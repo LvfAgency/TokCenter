@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TokCenter</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#09090d;
+    color:white;
+}
+
+header{
+    background:#111116;
+    padding:18px 20px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    border-bottom:1px solid #27272e;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#ff2d55;
+}
+
+nav{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    margin-top:15px;
+}
+
+nav button{
+    border:0;
+    background:#222229;
+    color:#aaa;
+    padding:10px 15px;
+    border-radius:20px;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+nav button.active,
+nav button:hover{
+    background:#ff2d55;
+    color:white;
+}
+
+main{
+    max-width:900px;
+    margin:auto;
+    padding:25px 18px 80px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero{
+    background:linear-gradient(135deg,#181820,#29202a);
+    border-radius:22px;
+    padding:28px 22px;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#aaa;
+    line-height:1.5;
+}
+
+.title{
+    margin:25px 0 14px;
+    font-size:22px;
+}
+
+.card{
+    background:#17171d;
+    border:1px solid #292930;
+    border-radius:17px;
+    padding:18px;
+    margin-bottom:13px;
+}
+
+.battle{
+    display:grid;
+    grid-template-columns:1fr 55px 1fr;
+    align-items:center;
+    text-align:center;
+    gap:10px;
+}
+
+.creator{
+    font-size:18px;
+    font-weight:800;
+}
+
+.vs{
+    color:#ff2d55;
+    font-weight:900;
+}
+
+.date{
+    color:#999;
+    font-size:13px;
+    margin-top:10px;
+    text-align:center;
+}
+
+.status{
+    display:inline-block;
+    margin-top:12px;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#28282f;
+    color:#bbb;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.live{
+    background:#e51e45;
+    color:white;
+}
+
+.form{
+    display:grid;
+    gap:13px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    background:#0e0e12;
+    color:white;
+    border:1px solid #35353e;
+    border-radius:11px;
+    font-size:16px;
+}
+
+label{
+    color:#aaa;
+    font-size:13px;
+}
+
+button.primary{
+    border:0;
+    background:#ff2d55;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.stat{
+    background:#17171d;
+    border-radius:15px;
+    padding:18px 10px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+}
+
+.stat span{
+    color:#999;
+    font-size:12px;
+}
+
+.rank{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.rank strong{
+    font-size:18px;
+}
+
+.number{
+    color:#ff2d55;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    color:#777;
+    padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Tok<span>Center</span></div>
+
+    <nav>
+        <button class="active" onclick="showPage('home',this)">🏠 Accueil</button>
+        <button onclick="showPage('battles',this)">⚔️ Battles</button>
+        <button onclick="showPage('calendar',this)">📅 Calendrier</button>
+        <button onclick="showPage('creators',this)">👤 Créateurs</button>
+        <button onclick="showPage('ranking',this)">🏆 Classement</button>
+        <button onclick="showPage('add',this)">➕ Ajouter</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- ACCUEIL -->
+<section id="home" class="page active">
+
+    <div class="hero">
+        <h1>Bienvenue sur TokCenter 👋</h1>
+        <p>
+            Le centre dédié aux TikTok LIVE, Battles,
+            créateurs et événements.
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <strong id="totalBattles">0</strong>
+            <span>Battles</span>
+        </div>
+
+        <div class="stat">
+            <strong id="totalCreators">0</strong>
+            <span>Créateurs</span>
+        </div>
+
+        <div class="stat">
+            <strong id="liveCount">0</strong>
+            <span>En direct</span>
+        </div>
+    </div>
+
+    <h2 class="title">🔥 Prochaines Battles</h2>
+
+    <div id="homeBattles"></div>
+
+</section>
+
+
+<!-- BATTLES -->
+<section id="battles" class="page">
+
+    <h1 class="title">⚔️ Battles</h1>
+
+    <div id="battleList"></div>
+
+</section>
+
+
+<!-- CALENDRIER -->
+<section id="calendar" class="page">
+
+    <h1 class="title">📅 Calendrier</h1>
+
+    <div id="calendarList"></div>
+
+</section>
+
+
+<!-- CREATEURS -->
+<section id="creators" class="page">
+
+    <h1 class="title">👤 Créateurs</h1>
+
+    <div id="creatorList"></div>
+
+</section>
+
+
+<!-- CLASSEMENT -->
+<section id="ranking" class="page">
+
+    <h1 class="title">🏆 Classement</h1>
+
+    <div class="card">
+        <div class="rank">
+            <strong>🥇 Créateur A</strong>
+            <span class="number">1250</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="rank">
+            <strong>🥈 Créateur B</strong>
+            <span class="number">1080</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="rank">
+            <strong>🥉 Créateur C</strong>
+            <span class="number">940</span>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- AJOUT -->
+<section id="add" class="page">
+
+    <h1 class="title">➕ Ajouter une Battle</h1>
+
+    <div class="card">
+
+        <form class="form" id="battleForm">
+
+            <div>
+                <label>Créateur A</label>
+                <input id="creatorA" placeholder="@createurA" required>
+            </div>
+
+            <div>
+                <label>Créateur B</label>
+                <input id="creatorB" placeholder="@createurB" required>
+            </div>
+
+            <div>
+                <label>Date</label>
+                <input id="battleDate" type="date" required>
+            </div>
+
+            <div>
+                <label>Heure</label>
+                <input id="battleTime" type="time" required>
+            </div>
+
+            <button class="primary" type="submit">
+                Ajouter la Battle
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+let battles = JSON.parse(localStorage.getItem("tokcenterBattles") || "[]");
+
+
+function save(){
+    localStorage.setItem(
+        "tokcenterBattles",
+        JSON.stringify(battles)
+    );
+}
+
+
+function showPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    document.querySelectorAll("nav button")
+        .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    render();
+}
+
+
+function render(){
+
+    document.getElementById("totalBattles").textContent =
+        battles.length;
+
+    const creators = new Set();
+
+    battles.forEach(b => {
+        creators.add(b.a);
+        creators.add(b.b);
+    });
+
+    document.getElementById("totalCreators").textContent =
+        creators.size;
+
+    document.getElementById("liveCount").textContent =
+        battles.filter(isLive).length;
+
+    renderBattles();
+    renderCalendar();
+    renderCreators();
+}
+
+
+function isLive(b){
+
+    const start = new Date(
+        b.date + "T" + b.time
+    );
+
+    const now = new Date();
+
+    const difference = now - start;
+
+    return difference >= 0 &&
+           difference <= 60 * 60 * 1000;
+}
+
+
+function battleHTML(b){
+
+    let status = "📅 À VENIR";
+    let extra = "";
+
+    if(isLive(b)){
+        status = "🔴 EN DIRECT";
+        extra = "live";
+    }
+    else if(
+        new Date(b.date + "T" + b.time) < new Date()
+    ){
+        status = "✅ TERMINÉ";
+    }
+
+    return `
+        <div class="card">
+
+            <div class="battle">
+
+                <div class="creator">
+                    ${escapeHTML(b.a)}
+                </div>
+
+                <div class="vs">
+                    VS
+                </div>
+
+                <div class="creator">
+                    ${escapeHTML(b.b)}
+                </div>
+
+            </div>
+
+            <div class="date">
+                📅 ${formatDate(b.date)}
+                &nbsp; • &nbsp;
+                ⏰ ${b.time}
+            </div>
+
+            <div style="text-align:center">
+                <span class="status ${extra}">
+                    ${status}
+                </span>
+            </div>
+
+        </div>
+    `;
+}
+
+
+function renderBattles(){
+
+    const list = document.getElementById("battleList");
+    const home = document.getElementById("homeBattles");
+
+    if(!battles.length){
+
+        list.innerHTML =
+            `<div class="card empty">
+                Aucune Battle programmée.
+            </div>`;
+
+        home.innerHTML =
+            `<div class="card empty">
+                Aucune Battle pour le moment.
+            </div>`;
+
+        return;
+    }
+
+    const sorted = [...battles].sort(
+        (a,b) =>
+        (a.date+a.time).localeCompare(
+            b.date+b.time
+        )
+    );
+
+    list.innerHTML =
+        sorted.map(battleHTML).join("");
+
+    home.innerHTML =
+        sorted.slice(0,3)
+        .map(battleHTML)
+        .join("");
+}
+
+
+function renderCalendar(){
+
+    const calendar =
+        document.getElementById("calendarList");
+
+    if(!battles.length){
+
+        calendar.innerHTML =
+            `<div class="card empty">
+                Ton calendrier est vide.
+            </div>`;
+
+        return;
+    }
+
+    const groups = {};
+
+    battles.forEach(b => {
+
+        if(!groups[b.date])
+            groups[b.date] = [];
+
+        groups[b.date].push(b);
+
+    });
+
+    calendar.innerHTML =
+        Object.keys(groups)
+        .sort()
+        .map(date => `
+            <h3 style="margin:20px 5px 10px">
+                ${formatDate(date)}
+            </h3>
+
+            ${groups[date]
+                .map(battleHTML)
+                .join("")}
+        `)
+        .join("");
+}
+
+
+function renderCreators(){
+
+    const container =
+        document.getElementById("creatorList");
+
+    const creators = {};
+
+    battles.forEach(b => {
+
+        creators[b.a] =
+            (creators[b.a] || 0) + 1;
+
+        creators[b.b] =
+            (creators[b.b] || 0) + 1;
+
+    });
+
+    if(!Object.keys(creators).length){
+
+        container.innerHTML =
+            `<div class="card empty">
+                Aucun créateur pour le moment.
+            </div>`;
+
+        return;
+    }
+
+    container.innerHTML =
+        Object.entries(creators)
+        .sort((a,b) => b[1]-a[1])
+        .map(([name,count]) => `
+            <div class="card">
+                <div class="rank">
+                    <strong>👤 ${escapeHTML(name)}</strong>
+                    <span>${count} Battle(s)</span>
+                </div>
+            </div>
+        `)
+        .join("");
+}
+
+
+document.getElementById("battleForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    battles.push({
+
+        a: document.getElementById("creatorA").value,
+
+        b: document.getElementById("creatorB").value,
+
+        date: document.getElementById("battleDate").value,
+
+        time: document.getElementById("battleTime").value
+
+    });
+
+    save();
+
+    this.reset();
+
+    alert("✅ Battle ajoutée !");
+
+    render();
+
+});
+
+
+function formatDate(date){
+
+    return new Date(date + "T12:00:00")
+        .toLocaleDateString(
+            "fr-FR",
+            {
+                weekday:"long",
+                day:"numeric",
+                month:"long",
+                year:"numeric"
+            }
+        );
+}
+
+
+function escapeHTML(text){
+
+    return text
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
