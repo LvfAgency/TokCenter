@@ -3,135 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TokCenter</title>
+<meta name="theme-color" content="#111827">
+<title>TokCenter — Gestion d'agence</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+:root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --primary:#7c3aed;
+    --primary-dark:#5b21b6;
+    --danger:#dc2626;
+    --success:#059669;
+    --shadow:0 10px 30px rgba(17,24,39,.08);
+    --radius:18px;
 }
 
-:root{
-    --bg:#09090d;
-    --panel:#111117;
-    --panel2:#18181f;
-    --border:#292934;
-    --text:#f5f5f7;
-    --muted:#92929d;
-    --accent:#fe2c55;
-    --cyan:#25f4ee;
-    --green:#32d583;
-    --danger:#ff526d;
+*{
+    box-sizing:border-box;
 }
 
 body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     background:var(--bg);
     color:var(--text);
-    min-height:100vh;
 }
 
-button,input,select{
+button,
+input,
+select,
+textarea{
     font:inherit;
 }
 
 button{
     cursor:pointer;
+    border:0;
 }
 
 .app{
+    display:flex;
     min-height:100vh;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+/* SIDEBAR */
 
 .sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
     width:250px;
-    background:#0d0d12;
-    border-right:1px solid var(--border);
-    padding:22px 15px;
-    z-index:50;
+    background:#111827;
+    color:white;
+    padding:22px 16px;
+    position:fixed;
+    inset:0 auto 0 0;
+    z-index:20;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:5px 10px 30px;
-}
-
-.logo-icon{
-    width:40px;
-    height:40px;
-    border-radius:11px;
-    background:linear-gradient(135deg,#fe2c55,#ff6684);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
+    font-size:24px;
     font-weight:900;
+    letter-spacing:-1px;
+    padding:8px 12px 24px;
 }
 
-.logo-text{
-    font-size:21px;
-    font-weight:800;
-}
-
-.logo-text span{
-    color:var(--accent);
+.logo span{
+    color:#a78bfa;
 }
 
 .nav{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
+    display:grid;
+    gap:7px;
 }
 
 .nav button{
-    width:100%;
-    border:0;
     background:transparent;
-    color:var(--muted);
-    padding:13px 14px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    gap:12px;
+    color:#d1d5db;
     text-align:left;
-    font-weight:600;
+    padding:13px 14px;
+    border-radius:12px;
+    font-weight:700;
 }
 
-.nav button:hover{
-    background:#18181f;
-    color:white;
-}
-
+.nav button:hover,
 .nav button.active{
-    background:#191920;
+    background:#312e81;
     color:white;
-    box-shadow:inset 3px 0 var(--accent);
 }
 
-.nav-icon{
-    width:22px;
-    text-align:center;
-}
-
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .main{
     margin-left:250px;
-    padding:25px;
-    min-height:100vh;
+    width:calc(100% - 250px);
+    padding:28px;
+    max-width:1500px;
 }
 
 .topbar{
@@ -142,721 +109,429 @@ button{
     margin-bottom:25px;
 }
 
-.page-title{
-    font-size:28px;
+.title h1{
+    margin:0;
+    font-size:30px;
+}
+
+.title p{
+    margin:5px 0 0;
+    color:var(--muted);
+}
+
+/* BUTTONS */
+
+.btn{
+    padding:11px 16px;
+    border-radius:11px;
     font-weight:800;
 }
 
-.page-subtitle{
-    color:var(--muted);
-    font-size:14px;
-    margin-top:5px;
+.primary{
+    background:var(--primary);
+    color:white;
 }
 
-.primary-btn{
-    border:0;
-    background:var(--accent);
-    color:white;
-    border-radius:10px;
-    padding:11px 17px;
+.primary:hover{
+    background:var(--primary-dark);
+}
+
+.secondary{
+    background:#eef2ff;
+    color:#4338ca;
+}
+
+.danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.ghost{
+    background:#f3f4f6;
+    color:#374151;
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    gap:18px;
+}
+
+.stats{
+    grid-template-columns:repeat(4,1fr);
+}
+
+.cards{
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.stat .label{
+    color:var(--muted);
     font-weight:700;
 }
 
-.primary-btn:hover{
-    filter:brightness(1.1);
-}
-
-.secondary-btn{
-    border:1px solid var(--border);
-    background:var(--panel2);
-    color:white;
-    border-radius:9px;
-    padding:10px 14px;
-    font-weight:600;
-}
-
-.secondary-btn:hover{
-    border-color:#444450;
-}
-
-.danger-btn{
-    border:1px solid rgba(255,82,109,.25);
-    background:rgba(255,82,109,.08);
-    color:#ff7187;
-    border-radius:8px;
-    padding:8px 11px;
-    font-size:12px;
-    font-weight:600;
-}
-
-/* =========================
-   PANELS
-========================= */
-
-.panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:20px;
-}
-
-.empty{
-    text-align:center;
-    color:var(--muted);
-    padding:35px 15px;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.stat-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:19px;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.stat-number{
-    font-size:29px;
+.stat .num{
+    font-size:32px;
     font-weight:900;
     margin-top:8px;
 }
 
-.stat-small{
+.section{
+    margin-top:24px;
+}
+
+.section h2{
+    font-size:19px;
+    margin:0 0 13px;
+}
+
+.empty{
+    padding:35px;
+    text-align:center;
     color:var(--muted);
-    font-size:12px;
-    margin-top:6px;
+    background:white;
+    border:1px dashed #d1d5db;
+    border-radius:16px;
 }
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:18px;
-}
-
-.panel-title{
+.row{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:15px;
-}
-
-.panel-title h3{
-    font-size:17px;
-}
-
-/* =========================
-   TEAMS
-========================= */
-
-.teams-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-}
-
-.team-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:18px;
-}
-
-.team-head{
-    display:flex;
     justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
-    margin-bottom:14px;
+    gap:12px;
 }
 
-.team-name{
-    font-size:18px;
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 9px;
+    border-radius:999px;
+    background:#ede9fe;
+    color:#5b21b6;
+    font-size:12px;
     font-weight:800;
-}
-
-.team-count{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.member-mini{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 0;
-    border-top:1px solid #20202a;
-    cursor:pointer;
-}
-
-.member-mini:hover{
-    background:#15151c;
 }
 
 .avatar{
-    width:39px;
-    height:39px;
-    min-width:39px;
+    width:54px;
+    height:54px;
     border-radius:50%;
-    background:#23232c;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    font-weight:800;
-}
-
-.avatar img{
-    width:100%;
-    height:100%;
     object-fit:cover;
+    background:#ede9fe;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    color:#5b21b6;
+    flex:none;
 }
 
-.member-info{
-    min-width:0;
-    flex:1;
+.avatar.big{
+    width:82px;
+    height:82px;
+    font-size:28px;
 }
 
-.member-name{
+.person{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.muted{
+    color:var(--muted);
     font-size:14px;
-    font-weight:700;
 }
 
-.member-username{
-    color:var(--muted);
+.small{
     font-size:12px;
-    margin-top:3px;
 }
 
-.role{
-    background:#24242d;
-    color:#c9c9d2;
-    border-radius:5px;
-    padding:4px 7px;
-    font-size:10px;
-    white-space:nowrap;
+/* SEARCH */
+
+.search{
+    margin-bottom:16px;
 }
 
-/* =========================
-   MEMBERS
-========================= */
-
-.members-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+.search input{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:white;
 }
 
-.member-card{
-    background:var(--panel);
-    border:1px solid var(--border);
+/* TEAMS */
+
+.teamhead{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:15px;
+}
+
+.teamicon{
+    width:55px;
+    height:55px;
     border-radius:15px;
-    padding:18px;
-    cursor:pointer;
-}
-
-.member-card:hover{
-    border-color:#41414d;
-}
-
-.member-card-top{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.member-card .avatar{
-    width:58px;
-    height:58px;
-    min-width:58px;
-}
-
-.member-card-name{
-    font-size:16px;
-    font-weight:800;
-}
-
-.member-card-username{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
-}
-
-.member-details{
-    margin-top:15px;
-    padding-top:12px;
-    border-top:1px solid #20202a;
-}
-
-.detail-line{
-    display:flex;
-    justify-content:space-between;
-    padding:5px 0;
-    font-size:12px;
-}
-
-.detail-line span:first-child{
-    color:var(--muted);
-}
-
-/* =========================
-   MATCHS
-========================= */
-
-.matches-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.match-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:17px;
-}
-
-.match-card.upcoming{
-    border-color:rgba(37,244,238,.2);
-}
-
-.match-card.completed{
-    border-color:rgba(50,213,131,.22);
-}
-
-.match-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:14px;
-}
-
-.match-date{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.match-status{
-    font-size:10px;
-    font-weight:800;
-    padding:5px 8px;
-    border-radius:6px;
-}
-
-.status-upcoming{
-    color:var(--cyan);
-    background:rgba(37,244,238,.08);
-}
-
-.status-completed{
-    color:var(--green);
-    background:rgba(50,213,131,.08);
-}
-
-.match-versus{
+    background:#111827;
+    color:white;
     display:grid;
-    grid-template-columns:1fr 60px 1fr;
-    align-items:center;
-    gap:12px;
+    place-items:center;
+    font-weight:900;
+    font-size:20px;
 }
 
-.match-side{
-    background:var(--panel2);
-    border:1px solid #25252f;
-    border-radius:11px;
-    padding:14px;
+/* LIST */
+
+.list{
+    display:grid;
+    gap:10px;
 }
 
-.match-side-title{
-    color:var(--muted);
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    margin-bottom:8px;
+.listitem{
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:12px;
+    background:#fafafa;
 }
 
-.match-agency{
-    font-weight:800;
-    font-size:15px;
+/* MATCH */
+
+.match{
+    border-left:5px solid var(--primary);
 }
 
-.match-team{
-    color:#c3c3cc;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.match-creator{
-    margin-top:9px;
-    font-size:13px;
-    font-weight:700;
-}
-
-.match-creator span{
-    color:var(--muted);
-    font-weight:400;
+.match .date{
+    font-weight:900;
 }
 
 .vs{
-    text-align:center;
-    color:var(--muted);
+    font-size:17px;
     font-weight:900;
 }
 
-.score{
-    margin-top:10px;
-    font-size:21px;
+.status{
+    font-size:12px;
     font-weight:900;
 }
 
-.match-actions{
+.upcoming{
+    color:#2563eb;
+}
+
+.done{
+    color:#059669;
+}
+
+/* FAVORITE */
+
+.favorite{
+    background:#fffbeb;
+}
+
+.star{
+    color:#f59e0b;
+    background:#fff7ed;
+    font-size:18px;
+}
+
+/* NOTICE */
+
+.notice{
+    padding:12px 14px;
+    background:#f5f3ff;
+    border-radius:12px;
+    color:#4c1d95;
+    margin-bottom:14px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(17,24,39,.58);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:50;
+}
+
+.modal.open{
     display:flex;
-    justify-content:flex-end;
-    gap:8px;
-    margin-top:14px;
 }
 
-/* =========================
-   CALENDRIER
-========================= */
+.modalbox{
+    background:white;
+    border-radius:20px;
+    width:min(680px,100%);
+    max-height:92vh;
+    overflow:auto;
+    padding:24px;
+}
 
-.calendar-header{
+.modalhead{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:18px;
 }
 
-.calendar-title{
-    font-size:20px;
-    font-weight:800;
-}
-
-.calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    border:1px solid var(--border);
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.calendar-day-name{
-    background:#18181f;
-    color:var(--muted);
-    text-align:center;
-    padding:11px;
-    font-size:11px;
-    border-right:1px solid var(--border);
-}
-
-.calendar-cell{
-    min-height:105px;
-    padding:8px;
-    background:#101016;
-    border-top:1px solid var(--border);
-    border-right:1px solid var(--border);
-}
-
-.calendar-cell.other{
-    opacity:.35;
-}
-
-.day-number{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:6px;
-}
-
-.calendar-match{
-    background:rgba(254,44,85,.12);
-    border-left:3px solid var(--accent);
-    border-radius:5px;
-    padding:5px;
-    font-size:10px;
-    margin-bottom:4px;
-}
-
-/* =========================
-   PROFIL
-========================= */
-
-.profile-header{
-    display:flex;
-    align-items:center;
-    gap:17px;
-    margin-bottom:22px;
-}
-
-.profile-header .avatar{
-    width:75px;
-    height:75px;
-    min-width:75px;
-}
-
-.profile-name{
-    font-size:24px;
-    font-weight:900;
-}
-
-.profile-username{
-    color:var(--muted);
-    margin-top:4px;
-}
-
-.profile-role{
-    display:inline-block;
-    margin-top:8px;
-}
-
-.profile-stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:13px;
-    margin-bottom:20px;
-}
-
-.profile-stat{
-    background:var(--panel2);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:15px;
-}
-
-.profile-stat-number{
-    font-size:24px;
-    font-weight:900;
-    margin-top:6px;
-}
-
-.month-title{
-    font-weight:800;
-    margin-bottom:13px;
-}
-
-/* =========================
-   MODALES
-========================= */
-
-.modal-bg{
-    position:fixed;
-    inset:0;
-    z-index:100;
-    background:rgba(0,0,0,.75);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.modal-bg.open{
-    display:flex;
-}
-
-.modal{
-    width:100%;
-    max-width:620px;
-    max-height:92vh;
-    overflow:auto;
-    background:#111117;
-    border:1px solid #30303b;
-    border-radius:17px;
-    padding:22px;
-}
-
-.modal.large{
-    max-width:800px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-header h2{
-    font-size:20px;
+.modalhead h2{
+    margin:0;
 }
 
 .close{
-    width:34px;
-    height:34px;
-    border:0;
-    border-radius:8px;
-    background:#22222b;
-    color:white;
-    font-size:19px;
+    background:#f3f4f6;
+    border-radius:10px;
+    padding:8px 11px;
 }
 
-.form-grid{
+/* FORMS */
+
+.formgrid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:14px;
 }
 
-.form-group{
-    display:flex;
-    flex-direction:column;
+.field{
+    display:grid;
     gap:6px;
 }
 
-.form-group.full{
+.field.full{
     grid-column:1/-1;
 }
 
-.form-group label{
-    color:#b9b9c3;
-    font-size:12px;
-    font-weight:600;
+.field label{
+    font-weight:800;
+    font-size:13px;
 }
 
-.form-group input,
-.form-group select{
+.field input,
+.field select,
+.field textarea{
     width:100%;
-    background:#191920;
-    color:white;
-    border:1px solid #2d2d38;
-    border-radius:9px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
     padding:11px;
-    outline:none;
+    background:white;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-    border-color:#555562;
+.field textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
-.form-footer{
+.file{
+    border:1px dashed #c4b5fd;
+    background:#faf5ff;
+    padding:14px;
+    border-radius:12px;
+}
+
+.preview{
+    margin-top:8px;
+}
+
+hr{
+    border:0;
+    border-top:1px solid var(--line);
+    margin:18px 0;
+}
+
+/* TABS */
+
+.tabs{
     display:flex;
-    justify-content:flex-end;
-    gap:9px;
-    margin-top:20px;
-}
-
-.avatar-upload{
-    display:flex;
-    align-items:center;
-    gap:14px;
+    gap:8px;
+    overflow:auto;
     margin-bottom:18px;
 }
 
-.avatar-preview{
-    width:68px;
-    height:68px;
-    border-radius:50%;
-    background:#22222b;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
+.tab{
+    background:#e5e7eb;
+    padding:10px 15px;
+    border-radius:10px;
+    font-weight:800;
+    white-space:nowrap;
 }
 
-.avatar-preview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.tab.active{
+    background:#111827;
+    color:white;
 }
 
-.upload-btn{
-    background:#202029;
-    border:1px solid #30303b;
-    padding:9px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:12px;
-}
+/* RESPONSIVE */
 
-.upload-btn input{
-    display:none;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1050px){
-
-    .stats-grid,
-    .teams-grid,
-    .members-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:760px){
+@media(max-width:900px){
 
     .sidebar{
-        width:68px;
-        padding:15px 8px;
+        width:76px;
+        padding:15px 10px;
     }
 
     .logo{
-        justify-content:center;
-        padding:5px 0 25px;
+        font-size:0;
+        text-align:center;
     }
 
-    .logo-text{
-        display:none;
+    .logo:after{
+        content:"TC";
+        font-size:21px;
     }
 
     .nav button{
-        justify-content:center;
-        padding:13px 8px;
+        font-size:0;
+        text-align:center;
     }
 
-    .nav button span:not(.nav-icon){
-        display:none;
+    .nav button:before{
+        content:"•";
+        font-size:22px;
     }
 
     .main{
-        margin-left:68px;
-        padding:15px;
+        margin-left:76px;
+        width:calc(100% - 76px);
+        padding:18px;
     }
 
-    .stats-grid,
-    .teams-grid,
-    .members-grid,
-    .profile-stats{
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .formgrid{
         grid-template-columns:1fr;
     }
 
-    .match-versus{
-        grid-template-columns:1fr;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 
-    .vs{
-        padding:2px;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .calendar-cell{
-        min-height:70px;
+    .topbar{
+        align-items:flex-start;
+        flex-direction:column;
     }
 }
 </style>
@@ -866,747 +541,57 @@ button{
 
 <div class="app">
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <aside class="sidebar">
 
     <div class="logo">
-        <div class="logo-icon">T</div>
-        <div class="logo-text">Tok<span>Center</span></div>
+        Tok<span>Center</span>
     </div>
 
-    <nav class="nav">
-
-        <button class="active" onclick="showPage('dashboard',this)">
-            <span class="nav-icon">⌂</span>
-            <span>Tableau de bord</span>
-        </button>
-
-        <button onclick="showPage('teams',this)">
-            <span class="nav-icon">👥</span>
-            <span>Teams</span>
-        </button>
-
-        <button onclick="showPage('members',this)">
-            <span class="nav-icon">👤</span>
-            <span>Créateurs</span>
-        </button>
-
-        <button onclick="showPage('matches',this)">
-            <span class="nav-icon">⚔</span>
-            <span>Matchs</span>
-        </button>
-
-        <button onclick="showPage('calendar',this)">
-            <span class="nav-icon">📅</span>
-            <span>Calendrier</span>
-        </button>
-
-    </nav>
+    <nav class="nav" id="nav"></nav>
 
 </aside>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="main">
 
-
-<!-- =========================
-     DASHBOARD
-========================= -->
-
-<section id="dashboard" class="page">
-
     <div class="topbar">
 
-        <div>
-            <div class="page-title">Tableau de bord</div>
-            <div class="page-subtitle">
-                Bienvenue sur TokCenter
-            </div>
+        <div class="title">
+            <h1 id="pageTitle">Tableau de bord</h1>
+            <p id="pageSubtitle">
+                Votre centre de gestion d'agence.
+            </p>
         </div>
 
-        <button class="primary-btn" onclick="openTeamModal()">
-            + Nouvelle team
+        <button class="btn primary" onclick="openQuickCreate()">
+            ＋ Ajouter
         </button>
 
     </div>
 
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <div class="stat-label">Teams</div>
-            <div class="stat-number" id="dashboardTeams">0</div>
-            <div class="stat-small">Teams enregistrées</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-label">Créateurs</div>
-            <div class="stat-number" id="dashboardCreators">0</div>
-            <div class="stat-small">Membres de vos teams</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-label">Matchs à venir</div>
-            <div class="stat-number" id="dashboardUpcoming">0</div>
-            <div class="stat-small">Matchs programmés</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-label">Matchs effectués</div>
-            <div class="stat-number" id="dashboardCompleted">0</div>
-            <div class="stat-small">Matchs terminés</div>
-        </div>
-
-    </div>
-
-
-    <div class="dashboard-grid">
-
-        <div class="panel">
-
-            <div class="panel-title">
-                <h3>Prochains matchs</h3>
-
-                <button class="secondary-btn"
-                        onclick="showPage('matches')">
-                    Voir tout
-                </button>
-            </div>
-
-            <div id="dashboardMatches"></div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                <h3>Vos teams</h3>
-
-                <button class="secondary-btn"
-                        onclick="showPage('teams')">
-                    Voir tout
-                </button>
-            </div>
-
-            <div id="dashboardTeamsList"></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     TEAMS
-========================= -->
-
-<section id="teams" class="page" style="display:none">
-
-    <div class="topbar">
-
-        <div>
-            <div class="page-title">Teams</div>
-            <div class="page-subtitle">
-                Organisez vos créateurs par team
-            </div>
-        </div>
-
-        <button class="primary-btn"
-                onclick="openTeamModal()">
-            + Créer une team
-        </button>
-
-    </div>
-
-    <div id="teamsGrid" class="teams-grid"></div>
-
-</section>
-
-
-<!-- =========================
-     MEMBRES
-========================= -->
-
-<section id="members" class="page" style="display:none">
-
-    <div class="topbar">
-
-        <div>
-            <div class="page-title">Créateurs</div>
-            <div class="page-subtitle">
-                Tous les membres de l'agence
-            </div>
-        </div>
-
-        <button class="primary-btn"
-                onclick="openMemberModal()">
-            + Ajouter un créateur
-        </button>
-
-    </div>
-
-    <div id="membersGrid" class="members-grid"></div>
-
-</section>
-
-
-<!-- =========================
-     MATCHS
-========================= -->
-
-<section id="matches" class="page" style="display:none">
-
-    <div class="topbar">
-
-        <div>
-            <div class="page-title">Matchs</div>
-            <div class="page-subtitle">
-                Gérez vos matchs TikTok
-            </div>
-        </div>
-
-        <button class="primary-btn"
-                onclick="openMatchModal()">
-            + Nouveau match
-        </button>
-
-    </div>
-
-    <div id="matchesList" class="matches-list"></div>
-
-</section>
-
-
-<!-- =========================
-     CALENDRIER
-========================= -->
-
-<section id="calendar" class="page" style="display:none">
-
-    <div class="topbar">
-
-        <div>
-            <div class="page-title">Calendrier</div>
-            <div class="page-subtitle">
-                Vue mensuelle de vos matchs
-            </div>
-        </div>
-
-    </div>
-
-    <div class="panel">
-
-        <div class="calendar-header">
-
-            <button class="secondary-btn"
-                    onclick="changeMonth(-1)">
-                ‹
-            </button>
-
-            <div class="calendar-title"
-                 id="calendarTitle">
-            </div>
-
-            <button class="secondary-btn"
-                    onclick="changeMonth(1)">
-                ›
-            </button>
-
-        </div>
-
-        <div class="calendar-grid"
-             id="calendarGrid">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PROFIL
-========================= -->
-
-<section id="memberProfile"
-         class="page"
-         style="display:none">
-
-    <div class="topbar">
-
-        <button class="secondary-btn"
-                onclick="showPage('members')">
-            ← Retour aux créateurs
-        </button>
-
-    </div>
-
-    <div id="memberProfileContent"></div>
-
-</section>
+    <div id="content"></div>
 
 </main>
-</div>
-
-
-<!-- =========================
-     MODAL TEAM
-========================= -->
-
-<div class="modal-bg" id="teamModal">
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2>Créer une team</h2>
-
-            <button class="close"
-                    onclick="closeModal('teamModal')">
-                ×
-            </button>
-
-        </div>
-
-
-        <form onsubmit="saveTeam(event)">
-
-            <div class="form-grid">
-
-                <div class="form-group full">
-
-                    <label>Nom de la team</label>
-
-                    <input id="teamName"
-                           placeholder="Ex : Team Alpha"
-                           required>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-footer">
-
-                <button type="button"
-                        class="secondary-btn"
-                        onclick="closeModal('teamModal')">
-                    Annuler
-                </button>
-
-                <button class="primary-btn">
-                    Créer la team
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
 
 </div>
 
 
-<!-- =========================
-     MODAL MEMBRE
-========================= -->
+<!-- MODALE -->
 
-<div class="modal-bg" id="memberModal">
+<div class="modal" id="modal">
 
-    <div class="modal">
+    <div class="modalbox">
 
-        <div class="modal-header">
+        <div class="modalhead">
 
-            <h2>Ajouter un créateur</h2>
+            <h2 id="modalTitle"></h2>
 
-            <button class="close"
-                    onclick="closeModal('memberModal')">
-                ×
+            <button class="close" onclick="closeModal()">
+                ✕
             </button>
 
         </div>
 
-
-        <form id="memberForm"
-              onsubmit="saveMember(event)">
-
-            <div class="avatar-upload">
-
-                <div class="avatar-preview"
-                     id="avatarPreview">
-                    👤
-                </div>
-
-                <label class="upload-btn">
-
-                    📷 Choisir une photo
-
-                    <input type="file"
-                           id="memberAvatar"
-                           accept="image/*"
-                           onchange="previewAvatar(event)">
-
-                </label>
-
-            </div>
-
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>Nom</label>
-
-                    <input id="memberName"
-                           placeholder="Nom du créateur"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Pseudo TikTok</label>
-
-                    <input id="memberUsername"
-                           placeholder="@pseudo"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Rôle</label>
-
-                    <select id="memberRole"
-                            required>
-
-                        <option value="">
-                            Sélectionner
-                        </option>
-
-                        <option value="Fondateur">
-                            Fondateur
-                        </option>
-
-                        <option value="Manager">
-                            Manager
-                        </option>
-
-                        <option value="Agent">
-                            Agent
-                        </option>
-
-                        <option value="Créateur">
-                            Créateur
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Team</label>
-
-                    <select id="memberTeam">
-
-                        <option value="">
-                            Aucune team
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Date d'arrivée dans l'agence
-                    </label>
-
-                    <!-- FACULTATIF -->
-                    <input type="date"
-                           id="memberJoinDate">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Statut</label>
-
-                    <select id="memberStatus">
-
-                        <option value="Actif">
-                            Actif
-                        </option>
-
-                        <option value="Inactif">
-                            Inactif
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-footer">
-
-                <button type="button"
-                        class="secondary-btn"
-                        onclick="closeModal('memberModal')">
-                    Annuler
-                </button>
-
-                <button class="primary-btn"
-                        type="submit">
-                    Ajouter le créateur
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     MODAL MATCH
-========================= -->
-
-<div class="modal-bg" id="matchModal">
-
-    <div class="modal large">
-
-        <div class="modal-header">
-
-            <h2>Créer un match</h2>
-
-            <button class="close"
-                    onclick="closeModal('matchModal')">
-                ×
-            </button>
-
-        </div>
-
-
-        <form onsubmit="saveMatch(event)">
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label>Notre team</label>
-
-                    <select id="matchTeam"
-                            onchange="updateMatchCreators()"
-                            required>
-
-                        <option value="">
-                            Sélectionner une team
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Notre créateur</label>
-
-                    <select id="matchCreator"
-                            required>
-
-                        <option value="">
-                            Sélectionner un créateur
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group full">
-
-                    <label>Agence adverse</label>
-
-                    <input id="opponentAgency"
-                           placeholder="Nom de l'agence adverse"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Team adverse</label>
-
-                    <input id="opponentTeam"
-                           placeholder="Nom de la team adverse">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Nom de l'adversaire</label>
-
-                    <input id="opponentName"
-                           placeholder="Nom de l'adversaire"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Pseudo de l'adversaire</label>
-
-                    <input id="opponentUsername"
-                           placeholder="@pseudo"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Date</label>
-
-                    <input type="date"
-                           id="matchDate"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Heure</label>
-
-                    <input type="time"
-                           id="matchTime"
-                           required>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="form-footer">
-
-                <button type="button"
-                        class="secondary-btn"
-                        onclick="closeModal('matchModal')">
-                    Annuler
-                </button>
-
-                <button class="primary-btn">
-                    Créer le match
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     MODAL SCORE
-========================= -->
-
-<div class="modal-bg" id="scoreModal">
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2>Résultat du match</h2>
-
-            <button class="close"
-                    onclick="closeModal('scoreModal')">
-                ×
-            </button>
-
-        </div>
-
-
-        <div id="scoreMatchInfo"
-             style="margin-bottom:15px;color:#aaa">
-        </div>
-
-
-        <form onsubmit="saveScore(event)">
-
-            <input type="hidden"
-                   id="scoreMatchId">
-
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>Notre score</label>
-
-                    <input type="number"
-                           id="ourScore"
-                           min="0"
-                           required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Score adverse</label>
-
-                    <input type="number"
-                           id="opponentScore"
-                           min="0"
-                           required>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-footer">
-
-                <button type="button"
-                        class="secondary-btn"
-                        onclick="closeModal('scoreModal')">
-                    Annuler
-                </button>
-
-                <button class="primary-btn">
-                    Enregistrer
-                </button>
-
-            </div>
-
-        </form>
+        <div id="modalBody"></div>
 
     </div>
 
@@ -1615,2256 +600,80 @@ button{
 
 <script>
 
-/* =====================================================
-   DONNÉES
-===================================================== */
+/* =========================================================
+   BASE DE DONNÉES LOCALE
+========================================================= */
 
-let teams =
-    JSON.parse(localStorage.getItem("tokcenter_teams")) || [];
+const STORAGE_KEY = "tokcenter_v5";
 
-let members =
-    JSON.parse(localStorage.getItem("tokcenter_members")) || [];
+let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {
 
-let matches =
-    JSON.parse(localStorage.getItem("tokcenter_matches")) || [];
+    creators: [],
+    teams: [],
+    matches: [],
+    agencies: [],
 
-let currentAvatar = "";
+    settings: {
+        agencyName: "LVF Agency"
+    }
 
-let currentCalendarDate = new Date();
+};
+
+let page = "dashboard";
+let pendingAvatar = "";
 
 
-/* =====================================================
-   SAUVEGARDE
-===================================================== */
+/* =========================================================
+   OUTILS
+========================================================= */
 
-function saveData(){
+function save(){
 
     localStorage.setItem(
-        "tokcenter_teams",
-        JSON.stringify(teams)
+        STORAGE_KEY,
+        JSON.stringify(db)
     );
 
-    localStorage.setItem(
-        "tokcenter_members",
-        JSON.stringify(members)
-    );
-
-    localStorage.setItem(
-        "tokcenter_matches",
-        JSON.stringify(matches)
-    );
 }
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+function uid(){
 
-function showPage(page, button=null){
-
-    document.querySelectorAll(".page").forEach(
-        p => p.style.display="none"
-    );
-
-    const target=document.getElementById(page);
-
-    if(target){
-        target.style.display="block";
-    }
-
-    document.querySelectorAll(".nav button")
-        .forEach(b=>b.classList.remove("active"));
-
-    if(button){
-        button.classList.add("active");
-    }
-
-    if(page==="dashboard") renderDashboard();
-    if(page==="teams") renderTeams();
-    if(page==="members") renderMembers();
-    if(page==="matches") renderMatches();
-    if(page==="calendar") renderCalendar();
-}
-
-
-/* =====================================================
-   MODALES
-===================================================== */
-
-function closeModal(id){
-
-    const modal=document.getElementById(id);
-
-    if(modal){
-        modal.classList.remove("open");
-    }
-}
-
-
-/* =====================================================
-   TEAM
-===================================================== */
-
-function openTeamModal(){
-
-    document.getElementById("teamName").value="";
-
-    document.getElementById("teamModal")
-        .classList.add("open");
-}
-
-
-function saveTeam(event){
-
-    event.preventDefault();
-
-    const name=
-        document.getElementById("teamName")
-        .value
-        .trim();
-
-    if(!name) return;
-
-
-    const duplicate=teams.some(
-        team =>
-        team.name.toLowerCase()===name.toLowerCase()
-    );
-
-    if(duplicate){
-
-        alert("Cette team existe déjà.");
-
-        return;
-    }
-
-
-    teams.push({
-
-        id:Date.now(),
-
-        name:name,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    saveData();
-
-    closeModal("teamModal");
-
-    renderTeams();
-    renderDashboard();
+    return Date.now().toString(36) +
+        Math.random().toString(36).slice(2,8);
 
 }
 
 
-/* =====================================================
-   MEMBRES
-===================================================== */
+function esc(value=""){
 
-function openMemberModal(){
+    return String(value).replace(
+        /[&<>"']/g,
+        function(char){
 
-    if(teams.length===0){
+            return {
 
-        alert(
-            "Crée d'abord une team avant d'ajouter un créateur."
-        );
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
 
-        return;
-    }
-
-
-    /*
-       On remet TOUJOURS le formulaire à zéro
-       à chaque ouverture.
-    */
-
-    document.getElementById("memberForm").reset();
-
-    currentAvatar="";
-
-    document.getElementById("avatarPreview")
-        .innerHTML="👤";
-
-    fillTeamSelect("memberTeam");
-
-    document.getElementById("memberStatus")
-        .value="Actif";
-
-    document.getElementById("memberModal")
-        .classList.add("open");
-}
-
-
-function previewAvatar(event){
-
-    const file=event.target.files[0];
-
-    if(!file) return;
-
-
-    const reader=new FileReader();
-
-    reader.onload=function(e){
-
-        currentAvatar=e.target.result;
-
-        document.getElementById("avatarPreview")
-            .innerHTML=
-            `<img src="${currentAvatar}" alt="Avatar">`;
-    };
-
-    reader.readAsDataURL(file);
-}
-
-
-function saveMember(event){
-
-    event.preventDefault();
-
-
-    const name=
-        document.getElementById("memberName")
-        .value
-        .trim();
-
-    const username=
-        document.getElementById("memberUsername")
-        .value
-        .trim();
-
-    const normalizedUsername=
-        normalizeUsername(username);
-
-    const role=
-        document.getElementById("memberRole")
-        .value;
-
-    const teamId=
-        document.getElementById("memberTeam")
-        .value;
-
-    const joinDate=
-        document.getElementById("memberJoinDate")
-        .value;
-
-    const status=
-        document.getElementById("memberStatus")
-        .value;
-
-
-    if(!name || !username || !role){
-
-        alert(
-            "Merci de renseigner le nom, le pseudo et le rôle."
-        );
-
-        return;
-    }
-
-
-    /*
-       PROTECTION CONTRE LES DOUBLONS
-    */
-
-    const alreadyExists=members.some(
-        member =>
-        normalizeUsername(member.username)
-        .toLowerCase()
-        ===
-        normalizedUsername.toLowerCase()
-    );
-
-
-    if(alreadyExists){
-
-        alert(
-            "Ce créateur existe déjà dans TokCenter."
-        );
-
-        return;
-    }
-
-
-    /*
-       CRÉATION
-    */
-
-    const newMember={
-
-        id:Date.now(),
-
-        name:name,
-
-        username:normalizedUsername,
-
-        role:role,
-
-        teamId:teamId || null,
-
-        /*
-           La date est volontairement facultative.
-        */
-        joinDate:joinDate || "",
-
-        status:status,
-
-        avatar:currentAvatar || ""
-
-    };
-
-
-    members.push(newMember);
-
-    saveData();
-
-
-    /*
-       IMPORTANT :
-       fermeture immédiate de la fenêtre.
-    */
-
-    closeModal("memberModal");
-
-
-    /*
-       Nettoyage complet du formulaire.
-    */
-
-    document.getElementById("memberForm").reset();
-
-    currentAvatar="";
-
-    document.getElementById("avatarPreview")
-        .innerHTML="👤";
-
-
-    /*
-       Actualisation immédiate.
-    */
-
-    renderMembers();
-    renderTeams();
-    renderDashboard();
-
-}
-
-
-/* =====================================================
-   SUPPRESSION MEMBRE
-===================================================== */
-
-function deleteMember(id){
-
-    const member=members.find(
-        m=>m.id===id
-    );
-
-    if(!member) return;
-
-
-    if(
-        !confirm(
-            `Supprimer ${member.name} ?`
-        )
-    ){
-        return;
-    }
-
-
-    members=members.filter(
-        m=>m.id!==id
-    );
-
-
-    /*
-       On conserve les matchs historiques.
-       Le créateur sera simplement indiqué
-       comme supprimé.
-    */
-
-    saveData();
-
-    renderMembers();
-    renderTeams();
-    renderDashboard();
-}
-
-
-/* =====================================================
-   TEAM UTILITAIRES
-===================================================== */
-
-function fillTeamSelect(id){
-
-    const select=document.getElementById(id);
-
-    select.innerHTML="";
-
-
-    if(id==="memberTeam"){
-
-        select.innerHTML=
-            '<option value="">Aucune team</option>';
-
-    }else{
-
-        select.innerHTML=
-            '<option value="">Sélectionner une team</option>';
-
-    }
-
-
-    teams.forEach(team=>{
-
-        const option=
-            document.createElement("option");
-
-        option.value=team.id;
-
-        option.textContent=team.name;
-
-        select.appendChild(option);
-
-    });
-}
-
-
-function getTeamName(teamId){
-
-    const team=teams.find(
-        t=>String(t.id)===String(teamId)
-    );
-
-    return team
-        ? team.name
-        : "Sans team";
-}
-
-
-/* =====================================================
-   TEAMS AFFICHAGE
-===================================================== */
-
-function renderTeams(){
-
-    const container=
-        document.getElementById("teamsGrid");
-
-
-    if(teams.length===0){
-
-        container.innerHTML=`
-
-            <div class="panel"
-                 style="grid-column:1/-1">
-
-                <div class="empty">
-
-                    Aucune team créée.
-
-                    <br><br>
-
-                    <button class="primary-btn"
-                            onclick="openTeamModal()">
-
-                        Créer ma première team
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML="";
-
-
-    teams.forEach(team=>{
-
-        const teamMembers=
-            members.filter(
-                m =>
-                String(m.teamId)
-                ===
-                String(team.id)
-            );
-
-
-        let memberHTML="";
-
-
-        if(teamMembers.length===0){
-
-            memberHTML=`
-
-                <div class="empty"
-                     style="padding:20px 5px">
-
-                    Aucun créateur dans cette team.
-
-                </div>
-
-            `;
-
-        }else{
-
-            memberHTML=
-                teamMembers
-                .map(member=>`
-
-                    <div class="member-mini"
-                         onclick="openMemberProfile(${member.id})">
-
-                        <div class="avatar">
-
-                            ${
-                                member.avatar
-                                ?
-                                `<img src="${member.avatar}" alt="">`
-                                :
-                                escapeHTML(
-                                    member.name
-                                    .charAt(0)
-                                    .toUpperCase()
-                                )
-                            }
-
-                        </div>
-
-                        <div class="member-info">
-
-                            <div class="member-name">
-
-                                ${escapeHTML(member.name)}
-
-                            </div>
-
-                            <div class="member-username">
-
-                                ${escapeHTML(member.username)}
-
-                            </div>
-
-                        </div>
-
-                        <div class="role">
-
-                            ${escapeHTML(member.role)}
-
-                        </div>
-
-                    </div>
-
-                `)
-                .join("");
+            }[char];
 
         }
-
-
-        container.innerHTML+=`
-
-            <div class="team-card">
-
-                <div class="team-head">
-
-                    <div>
-
-                        <div class="team-name">
-
-                            ${escapeHTML(team.name)}
-
-                        </div>
-
-                        <div class="team-count">
-
-                            ${teamMembers.length}
-
-                            ${
-                                teamMembers.length>1
-                                ?
-                                "créateurs"
-                                :
-                                "créateur"
-                            }
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                ${memberHTML}
-
-            </div>
-
-        `;
-
-    });
-}
-
-
-/* =====================================================
-   MEMBRES AFFICHAGE
-===================================================== */
-
-function renderMembers(){
-
-    const container=
-        document.getElementById("membersGrid");
-
-
-    if(members.length===0){
-
-        container.innerHTML=`
-
-            <div class="panel"
-                 style="grid-column:1/-1">
-
-                <div class="empty">
-
-                    Aucun créateur enregistré.
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML="";
-
-
-    members.forEach(member=>{
-
-        const teamName=
-            getTeamName(member.teamId);
-
-        const totalMatches=
-            matches.filter(
-                m =>
-                String(m.creatorId)
-                ===
-                String(member.id)
-            ).length;
-
-
-        container.innerHTML+=`
-
-            <div class="member-card"
-                 onclick="openMemberProfile(${member.id})">
-
-                <div class="member-card-top">
-
-                    <div class="avatar">
-
-                        ${
-                            member.avatar
-                            ?
-                            `<img src="${member.avatar}" alt="">`
-                            :
-                            escapeHTML(
-                                member.name
-                                .charAt(0)
-                                .toUpperCase()
-                            )
-                        }
-
-                    </div>
-
-                    <div style="flex:1">
-
-                        <div class="member-card-name">
-
-                            ${escapeHTML(member.name)}
-
-                        </div>
-
-                        <div class="member-card-username">
-
-                            ${escapeHTML(member.username)}
-
-                        </div>
-
-                    </div>
-
-                    <div class="role">
-
-                        ${escapeHTML(member.role)}
-
-                    </div>
-
-                </div>
-
-
-                <div class="member-details">
-
-                    <div class="detail-line">
-
-                        <span>Team</span>
-
-                        <strong>
-                            ${escapeHTML(teamName)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-line">
-
-                        <span>Statut</span>
-
-                        <strong>
-                            ${escapeHTML(member.status)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-line">
-
-                        <span>Matchs</span>
-
-                        <strong>
-                            ${totalMatches}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-}
-
-
-/* =====================================================
-   PROFIL MEMBRE
-===================================================== */
-
-function openMemberProfile(id){
-
-    const member=
-        members.find(
-            m=>String(m.id)===String(id)
-        );
-
-    if(!member) return;
-
-
-    document.querySelectorAll(".page")
-        .forEach(p=>p.style.display="none");
-
-
-    document.getElementById("memberProfile")
-        .style.display="block";
-
-
-    document.querySelectorAll(".nav button")
-        .forEach(b=>b.classList.remove("active"));
-
-
-    const memberMatches=
-        matches.filter(
-            m =>
-            String(m.creatorId)
-            ===
-            String(member.id)
-        );
-
-
-    const now=new Date();
-
-
-    const monthMatches=
-        memberMatches.filter(match=>{
-
-            const date=
-                new Date(
-                    match.date+"T"+match.time
-                );
-
-            return(
-                date.getMonth()===now.getMonth()
-                &&
-                date.getFullYear()===now.getFullYear()
-            );
-
-        });
-
-
-    const completed=
-        memberMatches.filter(
-            m=>isMatchCompleted(m)
-        ).length;
-
-
-    const upcoming=
-        memberMatches.filter(
-            m=>!isMatchCompleted(m)
-        ).length;
-
-
-    const teamName=
-        getTeamName(member.teamId);
-
-
-    let history="";
-
-
-    if(memberMatches.length===0){
-
-        history=`
-
-            <div class="empty">
-
-                Aucun match enregistré
-                pour ce membre.
-
-            </div>
-
-        `;
-
-    }else{
-
-        const sorted=
-            [...memberMatches].sort(
-                (a,b)=>
-                new Date(
-                    b.date+"T"+b.time
-                )
-                -
-                new Date(
-                    a.date+"T"+a.time
-                )
-            );
-
-
-        history=
-            sorted.map(match=>`
-
-                <div class="member-mini">
-
-                    <div class="avatar">
-                        ⚔
-                    </div>
-
-                    <div class="member-info">
-
-                        <div class="member-name">
-
-                            ${escapeHTML(
-                                match.opponentAgency
-                            )}
-
-                        </div>
-
-                        <div class="member-username">
-
-                            ${formatDate(match.date)}
-                            —
-                            ${escapeHTML(match.time)}
-
-                        </div>
-
-                    </div>
-
-                    <div class="role">
-
-                        ${
-                            isMatchCompleted(match)
-                            ?
-                            "Terminé"
-                            :
-                            "À venir"
-                        }
-
-                    </div>
-
-                </div>
-
-            `).join("");
-
-    }
-
-
-    document.getElementById(
-        "memberProfileContent"
-    ).innerHTML=`
-
-        <div class="panel">
-
-            <div class="profile-header">
-
-                <div class="avatar">
-
-                    ${
-                        member.avatar
-                        ?
-                        `<img src="${member.avatar}" alt="">`
-                        :
-                        escapeHTML(
-                            member.name
-                            .charAt(0)
-                            .toUpperCase()
-                        )
-                    }
-
-                </div>
-
-
-                <div style="flex:1">
-
-                    <div class="profile-name">
-
-                        ${escapeHTML(member.name)}
-
-                    </div>
-
-                    <div class="profile-username">
-
-                        ${escapeHTML(member.username)}
-
-                    </div>
-
-                    <div class="role profile-role">
-
-                        ${escapeHTML(member.role)}
-
-                    </div>
-
-                </div>
-
-
-                <button class="danger-btn"
-                        onclick="deleteMemberFromProfile(${member.id})">
-
-                    Supprimer
-
-                </button>
-
-            </div>
-
-
-            <div class="profile-stats">
-
-                <div class="profile-stat">
-
-                    <div class="stat-label">
-                        Team
-                    </div>
-
-                    <div class="profile-stat-number"
-                         style="font-size:17px">
-
-                        ${escapeHTML(teamName)}
-
-                    </div>
-
-                </div>
-
-
-                <div class="profile-stat">
-
-                    <div class="stat-label">
-                        Matchs
-                    </div>
-
-                    <div class="profile-stat-number">
-
-                        ${memberMatches.length}
-
-                    </div>
-
-                </div>
-
-
-                <div class="profile-stat">
-
-                    <div class="stat-label">
-                        Matchs terminés
-                    </div>
-
-                    <div class="profile-stat-number">
-
-                        ${completed}
-
-                    </div>
-
-                </div>
-
-
-                <div class="profile-stat">
-
-                    <div class="stat-label">
-                        Matchs à venir
-                    </div>
-
-                    <div class="profile-stat-number">
-
-                        ${upcoming}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="panel"
-                 style="padding:17px;margin-bottom:15px">
-
-                <div class="month-title">
-
-                    📊 Activité du mois
-
-                </div>
-
-
-                <div class="profile-stats"
-                     style="margin:0">
-
-                    <div class="profile-stat">
-
-                        <div class="stat-label">
-
-                            Matchs ce mois
-
-                        </div>
-
-                        <div class="profile-stat-number">
-
-                            ${monthMatches.length}
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="profile-stat">
-
-                        <div class="stat-label">
-
-                            Agences rencontrées
-
-                        </div>
-
-                        <div class="profile-stat-number">
-
-                            ${
-                                new Set(
-                                    monthMatches.map(
-                                        m=>m.opponentAgency
-                                    )
-                                ).size
-                            }
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="panel"
-                 style="padding:17px">
-
-                <div class="month-title">
-
-                    ⚔ Historique des matchs
-
-                </div>
-
-                ${history}
-
-            </div>
-
-
-            <div style="
-                margin-top:15px;
-                color:#888;
-                font-size:12px;
-            ">
-
-                ${
-                    member.joinDate
-                    ?
-                    "Membre depuis le "
-                    +
-                    formatDate(member.joinDate)
-                    :
-                    "Date d'arrivée non renseignée"
-                }
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-function deleteMemberFromProfile(id){
-
-    if(!confirm("Supprimer ce créateur ?")) return;
-
-    members=
-        members.filter(
-            m=>String(m.id)!==String(id)
-        );
-
-    saveData();
-
-    renderMembers();
-    renderTeams();
-    renderDashboard();
-
-    showPage("members");
-}
-
-
-/* =====================================================
-   MATCH
-===================================================== */
-
-function openMatchModal(){
-
-    if(teams.length===0){
-
-        alert(
-            "Crée d'abord une team avant de créer un match."
-        );
-
-        return;
-    }
-
-
-    fillTeamSelect("matchTeam");
-
-
-    document.getElementById("matchCreator")
-        .innerHTML=
-        '<option value="">Sélectionner un créateur</option>';
-
-
-    document.getElementById("opponentAgency").value="";
-    document.getElementById("opponentTeam").value="";
-    document.getElementById("opponentName").value="";
-    document.getElementById("opponentUsername").value="";
-
-
-    const today=new Date();
-
-
-    document.getElementById("matchDate")
-        .value=
-        today.toISOString().split("T")[0];
-
-
-    document.getElementById("matchTime")
-        .value="20:00";
-
-
-    document.getElementById("matchModal")
-        .classList.add("open");
-
-}
-
-
-function updateMatchCreators(){
-
-    const teamId=
-        document.getElementById("matchTeam")
-        .value;
-
-
-    const select=
-        document.getElementById("matchCreator");
-
-
-    select.innerHTML=
-        '<option value="">Sélectionner un créateur</option>';
-
-
-    if(!teamId) return;
-
-
-    const teamMembers=
-        members.filter(
-            m =>
-            String(m.teamId)
-            ===
-            String(teamId)
-        );
-
-
-    teamMembers.forEach(member=>{
-
-        const option=
-            document.createElement("option");
-
-        option.value=member.id;
-
-        option.textContent=
-            `${member.name} — ${member.username}`;
-
-        select.appendChild(option);
-
-    });
-
-}
-
-
-function saveMatch(event){
-
-    event.preventDefault();
-
-
-    const teamId=
-        document.getElementById("matchTeam").value;
-
-
-    const creatorId=
-        document.getElementById("matchCreator").value;
-
-
-    if(!teamId || !creatorId){
-
-        alert(
-            "Sélectionne une team et un créateur."
-        );
-
-        return;
-    }
-
-
-    matches.push({
-
-        id:Date.now(),
-
-        teamId:teamId,
-
-        creatorId:creatorId,
-
-        opponentAgency:
-            document
-            .getElementById("opponentAgency")
-            .value
-            .trim(),
-
-        opponentTeam:
-            document
-            .getElementById("opponentTeam")
-            .value
-            .trim(),
-
-        opponentName:
-            document
-            .getElementById("opponentName")
-            .value
-            .trim(),
-
-        opponentUsername:
-            normalizeUsername(
-                document
-                .getElementById("opponentUsername")
-                .value
-                .trim()
-            ),
-
-        date:
-            document
-            .getElementById("matchDate")
-            .value,
-
-        time:
-            document
-            .getElementById("matchTime")
-            .value,
-
-        ourScore:null,
-
-        opponentScore:null
-
-    });
-
-
-    saveData();
-
-    closeModal("matchModal");
-
-    renderMatches();
-    renderDashboard();
-    renderCalendar();
-
-}
-
-
-/* =====================================================
-   SCORE
-===================================================== */
-
-function canEnterScore(match){
-
-    const date=
-        new Date(
-            match.date+"T"+match.time
-        );
-
-    return date<=new Date();
-}
-
-
-function isMatchCompleted(match){
-
-    if(
-        match.ourScore!==null
-        &&
-        match.opponentScore!==null
-    ){
-        return true;
-    }
-
-
-    return canEnterScore(match);
-}
-
-
-function openScoreModal(id){
-
-    const match=
-        matches.find(
-            m=>String(m.id)===String(id)
-        );
-
-    if(!match) return;
-
-
-    if(!canEnterScore(match)){
-
-        alert(
-            "Le match n'est pas encore terminé."
-        );
-
-        return;
-    }
-
-
-    document.getElementById("scoreMatchId")
-        .value=match.id;
-
-
-    document.getElementById("ourScore")
-        .value=
-        match.ourScore!==null
-        ?
-        match.ourScore
-        :
-        "";
-
-
-    document.getElementById("opponentScore")
-        .value=
-        match.opponentScore!==null
-        ?
-        match.opponentScore
-        :
-        "";
-
-
-    document.getElementById("scoreMatchInfo")
-        .innerHTML=
-        `
-            <strong>
-                ${escapeHTML(match.opponentAgency)}
-            </strong>
-            —
-            ${formatDate(match.date)}
-            à
-            ${escapeHTML(match.time)}
-        `;
-
-
-    document.getElementById("scoreModal")
-        .classList.add("open");
-
-}
-
-
-function saveScore(event){
-
-    event.preventDefault();
-
-
-    const id=
-        document.getElementById("scoreMatchId")
-        .value;
-
-
-    const match=
-        matches.find(
-            m=>String(m.id)===String(id)
-        );
-
-
-    if(!match) return;
-
-
-    match.ourScore=
-        Number(
-            document.getElementById("ourScore")
-            .value
-        );
-
-
-    match.opponentScore=
-        Number(
-            document.getElementById("opponentScore")
-            .value
-        );
-
-
-    saveData();
-
-    closeModal("scoreModal");
-
-    renderMatches();
-    renderDashboard();
-    renderCalendar();
-
-}
-
-
-function deleteMatch(id){
-
-    if(!confirm("Supprimer ce match ?")) return;
-
-
-    matches=
-        matches.filter(
-            m=>String(m.id)!==String(id)
-        );
-
-
-    saveData();
-
-    renderMatches();
-    renderDashboard();
-    renderCalendar();
-
-}
-
-
-/* =====================================================
-   AFFICHAGE MATCHS
-===================================================== */
-
-function renderMatches(){
-
-    const container=
-        document.getElementById("matchesList");
-
-
-    if(matches.length===0){
-
-        container.innerHTML=`
-
-            <div class="panel">
-
-                <div class="empty">
-
-                    Aucun match enregistré.
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    const sorted=
-        [...matches].sort(
-            (a,b)=>
-            new Date(
-                a.date+"T"+a.time
-            )
-            -
-            new Date(
-                b.date+"T"+b.time
-            )
-        );
-
-
-    container.innerHTML="";
-
-
-    sorted.forEach(match=>{
-
-        const teamName=
-            getTeamName(match.teamId);
-
-
-        const creator=
-            members.find(
-                m =>
-                String(m.id)
-                ===
-                String(match.creatorId)
-            );
-
-
-        const completed=
-            isMatchCompleted(match);
-
-
-        let scoreHTML="";
-
-
-        if(
-            match.ourScore!==null
-            &&
-            match.opponentScore!==null
-        ){
-
-            scoreHTML=`
-
-                <div class="score">
-
-                    ${match.ourScore}
-                    —
-                    ${match.opponentScore}
-
-                </div>
-
-            `;
-
-        }
-
-
-        container.innerHTML+=`
-
-            <div class="match-card
-                        ${completed
-                            ?
-                            "completed"
-                            :
-                            "upcoming"}">
-
-
-                <div class="match-top">
-
-                    <div class="match-date">
-
-                        📅
-                        ${formatDate(match.date)}
-
-                        &nbsp; • &nbsp;
-
-                        🕐
-                        ${escapeHTML(match.time)}
-
-                    </div>
-
-
-                    <div class="match-status
-                        ${
-                            completed
-                            ?
-                            "status-completed"
-                            :
-                            "status-upcoming"
-                        }">
-
-                        ${
-                            completed
-                            ?
-                            "MATCH TERMINÉ"
-                            :
-                            "MATCH À VENIR"
-                        }
-
-                    </div>
-
-                </div>
-
-
-                <div class="match-versus">
-
-
-                    <!-- NOTRE CÔTÉ -->
-
-                    <div class="match-side">
-
-                        <div class="match-side-title">
-
-                            Notre agence
-
-                        </div>
-
-
-                        <div class="match-agency">
-
-                            LVF Agency
-
-                        </div>
-
-
-                        <div class="match-team">
-
-                            Team :
-                            ${escapeHTML(teamName)}
-
-                        </div>
-
-
-                        <div class="match-creator">
-
-                            ${
-                                creator
-                                ?
-                                escapeHTML(creator.name)
-                                :
-                                "Créateur supprimé"
-                            }
-
-
-                            ${
-                                creator
-                                ?
-                                `<span>
-                                    ${escapeHTML(
-                                        creator.username
-                                    )}
-                                </span>`
-                                :
-                                ""
-                            }
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="vs">
-
-                        VS
-
-                    </div>
-
-
-                    <!-- CÔTÉ ADVERSE -->
-
-                    <div class="match-side">
-
-                        <div class="match-side-title">
-
-                            Agence adverse
-
-                        </div>
-
-
-                        <div class="match-agency">
-
-                            ${escapeHTML(
-                                match.opponentAgency
-                            )}
-
-                        </div>
-
-
-                        <div class="match-team">
-
-                            Team :
-                            ${
-                                match.opponentTeam
-                                ?
-                                escapeHTML(
-                                    match.opponentTeam
-                                )
-                                :
-                                "—"
-                            }
-
-                        </div>
-
-
-                        <div class="match-creator">
-
-                            ${escapeHTML(
-                                match.opponentName
-                            )}
-
-                            <span>
-
-                                ${escapeHTML(
-                                    match.opponentUsername
-                                )}
-
-                            </span>
-
-                        </div>
-
-
-                        ${scoreHTML}
-
-                    </div>
-
-                </div>
-
-
-                <div class="match-actions">
-
-
-                    ${
-                        canEnterScore(match)
-                        ?
-                        `
-                            <button
-                                class="secondary-btn"
-                                onclick="
-                                openScoreModal(${match.id})
-                                ">
-
-                                ${
-                                    match.ourScore!==null
-                                    ?
-                                    "Modifier le résultat"
-                                    :
-                                    "Ajouter le résultat"
-                                }
-
-                            </button>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    <button
-                        class="danger-btn"
-                        onclick="
-                        deleteMatch(${match.id})
-                        ">
-
-                        Supprimer
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-}
-
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
-
-function renderDashboard(){
-
-    document.getElementById(
-        "dashboardTeams"
-    ).textContent=teams.length;
-
-
-    document.getElementById(
-        "dashboardCreators"
-    ).textContent=members.length;
-
-
-    const upcoming=
-        matches.filter(
-            m=>!isMatchCompleted(m)
-        );
-
-
-    const completed=
-        matches.filter(
-            m=>isMatchCompleted(m)
-        );
-
-
-    document.getElementById(
-        "dashboardUpcoming"
-    ).textContent=upcoming.length;
-
-
-    document.getElementById(
-        "dashboardCompleted"
-    ).textContent=completed.length;
-
-
-    const matchContainer=
-        document.getElementById(
-            "dashboardMatches"
-        );
-
-
-    if(upcoming.length===0){
-
-        matchContainer.innerHTML=`
-
-            <div class="empty">
-
-                Aucun match à venir.
-
-            </div>
-
-        `;
-
-    }else{
-
-        const sorted=
-            [...upcoming].sort(
-                (a,b)=>
-                new Date(
-                    a.date+"T"+a.time
-                )
-                -
-                new Date(
-                    b.date+"T"+b.time
-                )
-            );
-
-
-        matchContainer.innerHTML=
-            sorted
-            .slice(0,5)
-            .map(match=>{
-
-                const creator=
-                    members.find(
-                        m =>
-                        String(m.id)
-                        ===
-                        String(match.creatorId)
-                    );
-
-
-                return `
-
-                    <div class="member-mini">
-
-                        <div class="avatar">
-                            ⚔
-                        </div>
-
-
-                        <div class="member-info">
-
-                            <div class="member-name">
-
-                                ${
-                                    creator
-                                    ?
-                                    escapeHTML(
-                                        creator.name
-                                    )
-                                    :
-                                    "Créateur"
-                                }
-
-                                vs
-
-                                ${escapeHTML(
-                                    match.opponentAgency
-                                )}
-
-                            </div>
-
-
-                            <div class="member-username">
-
-                                ${formatDate(
-                                    match.date
-                                )}
-
-                                à
-
-                                ${escapeHTML(
-                                    match.time
-                                )}
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            })
-            .join("");
-
-    }
-
-
-    const teamContainer=
-        document.getElementById(
-            "dashboardTeamsList"
-        );
-
-
-    if(teams.length===0){
-
-        teamContainer.innerHTML=`
-
-            <div class="empty">
-
-                Aucune team.
-
-            </div>
-
-        `;
-
-    }else{
-
-        teamContainer.innerHTML=
-            teams
-            .slice(0,5)
-            .map(team=>{
-
-                const count=
-                    members.filter(
-                        m =>
-                        String(m.teamId)
-                        ===
-                        String(team.id)
-                    ).length;
-
-
-                return `
-
-                    <div class="member-mini">
-
-                        <div class="avatar">
-                            👥
-                        </div>
-
-
-                        <div class="member-info">
-
-                            <div class="member-name">
-
-                                ${escapeHTML(
-                                    team.name
-                                )}
-
-                            </div>
-
-
-                            <div class="member-username">
-
-                                ${count}
-                                ${
-                                    count>1
-                                    ?
-                                    "créateurs"
-                                    :
-                                    "créateur"
-                                }
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            })
-            .join("");
-
-    }
-
-}
-
-
-/* =====================================================
-   CALENDRIER
-===================================================== */
-
-function changeMonth(amount){
-
-    currentCalendarDate.setMonth(
-        currentCalendarDate.getMonth()
-        +
-        amount
     );
 
-    renderCalendar();
 }
 
 
-function renderCalendar(){
+function fmtDate(value){
 
-    const year=
-        currentCalendarDate.getFullYear();
+    if(!value) return "—";
 
-    const month=
-        currentCalendarDate.getMonth();
-
-
-    const months=[
-        "Janvier",
-        "Février",
-        "Mars",
-        "Avril",
-        "Mai",
-        "Juin",
-        "Juillet",
-        "Août",
-        "Septembre",
-        "Octobre",
-        "Novembre",
-        "Décembre"
-    ];
-
-
-    document.getElementById(
-        "calendarTitle"
-    ).textContent=
-        `${months[month]} ${year}`;
-
-
-    const grid=
-        document.getElementById(
-            "calendarGrid"
-        );
-
-
-    const dayNames=[
-        "Lun",
-        "Mar",
-        "Mer",
-        "Jeu",
-        "Ven",
-        "Sam",
-        "Dim"
-    ];
-
-
-    grid.innerHTML=
-        dayNames
-        .map(
-            day=>
-            `
-            <div class="calendar-day-name">
-                ${day}
-            </div>
-            `
-        )
-        .join("");
-
-
-    const firstDay=
-        new Date(
-            year,
-            month,
-            1
-        );
-
-
-    let startDay=
-        firstDay.getDay();
-
-
-    startDay=
-        startDay===0
-        ?
-        6
-        :
-        startDay-1;
-
-
-    const daysInMonth=
-        new Date(
-            year,
-            month+1,
-            0
-        ).getDate();
-
-
-    const previousMonthDays=
-        new Date(
-            year,
-            month,
-            0
-        ).getDate();
-
-
-    for(let i=0;i<42;i++){
-
-        let dayNumber=
-            i-startDay+1;
-
-
-        let cellDate;
-
-        let other=false;
-
-
-        if(dayNumber<1){
-
-            dayNumber=
-                previousMonthDays
-                +
-                dayNumber;
-
-            cellDate=
-                new Date(
-                    year,
-                    month-1,
-                    dayNumber
-                );
-
-            other=true;
-
-        }else if(
-            dayNumber>daysInMonth
-        ){
-
-            dayNumber=
-                dayNumber
-                -
-                daysInMonth;
-
-            cellDate=
-                new Date(
-                    year,
-                    month+1,
-                    dayNumber
-                );
-
-            other=true;
-
-        }else{
-
-            cellDate=
-                new Date(
-                    year,
-                    month,
-                    dayNumber
-                );
-
-        }
-
-
-        const dateString=
-            cellDate.getFullYear()
-            +
-            "-"
-            +
-            String(
-                cellDate.getMonth()+1
-            ).padStart(2,"0")
-            +
-            "-"
-            +
-            String(
-                cellDate.getDate()
-            ).padStart(2,"0");
-
-
-        const dayMatches=
-            matches.filter(
-                m=>m.date===dateString
-            );
-
-
-        const matchHTML=
-            dayMatches
-            .map(match=>`
-
-                <div class="calendar-match">
-
-                    ${escapeHTML(match.time)}
-                    —
-                    ${escapeHTML(
-                        match.opponentAgency
-                    )}
-
-                </div>
-
-            `)
-            .join("");
-
-
-        grid.innerHTML+=`
-
-            <div class="calendar-cell
-                        ${other ? "other":""}">
-
-                <div class="day-number">
-
-                    ${dayNumber}
-
-                </div>
-
-                ${matchHTML}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   UTILITAIRES
-===================================================== */
-
-function normalizeUsername(username){
-
-    if(!username) return "";
-
-    username=username.trim();
-
-    return username.startsWith("@")
-        ?
-        username
-        :
-        "@"+username;
-}
-
-
-function formatDate(dateString){
-
-    if(!dateString) return "—";
-
-
-    const date=
-        new Date(
-            dateString+"T00:00:00"
-        );
-
-
-    return date.toLocaleDateString(
+    return new Date(
+        value + "T00:00:00"
+    ).toLocaleDateString(
         "fr-FR",
         {
             day:"2-digit",
@@ -3876,36 +685,3306 @@ function formatDate(dateString){
 }
 
 
-function escapeHTML(value){
+function fmtDT(value){
 
-    if(
-        value===null
-        ||
-        value===undefined
-    ){
-        return "";
-    }
+    if(!value) return "—";
 
+    const date = new Date(value);
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    ) +
+    " à " +
+    date.toLocaleTimeString(
+        "fr-FR",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
 
 }
 
 
-/* =====================================================
-   INITIALISATION
-===================================================== */
+function initials(name){
 
-renderDashboard();
-renderTeams();
-renderMembers();
-renderMatches();
-renderCalendar();
+    return (name || "?")
+        .split(/\s+/)
+        .slice(0,2)
+        .map(x => x[0])
+        .join("")
+        .toUpperCase();
+
+}
+
+
+function avatar(creator,big=false){
+
+    if(
+        creator &&
+        creator.avatar
+    ){
+
+        return `
+            <img
+                class="avatar ${big ? "big" : ""}"
+                src="${creator.avatar}"
+                alt=""
+            >
+        `;
+
+    }
+
+    return `
+        <div class="avatar ${big ? "big" : ""}">
+            ${esc(initials(creator?.name || "?"))}
+        </div>
+    `;
+
+}
+
+
+function roleBadge(role){
+
+    return `
+        <span class="badge">
+            ${esc(role || "Créateur")}
+        </span>
+    `;
+
+}
+
+
+function creator(id){
+
+    return db.creators.find(
+        x => x.id === id
+    );
+
+}
+
+
+function team(id){
+
+    return db.teams.find(
+        x => x.id === id
+    );
+
+}
+
+
+function agency(id){
+
+    return db.agencies.find(
+        x => x.id === id
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const navItems = [
+
+    ["dashboard","🏠","Tableau de bord"],
+    ["teams","👥","Teams"],
+    ["creators","👤","Créateurs"],
+    ["matches","⚔️","Matchs"],
+    ["agencies","🏢","Agences"],
+    ["calendar","📅","Calendrier"]
+
+];
+
+
+function renderNav(){
+
+    document.getElementById("nav").innerHTML =
+        navItems.map(item => `
+
+            <button
+                class="${page === item[0] ? "active" : ""}"
+                onclick="go('${item[0]}')"
+            >
+
+                ${item[1]}
+                <span>${item[2]}</span>
+
+            </button>
+
+        `).join("");
+
+}
+
+
+function go(newPage){
+
+    page = newPage;
+
+    renderNav();
+
+    render();
+
+}
+
+
+/* =========================================================
+   RENDU PRINCIPAL
+========================================================= */
+
+function render(){
+
+    const titles = {
+
+        dashboard:[
+            "Tableau de bord",
+            "Vue d'ensemble de TokCenter."
+        ],
+
+        teams:[
+            "Teams",
+            "Gérez vos équipes et leurs créateurs."
+        ],
+
+        creators:[
+            "Créateurs",
+            "Vos membres, leurs rôles et leurs informations."
+        ],
+
+        matches:[
+            "Matchs",
+            "Planifiez et consultez vos matchs TikTok."
+        ],
+
+        agencies:[
+            "Agences adverses",
+            "Votre carnet d'agences enregistré manuellement."
+        ],
+
+        calendar:[
+            "Calendrier",
+            "Vos matchs classés par date."
+        ]
+
+    };
+
+    document.getElementById("pageTitle")
+        .textContent = titles[page][0];
+
+    document.getElementById("pageSubtitle")
+        .textContent = titles[page][1];
+
+    document.getElementById("content")
+        .innerHTML = views[page]();
+
+}
+
+
+/* =========================================================
+   TABLEAU DE BORD
+========================================================= */
+
+const views = {};
+
+
+views.dashboard = function(){
+
+    const upcoming = db.matches
+        .filter(
+            m => new Date(m.datetime) > new Date()
+        )
+        .sort(
+            (a,b) =>
+                new Date(a.datetime) -
+                new Date(b.datetime)
+        );
+
+    return `
+
+        <div class="grid stats">
+
+            <div class="card stat">
+                <div class="label">Teams</div>
+                <div class="num">
+                    ${db.teams.length}
+                </div>
+            </div>
+
+            <div class="card stat">
+                <div class="label">Créateurs</div>
+                <div class="num">
+                    ${db.creators.length}
+                </div>
+            </div>
+
+            <div class="card stat">
+                <div class="label">Matchs à venir</div>
+                <div class="num">
+                    ${upcoming.length}
+                </div>
+            </div>
+
+            <div class="card stat">
+                <div class="label">
+                    Agences enregistrées
+                </div>
+                <div class="num">
+                    ${db.agencies.length}
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h2>
+                Prochains matchs
+            </h2>
+
+            ${
+                matchList(
+                    upcoming.slice(0,4)
+                )
+            }
+
+        </div>
+
+
+        <div class="section">
+
+            <h2>
+                Activité récente
+            </h2>
+
+            <div class="card">
+
+                ${
+                    db.matches.length
+
+                    ?
+
+                    `
+                    <div class="list">
+
+                        ${
+                            db.matches
+                            .slice()
+                            .sort(
+                                (a,b) =>
+                                    new Date(b.datetime) -
+                                    new Date(a.datetime)
+                            )
+                            .slice(0,5)
+                            .map(m => `
+
+                                <div class="listitem">
+
+                                    <div class="row">
+
+                                        <div>
+
+                                            <b>
+                                                ${esc(
+                                                    m.ourTeamName ||
+                                                    team(m.teamId)?.name ||
+                                                    "Team"
+                                                )}
+                                            </b>
+
+                                            vs
+
+                                            <b>
+                                                ${esc(
+                                                    m.agencyName ||
+                                                    "Agence adverse"
+                                                )}
+                                            </b>
+
+                                        </div>
+
+                                        <span class="muted">
+                                            ${fmtDT(m.datetime)}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            `)
+                            .join("")
+
+                        }
+
+                    </div>
+                    `
+
+                    :
+
+                    `
+                    <div class="empty">
+                        Aucune activité pour le moment.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================================================
+   CRÉATEURS
+========================================================= */
+
+views.creators = function(){
+
+    const q =
+        (window.creatorSearch || "")
+        .toLowerCase();
+
+    const creators =
+        db.creators.filter(c =>
+
+            (
+                c.name +
+                " " +
+                c.username +
+                " " +
+                c.role
+            )
+            .toLowerCase()
+            .includes(q)
+
+        );
+
+
+    return `
+
+        <div class="search">
+
+            <input
+                placeholder="🔎 Rechercher un créateur..."
+                value="${esc(window.creatorSearch || "")}"
+                oninput="
+                    window.creatorSearch=this.value;
+                    render();
+                "
+            >
+
+        </div>
+
+
+        <div
+            class="actions"
+            style="margin-bottom:16px"
+        >
+
+            <button
+                class="btn primary"
+                onclick="openCreator()"
+            >
+                ＋ Ajouter un créateur
+            </button>
+
+        </div>
+
+
+        ${
+            creators.length
+
+            ?
+
+            `
+            <div class="grid cards">
+
+                ${
+                    creators.map(c => `
+
+                        <div class="card">
+
+                            <div class="row">
+
+                                <div class="person">
+
+                                    ${avatar(c)}
+
+                                    <div>
+
+                                        <b>
+                                            ${esc(c.name)}
+                                        </b>
+
+                                        <div class="muted">
+                                            @${esc(c.username)}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                ${roleBadge(c.role)}
+
+                            </div>
+
+
+                            <div
+                                class="muted"
+                                style="margin-top:14px"
+                            >
+
+                                ${
+                                    c.joinDate
+                                    ? "Arrivé le " +
+                                      fmtDate(c.joinDate)
+                                    : "Date d'arrivée non renseignée"
+                                }
+
+                                ·
+
+                                ${
+                                    db.teams
+                                    .filter(
+                                        t =>
+                                            t.memberIds?.includes(c.id)
+                                    )
+                                    .map(
+                                        t => esc(t.name)
+                                    )
+                                    .join(", ")
+                                    ||
+                                    "Aucune team"
+                                }
+
+                            </div>
+
+
+                            <div
+                                class="actions"
+                                style="margin-top:14px"
+                            >
+
+                                <button
+                                    class="btn secondary"
+                                    onclick="
+                                        creatorDetails('${c.id}')
+                                    "
+                                >
+                                    Voir la fiche
+                                </button>
+
+                                <button
+                                    class="btn ghost"
+                                    onclick="
+                                        openCreator('${c.id}')
+                                    "
+                                >
+                                    Modifier
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `).join("")
+
+                }
+
+            </div>
+            `
+
+            :
+
+            `
+            <div class="empty">
+
+                Aucun créateur.
+                Ajoutez votre premier membre.
+
+            </div>
+            `
+
+        }
+
+    `;
+
+};
+
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+views.teams = function(){
+
+    return `
+
+        <div
+            class="actions"
+            style="margin-bottom:16px"
+        >
+
+            <button
+                class="btn primary"
+                onclick="openTeam()"
+            >
+                ＋ Créer une team
+            </button>
+
+        </div>
+
+
+        ${
+            db.teams.length
+
+            ?
+
+            `
+            <div class="grid cards">
+
+                ${
+                    db.teams.map(t => {
+
+                        const members =
+                            db.creators.filter(
+                                c =>
+                                    t.memberIds?.includes(c.id)
+                            );
+
+                        return `
+
+                            <div class="card">
+
+                                <div class="teamhead">
+
+                                    <div class="teamicon">
+                                        ${esc(
+                                            initials(t.name)
+                                        )}
+                                    </div>
+
+                                    <div>
+
+                                        <h3 style="margin:0">
+                                            ${esc(t.name)}
+                                        </h3>
+
+                                        <span class="muted">
+                                            ${members.length}
+                                            créateur${members.length > 1 ? "s" : ""}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="list">
+
+                                    ${
+                                        members.length
+
+                                        ?
+
+                                        members.map(c => `
+
+                                            <div class="person">
+
+                                                ${avatar(c)}
+
+                                                <div>
+
+                                                    <b>
+                                                        ${esc(c.name)}
+                                                    </b>
+
+                                                    <div class="muted">
+
+                                                        @${esc(c.username)}
+                                                        ·
+                                                        ${esc(c.role)}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        `).join("")
+
+                                        :
+
+                                        `
+                                        <div class="muted">
+                                            Aucun membre.
+                                        </div>
+                                        `
+
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="actions"
+                                    style="margin-top:15px"
+                                >
+
+                                    <button
+                                        class="btn secondary"
+                                        onclick="
+                                            teamDetails('${t.id}')
+                                        "
+                                    >
+                                        Ouvrir
+                                    </button>
+
+                                    <button
+                                        class="btn ghost"
+                                        onclick="
+                                            openTeam('${t.id}')
+                                        "
+                                    >
+                                        Modifier
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }).join("")
+
+                }
+
+            </div>
+            `
+
+            :
+
+            `
+            <div class="empty">
+                Aucune team créée.
+            </div>
+            `
+
+        }
+
+    `;
+
+};
+
+
+/* =========================================================
+   MATCHS
+========================================================= */
+
+views.matches = function(){
+
+    return `
+
+        <div
+            class="actions"
+            style="margin-bottom:16px"
+        >
+
+            <button
+                class="btn primary"
+                onclick="openMatch()"
+            >
+                ＋ Créer un match
+            </button>
+
+        </div>
+
+
+        <div class="tabs">
+
+            <button class="tab active">
+                Tous (${db.matches.length})
+            </button>
+
+            <button class="tab">
+                À venir
+                (${
+                    db.matches.filter(
+                        m =>
+                            new Date(m.datetime) > new Date()
+                    ).length
+                })
+            </button>
+
+            <button class="tab">
+                Terminés
+                (${
+                    db.matches.filter(
+                        m =>
+                            new Date(m.datetime) <= new Date()
+                    ).length
+                })
+            </button>
+
+        </div>
+
+
+        ${
+            matchList(
+                db.matches
+                .slice()
+                .sort(
+                    (a,b) =>
+                        new Date(a.datetime) -
+                        new Date(b.datetime)
+                )
+            )
+        }
+
+    `;
+
+};
+
+
+function matchList(matches){
+
+    if(!matches.length){
+
+        return `
+            <div class="empty">
+                Aucun match enregistré.
+            </div>
+        `;
+
+    }
+
+
+    return `
+
+        <div class="grid">
+
+            ${
+                matches.map(m => {
+
+                    const c =
+                        creator(m.creatorId);
+
+                    const isUpcoming =
+                        new Date(m.datetime) >
+                        new Date();
+
+
+                    return `
+
+                        <div class="card match">
+
+                            <div class="row">
+
+                                <div class="date">
+                                    ${fmtDT(m.datetime)}
+                                </div>
+
+                                <span
+                                    class="
+                                        status
+                                        ${
+                                            isUpcoming
+                                            ? "upcoming"
+                                            : "done"
+                                        }
+                                    "
+                                >
+
+                                    ${
+                                        isUpcoming
+                                        ? "À venir"
+                                        : "Terminé"
+                                    }
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                style="margin:16px 0"
+                            >
+
+                                <div class="vs">
+
+                                    ${esc(
+                                        m.ourAgency ||
+                                        "LVF Agency"
+                                    )}
+
+                                    ·
+
+                                    ${esc(
+                                        m.ourTeamName ||
+                                        team(m.teamId)?.name ||
+                                        "Team"
+                                    )}
+
+                                    ·
+
+                                    ${
+                                        c
+                                        ? esc(c.name) +
+                                          " (@" +
+                                          esc(c.username) +
+                                          ")"
+                                        : "Créateur non renseigné"
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="muted"
+                                    style="margin-top:7px"
+                                >
+                                    VS
+                                </div>
+
+
+                                <div class="vs">
+
+                                    ${esc(
+                                        m.agencyName ||
+                                        "Agence adverse"
+                                    )}
+
+                                    ·
+
+                                    ${esc(
+                                        m.opponentTeam ||
+                                        "Team adverse"
+                                    )}
+
+                                    ·
+
+                                    ${esc(
+                                        m.opponentName ||
+                                        "Adversaire"
+                                    )}
+
+                                    ${
+                                        m.opponentUsername
+                                        ? `
+                                            (@${esc(
+                                                m.opponentUsername
+                                            )})
+                                        `
+                                        : ""
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="actions">
+
+                                <button
+                                    class="btn secondary"
+                                    onclick="
+                                        matchDetails('${m.id}')
+                                    "
+                                >
+                                    Détails
+                                </button>
+
+                                <button
+                                    class="btn ghost"
+                                    onclick="
+                                        openMatch('${m.id}')
+                                    "
+                                >
+                                    Modifier
+                                </button>
+
+                                <button
+                                    class="btn danger"
+                                    onclick="
+                                        deleteMatch('${m.id}')
+                                    "
+                                >
+                                    Supprimer
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("")
+
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   AGENCES
+========================================================= */
+
+views.agencies = function(){
+
+    const q =
+        (window.agencySearch || "")
+        .toLowerCase();
+
+
+    const agencies =
+        db.agencies.filter(a =>
+
+            (
+                a.name +
+                " " +
+                (a.notes || "")
+            )
+            .toLowerCase()
+            .includes(q)
+
+        );
+
+
+    return `
+
+        <div class="notice">
+
+            💡 Une agence n'est ajoutée à ce carnet
+            que lorsque <b>vous</b> décidez de
+            l'enregistrer.
+
+            Une agence simplement écrite dans un match
+            ne devient jamais automatiquement une agence
+            enregistrée.
+
+        </div>
+
+
+        <div class="search">
+
+            <input
+                placeholder="🔎 Rechercher une agence enregistrée..."
+                value="${esc(window.agencySearch || "")}"
+                oninput="
+                    window.agencySearch=this.value;
+                    render();
+                "
+            >
+
+        </div>
+
+
+        <div
+            class="actions"
+            style="margin-bottom:16px"
+        >
+
+            <button
+                class="btn primary"
+                onclick="openAgency()"
+            >
+                ＋ Enregistrer une agence
+            </button>
+
+        </div>
+
+
+        ${
+            agencies.length
+
+            ?
+
+            `
+            <div class="grid cards">
+
+                ${
+                    agencies.map(a => {
+
+                        const matches =
+                            db.matches.filter(
+                                m =>
+                                    m.agencyId === a.id
+                                    ||
+                                    (
+                                        m.agencyName &&
+                                        m.agencyName.toLowerCase()
+                                        ===
+                                        a.name.toLowerCase()
+                                    )
+                            );
+
+
+                        const teams = [
+                            ...new Set(
+                                matches
+                                .map(m => m.opponentTeam)
+                                .filter(Boolean)
+                            )
+                        ];
+
+
+                        const people = [
+                            ...new Set(
+                                matches
+                                .map(
+                                    m =>
+                                        m.opponentUsername ||
+                                        m.opponentName
+                                )
+                                .filter(Boolean)
+                            )
+                        ];
+
+
+                        return `
+
+                            <div
+                                class="
+                                    card
+                                    ${a.favorite ? "favorite" : ""}
+                                "
+                            >
+
+                                <div class="row">
+
+                                    <div>
+
+                                        <h3 style="margin:0">
+                                            ${esc(a.name)}
+                                        </h3>
+
+                                        <div class="muted">
+
+                                            ${matches.length}
+                                            match${matches.length > 1 ? "s" : ""}
+                                            associé${matches.length > 1 ? "s" : ""}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <button
+                                        class="btn ghost star"
+                                        onclick="
+                                            toggleFavorite('${a.id}')
+                                        "
+                                    >
+
+                                        ${
+                                            a.favorite
+                                            ? "★"
+                                            : "☆"
+                                        }
+
+                                    </button>
+
+                                </div>
+
+
+                                <div
+                                    style="margin-top:15px"
+                                    class="muted"
+                                >
+
+                                    <b>
+                                        Teams :
+                                    </b>
+
+                                    ${
+                                        teams.length
+                                        ? teams.map(esc).join(", ")
+                                        : "Aucune encore"
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="muted"
+                                    style="margin-top:6px"
+                                >
+
+                                    <b>
+                                        Adversaires :
+                                    </b>
+
+                                    ${
+                                        people.length
+                                        ? people.map(esc).join(", ")
+                                        : "Aucun encore"
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="actions"
+                                    style="margin-top:15px"
+                                >
+
+                                    <button
+                                        class="btn secondary"
+                                        onclick="
+                                            agencyDetails('${a.id}')
+                                        "
+                                    >
+                                        Ouvrir
+                                    </button>
+
+                                    <button
+                                        class="btn ghost"
+                                        onclick="
+                                            openAgency('${a.id}')
+                                        "
+                                    >
+                                        Modifier
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }).join("")
+
+                }
+
+            </div>
+            `
+
+            :
+
+            `
+            <div class="empty">
+
+                Aucune agence enregistrée par vous.
+
+            </div>
+            `
+
+        }
+
+    `;
+
+};
+
+
+/* =========================================================
+   CALENDRIER
+========================================================= */
+
+views.calendar = function(){
+
+    const matches =
+        db.matches
+        .slice()
+        .sort(
+            (a,b) =>
+                new Date(a.datetime) -
+                new Date(b.datetime)
+        );
+
+
+    return `
+
+        <div class="card">
+
+            <div class="list">
+
+                ${
+                    matches.length
+
+                    ?
+
+                    matches.map(m => `
+
+                        <div class="listitem">
+
+                            <div class="row">
+
+                                <div>
+
+                                    <b>
+                                        ${fmtDT(m.datetime)}
+                                    </b>
+
+                                    <div style="margin-top:5px">
+
+                                        ${esc(
+                                            m.ourTeamName ||
+                                            team(m.teamId)?.name ||
+                                            "Team"
+                                        )}
+
+                                        vs
+
+                                        ${esc(
+                                            m.agencyName ||
+                                            "Agence adverse"
+                                        )}
+
+                                        —
+
+                                        ${esc(
+                                            m.opponentTeam ||
+                                            ""
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <button
+                                    class="btn secondary"
+                                    onclick="
+                                        matchDetails('${m.id}')
+                                    "
+                                >
+                                    Voir
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `).join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+
+                        Le calendrier est vide.
+
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================================================
+   MODALES
+========================================================= */
+
+function openModal(title,body){
+
+    document.getElementById("modalTitle")
+        .textContent = title;
+
+    document.getElementById("modalBody")
+        .innerHTML = body;
+
+    document.getElementById("modal")
+        .classList.add("open");
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .classList.remove("open");
+
+}
+
+
+function openQuickCreate(){
+
+    openMatch();
+
+}
+
+
+/* =========================================================
+   CRÉATEUR
+========================================================= */
+
+function openCreator(id){
+
+    const c =
+        creator(id) ||
+        {
+            name:"",
+            username:"",
+            role:"Créateur",
+            joinDate:"",
+            avatar:""
+        };
+
+
+    pendingAvatar = "";
+
+
+    openModal(
+
+        id
+        ? "Modifier le créateur"
+        : "Ajouter un créateur",
+
+        `
+
+        <form
+            onsubmit="
+                submitCreator(event,'${id || ""}')
+            "
+        >
+
+            <div class="formgrid">
+
+
+                <div class="field">
+
+                    <label>
+                        Nom *
+                    </label>
+
+                    <input
+                        id="cname"
+                        required
+                        value="${esc(c.name)}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Pseudo TikTok *
+                    </label>
+
+                    <input
+                        id="cuser"
+                        required
+                        value="${esc(c.username)}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Rôle *
+                    </label>
+
+                    <select id="crole">
+
+                        <option
+                            ${c.role === "Fondateur" ? "selected" : ""}
+                        >
+                            Fondateur
+                        </option>
+
+                        <option
+                            ${c.role === "Manager" ? "selected" : ""}
+                        >
+                            Manager
+                        </option>
+
+                        <option
+                            ${c.role === "Agent" ? "selected" : ""}
+                        >
+                            Agent
+                        </option>
+
+                        <option
+                            ${(!c.role || c.role === "Créateur") ? "selected" : ""}
+                        >
+                            Créateur
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Date d'arrivée
+                        <span class="muted">
+                            (facultative)
+                        </span>
+                    </label>
+
+                    <input
+                        id="cdate"
+                        type="date"
+                        value="${esc(c.joinDate)}"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Avatar
+                        <span class="muted">
+                            (facultatif)
+                        </span>
+                    </label>
+
+                    <div class="file">
+
+                        <input
+                            id="cavatar"
+                            type="file"
+                            accept="image/*"
+                            onchange="previewAvatar(this)"
+                        >
+
+                        <div
+                            id="avatarPreview"
+                            class="preview"
+                        >
+
+                            ${
+                                c.avatar
+                                ?
+                                `<img
+                                    src="${c.avatar}"
+                                    class="avatar big"
+                                >`
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="actions"
+                style="margin-top:18px"
+            >
+
+                <button
+                    type="submit"
+                    class="btn primary"
+                >
+
+                    ${
+                        id
+                        ? "Enregistrer"
+                        : "Ajouter le créateur"
+                    }
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn ghost"
+                    onclick="closeModal()"
+                >
+                    Annuler
+                </button>
+
+            </div>
+
+        </form>
+
+        `
+
+    );
+
+}
+
+
+function previewAvatar(input){
+
+    const file = input.files[0];
+
+    if(!file) return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(){
+
+        pendingAvatar =
+            reader.result;
+
+
+        document.getElementById(
+            "avatarPreview"
+        ).innerHTML = `
+
+            <img
+                src="${pendingAvatar}"
+                class="avatar big"
+            >
+
+        `;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function submitCreator(event,id){
+
+    event.preventDefault();
+
+
+    const c =
+        id
+        ? creator(id)
+        : {
+            id:uid()
+        };
+
+
+    c.name =
+        document.getElementById(
+            "cname"
+        ).value.trim();
+
+
+    c.username =
+        document.getElementById(
+            "cuser"
+        ).value
+        .trim()
+        .replace(/^@/,"");
+
+
+    c.role =
+        document.getElementById(
+            "crole"
+        ).value;
+
+
+    c.joinDate =
+        document.getElementById(
+            "cdate"
+        ).value;
+
+
+    c.avatar =
+        pendingAvatar ||
+        c.avatar ||
+        "";
+
+
+    if(!id){
+
+        db.creators.push(c);
+
+    }
+
+
+    pendingAvatar = "";
+
+    save();
+
+    closeModal();
+
+    render();
+
+}
+
+
+/* =========================================================
+   FICHE CRÉATEUR
+========================================================= */
+
+function creatorDetails(id){
+
+    const c = creator(id);
+
+    const matches =
+        db.matches.filter(
+            m =>
+                m.creatorId === id
+        );
+
+
+    const teams =
+        db.teams.filter(
+            t =>
+                t.memberIds?.includes(id)
+        );
+
+
+    openModal(
+
+        c.name,
+
+        `
+
+        <div class="person">
+
+            ${avatar(c,true)}
+
+            <div>
+
+                <h2 style="margin:0">
+                    ${esc(c.name)}
+                </h2>
+
+                <div class="muted">
+                    @${esc(c.username)}
+                </div>
+
+                ${roleBadge(c.role)}
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="card">
+
+                <b>
+                    Informations
+                </b>
+
+                <p class="muted">
+
+                    Date d'arrivée :
+                    ${
+                        c.joinDate
+                        ? fmtDate(c.joinDate)
+                        : "Non renseignée"
+                    }
+
+                    <br>
+
+                    Team(s) :
+                    ${
+                        teams.length
+                        ? teams
+                            .map(t => esc(t.name))
+                            .join(", ")
+                        : "Aucune"
+                    }
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Statistiques de matchs
+            </h3>
+
+
+            <div class="grid stats">
+
+                <div class="card stat">
+
+                    <div class="label">
+                        Matchs
+                    </div>
+
+                    <div class="num">
+                        ${matches.length}
+                    </div>
+
+                </div>
+
+
+                <div class="card stat">
+
+                    <div class="label">
+                        À venir
+                    </div>
+
+                    <div class="num">
+
+                        ${
+                            matches.filter(
+                                m =>
+                                    new Date(m.datetime) >
+                                    new Date()
+                            ).length
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Historique
+            </h3>
+
+            ${
+                matchList(matches)
+            }
+
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================================================
+   TEAM
+========================================================= */
+
+function openTeam(id){
+
+    const t =
+        team(id) ||
+        {
+            name:"",
+            memberIds:[]
+        };
+
+
+    openModal(
+
+        id
+        ? "Modifier la team"
+        : "Créer une team",
+
+        `
+
+        <form
+            onsubmit="
+                submitTeam(event,'${id || ""}')
+            "
+        >
+
+            <div class="field">
+
+                <label>
+                    Nom de la team *
+                </label>
+
+                <input
+                    id="tname"
+                    required
+                    value="${esc(t.name)}"
+                >
+
+            </div>
+
+
+            <div
+                class="field"
+                style="margin-top:14px"
+            >
+
+                <label>
+                    Créateurs de la team
+                </label>
+
+
+                <div class="list">
+
+                    ${
+                        db.creators.length
+
+                        ?
+
+                        db.creators.map(c => `
+
+                            <label class="listitem">
+
+                                <input
+                                    type="checkbox"
+                                    class="tm"
+                                    value="${c.id}"
+                                    ${
+                                        t.memberIds?.includes(c.id)
+                                        ? "checked"
+                                        : ""
+                                    }
+                                >
+
+                                ${esc(c.name)}
+
+                                —
+
+                                @${esc(c.username)}
+
+                                ·
+
+                                ${esc(c.role)}
+
+                            </label>
+
+                        `).join("")
+
+                        :
+
+                        `
+                        <div class="muted">
+                            Créez d'abord des créateurs.
+                        </div>
+                        `
+
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="actions"
+                style="margin-top:18px"
+            >
+
+                <button
+                    class="btn primary"
+                >
+                    Enregistrer
+                </button>
+
+            </div>
+
+        </form>
+
+        `
+
+    );
+
+}
+
+
+function submitTeam(event,id){
+
+    event.preventDefault();
+
+
+    const t =
+        id
+        ? team(id)
+        : {
+            id:uid()
+        };
+
+
+    t.name =
+        document.getElementById(
+            "tname"
+        ).value.trim();
+
+
+    t.memberIds =
+        [...document.querySelectorAll(
+            ".tm:checked"
+        )]
+        .map(
+            x => x.value
+        );
+
+
+    if(!id){
+
+        db.teams.push(t);
+
+    }
+
+
+    save();
+
+    closeModal();
+
+    render();
+
+}
+
+
+/* =========================================================
+   FICHE TEAM
+========================================================= */
+
+function teamDetails(id){
+
+    const t = team(id);
+
+
+    const members =
+        db.creators.filter(
+            c =>
+                t.memberIds?.includes(c.id)
+        );
+
+
+    const matches =
+        db.matches.filter(
+            m =>
+                m.teamId === id
+        );
+
+
+    openModal(
+
+        t.name,
+
+        `
+
+        <div class="teamhead">
+
+            <div class="teamicon">
+                ${esc(initials(t.name))}
+            </div>
+
+            <div>
+
+                <h2 style="margin:0">
+                    ${esc(t.name)}
+                </h2>
+
+                <div class="muted">
+                    ${members.length} membre(s)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Membres
+            </h3>
+
+            <div class="list">
+
+                ${
+                    members.length
+
+                    ?
+
+                    members.map(c => `
+
+                        <div class="person">
+
+                            ${avatar(c)}
+
+                            <div>
+
+                                <b>
+                                    ${esc(c.name)}
+                                </b>
+
+                                <div class="muted">
+
+                                    @${esc(c.username)}
+                                    ·
+                                    ${esc(c.role)}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `).join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        Aucun membre.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Matchs de la team
+            </h3>
+
+            ${
+                matchList(matches)
+            }
+
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================================================
+   AGENCES
+========================================================= */
+
+function openAgency(id){
+
+    const a =
+        agency(id) ||
+        {
+            name:"",
+            favorite:false,
+            notes:""
+        };
+
+
+    openModal(
+
+        id
+        ? "Modifier l'agence"
+        : "Enregistrer une agence",
+
+        `
+
+        <form
+            onsubmit="
+                submitAgency(event,'${id || ""}')
+            "
+        >
+
+            <div class="notice">
+
+                Cette agence sera ajoutée à votre carnet
+                uniquement après validation de ce formulaire.
+
+            </div>
+
+
+            <div class="formgrid">
+
+
+                <div class="field full">
+
+                    <label>
+                        Nom de l'agence *
+                    </label>
+
+                    <input
+                        id="aname"
+                        required
+                        value="${esc(a.name)}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Agence favorite
+                    </label>
+
+                    <select id="afav">
+
+                        <option
+                            value="0"
+                            ${!a.favorite ? "selected" : ""}
+                        >
+                            Non
+                        </option>
+
+                        <option
+                            value="1"
+                            ${a.favorite ? "selected" : ""}
+                        >
+                            Oui ⭐
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Notes
+                        <span class="muted">
+                            (facultatif)
+                        </span>
+                    </label>
+
+                    <textarea id="anotes">${esc(
+                        a.notes || ""
+                    )}</textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="actions"
+                style="margin-top:18px"
+            >
+
+                <button
+                    class="btn primary"
+                >
+                    Enregistrer l'agence
+                </button>
+
+            </div>
+
+        </form>
+
+        `
+
+    );
+
+}
+
+
+function submitAgency(event,id){
+
+    event.preventDefault();
+
+
+    const a =
+        id
+        ? agency(id)
+        : {
+            id:uid()
+        };
+
+
+    a.name =
+        document.getElementById(
+            "aname"
+        ).value.trim();
+
+
+    a.favorite =
+        document.getElementById(
+            "afav"
+        ).value === "1";
+
+
+    a.notes =
+        document.getElementById(
+            "anotes"
+        ).value.trim();
+
+
+    if(!id){
+
+        db.agencies.push(a);
+
+    }
+
+
+    save();
+
+    closeModal();
+
+    render();
+
+}
+
+
+function toggleFavorite(id){
+
+    const a = agency(id);
+
+    a.favorite = !a.favorite;
+
+    save();
+
+    render();
+
+}
+
+
+/* =========================================================
+   FICHE AGENCE
+========================================================= */
+
+function agencyDetails(id){
+
+    const a = agency(id);
+
+
+    const matches =
+        db.matches.filter(
+            m =>
+                m.agencyId === id
+                ||
+                (
+                    m.agencyName &&
+                    m.agencyName.toLowerCase()
+                    ===
+                    a.name.toLowerCase()
+                )
+        );
+
+
+    const teams = [
+
+        ...new Set(
+            matches
+            .map(
+                m =>
+                    m.opponentTeam
+            )
+            .filter(Boolean)
+        )
+
+    ];
+
+
+    const people = [
+
+        ...new Set(
+            matches
+            .map(
+                m =>
+                    m.opponentUsername ||
+                    m.opponentName
+            )
+            .filter(Boolean)
+        )
+
+    ];
+
+
+    openModal(
+
+        "Agence — " + a.name,
+
+        `
+
+        <div class="row">
+
+            <div>
+
+                <h2 style="margin:0">
+                    ${esc(a.name)}
+                </h2>
+
+                <div class="muted">
+
+                    ${
+                        a.favorite
+                        ? "⭐ Agence favorite"
+                        : "Agence enregistrée"
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="grid stats">
+
+                <div class="card stat">
+
+                    <div class="label">
+                        Matchs
+                    </div>
+
+                    <div class="num">
+                        ${matches.length}
+                    </div>
+
+                </div>
+
+
+                <div class="card stat">
+
+                    <div class="label">
+                        Teams rencontrées
+                    </div>
+
+                    <div class="num">
+                        ${teams.length}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Teams rencontrées
+            </h3>
+
+            <div class="list">
+
+                ${
+                    teams.length
+
+                    ?
+
+                    teams.map(
+                        x => `
+                            <div class="listitem">
+                                <b>${esc(x)}</b>
+                            </div>
+                        `
+                    ).join("")
+
+                    :
+
+                    `
+                    <div class="muted">
+                        Aucune donnée.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Adversaires rencontrés
+            </h3>
+
+            <div class="list">
+
+                ${
+                    people.length
+
+                    ?
+
+                    people.map(
+                        x => `
+                            <div class="listitem">
+                                <b>${esc(x)}</b>
+                            </div>
+                        `
+                    ).join("")
+
+                    :
+
+                    `
+                    <div class="muted">
+                        Aucun adversaire enregistré.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Historique
+            </h3>
+
+            ${
+                matchList(matches)
+            }
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Notes
+            </h3>
+
+            <div class="card">
+
+                ${
+                    esc(
+                        a.notes ||
+                        "Aucune note."
+                    )
+                }
+
+            </div>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================================================
+   CRÉATION / MODIFICATION D'UN MATCH
+========================================================= */
+
+function openMatch(id){
+
+    const m =
+        id
+        ? db.matches.find(
+            x => x.id === id
+        )
+        :
+        {
+            ourAgency:
+                db.settings.agencyName ||
+                "LVF Agency",
+
+            teamId:"",
+            creatorId:"",
+            agencyId:"",
+            agencyName:"",
+            opponentTeam:"",
+            opponentName:"",
+            opponentUsername:"",
+            datetime:""
+        };
+
+
+    const savedAgencies =
+        db.agencies
+        .slice()
+        .sort(
+            (a,b) =>
+                Number(b.favorite) -
+                Number(a.favorite)
+        );
+
+
+    openModal(
+
+        id
+        ? "Modifier le match"
+        : "Créer un match",
+
+        `
+
+        <form
+            onsubmit="
+                submitMatch(event,'${id || ""}')
+            "
+        >
+
+            <div class="formgrid">
+
+
+                <div class="field">
+
+                    <label>
+                        Notre agence
+                    </label>
+
+                    <input
+                        id="ourAgency"
+                        value="${esc(
+                            m.ourAgency ||
+                            db.settings.agencyName ||
+                            "LVF Agency"
+                        )}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Notre team *
+                    </label>
+
+                    <select
+                        id="mteam"
+                        required
+                        onchange="fillCreators()"
+                    >
+
+                        <option value="">
+                            Choisir une team...
+                        </option>
+
+                        ${
+                            db.teams.map(t => `
+
+                                <option
+                                    value="${t.id}"
+                                    ${
+                                        m.teamId === t.id
+                                        ? "selected"
+                                        : ""
+                                    }
+                                >
+                                    ${esc(t.name)}
+                                </option>
+
+                            `).join("")
+
+                        }
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Notre créateur *
+                    </label>
+
+                    <select
+                        id="mcreator"
+                        required
+                    >
+
+                        <option value="">
+                            Choisir après la team...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Agence adverse
+                    </label>
+
+
+                    <div class="actions">
+
+                        <select
+                            id="agencySelect"
+                            style="flex:1"
+                            onchange="selectSavedAgency()"
+                        >
+
+                            <option value="">
+                                ✏️ Écrire une agence / choisir...
+                            </option>
+
+                            ${
+                                savedAgencies.map(a => `
+
+                                    <option
+                                        value="${a.id}"
+                                        ${
+                                            m.agencyId === a.id
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+
+                                        ${
+                                            a.favorite
+                                            ? "⭐ "
+                                            : ""
+                                        }
+
+                                        ${esc(a.name)}
+
+                                    </option>
+
+                                `).join("")
+
+                            }
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            class="btn secondary"
+                            onclick="openAgency()"
+                        >
+                            ＋ Enregistrer une agence
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        id="agencyName"
+                        style="margin-top:8px"
+                        placeholder="Nom de l'agence adverse (saisie libre)"
+                        value="${esc(
+                            m.agencyName || ""
+                        )}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Team adverse
+                    </label>
+
+                    <input
+                        id="oppTeam"
+                        value="${esc(
+                            m.opponentTeam || ""
+                        )}"
+                        placeholder="Ex. Team Predator"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Nom de l'adversaire
+                    </label>
+
+                    <input
+                        id="oppName"
+                        value="${esc(
+                            m.opponentName || ""
+                        )}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Pseudo de l'adversaire
+                    </label>
+
+                    <input
+                        id="oppUser"
+                        value="${esc(
+                            m.opponentUsername || ""
+                        )}"
+                        placeholder="@pseudo"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Date *
+                    </label>
+
+                    <input
+                        id="mdate"
+                        type="date"
+                        required
+                        value="${
+                            m.datetime
+                            ? m.datetime.slice(0,10)
+                            : ""
+                        }"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Heure *
+                    </label>
+
+                    <input
+                        id="mtime"
+                        type="time"
+                        required
+                        value="${
+                            m.datetime
+                            ? m.datetime.slice(11,16)
+                            : ""
+                        }"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="notice"
+                style="margin-top:14px"
+            >
+
+                Une agence sélectionnée ici est réutilisée.
+
+                Une agence écrite manuellement n'est
+                <b>pas</b> enregistrée automatiquement.
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="btn primary"
+                >
+                    Enregistrer le match
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn ghost"
+                    onclick="closeModal()"
+                >
+                    Annuler
+                </button>
+
+            </div>
+
+        </form>
+
+        `
+
+    );
+
+
+    setTimeout(
+        () => {
+
+            fillCreators(
+                m.creatorId || ""
+            );
+
+            selectSavedAgency();
+
+        },
+        0
+    );
+
+}
+
+
+/* =========================================================
+   CRÉATEURS D'UNE TEAM
+========================================================= */
+
+function fillCreators(selected=""){
+
+    const teamId =
+        document.getElementById(
+            "mteam"
+        )?.value;
+
+
+    const select =
+        document.getElementById(
+            "mcreator"
+        );
+
+
+    if(!select) return;
+
+
+    const ids =
+        team(teamId)
+        ?.memberIds ||
+        [];
+
+
+    select.innerHTML =
+
+        `
+        <option value="">
+            Choisir un créateur...
+        </option>
+        `
+
+        +
+
+        db.creators
+        .filter(
+            c =>
+                ids.includes(c.id)
+        )
+        .map(c => `
+
+            <option
+                value="${c.id}"
+                ${
+                    c.id === selected
+                    ? "selected"
+                    : ""
+                }
+            >
+
+                ${esc(c.name)}
+                —
+                @${esc(c.username)}
+
+            </option>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   AGENCE ENREGISTRÉE
+========================================================= */
+
+function selectSavedAgency(){
+
+    const select =
+        document.getElementById(
+            "agencySelect"
+        );
+
+
+    const input =
+        document.getElementById(
+            "agencyName"
+        );
+
+
+    if(!select || !input) return;
+
+
+    const selectedAgency =
+        agency(select.value);
+
+
+    if(selectedAgency){
+
+        input.value =
+            selectedAgency.name;
+
+    }
+
+}
+
+
+/* =========================================================
+   ENREGISTREMENT MATCH
+========================================================= */
+
+function submitMatch(event,id){
+
+    event.preventDefault();
+
+
+    const m =
+        id
+        ? db.matches.find(
+            x => x.id === id
+        )
+        :
+        {
+            id:uid()
+        };
+
+
+    const agencyId =
+        document.getElementById(
+            "agencySelect"
+        ).value;
+
+
+    const selectedAgency =
+        agency(agencyId);
+
+
+    m.ourAgency =
+        document.getElementById(
+            "ourAgency"
+        ).value.trim()
+        ||
+        "LVF Agency";
+
+
+    m.teamId =
+        document.getElementById(
+            "mteam"
+        ).value;
+
+
+    m.ourTeamName =
+        team(m.teamId)
+        ?.name ||
+        "";
+
+
+    m.creatorId =
+        document.getElementById(
+            "mcreator"
+        ).value;
+
+
+    /*
+       IMPORTANT :
+       L'agence n'est liée à la base enregistrée
+       que si elle a réellement été sélectionnée
+       dans la liste des agences enregistrées.
+    */
+
+    m.agencyId =
+        selectedAgency
+        ? selectedAgency.id
+        : "";
+
+
+    m.agencyName =
+        document.getElementById(
+            "agencyName"
+        ).value.trim();
+
+
+    m.opponentTeam =
+        document.getElementById(
+            "oppTeam"
+        ).value.trim();
+
+
+    m.opponentName =
+        document.getElementById(
+            "oppName"
+        ).value.trim();
+
+
+    m.opponentUsername =
+        document.getElementById(
+            "oppUser"
+        ).value
+        .trim()
+        .replace(/^@/,"");
+
+
+    const date =
+        document.getElementById(
+            "mdate"
+        ).value;
+
+
+    const time =
+        document.getElementById(
+            "mtime"
+        ).value;
+
+
+    m.datetime =
+        date +
+        "T" +
+        time;
+
+
+    if(!id){
+
+        db.matches.push(m);
+
+    }
+
+
+    save();
+
+    closeModal();
+
+    render();
+
+}
+
+
+/* =========================================================
+   DÉTAILS MATCH
+========================================================= */
+
+function matchDetails(id){
+
+    const m =
+        db.matches.find(
+            x => x.id === id
+        );
+
+
+    const c =
+        creator(m.creatorId);
+
+
+    openModal(
+
+        "Détails du match",
+
+        `
+
+        <div class="card">
+
+            <div class="muted">
+                ${fmtDT(m.datetime)}
+            </div>
+
+
+            <h2>
+
+                ${esc(m.ourAgency)}
+
+                ·
+
+                ${esc(m.ourTeamName)}
+
+            </h2>
+
+
+            <div class="person">
+
+                ${
+                    c
+                    ? avatar(c)
+                    : ""
+                }
+
+
+                <div>
+
+                    <b>
+                        ${
+                            c
+                            ? esc(c.name)
+                            : "—"
+                        }
+                    </b>
+
+                    <div class="muted">
+
+                        ${
+                            c
+                            ? "@" + esc(c.username)
+                            : ""
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="muted">
+                AGENCE ADVERSE
+            </div>
+
+
+            <h2>
+
+                ${esc(
+                    m.agencyName ||
+                    "—"
+                )}
+
+                ·
+
+                ${esc(
+                    m.opponentTeam ||
+                    "—"
+                )}
+
+            </h2>
+
+
+            <div>
+
+                <b>
+                    ${esc(
+                        m.opponentName ||
+                        "—"
+                    )}
+                </b>
+
+
+                ${
+                    m.opponentUsername
+
+                    ?
+
+                    `
+                    <span class="muted">
+                        (@${esc(
+                            m.opponentUsername
+                        )})
+                    </span>
+                    `
+
+                    :
+
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="actions"
+            style="margin-top:14px"
+        >
+
+            <button
+                class="btn ghost"
+                onclick="
+                    openMatch('${id}')
+                "
+            >
+                Modifier
+            </button>
+
+
+            <button
+                class="btn danger"
+                onclick="
+                    deleteMatch('${id}')
+                "
+            >
+                Supprimer
+            </button>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================================================
+   SUPPRESSION MATCH
+========================================================= */
+
+function deleteMatch(id){
+
+    if(
+        !confirm(
+            "Supprimer ce match ?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    db.matches =
+        db.matches.filter(
+            m =>
+                m.id !== id
+        );
+
+
+    save();
+
+    closeModal();
+
+    render();
+
+}
+
+
+/* =========================================================
+   FERMETURE MODALE
+========================================================= */
+
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target.id === "modal"
+            ){
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+render();
 
 </script>
 
