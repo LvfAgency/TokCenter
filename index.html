@@ -9,14 +9,14 @@
 <style>
 :root{
   --bg:#f5f6fa;
-  --card:#ffffff;
+  --card:#fff;
   --sidebar:#111827;
-  --sidebar-2:#182033;
+  --sidebar2:#1b2435;
   --text:#182033;
   --muted:#7b8497;
-  --border:#e7e9ef;
+  --border:#e5e7ee;
   --violet:#7c3aed;
-  --violet-light:#f1eaff;
+  --violetLight:#f1eaff;
   --green:#16a34a;
   --red:#dc2626;
   --orange:#ea580c;
@@ -30,7 +30,7 @@ html,body{
   margin:0;
   padding:0;
   min-height:100%;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);
   color:var(--text);
 }
@@ -77,7 +77,7 @@ button{
   align-items:center;
   justify-content:center;
   margin-bottom:30px;
-  color:white;
+  color:#fff;
   font-size:17px;
   font-weight:800;
   letter-spacing:-1px;
@@ -119,12 +119,12 @@ button{
 }
 
 .nav-btn:hover{
-  color:white;
-  background:var(--sidebar-2);
+  color:#fff;
+  background:var(--sidebar2);
 }
 
 .nav-btn.active{
-  color:white;
+  color:#fff;
   background:var(--violet);
   box-shadow:0 8px 20px rgba(124,58,237,.3);
 }
@@ -223,7 +223,7 @@ button{
   height:42px;
   border:1px solid var(--border);
   border-radius:12px;
-  background:white;
+  background:#fff;
   color:#687286;
   display:flex;
   align-items:center;
@@ -280,6 +280,7 @@ button{
   font-weight:700;
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
   box-shadow:0 7px 18px rgba(124,58,237,.2);
 }
@@ -298,7 +299,7 @@ button{
 }
 
 /* =========================
-   CARDS / DASHBOARD
+   STATS
 ========================= */
 
 .stats{
@@ -327,7 +328,7 @@ button{
   width:42px;
   height:42px;
   border-radius:12px;
-  background:var(--violet-light);
+  background:var(--violetLight);
   color:var(--violet);
   display:flex;
   align-items:center;
@@ -353,6 +354,10 @@ button{
   font-weight:800;
   letter-spacing:-1px;
 }
+
+/* =========================
+   CARDS
+========================= */
 
 .grid-2{
   display:grid;
@@ -429,7 +434,7 @@ button{
 }
 
 /* =========================
-   TABLE / LIST
+   LIST
 ========================= */
 
 .list{
@@ -441,7 +446,7 @@ button{
 .list-row{
   border:1px solid var(--border);
   border-radius:14px;
-  padding:15px 16px;
+  padding:14px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -450,6 +455,13 @@ button{
 }
 
 .list-main{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.list-info{
   min-width:0;
 }
 
@@ -502,20 +514,46 @@ button{
   stroke-linejoin:round;
 }
 
-.badge{
-  display:inline-flex;
+/* =========================
+   AVATARS / IMAGES
+========================= */
+
+.avatar{
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  flex-shrink:0;
+  overflow:hidden;
+  background:#eeeef4;
+  display:flex;
   align-items:center;
-  border-radius:999px;
-  padding:5px 9px;
-  font-size:11px;
-  font-weight:700;
+  justify-content:center;
+  color:#7c8495;
+  font-weight:800;
+  font-size:16px;
 }
 
-.badge-purple{background:#f1eaff;color:#6d28d9}
-.badge-green{background:#eaf8ef;color:#15803d}
-.badge-red{background:#fff0f0;color:#b91c1c}
-.badge-orange{background:#fff3e9;color:#c2410c}
-.badge-gray{background:#f1f2f5;color:#667085}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.avatar.large{
+  width:82px;
+  height:82px;
+  border-radius:20px;
+  font-size:24px;
+}
+
+.avatar.creator{
+  border-radius:50%;
+}
+
+.avatar.team{
+  border-radius:16px;
+}
 
 /* =========================
    MATCH
@@ -561,6 +599,10 @@ button{
   margin-top:4px;
 }
 
+.agency-side{
+  text-align:right;
+}
+
 .vs{
   width:40px;
   height:40px;
@@ -575,12 +617,93 @@ button{
   flex-shrink:0;
 }
 
-.agency-side{
-  text-align:right;
+.match-person{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.match-person .avatar{
+  width:42px;
+  height:42px;
+  border-radius:12px;
 }
 
 /* =========================
-   FORMS / MODAL
+   BADGES
+========================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.badge-purple{
+  background:#f1eaff;
+  color:#6d28d9;
+}
+
+.badge-green{
+  background:#eaf8ef;
+  color:#15803d;
+}
+
+.badge-red{
+  background:#fff0f0;
+  color:#b91c1c;
+}
+
+.badge-orange{
+  background:#fff3e9;
+  color:#c2410c;
+}
+
+.badge-gray{
+  background:#f1f2f5;
+  color:#667085;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+  position:relative;
+  width:300px;
+}
+
+.search input{
+  width:100%;
+  height:43px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:0 14px 0 40px;
+  outline:none;
+  background:#fff;
+}
+
+.search input:focus{
+  border-color:#a78bfa;
+  box-shadow:0 0 0 3px rgba(124,58,237,.08);
+}
+
+.search svg{
+  position:absolute;
+  left:13px;
+  top:12px;
+  width:18px;
+  height:18px;
+  stroke:#929aaa;
+  fill:none;
+  stroke-width:1.8;
+}
+
+/* =========================
+   MODAL
 ========================= */
 
 .modal-backdrop{
@@ -600,7 +723,7 @@ button{
 }
 
 .modal{
-  width:min(650px,100%);
+  width:min(680px,100%);
   max-height:92vh;
   overflow:auto;
   background:#fff;
@@ -716,46 +839,63 @@ button{
   background:#f7f7f9;
 }
 
-.checkbox-line{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:13px;
-  color:#596579;
-  margin-top:4px;
-}
-
-.checkbox-line input{
-  width:16px;
-  height:16px;
-}
-
 /* =========================
-   SEARCH
+   IMAGE UPLOAD
 ========================= */
 
-.search{
-  position:relative;
-  width:300px;
+.image-upload{
+  border:1.5px dashed #d6d9e2;
+  border-radius:16px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  background:#fafafd;
 }
 
-.search input{
-  width:100%;
-  height:43px;
+.image-upload:hover{
+  border-color:#a78bfa;
+}
+
+.image-upload-info{
+  flex:1;
+}
+
+.image-upload-info strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:4px;
+}
+
+.image-upload-info span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.upload-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:0 14px 0 40px;
-  outline:none;
   background:#fff;
+  color:#596579;
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.search svg{
-  position:absolute;
-  left:13px;
-  top:12px;
-  width:18px;
-  height:18px;
-  stroke:#929aaa;
+.upload-button:hover{
+  color:var(--violet);
+  border-color:#c4b5fd;
+}
+
+.upload-button svg{
+  width:16px;
+  height:16px;
+  stroke:currentColor;
   fill:none;
   stroke-width:1.8;
 }
@@ -791,8 +931,8 @@ button{
 }
 
 .calendar-nav button{
-  width:35px;
   height:35px;
+  padding:0 11px;
   border:1px solid var(--border);
   background:#fff;
   border-radius:9px;
@@ -903,37 +1043,11 @@ button{
 }
 
 /* =========================
-   FILTER BAR
-========================= */
-
-.toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:18px;
-}
-
-.filters{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-
-.filter{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:10px;
-  padding:9px 12px;
-  color:#596579;
-  font-size:12px;
-}
-
-/* =========================
    RESPONSIVE
 ========================= */
 
 @media(max-width:1000px){
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -944,6 +1058,7 @@ button{
 }
 
 @media(max-width:700px){
+
   .sidebar{
     width:70px;
     min-width:70px;
@@ -989,11 +1104,6 @@ button{
     width:100%;
   }
 
-  .toolbar{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
   .day{
     min-height:85px;
     padding:5px;
@@ -1007,8 +1117,21 @@ button{
     font-size:8px;
   }
 
-  .top-actions .optional-mobile{
-    display:none;
+  .match-vs{
+    gap:8px;
+  }
+
+  .match-side strong{
+    font-size:13px;
+  }
+
+  .list-row{
+    align-items:flex-start;
+  }
+
+  .image-upload{
+    align-items:flex-start;
+    flex-direction:column;
   }
 }
 </style>
@@ -1018,205 +1141,226 @@ button{
 
 <div class="app">
 
-  <!-- =========================
-       SIDEBAR
-  ========================== -->
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
 
-  <aside class="sidebar">
+<aside class="sidebar">
 
-    <div class="side-logo">
-      T<span>C</span>
+  <div class="side-logo">
+    T<span>C</span>
+  </div>
+
+  <nav class="nav">
+
+    <!-- ACCUEIL -->
+    <button class="nav-btn active"
+            data-page="home"
+            data-tooltip="Accueil"
+            aria-label="Accueil">
+      <svg viewBox="0 0 24 24">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9.5V21h14V9.5"/>
+        <path d="M9 21v-7h6v7"/>
+      </svg>
+    </button>
+
+    <!-- MATCH -->
+    <button class="nav-btn"
+            data-page="matches"
+            data-tooltip="Match"
+            aria-label="Match">
+      <svg viewBox="0 0 24 24">
+        <path d="m14.5 5.5 4-4"/>
+        <path d="m19 2 3 3-4 4"/>
+        <path d="m9.5 18.5-4 4"/>
+        <path d="m5 22-3-3 4-4"/>
+        <path d="m14 10 8 8"/>
+        <path d="m10 14-8-8"/>
+        <path d="m13 7 4 4"/>
+        <path d="m7 13 4 4"/>
+      </svg>
+    </button>
+
+    <!-- TEAM -->
+    <button class="nav-btn"
+            data-page="teams"
+            data-tooltip="Team"
+            aria-label="Team">
+      <svg viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </button>
+
+    <!-- CREATEUR -->
+    <button class="nav-btn"
+            data-page="creators"
+            data-tooltip="Créateur"
+            aria-label="Créateur">
+      <svg viewBox="0 0 24 24">
+        <circle cx="10" cy="7" r="4"/>
+        <path d="M2 21a8 8 0 0 1 16 0"/>
+        <path d="m19 8 1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/>
+      </svg>
+    </button>
+
+    <!-- AGENCE -->
+    <button class="nav-btn"
+            data-page="agencies"
+            data-tooltip="Agence"
+            aria-label="Agence">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 21h18"/>
+        <path d="M6 21V3h12v18"/>
+        <path d="M9 7h1"/>
+        <path d="M14 7h1"/>
+        <path d="M9 11h1"/>
+        <path d="M14 11h1"/>
+        <path d="M9 15h1"/>
+        <path d="M14 15h1"/>
+      </svg>
+    </button>
+
+    <!-- CALENDRIER -->
+    <button class="nav-btn"
+            data-page="calendar"
+            data-tooltip="Calendrier"
+            aria-label="Calendrier">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="17" rx="2"/>
+        <path d="M16 2v4"/>
+        <path d="M8 2v4"/>
+        <path d="M3 10h18"/>
+        <path d="M8 14h.01"/>
+        <path d="M12 14h.01"/>
+        <path d="M16 14h.01"/>
+        <path d="M8 18h.01"/>
+        <path d="M12 18h.01"/>
+      </svg>
+    </button>
+
+    <!-- CLASSEMENT -->
+    <button class="nav-btn"
+            data-page="ranking"
+            data-tooltip="Classement"
+            aria-label="Classement">
+      <svg viewBox="0 0 24 24">
+        <path d="M8 21h8"/>
+        <path d="M12 17v4"/>
+        <path d="M7 4h10v5a5 5 0 0 1-10 0z"/>
+        <path d="M7 6H3v2a4 4 0 0 0 4 4"/>
+        <path d="M17 6h4v2a4 4 0 0 1-4 4"/>
+      </svg>
+    </button>
+
+  </nav>
+
+  <div class="sidebar-bottom">
+
+    <button class="clear-btn"
+            id="resetData"
+            title="Réinitialiser toutes les données"
+            aria-label="Réinitialiser toutes les données">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18"/>
+        <path d="M8 6V4h8v2"/>
+        <path d="M19 6l-1 15H6L5 6"/>
+        <path d="M10 11v6"/>
+        <path d="M14 11v6"/>
+      </svg>
+
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div class="logo">
+      Tok<span class="center">Center</span>
     </div>
 
-    <nav class="nav">
+    <div class="top-actions">
 
-      <!-- ACCUEIL -->
-      <button class="nav-btn active"
-              data-page="home"
-              data-tooltip="Accueil"
-              aria-label="Accueil">
+      <!-- EXPORT -->
+      <button class="icon-action"
+              id="exportData"
+              title="Exporter les données"
+              aria-label="Exporter les données">
+
         <svg viewBox="0 0 24 24">
-          <path d="m3 10 9-7 9 7"/>
-          <path d="M5 9.5V21h14V9.5"/>
-          <path d="M9 21v-7h6v7"/>
+          <path d="M12 3v12"/>
+          <path d="m7 10 5 5 5-5"/>
+          <path d="M5 21h14"/>
         </svg>
+
       </button>
 
-      <!-- MATCH -->
-      <button class="nav-btn"
-              data-page="matches"
-              data-tooltip="Match"
-              aria-label="Match">
-        <svg viewBox="0 0 24 24">
-          <path d="m14.5 5.5 4-4"/>
-          <path d="m19 2 3 3-4 4"/>
-          <path d="m9.5 18.5-4 4"/>
-          <path d="m5 22-3-3 4-4"/>
-          <path d="m14 10 8 8"/>
-          <path d="m10 14-8-8"/>
-          <path d="m13 7 4 4"/>
-          <path d="m7 13 4 4"/>
-        </svg>
-      </button>
+      <!-- IMPORT -->
+      <label class="icon-action"
+             title="Importer des données"
+             aria-label="Importer des données"
+             style="cursor:pointer">
 
-      <!-- TEAM -->
-      <button class="nav-btn"
-              data-page="teams"
-              data-tooltip="Team"
-              aria-label="Team">
         <svg viewBox="0 0 24 24">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          <path d="M12 15V3"/>
+          <path d="m7 8 5-5 5 5"/>
+          <path d="M5 21h14"/>
         </svg>
-      </button>
 
-      <!-- CREATEUR -->
-      <button class="nav-btn"
-              data-page="creators"
-              data-tooltip="Créateur"
-              aria-label="Créateur">
-        <svg viewBox="0 0 24 24">
-          <circle cx="10" cy="7" r="4"/>
-          <path d="M2 21a8 8 0 0 1 16 0"/>
-          <path d="m19 8 1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/>
-        </svg>
-      </button>
+        <input type="file"
+               id="importData"
+               accept=".json"
+               style="display:none">
 
-      <!-- AGENCE -->
-      <button class="nav-btn"
-              data-page="agencies"
-              data-tooltip="Agence"
-              aria-label="Agence">
-        <svg viewBox="0 0 24 24">
-          <path d="M3 21h18"/>
-          <path d="M6 21V3h12v18"/>
-          <path d="M9 7h1"/>
-          <path d="M14 7h1"/>
-          <path d="M9 11h1"/>
-          <path d="M14 11h1"/>
-          <path d="M9 15h1"/>
-          <path d="M14 15h1"/>
-        </svg>
-      </button>
+      </label>
 
-      <!-- CALENDRIER -->
-      <button class="nav-btn"
-              data-page="calendar"
-              data-tooltip="Calendrier"
-              aria-label="Calendrier">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="4" width="18" height="17" rx="2"/>
-          <path d="M16 2v4"/>
-          <path d="M8 2v4"/>
-          <path d="M3 10h18"/>
-          <path d="M8 14h.01"/>
-          <path d="M12 14h.01"/>
-          <path d="M16 14h.01"/>
-          <path d="M8 18h.01"/>
-          <path d="M12 18h.01"/>
-        </svg>
-      </button>
-
-      <!-- CLASSEMENT -->
-      <button class="nav-btn"
-              data-page="ranking"
-              data-tooltip="Classement"
-              aria-label="Classement">
-        <svg viewBox="0 0 24 24">
-          <path d="M8 21h8"/>
-          <path d="M12 17v4"/>
-          <path d="M7 4h10v5a5 5 0 0 1-10 0z"/>
-          <path d="M7 6H3v2a4 4 0 0 0 4 4"/>
-          <path d="M17 6h4v2a4 4 0 0 1-4 4"/>
-        </svg>
-      </button>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-      <button class="clear-btn"
-              id="resetData"
-              data-tooltip="Réinitialiser"
-              title="Réinitialiser toutes les données"
-              aria-label="Réinitialiser toutes les données">
-        <svg viewBox="0 0 24 24">
-          <path d="M3 6h18"/>
-          <path d="M8 6V4h8v2"/>
-          <path d="M19 6l-1 15H6L5 6"/>
-          <path d="M10 11v6"/>
-          <path d="M14 11v6"/>
-        </svg>
-      </button>
     </div>
 
-  </aside>
+  </header>
 
-  <!-- =========================
-       MAIN
-  ========================== -->
+  <div id="content" class="page"></div>
 
-  <main class="main">
-
-    <header class="topbar">
-
-      <div class="logo">
-        Tok<span class="center">Center</span>
-      </div>
-
-      <div class="top-actions">
-
-        <button class="icon-action"
-                id="exportData"
-                title="Exporter les données"
-                aria-label="Exporter les données">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v12"/>
-            <path d="m7 10 5 5 5-5"/>
-            <path d="M5 21h14"/>
-          </svg>
-        </button>
-
-        <label class="icon-action"
-               title="Importer des données"
-               aria-label="Importer des données"
-               style="cursor:pointer">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 15V3"/>
-            <path d="m7 8 5-5 5 5"/>
-            <path d="M5 21h14"/>
-          </svg>
-          <input type="file" id="importData" accept=".json" style="display:none">
-        </label>
-
-      </div>
-
-    </header>
-
-    <div id="content" class="page"></div>
-
-  </main>
+</main>
 
 </div>
 
-<!-- =========================
+
+<!-- ======================================================
      MODAL
-========================== -->
+====================================================== -->
 
 <div class="modal-backdrop" id="modalBackdrop">
 
   <div class="modal">
 
     <div class="modal-head">
+
       <h2 id="modalTitle">Ajouter</h2>
 
-      <button class="close" id="closeModal" aria-label="Fermer">
+      <button class="close"
+              id="closeModal"
+              aria-label="Fermer">
+
         <svg viewBox="0 0 24 24">
           <path d="M6 6l12 12"/>
           <path d="M18 6 6 18"/>
         </svg>
+
       </button>
+
     </div>
 
     <div class="form" id="modalForm"></div>
@@ -1225,20 +1369,20 @@ button{
 
 </div>
 
+
 <script>
+
 /* ==========================================================
    TOKCENTER
-   Application autonome
-   Données stockées uniquement dans le navigateur
 ========================================================== */
 
-const STORAGE_KEY = "tokcenter_clean_v1";
+const STORAGE_KEY = "tokcenter_clean_v2";
 
 const emptyDB = {
-  teams: [],
-  creators: [],
-  agencies: [],
-  matches: []
+  teams:[],
+  creators:[],
+  agencies:[],
+  matches:[]
 };
 
 let db = loadDB();
@@ -1247,8 +1391,15 @@ let editingId = null;
 let currentModalType = null;
 let calendarDate = new Date();
 
+
+/* ==========================================================
+   DATABASE
+========================================================== */
+
 function loadDB(){
+
   try{
+
     const saved = localStorage.getItem(STORAGE_KEY);
 
     if(!saved){
@@ -1258,145 +1409,260 @@ function loadDB(){
     const parsed = JSON.parse(saved);
 
     return {
-      teams: Array.isArray(parsed.teams) ? parsed.teams : [],
-      creators: Array.isArray(parsed.creators) ? parsed.creators : [],
-      agencies: Array.isArray(parsed.agencies) ? parsed.agencies : [],
-      matches: Array.isArray(parsed.matches) ? parsed.matches : []
+      teams:Array.isArray(parsed.teams) ? parsed.teams : [],
+      creators:Array.isArray(parsed.creators) ? parsed.creators : [],
+      agencies:Array.isArray(parsed.agencies) ? parsed.agencies : [],
+      matches:Array.isArray(parsed.matches) ? parsed.matches : []
     };
 
-  }catch(e){
+  }catch(error){
+
     return structuredClone(emptyDB);
+
   }
 }
 
+
 function saveDB(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(db)
+  );
+
 }
+
 
 function uid(){
-  return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+
+  return Date.now().toString(36)
+    + Math.random().toString(36).slice(2,9);
+
 }
 
+
 function esc(value){
+
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
+
 
 function formatDate(dateString){
-  if(!dateString) return "Date non définie";
 
-  const d = new Date(dateString + "T00:00:00");
+  if(!dateString){
+    return "Date non définie";
+  }
 
-  if(Number.isNaN(d.getTime())) return dateString;
+  const d = new Date(dateString+"T00:00:00");
 
-  return d.toLocaleDateString("fr-FR",{
-    day:"2-digit",
-    month:"long",
-    year:"numeric"
-  });
+  if(Number.isNaN(d.getTime())){
+    return dateString;
+  }
+
+  return d.toLocaleDateString(
+    "fr-FR",
+    {
+      day:"2-digit",
+      month:"long",
+      year:"numeric"
+    }
+  );
+
 }
+
 
 function formatShortDate(dateString){
-  if(!dateString) return "";
 
-  const d = new Date(dateString + "T00:00:00");
+  if(!dateString){
+    return "";
+  }
 
-  return d.toLocaleDateString("fr-FR",{
-    day:"2-digit",
-    month:"2-digit",
-    year:"numeric"
-  });
+  const d = new Date(dateString+"T00:00:00");
+
+  return d.toLocaleDateString(
+    "fr-FR",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric"
+    }
+  );
+
 }
 
-function getTeam(id){
-  return db.teams.find(x => x.id === id);
-}
-
-function getCreator(id){
-  return db.creators.find(x => x.id === id);
-}
-
-function getAgency(id){
-  return db.agencies.find(x => x.id === id);
-}
 
 function todayISO(){
+
   const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-  return `${y}-${m}-${day}`;
+
+  return (
+    d.getFullYear()
+    + "-"
+    + String(d.getMonth()+1).padStart(2,"0")
+    + "-"
+    + String(d.getDate()).padStart(2,"0")
+  );
+
 }
+
+
+function getTeam(id){
+  return db.teams.find(x=>x.id===id);
+}
+
+
+function getCreator(id){
+  return db.creators.find(x=>x.id===id);
+}
+
+
+function getAgency(id){
+  return db.agencies.find(x=>x.id===id);
+}
+
 
 function nowDateTime(match){
-  if(!match.date) return Infinity;
 
-  const time = match.time || "00:00";
+  if(!match.date){
+    return Infinity;
+  }
 
-  return new Date(`${match.date}T${time}:00`).getTime();
+  return new Date(
+    `${match.date}T${match.time || "00:00"}:00`
+  ).getTime();
+
 }
+
 
 function getMatchAgencyName(match){
+
   const agency = getAgency(match.agencyId);
 
-  return agency ? agency.name : (match.agencyName || "Agence non définie");
+  return agency
+    ? agency.name
+    : (match.agencyName || "Agence non définie");
+
 }
+
 
 function getMatchCreatorName(match){
+
   const creator = getCreator(match.creatorId);
 
-  return creator ? creator.name : "Créateur non défini";
+  return creator
+    ? creator.name
+    : "Créateur non défini";
+
 }
+
 
 function getMatchTeamName(match){
+
   const team = getTeam(match.teamId);
 
-  return team ? team.name : "Team non définie";
+  return team
+    ? team.name
+    : "Team non définie";
+
 }
 
+
+/* ==========================================================
+   AVATAR
+========================================================== */
+
+function avatarHTML(item,type,size="normal"){
+
+  const image = item?.image || "";
+
+  let initials = "?";
+
+  if(item?.name){
+    initials = item.name
+      .trim()
+      .split(/\s+/)
+      .slice(0,2)
+      .map(x=>x[0])
+      .join("")
+      .toUpperCase();
+  }
+
+  const classes =
+    `avatar ${type || ""} ${size === "large" ? "large" : ""}`;
+
+  if(image){
+
+    return `
+      <div class="${classes}">
+        <img src="${esc(image)}" alt="">
+      </div>
+    `;
+
+  }
+
+  return `
+    <div class="${classes}">
+      ${esc(initials)}
+    </div>
+  `;
+
+}
+
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
 function statusBadge(status){
-  if(status === "Terminé"){
+
+  if(status==="Terminé"){
     return `<span class="badge badge-green">Terminé</span>`;
   }
 
-  if(status === "Annulé"){
+  if(status==="Annulé"){
     return `<span class="badge badge-red">Annulé</span>`;
   }
 
   return `<span class="badge badge-purple">À venir</span>`;
+
 }
 
+
 function resultBadge(result){
-  if(result === "Victoire"){
+
+  if(result==="Victoire"){
     return `<span class="badge badge-green">Victoire</span>`;
   }
 
-  if(result === "Défaite"){
+  if(result==="Défaite"){
     return `<span class="badge badge-red">Défaite</span>`;
   }
 
-  if(result === "Égalité"){
+  if(result==="Égalité"){
     return `<span class="badge badge-orange">Égalité</span>`;
   }
 
   return `<span class="badge badge-gray">À jouer</span>`;
+
 }
+
 
 /* ==========================================================
    NAVIGATION
 ========================================================== */
 
-document.querySelectorAll(".nav-btn").forEach(btn => {
+document.querySelectorAll(".nav-btn").forEach(btn=>{
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click",()=>{
 
-    document.querySelectorAll(".nav-btn").forEach(x => {
-      x.classList.remove("active");
-    });
+    document.querySelectorAll(".nav-btn")
+      .forEach(x=>x.classList.remove("active"));
 
     btn.classList.add("active");
 
@@ -1408,6 +1674,7 @@ document.querySelectorAll(".nav-btn").forEach(btn => {
 
 });
 
+
 /* ==========================================================
    RENDER
 ========================================================== */
@@ -1416,36 +1683,38 @@ function render(){
 
   const content = document.getElementById("content");
 
-  if(currentPage === "home"){
+  if(currentPage==="home"){
     content.innerHTML = renderHome();
   }
 
-  if(currentPage === "teams"){
+  if(currentPage==="teams"){
     content.innerHTML = renderTeams();
   }
 
-  if(currentPage === "creators"){
+  if(currentPage==="creators"){
     content.innerHTML = renderCreators();
   }
 
-  if(currentPage === "agencies"){
+  if(currentPage==="agencies"){
     content.innerHTML = renderAgencies();
   }
 
-  if(currentPage === "matches"){
+  if(currentPage==="matches"){
     content.innerHTML = renderMatches();
   }
 
-  if(currentPage === "calendar"){
+  if(currentPage==="calendar"){
     content.innerHTML = renderCalendar();
   }
 
-  if(currentPage === "ranking"){
+  if(currentPage==="ranking"){
     content.innerHTML = renderRanking();
   }
 
   attachPageEvents();
+
 }
+
 
 /* ==========================================================
    HOME
@@ -1454,88 +1723,118 @@ function render(){
 function renderHome(){
 
   const upcoming = db.matches
-    .filter(m => m.status !== "Annulé")
-    .filter(m => nowDateTime(m) >= Date.now())
-    .sort((a,b) => nowDateTime(a) - nowDateTime(b))[0];
+    .filter(m=>m.status!=="Annulé")
+    .filter(m=>nowDateTime(m)>=Date.now())
+    .sort((a,b)=>nowDateTime(a)-nowDateTime(b))[0];
 
   return `
 
     <div class="page-head">
+
       <div>
         <h1>Accueil</h1>
         <p>Vue d'ensemble de ton activité TokCenter.</p>
       </div>
 
-      <button class="primary" onclick="openModal('match')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('match')">
+
+        ${plusIcon()}
+
         Nouveau Match
+
       </button>
+
     </div>
+
 
     <div class="stats">
 
       <div class="stat-card">
+
         <div class="stat-top">
+
           <div class="stat-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-            </svg>
+            ${usersIcon()}
           </div>
-          <span class="stat-label">Teams</span>
+
+          <span class="stat-label">
+            Teams
+          </span>
+
         </div>
-        <div class="stat-number">${db.teams.length}</div>
+
+        <div class="stat-number">
+          ${db.teams.length}
+        </div>
+
       </div>
 
-      <div class="stat-card">
-        <div class="stat-top">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24">
-              <circle cx="10" cy="7" r="4"/>
-              <path d="M2 21a8 8 0 0 1 16 0"/>
-            </svg>
-          </div>
-          <span class="stat-label">Créateurs</span>
-        </div>
-        <div class="stat-number">${db.creators.length}</div>
-      </div>
 
       <div class="stat-card">
+
         <div class="stat-top">
+
           <div class="stat-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M3 21h18"/>
-              <path d="M6 21V3h12v18"/>
-              <path d="M9 7h1"/>
-              <path d="M14 7h1"/>
-              <path d="M9 11h1"/>
-              <path d="M14 11h1"/>
-            </svg>
+            ${personIcon()}
           </div>
-          <span class="stat-label">Agences</span>
+
+          <span class="stat-label">
+            Créateurs
+          </span>
+
         </div>
-        <div class="stat-number">${db.agencies.length}</div>
+
+        <div class="stat-number">
+          ${db.creators.length}
+        </div>
+
       </div>
 
+
       <div class="stat-card">
+
         <div class="stat-top">
+
           <div class="stat-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M8 21h8"/>
-              <path d="M12 17v4"/>
-              <path d="M7 4h10v5a5 5 0 0 1-10 0z"/>
-            </svg>
+            ${buildingIcon()}
           </div>
-          <span class="stat-label">Matchs</span>
+
+          <span class="stat-label">
+            Agences
+          </span>
+
         </div>
-        <div class="stat-number">${db.matches.length}</div>
+
+        <div class="stat-number">
+          ${db.agencies.length}
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div class="stat-icon">
+            ${trophyIcon()}
+          </div>
+
+          <span class="stat-label">
+            Matchs
+          </span>
+
+        </div>
+
+        <div class="stat-number">
+          ${db.matches.length}
+        </div>
+
       </div>
 
     </div>
+
 
     <div class="grid-2">
 
@@ -1543,8 +1842,11 @@ function renderHome(){
 
         <div class="card-title">
           <h2>Prochain Match OFF</h2>
-          <span>${upcoming ? formatShortDate(upcoming.date) : ""}</span>
+          <span>
+            ${upcoming ? formatShortDate(upcoming.date) : ""}
+          </span>
         </div>
+
 
         ${
           upcoming
@@ -1553,32 +1855,76 @@ function renderHome(){
           <div class="match-card" style="margin:0">
 
             <div class="match-date">
+
               ${formatDate(upcoming.date)}
-              ${upcoming.time ? " • " + esc(upcoming.time) : ""}
+
+              ${upcoming.time
+                ? " • "+esc(upcoming.time)
+                : ""}
+
             </div>
+
 
             <div class="match-vs">
 
               <div class="match-side">
-                <strong>${esc(getMatchCreatorName(upcoming))}</strong>
-                <small>${esc(getMatchTeamName(upcoming))}</small>
+
+                <div class="match-person">
+
+                  ${
+                    avatarHTML(
+                      getCreator(upcoming.creatorId),
+                      "creator"
+                    )
+                  }
+
+                  <div>
+
+                    <strong>
+                      ${esc(getMatchCreatorName(upcoming))}
+                    </strong>
+
+                    <small>
+                      ${esc(getMatchTeamName(upcoming))}
+                    </small>
+
+                  </div>
+
+                </div>
+
               </div>
 
-              <div class="vs">VS</div>
+
+              <div class="vs">
+                VS
+              </div>
+
 
               <div class="match-side agency-side">
-                <strong>${esc(getMatchAgencyName(upcoming))}</strong>
-                <small>Agence adverse</small>
+
+                <strong>
+                  ${esc(getMatchAgencyName(upcoming))}
+                </strong>
+
+                <small>
+                  Agence adverse
+                </small>
+
               </div>
 
             </div>
 
+
             ${
               upcoming.theme
-              ? `<div style="margin-top:15px;color:#737d90;font-size:12px">
-                  Thème : ${esc(upcoming.theme)}
-                </div>`
-              : ""
+              ?
+              `
+              <div style="margin-top:15px;color:#737d90;font-size:12px">
+                Thème : ${esc(upcoming.theme)}
+              </div>
+              `
+              :
+              ""
             }
 
           </div>
@@ -1586,65 +1932,104 @@ function renderHome(){
           :
           `
           <div class="empty">
+
             <div class="empty-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="17" rx="2"/>
-                <path d="M16 2v4"/>
-                <path d="M8 2v4"/>
-                <path d="M3 10h18"/>
-              </svg>
+              ${calendarIcon()}
             </div>
 
-            <strong>Aucun Match OFF programmé</strong>
-            <p>Ajoute ton premier match pour le voir apparaître ici.</p>
+            <strong>
+              Aucun Match OFF programmé
+            </strong>
+
+            <p>
+              Ajoute ton premier match pour le voir apparaître ici.
+            </p>
+
           </div>
           `
         }
 
       </div>
 
+
       <div class="card">
 
         <div class="card-title">
-          <h2>Derniers Matchs</h2>
-          <span>${db.matches.length}</span>
+
+          <h2>
+            Derniers Matchs
+          </h2>
+
+          <span>
+            ${db.matches.length}
+          </span>
+
         </div>
+
 
         ${
           db.matches.length
           ?
           `
           <div class="list">
+
             ${
               [...db.matches]
-                .sort((a,b) => nowDateTime(b) - nowDateTime(a))
-                .slice(0,5)
-                .map(m => `
-                  <div class="list-row">
+              .sort((a,b)=>nowDateTime(b)-nowDateTime(a))
+              .slice(0,5)
+              .map(m=>`
 
-                    <div class="list-main">
-                      <strong>${esc(getMatchCreatorName(m))}</strong>
+                <div class="list-row">
+
+                  <div class="list-main">
+
+                    ${
+                      avatarHTML(
+                        getCreator(m.creatorId),
+                        "creator"
+                      )
+                    }
+
+                    <div class="list-info">
+
+                      <strong>
+                        ${esc(getMatchCreatorName(m))}
+                      </strong>
+
                       <small>
                         ${esc(getMatchTeamName(m))}
                         vs
                         ${esc(getMatchAgencyName(m))}
                       </small>
-                    </div>
 
-                    <div>
-                      ${resultBadge(m.result)}
                     </div>
 
                   </div>
-                `).join("")
+
+                  <div>
+                    ${resultBadge(m.result)}
+                  </div>
+
+                </div>
+
+              `).join("")
             }
+
           </div>
           `
           :
           `
-          <div class="empty" style="padding:35px 10px">
-            <strong>Encore aucun match</strong>
-            <p>Les matchs que tu créeras apparaîtront ici.</p>
+          <div class="empty"
+               style="padding:35px 10px">
+
+            <strong>
+              Encore aucun match
+            </strong>
+
+            <p>
+              Les matchs que tu créeras apparaîtront ici.
+            </p>
+
           </div>
           `
         }
@@ -1652,8 +2037,11 @@ function renderHome(){
       </div>
 
     </div>
+
   `;
+
 }
+
 
 /* ==========================================================
    TEAMS
@@ -1667,18 +2055,22 @@ function renderTeams(){
 
       <div>
         <h1>Teams</h1>
-        <p>Crée et gère tes Teams TikTok.</p>
+        <p>
+          Crée et gère tes Teams TikTok.
+        </p>
       </div>
 
-      <button class="primary" onclick="openModal('team')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('team')">
+
+        ${plusIcon()}
+
         Ajouter une Team
+
       </button>
 
     </div>
+
 
     ${
       db.teams.length
@@ -1686,19 +2078,24 @@ function renderTeams(){
       `
       <div class="card">
 
-        <div class="toolbar">
+        <div style="margin-bottom:18px">
+
           <div class="search">
-            <svg viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m20 20-4-4"/>
-            </svg>
-            <input id="teamSearch" placeholder="Rechercher une Team...">
+
+            ${searchIcon()}
+
+            <input id="teamSearch"
+                   placeholder="Rechercher une Team...">
+
           </div>
+
         </div>
 
-        <div class="list" id="teamList">
 
-          ${db.teams.map(team => teamRow(team)).join("")}
+        <div class="list"
+             id="teamList">
+
+          ${db.teams.map(teamRow).join("")}
 
         </div>
 
@@ -1713,46 +2110,81 @@ function renderTeams(){
     }
 
   `;
+
 }
+
 
 function teamRow(team){
 
-  const creatorCount = db.creators.filter(c => c.teamId === team.id).length;
+  const creatorCount =
+    db.creators.filter(c=>c.teamId===team.id).length;
 
   return `
+
     <div class="list-row searchable-team"
-         data-search="${esc((team.name+" "+team.tiktok+" "+team.description).toLowerCase())}">
+         data-search="${esc(
+           (
+             team.name+" "+
+             team.tiktok+" "+
+             team.description
+           ).toLowerCase()
+         )}">
 
       <div class="list-main">
 
-        <strong>${esc(team.name)}</strong>
+        ${avatarHTML(team,"team")}
 
-        <small>
-          ${team.tiktok ? esc(team.tiktok) + " • " : ""}
-          ${creatorCount} créateur${creatorCount > 1 ? "s" : ""}
-        </small>
+        <div class="list-info">
+
+          <strong>
+            ${esc(team.name)}
+          </strong>
+
+          <small>
+
+            ${
+              team.tiktok
+              ? esc(team.tiktok)+" • "
+              : ""
+            }
+
+            ${creatorCount}
+            créateur${creatorCount>1?"s":""}
+
+          </small>
+
+        </div>
 
       </div>
+
 
       <div class="row-actions">
 
         <button class="small-btn"
                 onclick="editItem('team','${team.id}')"
                 title="Modifier">
-          ${iconEdit()}
+
+          ${editIcon()}
+
         </button>
+
 
         <button class="small-btn danger"
                 onclick="deleteItem('team','${team.id}')"
                 title="Supprimer">
-          ${iconTrash()}
+
+          ${trashIcon()}
+
         </button>
 
       </div>
 
     </div>
+
   `;
+
 }
+
 
 /* ==========================================================
    CREATORS
@@ -1766,18 +2198,22 @@ function renderCreators(){
 
       <div>
         <h1>Créateurs</h1>
-        <p>Gère les créateurs et leur rattachement à une Team.</p>
+        <p>
+          Gère les créateurs et leur rôle dans l'agence.
+        </p>
       </div>
 
-      <button class="primary" onclick="openModal('creator')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('creator')">
+
+        ${plusIcon()}
+
         Ajouter un Créateur
+
       </button>
 
     </div>
+
 
     ${
       db.creators.length
@@ -1785,19 +2221,22 @@ function renderCreators(){
       `
       <div class="card">
 
-        <div class="toolbar">
+        <div style="margin-bottom:18px">
 
           <div class="search">
-            <svg viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m20 20-4-4"/>
-            </svg>
-            <input id="creatorSearch" placeholder="Rechercher un créateur...">
+
+            ${searchIcon()}
+
+            <input id="creatorSearch"
+                   placeholder="Rechercher un créateur...">
+
           </div>
 
         </div>
 
-        <div class="list" id="creatorList">
+
+        <div class="list"
+             id="creatorList">
 
           ${db.creators.map(creatorRow).join("")}
 
@@ -1814,45 +2253,96 @@ function renderCreators(){
     }
 
   `;
+
 }
+
 
 function creatorRow(c){
 
   const team = getTeam(c.teamId);
 
   return `
+
     <div class="list-row searchable-creator"
-         data-search="${esc((c.name+" "+c.tiktok+" "+(team?.name||"")+" "+(c.note||"")).toLowerCase())}">
+         data-search="${esc(
+           (
+             c.name+" "+
+             c.tiktok+" "+
+             c.role+" "+
+             (team?.name||"")+" "+
+             (c.note||"")
+           ).toLowerCase()
+         )}">
 
       <div class="list-main">
 
-        <strong>${esc(c.name)}</strong>
+        ${avatarHTML(c,"creator")}
 
-        <small>
-          ${c.tiktok ? esc(c.tiktok) + " • " : ""}
-          ${team ? esc(team.name) : "Aucune Team"}
-        </small>
+        <div class="list-info">
+
+          <strong>
+            ${esc(c.name)}
+          </strong>
+
+          <small>
+
+            ${
+              c.tiktok
+              ? esc(c.tiktok)+" • "
+              : ""
+            }
+
+            ${
+              team
+              ? esc(team.name)
+              : "Aucune Team"
+            }
+
+          </small>
+
+        </div>
 
       </div>
 
-      <div style="display:flex;align-items:center;gap:14px">
 
-        <span class="badge ${c.status === "Actif" ? "badge-green" : "badge-gray"}">
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:12px;
+        flex-shrink:0;
+      ">
+
+        <span class="badge badge-purple">
+          ${esc(c.role || "Créateur")}
+        </span>
+
+
+        <span class="badge ${
+          c.status==="Actif"
+          ? "badge-green"
+          : "badge-gray"
+        }">
           ${esc(c.status || "Actif")}
         </span>
+
 
         <div class="row-actions">
 
           <button class="small-btn"
                   onclick="editItem('creator','${c.id}')"
                   title="Modifier">
-            ${iconEdit()}
+
+            ${editIcon()}
+
           </button>
+
 
           <button class="small-btn danger"
                   onclick="deleteItem('creator','${c.id}')"
                   title="Supprimer">
-            ${iconTrash()}
+
+            ${trashIcon()}
+
           </button>
 
         </div>
@@ -1860,8 +2350,11 @@ function creatorRow(c){
       </div>
 
     </div>
+
   `;
+
 }
+
 
 /* ==========================================================
    AGENCIES
@@ -1875,18 +2368,22 @@ function renderAgencies(){
 
       <div>
         <h1>Agences</h1>
-        <p>Liste uniquement les agences que tu souhaites enregistrer.</p>
+        <p>
+          Liste uniquement les agences que tu souhaites enregistrer.
+        </p>
       </div>
 
-      <button class="primary" onclick="openModal('agency')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('agency')">
+
+        ${plusIcon()}
+
         Ajouter une Agence
+
       </button>
 
     </div>
+
 
     ${
       db.agencies.length
@@ -1894,17 +2391,19 @@ function renderAgencies(){
       `
       <div class="card">
 
-        <div class="toolbar">
+        <div style="margin-bottom:18px">
 
           <div class="search">
-            <svg viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m20 20-4-4"/>
-            </svg>
-            <input id="agencySearch" placeholder="Rechercher une agence...">
+
+            ${searchIcon()}
+
+            <input id="agencySearch"
+                   placeholder="Rechercher une agence...">
+
           </div>
 
         </div>
+
 
         <div class="list">
 
@@ -1923,46 +2422,85 @@ function renderAgencies(){
     }
 
   `;
+
 }
+
 
 function agencyRow(a){
 
   return `
+
     <div class="list-row searchable-agency"
-         data-search="${esc((a.name+" "+a.tiktok+" "+(a.note||"")).toLowerCase())}">
+         data-search="${esc(
+           (
+             a.name+" "+
+             a.tiktok+" "+
+             (a.note||"")
+           ).toLowerCase()
+         )}">
 
       <div class="list-main">
 
-        <strong>
-          ${a.favorite ? "★ " : ""}
-          ${esc(a.name)}
-        </strong>
+        <div class="avatar team">
+          ${buildingIcon()}
+        </div>
 
-        <small>
-          ${a.tiktok ? esc(a.tiktok) : "Aucun compte TikTok renseigné"}
-        </small>
+        <div class="list-info">
+
+          <strong>
+
+            ${
+              a.favorite
+              ? "★ "
+              : ""
+            }
+
+            ${esc(a.name)}
+
+          </strong>
+
+          <small>
+
+            ${
+              a.tiktok
+              ? esc(a.tiktok)
+              : "Aucun compte TikTok renseigné"
+            }
+
+          </small>
+
+        </div>
 
       </div>
+
 
       <div class="row-actions">
 
         <button class="small-btn"
                 onclick="editItem('agency','${a.id}')"
                 title="Modifier">
-          ${iconEdit()}
+
+          ${editIcon()}
+
         </button>
+
 
         <button class="small-btn danger"
                 onclick="deleteItem('agency','${a.id}')"
                 title="Supprimer">
-          ${iconTrash()}
+
+          ${trashIcon()}
+
         </button>
 
       </div>
 
     </div>
+
   `;
+
 }
+
 
 /* ==========================================================
    MATCHES
@@ -1971,7 +2509,7 @@ function agencyRow(a){
 function renderMatches(){
 
   const matches = [...db.matches]
-    .sort((a,b) => nowDateTime(a) - nowDateTime(b));
+    .sort((a,b)=>nowDateTime(a)-nowDateTime(b));
 
   return `
 
@@ -1979,18 +2517,22 @@ function renderMatches(){
 
       <div>
         <h1>Match OFF</h1>
-        <p>Créateur / Team contre une agence adverse.</p>
+        <p>
+          Créateur / Team contre une agence adverse.
+        </p>
       </div>
 
-      <button class="primary" onclick="openModal('match')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('match')">
+
+        ${plusIcon()}
+
         Nouveau Match OFF
+
       </button>
 
     </div>
+
 
     ${
       matches.length
@@ -2011,86 +2553,172 @@ function renderMatches(){
     }
 
   `;
+
 }
+
 
 function matchCard(m){
 
+  const creator = getCreator(m.creatorId);
+  const team = getTeam(m.teamId);
+
   return `
+
     <div class="match-card">
 
-      <div style="display:flex;justify-content:space-between;gap:15px;align-items:flex-start">
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        align-items:flex-start;
+      ">
 
-        <div>
+        <div style="flex:1">
 
           <div class="match-date">
+
             ${formatDate(m.date)}
-            ${m.time ? " • " + esc(m.time) : ""}
+
+            ${
+              m.time
+              ? " • "+esc(m.time)
+              : ""
+            }
+
           </div>
+
 
           <div class="match-vs">
 
             <div class="match-side">
-              <strong>${esc(getMatchCreatorName(m))}</strong>
-              <small>${esc(getMatchTeamName(m))}</small>
+
+              <div class="match-person">
+
+                ${avatarHTML(creator,"creator")}
+
+                <div>
+
+                  <strong>
+                    ${esc(getMatchCreatorName(m))}
+                  </strong>
+
+                  <small>
+                    ${esc(getMatchTeamName(m))}
+                  </small>
+
+                </div>
+
+              </div>
+
             </div>
 
-            <div class="vs">VS</div>
+
+            <div class="vs">
+              VS
+            </div>
+
 
             <div class="match-side agency-side">
-              <strong>${esc(getMatchAgencyName(m))}</strong>
-              <small>Agence adverse</small>
+
+              <strong>
+                ${esc(getMatchAgencyName(m))}
+              </strong>
+
+              <small>
+                Agence adverse
+              </small>
+
             </div>
 
           </div>
 
+
           ${
             m.theme
             ?
-            `<div style="margin-top:13px;color:#737d90;font-size:12px">
+            `
+            <div style="
+              margin-top:13px;
+              color:#737d90;
+              font-size:12px;
+            ">
               Thème : ${esc(m.theme)}
-            </div>`
+            </div>
+            `
             :
             ""
           }
 
         </div>
 
-        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:8px;
+          flex-shrink:0;
+        ">
+
           ${statusBadge(m.status)}
+
           ${resultBadge(m.result)}
+
         </div>
 
       </div>
 
+
       ${
         m.notes
         ?
-        `<div style="margin-top:15px;padding-top:13px;border-top:1px solid var(--border);color:#737d90;font-size:12px">
+        `
+        <div style="
+          margin-top:15px;
+          padding-top:13px;
+          border-top:1px solid var(--border);
+          color:#737d90;
+          font-size:12px;
+        ">
           ${esc(m.notes)}
-        </div>`
+        </div>
+        `
         :
         ""
       }
 
-      <div style="display:flex;justify-content:flex-end;gap:7px;margin-top:15px">
+
+      <div style="
+        display:flex;
+        justify-content:flex-end;
+        gap:7px;
+        margin-top:15px;
+      ">
 
         <button class="small-btn"
                 onclick="editItem('match','${m.id}')"
                 title="Modifier">
-          ${iconEdit()}
+
+          ${editIcon()}
+
         </button>
+
 
         <button class="small-btn danger"
                 onclick="deleteItem('match','${m.id}')"
                 title="Supprimer">
-          ${iconTrash()}
+
+          ${trashIcon()}
+
         </button>
 
       </div>
 
     </div>
+
   `;
+
 }
+
 
 /* ==========================================================
    CALENDAR
@@ -2101,63 +2729,118 @@ function renderCalendar(){
   const year = calendarDate.getFullYear();
   const month = calendarDate.getMonth();
 
-  const monthName = calendarDate.toLocaleDateString("fr-FR",{
-    month:"long",
-    year:"numeric"
-  });
+  const monthName =
+    calendarDate.toLocaleDateString(
+      "fr-FR",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
 
-  const firstDay = new Date(year,month,1);
+  const firstDay =
+    new Date(year,month,1);
+
   let startDay = firstDay.getDay();
 
-  startDay = startDay === 0 ? 6 : startDay - 1;
+  startDay =
+    startDay===0
+    ? 6
+    : startDay-1;
 
-  const daysInMonth = new Date(year,month+1,0).getDate();
-  const prevDays = new Date(year,month,0).getDate();
+  const daysInMonth =
+    new Date(year,month+1,0).getDate();
 
   let cells = "";
 
   for(let i=0;i<42;i++){
 
-    const dayNumber = i - startDay + 1;
+    const dayNumber =
+      i-startDay+1;
 
     let dateObj;
-    let isOther = false;
+    let isOther=false;
 
-    if(dayNumber < 1){
-      dateObj = new Date(year,month-1,dayNumber);
-      isOther = true;
-    }else if(dayNumber > daysInMonth){
-      dateObj = new Date(year,month+1,dayNumber-daysInMonth);
-      isOther = true;
+    if(dayNumber<1){
+
+      dateObj =
+        new Date(
+          year,
+          month-1,
+          dayNumber
+        );
+
+      isOther=true;
+
+    }else if(dayNumber>daysInMonth){
+
+      dateObj =
+        new Date(
+          year,
+          month+1,
+          dayNumber-daysInMonth
+        );
+
+      isOther=true;
+
     }else{
-      dateObj = new Date(year,month,dayNumber);
+
+      dateObj =
+        new Date(
+          year,
+          month,
+          dayNumber
+        );
+
     }
 
     const iso =
-      dateObj.getFullYear() + "-" +
-      String(dateObj.getMonth()+1).padStart(2,"0") + "-" +
-      String(dateObj.getDate()).padStart(2,"0");
+      dateObj.getFullYear()
+      + "-"
+      + String(dateObj.getMonth()+1).padStart(2,"0")
+      + "-"
+      + String(dateObj.getDate()).padStart(2,"0");
 
-    const matches = db.matches.filter(m => m.date === iso);
+    const matches =
+      db.matches.filter(m=>m.date===iso);
 
-    const today = todayISO() === iso;
+    const today =
+      todayISO()===iso;
 
     cells += `
-      <div class="day ${isOther ? "other" : ""} ${today ? "today" : ""}">
 
-        <div class="day-num">${dateObj.getDate()}</div>
+      <div class="day
+        ${isOther ? "other" : ""}
+        ${today ? "today" : ""}
+      ">
+
+        <div class="day-num">
+          ${dateObj.getDate()}
+        </div>
 
         ${
-          matches.map(m => `
+          matches.map(m=>`
+
             <div class="cal-match"
-                 title="${esc(getMatchCreatorName(m))} vs ${esc(getMatchAgencyName(m))}">
-              ${esc(getMatchCreatorName(m))} vs ${esc(getMatchAgencyName(m))}
+                 title="${esc(
+                   getMatchCreatorName(m)
+                   +" vs "
+                   +getMatchAgencyName(m)
+                 )}">
+
+              ${esc(getMatchCreatorName(m))}
+              vs
+              ${esc(getMatchAgencyName(m))}
+
             </div>
+
           `).join("")
         }
 
       </div>
+
     `;
+
   }
 
   return `
@@ -2166,34 +2849,50 @@ function renderCalendar(){
 
       <div>
         <h1>Calendrier</h1>
-        <p>Visualise tous tes Matchs OFF.</p>
+        <p>
+          Visualise tous tes Matchs OFF.
+        </p>
       </div>
 
-      <button class="primary" onclick="openModal('match')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
+      <button class="primary"
+              onclick="openModal('match')">
+
+        ${plusIcon()}
+
         Nouveau Match
+
       </button>
 
     </div>
+
 
     <div class="calendar-card">
 
       <div class="calendar-head">
 
-        <strong>${esc(monthName)}</strong>
+        <strong>
+          ${esc(monthName)}
+        </strong>
+
 
         <div class="calendar-nav">
 
-          <button onclick="changeMonth(-1)">‹</button>
-          <button onclick="goToday()">Aujourd'hui</button>
-          <button onclick="changeMonth(1)">›</button>
+          <button onclick="changeMonth(-1)">
+            ‹
+          </button>
+
+          <button onclick="goToday()">
+            Aujourd'hui
+          </button>
+
+          <button onclick="changeMonth(1)">
+            ›
+          </button>
 
         </div>
 
       </div>
+
 
       <div class="calendar-grid">
 
@@ -2210,18 +2909,31 @@ function renderCalendar(){
       </div>
 
     </div>
+
   `;
+
 }
+
 
 function changeMonth(direction){
-  calendarDate.setMonth(calendarDate.getMonth()+direction);
+
+  calendarDate.setMonth(
+    calendarDate.getMonth()+direction
+  );
+
   render();
+
 }
 
+
 function goToday(){
+
   calendarDate = new Date();
+
   render();
+
 }
+
 
 /* ==========================================================
    RANKING
@@ -2229,69 +2941,123 @@ function goToday(){
 
 function renderRanking(){
 
-  const teamStats = db.teams.map(team => {
+  const teamStats =
+    db.teams
+      .map(team=>{
 
-    const matches = db.matches.filter(m => m.teamId === team.id);
+        const matches =
+          db.matches.filter(
+            m=>m.teamId===team.id
+          );
 
-    const wins = matches.filter(m => m.result === "Victoire").length;
-    const losses = matches.filter(m => m.result === "Défaite").length;
-    const draws = matches.filter(m => m.result === "Égalité").length;
+        const wins =
+          matches.filter(
+            m=>m.result==="Victoire"
+          ).length;
 
-    return {
-      name:team.name,
-      matches:matches.length,
-      wins,
-      losses,
-      draws
-    };
+        const losses =
+          matches.filter(
+            m=>m.result==="Défaite"
+          ).length;
 
-  }).sort((a,b) =>
-    b.wins-a.wins ||
-    b.draws-a.draws ||
-    a.losses-b.losses
-  );
+        const draws =
+          matches.filter(
+            m=>m.result==="Égalité"
+          ).length;
 
-  const creatorStats = db.creators.map(c => {
+        return {
+          name:team.name,
+          matches:matches.length,
+          wins,
+          losses,
+          draws
+        };
 
-    const matches = db.matches.filter(m => m.creatorId === c.id);
+      })
+      .sort(
+        (a,b)=>
+          b.wins-a.wins ||
+          b.draws-a.draws ||
+          a.losses-b.losses
+      );
 
-    const wins = matches.filter(m => m.result === "Victoire").length;
-    const losses = matches.filter(m => m.result === "Défaite").length;
-    const draws = matches.filter(m => m.result === "Égalité").length;
 
-    return {
-      name:c.name,
-      matches:matches.length,
-      wins,
-      losses,
-      draws
-    };
+  const creatorStats =
+    db.creators
+      .map(c=>{
 
-  }).sort((a,b) =>
-    b.wins-a.wins ||
-    b.draws-a.draws ||
-    a.losses-b.losses
-  );
+        const matches =
+          db.matches.filter(
+            m=>m.creatorId===c.id
+          );
+
+        const wins =
+          matches.filter(
+            m=>m.result==="Victoire"
+          ).length;
+
+        const losses =
+          matches.filter(
+            m=>m.result==="Défaite"
+          ).length;
+
+        const draws =
+          matches.filter(
+            m=>m.result==="Égalité"
+          ).length;
+
+        return {
+          name:c.name,
+          matches:matches.length,
+          wins,
+          losses,
+          draws
+        };
+
+      })
+      .sort(
+        (a,b)=>
+          b.wins-a.wins ||
+          b.draws-a.draws ||
+          a.losses-b.losses
+      );
+
 
   return `
 
     <div class="page-head">
 
       <div>
+
         <h1>Classement</h1>
-        <p>Classement automatique basé sur les résultats enregistrés.</p>
+
+        <p>
+          Classement automatique basé sur les résultats enregistrés.
+        </p>
+
       </div>
 
     </div>
 
+
     <div class="grid-2">
+
 
       <div class="card">
 
         <div class="card-title">
-          <h2>Classement des Teams</h2>
-          <span>${teamStats.length} Team${teamStats.length > 1 ? "s" : ""}</span>
+
+          <h2>
+            Classement des Teams
+          </h2>
+
+          <span>
+            ${teamStats.length}
+            Team${teamStats.length>1?"s":""}
+          </span>
+
         </div>
+
 
         ${
           teamStats.length
@@ -2300,6 +3066,7 @@ function renderRanking(){
           <table class="rank-table">
 
             <thead>
+
               <tr>
                 <th>#</th>
                 <th>Team</th>
@@ -2308,48 +3075,76 @@ function renderRanking(){
                 <th>E</th>
                 <th>D</th>
               </tr>
+
             </thead>
+
 
             <tbody>
 
-              ${teamStats.map((s,i) => `
-                <tr>
+              ${
+                teamStats.map((s,i)=>`
 
-                  <td>
-                    <span class="rank-number">${i+1}</span>
-                  </td>
+                  <tr>
 
-                  <td class="rank-name">${esc(s.name)}</td>
+                    <td>
+                      <span class="rank-number">
+                        ${i+1}
+                      </span>
+                    </td>
 
-                  <td>${s.matches}</td>
-                  <td>${s.wins}</td>
-                  <td>${s.draws}</td>
-                  <td>${s.losses}</td>
+                    <td class="rank-name">
+                      ${esc(s.name)}
+                    </td>
 
-                </tr>
-              `).join("")}
+                    <td>${s.matches}</td>
+                    <td>${s.wins}</td>
+                    <td>${s.draws}</td>
+                    <td>${s.losses}</td>
+
+                  </tr>
+
+                `).join("")
+              }
 
             </tbody>
 
           </table>
           `
           :
-          emptyBlock(
-            "Aucune Team",
-            "Le classement apparaîtra lorsque tu ajouteras tes Teams.",
-            null,
-            true
-          )
+          `
+          <div class="empty"
+               style="padding:35px 10px">
+
+            <strong>
+              Aucune Team
+            </strong>
+
+            <p>
+              Le classement apparaîtra lorsque tu ajouteras tes Teams.
+            </p>
+
+          </div>
+          `
         }
 
       </div>
 
+
       <div class="card">
 
         <div class="card-title">
-          <h2>Classement des Créateurs</h2>
-          <span>${creatorStats.length} créateur${creatorStats.length > 1 ? "s" : ""}</span>
+
+          <h2>
+            Classement des Créateurs
+          </h2>
+
+          <span>
+            ${creatorStats.length}
+            créateur${creatorStats.length>1?"s":""}
+          </span>
+
         </div>
+
 
         ${
           creatorStats.length
@@ -2358,6 +3153,7 @@ function renderRanking(){
           <table class="rank-table">
 
             <thead>
+
               <tr>
                 <th>#</th>
                 <th>Créateur</th>
@@ -2366,449 +3162,1118 @@ function renderRanking(){
                 <th>E</th>
                 <th>D</th>
               </tr>
+
             </thead>
+
 
             <tbody>
 
-              ${creatorStats.map((s,i) => `
-                <tr>
+              ${
+                creatorStats.map((s,i)=>`
 
-                  <td>
-                    <span class="rank-number">${i+1}</span>
-                  </td>
+                  <tr>
 
-                  <td class="rank-name">${esc(s.name)}</td>
+                    <td>
+                      <span class="rank-number">
+                        ${i+1}
+                      </span>
+                    </td>
 
-                  <td>${s.matches}</td>
-                  <td>${s.wins}</td>
-                  <td>${s.draws}</td>
-                  <td>${s.losses}</td>
+                    <td class="rank-name">
+                      ${esc(s.name)}
+                    </td>
 
-                </tr>
-              `).join("")}
+                    <td>${s.matches}</td>
+                    <td>${s.wins}</td>
+                    <td>${s.draws}</td>
+                    <td>${s.losses}</td>
+
+                  </tr>
+
+                `).join("")
+              }
 
             </tbody>
 
           </table>
           `
           :
-          emptyBlock(
-            "Aucun Créateur",
-            "Le classement apparaîtra lorsque tu ajouteras tes créateurs.",
-            null,
-            true
-          )
+          `
+          <div class="empty"
+               style="padding:35px 10px">
+
+            <strong>
+              Aucun Créateur
+            </strong>
+
+            <p>
+              Le classement apparaîtra lorsque tu ajouteras tes créateurs.
+            </p>
+
+          </div>
+          `
         }
 
       </div>
 
     </div>
+
   `;
+
 }
 
+
 /* ==========================================================
-   EMPTY BLOCK
+   EMPTY
 ========================================================== */
 
-function emptyBlock(title,text,type="",compact=false){
+function emptyBlock(title,text,type=""){
 
-  let action = "";
+  let action="";
 
   if(type){
-    action = `
-      <button class="primary" style="margin-top:18px"
+
+    let label="";
+
+    if(type==="team"){
+      label="Ajouter une Team";
+    }
+
+    if(type==="creator"){
+      label="Ajouter un Créateur";
+    }
+
+    if(type==="agency"){
+      label="Ajouter une Agence";
+    }
+
+    if(type==="match"){
+      label="Nouveau Match OFF";
+    }
+
+    action=`
+
+      <button class="primary"
+              style="margin-top:18px"
               onclick="openModal('${type}')">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
-        ${type === "team" ? "Ajouter une Team" :
-          type === "creator" ? "Ajouter un Créateur" :
-          type === "agency" ? "Ajouter une Agence" :
-          "Nouveau Match OFF"}
+
+        ${plusIcon()}
+
+        ${label}
+
       </button>
+
     `;
+
   }
 
   return `
+
     <div class="card">
-      <div class="empty ${compact ? "" : ""}">
+
+      <div class="empty">
 
         <div class="empty-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v18"/>
-            <path d="M3 12h18"/>
-          </svg>
+          ${plusIcon()}
         </div>
 
-        <strong>${esc(title)}</strong>
-        <p>${esc(text)}</p>
+        <strong>
+          ${esc(title)}
+        </strong>
+
+        <p>
+          ${esc(text)}
+        </p>
 
         ${action}
 
       </div>
+
     </div>
+
   `;
+
 }
 
+
 /* ==========================================================
-   MODALS
+   MODAL
 ========================================================== */
 
 function openModal(type,id=null){
 
-  editingId = id;
-  currentModalType = type;
+  editingId=id;
+  currentModalType=type;
 
-  const backdrop = document.getElementById("modalBackdrop");
-  const title = document.getElementById("modalTitle");
-  const form = document.getElementById("modalForm");
+  const backdrop =
+    document.getElementById("modalBackdrop");
+
+  const title =
+    document.getElementById("modalTitle");
+
+  const form =
+    document.getElementById("modalForm");
+
 
   const item =
     id
     ?
     (
-      type === "team" ? db.teams.find(x=>x.id===id) :
-      type === "creator" ? db.creators.find(x=>x.id===id) :
-      type === "agency" ? db.agencies.find(x=>x.id===id) :
+      type==="team"
+      ? db.teams.find(x=>x.id===id)
+      :
+      type==="creator"
+      ? db.creators.find(x=>x.id===id)
+      :
+      type==="agency"
+      ? db.agencies.find(x=>x.id===id)
+      :
       db.matches.find(x=>x.id===id)
     )
     :
     null;
 
-  if(type === "team"){
 
-    title.textContent = item ? "Modifier la Team" : "Ajouter une Team";
+  /* =========================
+     TEAM
+  ========================= */
 
-    form.innerHTML = `
+  if(type==="team"){
+
+    title.textContent =
+      item
+      ? "Modifier la Team"
+      : "Ajouter une Team";
+
+
+    form.innerHTML=`
 
       <form onsubmit="saveTeam(event)">
 
         <div class="form-grid">
 
-          <div class="field full">
-            <label>Nom de la Team *</label>
-            <input id="teamName"
-                   required
-                   value="${esc(item?.name || "")}"
-                   placeholder="Ex. Team LVF">
-          </div>
 
           <div class="field full">
-            <label>Compte TikTok</label>
-            <input id="teamTikTok"
-                   value="${esc(item?.tiktok || "")}"
-                   placeholder="@nomdelateam">
+
+            <label>
+              Image / Logo de la Team
+            </label>
+
+
+            <div class="image-upload">
+
+              <div id="teamImagePreview">
+
+                ${avatarHTML(
+                  item || {name:"Team"},
+                  "team",
+                  "large"
+                )}
+
+              </div>
+
+
+              <div class="image-upload-info">
+
+                <strong>
+                  Choisir une image
+                </strong>
+
+                <span>
+                  Sélectionne une photo ou un logo depuis ta galerie.
+                </span>
+
+              </div>
+
+
+              <label class="upload-button">
+
+                ${uploadIcon()}
+
+                Galerie
+
+                <input
+                  type="file"
+                  id="teamImage"
+                  accept="image/*"
+                  style="display:none"
+                  onchange="previewImage(this,'teamImagePreview','team','large')"
+                >
+
+              </label>
+
+            </div>
+
           </div>
 
+
           <div class="field full">
-            <label>Description / Note</label>
-            <textarea id="teamDescription"
-                      placeholder="Informations complémentaires...">${esc(item?.description || "")}</textarea>
+
+            <label>
+              Nom de la Team *
+            </label>
+
+            <input
+              id="teamName"
+              required
+              value="${esc(item?.name||"")}"
+              placeholder="Nom de la Team"
+            >
+
           </div>
+
+
+          <div class="field full">
+
+            <label>
+              Compte TikTok
+            </label>
+
+            <input
+              id="teamTikTok"
+              value="${esc(item?.tiktok||"")}"
+              placeholder="@nomdelateam"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label>
+              Description / Note
+            </label>
+
+            <textarea
+              id="teamDescription"
+              placeholder="Informations complémentaires..."
+            >${esc(item?.description||"")}</textarea>
+
+          </div>
+
 
         </div>
 
+
         <div class="form-actions">
-          <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-          <button type="submit" class="primary">${item ? "Enregistrer" : "Créer la Team"}</button>
+
+          <button
+            type="button"
+            class="secondary"
+            onclick="closeModal()">
+
+            Annuler
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary">
+
+            ${item
+              ? "Enregistrer"
+              : "Créer la Team"}
+
+          </button>
+
         </div>
 
       </form>
+
     `;
+
   }
 
-  if(type === "creator"){
 
-    title.textContent = item ? "Modifier le Créateur" : "Ajouter un Créateur";
+  /* =========================
+     CREATOR
+  ========================= */
 
-    form.innerHTML = `
+  if(type==="creator"){
+
+    title.textContent =
+      item
+      ? "Modifier le Créateur"
+      : "Ajouter un Créateur";
+
+
+    form.innerHTML=`
 
       <form onsubmit="saveCreator(event)">
 
         <div class="form-grid">
 
+
           <div class="field full">
-            <label>Nom / Pseudo du créateur *</label>
-            <input id="creatorName"
-                   required
-                   value="${esc(item?.name || "")}"
-                   placeholder="Ex. @pseudo">
+
+            <label>
+              Photo du créateur
+            </label>
+
+
+            <div class="image-upload">
+
+              <div id="creatorImagePreview">
+
+                ${avatarHTML(
+                  item || {name:"Créateur"},
+                  "creator",
+                  "large"
+                )}
+
+              </div>
+
+
+              <div class="image-upload-info">
+
+                <strong>
+                  Choisir une photo
+                </strong>
+
+                <span>
+                  Sélectionne une photo depuis ta galerie.
+                </span>
+
+              </div>
+
+
+              <label class="upload-button">
+
+                ${uploadIcon()}
+
+                Galerie
+
+                <input
+                  type="file"
+                  id="creatorImage"
+                  accept="image/*"
+                  style="display:none"
+                  onchange="previewImage(this,'creatorImagePreview','creator','large')"
+                >
+
+              </label>
+
+            </div>
+
           </div>
 
-          <div class="field">
-            <label>Compte TikTok</label>
-            <input id="creatorTikTok"
-                   value="${esc(item?.tiktok || "")}"
-                   placeholder="@pseudo">
+
+          <div class="field full">
+
+            <label>
+              Nom / Pseudo du créateur *
+            </label>
+
+            <input
+              id="creatorName"
+              required
+              value="${esc(item?.name||"")}"
+              placeholder="Nom ou pseudo"
+            >
+
           </div>
 
+
           <div class="field">
-            <label>Team</label>
+
+            <label>
+              Compte TikTok
+            </label>
+
+            <input
+              id="creatorTikTok"
+              value="${esc(item?.tiktok||"")}"
+              placeholder="@pseudo"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Team
+            </label>
+
             <select id="creatorTeam">
 
-              <option value="">Aucune Team</option>
+              <option value="">
+                Aucune Team
+              </option>
 
-              ${db.teams.map(t => `
-                <option value="${t.id}"
-                  ${item?.teamId === t.id ? "selected" : ""}>
-                  ${esc(t.name)}
-                </option>
-              `).join("")}
+              ${
+                db.teams.map(t=>`
+
+                  <option
+                    value="${t.id}"
+                    ${item?.teamId===t.id ? "selected" : ""}
+                  >
+
+                    ${esc(t.name)}
+
+                  </option>
+
+                `).join("")
+              }
 
             </select>
+
           </div>
 
+
           <div class="field">
-            <label>Statut</label>
+
+            <label>
+              Rôle *
+            </label>
+
+            <select
+              id="creatorRole"
+              required
+            >
+
+              <option
+                value="Fondateur"
+                ${item?.role==="Fondateur" ? "selected" : ""}
+              >
+                Fondateur
+              </option>
+
+              <option
+                value="Manager"
+                ${item?.role==="Manager" ? "selected" : ""}
+              >
+                Manager
+              </option>
+
+              <option
+                value="Agent"
+                ${item?.role==="Agent" ? "selected" : ""}
+              >
+                Agent
+              </option>
+
+              <option
+                value="Créateur"
+                ${!item || item?.role==="Créateur" ? "selected" : ""}
+              >
+                Créateur
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Statut
+            </label>
+
             <select id="creatorStatus">
-              <option ${item?.status === "Actif" || !item ? "selected" : ""}>Actif</option>
-              <option ${item?.status === "Inactif" ? "selected" : ""}>Inactif</option>
+
+              <option
+                ${!item || item.status==="Actif"
+                  ? "selected"
+                  : ""}
+              >
+                Actif
+              </option>
+
+              <option
+                ${item?.status==="Inactif"
+                  ? "selected"
+                  : ""}
+              >
+                Inactif
+              </option>
+
             </select>
+
           </div>
 
-          <div class="field">
-            <label>Note</label>
-            <input id="creatorNote"
-                   value="${esc(item?.note || "")}"
-                   placeholder="Note interne">
+
+          <div class="field full">
+
+            <label>
+              Note
+            </label>
+
+            <textarea
+              id="creatorNote"
+              placeholder="Note interne..."
+            >${esc(item?.note||"")}</textarea>
+
           </div>
+
 
         </div>
 
+
         <div class="form-actions">
-          <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-          <button type="submit" class="primary">${item ? "Enregistrer" : "Créer le Créateur"}</button>
+
+          <button
+            type="button"
+            class="secondary"
+            onclick="closeModal()">
+
+            Annuler
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary">
+
+            ${item
+              ? "Enregistrer"
+              : "Créer le Créateur"}
+
+          </button>
+
         </div>
 
       </form>
+
     `;
+
   }
 
-  if(type === "agency"){
 
-    title.textContent = item ? "Modifier l'Agence" : "Ajouter une Agence";
+  /* =========================
+     AGENCY
+  ========================= */
 
-    form.innerHTML = `
+  if(type==="agency"){
+
+    title.textContent =
+      item
+      ? "Modifier l'Agence"
+      : "Ajouter une Agence";
+
+
+    form.innerHTML=`
 
       <form onsubmit="saveAgency(event)">
 
         <div class="form-grid">
 
+
           <div class="field full">
-            <label>Nom de l'Agence *</label>
-            <input id="agencyName"
-                   required
-                   value="${esc(item?.name || "")}"
-                   placeholder="Nom de l'agence">
+
+            <label>
+              Nom de l'Agence *
+            </label>
+
+            <input
+              id="agencyName"
+              required
+              value="${esc(item?.name||"")}"
+              placeholder="Nom de l'agence"
+            >
+
           </div>
 
+
           <div class="field full">
-            <label>Compte TikTok</label>
-            <input id="agencyTikTok"
-                   value="${esc(item?.tiktok || "")}"
-                   placeholder="@agence">
+
+            <label>
+              Compte TikTok
+            </label>
+
+            <input
+              id="agencyTikTok"
+              value="${esc(item?.tiktok||"")}"
+              placeholder="@agence"
+            >
+
           </div>
 
+
           <div class="field full">
 
-            <label class="checkbox-line">
-              <input type="checkbox"
-                     id="agencyFavorite"
-                     ${item?.favorite ? "checked" : ""}>
+            <label style="
+              display:flex;
+              align-items:center;
+              gap:9px;
+              cursor:pointer;
+            ">
+
+              <input
+                type="checkbox"
+                id="agencyFavorite"
+                ${item?.favorite ? "checked" : ""}
+              >
+
               Ajouter aux agences favorites
+
             </label>
 
           </div>
 
+
           <div class="field full">
-            <label>Note</label>
-            <textarea id="agencyNote"
-                      placeholder="Informations complémentaires...">${esc(item?.note || "")}</textarea>
+
+            <label>
+              Note
+            </label>
+
+            <textarea
+              id="agencyNote"
+              placeholder="Informations complémentaires..."
+            >${esc(item?.note||"")}</textarea>
+
           </div>
+
 
         </div>
 
+
         <div class="form-actions">
-          <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-          <button type="submit" class="primary">${item ? "Enregistrer" : "Créer l'Agence"}</button>
+
+          <button
+            type="button"
+            class="secondary"
+            onclick="closeModal()">
+
+            Annuler
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary">
+
+            ${item
+              ? "Enregistrer"
+              : "Créer l'Agence"}
+
+          </button>
+
         </div>
 
       </form>
+
     `;
+
   }
 
-  if(type === "match"){
 
-    title.textContent = item ? "Modifier le Match OFF" : "Nouveau Match OFF";
+  /* =========================
+     MATCH
+  ========================= */
 
-    form.innerHTML = `
+  if(type==="match"){
+
+    title.textContent =
+      item
+      ? "Modifier le Match OFF"
+      : "Nouveau Match OFF";
+
+
+    form.innerHTML=`
 
       <form onsubmit="saveMatch(event)">
 
         <div class="form-grid">
 
-          <div class="field">
-            <label>Date *</label>
-            <input type="date"
-                   id="matchDate"
-                   required
-                   value="${esc(item?.date || "")}">
-          </div>
 
           <div class="field">
-            <label>Heure</label>
-            <input type="time"
-                   id="matchTime"
-                   value="${esc(item?.time || "")}">
+
+            <label>
+              Date *
+            </label>
+
+            <input
+              type="date"
+              id="matchDate"
+              required
+              value="${esc(item?.date||"")}"
+            >
+
           </div>
+
+
+          <div class="field">
+
+            <label>
+              Heure
+            </label>
+
+            <input
+              type="time"
+              id="matchTime"
+              value="${esc(item?.time||"")}"
+            >
+
+          </div>
+
 
           <div class="field full">
-            <label>Thème du Match</label>
-            <input id="matchTheme"
-                   value="${esc(item?.theme || "")}"
-                   placeholder="Ex. Battle spéciale">
+
+            <label>
+              Thème du Match
+            </label>
+
+            <input
+              id="matchTheme"
+              value="${esc(item?.theme||"")}"
+              placeholder="Thème du Match"
+            >
+
           </div>
+
 
           <div class="field">
-            <label>Créateur *</label>
-            <select id="matchCreator" required>
 
-              <option value="">Sélectionner un créateur</option>
+            <label>
+              Créateur *
+            </label>
 
-              ${db.creators.map(c => `
-                <option value="${c.id}"
-                  ${item?.creatorId === c.id ? "selected" : ""}>
-                  ${esc(c.name)}
-                </option>
-              `).join("")}
+            <select
+              id="matchCreator"
+              required
+            >
+
+              <option value="">
+                Sélectionner un créateur
+              </option>
+
+              ${
+                db.creators.map(c=>`
+
+                  <option
+                    value="${c.id}"
+                    ${item?.creatorId===c.id
+                      ? "selected"
+                      : ""}
+                  >
+
+                    ${esc(c.name)}
+
+                  </option>
+
+                `).join("")
+              }
 
             </select>
+
           </div>
+
 
           <div class="field">
-            <label>Team *</label>
-            <select id="matchTeam" required>
 
-              <option value="">Sélectionner une Team</option>
+            <label>
+              Team *
+            </label>
 
-              ${db.teams.map(t => `
-                <option value="${t.id}"
-                  ${item?.teamId === t.id ? "selected" : ""}>
-                  ${esc(t.name)}
-                </option>
-              `).join("")}
+            <select
+              id="matchTeam"
+              required
+            >
+
+              <option value="">
+                Sélectionner une Team
+              </option>
+
+              ${
+                db.teams.map(t=>`
+
+                  <option
+                    value="${t.id}"
+                    ${item?.teamId===t.id
+                      ? "selected"
+                      : ""}
+                  >
+
+                    ${esc(t.name)}
+
+                  </option>
+
+                `).join("")
+              }
 
             </select>
+
           </div>
+
 
           <div class="field full">
-            <label>Agence adverse</label>
+
+            <label>
+              Agence adverse enregistrée
+            </label>
+
             <select id="matchAgency">
 
-              <option value="">Agence non enregistrée / saisir ci-dessous</option>
+              <option value="">
+                Aucune — saisir le nom ci-dessous
+              </option>
 
-              ${db.agencies.map(a => `
-                <option value="${a.id}"
-                  ${item?.agencyId === a.id ? "selected" : ""}>
-                  ${esc(a.name)}
-                </option>
-              `).join("")}
+              ${
+                db.agencies.map(a=>`
+
+                  <option
+                    value="${a.id}"
+                    ${item?.agencyId===a.id
+                      ? "selected"
+                      : ""}
+                  >
+
+                    ${esc(a.name)}
+
+                  </option>
+
+                `).join("")
+              }
 
             </select>
+
           </div>
+
 
           <div class="field full">
-            <label>Ou saisir le nom de l'agence adverse</label>
-            <input id="matchAgencyName"
-                   value="${esc(item?.agencyName || "")}"
-                   placeholder="Cette agence ne sera PAS ajoutée automatiquement à tes agences">
+
+            <label>
+              Ou saisir le nom de l'agence adverse
+            </label>
+
+            <input
+              id="matchAgencyName"
+              value="${esc(item?.agencyName||"")}"
+              placeholder="Nom de l'agence adverse"
+            >
+
           </div>
 
+
           <div class="field">
-            <label>Statut</label>
+
+            <label>
+              Statut
+            </label>
+
             <select id="matchStatus">
 
-              <option ${!item || item.status === "À venir" ? "selected" : ""}>
+              <option
+                ${!item || item.status==="À venir"
+                  ? "selected"
+                  : ""}
+              >
                 À venir
               </option>
 
-              <option ${item?.status === "Terminé" ? "selected" : ""}>
+              <option
+                ${item?.status==="Terminé"
+                  ? "selected"
+                  : ""}
+              >
                 Terminé
               </option>
 
-              <option ${item?.status === "Annulé" ? "selected" : ""}>
+              <option
+                ${item?.status==="Annulé"
+                  ? "selected"
+                  : ""}
+              >
                 Annulé
               </option>
 
             </select>
+
           </div>
 
+
           <div class="field">
-            <label>Résultat</label>
+
+            <label>
+              Résultat
+            </label>
+
             <select id="matchResult">
 
-              <option value="À jouer"
-                ${!item || item.result === "À jouer" ? "selected" : ""}>
+              <option
+                value="À jouer"
+                ${!item || item.result==="À jouer"
+                  ? "selected"
+                  : ""}
+              >
                 À jouer
               </option>
 
-              <option value="Victoire"
-                ${item?.result === "Victoire" ? "selected" : ""}>
+              <option
+                value="Victoire"
+                ${item?.result==="Victoire"
+                  ? "selected"
+                  : ""}
+              >
                 Victoire
               </option>
 
-              <option value="Défaite"
-                ${item?.result === "Défaite" ? "selected" : ""}>
+              <option
+                value="Défaite"
+                ${item?.result==="Défaite"
+                  ? "selected"
+                  : ""}
+              >
                 Défaite
               </option>
 
-              <option value="Égalité"
-                ${item?.result === "Égalité" ? "selected" : ""}>
+              <option
+                value="Égalité"
+                ${item?.result==="Égalité"
+                  ? "selected"
+                  : ""}
+              >
                 Égalité
               </option>
 
             </select>
+
           </div>
 
+
           <div class="field full">
-            <label>Note</label>
-            <textarea id="matchNotes"
-                      placeholder="Informations sur le match...">${esc(item?.notes || "")}</textarea>
+
+            <label>
+              Note
+            </label>
+
+            <textarea
+              id="matchNotes"
+              placeholder="Informations sur le match..."
+            >${esc(item?.notes||"")}</textarea>
+
           </div>
+
 
         </div>
 
+
         <div class="form-actions">
-          <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-          <button type="submit" class="primary">${item ? "Enregistrer le Match" : "Créer le Match OFF"}</button>
+
+          <button
+            type="button"
+            class="secondary"
+            onclick="closeModal()">
+
+            Annuler
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary">
+
+            ${item
+              ? "Enregistrer le Match"
+              : "Créer le Match OFF"}
+
+          </button>
+
         </div>
 
       </form>
+
     `;
+
   }
 
+
   backdrop.classList.add("open");
+
 }
+
+
+/* ==========================================================
+   IMAGE PREVIEW
+========================================================== */
+
+function previewImage(
+  input,
+  previewId,
+  type,
+  size="normal"
+){
+
+  const file = input.files?.[0];
+
+  if(!file){
+    return;
+  }
+
+  if(!file.type.startsWith("image/")){
+    alert("Merci de sélectionner une image.");
+    input.value="";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    const container =
+      document.getElementById(previewId);
+
+    if(!container){
+      return;
+    }
+
+    container.innerHTML = `
+
+      <div class="avatar ${type} ${size==="large" ? "large" : ""}">
+        <img src="${e.target.result}" alt="">
+      </div>
+
+    `;
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* ==========================================================
+   CLOSE MODAL
+========================================================== */
 
 function closeModal(){
 
-  document.getElementById("modalBackdrop").classList.remove("open");
+  document
+    .getElementById("modalBackdrop")
+    .classList.remove("open");
 
-  editingId = null;
-  currentModalType = null;
+  editingId=null;
+  currentModalType=null;
 
 }
 
-document.getElementById("closeModal").addEventListener("click",closeModal);
 
-document.getElementById("modalBackdrop").addEventListener("click",e => {
+document
+  .getElementById("closeModal")
+  .addEventListener(
+    "click",
+    closeModal
+  );
 
-  if(e.target.id === "modalBackdrop"){
-    closeModal();
-  }
 
-});
+document
+  .getElementById("modalBackdrop")
+  .addEventListener(
+    "click",
+    e=>{
+      if(e.target.id==="modalBackdrop"){
+        closeModal();
+      }
+    }
+  );
+
 
 /* ==========================================================
    SAVE TEAM
@@ -2818,36 +4283,92 @@ function saveTeam(e){
 
   e.preventDefault();
 
-  const data = {
-    name:document.getElementById("teamName").value.trim(),
-    tiktok:document.getElementById("teamTikTok").value.trim(),
-    description:document.getElementById("teamDescription").value.trim()
+  const name =
+    document
+      .getElementById("teamName")
+      .value
+      .trim();
+
+  const tiktok =
+    document
+      .getElementById("teamTikTok")
+      .value
+      .trim();
+
+  const description =
+    document
+      .getElementById("teamDescription")
+      .value
+      .trim();
+
+  const file =
+    document
+      .getElementById("teamImage")
+      ?.files?.[0];
+
+
+  if(!name){
+    return;
+  }
+
+
+  const existing =
+    editingId
+    ? getTeam(editingId)
+    : null;
+
+
+  const finish = image=>{
+
+    const data={
+      name,
+      tiktok,
+      description,
+      image:
+        image !== undefined
+        ? image
+        : (existing?.image || "")
+    };
+
+
+    if(editingId){
+
+      if(existing){
+        Object.assign(existing,data);
+      }
+
+    }else{
+
+      db.teams.push({
+        id:uid(),
+        ...data
+      });
+
+    }
+
+
+    saveDB();
+    closeModal();
+    render();
+
   };
 
-  if(!data.name) return;
 
-  if(editingId){
+  if(file){
 
-    const team = getTeam(editingId);
-
-    if(team){
-      Object.assign(team,data);
-    }
+    readFileAsDataURL(
+      file,
+      finish
+    );
 
   }else{
 
-    db.teams.push({
-      id:uid(),
-      ...data
-    });
+    finish(undefined);
 
   }
 
-  saveDB();
-  closeModal();
-  render();
-
 }
+
 
 /* ==========================================================
    SAVE CREATOR
@@ -2857,38 +4378,132 @@ function saveCreator(e){
 
   e.preventDefault();
 
-  const data = {
-    name:document.getElementById("creatorName").value.trim(),
-    tiktok:document.getElementById("creatorTikTok").value.trim(),
-    teamId:document.getElementById("creatorTeam").value,
-    status:document.getElementById("creatorStatus").value,
-    note:document.getElementById("creatorNote").value.trim()
+  const name =
+    document
+      .getElementById("creatorName")
+      .value
+      .trim();
+
+  const tiktok =
+    document
+      .getElementById("creatorTikTok")
+      .value
+      .trim();
+
+  const teamId =
+    document
+      .getElementById("creatorTeam")
+      .value;
+
+  const role =
+    document
+      .getElementById("creatorRole")
+      .value;
+
+  const status =
+    document
+      .getElementById("creatorStatus")
+      .value;
+
+  const note =
+    document
+      .getElementById("creatorNote")
+      .value
+      .trim();
+
+  const file =
+    document
+      .getElementById("creatorImage")
+      ?.files?.[0];
+
+
+  if(!name || !role){
+    return;
+  }
+
+
+  const existing =
+    editingId
+    ? getCreator(editingId)
+    : null;
+
+
+  const finish = image=>{
+
+    const data={
+      name,
+      tiktok,
+      teamId,
+      role,
+      status,
+      note,
+      image:
+        image !== undefined
+        ? image
+        : (existing?.image || "")
+    };
+
+
+    if(editingId){
+
+      if(existing){
+        Object.assign(existing,data);
+      }
+
+    }else{
+
+      db.creators.push({
+        id:uid(),
+        ...data
+      });
+
+    }
+
+
+    saveDB();
+    closeModal();
+    render();
+
   };
 
-  if(!data.name) return;
 
-  if(editingId){
+  if(file){
 
-    const creator = getCreator(editingId);
-
-    if(creator){
-      Object.assign(creator,data);
-    }
+    readFileAsDataURL(
+      file,
+      finish
+    );
 
   }else{
 
-    db.creators.push({
-      id:uid(),
-      ...data
-    });
+    finish(undefined);
 
   }
 
-  saveDB();
-  closeModal();
-  render();
+}
+
+
+/* ==========================================================
+   FILE TO DATA URL
+========================================================== */
+
+function readFileAsDataURL(file,callback){
+
+  const reader =
+    new FileReader();
+
+  reader.onload = ()=>{
+    callback(reader.result);
+  };
+
+  reader.onerror = ()=>{
+    alert("Impossible de lire cette image.");
+  };
+
+  reader.readAsDataURL(file);
 
 }
+
 
 /* ==========================================================
    SAVE AGENCY
@@ -2898,21 +4513,49 @@ function saveAgency(e){
 
   e.preventDefault();
 
-  const data = {
-    name:document.getElementById("agencyName").value.trim(),
-    tiktok:document.getElementById("agencyTikTok").value.trim(),
-    favorite:document.getElementById("agencyFavorite").checked,
-    note:document.getElementById("agencyNote").value.trim()
+  const data={
+
+    name:
+      document
+        .getElementById("agencyName")
+        .value
+        .trim(),
+
+    tiktok:
+      document
+        .getElementById("agencyTikTok")
+        .value
+        .trim(),
+
+    favorite:
+      document
+        .getElementById("agencyFavorite")
+        .checked,
+
+    note:
+      document
+        .getElementById("agencyNote")
+        .value
+        .trim()
+
   };
 
-  if(!data.name) return;
+
+  if(!data.name){
+    return;
+  }
+
 
   if(editingId){
 
-    const agency = getAgency(editingId);
+    const agency =
+      getAgency(editingId);
 
     if(agency){
-      Object.assign(agency,data);
+      Object.assign(
+        agency,
+        data
+      );
     }
 
   }else{
@@ -2924,11 +4567,13 @@ function saveAgency(e){
 
   }
 
+
   saveDB();
   closeModal();
   render();
 
 }
+
 
 /* ==========================================================
    SAVE MATCH
@@ -2938,47 +4583,117 @@ function saveMatch(e){
 
   e.preventDefault();
 
-  const agencyId = document.getElementById("matchAgency").value;
-  const typedAgency = document.getElementById("matchAgencyName").value.trim();
+  const agencyId =
+    document
+      .getElementById("matchAgency")
+      .value;
 
-  const selectedAgency = agencyId ? getAgency(agencyId) : null;
+  const typedAgency =
+    document
+      .getElementById("matchAgencyName")
+      .value
+      .trim();
 
-  const data = {
-    date:document.getElementById("matchDate").value,
-    time:document.getElementById("matchTime").value,
-    theme:document.getElementById("matchTheme").value.trim(),
-    creatorId:document.getElementById("matchCreator").value,
-    teamId:document.getElementById("matchTeam").value,
+  const selectedAgency =
+    agencyId
+    ? getAgency(agencyId)
+    : null;
 
-    /*
-      IMPORTANT :
-      Une agence saisie manuellement dans un match
-      n'est jamais ajoutée automatiquement à db.agencies.
-    */
-    agencyId:agencyId || "",
-    agencyName:selectedAgency ? selectedAgency.name : typedAgency,
 
-    status:document.getElementById("matchStatus").value,
-    result:document.getElementById("matchResult").value,
-    notes:document.getElementById("matchNotes").value.trim()
+  const data={
+
+    date:
+      document
+        .getElementById("matchDate")
+        .value,
+
+    time:
+      document
+        .getElementById("matchTime")
+        .value,
+
+    theme:
+      document
+        .getElementById("matchTheme")
+        .value
+        .trim(),
+
+    creatorId:
+      document
+        .getElementById("matchCreator")
+        .value,
+
+    teamId:
+      document
+        .getElementById("matchTeam")
+        .value,
+
+    agencyId:
+      agencyId || "",
+
+    agencyName:
+      selectedAgency
+      ? selectedAgency.name
+      : typedAgency,
+
+    status:
+      document
+        .getElementById("matchStatus")
+        .value,
+
+    result:
+      document
+        .getElementById("matchResult")
+        .value,
+
+    notes:
+      document
+        .getElementById("matchNotes")
+        .value
+        .trim()
+
   };
 
-  if(!data.date || !data.creatorId || !data.teamId){
-    alert("Merci de renseigner la date, le créateur et la Team.");
+
+  if(
+    !data.date ||
+    !data.creatorId ||
+    !data.teamId
+  ){
+
+    alert(
+      "Merci de renseigner la date, le créateur et la Team."
+    );
+
     return;
   }
 
-  if(!data.agencyId && !data.agencyName){
-    alert("Merci de sélectionner une agence ou de saisir le nom de l'agence adverse.");
+
+  if(
+    !data.agencyId &&
+    !data.agencyName
+  ){
+
+    alert(
+      "Merci de sélectionner une agence ou de saisir le nom de l'agence adverse."
+    );
+
     return;
   }
+
 
   if(editingId){
 
-    const match = db.matches.find(x => x.id === editingId);
+    const match =
+      db.matches.find(
+        x=>x.id===editingId
+      );
 
     if(match){
-      Object.assign(match,data);
+      Object.assign(
+        match,
+        data
+      );
     }
 
   }else{
@@ -2991,19 +4706,27 @@ function saveMatch(e){
 
   }
 
+
   saveDB();
   closeModal();
   render();
 
 }
 
+
 /* ==========================================================
    EDIT
 ========================================================== */
 
 function editItem(type,id){
-  openModal(type,id);
+
+  openModal(
+    type,
+    id
+  );
+
 }
+
 
 /* ==========================================================
    DELETE
@@ -3011,53 +4734,100 @@ function editItem(type,id){
 
 function deleteItem(type,id){
 
-  let label = "";
+  let label="cet élément";
 
-  if(type === "team") label = "cette Team";
-  if(type === "creator") label = "ce Créateur";
-  if(type === "agency") label = "cette Agence";
-  if(type === "match") label = "ce Match OFF";
+  if(type==="team"){
+    label="cette Team";
+  }
 
-  if(!confirm(`Voulez-vous vraiment supprimer ${label} ?`)){
+  if(type==="creator"){
+    label="ce Créateur";
+  }
+
+  if(type==="agency"){
+    label="cette Agence";
+  }
+
+  if(type==="match"){
+    label="ce Match OFF";
+  }
+
+
+  if(
+    !confirm(
+      `Voulez-vous vraiment supprimer ${label} ?`
+    )
+  ){
+
     return;
+
   }
 
-  if(type === "team"){
-    db.teams = db.teams.filter(x => x.id !== id);
+
+  if(type==="team"){
+
+    db.teams =
+      db.teams.filter(
+        x=>x.id!==id
+      );
+
   }
 
-  if(type === "creator"){
-    db.creators = db.creators.filter(x => x.id !== id);
+
+  if(type==="creator"){
+
+    db.creators =
+      db.creators.filter(
+        x=>x.id!==id
+      );
+
   }
 
-  if(type === "agency"){
 
-    const agency = getAgency(id);
+  if(type==="agency"){
 
-    db.agencies = db.agencies.filter(x => x.id !== id);
+    const agency =
+      getAgency(id);
 
-    /*
-      Les matchs gardent le nom de l'agence
-      même si elle est retirée de la liste enregistrée.
-    */
+    db.agencies =
+      db.agencies.filter(
+        x=>x.id!==id
+      );
 
-    db.matches.forEach(m => {
-      if(m.agencyId === id){
-        m.agencyId = "";
-        m.agencyName = agency ? agency.name : m.agencyName;
+
+    db.matches.forEach(m=>{
+
+      if(m.agencyId===id){
+
+        m.agencyId="";
+
+        m.agencyName =
+          agency
+          ? agency.name
+          : m.agencyName;
+
       }
+
     });
 
   }
 
-  if(type === "match"){
-    db.matches = db.matches.filter(x => x.id !== id);
+
+  if(type==="match"){
+
+    db.matches =
+      db.matches.filter(
+        x=>x.id!==id
+      );
+
   }
+
 
   saveDB();
   render();
 
 }
+
 
 /* ==========================================================
    SEARCH
@@ -3065,168 +4835,294 @@ function deleteItem(type,id){
 
 function attachPageEvents(){
 
-  const teamSearch = document.getElementById("teamSearch");
+  const teamSearch =
+    document.getElementById("teamSearch");
 
   if(teamSearch){
 
-    teamSearch.addEventListener("input",() => {
+    teamSearch.addEventListener(
+      "input",
+      ()=>{
 
-      const q = teamSearch.value.toLowerCase();
+        const q =
+          teamSearch.value.toLowerCase();
 
-      document.querySelectorAll(".searchable-team").forEach(row => {
-        row.style.display =
-          row.dataset.search.includes(q)
-          ? ""
-          : "none";
-      });
+        document
+          .querySelectorAll(".searchable-team")
+          .forEach(row=>{
 
-    });
+            row.style.display =
+              row.dataset.search.includes(q)
+              ? ""
+              : "none";
+
+          });
+
+      }
+    );
 
   }
 
-  const creatorSearch = document.getElementById("creatorSearch");
+
+  const creatorSearch =
+    document.getElementById("creatorSearch");
 
   if(creatorSearch){
 
-    creatorSearch.addEventListener("input",() => {
+    creatorSearch.addEventListener(
+      "input",
+      ()=>{
 
-      const q = creatorSearch.value.toLowerCase();
+        const q =
+          creatorSearch.value.toLowerCase();
 
-      document.querySelectorAll(".searchable-creator").forEach(row => {
-        row.style.display =
-          row.dataset.search.includes(q)
-          ? ""
-          : "none";
-      });
+        document
+          .querySelectorAll(".searchable-creator")
+          .forEach(row=>{
 
-    });
+            row.style.display =
+              row.dataset.search.includes(q)
+              ? ""
+              : "none";
+
+          });
+
+      }
+    );
 
   }
 
-  const agencySearch = document.getElementById("agencySearch");
+
+  const agencySearch =
+    document.getElementById("agencySearch");
 
   if(agencySearch){
 
-    agencySearch.addEventListener("input",() => {
+    agencySearch.addEventListener(
+      "input",
+      ()=>{
 
-      const q = agencySearch.value.toLowerCase();
+        const q =
+          agencySearch.value.toLowerCase();
 
-      document.querySelectorAll(".searchable-agency").forEach(row => {
-        row.style.display =
-          row.dataset.search.includes(q)
-          ? ""
-          : "none";
-      });
+        document
+          .querySelectorAll(".searchable-agency")
+          .forEach(row=>{
 
-    });
+            row.style.display =
+              row.dataset.search.includes(q)
+              ? ""
+              : "none";
+
+          });
+
+      }
+    );
 
   }
 
 }
 
+
 /* ==========================================================
    EXPORT
 ========================================================== */
 
-document.getElementById("exportData").addEventListener("click",() => {
+document
+  .getElementById("exportData")
+  .addEventListener(
+    "click",
+    ()=>{
 
-  const blob = new Blob(
-    [JSON.stringify(db,null,2)],
-    {type:"application/json"}
+      const blob =
+        new Blob(
+          [
+            JSON.stringify(
+              db,
+              null,
+              2
+            )
+          ],
+          {
+            type:"application/json"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(blob);
+
+
+      const a =
+        document.createElement("a");
+
+      a.href=url;
+
+      a.download=
+        "tokcenter-donnees.json";
+
+      document.body.appendChild(a);
+
+      a.click();
+
+      a.remove();
+
+      URL.revokeObjectURL(url);
+
+    }
   );
 
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = "tokcenter-donnees.json";
-
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  URL.revokeObjectURL(url);
-
-});
 
 /* ==========================================================
    IMPORT
 ========================================================== */
 
-document.getElementById("importData").addEventListener("change",async e => {
+document
+  .getElementById("importData")
+  .addEventListener(
+    "change",
+    async e=>{
 
-  const file = e.target.files[0];
+      const file =
+        e.target.files[0];
 
-  if(!file) return;
+      if(!file){
+        return;
+      }
 
-  try{
 
-    const text = await file.text();
-    const imported = JSON.parse(text);
+      try{
 
-    if(
-      !Array.isArray(imported.teams) ||
-      !Array.isArray(imported.creators) ||
-      !Array.isArray(imported.agencies) ||
-      !Array.isArray(imported.matches)
-    ){
-      throw new Error("Format invalide");
+        const text =
+          await file.text();
+
+        const imported =
+          JSON.parse(text);
+
+
+        if(
+          !Array.isArray(imported.teams) ||
+          !Array.isArray(imported.creators) ||
+          !Array.isArray(imported.agencies) ||
+          !Array.isArray(imported.matches)
+        ){
+
+          throw new Error("Format invalide");
+
+        }
+
+
+        if(
+          !confirm(
+            "Importer ces données va remplacer les données actuellement présentes. Continuer ?"
+          )
+        ){
+
+          e.target.value="";
+          return;
+
+        }
+
+
+        db={
+
+          teams:imported.teams,
+          creators:imported.creators,
+          agencies:imported.agencies,
+          matches:imported.matches
+
+        };
+
+
+        saveDB();
+        render();
+
+        alert(
+          "Import terminé."
+        );
+
+      }catch(error){
+
+        alert(
+          "Impossible d'importer ce fichier."
+        );
+
+      }
+
+
+      e.target.value="";
+
     }
+  );
 
-    if(!confirm("Importer ces données va remplacer les données actuellement présentes. Continuer ?")){
-      e.target.value = "";
-      return;
-    }
-
-    db = {
-      teams:imported.teams,
-      creators:imported.creators,
-      agencies:imported.agencies,
-      matches:imported.matches
-    };
-
-    saveDB();
-    render();
-
-    alert("Import terminé.");
-
-  }catch(error){
-
-    alert("Impossible d'importer ce fichier.");
-
-  }
-
-  e.target.value = "";
-
-});
 
 /* ==========================================================
    RESET
 ========================================================== */
 
-document.getElementById("resetData").addEventListener("click",() => {
+document
+  .getElementById("resetData")
+  .addEventListener(
+    "click",
+    ()=>{
 
-  const confirmation = prompt(
-    "Cette action supprimera TOUTES les données de TokCenter.\n\nTape SUPPRIMER pour confirmer."
+      const confirmation =
+        prompt(
+          "Cette action supprimera TOUTES les données de TokCenter.\n\nTape SUPPRIMER pour confirmer."
+        );
+
+
+      if(
+        confirmation!=="SUPPRIMER"
+      ){
+
+        return;
+
+      }
+
+
+      db =
+        structuredClone(
+          emptyDB
+        );
+
+
+      saveDB();
+      render();
+
+    }
   );
 
-  if(confirmation !== "SUPPRIMER"){
-    return;
-  }
-
-  db = structuredClone(emptyDB);
-
-  saveDB();
-  render();
-
-});
 
 /* ==========================================================
    ICONS
 ========================================================== */
 
-function iconEdit(){
+function plusIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 5v14"/>
+      <path d="M5 12h14"/>
+    </svg>
+  `;
+
+}
+
+
+function searchIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7"/>
+      <path d="m20 20-4-4"/>
+    </svg>
+  `;
+
+}
+
+
+function editIcon(){
 
   return `
     <svg viewBox="0 0 24 24">
@@ -3237,7 +5133,8 @@ function iconEdit(){
 
 }
 
-function iconTrash(){
+
+function trashIcon(){
 
   return `
     <svg viewBox="0 0 24 24">
@@ -3250,6 +5147,93 @@ function iconTrash(){
   `;
 
 }
+
+
+function uploadIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 16V4"/>
+      <path d="m7 9 5-5 5 5"/>
+      <path d="M5 20h14"/>
+    </svg>
+  `;
+
+}
+
+
+function usersIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  `;
+
+}
+
+
+function personIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <circle cx="10" cy="7" r="4"/>
+      <path d="M2 21a8 8 0 0 1 16 0"/>
+    </svg>
+  `;
+
+}
+
+
+function buildingIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <path d="M3 21h18"/>
+      <path d="M6 21V3h12v18"/>
+      <path d="M9 7h1"/>
+      <path d="M14 7h1"/>
+      <path d="M9 11h1"/>
+      <path d="M14 11h1"/>
+      <path d="M9 15h1"/>
+      <path d="M14 15h1"/>
+    </svg>
+  `;
+
+}
+
+
+function trophyIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <path d="M8 21h8"/>
+      <path d="M12 17v4"/>
+      <path d="M7 4h10v5a5 5 0 0 1-10 0z"/>
+      <path d="M7 6H3v2a4 4 0 0 0 4 4"/>
+      <path d="M17 6h4v2a4 4 0 0 1-4 4"/>
+    </svg>
+  `;
+
+}
+
+
+function calendarIcon(){
+
+  return `
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="17" rx="2"/>
+      <path d="M16 2v4"/>
+      <path d="M8 2v4"/>
+      <path d="M3 10h18"/>
+    </svg>
+  `;
+
+}
+
 
 /* ==========================================================
    START
