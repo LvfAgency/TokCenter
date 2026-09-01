@@ -3,404 +3,796 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090d">
 <title>TokCenter</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+:root{
+    --bg:#08080c;
+    --panel:#111116;
+    --panel2:#17171e;
+    --panel3:#1d1d26;
+    --border:#292932;
+    --text:#ffffff;
+    --muted:#8f8f9d;
+    --pink:#ff2d55;
+    --pink2:#ff496b;
+    --green:#35d07f;
+    --yellow:#ffbd45;
+    --red:#ff4d4d;
+    --blue:#4d9cff;
 }
 
-body {
-    background: #0b0b10;
-    color: #fff;
-    min-height: 100vh;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-button {
-    cursor: pointer;
-    border: none;
+html{
+    scroll-behavior:smooth;
 }
 
-.app {
-    display: flex;
-    min-height: 100vh;
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 250px;
-    background: #111118;
-    border-right: 1px solid #252530;
-    padding: 25px 18px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+button,
+input,
+select{
+    font:inherit;
 }
 
-.logo {
-    font-size: 27px;
-    font-weight: 800;
-    margin-bottom: 40px;
-    text-align: center;
+button{
+    border:0;
+    cursor:pointer;
 }
 
-.logo span {
-    color: #ff2d55;
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
-.nav button {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 8px;
-    background: transparent;
-    color: #aaa;
-    text-align: left;
-    border-radius: 10px;
-    font-size: 15px;
+.app{
+    min-height:100vh;
 }
 
-.nav button:hover,
-.nav button.active {
-    background: #ff2d55;
-    color: white;
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    width:250px;
+    background:#0e0e13;
+    border-right:1px solid var(--border);
+    padding:25px 16px;
+    z-index:50;
 }
 
-/* MAIN */
-.main {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    padding: 35px;
+.logo{
+    text-align:center;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:-1px;
+    margin-bottom:40px;
 }
 
-.page {
-    display: none;
+.logo span{
+    color:var(--pink);
 }
 
-.page.active {
-    display: block;
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
 
-.header {
-    margin-bottom: 30px;
+.nav-btn{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 14px;
+    color:#9999a5;
+    background:transparent;
+    border-radius:10px;
+    text-align:left;
+    transition:.2s;
 }
 
-.header h1 {
-    font-size: 32px;
-    margin-bottom: 7px;
+.nav-btn:hover{
+    color:white;
+    background:#191920;
 }
 
-.header p {
-    color: #888;
+.nav-btn.active{
+    color:white;
+    background:var(--pink);
 }
 
-/* DASHBOARD */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 30px;
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+    padding:32px;
+    max-width:1600px;
 }
 
-.stat {
-    background: #15151d;
-    border: 1px solid #272733;
-    border-radius: 15px;
-    padding: 22px;
+.page{
+    display:none;
 }
 
-.stat-title {
-    color: #888;
-    font-size: 14px;
-    margin-bottom: 10px;
+.page.active{
+    display:block;
 }
 
-.stat-number {
-    font-size: 32px;
-    font-weight: bold;
+.page-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
 }
 
-/* CARDS */
-.card {
-    background: #15151d;
-    border: 1px solid #272733;
-    border-radius: 15px;
-    padding: 22px;
-    margin-bottom: 20px;
+.page-header h1{
+    font-size:32px;
+    line-height:1.1;
+    margin-bottom:7px;
 }
 
-.card h2 {
-    margin-bottom: 18px;
+.page-header p{
+    color:var(--muted);
 }
 
-/* BUTTON */
-.primary {
-    background: #ff2d55;
-    color: white;
-    padding: 11px 17px;
-    border-radius: 9px;
-    font-weight: bold;
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border-radius:9px;
+    padding:11px 16px;
+    font-weight:700;
+    transition:.2s;
 }
 
-.primary:hover {
-    background: #e51f46;
+.btn-primary{
+    color:white;
+    background:var(--pink);
 }
 
-.secondary {
-    background: #292934;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
+.btn-primary:hover{
+    background:#e92349;
 }
 
-.danger {
-    background: #c62828;
-    color: white;
-    padding: 9px 13px;
-    border-radius: 8px;
+.btn-secondary{
+    color:white;
+    background:var(--panel3);
+    border:1px solid var(--border);
 }
 
-/* TEAMS */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+.btn-secondary:hover{
+    background:#262630;
 }
 
-.team-card {
-    background: #15151d;
-    border: 1px solid #292934;
-    border-radius: 15px;
-    padding: 20px;
+.btn-danger{
+    color:white;
+    background:#9f2525;
 }
 
-.team-card h3 {
-    font-size: 21px;
-    margin-bottom: 8px;
+.btn-danger:hover{
+    background:#bd2d2d;
 }
 
-.team-count {
-    color: #888;
-    margin-bottom: 18px;
+.btn-small{
+    padding:8px 11px;
+    font-size:13px;
 }
 
-.member {
-    background: #20202a;
-    padding: 12px;
-    border-radius: 9px;
-    margin-bottom: 8px;
+/* =========================
+   DASHBOARD
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:24px;
 }
 
-.member-name {
-    font-weight: bold;
+.stat-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
 }
 
-.member-pseudo {
-    color: #aaa;
-    font-size: 13px;
-    margin-top: 3px;
+.stat-icon{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--panel3);
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:20px;
 }
 
-.role {
-    display: inline-block;
-    margin-top: 7px;
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 11px;
-    background: #ff2d55;
+.stat-label{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:6px;
 }
 
-.team-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 15px;
+.stat-number{
+    font-size:32px;
+    font-weight:850;
 }
 
-/* MATCHS */
-.match {
-    background: #15151d;
-    border: 1px solid #292934;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 15px;
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:20px;
 }
 
-.match-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+.panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
 }
 
-.match-date {
-    color: #ff2d55;
-    font-weight: bold;
+.panel-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
 }
 
-.match-agencies {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding: 15px 0;
+.panel-title h2{
+    font-size:19px;
 }
 
-.match-status {
-    text-align: center;
-    color: #aaa;
-    font-size: 13px;
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    padding:35px 20px;
+    text-align:center;
+    color:var(--muted);
 }
 
-/* CALENDRIER */
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+.empty-icon{
+    font-size:32px;
+    margin-bottom:10px;
 }
 
-.day-name {
-    text-align: center;
-    color: #888;
-    font-size: 13px;
-    padding: 8px;
+/* =========================
+   TEAMS
+========================= */
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+    gap:18px;
 }
 
-.day {
-    min-height: 95px;
-    background: #15151d;
-    border: 1px solid #292934;
-    border-radius: 10px;
-    padding: 10px;
+.team-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    overflow:hidden;
 }
 
-.day.today {
-    border-color: #ff2d55;
+.team-card-header{
+    padding:20px;
+    border-bottom:1px solid var(--border);
 }
 
-.day-number {
-    font-weight: bold;
+.team-card-header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
 }
 
-.day-match {
-    background: #ff2d55;
-    padding: 5px;
-    border-radius: 5px;
-    margin-top: 8px;
-    font-size: 11px;
+.team-name{
+    font-size:21px;
+    font-weight:800;
 }
 
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.75);
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
+.team-count{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
 }
 
-.modal.show {
-    display: flex;
+.team-card-body{
+    padding:15px;
 }
 
-.modal-box {
-    width: 95%;
-    max-width: 500px;
-    background: #17171f;
-    border: 1px solid #30303b;
-    border-radius: 16px;
-    padding: 25px;
+.member-card{
+    background:var(--panel2);
+    border:1px solid #25252d;
+    border-radius:10px;
+    padding:13px;
+    margin-bottom:9px;
 }
 
-.modal-box h2 {
-    margin-bottom: 20px;
+.member-card:last-child{
+    margin-bottom:0;
 }
 
-.form-group {
-    margin-bottom: 15px;
+.member-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    color: #bbb;
-    font-size: 14px;
+.member-name{
+    font-weight:750;
 }
 
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 12px;
-    background: #0f0f15;
-    border: 1px solid #30303b;
-    border-radius: 8px;
-    color: white;
-    outline: none;
+.member-pseudo{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #ff2d55;
+.member-role{
+    display:inline-block;
+    margin-top:9px;
+    padding:4px 8px;
+    border-radius:5px;
+    background:#30202a;
+    color:#ff8da3;
+    font-size:11px;
+    font-weight:700;
 }
 
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+.member-actions{
+    display:flex;
+    gap:6px;
+    margin-top:10px;
 }
 
-/* MOBILE */
-.mobile-menu {
-    display: none;
+.team-footer{
+    display:flex;
+    gap:8px;
+    padding:15px;
+    border-top:1px solid var(--border);
 }
 
-@media(max-width: 850px) {
+.team-footer .btn{
+    flex:1;
+}
 
-    .sidebar {
-        width: 210px;
+/* =========================
+   MATCHS
+========================= */
+
+.match-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.match-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+}
+
+.match-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.match-date{
+    color:var(--pink);
+    font-weight:750;
+}
+
+.status{
+    padding:5px 9px;
+    border-radius:6px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.status.upcoming{
+    background:#332b17;
+    color:var(--yellow);
+}
+
+.status.finished{
+    background:#163223;
+    color:var(--green);
+}
+
+.match-vs{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    padding:12px;
+    text-align:center;
+}
+
+.agency{
+    font-size:20px;
+    font-weight:800;
+}
+
+.vs{
+    color:var(--muted);
+    font-weight:900;
+}
+
+.match-actions{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px solid var(--border);
+}
+
+/* =========================
+   CALENDRIER
+========================= */
+
+.calendar-panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.calendar-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px;
+    border-bottom:1px solid var(--border);
+}
+
+.calendar-title{
+    font-size:20px;
+    font-weight:800;
+    text-transform:capitalize;
+}
+
+.calendar-actions{
+    display:flex;
+    gap:7px;
+}
+
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+}
+
+.weekday{
+    padding:12px 7px;
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    border-bottom:1px solid var(--border);
+}
+
+.calendar-day{
+    min-height:115px;
+    padding:9px;
+    border-right:1px solid #202027;
+    border-bottom:1px solid #202027;
+}
+
+.calendar-day:nth-child(7n){
+    border-right:0;
+}
+
+.calendar-day.other-month{
+    opacity:.3;
+}
+
+.calendar-day.today{
+    background:#18121a;
+}
+
+.day-number{
+    width:27px;
+    height:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.today .day-number{
+    background:var(--pink);
+    color:white;
+    font-weight:800;
+}
+
+.calendar-match{
+    background:#29202a;
+    border-left:3px solid var(--pink);
+    border-radius:5px;
+    padding:6px;
+    margin-top:5px;
+    font-size:10px;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.calendar-match:hover{
+    background:#382833;
+}
+
+.calendar-match-time{
+    color:var(--pink2);
+    font-weight:800;
+}
+
+.calendar-match-agency{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-top:2px;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.78);
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:500px;
+    max-height:90vh;
+    overflow:auto;
+    background:#15151c;
+    border:1px solid #30303a;
+    border-radius:17px;
+    padding:24px;
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.modal-header h2{
+    font-size:21px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    background:var(--panel3);
+    color:white;
+    font-size:20px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    color:#b7b7c2;
+    font-size:13px;
+    font-weight:650;
+    margin-bottom:7px;
+}
+
+.form-control{
+    width:100%;
+    padding:12px 13px;
+    color:white;
+    background:#0c0c11;
+    border:1px solid #30303a;
+    border-radius:9px;
+    outline:0;
+}
+
+.form-control:focus{
+    border-color:var(--pink);
+}
+
+.form-help{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:22px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast-container{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:200;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.toast{
+    background:#202027;
+    border:1px solid #383842;
+    color:white;
+    border-radius:10px;
+    padding:12px 15px;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    animation:toastIn .25s ease;
+}
+
+@keyframes toastIn{
+    from{
+        transform:translateY(10px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-header{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .main {
-        margin-left: 210px;
-        width: calc(100% - 210px);
-        padding: 20px;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
+    .dashboard-grid{
+        grid-template-columns:1fr;
     }
 }
 
-@media(max-width: 650px) {
+@media(max-width:700px){
 
-    .sidebar {
-        display: none;
+    .sidebar{
+        display:none;
     }
 
-    .main {
-        margin-left: 0;
-        width: 100%;
-        padding: 18px;
+    .main{
+        margin-left:0;
+        padding:70px 15px 25px;
     }
 
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
+    .mobile-header{
+        position:fixed;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        top:0;
+        left:0;
+        right:0;
+        height:55px;
+        padding:0 15px;
+        background:#0e0e13;
+        border-bottom:1px solid var(--border);
+        z-index:60;
     }
 
-    .calendar {
-        gap: 4px;
+    .mobile-logo{
+        font-size:21px;
+        font-weight:900;
     }
 
-    .day {
-        min-height: 65px;
-        padding: 5px;
+    .mobile-logo span{
+        color:var(--pink);
     }
 
-    .day-match {
-        font-size: 9px;
+    .mobile-select{
+        background:var(--panel3);
+        color:white;
+        border:1px solid var(--border);
+        border-radius:8px;
+        padding:7px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .page-header h1{
+        font-size:27px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:16px;
+    }
+
+    .stat-number{
+        font-size:27px;
+    }
+
+    .stat-icon{
+        margin-bottom:10px;
+    }
+
+    .calendar-day{
+        min-height:80px;
+        padding:5px;
+    }
+
+    .calendar-match{
+        font-size:9px;
+        padding:4px;
+    }
+
+    .weekday{
+        font-size:10px;
+    }
+
+    .match-vs{
+        gap:10px;
+    }
+
+    .agency{
+        font-size:16px;
     }
 }
 </style>
@@ -410,71 +802,152 @@ button {
 
 <div class="app">
 
-    <!-- MENU -->
-    <aside class="sidebar">
-        <div class="logo">TOK<span>CENTER</span></div>
+    <!-- HEADER MOBILE -->
+    <header class="mobile-header">
+        <div class="mobile-logo">TOK<span>CENTER</span></div>
 
-        <div class="nav">
-            <button class="active" onclick="showPage('dashboard', this)">🏠 Tableau de bord</button>
-            <button onclick="showPage('teams', this)">👥 Teams</button>
-            <button onclick="showPage('matches', this)">⚔️ Matchs</button>
-            <button onclick="showPage('calendar', this)">📅 Calendrier</button>
+        <select class="mobile-select" id="mobileNavigation">
+            <option value="dashboard">Accueil</option>
+            <option value="teams">Teams</option>
+            <option value="matches">Matchs</option>
+            <option value="calendar">Calendrier</option>
+        </select>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            TOK<span>CENTER</span>
         </div>
+
+        <nav class="nav">
+
+            <button class="nav-btn active" data-page="dashboard">
+                🏠
+                <span>Tableau de bord</span>
+            </button>
+
+            <button class="nav-btn" data-page="teams">
+                👥
+                <span>Teams</span>
+            </button>
+
+            <button class="nav-btn" data-page="matches">
+                ⚔️
+                <span>Matchs</span>
+            </button>
+
+            <button class="nav-btn" data-page="calendar">
+                📅
+                <span>Calendrier</span>
+            </button>
+
+        </nav>
+
     </aside>
 
-    <!-- CONTENU -->
+
+    <!-- MAIN -->
     <main class="main">
 
-        <!-- DASHBOARD -->
-        <section id="dashboard" class="page active">
+        <!-- =========================
+             DASHBOARD
+        ========================= -->
 
-            <div class="header">
-                <h1>Tableau de bord</h1>
-                <p>Bienvenue sur TokCenter.</p>
+        <section id="page-dashboard" class="page active">
+
+            <div class="page-header">
+                <div>
+                    <h1>Tableau de bord</h1>
+                    <p>Vue d'ensemble de votre activité TokCenter.</p>
+                </div>
             </div>
 
             <div class="stats">
 
-                <div class="stat">
-                    <div class="stat-title">Teams</div>
-                    <div class="stat-number" id="statTeams">0</div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-label">Teams</div>
+                    <div class="stat-number" id="dashboardTeams">0</div>
                 </div>
 
-                <div class="stat">
-                    <div class="stat-title">Membres</div>
-                    <div class="stat-number" id="statMembers">0</div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎥</div>
+                    <div class="stat-label">Membres</div>
+                    <div class="stat-number" id="dashboardMembers">0</div>
                 </div>
 
-                <div class="stat">
-                    <div class="stat-title">Matchs à venir</div>
-                    <div class="stat-number" id="statUpcoming">0</div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚔️</div>
+                    <div class="stat-label">Matchs à venir</div>
+                    <div class="stat-number" id="dashboardUpcoming">0</div>
                 </div>
 
-                <div class="stat">
-                    <div class="stat-title">Matchs effectués</div>
-                    <div class="stat-number" id="statFinished">0</div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-label">Matchs effectués</div>
+                    <div class="stat-number" id="dashboardFinished">0</div>
                 </div>
 
             </div>
 
-            <div class="card">
-                <h2>Prochains matchs</h2>
-                <div id="dashboardMatches"></div>
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-title">
+                        <h2>Prochains matchs</h2>
+
+                        <button class="btn btn-secondary btn-small"
+                                onclick="navigate('matches')">
+                            Voir tous
+                        </button>
+                    </div>
+
+                    <div id="dashboardMatches"></div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-title">
+                        <h2>Vos Teams</h2>
+
+                        <button class="btn btn-secondary btn-small"
+                                onclick="navigate('teams')">
+                            Gérer
+                        </button>
+                    </div>
+
+                    <div id="dashboardTeamsList"></div>
+
+                </div>
+
             </div>
 
         </section>
 
 
-        <!-- TEAMS -->
-        <section id="teams" class="page">
+        <!-- =========================
+             TEAMS
+        ========================= -->
 
-            <div class="header">
-                <h1>Teams</h1>
-                <p>Gérez vos teams et leurs membres.</p>
-            </div>
+        <section id="page-teams" class="page">
 
-            <div style="margin-bottom:20px;">
-                <button class="primary" onclick="openTeamModal()">＋ Créer une Team</button>
+            <div class="page-header">
+
+                <div>
+                    <h1>Teams</h1>
+                    <p>Créez vos Teams et gérez leurs membres.</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="openTeamModal()">
+                    ＋ Créer une Team
+                </button>
+
             </div>
 
             <div id="teamsContainer" class="team-grid"></div>
@@ -482,39 +955,61 @@ button {
         </section>
 
 
-        <!-- MATCHS -->
-        <section id="matches" class="page">
+        <!-- =========================
+             MATCHS
+        ========================= -->
 
-            <div class="header">
-                <h1>Matchs</h1>
-                <p>Gérez les matchs entre agences.</p>
+        <section id="page-matches" class="page">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Matchs</h1>
+                    <p>Gérez vos matchs contre les agences adverses.</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="openMatchModal()">
+                    ＋ Ajouter un match
+                </button>
+
             </div>
 
-            <div style="margin-bottom:20px;">
-                <button class="primary" onclick="openMatchModal()">＋ Ajouter un match</button>
-            </div>
-
-            <div id="matchesContainer"></div>
+            <div id="matchesContainer" class="match-list"></div>
 
         </section>
 
 
-        <!-- CALENDRIER -->
-        <section id="calendar" class="page">
+        <!-- =========================
+             CALENDRIER
+        ========================= -->
 
-            <div class="header">
-                <h1>Calendrier</h1>
-                <p>Visualisez rapidement vos matchs.</p>
+        <section id="page-calendar" class="page">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Calendrier</h1>
+                    <p>Retrouvez tous vos matchs par date.</p>
+                </div>
+
             </div>
 
-            <div class="card">
+            <div class="calendar-panel">
 
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-                    <button class="secondary" onclick="changeMonth(-1)">‹</button>
+                <div class="calendar-toolbar">
 
-                    <h2 id="calendarTitle"></h2>
+                    <button class="btn btn-secondary"
+                            onclick="changeMonth(-1)">
+                        ‹
+                    </button>
 
-                    <button class="secondary" onclick="changeMonth(1)">›</button>
+                    <div class="calendar-title" id="calendarTitle"></div>
+
+                    <button class="btn btn-secondary"
+                            onclick="changeMonth(1)">
+                        ›
+                    </button>
+
                 </div>
 
                 <div class="calendar" id="calendar"></div>
@@ -524,703 +1019,1898 @@ button {
         </section>
 
     </main>
+
 </div>
 
 
-<!-- MODAL TEAM -->
+<!-- =========================
+     MODAL TEAM
+========================= -->
+
 <div class="modal" id="teamModal">
 
     <div class="modal-box">
 
-        <h2>Créer une Team</h2>
-
-        <div class="form-group">
-            <label>Nom de la Team</label>
-            <input type="text" id="teamName" placeholder="Ex : Team Alpha">
+        <div class="modal-header">
+            <h2 id="teamModalTitle">Créer une Team</h2>
+            <button class="close" onclick="closeModal('teamModal')">×</button>
         </div>
 
-        <div class="modal-actions">
-            <button class="secondary" onclick="closeModal('teamModal')">Annuler</button>
-            <button class="primary" onclick="createTeam()">Créer</button>
+        <input type="hidden" id="editTeamId">
+
+        <div class="form-group">
+
+            <label for="teamName">
+                Nom de la Team
+            </label>
+
+            <input
+                class="form-control"
+                id="teamName"
+                type="text"
+                placeholder="Ex : Team Alpha"
+            >
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn btn-secondary"
+                    onclick="closeModal('teamModal')">
+                Annuler
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="saveTeam()">
+                Enregistrer
+            </button>
+
         </div>
 
     </div>
+
 </div>
 
 
-<!-- MODAL MEMBRE -->
+<!-- =========================
+     MODAL MEMBRE
+========================= -->
+
 <div class="modal" id="memberModal">
 
     <div class="modal-box">
 
-        <h2>Ajouter un membre</h2>
+        <div class="modal-header">
+            <h2 id="memberModalTitle">Ajouter un membre</h2>
+            <button class="close" onclick="closeModal('memberModal')">×</button>
+        </div>
 
         <input type="hidden" id="memberTeamId">
+        <input type="hidden" id="editMemberId">
 
         <div class="form-group">
-            <label>Nom</label>
-            <input type="text" id="memberName" placeholder="Nom du membre">
+
+            <label for="memberName">
+                Nom
+            </label>
+
+            <input
+                class="form-control"
+                id="memberName"
+                type="text"
+                placeholder="Nom et prénom"
+            >
+
         </div>
 
         <div class="form-group">
-            <label>Pseudo TikTok</label>
-            <input type="text" id="memberPseudo" placeholder="@pseudo">
+
+            <label for="memberPseudo">
+                Pseudo TikTok
+            </label>
+
+            <input
+                class="form-control"
+                id="memberPseudo"
+                type="text"
+                placeholder="@pseudo"
+            >
+
+            <div class="form-help">
+                Le pseudo TikTok de la personne.
+            </div>
+
         </div>
 
         <div class="form-group">
-            <label>Rôle</label>
 
-            <select id="memberRole">
-                <option value="Fondateur">Fondateur</option>
-                <option value="Manager">Manager</option>
-                <option value="Agent">Agent</option>
-                <option value="Créateur">Créateur</option>
+            <label for="memberRole">
+                Rôle
+            </label>
+
+            <select class="form-control" id="memberRole">
+
+                <option value="Fondateur">
+                    Fondateur
+                </option>
+
+                <option value="Manager">
+                    Manager
+                </option>
+
+                <option value="Agent">
+                    Agent
+                </option>
+
+                <option value="Créateur" selected>
+                    Créateur
+                </option>
+
             </select>
 
         </div>
 
-        <div class="modal-actions">
-            <button class="secondary" onclick="closeModal('memberModal')">Annuler</button>
-            <button class="primary" onclick="createMember()">Ajouter</button>
+        <div class="modal-footer">
+
+            <button class="btn btn-secondary"
+                    onclick="closeModal('memberModal')">
+                Annuler
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="saveMember()">
+                Enregistrer
+            </button>
+
         </div>
 
     </div>
+
 </div>
 
 
-<!-- MODAL MATCH -->
+<!-- =========================
+     MODAL MATCH
+========================= -->
+
 <div class="modal" id="matchModal">
 
     <div class="modal-box">
 
-        <h2>Ajouter un match</h2>
+        <div class="modal-header">
+            <h2 id="matchModalTitle">Ajouter un match</h2>
+            <button class="close" onclick="closeModal('matchModal')">×</button>
+        </div>
+
+        <input type="hidden" id="editMatchId">
 
         <div class="form-group">
-            <label>Agence adverse</label>
-            <input type="text" id="matchAgency" placeholder="Nom de l'agence">
+
+            <label for="matchAgency">
+                Agence adverse
+            </label>
+
+            <input
+                class="form-control"
+                id="matchAgency"
+                type="text"
+                placeholder="Nom de l'agence"
+            >
+
         </div>
 
         <div class="form-group">
-            <label>Date</label>
-            <input type="date" id="matchDate">
+
+            <label for="matchDate">
+                Date
+            </label>
+
+            <input
+                class="form-control"
+                id="matchDate"
+                type="date"
+            >
+
         </div>
 
         <div class="form-group">
-            <label>Heure</label>
-            <input type="time" id="matchTime">
+
+            <label for="matchTime">
+                Heure
+            </label>
+
+            <input
+                class="form-control"
+                id="matchTime"
+                type="time"
+            >
+
         </div>
 
-        <div class="modal-actions">
-            <button class="secondary" onclick="closeModal('matchModal')">Annuler</button>
-            <button class="primary" onclick="createMatch()">Ajouter</button>
+        <div class="modal-footer">
+
+            <button class="btn btn-secondary"
+                    onclick="closeModal('matchModal')">
+                Annuler
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="saveMatch()">
+                Enregistrer
+            </button>
+
         </div>
 
     </div>
+
 </div>
+
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
 
 
 <script>
 
-/* =========================
+/* =========================================================
+   TOKCENTER
    DONNÉES
-========================= */
+========================================================= */
 
-let teams = JSON.parse(localStorage.getItem("tokcenter_teams")) || [];
-let matches = JSON.parse(localStorage.getItem("tokcenter_matches")) || [];
+const STORAGE_KEY = "tokcenter_data_v3";
+
+let data = loadData();
 
 let calendarDate = new Date();
 
 
-/* =========================
-   SAUVEGARDE
-========================= */
+/* =========================================================
+   DONNÉES PAR DÉFAUT
+========================================================= */
 
-function saveData() {
-    localStorage.setItem("tokcenter_teams", JSON.stringify(teams));
-    localStorage.setItem("tokcenter_matches", JSON.stringify(matches));
-}
+function loadData(){
 
+    try{
 
-/* =========================
-   NAVIGATION
-========================= */
+        const saved = localStorage.getItem(STORAGE_KEY);
 
-function showPage(page, button) {
+        if(saved){
 
-    document.querySelectorAll(".page").forEach(p => {
-        p.classList.remove("active");
-    });
+            const parsed = JSON.parse(saved);
 
-    document.getElementById(page).classList.add("active");
+            if(
+                parsed &&
+                Array.isArray(parsed.teams) &&
+                Array.isArray(parsed.matches)
+            ){
 
-    document.querySelectorAll(".nav button").forEach(b => {
-        b.classList.remove("active");
-    });
+                return parsed;
+            }
+        }
 
-    if(button) {
-        button.classList.add("active");
+    }catch(error){
+
+        console.error("Erreur de chargement :", error);
+
     }
 
+    return {
+        teams: [],
+        matches: []
+    };
+}
+
+
+/* =========================================================
+   SAUVEGARDE
+========================================================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function navigate(page){
+
+    document.querySelectorAll(".page")
+        .forEach(element => {
+            element.classList.remove("active");
+        });
+
+    const target =
+        document.getElementById("page-" + page);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+
+        });
+
+
+    const mobile =
+        document.getElementById("mobileNavigation");
+
+    if(mobile){
+        mobile.value = page;
+    }
+
+
     renderAll();
+
 }
 
 
-/* =========================
+document.querySelectorAll(".nav-btn")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            navigate(button.dataset.page);
+
+        });
+
+    });
+
+
+document.getElementById("mobileNavigation")
+    .addEventListener("change", function(){
+
+        navigate(this.value);
+
+    });
+
+
+/* =========================================================
    MODALES
-========================= */
+========================================================= */
 
-function openModal(id) {
-    document.getElementById(id).classList.add("show");
+function openModal(id){
+
+    document.getElementById(id)
+        .classList.add("show");
+
 }
 
-function closeModal(id) {
-    document.getElementById(id).classList.remove("show");
+
+function closeModal(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+
 }
 
-function openTeamModal() {
+
+document.querySelectorAll(".modal")
+    .forEach(modal => {
+
+        modal.addEventListener("click", function(event){
+
+            if(event.target === modal){
+
+                modal.classList.remove("show");
+
+            }
+
+        });
+
+    });
+
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+function openTeamModal(teamId = null){
+
+    document.getElementById("editTeamId").value =
+        teamId || "";
+
     document.getElementById("teamName").value = "";
+
+
+    if(teamId){
+
+        const team =
+            data.teams.find(t => t.id === teamId);
+
+        if(!team) return;
+
+        document.getElementById("teamModalTitle")
+            .textContent = "Modifier la Team";
+
+        document.getElementById("teamName").value =
+            team.name;
+
+    }else{
+
+        document.getElementById("teamModalTitle")
+            .textContent = "Créer une Team";
+
+    }
+
+
     openModal("teamModal");
+
+    setTimeout(() => {
+
+        document.getElementById("teamName").focus();
+
+    },100);
+
 }
 
-function openMatchModal() {
-    document.getElementById("matchAgency").value = "";
-    document.getElementById("matchDate").value = "";
-    document.getElementById("matchTime").value = "";
-    openModal("matchModal");
+
+function saveTeam(){
+
+    const name =
+        document.getElementById("teamName")
+            .value
+            .trim();
+
+    const editId =
+        document.getElementById("editTeamId")
+            .value;
+
+
+    if(!name){
+
+        showToast("Veuillez entrer un nom de Team.");
+
+        return;
+    }
+
+
+    if(editId){
+
+        const team =
+            data.teams.find(
+                t => t.id === Number(editId)
+            );
+
+        if(team){
+
+            team.name = name;
+
+            showToast("Team modifiée.");
+
+        }
+
+    }else{
+
+        data.teams.push({
+
+            id:Date.now(),
+
+            name:name,
+
+            members:[]
+
+        });
+
+        showToast("Team créée.");
+
+    }
+
+
+    saveData();
+
+    closeModal("teamModal");
+
+    renderAll();
+
 }
 
-function openMemberModal(teamId) {
 
-    document.getElementById("memberTeamId").value = teamId;
+function deleteTeam(teamId){
+
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
+
+    if(!team) return;
+
+
+    const members =
+        Array.isArray(team.members)
+            ? team.members.length
+            : 0;
+
+
+    let message =
+        `Supprimer la Team « ${team.name} » ?`;
+
+
+    if(members > 0){
+
+        message +=
+            `\n\nCette Team contient ${members} membre${members > 1 ? "s" : ""}.`;
+
+    }
+
+
+    if(!confirm(message)) return;
+
+
+    data.teams =
+        data.teams.filter(
+            t => t.id !== teamId
+        );
+
+
+    saveData();
+
+    renderAll();
+
+    showToast("Team supprimée.");
+
+}
+
+
+/* =========================================================
+   MEMBRES
+========================================================= */
+
+function openMemberModal(teamId, memberId = null){
+
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
+
+    if(!team) return;
+
+
+    document.getElementById("memberTeamId").value =
+        teamId;
+
+    document.getElementById("editMemberId").value =
+        memberId || "";
+
     document.getElementById("memberName").value = "";
+
     document.getElementById("memberPseudo").value = "";
-    document.getElementById("memberRole").value = "Créateur";
+
+    document.getElementById("memberRole").value =
+        "Créateur";
+
+
+    if(memberId){
+
+        const member =
+            team.members.find(
+                m => m.id === memberId
+            );
+
+        if(!member) return;
+
+
+        document.getElementById("memberModalTitle")
+            .textContent = "Modifier le membre";
+
+        document.getElementById("memberName").value =
+            member.name;
+
+        document.getElementById("memberPseudo").value =
+            member.pseudo;
+
+        document.getElementById("memberRole").value =
+            member.role;
+
+    }else{
+
+        document.getElementById("memberModalTitle")
+            .textContent =
+            `Ajouter un membre à ${team.name}`;
+
+    }
+
 
     openModal("memberModal");
+
 }
 
 
-/* =========================
-   TEAMS
-========================= */
+function saveMember(){
 
-function createTeam() {
+    const teamId =
+        Number(
+            document.getElementById("memberTeamId")
+                .value
+        );
 
-    const name = document.getElementById("teamName").value.trim();
 
-    if(!name) {
-        alert("Veuillez entrer un nom de Team.");
+    const editId =
+        document.getElementById("editMemberId")
+            .value;
+
+
+    const name =
+        document.getElementById("memberName")
+            .value
+            .trim();
+
+
+    let pseudo =
+        document.getElementById("memberPseudo")
+            .value
+            .trim();
+
+
+    const role =
+        document.getElementById("memberRole")
+            .value;
+
+
+    if(!name){
+
+        showToast("Veuillez renseigner le nom.");
+
         return;
     }
 
-    teams.push({
-        id: Date.now(),
-        name: name,
-        members: []
-    });
 
-    saveData();
-    closeModal("teamModal");
-    renderAll();
-}
+    if(!pseudo){
 
+        showToast("Veuillez renseigner le pseudo TikTok.");
 
-function deleteTeam(id) {
-
-    if(!confirm("Supprimer cette Team ?")) return;
-
-    teams = teams.filter(team => team.id !== id);
-
-    saveData();
-    renderAll();
-}
-
-
-function createMember() {
-
-    const teamId = Number(document.getElementById("memberTeamId").value);
-
-    const name = document.getElementById("memberName").value.trim();
-    const pseudo = document.getElementById("memberPseudo").value.trim();
-    const role = document.getElementById("memberRole").value;
-
-    if(!name || !pseudo) {
-        alert("Veuillez renseigner le nom et le pseudo TikTok.");
         return;
     }
 
-    const team = teams.find(t => t.id === teamId);
+
+    if(!pseudo.startsWith("@")){
+
+        pseudo = "@" + pseudo;
+
+    }
+
+
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
+
 
     if(!team) return;
 
-    team.members.push({
-        id: Date.now(),
-        name: name,
-        pseudo: pseudo,
-        role: role
-    });
+
+    if(!Array.isArray(team.members)){
+
+        team.members = [];
+
+    }
+
+
+    if(editId){
+
+        const member =
+            team.members.find(
+                m => m.id === Number(editId)
+            );
+
+
+        if(member){
+
+            member.name = name;
+
+            member.pseudo = pseudo;
+
+            member.role = role;
+
+            showToast("Membre modifié.");
+
+        }
+
+    }else{
+
+        team.members.push({
+
+            id:Date.now(),
+
+            name:name,
+
+            pseudo:pseudo,
+
+            role:role
+
+        });
+
+
+        showToast("Membre ajouté.");
+
+    }
+
 
     saveData();
+
     closeModal("memberModal");
+
     renderAll();
+
 }
 
 
-function deleteMember(teamId, memberId) {
+function deleteMember(teamId, memberId){
 
-    const team = teams.find(t => t.id === teamId);
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
 
     if(!team) return;
 
-    if(!confirm("Supprimer ce membre ?")) return;
 
-    team.members = team.members.filter(m => m.id !== memberId);
+    const member =
+        team.members.find(
+            m => m.id === memberId
+        );
+
+
+    if(!member) return;
+
+
+    if(!confirm(
+        `Supprimer ${member.name} de cette Team ?`
+    )) return;
+
+
+    team.members =
+        team.members.filter(
+            m => m.id !== memberId
+        );
+
 
     saveData();
+
     renderAll();
+
+    showToast("Membre supprimé.");
+
 }
 
 
-/* =========================
-   AFFICHAGE TEAMS
-========================= */
-
-function renderTeams() {
-
-    const container = document.getElementById("teamsContainer");
-
-    if(!teams.length) {
-
-        container.innerHTML = `
-            <div class="card">
-                <p style="color:#888;">
-                    Aucune Team créée pour le moment.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = teams.map(team => {
-
-        const members = team.members || [];
-
-        return `
-            <div class="team-card">
-
-                <h3>${escapeHTML(team.name)}</h3>
-
-                <div class="team-count">
-                    ${members.length} membre${members.length > 1 ? "s" : ""}
-                </div>
-
-                ${
-                    members.length
-                    ?
-                    members.map(member => `
-                        <div class="member">
-
-                            <div class="member-name">
-                                ${escapeHTML(member.name)}
-                            </div>
-
-                            <div class="member-pseudo">
-                                ${escapeHTML(member.pseudo)}
-                            </div>
-
-                            <span class="role">
-                                ${escapeHTML(member.role)}
-                            </span>
-
-                            <div style="text-align:right;margin-top:8px;">
-                                <button
-                                    class="danger"
-                                    onclick="deleteMember(${team.id}, ${member.id})">
-                                    Supprimer
-                                </button>
-                            </div>
-
-                        </div>
-                    `).join("")
-                    :
-                    `<p style="color:#777;margin-bottom:10px;">Aucun membre.</p>`
-                }
-
-                <div class="team-actions">
-
-                    <button
-                        class="primary"
-                        onclick="openMemberModal(${team.id})">
-                        ＋ Ajouter un membre
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="deleteTeam(${team.id})">
-                        Supprimer
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-}
-
-
-/* =========================
+/* =========================================================
    MATCHS
-========================= */
+========================================================= */
 
-function createMatch() {
+function openMatchModal(matchId = null){
 
-    const agency = document.getElementById("matchAgency").value.trim();
-    const date = document.getElementById("matchDate").value;
-    const time = document.getElementById("matchTime").value;
+    document.getElementById("editMatchId").value =
+        matchId || "";
 
-    if(!agency || !date || !time) {
-        alert("Veuillez remplir tous les champs.");
+    document.getElementById("matchAgency").value = "";
+
+    document.getElementById("matchDate").value = "";
+
+    document.getElementById("matchTime").value = "";
+
+
+    if(matchId){
+
+        const match =
+            data.matches.find(
+                m => m.id === matchId
+            );
+
+        if(!match) return;
+
+
+        document.getElementById("matchModalTitle")
+            .textContent =
+            "Modifier le match";
+
+
+        document.getElementById("matchAgency").value =
+            match.agency;
+
+
+        document.getElementById("matchDate").value =
+            match.date;
+
+
+        document.getElementById("matchTime").value =
+            match.time;
+
+    }else{
+
+        document.getElementById("matchModalTitle")
+            .textContent =
+            "Ajouter un match";
+
+
+        const today =
+            new Date();
+
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(today.getMonth()+1)
+                .padStart(2,"0");
+
+        const day =
+            String(today.getDate())
+                .padStart(2,"0");
+
+
+        document.getElementById("matchDate").value =
+            `${year}-${month}-${day}`;
+
+    }
+
+
+    openModal("matchModal");
+
+}
+
+
+function saveMatch(){
+
+    const editId =
+        document.getElementById("editMatchId")
+            .value;
+
+
+    const agency =
+        document.getElementById("matchAgency")
+            .value
+            .trim();
+
+
+    const date =
+        document.getElementById("matchDate")
+            .value;
+
+
+    const time =
+        document.getElementById("matchTime")
+            .value;
+
+
+    if(!agency){
+
+        showToast("Veuillez renseigner l'agence adverse.");
+
         return;
     }
 
-    matches.push({
-        id: Date.now(),
-        agency: agency,
-        date: date,
-        time: time,
-        completed: false
-    });
+
+    if(!date){
+
+        showToast("Veuillez sélectionner une date.");
+
+        return;
+    }
+
+
+    if(!time){
+
+        showToast("Veuillez sélectionner une heure.");
+
+        return;
+    }
+
+
+    if(editId){
+
+        const match =
+            data.matches.find(
+                m => m.id === Number(editId)
+            );
+
+
+        if(match){
+
+            match.agency = agency;
+
+            match.date = date;
+
+            match.time = time;
+
+            showToast("Match modifié.");
+
+        }
+
+    }else{
+
+        data.matches.push({
+
+            id:Date.now(),
+
+            agency:agency,
+
+            date:date,
+
+            time:time,
+
+            completed:false
+
+        });
+
+
+        showToast("Match ajouté.");
+
+    }
+
 
     saveData();
+
     closeModal("matchModal");
+
     renderAll();
+
 }
 
 
-function deleteMatch(id) {
+function deleteMatch(matchId){
 
-    if(!confirm("Supprimer ce match ?")) return;
-
-    matches = matches.filter(match => match.id !== id);
-
-    saveData();
-    renderAll();
-}
-
-
-function toggleMatch(id) {
-
-    const match = matches.find(m => m.id === id);
+    const match =
+        data.matches.find(
+            m => m.id === matchId
+        );
 
     if(!match) return;
 
-    match.completed = !match.completed;
+
+    if(!confirm(
+        `Supprimer le match contre « ${match.agency} » ?`
+    )) return;
+
+
+    data.matches =
+        data.matches.filter(
+            m => m.id !== matchId
+        );
+
 
     saveData();
+
     renderAll();
+
+    showToast("Match supprimé.");
+
 }
 
 
-function renderMatches() {
+function toggleMatch(matchId){
 
-    const container = document.getElementById("matchesContainer");
+    const match =
+        data.matches.find(
+            m => m.id === matchId
+        );
 
-    const sorted = [...matches].sort((a,b) => {
+    if(!match) return;
 
-        const da = new Date(`${a.date}T${a.time}`);
-        const db = new Date(`${b.date}T${b.time}`);
 
-        return da - db;
-    });
+    match.completed =
+        !match.completed;
 
-    if(!sorted.length) {
+
+    saveData();
+
+    renderAll();
+
+
+    showToast(
+        match.completed
+            ? "Match marqué comme effectué."
+            : "Match remis dans les matchs à venir."
+    );
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function getTotalMembers(){
+
+    return data.teams.reduce(
+        (total, team) => {
+
+            return total +
+                (
+                    Array.isArray(team.members)
+                        ? team.members.length
+                        : 0
+                );
+
+        },
+        0
+    );
+
+}
+
+
+function getUpcomingMatches(){
+
+    return data.matches
+        .filter(match => !match.completed)
+        .sort(
+            (a,b) =>
+                getDateTime(a) -
+                getDateTime(b)
+        );
+
+}
+
+
+function getFinishedMatches(){
+
+    return data.matches
+        .filter(match => match.completed);
+
+}
+
+
+function getDateTime(match){
+
+    return new Date(
+        `${match.date}T${match.time || "00:00"}`
+    ).getTime();
+
+}
+
+
+function renderDashboard(){
+
+    const totalMembers =
+        getTotalMembers();
+
+
+    document.getElementById(
+        "dashboardTeams"
+    ).textContent =
+        data.teams.length;
+
+
+    document.getElementById(
+        "dashboardMembers"
+    ).textContent =
+        totalMembers;
+
+
+    document.getElementById(
+        "dashboardUpcoming"
+    ).textContent =
+        getUpcomingMatches().length;
+
+
+    document.getElementById(
+        "dashboardFinished"
+    ).textContent =
+        getFinishedMatches().length;
+
+
+    renderDashboardMatches();
+
+    renderDashboardTeams();
+
+}
+
+
+function renderDashboardMatches(){
+
+    const container =
+        document.getElementById(
+            "dashboardMatches"
+        );
+
+
+    const upcoming =
+        getUpcomingMatches()
+            .slice(0,5);
+
+
+    if(!upcoming.length){
 
         container.innerHTML = `
-            <div class="card">
-                <p style="color:#888;">
-                    Aucun match enregistré.
-                </p>
+            <div class="empty">
+                <div class="empty-icon">📅</div>
+                <div>Aucun match à venir.</div>
             </div>
         `;
 
         return;
     }
 
-    container.innerHTML = sorted.map(match => {
 
-        const date = formatDate(match.date);
+    container.innerHTML =
+        upcoming.map(match => `
 
-        return `
-            <div class="match">
+            <div class="match-card">
 
-                <div class="match-top">
+                <div class="match-header">
 
                     <div class="match-date">
-                        ${date} à ${match.time}
+                        ${formatDate(match.date)}
+                        · ${escapeHTML(match.time)}
+                    </div>
+
+                    <span class="status upcoming">
+                        À venir
+                    </span>
+
+                </div>
+
+                <div class="match-vs">
+
+                    <div class="agency">
+                        TokCenter
+                    </div>
+
+                    <div class="vs">
+                        VS
+                    </div>
+
+                    <div class="agency">
+                        ${escapeHTML(match.agency)}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+function renderDashboardTeams(){
+
+    const container =
+        document.getElementById(
+            "dashboardTeamsList"
+        );
+
+
+    if(!data.teams.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">👥</div>
+                <div>Aucune Team créée.</div>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        data.teams.map(team => {
+
+            const count =
+                Array.isArray(team.members)
+                    ? team.members.length
+                    : 0;
+
+
+            return `
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:space-between;
+                    padding:12px 0;
+                    border-bottom:1px solid var(--border);
+                ">
+
+                    <div>
+
+                        <div style="font-weight:750;">
+                            ${escapeHTML(team.name)}
+                        </div>
+
+                        <div style="
+                            color:var(--muted);
+                            font-size:12px;
+                            margin-top:3px;
+                        ">
+                            ${count}
+                            membre${count > 1 ? "s" : ""}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-secondary btn-small"
+                        onclick="openMemberModal(${team.id})">
+                        ＋
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   AFFICHAGE TEAMS
+========================================================= */
+
+function renderTeams(){
+
+    const container =
+        document.getElementById(
+            "teamsContainer"
+        );
+
+
+    if(!data.teams.length){
+
+        container.innerHTML = `
+
+            <div class="panel"
+                 style="grid-column:1/-1;">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        👥
                     </div>
 
                     <div>
+                        Aucune Team pour le moment.
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        style="margin-top:15px;"
+                        onclick="openTeamModal()">
+                        Créer ma première Team
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        data.teams.map(team => {
+
+            const members =
+                Array.isArray(team.members)
+                    ? team.members
+                    : [];
+
+
+            return `
+
+                <article class="team-card">
+
+                    <div class="team-card-header">
+
+                        <div class="team-card-header-top">
+
+                            <div>
+
+                                <div class="team-name">
+                                    ${escapeHTML(team.name)}
+                                </div>
+
+                                <div class="team-count">
+                                    ${members.length}
+                                    membre${members.length > 1 ? "s" : ""}
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="btn btn-secondary btn-small"
+                                onclick="openTeamModal(${team.id})">
+                                Modifier
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="team-card-body">
+
                         ${
-                            match.completed
-                            ? "✅ Terminé"
-                            : "⏳ À venir"
+                            members.length
+
+                            ?
+
+                            members.map(member => `
+
+                                <div class="member-card">
+
+                                    <div class="member-top">
+
+                                        <div>
+
+                                            <div class="member-name">
+                                                ${escapeHTML(member.name)}
+                                            </div>
+
+                                            <div class="member-pseudo">
+                                                ${escapeHTML(member.pseudo)}
+                                            </div>
+
+                                            <span class="member-role">
+                                                ${escapeHTML(member.role)}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="member-actions">
+
+                                        <button
+                                            class="btn btn-secondary btn-small"
+                                            onclick="openMemberModal(${team.id},${member.id})">
+                                            Modifier
+                                        </button>
+
+                                        <button
+                                            class="btn btn-danger btn-small"
+                                            onclick="deleteMember(${team.id},${member.id})">
+                                            Supprimer
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            `).join("")
+
+                            :
+
+                            `
+
+                                <div class="empty"
+                                     style="padding:25px 10px;">
+                                    Aucun membre dans cette Team.
+                                </div>
+
+                            `
                         }
+
+                    </div>
+
+
+                    <div class="team-footer">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="openMemberModal(${team.id})">
+                            ＋ Ajouter un membre
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteTeam(${team.id})">
+                            Supprimer
+                        </button>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   AFFICHAGE MATCHS
+========================================================= */
+
+function renderMatches(){
+
+    const container =
+        document.getElementById(
+            "matchesContainer"
+        );
+
+
+    if(!data.matches.length){
+
+        container.innerHTML = `
+
+            <div class="panel">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚔️
+                    </div>
+
+                    <div>
+                        Aucun match enregistré.
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        style="margin-top:15px;"
+                        onclick="openMatchModal()">
+                        Ajouter un match
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const matches =
+        [...data.matches]
+            .sort(
+                (a,b) =>
+                    getDateTime(a) -
+                    getDateTime(b)
+            );
+
+
+    container.innerHTML =
+        matches.map(match => `
+
+            <article class="match-card">
+
+                <div class="match-header">
+
+                    <div class="match-date">
+                        ${formatDate(match.date)}
+                        ·
+                        ${escapeHTML(match.time)}
+                    </div>
+
+                    <span class="
+                        status
+                        ${match.completed
+                            ? "finished"
+                            : "upcoming"}
+                    ">
+                        ${match.completed
+                            ? "Effectué"
+                            : "À venir"}
+                    </span>
+
+                </div>
+
+
+                <div class="match-vs">
+
+                    <div class="agency">
+                        TokCenter
+                    </div>
+
+                    <div class="vs">
+                        VS
+                    </div>
+
+                    <div class="agency">
+                        ${escapeHTML(match.agency)}
                     </div>
 
                 </div>
 
-                <div class="match-agencies">
-                    TokCenter
-                    <span style="color:#666;"> VS </span>
-                    ${escapeHTML(match.agency)}
-                </div>
 
-                <div class="match-status">
-                    Match contre une agence
-                </div>
-
-                <div style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
+                <div class="match-actions">
 
                     <button
-                        class="secondary"
+                        class="btn btn-secondary btn-small"
                         onclick="toggleMatch(${match.id})">
                         ${
                             match.completed
-                            ? "Marquer à venir"
-                            : "Marquer terminé"
+                                ? "↩ Remettre à venir"
+                                : "✓ Marquer effectué"
                         }
                     </button>
 
                     <button
-                        class="danger"
+                        class="btn btn-secondary btn-small"
+                        onclick="openMatchModal(${match.id})">
+                        Modifier
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-small"
                         onclick="deleteMatch(${match.id})">
                         Supprimer
                     </button>
 
                 </div>
 
-            </div>
-        `;
+            </article>
 
-    }).join("");
+        `).join("");
+
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+/* =========================================================
+   CALENDRIER
+========================================================= */
 
-function renderDashboard() {
+function changeMonth(direction){
 
-    const totalMembers = teams.reduce(
-        (total, team) => total + (team.members?.length || 0),
-        0
+    calendarDate.setMonth(
+        calendarDate.getMonth() + direction
     );
 
-    const upcoming = matches.filter(m => !m.completed).length;
-    const finished = matches.filter(m => m.completed).length;
+    renderCalendar();
 
-    document.getElementById("statTeams").textContent = teams.length;
-
-    document.getElementById("statMembers").textContent = totalMembers;
-
-    document.getElementById("statUpcoming").textContent = upcoming;
-
-    document.getElementById("statFinished").textContent = finished;
-
-
-    const dashboard = document.getElementById("dashboardMatches");
-
-    const upcomingMatches = matches
-        .filter(m => !m.completed)
-        .sort((a,b) =>
-            new Date(`${a.date}T${a.time}`) -
-            new Date(`${b.date}T${b.time}`)
-        )
-        .slice(0,5);
-
-
-    if(!upcomingMatches.length) {
-
-        dashboard.innerHTML = `
-            <p style="color:#888;">
-                Aucun match à venir.
-            </p>
-        `;
-
-        return;
-    }
-
-
-    dashboard.innerHTML = upcomingMatches.map(match => `
-        <div class="match">
-
-            <div class="match-top">
-
-                <div class="match-date">
-                    ${formatDate(match.date)}
-                </div>
-
-                <div>
-                    ${match.time}
-                </div>
-
-            </div>
-
-            <div class="match-agencies">
-                TokCenter
-                <span style="color:#666;"> VS </span>
-                ${escapeHTML(match.agency)}
-            </div>
-
-        </div>
-    `).join("");
 }
 
 
-/* =========================
-   CALENDRIER
-========================= */
+function goToToday(){
 
-function changeMonth(direction) {
-
-    calendarDate.setMonth(calendarDate.getMonth() + direction);
+    calendarDate = new Date();
 
     renderCalendar();
+
 }
 
 
-function renderCalendar() {
+function renderCalendar(){
 
-    const calendar = document.getElementById("calendar");
+    const calendar =
+        document.getElementById("calendar");
 
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
 
-    const monthNames = [
-        "Janvier","Février","Mars","Avril",
-        "Mai","Juin","Juillet","Août",
-        "Septembre","Octobre","Novembre","Décembre"
+    const year =
+        calendarDate.getFullYear();
+
+
+    const month =
+        calendarDate.getMonth();
+
+
+    const monthName =
+        new Intl.DateTimeFormat(
+            "fr-FR",
+            {month:"long"}
+        ).format(calendarDate);
+
+
+    document.getElementById(
+        "calendarTitle"
+    ).textContent =
+        `${monthName} ${year}`;
+
+
+    const weekdays = [
+        "Lun",
+        "Mar",
+        "Mer",
+        "Jeu",
+        "Ven",
+        "Sam",
+        "Dim"
     ];
 
-    document.getElementById("calendarTitle").textContent =
-        `${monthNames[month]} ${year}`;
+
+    let html =
+        weekdays.map(day => `
+            <div class="weekday">
+                ${day}
+            </div>
+        `).join("");
 
 
-    const firstDay = new Date(year, month, 1).getDay();
-
-    const offset = firstDay === 0 ? 6 : firstDay - 1;
-
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    let html = "";
-
-    [
-        "Lun","Mar","Mer","Jeu","Ven","Sam","Dim"
-    ].forEach(day => {
-
-        html += `
-            <div class="day-name">${day}</div>
-        `;
-
-    });
+    const first =
+        new Date(year,month,1);
 
 
-    for(let i = 0; i < offset; i++) {
+    let firstDay =
+        first.getDay();
 
-        html += `<div></div>`;
 
+    if(firstDay === 0){
+        firstDay = 7;
     }
 
 
-    const today = new Date();
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
 
 
-    for(let day = 1; day <= daysInMonth; day++) {
+    const previousDays =
+        firstDay - 1;
+
+
+    const previousMonthDays =
+        new Date(
+            year,
+            month,
+            0
+        ).getDate();
+
+
+    const totalCells =
+        Math.ceil(
+            (previousDays + daysInMonth) / 7
+        ) * 7;
+
+
+    const today =
+        new Date();
+
+
+    for(let i=0; i<totalCells; i++){
+
+        const dayIndex =
+            i - previousDays + 1;
+
+
+        let date;
+        let currentMonth = true;
+
+
+        if(dayIndex < 1){
+
+            date =
+                previousMonthDays + dayIndex;
+
+            currentMonth = false;
+
+        }else if(dayIndex > daysInMonth){
+
+            date =
+                dayIndex - daysInMonth;
+
+            currentMonth = false;
+
+        }else{
+
+            date = dayIndex;
+
+        }
+
+
+        let cellYear = year;
+        let cellMonth = month;
+
+
+        if(!currentMonth && dayIndex < 1){
+
+            cellMonth--;
+
+            if(cellMonth < 0){
+
+                cellMonth = 11;
+                cellYear--;
+
+            }
+
+        }
+
+
+        if(!currentMonth && dayIndex > daysInMonth){
+
+            cellMonth++;
+
+            if(cellMonth > 11){
+
+                cellMonth = 0;
+                cellYear++;
+
+            }
+
+        }
+
 
         const dateString =
-            `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+            `${cellYear}-${String(cellMonth+1).padStart(2,"0")}-${String(date).padStart(2,"0")}`;
 
 
         const isToday =
-            today.getFullYear() === year &&
-            today.getMonth() === month &&
-            today.getDate() === day;
+            today.getFullYear() === cellYear &&
+            today.getMonth() === cellMonth &&
+            today.getDate() === date;
 
 
         const dayMatches =
-            matches.filter(m => m.date === dateString);
+            data.matches
+                .filter(
+                    match =>
+                        match.date === dateString
+                );
 
 
         html += `
-            <div class="day ${isToday ? "today" : ""}">
+
+            <div class="
+                calendar-day
+                ${currentMonth ? "" : "other-month"}
+                ${isToday ? "today" : ""}
+            ">
 
                 <div class="day-number">
-                    ${day}
+                    ${date}
                 </div>
 
                 ${
-                    dayMatches.map(match => `
-                        <div class="day-match">
-                            VS ${escapeHTML(match.agency)}
-                        </div>
-                    `).join("")
+                    dayMatches
+                        .map(match => `
+
+                            <div
+                                class="calendar-match"
+                                onclick="openMatchModal(${match.id})"
+                                title="VS ${escapeHTML(match.agency)}"
+                            >
+
+                                <div class="calendar-match-time">
+                                    ${escapeHTML(match.time)}
+                                </div>
+
+                                <div class="calendar-match-agency">
+                                    VS ${escapeHTML(match.agency)}
+                                </div>
+
+                            </div>
+
+                        `)
+                        .join("")
                 }
 
             </div>
+
         `;
+
     }
 
 
     calendar.innerHTML = html;
+
 }
 
 
-/* =========================
+/* =========================================================
    UTILITAIRES
-========================= */
+========================================================= */
 
-function formatDate(dateString) {
+function formatDate(dateString){
 
-    const date = new Date(dateString + "T00:00:00");
+    if(!dateString) return "";
 
-    return date.toLocaleDateString("fr-FR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    });
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
 }
 
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
 }
 
 
-/* =========================
+function showToast(message){
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+
+    const toast =
+        document.createElement("div");
+
+
+    toast.className = "toast";
+
+    toast.textContent = message;
+
+
+    container.appendChild(toast);
+
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   RACCOURCIS CLAVIER
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document
+                .querySelectorAll(".modal.show")
+                .forEach(modal => {
+
+                    modal.classList.remove("show");
+
+                });
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    RENDU GLOBAL
-========================= */
+========================================================= */
 
-function renderAll() {
+function renderAll(){
+
+    renderDashboard();
 
     renderTeams();
+
     renderMatches();
-    renderDashboard();
+
     renderCalendar();
+
 }
 
 
-/* =========================
+/* =========================================================
    INITIALISATION
-========================= */
+========================================================= */
 
 renderAll();
 
