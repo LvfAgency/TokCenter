@@ -1,1283 +1,1615 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090a12">
+  <title>TokCenter — Hub TikTok</title>
 
-<title>TokCenter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    :root {
+      --bg: #080910;
+      --bg2: #0d0f19;
+      --card: rgba(20, 22, 34, .82);
+      --card-hover: rgba(27, 29, 44, .95);
+      --border: rgba(255,255,255,.08);
+      --text: #f5f5f7;
+      --muted: #9295a5;
+      --purple: #8b5cf6;
+      --purple2: #6d3df5;
+      --blue: #38bdf8;
+      --pink: #ec4899;
+      --green: #22c55e;
+      --red: #ef4444;
+      --gold: #f59e0b;
+      --sidebar: 92px;
+    }
 
-:root {
-    --bg: #07080d;
-    --sidebar: #0d0f17;
-    --panel: #11141e;
-    --panel-light: #171b27;
-    --border: rgba(255,255,255,0.08);
-    --text: #ffffff;
-    --muted: #858b9c;
-    --pink: #ff2d75;
-    --purple: #8b5cf6;
-    --blue: #4f8cff;
-    --green: #24d18b;
-    --yellow: #ffbd45;
-    --danger: #ff4f5e;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 75% 10%, rgba(139,92,246,0.12), transparent 30%),
-        radial-gradient(circle at 20% 90%, rgba(255,45,117,0.08), transparent 30%),
+    body {
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(139,92,246,.14), transparent 30%),
+        radial-gradient(circle at 15% 80%, rgba(56,189,248,.07), transparent 28%),
         var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 92px;
-    height: 100vh;
-    background: rgba(13,15,23,0.96);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(20px);
-}
-
-.logo {
-    width: 56px;
-    height: 56px;
-    margin-top: 22px;
-    margin-bottom: 35px;
-    border-radius: 17px;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 900;
-    box-shadow: 0 8px 30px rgba(255,45,117,0.25);
-}
-
-.logo span {
-    color: white;
-}
-
-.nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-}
-
-.nav-button {
-    width: 58px;
-    height: 58px;
-    border: 0;
-    background: transparent;
-    color: #73798b;
-    border-radius: 17px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: all 0.2s ease;
-}
-
-.nav-button:hover {
-    color: white;
-    background: rgba(255,255,255,0.06);
-    transform: translateY(-1px);
-}
-
-.nav-button.active {
-    color: white;
-    background: linear-gradient(
-        145deg,
-        rgba(255,45,117,0.22),
-        rgba(139,92,246,0.18)
-    );
-}
-
-.nav-button.active::before {
-    content: "";
-    position: absolute;
-    left: -17px;
-    width: 4px;
-    height: 30px;
-    border-radius: 0 5px 5px 0;
-    background: linear-gradient(to bottom, var(--pink), var(--purple));
-    box-shadow: 0 0 15px rgba(255,45,117,0.6);
-}
-
-.nav-icon {
-    width: 27px;
-    height: 27px;
-    display: block;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-    margin-left: 92px;
-    min-height: 100vh;
-    padding: 38px 48px 60px;
-}
-
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 42px;
-}
-
-.page-title h1 {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-
-.page-title p {
-    margin-top: 7px;
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.top-actions {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.top-button {
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: white;
-    width: 45px;
-    height: 45px;
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.top-button:hover {
-    background: var(--panel-light);
-}
-
-.top-button svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.dashboard {
-    display: block;
-}
-
-.hero {
-    background:
-        radial-gradient(circle at 85% 20%, rgba(139,92,246,0.24), transparent 30%),
-        radial-gradient(circle at 20% 100%, rgba(255,45,117,0.15), transparent 35%),
-        linear-gradient(135deg, #121521, #0f111a);
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    padding: 35px;
-    min-height: 205px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 25px;
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    right: -110px;
-    top: -150px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-.hero h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.hero p {
-    max-width: 650px;
-    color: #a6abba;
-    line-height: 1.6;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.stat {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 23px;
-}
-
-.stat-icon {
-    width: 43px;
-    height: 43px;
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-}
-
-.stat-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.stat:nth-child(1) .stat-icon {
-    background: rgba(79,140,255,0.13);
-    color: var(--blue);
-}
-
-.stat:nth-child(2) .stat-icon {
-    background: rgba(255,45,117,0.13);
-    color: var(--pink);
-}
-
-.stat:nth-child(3) .stat-icon {
-    background: rgba(36,209,139,0.13);
-    color: var(--green);
-}
-
-.stat:nth-child(4) .stat-icon {
-    background: rgba(255,189,69,0.13);
-    color: var(--yellow);
-}
-
-.stat-number {
-    font-size: 29px;
-    font-weight: 800;
-}
-
-.stat-label {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 5px;
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section {
-    display: none;
-}
-
-.section.active {
-    display: block;
-}
-
-.section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 22px;
-}
-
-.section-header h2 {
-    font-size: 23px;
-}
-
-.primary-button {
-    border: none;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    color: white;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255,45,117,0.18);
-}
-
-.primary-button:hover {
-    transform: translateY(-1px);
-}
-
-/* =========================
-   EMPTY STATE
-========================= */
-
-.empty {
-    border: 1px dashed rgba(255,255,255,0.13);
-    background: rgba(17,20,30,0.65);
-    border-radius: 22px;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 35px;
-}
-
-.empty-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    color: #858b9c;
-}
-
-.empty-icon svg {
-    width: 34px;
-    height: 34px;
-}
-
-.empty h3 {
-    font-size: 19px;
-    margin-bottom: 8px;
-}
-
-.empty p {
-    color: var(--muted);
-    font-size: 14px;
-    max-width: 430px;
-    line-height: 1.6;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 23px;
-    min-height: 170px;
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 25px;
-}
-
-.calendar-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.calendar-top h3 {
-    font-size: 20px;
-}
-
-.calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-}
-
-.day-name {
-    color: var(--muted);
-    text-align: center;
-    font-size: 12px;
-    padding: 10px 0;
-}
-
-.day {
-    min-height: 75px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 10px;
-    color: #aaa;
-}
-
-.day.today {
-    border-color: rgba(255,45,117,0.6);
-    background: rgba(255,45,117,0.08);
-    color: white;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1100px) {
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
+    button {
+      font: inherit;
     }
-}
 
-@media (max-width: 750px) {
+    /* =========================
+       SIDEBAR
+    ========================= */
+
     .sidebar {
-        width: 70px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: var(--sidebar);
+      height: 100vh;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 12px;
+      background: rgba(9,10,18,.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
     }
 
     .logo {
-        width: 45px;
-        height: 45px;
-        border-radius: 14px;
-        margin-bottom: 25px;
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      background: linear-gradient(145deg, #9b6cff, #5f31e8);
+      box-shadow:
+        0 10px 35px rgba(139,92,246,.35),
+        inset 0 1px 0 rgba(255,255,255,.25);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -2px;
     }
 
-    .nav-button {
-        width: 48px;
-        height: 48px;
+    .nav {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      align-items: center;
     }
 
-    .nav-button.active::before {
-        left: -11px;
+    .nav-btn {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border: 1px solid transparent;
+      border-radius: 18px;
+      background: transparent;
+      color: #777b8d;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .25s ease;
     }
 
-    .nav-icon {
-        width: 24px;
-        height: 24px;
+    .nav-btn svg {
+      width: 27px;
+      height: 27px;
+      stroke-width: 1.9;
+      transition: .25s ease;
     }
+
+    .nav-btn:hover {
+      color: white;
+      background: rgba(255,255,255,.055);
+    }
+
+    .nav-btn.active {
+      color: white;
+      background: linear-gradient(
+        145deg,
+        rgba(139,92,246,.27),
+        rgba(109,61,245,.11)
+      );
+      border-color: rgba(139,92,246,.28);
+      box-shadow: inset 0 0 25px rgba(139,92,246,.08);
+    }
+
+    .nav-btn.active svg {
+      filter: drop-shadow(0 0 8px rgba(139,92,246,.8));
+    }
+
+    .nav-label {
+      position: absolute;
+      left: 75px;
+      white-space: nowrap;
+      background: #171927;
+      border: 1px solid var(--border);
+      color: white;
+      padding: 8px 11px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-5px);
+      transition: .2s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .nav-btn:hover .nav-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
 
     .main {
-        margin-left: 70px;
-        padding: 25px 18px 45px;
+      margin-left: var(--sidebar);
+      min-height: 100vh;
+      padding: 28px 34px 60px;
+    }
+
+    .topbar {
+      max-width: 1450px;
+      margin: auto;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .mobile-logo {
+      display: none;
     }
 
     .page-title h1 {
-        font-size: 26px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
-    .hero {
-        padding: 25px;
-    }
-
-    .stats,
-    .grid {
-        grid-template-columns: 1fr;
+    .page-title p {
+      color: var(--muted);
+      margin-top: 5px;
+      font-size: 14px;
     }
 
     .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search {
+      width: 220px;
+      height: 43px;
+      padding: 0 15px;
+      border-radius: 13px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      color: white;
+      outline: none;
+      transition: .2s;
+    }
+
+    .search:focus {
+      border-color: rgba(139,92,246,.55);
+      background: rgba(255,255,255,.05);
+    }
+
+    .profile {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      background: linear-gradient(145deg, #272a3c, #171926);
+      border: 1px solid var(--border);
+    }
+
+    /* =========================
+       VIEWS
+    ========================= */
+
+    .view {
+      display: none;
+      max-width: 1450px;
+      margin: auto;
+      animation: fadeUp .35s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      min-height: 280px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 75% 35%, rgba(139,92,246,.28), transparent 30%),
+        radial-gradient(circle at 95% 100%, rgba(56,189,248,.13), transparent 35%),
+        linear-gradient(135deg, #161827, #0d0f18);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,.28);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      right: -100px;
+      top: -160px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow:
+        0 0 0 40px rgba(255,255,255,.015),
+        0 0 0 80px rgba(255,255,255,.01);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #bca7ff;
+      background: rgba(139,92,246,.11);
+      border: 1px solid rgba(139,92,246,.2);
+      padding: 7px 11px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 10px #a78bfa;
+    }
+
+    .hero h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1;
+      letter-spacing: -2.5px;
+      margin-bottom: 15px;
+    }
+
+    .hero h2 span {
+      background: linear-gradient(90deg, #a78bfa, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #a7aaba;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 570px;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      min-height: 110px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      backdrop-filter: blur(14px);
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .stat-icon {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(139,92,246,.12);
+      color: #a78bfa;
+    }
+
+    .stat-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .stat-number {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .stat-name {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+      margin-top: 35px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .section-head h3 {
+      font-size: 19px;
+      letter-spacing: -.4px;
+    }
+
+    .section-head span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       MATCHES
+    ========================= */
+
+    .matches {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .match-card {
+      position: relative;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+      transition: .25s ease;
+      overflow: hidden;
+    }
+
+    .match-card:hover {
+      transform: translateY(-3px);
+      background: var(--card-hover);
+      border-color: rgba(139,92,246,.25);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+
+    .match-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .match-type {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 9px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .status.live {
+      color: #86efac;
+      background: rgba(34,197,94,.1);
+    }
+
+    .status.live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .status.soon {
+      color: #fcd34d;
+      background: rgba(245,158,11,.1);
+    }
+
+    .teams {
+      display: grid;
+      grid-template-columns: 1fr 70px 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team.right {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .team-logo {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 15px;
+      background: linear-gradient(145deg, #282b3e, #151722);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+
+    .team-name {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .team-sub {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .vs {
+      text-align: center;
+      color: #686c7d;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .match-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 15px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .match-time {
+      color: white;
+      font-weight: 700;
+    }
+
+    /* =========================
+       CREATORS
+    ========================= */
+
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .creator {
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 21px;
+      text-align: center;
+      transition: .25s;
+    }
+
+    .creator:hover {
+      transform: translateY(-3px);
+      background: var(--card-hover);
+      border-color: rgba(139,92,246,.25);
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 14px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      background: linear-gradient(145deg, #8b5cf6, #31206e);
+      box-shadow: 0 12px 30px rgba(139,92,246,.2);
+    }
+
+    .creator h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .creator p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .creator-stat {
+      margin-top: 16px;
+      padding-top: 13px;
+      border-top: 1px solid var(--border);
+      color: #b9bbc7;
+      font-size: 11px;
+    }
+
+    /* =========================
+       CALENDAR
+    ========================= */
+
+    .calendar-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 25px;
+    }
+
+    .calendar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .calendar-top h2 {
+      font-size: 22px;
+    }
+
+    .calendar-buttons {
+      display: flex;
+      gap: 7px;
+    }
+
+    .cal-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .day {
+      min-height: 105px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 11px;
+      background: rgba(255,255,255,.018);
+    }
+
+    .day.today {
+      border-color: rgba(139,92,246,.5);
+      background: rgba(139,92,246,.08);
+    }
+
+    .day-name {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .day-number {
+      font-size: 16px;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .event {
+      margin-top: 12px;
+      padding: 6px 7px;
+      border-radius: 7px;
+      font-size: 9px;
+      background: rgba(139,92,246,.16);
+      color: #c4b5fd;
+      border-left: 2px solid #8b5cf6;
+    }
+
+    /* =========================
+       TEAMS
+    ========================= */
+
+    .team-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .agency {
+      padding: 24px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: .25s;
+    }
+
+    .agency:hover {
+      transform: translateY(-3px);
+      border-color: rgba(139,92,246,.25);
+    }
+
+    .agency-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .agency-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      background: linear-gradient(145deg, #292c40, #161824);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .agency h4 {
+      font-size: 15px;
+    }
+
+    .agency p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .agency-bottom {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .creator-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .team-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      :root {
+        --sidebar: 0px;
+      }
+
+      .sidebar {
         display: none;
-    }
+      }
 
-    .calendar {
+      .main {
+        margin-left: 0;
+        padding: 18px 15px 95px;
+      }
+
+      .topbar {
+        height: auto;
+        margin-bottom: 22px;
+      }
+
+      .mobile-logo {
+        display: flex;
+        width: 43px;
+        height: 43px;
+        border-radius: 14px;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, #9b6cff, #5f31e8);
+        font-weight: 900;
+      }
+
+      .page-title {
+        margin-right: auto;
+        margin-left: 12px;
+      }
+
+      .page-title h1 {
+        font-size: 21px;
+      }
+
+      .page-title p {
+        display: none;
+      }
+
+      .search {
+        display: none;
+      }
+
+      .profile {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero {
+        min-height: 280px;
+        padding: 27px;
+        border-radius: 23px;
+      }
+
+      .hero h2 {
+        font-size: 37px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .stats {
+        gap: 9px;
+      }
+
+      .stat {
+        min-height: 100px;
+        padding: 15px;
+        border-radius: 16px;
+      }
+
+      .stat-number {
+        font-size: 21px;
+      }
+
+      .matches,
+      .creator-grid,
+      .team-list {
+        grid-template-columns: 1fr;
+      }
+
+      .match-card {
+        padding: 18px;
+      }
+
+      .team-name {
+        font-size: 12px;
+      }
+
+      .team-logo {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+      }
+
+      .calendar-box {
+        padding: 15px;
         overflow-x: auto;
-    }
+      }
 
-    .calendar-days {
-        min-width: 600px;
+      .week {
+        min-width: 650px;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        display: flex;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        height: 68px;
+        z-index: 200;
+        border: 1px solid var(--border);
+        border-radius: 21px;
+        background: rgba(14,15,24,.94);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 15px 45px rgba(0,0,0,.45);
+      }
+
+      .mobile-nav button {
+        width: 52px;
+        height: 52px;
+        border: 0;
+        background: transparent;
+        color: #737789;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-nav button.active {
+        color: white;
+        background: rgba(139,92,246,.17);
+      }
+
+      .mobile-nav svg {
+        width: 24px;
+        height: 24px;
+      }
     }
-}
-</style>
+  </style>
 </head>
 
 <body>
 
-<!-- =========================
-     MENU GAUCHE
-========================= -->
+  <!-- =========================
+       MENU GAUCHE
+  ========================== -->
 
-<aside class="sidebar">
+  <aside class="sidebar">
 
-    <div class="logo">
-        <span>TC</span>
-    </div>
+    <div class="logo">TC</div>
 
     <nav class="nav">
 
-        <!-- ACCUEIL -->
-        <button class="nav-button active"
-                data-section="accueil"
-                title="Accueil"
-                aria-label="Accueil">
+      <button class="nav-btn active" data-view="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 10.5 12 3l9 7.5"/>
+          <path d="M5 9.5V21h14V9.5"/>
+          <path d="M9 21v-6h6v6"/>
+        </svg>
+        <span class="nav-label">Accueil</span>
+      </button>
 
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <path d="M3 10.5L12 3l9 7.5"/>
-                <path d="M5.5 9.5V21h13V9.5"/>
-                <path d="M9 21v-6h6v6"/>
-            </svg>
+      <button class="nav-btn" data-view="matches">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M8 3v18"/>
+          <path d="M16 3v18"/>
+          <path d="M3 8h18"/>
+          <path d="M3 16h18"/>
+          <rect x="4" y="4" width="16" height="16" rx="3"/>
+        </svg>
+        <span class="nav-label">Matchs</span>
+      </button>
 
-        </button>
+      <button class="nav-btn" data-view="calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="5" width="18" height="16" rx="3"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+          <path d="M8 14h2M14 14h2M8 17h2"/>
+        </svg>
+        <span class="nav-label">Calendrier</span>
+      </button>
 
-        <!-- MATCH -->
-        <button class="nav-button"
-                data-section="match"
-                title="Match"
-                aria-label="Match">
+      <button class="nav-btn" data-view="creators">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="9" cy="8" r="4"/>
+          <path d="M2.5 21c.8-4 3-6 6.5-6s5.7 2 6.5 6"/>
+          <path d="M16 4.5a4 4 0 0 1 0 7.5"/>
+          <path d="M17 15c2.7.4 4.2 2.1 4.7 5"/>
+        </svg>
+        <span class="nav-label">Créateurs</span>
+      </button>
 
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <path d="M7 3l5 5-4 4-5-5z"/>
-                <path d="M17 3l-5 5 4 4 5-5z"/>
-                <path d="M8 12l-5 9"/>
-                <path d="M16 12l5 9"/>
-                <path d="M9 14h6"/>
-                <path d="M8 18h8"/>
-            </svg>
-
-        </button>
-
-        <!-- TEAM -->
-        <button class="nav-button"
-                data-section="team"
-                title="Team"
-                aria-label="Team">
-
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <circle cx="9" cy="8" r="3"/>
-                <circle cx="17" cy="9" r="2.5"/>
-                <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
-                <path d="M14.5 15c2.7-.5 5.1 1.1 6 4"/>
-            </svg>
-
-        </button>
-
-        <!-- CREATEUR -->
-        <button class="nav-button"
-                data-section="createur"
-                title="Créateur"
-                aria-label="Créateur">
-
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <circle cx="12" cy="8" r="3.5"/>
-                <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
-                <path d="M18.5 3.5v4"/>
-                <path d="M16.5 5.5h4"/>
-            </svg>
-
-        </button>
-
-        <!-- AGENCE -->
-        <button class="nav-button"
-                data-section="agence"
-                title="Agence"
-                aria-label="Agence">
-
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <path d="M4 21V5l8-3 8 3v16"/>
-                <path d="M2 21h20"/>
-                <path d="M8 7h1"/>
-                <path d="M15 7h1"/>
-                <path d="M8 11h1"/>
-                <path d="M15 11h1"/>
-                <path d="M8 15h1"/>
-                <path d="M15 15h1"/>
-                <path d="M10 21v-4h4v4"/>
-            </svg>
-
-        </button>
-
-        <!-- CALENDRIER -->
-        <button class="nav-button"
-                data-section="calendrier"
-                title="Calendrier"
-                aria-label="Calendrier">
-
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <rect x="3" y="5" width="18" height="16" rx="3"/>
-                <path d="M7 3v4"/>
-                <path d="M17 3v4"/>
-                <path d="M3 10h18"/>
-                <path d="M7 14h2"/>
-                <path d="M11 14h2"/>
-                <path d="M15 14h2"/>
-                <path d="M7 18h2"/>
-                <path d="M11 18h2"/>
-            </svg>
-
-        </button>
-
-        <!-- CLASSEMENT -->
-        <button class="nav-button"
-                data-section="classement"
-                title="Classement"
-                aria-label="Classement">
-
-            <svg class="nav-icon" viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="1.8"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <path d="M8 21h8"/>
-                <path d="M12 17v4"/>
-                <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
-                <path d="M6 6H3v2c0 3 1.5 5 4 5"/>
-                <path d="M18 6h3v2c0 3-1.5 5-4 5"/>
-                <path d="M9 6h6"/>
-            </svg>
-
-        </button>
+      <button class="nav-btn" data-view="agencies">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M4 21V7l8-4 8 4v14"/>
+          <path d="M2 21h20"/>
+          <path d="M8 11h2M14 11h2M8 15h2M14 15h2"/>
+        </svg>
+        <span class="nav-label">Agences</span>
+      </button>
 
     </nav>
 
-</aside>
-
-
-<!-- =========================
-     CONTENU PRINCIPAL
-========================= -->
-
-<main class="main">
-
-    <div class="topbar">
-
-        <div class="page-title">
-            <h1 id="pageTitle">Accueil</h1>
-            <p id="pageSubtitle">
-                Bienvenue sur TokCenter
-            </p>
-        </div>
-
-        <div class="top-actions">
-
-            <button class="top-button" title="Notifications">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
-
-                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                    <path d="M10 21h4"/>
-
-                </svg>
-
-            </button>
-
-            <button class="top-button" title="Profil">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
-
-                    <circle cx="12" cy="8" r="3"/>
-                    <path d="M5 21c.6-4.5 2.9-7 7-7s6.4 2.5 7 7"/>
-
-                </svg>
-
-            </button>
-
-        </div>
-
+    <div class="sidebar-bottom">
+      <button class="nav-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.2h-2.6v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H6.3v-2.6h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5.3H15v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.2V14h-.2a1.7 1.7 0 0 0-1.5 1Z"/>
+        </svg>
+        <span class="nav-label">Paramètres</span>
+      </button>
     </div>
 
+  </aside>
+
+  <!-- =========================
+       CONTENU PRINCIPAL
+  ========================== -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="mobile-logo">TC</div>
+
+      <div class="page-title">
+        <h1 id="pageTitle">Accueil</h1>
+        <p id="pageSubtitle">Bienvenue sur TokCenter</p>
+      </div>
+
+      <div class="top-actions">
+        <input class="search" type="search" placeholder="Rechercher...">
+        <div class="profile">TC</div>
+      </div>
+
+    </header>
 
     <!-- =========================
          ACCUEIL
-    ========================= -->
+    ========================== -->
 
-    <section id="accueil" class="section active">
+    <section class="view active" id="home">
 
-        <div class="hero">
+      <div class="hero">
 
-            <h2>TokCenter</h2>
+        <div class="hero-content">
 
-            <p>
-                La plateforme centrale pour gérer les équipes,
-                créateurs, agences, matchs, calendriers et classements
-                autour de TikTok.
-            </p>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Plateforme TikTok
+          </div>
 
-        </div>
+          <h2>
+            Bienvenue sur<br>
+            <span>TokCenter.</span>
+          </h2>
 
-
-        <div class="stats">
-
-            <div class="stat">
-
-                <div class="stat-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-
-                        <circle cx="9" cy="8" r="3"/>
-                        <circle cx="17" cy="9" r="2.5"/>
-                        <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
-
-                    </svg>
-
-                </div>
-
-                <div class="stat-number" id="statTeams">0</div>
-                <div class="stat-label">Teams</div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
-
-                        <circle cx="12" cy="8" r="3.5"/>
-                        <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
-
-                    </svg>
-
-                </div>
-
-                <div class="stat-number" id="statCreators">0</div>
-                <div class="stat-label">Créateurs</div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
-
-                        <path d="M7 3l5 5-4 4-5-5z"/>
-                        <path d="M17 3l-5 5 4 4 5-5z"/>
-                        <path d="M8 12l-5 9"/>
-                        <path d="M16 12l5 9"/>
-
-                    </svg>
-
-                </div>
-
-                <div class="stat-number" id="statMatches">0</div>
-                <div class="stat-label">Matchs</div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
-
-                        <path d="M8 21h8"/>
-                        <path d="M12 17v4"/>
-                        <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
-
-                    </svg>
-
-                </div>
-
-                <div class="stat-number" id="statRanking">0</div>
-                <div class="stat-label">Classement</div>
-
-            </div>
+          <p>
+            Le centre de suivi des créateurs, agences, matchs et événements.
+            Retrouvez toutes les informations importantes au même endroit.
+          </p>
 
         </div>
 
+      </div>
 
-        <div class="section-header">
-            <h2>Activité récente</h2>
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-name">Matchs</span>
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M8 3v18M16 3v18M3 8h18M3 16h18"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-number">24</div>
         </div>
 
-        <div class="empty">
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-name">Créateurs</span>
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c1-4 3.5-6 8-6s7 2 8 6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-number">86</div>
+        </div>
 
-            <div class="empty-icon">
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-name">Agences</span>
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 21V7l8-4 8 4v14M2 21h20"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-number">12</div>
+        </div>
 
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-name">Matchs gagnés</span>
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="m5 12 4 4L19 6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-number">71%</div>
+        </div>
 
-                    <path d="M4 19V5"/>
-                    <path d="M4 19h17"/>
-                    <path d="M7 15l4-4 3 2 5-6"/>
+      </div>
 
-                </svg>
+      <div class="section">
+
+        <div class="section-head">
+          <h3>Prochains matchs</h3>
+          <span>Voir les événements à venir</span>
+        </div>
+
+        <div class="matches">
+
+          <article class="match-card">
+
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status live">EN DIRECT</span>
+            </div>
+
+            <div class="teams">
+
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+
+              <div class="vs">VS</div>
+
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence B</div>
+                </div>
+                <div class="team-logo">AB</div>
+              </div>
 
             </div>
 
-            <h3>Aucune activité</h3>
+            <div class="match-bottom">
+              <span>Match du jour</span>
+              <span class="match-time">21:00</span>
+            </div>
 
-            <p>
-                Les activités de TokCenter apparaîtront ici
-                lorsque tes premières données seront ajoutées.
-            </p>
+          </article>
+
+          <article class="match-card">
+
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status soon">À VENIR</span>
+            </div>
+
+            <div class="teams">
+
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+
+              <div class="vs">VS</div>
+
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence C</div>
+                </div>
+                <div class="team-logo">AC</div>
+              </div>
+
+            </div>
+
+            <div class="match-bottom">
+              <span>Demain</span>
+              <span class="match-time">20:30</span>
+            </div>
+
+          </article>
 
         </div>
+
+      </div>
 
     </section>
-
 
     <!-- =========================
-         MATCH
-    ========================= -->
+         MATCHS
+    ========================== -->
 
-    <section id="match" class="section">
+    <section class="view" id="matches">
 
-        <div class="section-header">
+      <div class="section" style="margin-top:0">
 
-            <div>
-                <h2>Matchs</h2>
+        <div class="section-head">
+          <h3>Tous les matchs</h3>
+          <span>Calendrier des rencontres</span>
+        </div>
+
+        <div class="matches">
+
+          <article class="match-card">
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status live">EN DIRECT</span>
             </div>
 
-            <button class="primary-button"
-                    onclick="alert('Création de match bientôt disponible.')">
-                + Nouveau match
-            </button>
+            <div class="teams">
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence B</div>
+                </div>
+                <div class="team-logo">AB</div>
+              </div>
+            </div>
+
+            <div class="match-bottom">
+              <span>Aujourd'hui</span>
+              <span class="match-time">21:00</span>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status soon">À VENIR</span>
+            </div>
+
+            <div class="teams">
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence C</div>
+                </div>
+                <div class="team-logo">AC</div>
+              </div>
+            </div>
+
+            <div class="match-bottom">
+              <span>Demain</span>
+              <span class="match-time">20:30</span>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status soon">À VENIR</span>
+            </div>
+
+            <div class="teams">
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence D</div>
+                </div>
+                <div class="team-logo">AD</div>
+              </div>
+            </div>
+
+            <div class="match-bottom">
+              <span>Vendredi</span>
+              <span class="match-time">22:00</span>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <div class="match-head">
+              <span class="match-type">Match agence</span>
+              <span class="status soon">À VENIR</span>
+            </div>
+
+            <div class="teams">
+              <div class="team">
+                <div class="team-logo">TC</div>
+                <div>
+                  <div class="team-name">TokCenter</div>
+                  <div class="team-sub">Agence A</div>
+                </div>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team right">
+                <div>
+                  <div class="team-name">Adversaire</div>
+                  <div class="team-sub">Agence E</div>
+                </div>
+                <div class="team-logo">AE</div>
+              </div>
+            </div>
+
+            <div class="match-bottom">
+              <span>Samedi</span>
+              <span class="match-time">19:30</span>
+            </div>
+          </article>
 
         </div>
 
-        <div class="empty">
-
-            <div class="empty-icon">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8">
-
-                    <path d="M7 3l5 5-4 4-5-5z"/>
-                    <path d="M17 3l-5 5 4 4 5-5z"/>
-                    <path d="M8 12l-5 9"/>
-                    <path d="M16 12l5 9"/>
-
-                </svg>
-
-            </div>
-
-            <h3>Aucun match</h3>
-
-            <p>
-                Aucun match n'est actuellement enregistré.
-            </p>
-
-        </div>
+      </div>
 
     </section>
-
-
-    <!-- =========================
-         TEAM
-    ========================= -->
-
-    <section id="team" class="section">
-
-        <div class="section-header">
-
-            <h2>Teams</h2>
-
-            <button class="primary-button"
-                    onclick="alert('Création de team bientôt disponible.')">
-                + Créer une team
-            </button>
-
-        </div>
-
-        <div class="empty">
-
-            <div class="empty-icon">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8">
-
-                    <circle cx="9" cy="8" r="3"/>
-                    <circle cx="17" cy="9" r="2.5"/>
-                    <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
-                    <path d="M14.5 15c2.7-.5 5.1 1.1 6 4"/>
-
-                </svg>
-
-            </div>
-
-            <h3>Aucune team</h3>
-
-            <p>
-                Crée ta première team pour commencer à organiser
-                tes créateurs et tes matchs.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CREATEUR
-    ========================= -->
-
-    <section id="createur" class="section">
-
-        <div class="section-header">
-
-            <h2>Créateurs</h2>
-
-            <button class="primary-button"
-                    onclick="alert('Ajout de créateur bientôt disponible.')">
-                + Ajouter un créateur
-            </button>
-
-        </div>
-
-        <div class="empty">
-
-            <div class="empty-icon">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8">
-
-                    <circle cx="12" cy="8" r="3.5"/>
-                    <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
-                    <path d="M18.5 3.5v4"/>
-                    <path d="M16.5 5.5h4"/>
-
-                </svg>
-
-            </div>
-
-            <h3>Aucun créateur</h3>
-
-            <p>
-                Aucun créateur n'est encore enregistré dans TokCenter.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         AGENCE
-    ========================= -->
-
-    <section id="agence" class="section">
-
-        <div class="section-header">
-
-            <h2>Agences</h2>
-
-            <button class="primary-button"
-                    onclick="alert('Ajout d’agence bientôt disponible.')">
-                + Ajouter une agence
-            </button>
-
-        </div>
-
-        <div class="empty">
-
-            <div class="empty-icon">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8">
-
-                    <path d="M4 21V5l8-3 8 3v16"/>
-                    <path d="M2 21h20"/>
-                    <path d="M8 7h1"/>
-                    <path d="M15 7h1"/>
-                    <path d="M8 11h1"/>
-                    <path d="M15 11h1"/>
-                    <path d="M8 15h1"/>
-                    <path d="M15 15h1"/>
-                    <path d="M10 21v-4h4v4"/>
-
-                </svg>
-
-            </div>
-
-            <h3>Aucune agence</h3>
-
-            <p>
-                Les agences partenaires apparaîtront ici.
-            </p>
-
-        </div>
-
-    </section>
-
 
     <!-- =========================
          CALENDRIER
-    ========================= -->
+    ========================== -->
 
-    <section id="calendrier" class="section">
+    <section class="view" id="calendar">
 
-        <div class="section-header">
+      <div class="calendar-box">
 
-            <h2>Calendrier</h2>
+        <div class="calendar-top">
+          <h2>Septembre 2026</h2>
 
-            <button class="primary-button"
-                    onclick="alert('Création de match bientôt disponible.')">
-                + Programmer un match
-            </button>
+          <div class="calendar-buttons">
+            <button class="cal-btn">‹</button>
+            <button class="cal-btn">›</button>
+          </div>
+        </div>
+
+        <div class="week">
+
+          <div class="day">
+            <div class="day-name">Lun</div>
+            <div class="day-number">31</div>
+          </div>
+
+          <div class="day today">
+            <div class="day-name">Mar</div>
+            <div class="day-number">1</div>
+            <div class="event">21:00 · Match</div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Mer</div>
+            <div class="day-number">2</div>
+            <div class="event">20:30 · Match</div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Jeu</div>
+            <div class="day-number">3</div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Ven</div>
+            <div class="day-number">4</div>
+            <div class="event">22:00 · Match</div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Sam</div>
+            <div class="day-number">5</div>
+            <div class="event">19:30 · Match</div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Dim</div>
+            <div class="day-number">6</div>
+          </div>
 
         </div>
 
-
-        <div class="calendar">
-
-            <div class="calendar-top">
-
-                <h3>Calendrier des matchs</h3>
-
-            </div>
-
-
-            <div class="calendar-days">
-
-                <div class="day-name">Lun</div>
-                <div class="day-name">Mar</div>
-                <div class="day-name">Mer</div>
-                <div class="day-name">Jeu</div>
-                <div class="day-name">Ven</div>
-                <div class="day-name">Sam</div>
-                <div class="day-name">Dim</div>
-
-
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-
-            </div>
-
-        </div>
+      </div>
 
     </section>
-
 
     <!-- =========================
-         CLASSEMENT
-    ========================= -->
+         CREATEURS
+    ========================== -->
 
-    <section id="classement" class="section">
+    <section class="view" id="creators">
 
-        <div class="section-header">
+      <div class="section" style="margin-top:0">
 
-            <h2>Classement</h2>
+        <div class="section-head">
+          <h3>Créateurs</h3>
+          <span>Communauté TokCenter</span>
+        </div>
+
+        <div class="creator-grid">
+
+          <div class="creator">
+            <div class="avatar">MK</div>
+            <h4>Max</h4>
+            <p>@max_creator</p>
+            <div class="creator-stat">⭐ Créateur actif</div>
+          </div>
+
+          <div class="creator">
+            <div class="avatar">LS</div>
+            <h4>Léa</h4>
+            <p>@lea_live</p>
+            <div class="creator-stat">⭐ Créatrice active</div>
+          </div>
+
+          <div class="creator">
+            <div class="avatar">TN</div>
+            <h4>Tom</h4>
+            <p>@tom_tiktok</p>
+            <div class="creator-stat">⭐ Créateur actif</div>
+          </div>
+
+          <div class="creator">
+            <div class="avatar">EM</div>
+            <h4>Emma</h4>
+            <p>@emma_live</p>
+            <div class="creator-stat">⭐ Créatrice active</div>
+          </div>
 
         </div>
 
-        <div class="empty">
-
-            <div class="empty-icon">
-
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8">
-
-                    <path d="M8 21h8"/>
-                    <path d="M12 17v4"/>
-                    <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
-                    <path d="M6 6H3v2c0 3 1.5 5 4 5"/>
-                    <path d="M18 6h3v2c0 3-1.5 5-4 5"/>
-
-                </svg>
-
-            </div>
-
-            <h3>Classement vide</h3>
-
-            <p>
-                Le classement sera automatiquement alimenté
-                lorsque les matchs et leurs résultats seront enregistrés.
-            </p>
-
-        </div>
+      </div>
 
     </section>
 
-</main>
+    <!-- =========================
+         AGENCES
+    ========================== -->
 
+    <section class="view" id="agencies">
 
-<script>
+      <div class="section" style="margin-top:0">
 
-/* =========================
-   NAVIGATION
-========================= */
+        <div class="section-head">
+          <h3>Agences</h3>
+          <span>Agences participantes</span>
+        </div>
 
-const buttons = document.querySelectorAll(".nav-button");
-const sections = document.querySelectorAll(".section");
+        <div class="team-list">
 
-const pageTitle = document.getElementById("pageTitle");
-const pageSubtitle = document.getElementById("pageSubtitle");
+          <div class="agency">
+            <div class="agency-top">
+              <div class="agency-logo">TC</div>
+              <div>
+                <h4>TokCenter</h4>
+                <p>Agence principale</p>
+              </div>
+            </div>
+            <div class="agency-bottom">
+              <span>Créateurs</span>
+              <strong>24</strong>
+            </div>
+          </div>
 
-const titles = {
-    accueil: {
-        title: "Accueil",
-        subtitle: "Bienvenue sur TokCenter"
-    },
+          <div class="agency">
+            <div class="agency-top">
+              <div class="agency-logo">AB</div>
+              <div>
+                <h4>Agence B</h4>
+                <p>Agence partenaire</p>
+              </div>
+            </div>
+            <div class="agency-bottom">
+              <span>Matchs</span>
+              <strong>12</strong>
+            </div>
+          </div>
 
-    match: {
-        title: "Matchs",
-        subtitle: "Gère les matchs entre agences"
-    },
+          <div class="agency">
+            <div class="agency-top">
+              <div class="agency-logo">AC</div>
+              <div>
+                <h4>Agence C</h4>
+                <p>Agence partenaire</p>
+              </div>
+            </div>
+            <div class="agency-bottom">
+              <span>Matchs</span>
+              <strong>8</strong>
+            </div>
+          </div>
 
-    team: {
-        title: "Teams",
-        subtitle: "Gère les équipes de créateurs"
-    },
+        </div>
 
-    createur: {
-        title: "Créateurs",
-        subtitle: "Gère les créateurs TikTok"
-    },
+      </div>
 
-    agence: {
-        title: "Agences",
-        subtitle: "Gère les agences présentes sur TokCenter"
-    },
+    </section>
 
-    calendrier: {
-        title: "Calendrier",
-        subtitle: "Visualise les matchs programmés"
-    },
+  </main>
 
-    classement: {
-        title: "Classement",
-        subtitle: "Classement des teams et résultats"
+  <!-- =========================
+       MENU MOBILE
+  ========================== -->
+
+  <nav class="mobile-nav">
+
+    <button class="active" data-view="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M3 10.5 12 3l9 7.5"/>
+        <path d="M5 9.5V21h14V9.5"/>
+        <path d="M9 21v-6h6v6"/>
+      </svg>
+    </button>
+
+    <button data-view="matches">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M8 3v18M16 3v18M3 8h18M3 16h18"/>
+        <rect x="4" y="4" width="16" height="16" rx="3"/>
+      </svg>
+    </button>
+
+    <button data-view="calendar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <rect x="3" y="5" width="18" height="16" rx="3"/>
+        <path d="M16 3v4M8 3v4M3 10h18"/>
+      </svg>
+    </button>
+
+    <button data-view="creators">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21c1-4 3.5-6 8-6s7 2 8 6"/>
+      </svg>
+    </button>
+
+    <button data-view="agencies">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M4 21V7l8-4 8 4v14M2 21h20"/>
+        <path d="M8 11h2M14 11h2M8 15h2M14 15h2"/>
+      </svg>
+    </button>
+
+  </nav>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-view]");
+    const views = document.querySelectorAll(".view");
+
+    const titles = {
+      home: ["Accueil", "Bienvenue sur TokCenter"],
+      matches: ["Matchs", "Toutes les rencontres"],
+      calendar: ["Calendrier", "Planning des événements"],
+      creators: ["Créateurs", "La communauté TokCenter"],
+      agencies: ["Agences", "Les agences participantes"]
+    };
+
+    function changeView(viewName) {
+
+      views.forEach(view => {
+        view.classList.remove("active");
+      });
+
+      const selected = document.getElementById(viewName);
+
+      if (selected) {
+        selected.classList.add("active");
+      }
+
+      buttons.forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.view === viewName
+        );
+      });
+
+      if (titles[viewName]) {
+        document.getElementById("pageTitle").textContent = titles[viewName][0];
+        document.getElementById("pageSubtitle").textContent = titles[viewName][1];
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
-};
 
-
-buttons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const target = button.dataset.section;
-
-        buttons.forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-        button.classList.add("active");
-
-        sections.forEach(section => {
-            section.classList.remove("active");
-        });
-
-        const targetSection = document.getElementById(target);
-
-        if (targetSection) {
-            targetSection.classList.add("active");
-        }
-
-        if (titles[target]) {
-            pageTitle.textContent = titles[target].title;
-            pageSubtitle.textContent = titles[target].subtitle;
-        }
-
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        changeView(button.dataset.view);
+      });
     });
-
-});
-
-
-/* =========================
-   DONNÉES VIDES PAR DÉFAUT
-========================= */
-
-document.getElementById("statTeams").textContent = "0";
-document.getElementById("statCreators").textContent = "0";
-document.getElementById("statMatches").textContent = "0";
-document.getElementById("statRanking").textContent = "0";
-
-</script>
+  </script>
 
 </body>
 </html>
