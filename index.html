@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111827">
+<meta name="description" content="TokCenter — Gestion d'agence TikTok">
 <title>TokCenter — Gestion d'agence</title>
 
 <style>
@@ -20,12 +21,17 @@
     --danger-soft:#fee2e2;
     --success:#059669;
     --blue:#2563eb;
+    --orange:#f59e0b;
     --shadow:0 10px 30px rgba(17,24,39,.08);
     --radius:18px;
 }
 
 *{
     box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -52,26 +58,29 @@ button{
     display:flex;
 }
 
-/* =========================
+
+/* =========================================================
    BARRE LATÉRALE
-========================= */
+========================================================= */
 
 .sidebar{
     width:255px;
     background:linear-gradient(180deg,#111827 0%,#171b2e 100%);
     color:white;
-    padding:20px 14px;
+    padding:18px 13px;
     position:fixed;
     inset:0 auto 0 0;
     z-index:30;
     box-shadow:8px 0 25px rgba(0,0,0,.08);
+    overflow-y:auto;
 }
 
 .logo{
-    padding:8px 13px 25px;
+    padding:8px 13px 26px;
     font-size:27px;
     font-weight:950;
     letter-spacing:-1.5px;
+    white-space:nowrap;
 }
 
 .logo span{
@@ -93,25 +102,24 @@ button{
     gap:7px;
 }
 
-/* Navigation compacte avec grosses icônes */
-
 .nav button{
     width:100%;
-    height:58px;
+    min-height:50px;
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:12px;
     background:transparent;
     color:#cbd5e1;
     text-align:left;
-    padding:9px 12px;
+    padding:9px 10px;
     border-radius:14px;
-    font-weight:750;
+    font-weight:800;
     transition:
-        background .18s ease,
-        color .18s ease,
-        transform .18s ease,
-        box-shadow .18s ease;
+        background .18s,
+        color .18s,
+        transform .18s,
+        box-shadow .18s;
+    position:relative;
 }
 
 .nav button:hover{
@@ -126,44 +134,40 @@ button{
     box-shadow:0 7px 18px rgba(124,58,237,.28);
 }
 
-/* Icônes beaucoup plus explicites */
-
 .nav-icon{
     width:38px;
     height:38px;
     min-width:38px;
     display:grid;
     place-items:center;
-    font-size:23px;
-    line-height:1;
     border-radius:11px;
-    background:rgba(255,255,255,.07);
+    background:rgba(255,255,255,.08);
+    font-size:21px;
+    line-height:1;
     transition:.18s;
 }
 
 .nav button:hover .nav-icon{
-    background:rgba(255,255,255,.13);
-    transform:scale(1.05);
+    background:rgba(255,255,255,.15);
+    transform:scale(1.06);
 }
 
 .nav button.active .nav-icon{
     background:rgba(255,255,255,.18);
 }
 
-/* Petit indicateur de page active */
-
-.nav button.active::after{
-    content:"";
-    width:4px;
-    height:28px;
-    background:white;
-    border-radius:999px;
-    margin-left:auto;
+.nav-label{
+    white-space:nowrap;
 }
 
-/* =========================
+.nav-tooltip{
+    display:none;
+}
+
+
+/* =========================================================
    CONTENU
-========================= */
+========================================================= */
 
 .main{
     margin-left:255px;
@@ -191,9 +195,10 @@ button{
     color:var(--muted);
 }
 
-/* =========================
+
+/* =========================================================
    BOUTONS
-========================= */
+========================================================= */
 
 .btn{
     padding:11px 16px;
@@ -236,9 +241,10 @@ button{
     font-size:19px;
 }
 
-/* =========================
+
+/* =========================================================
    CARTES
-========================= */
+========================================================= */
 
 .grid{
     display:grid;
@@ -327,9 +333,10 @@ button{
     font-size:12px;
 }
 
-/* =========================
+
+/* =========================================================
    AVATARS
-========================= */
+========================================================= */
 
 .avatar{
     width:54px;
@@ -356,9 +363,10 @@ button{
     gap:12px;
 }
 
-/* =========================
+
+/* =========================================================
    RECHERCHE
-========================= */
+========================================================= */
 
 .search{
     margin-bottom:16px;
@@ -381,9 +389,10 @@ button{
     box-shadow:0 0 0 3px rgba(124,58,237,.1);
 }
 
-/* =========================
+
+/* =========================================================
    TEAMS
-========================= */
+========================================================= */
 
 .teamhead{
     display:flex;
@@ -416,9 +425,10 @@ button{
     background:#fafafa;
 }
 
-/* =========================
+
+/* =========================================================
    MATCHS
-========================= */
+========================================================= */
 
 .match{
     border-left:5px solid var(--primary);
@@ -447,9 +457,10 @@ button{
     color:var(--success);
 }
 
-/* =========================
+
+/* =========================================================
    AGENCES
-========================= */
+========================================================= */
 
 .favorite{
     background:#fffdf7;
@@ -507,9 +518,10 @@ button{
     background:#f5f3ff;
 }
 
-/* =========================
+
+/* =========================================================
    TABS
-========================= */
+========================================================= */
 
 .tabs{
     display:flex;
@@ -531,9 +543,29 @@ button{
     color:white;
 }
 
-/* =========================
+
+/* =========================================================
+   PARAMÈTRES
+========================================================= */
+
+.settings-card{
+    max-width:700px;
+}
+
+.settings-icon{
+    width:58px;
+    height:58px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    background:var(--primary-soft);
+    font-size:27px;
+}
+
+
+/* =========================================================
    MODALE
-========================= */
+========================================================= */
 
 .modal{
     position:fixed;
@@ -578,9 +610,10 @@ button{
     padding:8px 11px;
 }
 
-/* =========================
+
+/* =========================================================
    FORMULAIRES
-========================= */
+========================================================= */
 
 .formgrid{
     display:grid;
@@ -635,55 +668,84 @@ hr{
     margin:18px 0;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
+/* =========================================================
+   MOBILE / TABLETTE
+========================================================= */
 
 @media(max-width:900px){
 
     .sidebar{
-        width:76px;
+        width:78px;
         padding:15px 9px;
     }
 
     .logo{
         font-size:0;
         text-align:center;
-        padding-left:0;
-        padding-right:0;
+        padding:8px 0 25px;
+        letter-spacing:0;
     }
 
+    /*
+       On conserve bien TokCenter au lieu de "TC".
+    */
     .logo:before{
-        content:"TC";
-        font-size:22px;
+        content:"TokCenter";
+        font-size:17px;
+        font-weight:950;
+        letter-spacing:-.5px;
+        color:white;
     }
 
     .logo span,
     .logo-sub,
-    .nav button span{
+    .nav-label{
         display:none;
     }
 
     .nav button{
         justify-content:center;
-        padding:10px;
-        height:58px;
-    }
-
-    .nav button.active::after{
-        display:none;
+        padding:6px;
+        min-height:52px;
     }
 
     .nav-icon{
-        width:40px;
-        height:40px;
-        min-width:40px;
-        font-size:24px;
+        width:43px;
+        height:43px;
+        min-width:43px;
+        font-size:22px;
+    }
+
+    /*
+       Petite indication au survol / maintien.
+    */
+    .nav button::after{
+        content:attr(data-label);
+        position:absolute;
+        left:67px;
+        top:50%;
+        transform:translateY(-50%);
+        background:#111827;
+        color:white;
+        padding:7px 10px;
+        border-radius:8px;
+        font-size:12px;
+        font-weight:800;
+        white-space:nowrap;
+        opacity:0;
+        pointer-events:none;
+        transition:.15s;
+        box-shadow:0 8px 20px rgba(0,0,0,.2);
+    }
+
+    .nav button:hover::after{
+        opacity:1;
     }
 
     .main{
-        margin-left:76px;
-        width:calc(100% - 76px);
+        margin-left:78px;
+        width:calc(100% - 78px);
         padding:18px;
     }
 
@@ -691,6 +753,7 @@ hr{
         grid-template-columns:repeat(2,1fr);
     }
 }
+
 
 @media(max-width:600px){
 
@@ -711,12 +774,52 @@ hr{
         flex-direction:column;
     }
 
-    .topbar .btn{
-        width:100%;
-    }
-
     .modalbox{
         padding:19px;
+    }
+
+    .title h1{
+        font-size:25px;
+    }
+
+    .title p{
+        font-size:13px;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+}
+
+
+@media(max-width:400px){
+
+    .sidebar{
+        width:68px;
+    }
+
+    .main{
+        margin-left:68px;
+        width:calc(100% - 68px);
+        padding:13px;
+    }
+
+    .logo:before{
+        font-size:14px;
+    }
+
+    .nav button::after{
+        left:60px;
+    }
+
+    .nav-icon{
+        width:40px;
+        height:40px;
+        min-width:40px;
     }
 }
 </style>
@@ -725,6 +828,10 @@ hr{
 <body>
 
 <div class="app">
+
+<!-- =====================================================
+     MENU PRINCIPAL
+===================================================== -->
 
 <aside class="sidebar">
 
@@ -738,24 +845,33 @@ hr{
 </aside>
 
 
+<!-- =====================================================
+     CONTENU PRINCIPAL
+===================================================== -->
+
 <main class="main">
 
     <div class="topbar">
 
         <div class="title">
-            <h1 id="pageTitle">Tableau de bord</h1>
+
+            <h1 id="pageTitle">
+                Tableau de bord
+            </h1>
 
             <p id="pageSubtitle">
                 Votre centre de gestion d'agence.
             </p>
+
         </div>
 
-        <button
-            class="btn primary"
-            onclick="openQuickCreate()"
-        >
-            ＋ Ajouter
-        </button>
+        <!--
+            IMPORTANT :
+            Aucun bouton Ajouter sur le tableau de bord.
+            Il apparaît uniquement dans les catégories.
+        -->
+
+        <div id="topAction"></div>
 
     </div>
 
@@ -765,6 +881,10 @@ hr{
 
 </div>
 
+
+<!-- =====================================================
+     MODALE
+===================================================== -->
 
 <div class="modal" id="modal">
 
@@ -777,6 +897,7 @@ hr{
             <button
                 class="close"
                 onclick="closeModal()"
+                aria-label="Fermer"
             >
                 ✕
             </button>
@@ -796,7 +917,7 @@ hr{
    BASE DE DONNÉES LOCALE
 ========================================================= */
 
-const STORAGE_KEY = "tokcenter_v6";
+const STORAGE_KEY = "tokcenter_v7";
 
 let db =
     JSON.parse(
@@ -811,6 +932,35 @@ let db =
             agencyName:"LVF Agency"
         }
     };
+
+
+/*
+    Compatibilité avec une ancienne version
+    si certaines données n'existent pas.
+*/
+
+db.creators = Array.isArray(db.creators)
+    ? db.creators
+    : [];
+
+db.teams = Array.isArray(db.teams)
+    ? db.teams
+    : [];
+
+db.matches = Array.isArray(db.matches)
+    ? db.matches
+    : [];
+
+db.agencies = Array.isArray(db.agencies)
+    ? db.agencies
+    : [];
+
+db.settings = db.settings || {};
+
+if(!db.settings.agencyName){
+    db.settings.agencyName = "LVF Agency";
+}
+
 
 let page = "dashboard";
 
@@ -988,11 +1138,18 @@ function roleBadge(role){
 const navItems = [
 
     ["dashboard","🏠","Tableau de bord"],
+
     ["teams","👥","Teams"],
+
     ["creators","👤","Créateurs"],
+
     ["matches","⚔️","Matchs"],
+
     ["agencies","🏢","Agences adverses"],
-    ["calendar","📅","Calendrier"]
+
+    ["calendar","📅","Calendrier"],
+
+    ["settings","⚙️","Paramètres"]
 
 ];
 
@@ -1006,15 +1163,15 @@ function renderNav(){
                 <button
                     class="${page === item[0] ? "active" : ""}"
                     onclick="go('${item[0]}')"
-                    title="${item[2]}"
-                    aria-label="${item[2]}"
+                    data-label="${esc(item[2])}"
+                    title="${esc(item[2])}"
                 >
 
                     <span class="nav-icon">
                         ${item[1]}
                     </span>
 
-                    <span>
+                    <span class="nav-label">
                         ${item[2]}
                     </span>
 
@@ -1034,11 +1191,16 @@ function go(newPage){
 
     render();
 
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
 }
 
 
 /* =========================================================
-   RENDU
+   RENDU PRINCIPAL
 ========================================================= */
 
 const views = {};
@@ -1050,7 +1212,7 @@ function render(){
 
         dashboard:[
             "Tableau de bord",
-            "Votre centre de gestion d'agence."
+            "Vue d'ensemble de votre agence."
         ],
 
         teams:[
@@ -1076,15 +1238,87 @@ function render(){
         calendar:[
             "Calendrier",
             "Vos matchs classés par date."
+        ],
+
+        settings:[
+            "Paramètres",
+            "Configurez les informations principales de votre agence."
         ]
 
     };
 
+
     document.getElementById("pageTitle")
         .textContent = titles[page][0];
 
+
     document.getElementById("pageSubtitle")
         .textContent = titles[page][1];
+
+
+    /*
+        Le tableau de bord ne permet volontairement
+        aucune création directe.
+    */
+
+    const topAction =
+        document.getElementById("topAction");
+
+
+    if(page === "teams"){
+
+        topAction.innerHTML = `
+            <button
+                class="btn primary"
+                onclick="openTeam()"
+            >
+                ＋ Créer une team
+            </button>
+        `;
+
+    }
+    else if(page === "creators"){
+
+        topAction.innerHTML = `
+            <button
+                class="btn primary"
+                onclick="openCreator()"
+            >
+                ＋ Ajouter un créateur
+            </button>
+        `;
+
+    }
+    else if(page === "matches"){
+
+        topAction.innerHTML = `
+            <button
+                class="btn primary"
+                onclick="openMatch()"
+            >
+                ＋ Créer un match
+            </button>
+        `;
+
+    }
+    else if(page === "agencies"){
+
+        topAction.innerHTML = `
+            <button
+                class="btn primary"
+                onclick="openAgency()"
+            >
+                ＋ Enregistrer une agence
+            </button>
+        `;
+
+    }
+    else{
+
+        topAction.innerHTML = "";
+
+    }
+
 
     document.getElementById("content")
         .innerHTML = views[page]();
@@ -1093,7 +1327,7 @@ function render(){
 
 
 /* =========================================================
-   DASHBOARD
+   TABLEAU DE BORD
 ========================================================= */
 
 views.dashboard = function(){
@@ -1112,7 +1346,22 @@ views.dashboard = function(){
                 new Date(b.datetime)
         );
 
+
+    const finished =
+        db.matches
+        .filter(
+            m =>
+                new Date(m.datetime) <= now
+        );
+
+
+    const nextMatch =
+        upcoming[0];
+
+
     return `
+
+        <!-- STATISTIQUES PRINCIPALES -->
 
         <div class="grid stats">
 
@@ -1170,16 +1419,141 @@ views.dashboard = function(){
         </div>
 
 
+        <!-- PROCHAIN MATCH -->
+
         <div class="section">
 
             <h2>
-                Prochains matchs
+                Prochain match
             </h2>
 
-            ${matchList(upcoming.slice(0,4))}
+            ${
+                nextMatch
+                ?
+                matchList([nextMatch])
+                :
+                `
+                <div class="empty">
+
+                    <div style="font-size:35px">
+                        📅
+                    </div>
+
+                    <br>
+
+                    Aucun match à venir.
+
+                </div>
+                `
+            }
 
         </div>
 
+
+        <!-- RÉSUMÉ RAPIDE -->
+
+        <div class="section">
+
+            <h2>
+                Vue rapide
+            </h2>
+
+            <div class="grid cards">
+
+                <div class="card">
+
+                    <div class="row">
+
+                        <div>
+
+                            <div class="muted">
+                                Matchs terminés
+                            </div>
+
+                            <div class="stat num">
+                                ${finished.length}
+                            </div>
+
+                        </div>
+
+                        <div style="font-size:30px">
+                            ✅
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="row">
+
+                        <div>
+
+                            <div class="muted">
+                                Agences favorites
+                            </div>
+
+                            <div class="stat num">
+
+                                ${
+                                    db.agencies.filter(
+                                        a => a.favorite
+                                    ).length
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div style="font-size:30px">
+                            ⭐
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="row">
+
+                        <div>
+
+                            <div class="muted">
+                                ${esc(
+                                    db.settings.agencyName ||
+                                    "Votre agence"
+                                )}
+                            </div>
+
+                            <div
+                                style="
+                                    margin-top:8px;
+                                    font-weight:900;
+                                "
+                            >
+                                Agence active
+                            </div>
+
+                        </div>
+
+                        <div style="font-size:30px">
+                            🏢
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIVITÉ RÉCENTE -->
 
         <div class="section">
 
@@ -1223,7 +1597,9 @@ views.dashboard = function(){
                                                     )}
                                                 </b>
 
-                                                vs
+                                                <span class="muted">
+                                                    vs
+                                                </span>
 
                                                 <b>
                                                     ${esc(
@@ -1254,7 +1630,7 @@ views.dashboard = function(){
 
                     `
                     <div class="empty">
-                        Aucune activité pour le moment.
+                        Aucun match enregistré pour le moment.
                     </div>
                     `
 
@@ -1263,6 +1639,16 @@ views.dashboard = function(){
             </div>
 
         </div>
+
+
+        <!--
+            Aucun bouton d'ajout ici volontairement.
+            Pour ajouter :
+            Teams → Teams
+            Créateur → Créateurs
+            Match → Matchs
+            Agence → Agences adverses
+        -->
 
     `;
 
@@ -1279,6 +1665,7 @@ views.creators = function(){
         creatorSearch
         .toLowerCase();
 
+
     const list =
         db.creators.filter(
             c =>
@@ -1293,6 +1680,7 @@ views.creators = function(){
                 .includes(q)
         );
 
+
     return `
 
         <div class="search">
@@ -1305,21 +1693,6 @@ views.creators = function(){
                     render();
                 "
             >
-
-        </div>
-
-
-        <div
-            class="actions"
-            style="margin-bottom:16px"
-        >
-
-            <button
-                class="btn primary"
-                onclick="openCreator()"
-            >
-                ＋ Ajouter un créateur
-            </button>
 
         </div>
 
@@ -1441,7 +1814,21 @@ views.creators = function(){
 
             `
             <div class="empty">
+
+                <div style="font-size:35px">
+                    👤
+                </div>
+
+                <br>
+
                 Aucun créateur enregistré.
+
+                <br><br>
+
+                Utilisez le bouton
+                <b>＋ Ajouter un créateur</b>
+                pour commencer.
+
             </div>
             `
 
@@ -1460,21 +1847,6 @@ views.teams = function(){
 
     return `
 
-        <div
-            class="actions"
-            style="margin-bottom:16px"
-        >
-
-            <button
-                class="btn primary"
-                onclick="openTeam()"
-            >
-                ＋ Créer une team
-            </button>
-
-        </div>
-
-
         ${
             db.teams.length
 
@@ -1492,6 +1864,7 @@ views.teams = function(){
                                     c =>
                                         t.memberIds?.includes(c.id)
                                 );
+
 
                             return `
 
@@ -1607,7 +1980,21 @@ views.teams = function(){
 
             `
             <div class="empty">
+
+                <div style="font-size:35px">
+                    👥
+                </div>
+
+                <br>
+
                 Aucune team créée.
+
+                <br><br>
+
+                Utilisez le bouton
+                <b>＋ Créer une team</b>
+                pour commencer.
+
             </div>
             `
 
@@ -1626,11 +2013,13 @@ views.matches = function(){
 
     const now = new Date();
 
+
     const upcoming =
         db.matches.filter(
             m =>
                 new Date(m.datetime) > now
         );
+
 
     const finished =
         db.matches.filter(
@@ -1638,22 +2027,8 @@ views.matches = function(){
                 new Date(m.datetime) <= now
         );
 
+
     return `
-
-        <div
-            class="actions"
-            style="margin-bottom:16px"
-        >
-
-            <button
-                class="btn primary"
-                onclick="openMatch()"
-            >
-                ＋ Créer un match
-            </button>
-
-        </div>
-
 
         <div class="tabs">
 
@@ -1693,13 +2068,23 @@ function matchList(matches){
 
         return `
             <div class="empty">
+
+                <div style="font-size:35px">
+                    ⚔️
+                </div>
+
+                <br>
+
                 Aucun match enregistré.
+
             </div>
         `;
 
     }
 
+
     const now = new Date();
+
 
     return `
 
@@ -1712,8 +2097,10 @@ function matchList(matches){
                         const c =
                             creator(m.creatorId);
 
+
                         const isUpcoming =
                             new Date(m.datetime) > now;
+
 
                         return `
 
@@ -1795,19 +2182,27 @@ function matchList(matches){
                                             "Agence adverse"
                                         )}
 
-                                        ·
+                                        ${
+                                            m.opponentTeam
+                                            ?
+                                            `
+                                            ·
+                                            ${esc(m.opponentTeam)}
+                                            `
+                                            :
+                                            ""
+                                        }
 
-                                        ${esc(
-                                            m.opponentTeam ||
-                                            "Team adverse"
-                                        )}
-
-                                        ·
-
-                                        ${esc(
-                                            m.opponentName ||
-                                            "Adversaire"
-                                        )}
+                                        ${
+                                            m.opponentName
+                                            ?
+                                            `
+                                            ·
+                                            ${esc(m.opponentName)}
+                                            `
+                                            :
+                                            ""
+                                        }
 
                                         ${
                                             m.opponentUsername
@@ -1882,6 +2277,7 @@ views.agencies = function(){
         agencySearch
         .toLowerCase();
 
+
     const agencies =
         db.agencies
         .filter(
@@ -1899,6 +2295,7 @@ views.agencies = function(){
                 Number(b.favorite) -
                 Number(a.favorite)
         );
+
 
     return `
 
@@ -1931,21 +2328,6 @@ views.agencies = function(){
         </div>
 
 
-        <div
-            class="actions"
-            style="margin-bottom:16px"
-        >
-
-            <button
-                class="btn primary"
-                onclick="openAgency()"
-            >
-                ＋ Enregistrer une agence
-            </button>
-
-        </div>
-
-
         ${
             agencies.length
 
@@ -1973,6 +2355,7 @@ views.agencies = function(){
                                         )
                                 );
 
+
                             const teams = [
                                 ...new Set(
                                     matches
@@ -1983,6 +2366,7 @@ views.agencies = function(){
                                     .filter(Boolean)
                                 )
                             ];
+
 
                             const people = [
                                 ...new Set(
@@ -1996,6 +2380,7 @@ views.agencies = function(){
                                     .filter(Boolean)
                                 )
                             ];
+
 
                             return `
 
@@ -2181,6 +2566,7 @@ views.calendar = function(){
                 new Date(b.datetime)
         );
 
+
     return `
 
         <div class="card">
@@ -2260,7 +2646,15 @@ views.calendar = function(){
 
                 `
                 <div class="empty">
+
+                    <div style="font-size:35px">
+                        📅
+                    </div>
+
+                    <br>
+
                     Le calendrier est vide.
+
                 </div>
                 `
 
@@ -2271,6 +2665,140 @@ views.calendar = function(){
     `;
 
 };
+
+
+/* =========================================================
+   PARAMÈTRES
+========================================================= */
+
+views.settings = function(){
+
+    return `
+
+        <div class="card settings-card">
+
+            <div class="row">
+
+                <div class="person">
+
+                    <div class="settings-icon">
+                        ⚙️
+                    </div>
+
+                    <div>
+
+                        <h2 style="margin:0">
+                            Paramètres de l'agence
+                        </h2>
+
+                        <div class="muted">
+                            Les informations utilisées dans TokCenter.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <form
+                onsubmit="saveSettings(event)"
+            >
+
+                <div class="field">
+
+                    <label>
+                        Nom de votre agence
+                    </label>
+
+                    <input
+                        id="settingsAgencyName"
+                        required
+                        value="${esc(
+                            db.settings.agencyName ||
+                            ""
+                        )}"
+                        placeholder="Nom de votre agence"
+                    >
+
+                </div>
+
+
+                <div
+                    class="muted"
+                    style="margin-top:8px"
+                >
+                    Ce nom sera proposé automatiquement
+                    lors de la création d'un match.
+                </div>
+
+
+                <div
+                    class="actions"
+                    style="margin-top:18px"
+                >
+
+                    <button
+                        class="btn primary"
+                    >
+                        Enregistrer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="card">
+
+                <b>
+                    💾 Stockage
+                </b>
+
+                <p class="muted">
+
+                    Les données de TokCenter sont actuellement
+                    enregistrées dans le stockage local de votre
+                    navigateur sur cet appareil.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+};
+
+
+function saveSettings(event){
+
+    event.preventDefault();
+
+    const value =
+        document
+        .getElementById("settingsAgencyName")
+        .value
+        .trim();
+
+    db.settings.agencyName =
+        value ||
+        "LVF Agency";
+
+    save();
+
+    render();
+
+}
 
 
 /* =========================================================
@@ -2299,13 +2827,6 @@ function closeModal(){
 }
 
 
-function openQuickCreate(){
-
-    openMatch();
-
-}
-
-
 /* =========================================================
    CRÉATEUR
 ========================================================= */
@@ -2322,7 +2843,9 @@ function openCreator(id){
             avatar:""
         };
 
+
     pendingAvatar = "";
+
 
     openModal(
 
@@ -2339,6 +2862,7 @@ function openCreator(id){
         >
 
             <div class="formgrid">
+
 
                 <div class="field">
 
@@ -2476,6 +3000,7 @@ function openCreator(id){
 
                 </div>
 
+
             </div>
 
 
@@ -2522,8 +3047,10 @@ function previewAvatar(input){
 
     if(!file) return;
 
+
     const reader =
         new FileReader();
+
 
     reader.onload =
         function(){
@@ -2531,10 +3058,12 @@ function previewAvatar(input){
             pendingAvatar =
                 reader.result;
 
+
             const preview =
                 document.getElementById(
                     "avatarPreview"
                 );
+
 
             if(preview){
 
@@ -2549,6 +3078,7 @@ function previewAvatar(input){
 
         };
 
+
     reader.readAsDataURL(file);
 
 }
@@ -2558,6 +3088,7 @@ function submitCreator(event,id){
 
     event.preventDefault();
 
+
     const c =
         id
         ? creator(id)
@@ -2566,11 +3097,13 @@ function submitCreator(event,id){
             id:uid()
         };
 
+
     c.name =
         document
         .getElementById("cname")
         .value
         .trim();
+
 
     c.username =
         document
@@ -2579,20 +3112,24 @@ function submitCreator(event,id){
         .trim()
         .replace(/^@/,"");
 
+
     c.role =
         document
         .getElementById("crole")
         .value;
+
 
     c.joinDate =
         document
         .getElementById("cdate")
         .value;
 
+
     c.avatar =
         pendingAvatar ||
         c.avatar ||
         "";
+
 
     if(!id){
 
@@ -2600,7 +3137,9 @@ function submitCreator(event,id){
 
     }
 
+
     pendingAvatar = "";
+
 
     save();
 
@@ -2620,17 +3159,23 @@ function creatorDetails(id){
     const c =
         creator(id);
 
+
+    if(!c) return;
+
+
     const matches =
         db.matches.filter(
             m =>
                 m.creatorId === id
         );
 
+
     const teams =
         db.teams.filter(
             t =>
                 t.memberIds?.includes(id)
         );
+
 
     openModal(
 
@@ -2763,7 +3308,7 @@ function creatorDetails(id){
 
 
 /* =========================================================
-   TEAMS
+   TEAM
 ========================================================= */
 
 function openTeam(id){
@@ -2774,6 +3319,7 @@ function openTeam(id){
             name:"",
             memberIds:[]
         };
+
 
     openModal(
 
@@ -2799,6 +3345,7 @@ function openTeam(id){
                     id="tname"
                     required
                     value="${esc(t.name)}"
+                    placeholder="Ex. Team Alpha"
                 >
 
             </div>
@@ -2878,6 +3425,14 @@ function openTeam(id){
                     Enregistrer
                 </button>
 
+                <button
+                    type="button"
+                    class="btn ghost"
+                    onclick="closeModal()"
+                >
+                    Annuler
+                </button>
+
             </div>
 
         </form>
@@ -2893,6 +3448,7 @@ function submitTeam(event,id){
 
     event.preventDefault();
 
+
     const t =
         id
         ? team(id)
@@ -2901,11 +3457,13 @@ function submitTeam(event,id){
             id:uid()
         };
 
+
     t.name =
         document
         .getElementById("tname")
         .value
         .trim();
+
 
     t.memberIds =
         [...document.querySelectorAll(".tm:checked")]
@@ -2914,11 +3472,13 @@ function submitTeam(event,id){
                 x.value
         );
 
+
     if(!id){
 
         db.teams.push(t);
 
     }
+
 
     save();
 
@@ -2934,17 +3494,23 @@ function teamDetails(id){
     const t =
         team(id);
 
+
+    if(!t) return;
+
+
     const members =
         db.creators.filter(
             c =>
                 t.memberIds?.includes(c.id)
         );
 
+
     const matches =
         db.matches.filter(
             m =>
                 m.teamId === id
         );
+
 
     openModal(
 
@@ -3058,6 +3624,7 @@ function openAgency(id){
             notes:""
         };
 
+
     openModal(
 
         id
@@ -3081,6 +3648,7 @@ function openAgency(id){
 
 
             <div class="formgrid">
+
 
                 <div class="field full">
 
@@ -3179,6 +3747,7 @@ function submitAgency(event,id){
 
     event.preventDefault();
 
+
     const a =
         id
         ? agency(id)
@@ -3187,16 +3756,19 @@ function submitAgency(event,id){
             id:uid()
         };
 
+
     a.name =
         document
         .getElementById("aname")
         .value
         .trim();
 
+
     a.favorite =
         document
         .getElementById("afav")
         .value === "1";
+
 
     a.notes =
         document
@@ -3204,11 +3776,13 @@ function submitAgency(event,id){
         .value
         .trim();
 
+
     if(!id){
 
         db.agencies.push(a);
 
     }
+
 
     save();
 
@@ -3224,10 +3798,13 @@ function toggleFavorite(id){
     const a =
         agency(id);
 
+
     if(!a) return;
+
 
     a.favorite =
         !a.favorite;
+
 
     save();
 
@@ -3245,6 +3822,10 @@ function agencyDetails(id){
     const a =
         agency(id);
 
+
+    if(!a) return;
+
+
     const matches =
         db.matches.filter(
             m =>
@@ -3260,6 +3841,7 @@ function agencyDetails(id){
                 )
         );
 
+
     const teams = [
         ...new Set(
             matches
@@ -3270,6 +3852,7 @@ function agencyDetails(id){
             .filter(Boolean)
         )
     ];
+
 
     const people = [
         ...new Set(
@@ -3283,6 +3866,7 @@ function agencyDetails(id){
             .filter(Boolean)
         )
     ];
+
 
     openModal(
 
@@ -3465,7 +4049,7 @@ function agencyDetails(id){
 
 
 /* =========================================================
-   CRÉATION MATCH
+   CRÉATION / MODIFICATION MATCH
 ========================================================= */
 
 function openMatch(id){
@@ -3493,6 +4077,10 @@ function openMatch(id){
             datetime:""
         };
 
+
+    if(!m) return;
+
+
     const savedAgencies =
         db.agencies
         .slice()
@@ -3501,6 +4089,7 @@ function openMatch(id){
                 Number(b.favorite) -
                 Number(a.favorite)
         );
+
 
     openModal(
 
@@ -3657,9 +4246,13 @@ function openMatch(id){
                         class="muted"
                         style="margin-top:6px"
                     >
+
                         💡 Une agence sélectionnée est
-                        réutilisée. Une agence écrite ici
-                        n'est pas enregistrée automatiquement.
+                        réutilisée.
+
+                        Une agence écrite manuellement ici
+                        n'est <b>pas enregistrée automatiquement</b>.
+
                     </div>
 
                 </div>
@@ -3762,6 +4355,23 @@ function openMatch(id){
             </div>
 
 
+            ${
+                db.teams.length
+                ?
+                ""
+                :
+                `
+                <div
+                    class="notice"
+                    style="margin-top:16px"
+                >
+                    ⚠️ Vous devez d'abord créer une team
+                    avant de pouvoir créer un match.
+                </div>
+                `
+            }
+
+
             <div
                 class="actions"
                 style="margin-top:18px"
@@ -3769,6 +4379,7 @@ function openMatch(id){
 
                 <button
                     class="btn primary"
+                    ${db.teams.length ? "" : "disabled"}
                 >
                     Enregistrer le match
                 </button>
@@ -3818,22 +4429,27 @@ function fillCreators(selected=""){
         .getElementById("mteam")
         ?.value;
 
+
     const select =
         document
         .getElementById("mcreator");
 
+
     if(!select) return;
+
 
     const ids =
         team(teamId)
         ?.memberIds ||
         [];
 
+
     const members =
         db.creators.filter(
             c =>
                 ids.includes(c.id)
         );
+
 
     select.innerHTML =
 
@@ -3877,14 +4493,18 @@ function selectSavedAgency(){
         document
         .getElementById("agencySelect");
 
+
     const input =
         document
         .getElementById("agencyName");
 
+
     if(!select || !input) return;
+
 
     const a =
         agency(select.value);
+
 
     if(a){
 
@@ -3904,6 +4524,7 @@ function submitMatch(event,id){
 
     event.preventDefault();
 
+
     const m =
         id
         ?
@@ -3915,6 +4536,9 @@ function submitMatch(event,id){
         {
             id:uid()
         };
+
+
+    if(!m) return;
 
 
     const agencyId =
@@ -3932,6 +4556,8 @@ function submitMatch(event,id){
         .getElementById("ourAgency")
         .value
         .trim()
+        ||
+        db.settings.agencyName
         ||
         "LVF Agency";
 
@@ -3955,8 +4581,8 @@ function submitMatch(event,id){
 
 
     /*
-       L'agence n'est liée à une agence enregistrée
-       que si l'utilisateur l'a explicitement sélectionnée.
+        L'agence n'est liée à une agence enregistrée
+        que si l'utilisateur l'a explicitement sélectionnée.
     */
 
     m.agencyId =
@@ -4042,8 +4668,13 @@ function matchDetails(id){
                 x.id === id
         );
 
+
+    if(!m) return;
+
+
     const c =
         creator(m.creatorId);
+
 
     openModal(
 
@@ -4062,6 +4693,7 @@ function matchDetails(id){
 
                 ${esc(
                     m.ourAgency ||
+                    db.settings.agencyName ||
                     "LVF Agency"
                 )}
 
@@ -4221,11 +4853,13 @@ function deleteMatch(id){
 
     }
 
+
     db.matches =
         db.matches.filter(
             m =>
                 m.id !== id
         );
+
 
     save();
 
@@ -4248,6 +4882,26 @@ document
 
         if(
             event.target.id === "modal"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TOUCHE ÉCHAP POUR FERMER UNE MODALE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
         ){
 
             closeModal();
