@@ -3,1129 +3,1136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TokCenter</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07080d;
+    --sidebar: #0d0f17;
+    --panel: #11141e;
+    --panel-light: #171b27;
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --muted: #858b9c;
+    --pink: #ff2d75;
+    --purple: #8b5cf6;
+    --blue: #4f8cff;
+    --green: #24d18b;
+    --yellow: #ffbd45;
+    --danger: #ff4f5e;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 75% 10%, rgba(139,92,246,0.12), transparent 30%),
+        radial-gradient(circle at 20% 90%, rgba(255,45,117,0.08), transparent 30%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 92px;
+    height: 100vh;
+    background: rgba(13,15,23,0.96);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+    margin-top: 22px;
+    margin-bottom: 35px;
+    border-radius: 17px;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 8px 30px rgba(255,45,117,0.25);
+}
+
+.logo span {
+    color: white;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+}
+
+.nav-button {
+    width: 58px;
+    height: 58px;
+    border: 0;
+    background: transparent;
+    color: #73798b;
+    border-radius: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+    color: white;
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+}
+
+.nav-button.active {
+    color: white;
+    background: linear-gradient(
+        145deg,
+        rgba(255,45,117,0.22),
+        rgba(139,92,246,0.18)
+    );
+}
+
+.nav-button.active::before {
+    content: "";
+    position: absolute;
+    left: -17px;
+    width: 4px;
+    height: 30px;
+    border-radius: 0 5px 5px 0;
+    background: linear-gradient(to bottom, var(--pink), var(--purple));
+    box-shadow: 0 0 15px rgba(255,45,117,0.6);
+}
+
+.nav-icon {
+    width: 27px;
+    height: 27px;
+    display: block;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: 92px;
+    min-height: 100vh;
+    padding: 38px 48px 60px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 42px;
+}
+
+.page-title h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.page-title p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.top-button {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.top-button:hover {
+    background: var(--panel-light);
+}
+
+.top-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+    display: block;
+}
+
+.hero {
+    background:
+        radial-gradient(circle at 85% 20%, rgba(139,92,246,0.24), transparent 30%),
+        radial-gradient(circle at 20% 100%, rgba(255,45,117,0.15), transparent 35%),
+        linear-gradient(135deg, #121521, #0f111a);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 35px;
+    min-height: 205px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    right: -110px;
+    top: -150px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 650px;
+    color: #a6abba;
+    line-height: 1.6;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 23px;
+}
+
+.stat-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.stat-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.stat:nth-child(1) .stat-icon {
+    background: rgba(79,140,255,0.13);
+    color: var(--blue);
+}
+
+.stat:nth-child(2) .stat-icon {
+    background: rgba(255,45,117,0.13);
+    color: var(--pink);
+}
+
+.stat:nth-child(3) .stat-icon {
+    background: rgba(36,209,139,0.13);
+    color: var(--green);
+}
+
+.stat:nth-child(4) .stat-icon {
+    background: rgba(255,189,69,0.13);
+    color: var(--yellow);
+}
+
+.stat-number {
+    font-size: 29px;
+    font-weight: 800;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 23px;
+}
+
+.primary-button {
+    border: none;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255,45,117,0.18);
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty {
+    border: 1px dashed rgba(255,255,255,0.13);
+    background: rgba(17,20,30,0.65);
+    border-radius: 22px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 35px;
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #858b9c;
+}
+
+.empty-icon svg {
+    width: 34px;
+    height: 34px;
+}
+
+.empty h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.empty p {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 430px;
+    line-height: 1.6;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 23px;
+    min-height: 170px;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 25px;
+}
+
+.calendar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.calendar-top h3 {
+    font-size: 20px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.day-name {
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+}
+
+.day {
+    min-height: 75px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    color: #aaa;
+}
+
+.day.today {
+    border-color: rgba(255,45,117,0.6);
+    background: rgba(255,45,117,0.08);
+    color: white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    :root {
-        --bg: #08090d;
-        --panel: #101218;
-        --panel-2: #151720;
-        --panel-3: #1b1e28;
-        --border: rgba(255,255,255,0.08);
-        --text: #ffffff;
-        --muted: #8d92a3;
-        --pink: #ff2d75;
-        --pink-light: #ff5b96;
-        --blue: #25a7ff;
-        --green: #36d98a;
-        --yellow: #ffc857;
-        --danger: #ff4f61;
-        --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background:
-            radial-gradient(circle at 80% 0%, rgba(255,45,117,0.09), transparent 28%),
-            radial-gradient(circle at 20% 100%, rgba(37,167,255,0.06), transparent 30%),
-            var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-        font-family: inherit;
-    }
-
-    button {
-        cursor: pointer;
-    }
-
-    /* =========================
-       SIDEBAR
-    ========================= */
-
+@media (max-width: 750px) {
     .sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 88px;
-        background: rgba(10,11,16,0.96);
-        border-right: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 1000;
-        backdrop-filter: blur(20px);
+        width: 70px;
     }
 
     .logo {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .logo-mark {
-        width: 48px;
-        height: 48px;
-        border-radius: 15px;
-        background: linear-gradient(135deg, var(--pink), #a800ff);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: 900;
-        box-shadow: 0 10px 30px rgba(255,45,117,0.28);
-    }
-
-    .nav {
-        width: 100%;
-        padding: 22px 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+        width: 45px;
+        height: 45px;
+        border-radius: 14px;
+        margin-bottom: 25px;
     }
 
     .nav-button {
-        position: relative;
-        width: 64px;
-        height: 64px;
-        margin: auto;
-        border: 0;
-        border-radius: 18px;
-        background: transparent;
-        color: #777c8d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.2s ease;
-    }
-
-    .nav-button svg {
-        width: 27px;
-        height: 27px;
-        stroke: currentColor;
-        stroke-width: 2;
-        fill: none;
-        pointer-events: none;
-    }
-
-    .nav-button:hover {
-        background: rgba(255,255,255,0.07);
-        color: #fff;
-        transform: translateY(-1px);
-    }
-
-    .nav-button.active {
-        background: linear-gradient(
-            135deg,
-            rgba(255,45,117,0.22),
-            rgba(168,0,255,0.14)
-        );
-        color: var(--pink-light);
-        box-shadow:
-            inset 0 0 0 1px rgba(255,45,117,0.16),
-            0 10px 25px rgba(255,45,117,0.08);
+        width: 48px;
+        height: 48px;
     }
 
     .nav-button.active::before {
-        content: "";
-        position: absolute;
-        left: -12px;
-        width: 4px;
-        height: 28px;
-        border-radius: 0 5px 5px 0;
-        background: var(--pink);
-        box-shadow: 0 0 15px rgba(255,45,117,0.7);
+        left: -11px;
     }
 
-    /* Infobulle */
-    .nav-button::after {
-        content: attr(data-label);
-        position: absolute;
-        left: 78px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #20232d;
-        color: #fff;
-        padding: 9px 13px;
-        border-radius: 9px;
-        font-size: 13px;
-        font-weight: 600;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: 0.15s ease;
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow);
-        z-index: 2000;
+    .nav-icon {
+        width: 24px;
+        height: 24px;
     }
-
-    .nav-button:hover::after {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .sidebar-bottom {
-        margin-top: auto;
-        padding-bottom: 22px;
-    }
-
-    .settings-button {
-        width: 64px;
-        height: 64px;
-        border-radius: 18px;
-        border: 0;
-        background: transparent;
-        color: #777c8d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .settings-button:hover {
-        background: rgba(255,255,255,0.07);
-        color: white;
-    }
-
-    .settings-button svg {
-        width: 25px;
-        height: 25px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
 
     .main {
-        margin-left: 88px;
-        min-height: 100vh;
-        padding: 42px 48px 60px;
-    }
-
-    .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 42px;
+        margin-left: 70px;
+        padding: 25px 18px 45px;
     }
 
     .page-title h1 {
-        font-size: 38px;
-        line-height: 1.1;
-        letter-spacing: -1.5px;
+        font-size: 26px;
     }
 
-    .page-title p {
-        color: var(--muted);
-        margin-top: 10px;
-        font-size: 15px;
+    .hero {
+        padding: 25px;
+    }
+
+    .stats,
+    .grid {
+        grid-template-columns: 1fr;
     }
 
     .top-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .icon-action {
-        width: 46px;
-        height: 46px;
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        background: var(--panel);
-        color: #aaaebe;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .icon-action:hover {
-        color: white;
-        border-color: rgba(255,255,255,0.16);
-        background: var(--panel-2);
-    }
-
-    .icon-action svg {
-        width: 20px;
-        height: 20px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-        position: relative;
-        min-height: 270px;
-        padding: 38px;
-        border-radius: 28px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.07);
-        background:
-            linear-gradient(
-                120deg,
-                rgba(255,45,117,0.17),
-                rgba(168,0,255,0.08) 45%,
-                rgba(37,167,255,0.08)
-            ),
-            var(--panel);
-        box-shadow: var(--shadow);
-        margin-bottom: 30px;
-    }
-
-    .hero::before {
-        content: "";
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        right: -120px;
-        top: -180px;
-        border-radius: 50%;
-        background: rgba(255,45,117,0.16);
-        filter: blur(40px);
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 720px;
-    }
-
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 100px;
-        background: rgba(255,255,255,0.07);
-        border: 1px solid rgba(255,255,255,0.08);
-        color: #dddfea;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        margin-bottom: 20px;
-    }
-
-    .hero-badge span {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--pink);
-        box-shadow: 0 0 10px var(--pink);
-    }
-
-    .hero h2 {
-        font-size: 36px;
-        line-height: 1.15;
-        letter-spacing: -1px;
-        margin-bottom: 14px;
-    }
-
-    .hero p {
-        max-width: 650px;
-        color: #a7acbc;
-        line-height: 1.65;
-        font-size: 15px;
-    }
-
-    /* =========================
-       STATS
-    ========================= */
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-        margin-bottom: 30px;
-    }
-
-    .stat-card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 24px;
-        min-height: 145px;
-    }
-
-    .stat-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .stat-icon {
-        width: 43px;
-        height: 43px;
-        border-radius: 13px;
-        background: rgba(255,255,255,0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .stat-icon svg {
-        width: 21px;
-        height: 21px;
-        stroke: #b6bac8;
-        fill: none;
-        stroke-width: 2;
-    }
-
-    .stat-card:nth-child(1) .stat-icon {
-        color: var(--pink);
-    }
-
-    .stat-card:nth-child(2) .stat-icon {
-        color: var(--blue);
-    }
-
-    .stat-card:nth-child(3) .stat-icon {
-        color: var(--green);
-    }
-
-    .stat-card:nth-child(4) .stat-icon {
-        color: var(--yellow);
-    }
-
-    .stat-value {
-        font-size: 30px;
-        font-weight: 800;
-        letter-spacing: -1px;
-    }
-
-    .stat-label {
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 5px;
-    }
-
-    /* =========================
-       CONTENT
-    ========================= */
-
-    .content-grid {
-        display: grid;
-        grid-template-columns: 1.4fr 0.9fr;
-        gap: 22px;
-    }
-
-    .panel {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 22px;
-        padding: 25px;
-        min-height: 300px;
-    }
-
-    .panel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 25px;
-    }
-
-    .panel-title {
-        font-size: 19px;
-        font-weight: 750;
-    }
-
-    .panel-subtitle {
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 5px;
-    }
-
-    .small-button {
-        border: 1px solid var(--border);
-        background: var(--panel-2);
-        color: #dfe2eb;
-        padding: 9px 13px;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .small-button:hover {
-        border-color: rgba(255,45,117,0.3);
-        color: var(--pink-light);
-    }
-
-    /* =========================
-       EMPTY STATE
-    ========================= */
-
-    .empty-state {
-        min-height: 205px;
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: 17px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 25px;
-    }
-
-    .empty-icon {
-        width: 58px;
-        height: 58px;
-        margin: 0 auto 15px;
-        border-radius: 18px;
-        background: rgba(255,255,255,0.045);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .empty-icon svg {
-        width: 26px;
-        height: 26px;
-        stroke: #6f7484;
-        fill: none;
-        stroke-width: 1.8;
-    }
-
-    .empty-state h3 {
-        font-size: 15px;
-        margin-bottom: 7px;
-    }
-
-    .empty-state p {
-        color: var(--muted);
-        font-size: 13px;
-        max-width: 360px;
-        line-height: 1.5;
-    }
-
-    /* =========================
-       MODALS
-    ========================= */
-
-    .modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.72);
-        backdrop-filter: blur(8px);
         display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 3000;
-        padding: 20px;
     }
 
-    .modal.open {
-        display: flex;
+    .calendar {
+        overflow-x: auto;
     }
 
-    .modal-box {
-        width: min(620px, 100%);
-        max-height: 90vh;
-        overflow-y: auto;
-        background: #11131a;
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        box-shadow: 0 30px 100px rgba(0,0,0,0.55);
-        padding: 30px;
+    .calendar-days {
+        min-width: 600px;
     }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 25px;
-    }
-
-    .modal-header h2 {
-        font-size: 24px;
-    }
-
-    .modal-header p {
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 7px;
-    }
-
-    .close-modal {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: var(--panel-2);
-        color: #aaa;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .close-modal:hover {
-        color: white;
-    }
-
-    .close-modal svg {
-        width: 19px;
-        height: 19px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-    }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 17px;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .form-group.full {
-        grid-column: 1 / -1;
-    }
-
-    .form-group label {
-        color: #c8cbd6;
-        font-size: 13px;
-        font-weight: 650;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        border: 1px solid rgba(255,255,255,0.09);
-        background: #191b23;
-        color: white;
-        border-radius: 12px;
-        padding: 13px 14px;
-        outline: none;
-        font-size: 14px;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        border-color: rgba(255,45,117,0.5);
-        box-shadow: 0 0 0 3px rgba(255,45,117,0.08);
-    }
-
-    .form-group textarea {
-        min-height: 100px;
-        resize: vertical;
-    }
-
-    .form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 25px;
-    }
-
-    .btn {
-        border: 0;
-        border-radius: 12px;
-        padding: 13px 19px;
-        font-size: 13px;
-        font-weight: 750;
-    }
-
-    .btn-secondary {
-        background: var(--panel-3);
-        color: #d5d8e1;
-        border: 1px solid var(--border);
-    }
-
-    .btn-primary {
-        color: white;
-        background: linear-gradient(135deg, var(--pink), #b600ff);
-        box-shadow: 0 10px 25px rgba(255,45,117,0.2);
-    }
-
-    .btn-primary:hover {
-        filter: brightness(1.08);
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 1100px) {
-        .stats {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .content-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 720px) {
-        .sidebar {
-            width: 70px;
-        }
-
-        .logo {
-            height: 78px;
-        }
-
-        .logo-mark {
-            width: 40px;
-            height: 40px;
-            border-radius: 13px;
-            font-size: 20px;
-        }
-
-        .nav {
-            padding: 15px 8px;
-        }
-
-        .nav-button,
-        .settings-button {
-            width: 52px;
-            height: 52px;
-            border-radius: 15px;
-        }
-
-        .nav-button::after {
-            display: none;
-        }
-
-        .main {
-            margin-left: 70px;
-            padding: 28px 18px 45px;
-        }
-
-        .topbar {
-            margin-bottom: 28px;
-        }
-
-        .page-title h1 {
-            font-size: 30px;
-        }
-
-        .hero {
-            padding: 27px;
-        }
-
-        .hero h2 {
-            font-size: 27px;
-        }
-
-        .stats {
-            gap: 12px;
-        }
-
-        .stat-card {
-            padding: 18px;
-        }
-
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .form-group.full {
-            grid-column: auto;
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
+<!-- =========================
+     MENU GAUCHE
+========================= -->
 
 <aside class="sidebar">
 
     <div class="logo">
-        <div class="logo-mark">T</div>
+        <span>TC</span>
     </div>
 
     <nav class="nav">
 
         <!-- ACCUEIL -->
         <button class="nav-button active"
-                data-page="accueil"
-                data-label="Accueil"
-                aria-label="Accueil"
-                title="Accueil">
+                data-section="accueil"
+                title="Accueil"
+                aria-label="Accueil">
 
-            <svg viewBox="0 0 24 24">
-                <path d="M3 10.5 12 3l9 7.5"></path>
-                <path d="M5.5 9.5V21h13V9.5"></path>
-                <path d="M9.5 21v-7h5v7"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M3 10.5L12 3l9 7.5"/>
+                <path d="M5.5 9.5V21h13V9.5"/>
+                <path d="M9 21v-6h6v6"/>
             </svg>
 
         </button>
 
         <!-- MATCH -->
         <button class="nav-button"
-                data-page="match"
-                data-label="Match"
-                aria-label="Match"
-                title="Match">
+                data-section="match"
+                title="Match"
+                aria-label="Match">
 
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M8 8l8 8"></path>
-                <path d="M16 8l-8 8"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M7 3l5 5-4 4-5-5z"/>
+                <path d="M17 3l-5 5 4 4 5-5z"/>
+                <path d="M8 12l-5 9"/>
+                <path d="M16 12l5 9"/>
+                <path d="M9 14h6"/>
+                <path d="M8 18h8"/>
             </svg>
 
         </button>
 
         <!-- TEAM -->
         <button class="nav-button"
-                data-page="team"
-                data-label="Team"
-                aria-label="Team"
-                title="Team">
+                data-section="team"
+                title="Team"
+                aria-label="Team">
 
-            <svg viewBox="0 0 24 24">
-                <circle cx="9" cy="8" r="3"></circle>
-                <circle cx="17" cy="9" r="2.3"></circle>
-                <path d="M3.5 20c.5-3.3 2.5-5 5.5-5s5 1.7 5.5 5"></path>
-                <path d="M14.5 15.5c2.5-.7 5 .9 5.5 3.5"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3"/>
+                <circle cx="17" cy="9" r="2.5"/>
+                <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
+                <path d="M14.5 15c2.7-.5 5.1 1.1 6 4"/>
             </svg>
 
         </button>
 
         <!-- CREATEUR -->
         <button class="nav-button"
-                data-page="createur"
-                data-label="Créateur"
-                aria-label="Créateur"
-                title="Créateur">
+                data-section="createur"
+                title="Créateur"
+                aria-label="Créateur">
 
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="3.5"></circle>
-                <path d="M5 21c.6-4.2 3-6.5 7-6.5s6.4 2.3 7 6.5"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3.5"/>
+                <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
+                <path d="M18.5 3.5v4"/>
+                <path d="M16.5 5.5h4"/>
             </svg>
 
         </button>
 
         <!-- AGENCE -->
         <button class="nav-button"
-                data-page="agence"
-                data-label="Agence"
-                aria-label="Agence"
-                title="Agence">
+                data-section="agence"
+                title="Agence"
+                aria-label="Agence">
 
-            <svg viewBox="0 0 24 24">
-                <path d="M4 21V8l8-5 8 5v13"></path>
-                <path d="M8 21v-5h8v5"></path>
-                <path d="M8 10h2"></path>
-                <path d="M14 10h2"></path>
-                <path d="M8 13h2"></path>
-                <path d="M14 13h2"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M4 21V5l8-3 8 3v16"/>
+                <path d="M2 21h20"/>
+                <path d="M8 7h1"/>
+                <path d="M15 7h1"/>
+                <path d="M8 11h1"/>
+                <path d="M15 11h1"/>
+                <path d="M8 15h1"/>
+                <path d="M15 15h1"/>
+                <path d="M10 21v-4h4v4"/>
             </svg>
 
         </button>
 
         <!-- CALENDRIER -->
         <button class="nav-button"
-                data-page="calendrier"
-                data-label="Calendrier"
-                aria-label="Calendrier"
-                title="Calendrier">
+                data-section="calendrier"
+                title="Calendrier"
+                aria-label="Calendrier">
 
-            <svg viewBox="0 0 24 24">
-                <rect x="3.5" y="5" width="17" height="16" rx="2"></rect>
-                <path d="M7 3v4"></path>
-                <path d="M17 3v4"></path>
-                <path d="M3.5 10h17"></path>
-                <path d="M8 14h2"></path>
-                <path d="M14 14h2"></path>
-                <path d="M8 17h2"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="16" rx="3"/>
+                <path d="M7 3v4"/>
+                <path d="M17 3v4"/>
+                <path d="M3 10h18"/>
+                <path d="M7 14h2"/>
+                <path d="M11 14h2"/>
+                <path d="M15 14h2"/>
+                <path d="M7 18h2"/>
+                <path d="M11 18h2"/>
             </svg>
 
         </button>
 
         <!-- CLASSEMENT -->
         <button class="nav-button"
-                data-page="classement"
-                data-label="Classement"
-                aria-label="Classement"
-                title="Classement">
+                data-section="classement"
+                title="Classement"
+                aria-label="Classement">
 
-            <svg viewBox="0 0 24 24">
-                <path d="M6 20V10"></path>
-                <path d="M12 20V4"></path>
-                <path d="M18 20v-7"></path>
-                <path d="M4 20h16"></path>
+            <svg class="nav-icon" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M8 21h8"/>
+                <path d="M12 17v4"/>
+                <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
+                <path d="M6 6H3v2c0 3 1.5 5 4 5"/>
+                <path d="M18 6h3v2c0 3-1.5 5-4 5"/>
+                <path d="M9 6h6"/>
             </svg>
 
         </button>
 
     </nav>
 
-    <div class="sidebar-bottom">
-
-        <button class="settings-button"
-                data-label="Paramètres"
-                aria-label="Paramètres"
-                title="Paramètres">
-
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1A1.7 1.7 0 0 0 8 15a1.7 1.7 0 0 0-1.5-1H6v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1V14h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
-            </svg>
-
-        </button>
-
-    </div>
-
 </aside>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- =========================
+     CONTENU PRINCIPAL
+========================= -->
 
 <main class="main">
 
-    <header class="topbar">
+    <div class="topbar">
 
         <div class="page-title">
             <h1 id="pageTitle">Accueil</h1>
             <p id="pageSubtitle">
-                Centralisez toute votre activité TikTok au même endroit.
+                Bienvenue sur TokCenter
             </p>
         </div>
 
         <div class="top-actions">
 
-            <button class="icon-action"
-                    aria-label="Notifications"
-                    title="Notifications">
+            <button class="top-button" title="Notifications">
 
-                <svg viewBox="0 0 24 24">
-                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
-                    <path d="M10 21h4"></path>
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                    <path d="M10 21h4"/>
+
+                </svg>
+
+            </button>
+
+            <button class="top-button" title="Profil">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="12" cy="8" r="3"/>
+                    <path d="M5 21c.6-4.5 2.9-7 7-7s6.4 2.5 7 7"/>
+
                 </svg>
 
             </button>
 
         </div>
 
-    </header>
+    </div>
 
 
-    <!-- =================================================
+    <!-- =========================
          ACCUEIL
-    ================================================= -->
+    ========================= -->
 
-    <section id="page-accueil" class="page">
+    <section id="accueil" class="section active">
 
         <div class="hero">
 
-            <div class="hero-content">
+            <h2>TokCenter</h2>
 
-                <div class="hero-badge">
-                    <span></span>
-                    TokCenter
-                </div>
-
-                <h2>
-                    Toute votre activité TikTok,
-                    au même endroit.
-                </h2>
-
-                <p>
-                    Gérez vos teams, vos créateurs, vos agences,
-                    vos matchs, votre calendrier et votre classement
-                    depuis une seule plateforme.
-                </p>
-
-            </div>
+            <p>
+                La plateforme centrale pour gérer les équipes,
+                créateurs, agences, matchs, calendriers et classements
+                autour de TikTok.
+            </p>
 
         </div>
 
 
         <div class="stats">
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="9" cy="8" r="3"></circle>
-                            <path d="M3.5 20c.5-3.3 2.5-5 5.5-5s5 1.7 5.5 5"></path>
-                            <circle cx="17" cy="9" r="2"></circle>
-                        </svg>
-                    </div>
+                <div class="stat-icon">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <circle cx="9" cy="8" r="3"/>
+                        <circle cx="17" cy="9" r="2.5"/>
+                        <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
+
+                    </svg>
+
                 </div>
 
-                <div class="stat-value" id="statTeams">0</div>
+                <div class="stat-number" id="statTeams">0</div>
                 <div class="stat-label">Teams</div>
 
             </div>
 
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="8" r="3.5"></circle>
-                            <path d="M5 21c.6-4.2 3-6.5 7-6.5s6.4 2.3 7 6.5"></path>
-                        </svg>
-                    </div>
+                <div class="stat-icon">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+
+                        <circle cx="12" cy="8" r="3.5"/>
+                        <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
+
+                    </svg>
+
                 </div>
 
-                <div class="stat-value" id="statCreators">0</div>
+                <div class="stat-number" id="statCreators">0</div>
                 <div class="stat-label">Créateurs</div>
 
             </div>
 
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4 21V8l8-5 8 5v13"></path>
-                            <path d="M8 21v-5h8v5"></path>
-                        </svg>
-                    </div>
+                <div class="stat-icon">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+
+                        <path d="M7 3l5 5-4 4-5-5z"/>
+                        <path d="M17 3l-5 5 4 4 5-5z"/>
+                        <path d="M8 12l-5 9"/>
+                        <path d="M16 12l5 9"/>
+
+                    </svg>
+
                 </div>
 
-                <div class="stat-value" id="statAgencies">0</div>
-                <div class="stat-label">Agences</div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M8 8l8 8"></path>
-                            <path d="M16 8l-8 8"></path>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="stat-value" id="statMatches">0</div>
+                <div class="stat-number" id="statMatches">0</div>
                 <div class="stat-label">Matchs</div>
 
             </div>
 
+
+            <div class="stat">
+
+                <div class="stat-icon">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+
+                        <path d="M8 21h8"/>
+                        <path d="M12 17v4"/>
+                        <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="stat-number" id="statRanking">0</div>
+                <div class="stat-label">Classement</div>
+
+            </div>
+
         </div>
 
 
-        <div class="content-grid">
+        <div class="section-header">
+            <h2>Activité récente</h2>
+        </div>
 
-            <div class="panel">
+        <div class="empty">
 
-                <div class="panel-header">
+            <div class="empty-icon">
 
-                    <div>
-                        <div class="panel-title">Prochains matchs</div>
-                        <div class="panel-subtitle">
-                            Les matchs programmés apparaîtront ici.
-                        </div>
-                    </div>
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
 
-                    <button class="small-button" onclick="openPage('match')">
-                        Voir tout
-                    </button>
+                    <path d="M4 19V5"/>
+                    <path d="M4 19h17"/>
+                    <path d="M7 15l4-4 3 2 5-6"/>
 
-                </div>
+                </svg>
 
-                <div class="empty-state">
+            </div>
 
-                    <div>
+            <h3>Aucune activité</h3>
 
-                        <div class="empty-icon">
+            <p>
+                Les activités de TokCenter apparaîtront ici
+                lorsque tes premières données seront ajoutées.
+            </p>
 
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="9"></circle>
-                                <path d="M8 8l8 8"></path>
-                                <path d="M16 8l-8 8"></path>
-                            </svg>
+        </div>
 
-                        </div>
+    </section>
 
-                        <h3>Aucun match programmé</h3>
 
-                        <p>
-                            Les prochains matchs apparaîtront ici
-                            dès qu'ils seront ajoutés.
-                        </p>
+    <!-- =========================
+         MATCH
+    ========================= -->
 
-                    </div>
+    <section id="match" class="section">
 
-                </div>
+        <div class="section-header">
+
+            <div>
+                <h2>Matchs</h2>
+            </div>
+
+            <button class="primary-button"
+                    onclick="alert('Création de match bientôt disponible.')">
+                + Nouveau match
+            </button>
+
+        </div>
+
+        <div class="empty">
+
+            <div class="empty-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <path d="M7 3l5 5-4 4-5-5z"/>
+                    <path d="M17 3l-5 5 4 4 5-5z"/>
+                    <path d="M8 12l-5 9"/>
+                    <path d="M16 12l5 9"/>
+
+                </svg>
+
+            </div>
+
+            <h3>Aucun match</h3>
+
+            <p>
+                Aucun match n'est actuellement enregistré.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TEAM
+    ========================= -->
+
+    <section id="team" class="section">
+
+        <div class="section-header">
+
+            <h2>Teams</h2>
+
+            <button class="primary-button"
+                    onclick="alert('Création de team bientôt disponible.')">
+                + Créer une team
+            </button>
+
+        </div>
+
+        <div class="empty">
+
+            <div class="empty-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <circle cx="9" cy="8" r="3"/>
+                    <circle cx="17" cy="9" r="2.5"/>
+                    <path d="M3.5 20c.4-3.5 2.3-5.5 5.5-5.5s5.1 2 5.5 5.5"/>
+                    <path d="M14.5 15c2.7-.5 5.1 1.1 6 4"/>
+
+                </svg>
+
+            </div>
+
+            <h3>Aucune team</h3>
+
+            <p>
+                Crée ta première team pour commencer à organiser
+                tes créateurs et tes matchs.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CREATEUR
+    ========================= -->
+
+    <section id="createur" class="section">
+
+        <div class="section-header">
+
+            <h2>Créateurs</h2>
+
+            <button class="primary-button"
+                    onclick="alert('Ajout de créateur bientôt disponible.')">
+                + Ajouter un créateur
+            </button>
+
+        </div>
+
+        <div class="empty">
+
+            <div class="empty-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <circle cx="12" cy="8" r="3.5"/>
+                    <path d="M5 21c.6-4.2 2.8-6.5 7-6.5s6.4 2.3 7 6.5"/>
+                    <path d="M18.5 3.5v4"/>
+                    <path d="M16.5 5.5h4"/>
+
+                </svg>
+
+            </div>
+
+            <h3>Aucun créateur</h3>
+
+            <p>
+                Aucun créateur n'est encore enregistré dans TokCenter.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AGENCE
+    ========================= -->
+
+    <section id="agence" class="section">
+
+        <div class="section-header">
+
+            <h2>Agences</h2>
+
+            <button class="primary-button"
+                    onclick="alert('Ajout d’agence bientôt disponible.')">
+                + Ajouter une agence
+            </button>
+
+        </div>
+
+        <div class="empty">
+
+            <div class="empty-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <path d="M4 21V5l8-3 8 3v16"/>
+                    <path d="M2 21h20"/>
+                    <path d="M8 7h1"/>
+                    <path d="M15 7h1"/>
+                    <path d="M8 11h1"/>
+                    <path d="M15 11h1"/>
+                    <path d="M8 15h1"/>
+                    <path d="M15 15h1"/>
+                    <path d="M10 21v-4h4v4"/>
+
+                </svg>
+
+            </div>
+
+            <h3>Aucune agence</h3>
+
+            <p>
+                Les agences partenaires apparaîtront ici.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CALENDRIER
+    ========================= -->
+
+    <section id="calendrier" class="section">
+
+        <div class="section-header">
+
+            <h2>Calendrier</h2>
+
+            <button class="primary-button"
+                    onclick="alert('Création de match bientôt disponible.')">
+                + Programmer un match
+            </button>
+
+        </div>
+
+
+        <div class="calendar">
+
+            <div class="calendar-top">
+
+                <h3>Calendrier des matchs</h3>
 
             </div>
 
 
-            <div class="panel">
+            <div class="calendar-days">
 
-                <div class="panel-header">
+                <div class="day-name">Lun</div>
+                <div class="day-name">Mar</div>
+                <div class="day-name">Mer</div>
+                <div class="day-name">Jeu</div>
+                <div class="day-name">Ven</div>
+                <div class="day-name">Sam</div>
+                <div class="day-name">Dim</div>
 
-                    <div>
-                        <div class="panel-title">Activité récente</div>
-                        <div class="panel-subtitle">
-                            Les dernières actions sur TokCenter.
-                        </div>
-                    </div>
 
-                </div>
-
-                <div class="empty-state">
-
-                    <div>
-
-                        <div class="empty-icon">
-
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path>
-                                <path d="M12 8v4l2.5 2"></path>
-                            </svg>
-
-                        </div>
-
-                        <h3>Aucune activité</h3>
-
-                        <p>
-                            L'activité de la plateforme apparaîtra
-                            ici au fur et à mesure.
-                        </p>
-
-                    </div>
-
-                </div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
 
             </div>
 
@@ -1134,786 +1141,141 @@
     </section>
 
 
-    <!-- =================================================
-         PAGES SECONDAIRES
-    ================================================= -->
+    <!-- =========================
+         CLASSEMENT
+    ========================= -->
 
-    <section id="page-match" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Matchs</div>
-                    <div class="panel-subtitle">
-                        Gérez les confrontations entre agences.
-                    </div>
-                </div>
-                <button class="small-button" onclick="openModal('matchModal')">
-                    + Nouveau match
-                </button>
-            </div>
+    <section id="classement" class="section">
 
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M8 8l8 8"></path>
-                            <path d="M16 8l-8 8"></path>
-                        </svg>
-                    </div>
-                    <h3>Aucun match</h3>
-                    <p>Créez votre premier match pour commencer.</p>
-                </div>
-            </div>
+        <div class="section-header">
+
+            <h2>Classement</h2>
+
         </div>
-    </section>
 
+        <div class="empty">
 
-    <section id="page-team" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Teams</div>
-                    <div class="panel-subtitle">
-                        Gérez les teams présentes sur TokCenter.
-                    </div>
-                </div>
-                <button class="small-button" onclick="openModal('teamModal')">
-                    + Créer une team
-                </button>
+            <div class="empty-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <path d="M8 21h8"/>
+                    <path d="M12 17v4"/>
+                    <path d="M6 3h12v6c0 4-2.5 7-6 7s-6-3-6-7z"/>
+                    <path d="M6 6H3v2c0 3 1.5 5 4 5"/>
+                    <path d="M18 6h3v2c0 3-1.5 5-4 5"/>
+
+                </svg>
+
             </div>
 
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="9" cy="8" r="3"></circle>
-                            <circle cx="17" cy="9" r="2.3"></circle>
-                            <path d="M3.5 20c.5-3.3 2.5-5 5.5-5s5 1.7 5.5 5"></path>
-                        </svg>
-                    </div>
-                    <h3>Aucune team</h3>
-                    <p>Créez une team pour commencer à organiser vos créateurs.</p>
-                </div>
-            </div>
+            <h3>Classement vide</h3>
+
+            <p>
+                Le classement sera automatiquement alimenté
+                lorsque les matchs et leurs résultats seront enregistrés.
+            </p>
+
         </div>
-    </section>
 
-
-    <section id="page-createur" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Créateurs</div>
-                    <div class="panel-subtitle">
-                        Retrouvez et gérez les créateurs TikTok.
-                    </div>
-                </div>
-                <button class="small-button" onclick="openModal('creatorModal')">
-                    + Ajouter
-                </button>
-            </div>
-
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="8" r="3.5"></circle>
-                            <path d="M5 21c.6-4.2 3-6.5 7-6.5s6.4 2.3 7 6.5"></path>
-                        </svg>
-                    </div>
-                    <h3>Aucun créateur</h3>
-                    <p>Les créateurs ajoutés apparaîtront ici.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="page-agence" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Agences</div>
-                    <div class="panel-subtitle">
-                        Gérez les agences présentes sur TokCenter.
-                    </div>
-                </div>
-                <button class="small-button" onclick="openModal('agencyModal')">
-                    + Ajouter
-                </button>
-            </div>
-
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4 21V8l8-5 8 5v13"></path>
-                            <path d="M8 21v-5h8v5"></path>
-                        </svg>
-                    </div>
-                    <h3>Aucune agence</h3>
-                    <p>Les agences ajoutées apparaîtront ici.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="page-calendrier" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Calendrier</div>
-                    <div class="panel-subtitle">
-                        Visualisez les matchs et événements à venir.
-                    </div>
-                </div>
-            </div>
-
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3.5" y="5" width="17" height="16" rx="2"></rect>
-                            <path d="M7 3v4"></path>
-                            <path d="M17 3v4"></path>
-                            <path d="M3.5 10h17"></path>
-                        </svg>
-                    </div>
-                    <h3>Calendrier vide</h3>
-                    <p>Les événements apparaîtront ici.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="page-classement" class="page" style="display:none;">
-        <div class="panel">
-            <div class="panel-header">
-                <div>
-                    <div class="panel-title">Classement</div>
-                    <div class="panel-subtitle">
-                        Classement des teams et des performances.
-                    </div>
-                </div>
-            </div>
-
-            <div class="empty-state">
-                <div>
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M6 20V10"></path>
-                            <path d="M12 20V4"></path>
-                            <path d="M18 20v-7"></path>
-                            <path d="M4 20h16"></path>
-                        </svg>
-                    </div>
-                    <h3>Classement indisponible</h3>
-                    <p>
-                        Le classement se remplira automatiquement
-                        lorsque les données seront disponibles.
-                    </p>
-                </div>
-            </div>
-        </div>
     </section>
 
 </main>
 
 
-<!-- =====================================================
-     MODAL TEAM
-===================================================== -->
-
-<div class="modal" id="teamModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-                <h2>Créer une team</h2>
-                <p>Ajoutez une nouvelle team à TokCenter.</p>
-            </div>
-
-            <button class="close-modal" onclick="closeModal('teamModal')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 6l12 12"></path>
-                    <path d="M18 6L6 18"></path>
-                </svg>
-            </button>
-
-        </div>
-
-        <form onsubmit="createTeam(event)">
-
-            <div class="form-grid">
-
-                <div class="form-group full">
-                    <label>Nom de la team</label>
-                    <input id="teamName" type="text" placeholder="Nom de la team" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Agence</label>
-                    <input id="teamAgency" type="text" placeholder="Nom de l'agence">
-                </div>
-
-                <div class="form-group">
-                    <label>Plateforme</label>
-                    <input type="text" value="TikTok" disabled>
-                </div>
-
-                <div class="form-group full">
-                    <label>Description</label>
-                    <textarea id="teamDescription" placeholder="Description de la team..."></textarea>
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button type="button"
-                        class="btn btn-secondary"
-                        onclick="closeModal('teamModal')">
-                    Annuler
-                </button>
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Créer la team
-                </button>
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     MODAL CREATEUR
-===================================================== -->
-
-<div class="modal" id="creatorModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-                <h2>Ajouter un créateur</h2>
-                <p>Ajoutez un créateur TikTok.</p>
-            </div>
-
-            <button class="close-modal" onclick="closeModal('creatorModal')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 6l12 12"></path>
-                    <path d="M18 6L6 18"></path>
-                </svg>
-            </button>
-
-        </div>
-
-        <form onsubmit="createCreator(event)">
-
-            <div class="form-grid">
-
-                <div class="form-group">
-                    <label>Pseudo TikTok</label>
-                    <input id="creatorName" type="text" placeholder="@pseudo" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Team</label>
-                    <input id="creatorTeam" type="text" placeholder="Nom de la team">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-
-                <button type="button"
-                        class="btn btn-secondary"
-                        onclick="closeModal('creatorModal')">
-                    Annuler
-                </button>
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Ajouter
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     MODAL AGENCE
-===================================================== -->
-
-<div class="modal" id="agencyModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-                <h2>Ajouter une agence</h2>
-                <p>Ajoutez une agence à TokCenter.</p>
-            </div>
-
-            <button class="close-modal" onclick="closeModal('agencyModal')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 6l12 12"></path>
-                    <path d="M18 6L6 18"></path>
-                </svg>
-            </button>
-
-        </div>
-
-        <form onsubmit="createAgency(event)">
-
-            <div class="form-grid">
-
-                <div class="form-group full">
-                    <label>Nom de l'agence</label>
-                    <input id="agencyName" type="text" placeholder="Nom de l'agence" required>
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-
-                <button type="button"
-                        class="btn btn-secondary"
-                        onclick="closeModal('agencyModal')">
-                    Annuler
-                </button>
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Ajouter
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     MODAL MATCH
-===================================================== -->
-
-<div class="modal" id="matchModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-                <h2>Nouveau match</h2>
-                <p>Programmez une confrontation entre deux agences.</p>
-            </div>
-
-            <button class="close-modal" onclick="closeModal('matchModal')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 6l12 12"></path>
-                    <path d="M18 6L6 18"></path>
-                </svg>
-            </button>
-
-        </div>
-
-        <form onsubmit="createMatch(event)">
-
-            <div class="form-grid">
-
-                <div class="form-group">
-                    <label>Agence 1</label>
-                    <input id="matchAgency1" type="text" placeholder="Première agence" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Agence 2</label>
-                    <input id="matchAgency2" type="text" placeholder="Deuxième agence" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Date</label>
-                    <input id="matchDate" type="date" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Heure</label>
-                    <input id="matchTime" type="time" required>
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-
-                <button type="button"
-                        class="btn btn-secondary"
-                        onclick="closeModal('matchModal')">
-                    Annuler
-                </button>
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Programmer
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
 <script>
 
-    /* ==============================================
-       NAVIGATION
-    ============================================== */
+/* =========================
+   NAVIGATION
+========================= */
 
-    const pageNames = {
-        accueil: {
-            title: "Accueil",
-            subtitle: "Centralisez toute votre activité TikTok au même endroit."
-        },
-        match: {
-            title: "Matchs",
-            subtitle: "Gérez les confrontations entre agences."
-        },
-        team: {
-            title: "Teams",
-            subtitle: "Gérez les teams présentes sur TokCenter."
-        },
-        createur: {
-            title: "Créateurs",
-            subtitle: "Retrouvez et gérez les créateurs TikTok."
-        },
-        agence: {
-            title: "Agences",
-            subtitle: "Gérez les agences présentes sur TokCenter."
-        },
-        calendrier: {
-            title: "Calendrier",
-            subtitle: "Visualisez les matchs et événements à venir."
-        },
-        classement: {
-            title: "Classement",
-            subtitle: "Classement des teams et des performances."
-        }
-    };
+const buttons = document.querySelectorAll(".nav-button");
+const sections = document.querySelectorAll(".section");
 
+const pageTitle = document.getElementById("pageTitle");
+const pageSubtitle = document.getElementById("pageSubtitle");
 
-    function openPage(page) {
+const titles = {
+    accueil: {
+        title: "Accueil",
+        subtitle: "Bienvenue sur TokCenter"
+    },
 
-        document.querySelectorAll(".page").forEach(section => {
-            section.style.display = "none";
-        });
+    match: {
+        title: "Matchs",
+        subtitle: "Gère les matchs entre agences"
+    },
 
-        const target = document.getElementById("page-" + page);
+    team: {
+        title: "Teams",
+        subtitle: "Gère les équipes de créateurs"
+    },
 
-        if (target) {
-            target.style.display = "block";
-        }
+    createur: {
+        title: "Créateurs",
+        subtitle: "Gère les créateurs TikTok"
+    },
 
-        document.querySelectorAll(".nav-button").forEach(button => {
-            button.classList.remove("active");
-        });
+    agence: {
+        title: "Agences",
+        subtitle: "Gère les agences présentes sur TokCenter"
+    },
 
-        const activeButton = document.querySelector(
-            '.nav-button[data-page="' + page + '"]'
-        );
+    calendrier: {
+        title: "Calendrier",
+        subtitle: "Visualise les matchs programmés"
+    },
 
-        if (activeButton) {
-            activeButton.classList.add("active");
-        }
-
-        if (pageNames[page]) {
-
-            document.getElementById("pageTitle").textContent =
-                pageNames[page].title;
-
-            document.getElementById("pageSubtitle").textContent =
-                pageNames[page].subtitle;
-        }
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    classement: {
+        title: "Classement",
+        subtitle: "Classement des teams et résultats"
     }
+};
 
 
-    document.querySelectorAll(".nav-button").forEach(button => {
+buttons.forEach(button => {
 
-        button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-            const page = button.dataset.page;
+        const target = button.dataset.section;
 
-            openPage(page);
-
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
         });
 
-    });
+        button.classList.add("active");
 
-
-    /* ==============================================
-       MODALS
-    ============================================== */
-
-    function openModal(id) {
-
-        const modal = document.getElementById(id);
-
-        if (modal) {
-            modal.classList.add("open");
-        }
-
-    }
-
-
-    function closeModal(id) {
-
-        const modal = document.getElementById(id);
-
-        if (modal) {
-            modal.classList.remove("open");
-        }
-
-    }
-
-
-    document.querySelectorAll(".modal").forEach(modal => {
-
-        modal.addEventListener("click", function(event) {
-
-            if (event.target === modal) {
-                modal.classList.remove("open");
-            }
-
+        sections.forEach(section => {
+            section.classList.remove("active");
         });
 
-    });
+        const targetSection = document.getElementById(target);
 
+        if (targetSection) {
+            targetSection.classList.add("active");
+        }
 
-    document.addEventListener("keydown", function(event) {
-
-        if (event.key === "Escape") {
-
-            document.querySelectorAll(".modal.open").forEach(modal => {
-                modal.classList.remove("open");
-            });
-
+        if (titles[target]) {
+            pageTitle.textContent = titles[target].title;
+            pageSubtitle.textContent = titles[target].subtitle;
         }
 
     });
 
+});
 
-    /* ==============================================
-       DONNÉES LOCALES
-    ============================================== */
 
-    let teams = [];
-    let creators = [];
-    let agencies = [];
-    let matches = [];
+/* =========================
+   DONNÉES VIDES PAR DÉFAUT
+========================= */
 
-
-    function updateStats() {
-
-        document.getElementById("statTeams").textContent =
-            teams.length;
-
-        document.getElementById("statCreators").textContent =
-            creators.length;
-
-        document.getElementById("statAgencies").textContent =
-            agencies.length;
-
-        document.getElementById("statMatches").textContent =
-            matches.length;
-
-    }
-
-
-    /* ==============================================
-       CRÉATION TEAM
-    ============================================== */
-
-    function createTeam(event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("teamName").value.trim();
-
-        const agency =
-            document.getElementById("teamAgency").value.trim();
-
-        const description =
-            document.getElementById("teamDescription").value.trim();
-
-        if (!name) {
-            return;
-        }
-
-        teams.push({
-            name,
-            agency,
-            platform: "TikTok",
-            description
-        });
-
-        updateStats();
-
-        document.getElementById("teamName").value = "";
-        document.getElementById("teamAgency").value = "";
-        document.getElementById("teamDescription").value = "";
-
-        closeModal("teamModal");
-
-        alert("Team créée avec succès.");
-
-    }
-
-
-    /* ==============================================
-       CRÉATION CRÉATEUR
-    ============================================== */
-
-    function createCreator(event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("creatorName").value.trim();
-
-        const team =
-            document.getElementById("creatorTeam").value.trim();
-
-        if (!name) {
-            return;
-        }
-
-        creators.push({
-            name,
-            team,
-            platform: "TikTok"
-        });
-
-        updateStats();
-
-        document.getElementById("creatorName").value = "";
-        document.getElementById("creatorTeam").value = "";
-
-        closeModal("creatorModal");
-
-        alert("Créateur ajouté avec succès.");
-
-    }
-
-
-    /* ==============================================
-       CRÉATION AGENCE
-    ============================================== */
-
-    function createAgency(event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("agencyName").value.trim();
-
-        if (!name) {
-            return;
-        }
-
-        agencies.push({
-            name,
-            platform: "TikTok"
-        });
-
-        updateStats();
-
-        document.getElementById("agencyName").value = "";
-
-        closeModal("agencyModal");
-
-        alert("Agence ajoutée avec succès.");
-
-    }
-
-
-    /* ==============================================
-       CRÉATION MATCH
-    ============================================== */
-
-    function createMatch(event) {
-
-        event.preventDefault();
-
-        const agency1 =
-            document.getElementById("matchAgency1").value.trim();
-
-        const agency2 =
-            document.getElementById("matchAgency2").value.trim();
-
-        const date =
-            document.getElementById("matchDate").value;
-
-        const time =
-            document.getElementById("matchTime").value;
-
-        if (!agency1 || !agency2 || !date || !time) {
-            return;
-        }
-
-        matches.push({
-            agency1,
-            agency2,
-            date,
-            time
-        });
-
-        updateStats();
-
-        document.getElementById("matchAgency1").value = "";
-        document.getElementById("matchAgency2").value = "";
-        document.getElementById("matchDate").value = "";
-        document.getElementById("matchTime").value = "";
-
-        closeModal("matchModal");
-
-        alert("Match programmé avec succès.");
-
-    }
-
-
-    /* ==============================================
-       INITIALISATION
-    ============================================== */
-
-    updateStats();
-
-    openPage("accueil");
+document.getElementById("statTeams").textContent = "0";
+document.getElementById("statCreators").textContent = "0";
+document.getElementById("statMatches").textContent = "0";
+document.getElementById("statRanking").textContent = "0";
 
 </script>
 
