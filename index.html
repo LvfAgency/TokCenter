@@ -90,26 +90,34 @@ button{
 
 .nav{
     display:grid;
-    gap:6px;
+    gap:7px;
 }
+
+/* Navigation compacte avec grosses icônes */
 
 .nav button{
     width:100%;
+    height:58px;
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
     background:transparent;
     color:#cbd5e1;
     text-align:left;
-    padding:12px 13px;
-    border-radius:13px;
+    padding:9px 12px;
+    border-radius:14px;
     font-weight:750;
-    transition:.18s;
+    transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
 .nav button:hover{
     background:rgba(124,58,237,.18);
     color:white;
+    transform:translateX(2px);
 }
 
 .nav button.active{
@@ -118,10 +126,39 @@ button{
     box-shadow:0 7px 18px rgba(124,58,237,.28);
 }
 
+/* Icônes beaucoup plus explicites */
+
 .nav-icon{
-    width:27px;
-    text-align:center;
-    font-size:18px;
+    width:38px;
+    height:38px;
+    min-width:38px;
+    display:grid;
+    place-items:center;
+    font-size:23px;
+    line-height:1;
+    border-radius:11px;
+    background:rgba(255,255,255,.07);
+    transition:.18s;
+}
+
+.nav button:hover .nav-icon{
+    background:rgba(255,255,255,.13);
+    transform:scale(1.05);
+}
+
+.nav button.active .nav-icon{
+    background:rgba(255,255,255,.18);
+}
+
+/* Petit indicateur de page active */
+
+.nav button.active::after{
+    content:"";
+    width:4px;
+    height:28px;
+    background:white;
+    border-radius:999px;
+    margin-left:auto;
 }
 
 /* =========================
@@ -629,11 +666,19 @@ hr{
 
     .nav button{
         justify-content:center;
-        padding:13px;
+        padding:10px;
+        height:58px;
+    }
+
+    .nav button.active::after{
+        display:none;
     }
 
     .nav-icon{
-        width:auto;
+        width:40px;
+        height:40px;
+        min-width:40px;
+        font-size:24px;
     }
 
     .main{
@@ -699,12 +744,16 @@ hr{
 
         <div class="title">
             <h1 id="pageTitle">Tableau de bord</h1>
+
             <p id="pageSubtitle">
                 Votre centre de gestion d'agence.
             </p>
         </div>
 
-        <button class="btn primary" onclick="openQuickCreate()">
+        <button
+            class="btn primary"
+            onclick="openQuickCreate()"
+        >
             ＋ Ajouter
         </button>
 
@@ -725,7 +774,10 @@ hr{
 
             <h2 id="modalTitle"></h2>
 
-            <button class="close" onclick="closeModal()">
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
                 ✕
             </button>
 
@@ -954,6 +1006,8 @@ function renderNav(){
                 <button
                     class="${page === item[0] ? "active" : ""}"
                     onclick="go('${item[0]}')"
+                    title="${item[2]}"
+                    aria-label="${item[2]}"
                 >
 
                     <span class="nav-icon">
@@ -1063,6 +1117,7 @@ views.dashboard = function(){
         <div class="grid stats">
 
             <div class="card stat">
+
                 <div class="label">
                     Teams
                 </div>
@@ -1070,10 +1125,12 @@ views.dashboard = function(){
                 <div class="num">
                     ${db.teams.length}
                 </div>
+
             </div>
 
 
             <div class="card stat">
+
                 <div class="label">
                     Créateurs
                 </div>
@@ -1081,10 +1138,12 @@ views.dashboard = function(){
                 <div class="num">
                     ${db.creators.length}
                 </div>
+
             </div>
 
 
             <div class="card stat">
+
                 <div class="label">
                     Matchs à venir
                 </div>
@@ -1092,10 +1151,12 @@ views.dashboard = function(){
                 <div class="num">
                     ${upcoming.length}
                 </div>
+
             </div>
 
 
             <div class="card stat">
+
                 <div class="label">
                     Agences adverses
                 </div>
@@ -1103,6 +1164,7 @@ views.dashboard = function(){
                 <div class="num">
                     ${db.agencies.length}
                 </div>
+
             </div>
 
         </div>
@@ -2278,7 +2340,6 @@ function openCreator(id){
 
             <div class="formgrid">
 
-
                 <div class="field">
 
                     <label>
@@ -2414,7 +2475,6 @@ function openCreator(id){
                     </div>
 
                 </div>
-
 
             </div>
 
@@ -3021,7 +3081,6 @@ function openAgency(id){
 
 
             <div class="formgrid">
-
 
                 <div class="field full">
 
