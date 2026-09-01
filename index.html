@@ -20,7 +20,6 @@
     --green:#35d07f;
     --yellow:#ffbd45;
     --red:#ff4d4d;
-    --blue:#4d9cff;
 }
 
 *{
@@ -49,11 +48,6 @@ select{
 button{
     border:0;
     cursor:pointer;
-}
-
-button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
 }
 
 .app{
@@ -427,12 +421,27 @@ button:disabled{
 }
 
 .match-vs{
-    display:flex;
-    justify-content:center;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
     align-items:center;
-    gap:25px;
+    gap:20px;
     padding:12px;
     text-align:center;
+}
+
+.match-side{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:16px;
+}
+
+.match-side-title{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:8px;
 }
 
 .agency{
@@ -440,9 +449,29 @@ button:disabled{
     font-weight:800;
 }
 
+.match-person{
+    margin-top:8px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.match-pseudo{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.match-team{
+    color:var(--pink2);
+    font-size:13px;
+    font-weight:700;
+    margin-top:5px;
+}
+
 .vs{
     color:var(--muted);
     font-weight:900;
+    font-size:15px;
 }
 
 .match-actions{
@@ -477,11 +506,6 @@ button:disabled{
     font-size:20px;
     font-weight:800;
     text-transform:capitalize;
-}
-
-.calendar-actions{
-    display:flex;
-    gap:7px;
 }
 
 .calendar{
@@ -544,10 +568,6 @@ button:disabled{
     overflow:hidden;
 }
 
-.calendar-match:hover{
-    background:#382833;
-}
-
 .calendar-match-time{
     color:var(--pink2);
     font-weight:800;
@@ -557,7 +577,6 @@ button:disabled{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    margin-top:2px;
 }
 
 /* =========================
@@ -581,7 +600,7 @@ button:disabled{
 
 .modal-box{
     width:100%;
-    max-width:500px;
+    max-width:520px;
     max-height:90vh;
     overflow:auto;
     background:#15151c;
@@ -638,10 +657,30 @@ button:disabled{
     border-color:var(--pink);
 }
 
+.form-control option{
+    background:#15151c;
+    color:white;
+}
+
 .form-help{
     color:var(--muted);
     font-size:11px;
     margin-top:5px;
+}
+
+.form-section{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:17px;
+}
+
+.form-section-title{
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:14px;
+    color:#fff;
 }
 
 .modal-footer{
@@ -672,18 +711,6 @@ button:disabled{
     border-radius:10px;
     padding:12px 15px;
     box-shadow:0 15px 40px rgba(0,0,0,.35);
-    animation:toastIn .25s ease;
-}
-
-@keyframes toastIn{
-    from{
-        transform:translateY(10px);
-        opacity:0;
-    }
-    to{
-        transform:translateY(0);
-        opacity:1;
-    }
 }
 
 /* =========================
@@ -769,10 +796,6 @@ button:disabled{
         font-size:27px;
     }
 
-    .stat-icon{
-        margin-bottom:10px;
-    }
-
     .calendar-day{
         min-height:80px;
         padding:5px;
@@ -788,11 +811,16 @@ button:disabled{
     }
 
     .match-vs{
+        grid-template-columns:1fr;
         gap:10px;
     }
 
+    .vs{
+        padding:2px;
+    }
+
     .agency{
-        font-size:16px;
+        font-size:17px;
     }
 }
 </style>
@@ -802,224 +830,229 @@ button:disabled{
 
 <div class="app">
 
-    <!-- HEADER MOBILE -->
-    <header class="mobile-header">
-        <div class="mobile-logo">TOK<span>CENTER</span></div>
+<header class="mobile-header">
+    <div class="mobile-logo">TOK<span>CENTER</span></div>
 
-        <select class="mobile-select" id="mobileNavigation">
-            <option value="dashboard">Accueil</option>
-            <option value="teams">Teams</option>
-            <option value="matches">Matchs</option>
-            <option value="calendar">Calendrier</option>
-        </select>
-    </header>
+    <select class="mobile-select" id="mobileNavigation">
+        <option value="dashboard">Accueil</option>
+        <option value="teams">Teams</option>
+        <option value="matches">Matchs</option>
+        <option value="calendar">Calendrier</option>
+    </select>
+</header>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
 
-        <div class="logo">
-            TOK<span>CENTER</span>
+<aside class="sidebar">
+
+    <div class="logo">
+        TOK<span>CENTER</span>
+    </div>
+
+    <nav class="nav">
+
+        <button class="nav-btn active" data-page="dashboard">
+            🏠
+            <span>Tableau de bord</span>
+        </button>
+
+        <button class="nav-btn" data-page="teams">
+            👥
+            <span>Teams</span>
+        </button>
+
+        <button class="nav-btn" data-page="matches">
+            ⚔️
+            <span>Matchs</span>
+        </button>
+
+        <button class="nav-btn" data-page="calendar">
+            📅
+            <span>Calendrier</span>
+        </button>
+
+    </nav>
+
+</aside>
+
+
+<main class="main">
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section id="page-dashboard" class="page active">
+
+    <div class="page-header">
+
+        <div>
+            <h1>Tableau de bord</h1>
+            <p>Vue d'ensemble de votre activité TokCenter.</p>
         </div>
 
-        <nav class="nav">
-
-            <button class="nav-btn active" data-page="dashboard">
-                🏠
-                <span>Tableau de bord</span>
-            </button>
-
-            <button class="nav-btn" data-page="teams">
-                👥
-                <span>Teams</span>
-            </button>
-
-            <button class="nav-btn" data-page="matches">
-                ⚔️
-                <span>Matchs</span>
-            </button>
-
-            <button class="nav-btn" data-page="calendar">
-                📅
-                <span>Calendrier</span>
-            </button>
-
-        </nav>
-
-    </aside>
+    </div>
 
 
-    <!-- MAIN -->
-    <main class="main">
+    <div class="stats">
 
-        <!-- =========================
-             DASHBOARD
-        ========================= -->
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-label">Teams</div>
+            <div class="stat-number" id="dashboardTeams">0</div>
+        </div>
 
-        <section id="page-dashboard" class="page active">
+        <div class="stat-card">
+            <div class="stat-icon">🎥</div>
+            <div class="stat-label">Membres</div>
+            <div class="stat-number" id="dashboardMembers">0</div>
+        </div>
 
-            <div class="page-header">
-                <div>
-                    <h1>Tableau de bord</h1>
-                    <p>Vue d'ensemble de votre activité TokCenter.</p>
-                </div>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon">⚔️</div>
+            <div class="stat-label">Matchs à venir</div>
+            <div class="stat-number" id="dashboardUpcoming">0</div>
+        </div>
 
-            <div class="stats">
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-label">Matchs effectués</div>
+            <div class="stat-number" id="dashboardFinished">0</div>
+        </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-label">Teams</div>
-                    <div class="stat-number" id="dashboardTeams">0</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">🎥</div>
-                    <div class="stat-label">Membres</div>
-                    <div class="stat-number" id="dashboardMembers">0</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">⚔️</div>
-                    <div class="stat-label">Matchs à venir</div>
-                    <div class="stat-number" id="dashboardUpcoming">0</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">✅</div>
-                    <div class="stat-label">Matchs effectués</div>
-                    <div class="stat-number" id="dashboardFinished">0</div>
-                </div>
-
-            </div>
+    </div>
 
 
-            <div class="dashboard-grid">
+    <div class="dashboard-grid">
 
-                <div class="panel">
+        <div class="panel">
 
-                    <div class="panel-title">
-                        <h2>Prochains matchs</h2>
+            <div class="panel-title">
+                <h2>Prochains matchs</h2>
 
-                        <button class="btn btn-secondary btn-small"
-                                onclick="navigate('matches')">
-                            Voir tous
-                        </button>
-                    </div>
-
-                    <div id="dashboardMatches"></div>
-
-                </div>
-
-
-                <div class="panel">
-
-                    <div class="panel-title">
-                        <h2>Vos Teams</h2>
-
-                        <button class="btn btn-secondary btn-small"
-                                onclick="navigate('teams')">
-                            Gérer
-                        </button>
-                    </div>
-
-                    <div id="dashboardTeamsList"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             TEAMS
-        ========================= -->
-
-        <section id="page-teams" class="page">
-
-            <div class="page-header">
-
-                <div>
-                    <h1>Teams</h1>
-                    <p>Créez vos Teams et gérez leurs membres.</p>
-                </div>
-
-                <button class="btn btn-primary" onclick="openTeamModal()">
-                    ＋ Créer une Team
+                <button class="btn btn-secondary btn-small"
+                        onclick="navigate('matches')">
+                    Voir tous
                 </button>
-
             </div>
 
-            <div id="teamsContainer" class="team-grid"></div>
+            <div id="dashboardMatches"></div>
 
-        </section>
+        </div>
 
 
-        <!-- =========================
-             MATCHS
-        ========================= -->
+        <div class="panel">
 
-        <section id="page-matches" class="page">
+            <div class="panel-title">
+                <h2>Vos Teams</h2>
 
-            <div class="page-header">
-
-                <div>
-                    <h1>Matchs</h1>
-                    <p>Gérez vos matchs contre les agences adverses.</p>
-                </div>
-
-                <button class="btn btn-primary" onclick="openMatchModal()">
-                    ＋ Ajouter un match
+                <button class="btn btn-secondary btn-small"
+                        onclick="navigate('teams')">
+                    Gérer
                 </button>
-
             </div>
 
-            <div id="matchesContainer" class="match-list"></div>
+            <div id="dashboardTeamsList"></div>
 
-        </section>
+        </div>
+
+    </div>
+
+</section>
 
 
-        <!-- =========================
-             CALENDRIER
-        ========================= -->
+<!-- =========================
+     TEAMS
+========================= -->
 
-        <section id="page-calendar" class="page">
+<section id="page-teams" class="page">
 
-            <div class="page-header">
+    <div class="page-header">
 
-                <div>
-                    <h1>Calendrier</h1>
-                    <p>Retrouvez tous vos matchs par date.</p>
-                </div>
+        <div>
+            <h1>Teams</h1>
+            <p>Créez vos Teams et gérez leurs membres.</p>
+        </div>
 
-            </div>
+        <button class="btn btn-primary"
+                onclick="openTeamModal()">
+            ＋ Créer une Team
+        </button>
 
-            <div class="calendar-panel">
+    </div>
 
-                <div class="calendar-toolbar">
+    <div id="teamsContainer" class="team-grid"></div>
 
-                    <button class="btn btn-secondary"
-                            onclick="changeMonth(-1)">
-                        ‹
-                    </button>
+</section>
 
-                    <div class="calendar-title" id="calendarTitle"></div>
 
-                    <button class="btn btn-secondary"
-                            onclick="changeMonth(1)">
-                        ›
-                    </button>
+<!-- =========================
+     MATCHS
+========================= -->
 
-                </div>
+<section id="page-matches" class="page">
 
-                <div class="calendar" id="calendar"></div>
+    <div class="page-header">
 
-            </div>
+        <div>
+            <h1>Matchs</h1>
+            <p>Gérez vos matchs contre les agences adverses.</p>
+        </div>
 
-        </section>
+        <button class="btn btn-primary"
+                onclick="openMatchModal()">
+            ＋ Ajouter un match
+        </button>
 
-    </main>
+    </div>
 
+    <div id="matchesContainer" class="match-list"></div>
+
+</section>
+
+
+<!-- =========================
+     CALENDRIER
+========================= -->
+
+<section id="page-calendar" class="page">
+
+    <div class="page-header">
+
+        <div>
+            <h1>Calendrier</h1>
+            <p>Retrouvez tous vos matchs par date.</p>
+        </div>
+
+    </div>
+
+
+    <div class="calendar-panel">
+
+        <div class="calendar-toolbar">
+
+            <button class="btn btn-secondary"
+                    onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+            <div class="calendar-title"
+                 id="calendarTitle"></div>
+
+            <button class="btn btn-secondary"
+                    onclick="changeMonth(1)">
+                ›
+            </button>
+
+        </div>
+
+        <div class="calendar"
+             id="calendar"></div>
+
+    </div>
+
+</section>
+
+</main>
 </div>
 
 
@@ -1029,45 +1062,53 @@ button:disabled{
 
 <div class="modal" id="teamModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
-            <h2 id="teamModalTitle">Créer une Team</h2>
-            <button class="close" onclick="closeModal('teamModal')">×</button>
-        </div>
+    <div class="modal-header">
 
-        <input type="hidden" id="editTeamId">
+        <h2 id="teamModalTitle">
+            Créer une Team
+        </h2>
 
-        <div class="form-group">
-
-            <label for="teamName">
-                Nom de la Team
-            </label>
-
-            <input
-                class="form-control"
-                id="teamName"
-                type="text"
-                placeholder="Ex : Team Alpha"
-            >
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button class="btn btn-secondary"
-                    onclick="closeModal('teamModal')">
-                Annuler
-            </button>
-
-            <button class="btn btn-primary"
-                    onclick="saveTeam()">
-                Enregistrer
-            </button>
-
-        </div>
+        <button class="close"
+                onclick="closeModal('teamModal')">
+            ×
+        </button>
 
     </div>
+
+    <input type="hidden" id="editTeamId">
+
+    <div class="form-group">
+
+        <label for="teamName">
+            Nom de la Team
+        </label>
+
+        <input
+            class="form-control"
+            id="teamName"
+            type="text"
+            placeholder="Ex : Team Alpha"
+        >
+
+    </div>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-secondary"
+                onclick="closeModal('teamModal')">
+            Annuler
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="saveTeam()">
+            Enregistrer
+        </button>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -1078,93 +1119,98 @@ button:disabled{
 
 <div class="modal" id="memberModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
-            <h2 id="memberModalTitle">Ajouter un membre</h2>
-            <button class="close" onclick="closeModal('memberModal')">×</button>
-        </div>
+    <div class="modal-header">
 
-        <input type="hidden" id="memberTeamId">
-        <input type="hidden" id="editMemberId">
+        <h2 id="memberModalTitle">
+            Ajouter un membre
+        </h2>
 
-        <div class="form-group">
-
-            <label for="memberName">
-                Nom
-            </label>
-
-            <input
-                class="form-control"
-                id="memberName"
-                type="text"
-                placeholder="Nom et prénom"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="memberPseudo">
-                Pseudo TikTok
-            </label>
-
-            <input
-                class="form-control"
-                id="memberPseudo"
-                type="text"
-                placeholder="@pseudo"
-            >
-
-            <div class="form-help">
-                Le pseudo TikTok de la personne.
-            </div>
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="memberRole">
-                Rôle
-            </label>
-
-            <select class="form-control" id="memberRole">
-
-                <option value="Fondateur">
-                    Fondateur
-                </option>
-
-                <option value="Manager">
-                    Manager
-                </option>
-
-                <option value="Agent">
-                    Agent
-                </option>
-
-                <option value="Créateur" selected>
-                    Créateur
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button class="btn btn-secondary"
-                    onclick="closeModal('memberModal')">
-                Annuler
-            </button>
-
-            <button class="btn btn-primary"
-                    onclick="saveMember()">
-                Enregistrer
-            </button>
-
-        </div>
+        <button class="close"
+                onclick="closeModal('memberModal')">
+            ×
+        </button>
 
     </div>
+
+    <input type="hidden" id="memberTeamId">
+    <input type="hidden" id="editMemberId">
+
+    <div class="form-group">
+
+        <label for="memberName">
+            Nom
+        </label>
+
+        <input
+            class="form-control"
+            id="memberName"
+            type="text"
+            placeholder="Nom et prénom"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="memberPseudo">
+            Pseudo TikTok
+        </label>
+
+        <input
+            class="form-control"
+            id="memberPseudo"
+            type="text"
+            placeholder="@pseudo"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="memberRole">
+            Rôle
+        </label>
+
+        <select class="form-control"
+                id="memberRole">
+
+            <option value="Fondateur">
+                Fondateur
+            </option>
+
+            <option value="Manager">
+                Manager
+            </option>
+
+            <option value="Agent">
+                Agent
+            </option>
+
+            <option value="Créateur" selected>
+                Créateur
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-secondary"
+                onclick="closeModal('memberModal')">
+            Annuler
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="saveMember()">
+            Enregistrer
+        </button>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -1175,29 +1221,146 @@ button:disabled{
 
 <div class="modal" id="matchModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
-            <h2 id="matchModalTitle">Ajouter un match</h2>
-            <button class="close" onclick="closeModal('matchModal')">×</button>
+    <div class="modal-header">
+
+        <h2 id="matchModalTitle">
+            Ajouter un match
+        </h2>
+
+        <button class="close"
+                onclick="closeModal('matchModal')">
+            ×
+        </button>
+
+    </div>
+
+    <input type="hidden" id="editMatchId">
+
+
+    <!-- NOTRE TEAM -->
+
+    <div class="form-section">
+
+        <div class="form-section-title">
+            👥 Notre participation
         </div>
 
-        <input type="hidden" id="editMatchId">
+
+        <div class="form-group">
+
+            <label for="matchTeam">
+                Team participante
+            </label>
+
+            <select
+                class="form-control"
+                id="matchTeam"
+                onchange="updateCreatorList()">
+
+                <option value="">
+                    Sélectionner une Team
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="matchCreator">
+                Créateur participant
+            </label>
+
+            <select
+                class="form-control"
+                id="matchCreator"
+                disabled>
+
+                <option value="">
+                    Sélectionnez d'abord une Team
+                </option>
+
+            </select>
+
+            <div class="form-help">
+                La liste est automatiquement remplie avec les membres de la Team sélectionnée.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- AGENCE ADVERSE -->
+
+    <div class="form-section">
+
+        <div class="form-section-title">
+            ⚔️ Agence adverse
+        </div>
+
 
         <div class="form-group">
 
             <label for="matchAgency">
-                Agence adverse
+                Nom de l'agence
             </label>
 
             <input
                 class="form-control"
                 id="matchAgency"
                 type="text"
-                placeholder="Nom de l'agence"
+                placeholder="Ex : Agency Live"
             >
 
         </div>
+
+
+        <div class="form-group">
+
+            <label for="matchOpponent">
+                Nom de l'adversaire
+            </label>
+
+            <input
+                class="form-control"
+                id="matchOpponent"
+                type="text"
+                placeholder="Nom de l'adversaire"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="matchOpponentPseudo">
+                Pseudo TikTok de l'adversaire
+            </label>
+
+            <input
+                class="form-control"
+                id="matchOpponentPseudo"
+                type="text"
+                placeholder="@pseudo"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- DATE / HEURE -->
+
+    <div class="form-section">
+
+        <div class="form-section-title">
+            📅 Date et heure
+        </div>
+
 
         <div class="form-group">
 
@@ -1213,11 +1376,19 @@ button:disabled{
 
         </div>
 
+
         <div class="form-group">
 
             <label for="matchTime">
                 Heure
             </label>
+
+            <!--
+                input type=time :
+                sur téléphone, le système affiche
+                le sélecteur d'heure natif avec
+                défilement.
+            -->
 
             <input
                 class="form-control"
@@ -1227,37 +1398,39 @@ button:disabled{
 
         </div>
 
-        <div class="modal-footer">
+    </div>
 
-            <button class="btn btn-secondary"
-                    onclick="closeModal('matchModal')">
-                Annuler
-            </button>
 
-            <button class="btn btn-primary"
-                    onclick="saveMatch()">
-                Enregistrer
-            </button>
+    <div class="modal-footer">
 
-        </div>
+        <button class="btn btn-secondary"
+                onclick="closeModal('matchModal')">
+            Annuler
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="saveMatch()">
+            Enregistrer
+        </button>
 
     </div>
 
 </div>
 
+</div>
 
-<!-- TOAST -->
-<div class="toast-container" id="toastContainer"></div>
+
+<div class="toast-container"
+     id="toastContainer"></div>
 
 
 <script>
 
 /* =========================================================
-   TOKCENTER
    DONNÉES
 ========================================================= */
 
-const STORAGE_KEY = "tokcenter_data_v3";
+const STORAGE_KEY = "tokcenter_data_v4";
 
 let data = loadData();
 
@@ -1265,18 +1438,20 @@ let calendarDate = new Date();
 
 
 /* =========================================================
-   DONNÉES PAR DÉFAUT
+   CHARGEMENT
 ========================================================= */
 
 function loadData(){
 
     try{
 
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const saved =
+            localStorage.getItem(STORAGE_KEY);
 
         if(saved){
 
-            const parsed = JSON.parse(saved);
+            const parsed =
+                JSON.parse(saved);
 
             if(
                 parsed &&
@@ -1285,19 +1460,26 @@ function loadData(){
             ){
 
                 return parsed;
+
             }
+
         }
 
     }catch(error){
 
-        console.error("Erreur de chargement :", error);
+        console.error(
+            "Erreur de chargement :",
+            error
+        );
 
     }
 
+
     return {
-        teams: [],
-        matches: []
+        teams:[],
+        matches:[]
     };
+
 }
 
 
@@ -1323,14 +1505,22 @@ function navigate(page){
 
     document.querySelectorAll(".page")
         .forEach(element => {
+
             element.classList.remove("active");
+
         });
 
+
     const target =
-        document.getElementById("page-" + page);
+        document.getElementById(
+            "page-" + page
+        );
+
 
     if(target){
+
         target.classList.add("active");
+
     }
 
 
@@ -1345,12 +1535,9 @@ function navigate(page){
         });
 
 
-    const mobile =
-        document.getElementById("mobileNavigation");
-
-    if(mobile){
-        mobile.value = page;
-    }
+    document.getElementById(
+        "mobileNavigation"
+    ).value = page;
 
 
     renderAll();
@@ -1361,21 +1548,24 @@ function navigate(page){
 document.querySelectorAll(".nav-btn")
     .forEach(button => {
 
-        button.addEventListener("click", () => {
-
-            navigate(button.dataset.page);
-
-        });
+        button.addEventListener(
+            "click",
+            () => navigate(button.dataset.page)
+        );
 
     });
 
 
-document.getElementById("mobileNavigation")
-    .addEventListener("change", function(){
+document.getElementById(
+    "mobileNavigation"
+).addEventListener(
+    "change",
+    function(){
 
         navigate(this.value);
 
-    });
+    }
+);
 
 
 /* =========================================================
@@ -1401,15 +1591,18 @@ function closeModal(id){
 document.querySelectorAll(".modal")
     .forEach(modal => {
 
-        modal.addEventListener("click", function(event){
+        modal.addEventListener(
+            "click",
+            function(event){
 
-            if(event.target === modal){
+                if(event.target === modal){
 
-                modal.classList.remove("show");
+                    modal.classList.remove("show");
+
+                }
 
             }
-
-        });
+        );
 
     });
 
@@ -1420,40 +1613,50 @@ document.querySelectorAll(".modal")
 
 function openTeamModal(teamId = null){
 
-    document.getElementById("editTeamId").value =
+    document.getElementById(
+        "editTeamId"
+    ).value =
         teamId || "";
 
-    document.getElementById("teamName").value = "";
+
+    document.getElementById(
+        "teamName"
+    ).value = "";
 
 
     if(teamId){
 
         const team =
-            data.teams.find(t => t.id === teamId);
+            data.teams.find(
+                t => t.id === teamId
+            );
+
 
         if(!team) return;
 
-        document.getElementById("teamModalTitle")
-            .textContent = "Modifier la Team";
 
-        document.getElementById("teamName").value =
+        document.getElementById(
+            "teamModalTitle"
+        ).textContent =
+            "Modifier la Team";
+
+
+        document.getElementById(
+            "teamName"
+        ).value =
             team.name;
 
     }else{
 
-        document.getElementById("teamModalTitle")
-            .textContent = "Créer une Team";
+        document.getElementById(
+            "teamModalTitle"
+        ).textContent =
+            "Créer une Team";
 
     }
 
 
     openModal("teamModal");
-
-    setTimeout(() => {
-
-        document.getElementById("teamName").focus();
-
-    },100);
 
 }
 
@@ -1461,20 +1664,25 @@ function openTeamModal(teamId = null){
 function saveTeam(){
 
     const name =
-        document.getElementById("teamName")
-            .value
-            .trim();
+        document.getElementById(
+            "teamName"
+        ).value.trim();
+
 
     const editId =
-        document.getElementById("editTeamId")
-            .value;
+        document.getElementById(
+            "editTeamId"
+        ).value;
 
 
     if(!name){
 
-        showToast("Veuillez entrer un nom de Team.");
+        showToast(
+            "Veuillez entrer un nom de Team."
+        );
 
         return;
+
     }
 
 
@@ -1485,11 +1693,14 @@ function saveTeam(){
                 t => t.id === Number(editId)
             );
 
+
         if(team){
 
             team.name = name;
 
-            showToast("Team modifiée.");
+            showToast(
+                "Team modifiée."
+            );
 
         }
 
@@ -1505,7 +1716,10 @@ function saveTeam(){
 
         });
 
-        showToast("Team créée.");
+
+        showToast(
+            "Team créée."
+        );
 
     }
 
@@ -1526,10 +1740,11 @@ function deleteTeam(teamId){
             t => t.id === teamId
         );
 
+
     if(!team) return;
 
 
-    const members =
+    const count =
         Array.isArray(team.members)
             ? team.members.length
             : 0;
@@ -1539,10 +1754,10 @@ function deleteTeam(teamId){
         `Supprimer la Team « ${team.name} » ?`;
 
 
-    if(members > 0){
+    if(count){
 
         message +=
-            `\n\nCette Team contient ${members} membre${members > 1 ? "s" : ""}.`;
+            `\n\nCette Team contient ${count} membre${count > 1 ? "s" : ""}.`;
 
     }
 
@@ -1560,7 +1775,9 @@ function deleteTeam(teamId){
 
     renderAll();
 
-    showToast("Team supprimée.");
+    showToast(
+        "Team supprimée."
+    );
 
 }
 
@@ -1569,27 +1786,45 @@ function deleteTeam(teamId){
    MEMBRES
 ========================================================= */
 
-function openMemberModal(teamId, memberId = null){
+function openMemberModal(
+    teamId,
+    memberId = null
+){
 
     const team =
         data.teams.find(
             t => t.id === teamId
         );
 
+
     if(!team) return;
 
 
-    document.getElementById("memberTeamId").value =
+    document.getElementById(
+        "memberTeamId"
+    ).value =
         teamId;
 
-    document.getElementById("editMemberId").value =
+
+    document.getElementById(
+        "editMemberId"
+    ).value =
         memberId || "";
 
-    document.getElementById("memberName").value = "";
 
-    document.getElementById("memberPseudo").value = "";
+    document.getElementById(
+        "memberName"
+    ).value = "";
 
-    document.getElementById("memberRole").value =
+
+    document.getElementById(
+        "memberPseudo"
+    ).value = "";
+
+
+    document.getElementById(
+        "memberRole"
+    ).value =
         "Créateur";
 
 
@@ -1600,25 +1835,38 @@ function openMemberModal(teamId, memberId = null){
                 m => m.id === memberId
             );
 
+
         if(!member) return;
 
 
-        document.getElementById("memberModalTitle")
-            .textContent = "Modifier le membre";
+        document.getElementById(
+            "memberModalTitle"
+        ).textContent =
+            "Modifier le membre";
 
-        document.getElementById("memberName").value =
+
+        document.getElementById(
+            "memberName"
+        ).value =
             member.name;
 
-        document.getElementById("memberPseudo").value =
+
+        document.getElementById(
+            "memberPseudo"
+        ).value =
             member.pseudo;
 
-        document.getElementById("memberRole").value =
+
+        document.getElementById(
+            "memberRole"
+        ).value =
             member.role;
 
     }else{
 
-        document.getElementById("memberModalTitle")
-            .textContent =
+        document.getElementById(
+            "memberModalTitle"
+        ).textContent =
             `Ajouter un membre à ${team.name}`;
 
     }
@@ -1633,46 +1881,55 @@ function saveMember(){
 
     const teamId =
         Number(
-            document.getElementById("memberTeamId")
-                .value
+            document.getElementById(
+                "memberTeamId"
+            ).value
         );
 
 
     const editId =
-        document.getElementById("editMemberId")
-            .value;
+        document.getElementById(
+            "editMemberId"
+        ).value;
 
 
     const name =
-        document.getElementById("memberName")
-            .value
-            .trim();
+        document.getElementById(
+            "memberName"
+        ).value.trim();
 
 
     let pseudo =
-        document.getElementById("memberPseudo")
-            .value
-            .trim();
+        document.getElementById(
+            "memberPseudo"
+        ).value.trim();
 
 
     const role =
-        document.getElementById("memberRole")
-            .value;
+        document.getElementById(
+            "memberRole"
+        ).value;
 
 
     if(!name){
 
-        showToast("Veuillez renseigner le nom.");
+        showToast(
+            "Veuillez renseigner le nom."
+        );
 
         return;
+
     }
 
 
     if(!pseudo){
 
-        showToast("Veuillez renseigner le pseudo TikTok.");
+        showToast(
+            "Veuillez renseigner le pseudo TikTok."
+        );
 
         return;
+
     }
 
 
@@ -1715,7 +1972,9 @@ function saveMember(){
 
             member.role = role;
 
-            showToast("Membre modifié.");
+            showToast(
+                "Membre modifié."
+            );
 
         }
 
@@ -1734,7 +1993,9 @@ function saveMember(){
         });
 
 
-        showToast("Membre ajouté.");
+        showToast(
+            "Membre ajouté."
+        );
 
     }
 
@@ -1748,12 +2009,16 @@ function saveMember(){
 }
 
 
-function deleteMember(teamId, memberId){
+function deleteMember(
+    teamId,
+    memberId
+){
 
     const team =
         data.teams.find(
             t => t.id === teamId
         );
+
 
     if(!team) return;
 
@@ -1782,7 +2047,187 @@ function deleteMember(teamId, memberId){
 
     renderAll();
 
-    showToast("Membre supprimé.");
+    showToast(
+        "Membre supprimé."
+    );
+
+}
+
+
+/* =========================================================
+   LISTE DES TEAMS DANS LE FORMULAIRE MATCH
+========================================================= */
+
+function populateMatchTeams(){
+
+    const select =
+        document.getElementById(
+            "matchTeam"
+        );
+
+
+    const current =
+        select.value;
+
+
+    select.innerHTML = `
+        <option value="">
+            Sélectionner une Team
+        </option>
+    `;
+
+
+    data.teams.forEach(team => {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            team.id;
+
+
+        option.textContent =
+            team.name;
+
+
+        select.appendChild(option);
+
+    });
+
+
+    if(current &&
+       data.teams.some(
+           team => String(team.id) === String(current)
+       )
+    ){
+
+        select.value = current;
+
+    }
+
+}
+
+
+/* =========================================================
+   LISTE AUTOMATIQUE DES CRÉATEURS
+========================================================= */
+
+function updateCreatorList(
+    selectedCreatorId = null
+){
+
+    const teamSelect =
+        document.getElementById(
+            "matchTeam"
+        );
+
+
+    const creatorSelect =
+        document.getElementById(
+            "matchCreator"
+        );
+
+
+    const teamId =
+        Number(teamSelect.value);
+
+
+    creatorSelect.innerHTML = "";
+
+
+    if(!teamId){
+
+        creatorSelect.disabled = true;
+
+        creatorSelect.innerHTML = `
+            <option value="">
+                Sélectionnez d'abord une Team
+            </option>
+        `;
+
+        return;
+
+    }
+
+
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
+
+
+    if(!team){
+
+        creatorSelect.disabled = true;
+
+        creatorSelect.innerHTML = `
+            <option value="">
+                Team introuvable
+            </option>
+        `;
+
+        return;
+
+    }
+
+
+    const members =
+        Array.isArray(team.members)
+            ? team.members
+            : [];
+
+
+    if(!members.length){
+
+        creatorSelect.disabled = true;
+
+        creatorSelect.innerHTML = `
+            <option value="">
+                Aucun membre dans cette Team
+            </option>
+        `;
+
+        return;
+
+    }
+
+
+    creatorSelect.disabled = false;
+
+
+    creatorSelect.innerHTML = `
+        <option value="">
+            Sélectionner le participant
+        </option>
+    `;
+
+
+    members.forEach(member => {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            member.id;
+
+
+        option.textContent =
+            `${member.name} — ${member.pseudo}`;
+
+
+        creatorSelect.appendChild(option);
+
+    });
+
+
+    if(selectedCreatorId){
+
+        creatorSelect.value =
+            selectedCreatorId;
+
+    }
 
 }
 
@@ -1791,16 +2236,42 @@ function deleteMember(teamId, memberId){
    MATCHS
 ========================================================= */
 
-function openMatchModal(matchId = null){
+function openMatchModal(
+    matchId = null
+){
 
-    document.getElementById("editMatchId").value =
+    document.getElementById(
+        "editMatchId"
+    ).value =
         matchId || "";
 
-    document.getElementById("matchAgency").value = "";
 
-    document.getElementById("matchDate").value = "";
+    document.getElementById(
+        "matchAgency"
+    ).value = "";
 
-    document.getElementById("matchTime").value = "";
+
+    document.getElementById(
+        "matchOpponent"
+    ).value = "";
+
+
+    document.getElementById(
+        "matchOpponentPseudo"
+    ).value = "";
+
+
+    document.getElementById(
+        "matchDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "matchTime"
+    ).value = "";
+
+
+    populateMatchTeams();
 
 
     if(matchId){
@@ -1810,29 +2281,61 @@ function openMatchModal(matchId = null){
                 m => m.id === matchId
             );
 
+
         if(!match) return;
 
 
-        document.getElementById("matchModalTitle")
-            .textContent =
+        document.getElementById(
+            "matchModalTitle"
+        ).textContent =
             "Modifier le match";
 
 
-        document.getElementById("matchAgency").value =
-            match.agency;
+        document.getElementById(
+            "matchTeam"
+        ).value =
+            match.teamId || "";
 
 
-        document.getElementById("matchDate").value =
-            match.date;
+        updateCreatorList(
+            match.creatorId || null
+        );
 
 
-        document.getElementById("matchTime").value =
-            match.time;
+        document.getElementById(
+            "matchAgency"
+        ).value =
+            match.agency || "";
+
+
+        document.getElementById(
+            "matchOpponent"
+        ).value =
+            match.opponent || "";
+
+
+        document.getElementById(
+            "matchOpponentPseudo"
+        ).value =
+            match.opponentPseudo || "";
+
+
+        document.getElementById(
+            "matchDate"
+        ).value =
+            match.date || "";
+
+
+        document.getElementById(
+            "matchTime"
+        ).value =
+            match.time || "";
 
     }else{
 
-        document.getElementById("matchModalTitle")
-            .textContent =
+        document.getElementById(
+            "matchModalTitle"
+        ).textContent =
             "Ajouter un match";
 
 
@@ -1843,17 +2346,29 @@ function openMatchModal(matchId = null){
         const year =
             today.getFullYear();
 
+
         const month =
-            String(today.getMonth()+1)
-                .padStart(2,"0");
+            String(
+                today.getMonth()+1
+            ).padStart(2,"0");
+
 
         const day =
-            String(today.getDate())
-                .padStart(2,"0");
+            String(
+                today.getDate()
+            ).padStart(2,"0");
 
 
-        document.getElementById("matchDate").value =
+        document.getElementById(
+            "matchDate"
+        ).value =
             `${year}-${month}-${day}`;
+
+
+        document.getElementById(
+            "matchTime"
+        ).value =
+            "21:00";
 
     }
 
@@ -1866,47 +2381,165 @@ function openMatchModal(matchId = null){
 function saveMatch(){
 
     const editId =
-        document.getElementById("editMatchId")
-            .value;
+        document.getElementById(
+            "editMatchId"
+        ).value;
+
+
+    const teamId =
+        Number(
+            document.getElementById(
+                "matchTeam"
+            ).value
+        );
+
+
+    const creatorId =
+        Number(
+            document.getElementById(
+                "matchCreator"
+            ).value
+        );
 
 
     const agency =
-        document.getElementById("matchAgency")
-            .value
-            .trim();
+        document.getElementById(
+            "matchAgency"
+        ).value.trim();
+
+
+    const opponent =
+        document.getElementById(
+            "matchOpponent"
+        ).value.trim();
+
+
+    let opponentPseudo =
+        document.getElementById(
+            "matchOpponentPseudo"
+        ).value.trim();
 
 
     const date =
-        document.getElementById("matchDate")
-            .value;
+        document.getElementById(
+            "matchDate"
+        ).value;
 
 
     const time =
-        document.getElementById("matchTime")
-            .value;
+        document.getElementById(
+            "matchTime"
+        ).value;
+
+
+    if(!teamId){
+
+        showToast(
+            "Veuillez sélectionner une Team."
+        );
+
+        return;
+
+    }
+
+
+    if(!creatorId){
+
+        showToast(
+            "Veuillez sélectionner le créateur participant."
+        );
+
+        return;
+
+    }
 
 
     if(!agency){
 
-        showToast("Veuillez renseigner l'agence adverse.");
+        showToast(
+            "Veuillez renseigner le nom de l'agence adverse."
+        );
 
         return;
+
+    }
+
+
+    if(!opponent){
+
+        showToast(
+            "Veuillez renseigner le nom de l'adversaire."
+        );
+
+        return;
+
+    }
+
+
+    if(!opponentPseudo){
+
+        showToast(
+            "Veuillez renseigner le pseudo TikTok de l'adversaire."
+        );
+
+        return;
+
+    }
+
+
+    if(!opponentPseudo.startsWith("@")){
+
+        opponentPseudo =
+            "@" + opponentPseudo;
+
     }
 
 
     if(!date){
 
-        showToast("Veuillez sélectionner une date.");
+        showToast(
+            "Veuillez sélectionner une date."
+        );
 
         return;
+
     }
 
 
     if(!time){
 
-        showToast("Veuillez sélectionner une heure.");
+        showToast(
+            "Veuillez sélectionner une heure."
+        );
 
         return;
+
+    }
+
+
+    const team =
+        data.teams.find(
+            t => t.id === teamId
+        );
+
+
+    if(!team) return;
+
+
+    const creator =
+        team.members.find(
+            m => m.id === creatorId
+        );
+
+
+    if(!creator){
+
+        showToast(
+            "Le créateur sélectionné est introuvable."
+        );
+
+        return;
+
     }
 
 
@@ -1920,13 +2553,45 @@ function saveMatch(){
 
         if(match){
 
-            match.agency = agency;
+            match.teamId =
+                teamId;
 
-            match.date = date;
 
-            match.time = time;
+            match.creatorId =
+                creatorId;
 
-            showToast("Match modifié.");
+
+            match.creatorName =
+                creator.name;
+
+
+            match.creatorPseudo =
+                creator.pseudo;
+
+
+            match.agency =
+                agency;
+
+
+            match.opponent =
+                opponent;
+
+
+            match.opponentPseudo =
+                opponentPseudo;
+
+
+            match.date =
+                date;
+
+
+            match.time =
+                time;
+
+
+            showToast(
+                "Match modifié."
+            );
 
         }
 
@@ -1936,7 +2601,21 @@ function saveMatch(){
 
             id:Date.now(),
 
+            teamId:teamId,
+
+            teamName:team.name,
+
+            creatorId:creatorId,
+
+            creatorName:creator.name,
+
+            creatorPseudo:creator.pseudo,
+
             agency:agency,
+
+            opponent:opponent,
+
+            opponentPseudo:opponentPseudo,
 
             date:date,
 
@@ -1947,7 +2626,9 @@ function saveMatch(){
         });
 
 
-        showToast("Match ajouté.");
+        showToast(
+            "Match ajouté."
+        );
 
     }
 
@@ -1968,6 +2649,7 @@ function deleteMatch(matchId){
             m => m.id === matchId
         );
 
+
     if(!match) return;
 
 
@@ -1986,7 +2668,9 @@ function deleteMatch(matchId){
 
     renderAll();
 
-    showToast("Match supprimé.");
+    showToast(
+        "Match supprimé."
+    );
 
 }
 
@@ -1997,6 +2681,7 @@ function toggleMatch(matchId){
         data.matches.find(
             m => m.id === matchId
         );
+
 
     if(!match) return;
 
@@ -2026,7 +2711,7 @@ function toggleMatch(matchId){
 function getTotalMembers(){
 
     return data.teams.reduce(
-        (total, team) => {
+        (total,team) => {
 
             return total +
                 (
@@ -2042,10 +2727,21 @@ function getTotalMembers(){
 }
 
 
+function getDateTime(match){
+
+    return new Date(
+        `${match.date}T${match.time || "00:00"}`
+    ).getTime();
+
+}
+
+
 function getUpcomingMatches(){
 
     return data.matches
-        .filter(match => !match.completed)
+        .filter(
+            match => !match.completed
+        )
         .sort(
             (a,b) =>
                 getDateTime(a) -
@@ -2058,25 +2754,18 @@ function getUpcomingMatches(){
 function getFinishedMatches(){
 
     return data.matches
-        .filter(match => match.completed);
+        .filter(
+            match => match.completed
+        );
 
 }
 
 
-function getDateTime(match){
-
-    return new Date(
-        `${match.date}T${match.time || "00:00"}`
-    ).getTime();
-
-}
-
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 function renderDashboard(){
-
-    const totalMembers =
-        getTotalMembers();
-
 
     document.getElementById(
         "dashboardTeams"
@@ -2087,7 +2776,7 @@ function renderDashboard(){
     document.getElementById(
         "dashboardMembers"
     ).textContent =
-        totalMembers;
+        getTotalMembers();
 
 
     document.getElementById(
@@ -2132,6 +2821,7 @@ function renderDashboardMatches(){
         `;
 
         return;
+
     }
 
 
@@ -2144,7 +2834,8 @@ function renderDashboardMatches(){
 
                     <div class="match-date">
                         ${formatDate(match.date)}
-                        · ${escapeHTML(match.time)}
+                        ·
+                        ${escapeHTML(match.time)}
                     </div>
 
                     <span class="status upcoming">
@@ -2153,18 +2844,53 @@ function renderDashboardMatches(){
 
                 </div>
 
+
                 <div class="match-vs">
 
-                    <div class="agency">
-                        TokCenter
+                    <div class="match-side">
+
+                        <div class="match-side-title">
+                            Notre participation
+                        </div>
+
+                        <div class="agency">
+                            ${escapeHTML(match.teamName || "Team")}
+                        </div>
+
+                        <div class="match-person">
+                            ${escapeHTML(match.creatorName || "")}
+                        </div>
+
+                        <div class="match-pseudo">
+                            ${escapeHTML(match.creatorPseudo || "")}
+                        </div>
+
                     </div>
+
 
                     <div class="vs">
                         VS
                     </div>
 
-                    <div class="agency">
-                        ${escapeHTML(match.agency)}
+
+                    <div class="match-side">
+
+                        <div class="match-side-title">
+                            Agence adverse
+                        </div>
+
+                        <div class="agency">
+                            ${escapeHTML(match.agency)}
+                        </div>
+
+                        <div class="match-person">
+                            ${escapeHTML(match.opponent || "")}
+                        </div>
+
+                        <div class="match-pseudo">
+                            ${escapeHTML(match.opponentPseudo || "")}
+                        </div>
+
                     </div>
 
                 </div>
@@ -2194,6 +2920,7 @@ function renderDashboardTeams(){
         `;
 
         return;
+
     }
 
 
@@ -2249,7 +2976,7 @@ function renderDashboardTeams(){
 
 
 /* =========================================================
-   AFFICHAGE TEAMS
+   TEAMS
 ========================================================= */
 
 function renderTeams(){
@@ -2291,6 +3018,7 @@ function renderTeams(){
         `;
 
         return;
+
     }
 
 
@@ -2366,6 +3094,7 @@ function renderTeams(){
 
                                     </div>
 
+
                                     <div class="member-actions">
 
                                         <button
@@ -2427,7 +3156,7 @@ function renderTeams(){
 
 
 /* =========================================================
-   AFFICHAGE MATCHS
+   MATCHS
 ========================================================= */
 
 function renderMatches(){
@@ -2468,6 +3197,7 @@ function renderMatches(){
         `;
 
         return;
+
     }
 
 
@@ -2509,16 +3239,60 @@ function renderMatches(){
 
                 <div class="match-vs">
 
-                    <div class="agency">
-                        TokCenter
+                    <div class="match-side">
+
+                        <div class="match-side-title">
+                            Notre participation
+                        </div>
+
+                        <div class="agency">
+                            ${escapeHTML(
+                                match.teamName || "Team"
+                            )}
+                        </div>
+
+                        <div class="match-person">
+                            ${escapeHTML(
+                                match.creatorName || ""
+                            )}
+                        </div>
+
+                        <div class="match-pseudo">
+                            ${escapeHTML(
+                                match.creatorPseudo || ""
+                            )}
+                        </div>
+
                     </div>
+
 
                     <div class="vs">
                         VS
                     </div>
 
-                    <div class="agency">
-                        ${escapeHTML(match.agency)}
+
+                    <div class="match-side">
+
+                        <div class="match-side-title">
+                            Agence adverse
+                        </div>
+
+                        <div class="agency">
+                            ${escapeHTML(match.agency)}
+                        </div>
+
+                        <div class="match-person">
+                            ${escapeHTML(
+                                match.opponent || ""
+                            )}
+                        </div>
+
+                        <div class="match-pseudo">
+                            ${escapeHTML(
+                                match.opponentPseudo || ""
+                            )}
+                        </div>
+
                     </div>
 
                 </div>
@@ -2572,19 +3346,12 @@ function changeMonth(direction){
 }
 
 
-function goToToday(){
-
-    calendarDate = new Date();
-
-    renderCalendar();
-
-}
-
-
 function renderCalendar(){
 
     const calendar =
-        document.getElementById("calendar");
+        document.getElementById(
+            "calendar"
+        );
 
 
     const year =
@@ -2628,7 +3395,11 @@ function renderCalendar(){
 
 
     const first =
-        new Date(year,month,1);
+        new Date(
+            year,
+            month,
+            1
+        );
 
 
     let firstDay =
@@ -2636,7 +3407,9 @@ function renderCalendar(){
 
 
     if(firstDay === 0){
+
         firstDay = 7;
+
     }
 
 
@@ -2662,7 +3435,10 @@ function renderCalendar(){
 
     const totalCells =
         Math.ceil(
-            (previousDays + daysInMonth) / 7
+            (
+                previousDays +
+                daysInMonth
+            ) / 7
         ) * 7;
 
 
@@ -2670,48 +3446,63 @@ function renderCalendar(){
         new Date();
 
 
-    for(let i=0; i<totalCells; i++){
+    for(
+        let i=0;
+        i<totalCells;
+        i++
+    ){
 
         const dayIndex =
             i - previousDays + 1;
 
 
         let date;
+
         let currentMonth = true;
 
 
         if(dayIndex < 1){
 
             date =
-                previousMonthDays + dayIndex;
+                previousMonthDays +
+                dayIndex;
 
             currentMonth = false;
 
-        }else if(dayIndex > daysInMonth){
+        }else if(
+            dayIndex > daysInMonth
+        ){
 
             date =
-                dayIndex - daysInMonth;
+                dayIndex -
+                daysInMonth;
 
             currentMonth = false;
 
         }else{
 
-            date = dayIndex;
+            date =
+                dayIndex;
 
         }
 
 
         let cellYear = year;
+
         let cellMonth = month;
 
 
-        if(!currentMonth && dayIndex < 1){
+        if(
+            !currentMonth &&
+            dayIndex < 1
+        ){
 
             cellMonth--;
 
             if(cellMonth < 0){
 
                 cellMonth = 11;
+
                 cellYear--;
 
             }
@@ -2719,13 +3510,17 @@ function renderCalendar(){
         }
 
 
-        if(!currentMonth && dayIndex > daysInMonth){
+        if(
+            !currentMonth &&
+            dayIndex > daysInMonth
+        ){
 
             cellMonth++;
 
             if(cellMonth > 11){
 
                 cellMonth = 0;
+
                 cellYear++;
 
             }
@@ -2734,7 +3529,11 @@ function renderCalendar(){
 
 
         const dateString =
-            `${cellYear}-${String(cellMonth+1).padStart(2,"0")}-${String(date).padStart(2,"0")}`;
+            `${cellYear}-${String(
+                cellMonth + 1
+            ).padStart(2,"0")}-${String(
+                date
+            ).padStart(2,"0")}`;
 
 
         const isToday =
@@ -2744,11 +3543,10 @@ function renderCalendar(){
 
 
         const dayMatches =
-            data.matches
-                .filter(
-                    match =>
-                        match.date === dateString
-                );
+            data.matches.filter(
+                match =>
+                    match.date === dateString
+            );
 
 
         html += `
@@ -2764,27 +3562,25 @@ function renderCalendar(){
                 </div>
 
                 ${
-                    dayMatches
-                        .map(match => `
+                    dayMatches.map(match => `
 
-                            <div
-                                class="calendar-match"
-                                onclick="openMatchModal(${match.id})"
-                                title="VS ${escapeHTML(match.agency)}"
-                            >
+                        <div
+                            class="calendar-match"
+                            onclick="openMatchModal(${match.id})"
+                            title="VS ${escapeHTML(match.agency)}"
+                        >
 
-                                <div class="calendar-match-time">
-                                    ${escapeHTML(match.time)}
-                                </div>
-
-                                <div class="calendar-match-agency">
-                                    VS ${escapeHTML(match.agency)}
-                                </div>
-
+                            <div class="calendar-match-time">
+                                ${escapeHTML(match.time)}
                             </div>
 
-                        `)
-                        .join("")
+                            <div class="calendar-match-agency">
+                                VS ${escapeHTML(match.agency)}
+                            </div>
+
+                        </div>
+
+                    `).join("")
                 }
 
             </div>
@@ -2794,7 +3590,8 @@ function renderCalendar(){
     }
 
 
-    calendar.innerHTML = html;
+    calendar.innerHTML =
+        html;
 
 }
 
@@ -2807,9 +3604,11 @@ function formatDate(dateString){
 
     if(!dateString) return "";
 
+
     const date =
         new Date(
-            dateString + "T00:00:00"
+            dateString +
+            "T00:00:00"
         );
 
 
@@ -2828,12 +3627,14 @@ function formatDate(dateString){
 
 function escapeHTML(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
@@ -2847,52 +3648,34 @@ function showToast(message){
 
 
     const toast =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
-    toast.className = "toast";
-
-    toast.textContent = message;
-
-
-    container.appendChild(toast);
+    toast.className =
+        "toast";
 
 
-    setTimeout(() => {
+    toast.textContent =
+        message;
 
-        toast.remove();
 
-    },3000);
+    container.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        () => toast.remove(),
+        3000
+    );
 
 }
 
 
 /* =========================================================
-   RACCOURCIS CLAVIER
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Escape"){
-
-            document
-                .querySelectorAll(".modal.show")
-                .forEach(modal => {
-
-                    modal.classList.remove("show");
-
-                });
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   RENDU GLOBAL
+   INITIALISATION
 ========================================================= */
 
 function renderAll(){
@@ -2909,8 +3692,28 @@ function renderAll(){
 
 
 /* =========================================================
-   INITIALISATION
+   ESCAPE
 ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Escape"){
+
+            document
+                .querySelectorAll(".modal.show")
+                .forEach(modal => {
+
+                    modal.classList.remove("show");
+
+                });
+
+        }
+
+    }
+);
+
 
 renderAll();
 
