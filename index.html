@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TokCenter — Gestion TikTok</title>
+<title>TokCenter</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 :root{
     --bg:#09090d;
     --panel:#111117;
-    --panel2:#17171f;
-    --border:#272733;
+    --panel2:#18181f;
+    --border:#292934;
     --text:#f5f5f7;
-    --muted:#94949f;
+    --muted:#92929d;
     --accent:#fe2c55;
-    --accent2:#25f4ee;
+    --cyan:#25f4ee;
     --green:#32d583;
-    --yellow:#fdb022;
-    --danger:#ff4d67;
+    --danger:#ff526d;
 }
 
 body{
@@ -42,21 +41,22 @@ button{
 }
 
 .app{
-    display:flex;
     min-height:100vh;
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
     width:250px;
     background:#0d0d12;
     border-right:1px solid var(--border);
     padding:22px 15px;
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
     z-index:50;
 }
 
@@ -68,15 +68,15 @@ button{
 }
 
 .logo-icon{
-    width:39px;
-    height:39px;
+    width:40px;
+    height:40px;
     border-radius:11px;
-    background:linear-gradient(135deg,var(--accent),#ff6683);
+    background:linear-gradient(135deg,#fe2c55,#ff6684);
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:21px;
     font-weight:900;
-    font-size:20px;
 }
 
 .logo-text{
@@ -95,58 +95,62 @@ button{
 }
 
 .nav button{
+    width:100%;
     border:0;
     background:transparent;
     color:var(--muted);
     padding:13px 14px;
     border-radius:10px;
-    text-align:left;
     display:flex;
     align-items:center;
     gap:12px;
+    text-align:left;
     font-weight:600;
 }
 
-.nav button:hover,
-.nav button.active{
-    background:#1a1a22;
+.nav button:hover{
+    background:#18181f;
     color:white;
 }
 
 .nav button.active{
+    background:#191920;
+    color:white;
     box-shadow:inset 3px 0 var(--accent);
 }
 
 .nav-icon{
     width:22px;
     text-align:center;
-    font-size:17px;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .main{
     margin-left:250px;
-    width:calc(100% - 250px);
     padding:25px;
+    min-height:100vh;
 }
 
 .topbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:27px;
+    gap:15px;
+    margin-bottom:25px;
 }
 
 .page-title{
-    font-size:27px;
+    font-size:28px;
     font-weight:800;
 }
 
 .page-subtitle{
     color:var(--muted);
-    margin-top:5px;
     font-size:14px;
+    margin-top:5px;
 }
 
 .primary-btn{
@@ -167,26 +171,50 @@ button{
     background:var(--panel2);
     color:white;
     border-radius:9px;
-    padding:10px 15px;
+    padding:10px 14px;
     font-weight:600;
+}
+
+.secondary-btn:hover{
+    border-color:#444450;
 }
 
 .danger-btn{
-    border:1px solid rgba(255,77,103,.25);
-    background:rgba(255,77,103,.08);
-    color:#ff7186;
-    border-radius:9px;
-    padding:9px 13px;
+    border:1px solid rgba(255,82,109,.25);
+    background:rgba(255,82,109,.08);
+    color:#ff7187;
+    border-radius:8px;
+    padding:8px 11px;
+    font-size:12px;
     font-weight:600;
 }
 
-/* DASHBOARD */
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+}
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:35px 15px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
 
 .stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:15px;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
 
 .stat-card{
@@ -199,18 +227,18 @@ button{
 .stat-label{
     color:var(--muted);
     font-size:13px;
-    margin-bottom:10px;
 }
 
 .stat-number{
-    font-size:28px;
-    font-weight:800;
+    font-size:29px;
+    font-weight:900;
+    margin-top:8px;
 }
 
 .stat-small{
-    margin-top:6px;
     color:var(--muted);
     font-size:12px;
+    margin-top:6px;
 }
 
 .dashboard-grid{
@@ -219,36 +247,25 @@ button{
     gap:18px;
 }
 
-.panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:20px;
-}
-
 .panel-title{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:17px;
+    margin-bottom:15px;
 }
 
 .panel-title h3{
     font-size:17px;
 }
 
-.empty{
-    padding:35px 15px;
-    text-align:center;
-    color:var(--muted);
-}
-
-/* TEAMS */
+/* =========================
+   TEAMS
+========================= */
 
 .teams-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:17px;
+    gap:16px;
 }
 
 .team-card{
@@ -256,19 +273,14 @@ button{
     border:1px solid var(--border);
     border-radius:15px;
     padding:18px;
-    transition:.15s;
-}
-
-.team-card:hover{
-    border-color:#3b3b49;
-    transform:translateY(-1px);
 }
 
 .team-head{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:14px;
 }
 
 .team-name{
@@ -279,13 +291,14 @@ button{
 .team-count{
     color:var(--muted);
     font-size:12px;
+    margin-top:4px;
 }
 
 .member-mini{
     display:flex;
     align-items:center;
     gap:10px;
-    padding:9px 0;
+    padding:10px 0;
     border-top:1px solid #20202a;
     cursor:pointer;
 }
@@ -295,11 +308,11 @@ button{
 }
 
 .avatar{
-    width:38px;
-    height:38px;
-    min-width:38px;
+    width:39px;
+    height:39px;
+    min-width:39px;
     border-radius:50%;
-    background:linear-gradient(135deg,#292934,#18181e);
+    background:#23232c;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -315,29 +328,94 @@ button{
 
 .member-info{
     min-width:0;
+    flex:1;
 }
 
 .member-name{
-    font-weight:700;
     font-size:14px;
+    font-weight:700;
 }
 
 .member-username{
     color:var(--muted);
     font-size:12px;
-    margin-top:2px;
+    margin-top:3px;
 }
 
 .role{
-    margin-left:auto;
-    font-size:10px;
-    padding:4px 7px;
+    background:#24242d;
+    color:#c9c9d2;
     border-radius:5px;
-    background:#22222b;
-    color:#c5c5cf;
+    padding:4px 7px;
+    font-size:10px;
+    white-space:nowrap;
 }
 
-/* MATCHES */
+/* =========================
+   MEMBERS
+========================= */
+
+.members-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.member-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+}
+
+.member-card:hover{
+    border-color:#41414d;
+}
+
+.member-card-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.member-card .avatar{
+    width:58px;
+    height:58px;
+    min-width:58px;
+}
+
+.member-card-name{
+    font-size:16px;
+    font-weight:800;
+}
+
+.member-card-username{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.member-details{
+    margin-top:15px;
+    padding-top:12px;
+    border-top:1px solid #20202a;
+}
+
+.detail-line{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    font-size:12px;
+}
+
+.detail-line span:first-child{
+    color:var(--muted);
+}
+
+/* =========================
+   MATCHS
+========================= */
 
 .matches-list{
     display:flex;
@@ -352,12 +430,12 @@ button{
     padding:17px;
 }
 
-.match-card.completed{
-    border-color:rgba(50,213,131,.22);
+.match-card.upcoming{
+    border-color:rgba(37,244,238,.2);
 }
 
-.match-card.upcoming{
-    border-color:rgba(37,244,238,.18);
+.match-card.completed{
+    border-color:rgba(50,213,131,.22);
 }
 
 .match-top{
@@ -373,34 +451,34 @@ button{
 }
 
 .match-status{
-    font-size:11px;
-    font-weight:700;
+    font-size:10px;
+    font-weight:800;
     padding:5px 8px;
     border-radius:6px;
 }
 
 .status-upcoming{
-    background:rgba(37,244,238,.09);
-    color:var(--accent2);
+    color:var(--cyan);
+    background:rgba(37,244,238,.08);
 }
 
 .status-completed{
-    background:rgba(50,213,131,.09);
     color:var(--green);
+    background:rgba(50,213,131,.08);
 }
 
 .match-versus{
     display:grid;
-    grid-template-columns:1fr 70px 1fr;
+    grid-template-columns:1fr 60px 1fr;
     align-items:center;
     gap:12px;
 }
 
 .match-side{
     background:var(--panel2);
-    border:1px solid #22222c;
+    border:1px solid #25252f;
     border-radius:11px;
-    padding:13px;
+    padding:14px;
 }
 
 .match-side-title{
@@ -423,7 +501,7 @@ button{
 }
 
 .match-creator{
-    margin-top:8px;
+    margin-top:9px;
     font-size:13px;
     font-weight:700;
 }
@@ -435,25 +513,26 @@ button{
 
 .vs{
     text-align:center;
-    font-size:14px;
     color:var(--muted);
-    font-weight:800;
-}
-
-.match-actions{
-    margin-top:14px;
-    display:flex;
-    justify-content:flex-end;
-    gap:8px;
-}
-
-.score{
-    margin-top:9px;
-    font-size:20px;
     font-weight:900;
 }
 
-/* CALENDAR */
+.score{
+    margin-top:10px;
+    font-size:21px;
+    font-weight:900;
+}
+
+.match-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:14px;
+}
+
+/* =========================
+   CALENDRIER
+========================= */
 
 .calendar-header{
     display:flex;
@@ -476,20 +555,20 @@ button{
 }
 
 .calendar-day-name{
-    background:#17171e;
-    padding:11px;
-    text-align:center;
-    font-size:11px;
+    background:#18181f;
     color:var(--muted);
+    text-align:center;
+    padding:11px;
+    font-size:11px;
     border-right:1px solid var(--border);
 }
 
 .calendar-cell{
     min-height:105px;
     padding:8px;
+    background:#101016;
     border-top:1px solid var(--border);
     border-right:1px solid var(--border);
-    background:#101016;
 }
 
 .calendar-cell.other{
@@ -497,9 +576,9 @@ button{
 }
 
 .day-number{
-    font-size:12px;
     color:var(--muted);
-    margin-bottom:7px;
+    font-size:12px;
+    margin-bottom:6px;
 }
 
 .calendar-match{
@@ -511,67 +590,9 @@ button{
     margin-bottom:4px;
 }
 
-/* MEMBERS */
-
-.members-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.member-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:18px;
-    cursor:pointer;
-}
-
-.member-card:hover{
-    border-color:#40404d;
-}
-
-.member-card-top{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.member-card .avatar{
-    width:55px;
-    height:55px;
-    min-width:55px;
-}
-
-.member-card-name{
-    font-size:16px;
-    font-weight:800;
-}
-
-.member-card-username{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
-}
-
-.member-details{
-    margin-top:15px;
-    padding-top:13px;
-    border-top:1px solid #20202a;
-}
-
-.detail-line{
-    display:flex;
-    justify-content:space-between;
-    padding:5px 0;
-    font-size:12px;
-}
-
-.detail-line span:first-child{
-    color:var(--muted);
-}
-
-/* STATISTICS */
+/* =========================
+   PROFIL
+========================= */
 
 .profile-header{
     display:flex;
@@ -626,16 +647,18 @@ button{
     margin-bottom:13px;
 }
 
-/* MODAL */
+/* =========================
+   MODALES
+========================= */
 
 .modal-bg{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.72);
+    z-index:100;
+    background:rgba(0,0,0,.75);
     display:none;
     align-items:center;
     justify-content:center;
-    z-index:100;
     padding:20px;
 }
 
@@ -670,13 +693,13 @@ button{
 }
 
 .close{
+    width:34px;
+    height:34px;
     border:0;
-    background:#202029;
-    color:white;
-    width:33px;
-    height:33px;
     border-radius:8px;
-    font-size:18px;
+    background:#22222b;
+    color:white;
+    font-size:19px;
 }
 
 .form-grid{
@@ -696,8 +719,8 @@ button{
 }
 
 .form-group label{
+    color:#b9b9c3;
     font-size:12px;
-    color:#b8b8c2;
     font-weight:600;
 }
 
@@ -706,7 +729,7 @@ button{
     width:100%;
     background:#191920;
     color:white;
-    border:1px solid #2c2c37;
+    border:1px solid #2d2d38;
     border-radius:9px;
     padding:11px;
     outline:none;
@@ -728,20 +751,19 @@ button{
     display:flex;
     align-items:center;
     gap:14px;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .avatar-preview{
-    width:65px;
-    height:65px;
+    width:68px;
+    height:68px;
     border-radius:50%;
+    background:#22222b;
     overflow:hidden;
-    background:#202029;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     font-size:22px;
-    font-weight:800;
 }
 
 .avatar-preview img{
@@ -751,34 +773,24 @@ button{
 }
 
 .upload-btn{
-    display:inline-block;
-    padding:9px 12px;
     background:#202029;
     border:1px solid #30303b;
+    padding:9px 12px;
     border-radius:8px;
-    font-size:12px;
     cursor:pointer;
+    font-size:12px;
 }
 
 .upload-btn input{
     display:none;
 }
 
-/* SEARCH */
-
-.search{
-    background:#15151c;
-    border:1px solid var(--border);
-    color:white;
-    padding:11px 13px;
-    border-radius:9px;
-    width:240px;
-    outline:none;
-}
-
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1050px){
+
     .stats-grid,
     .teams-grid,
     .members-grid{
@@ -791,6 +803,7 @@ button{
 }
 
 @media(max-width:760px){
+
     .sidebar{
         width:68px;
         padding:15px 8px;
@@ -816,7 +829,6 @@ button{
 
     .main{
         margin-left:68px;
-        width:calc(100% - 68px);
         padding:15px;
     }
 
@@ -827,20 +839,20 @@ button{
         grid-template-columns:1fr;
     }
 
-    .topbar{
-        gap:10px;
-    }
-
-    .search{
-        width:150px;
-    }
-
     .match-versus{
         grid-template-columns:1fr;
     }
 
     .vs{
         padding:2px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
     }
 
     .calendar-cell{
@@ -854,6 +866,10 @@ button{
 
 <div class="app">
 
+<!-- =========================
+     SIDEBAR
+========================= -->
+
 <aside class="sidebar">
 
     <div class="logo">
@@ -862,44 +878,65 @@ button{
     </div>
 
     <nav class="nav">
+
         <button class="active" onclick="showPage('dashboard',this)">
-            <span class="nav-icon">⌂</span><span>Tableau de bord</span>
+            <span class="nav-icon">⌂</span>
+            <span>Tableau de bord</span>
         </button>
 
         <button onclick="showPage('teams',this)">
-            <span class="nav-icon">👥</span><span>Teams</span>
+            <span class="nav-icon">👥</span>
+            <span>Teams</span>
         </button>
 
         <button onclick="showPage('members',this)">
-            <span class="nav-icon">👤</span><span>Créateurs</span>
+            <span class="nav-icon">👤</span>
+            <span>Créateurs</span>
         </button>
 
         <button onclick="showPage('matches',this)">
-            <span class="nav-icon">⚔</span><span>Matchs</span>
+            <span class="nav-icon">⚔</span>
+            <span>Matchs</span>
         </button>
 
         <button onclick="showPage('calendar',this)">
-            <span class="nav-icon">📅</span><span>Calendrier</span>
+            <span class="nav-icon">📅</span>
+            <span>Calendrier</span>
         </button>
+
     </nav>
 
 </aside>
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="main">
 
-<!-- DASHBOARD -->
+
+<!-- =========================
+     DASHBOARD
+========================= -->
 
 <section id="dashboard" class="page">
 
     <div class="topbar">
+
         <div>
             <div class="page-title">Tableau de bord</div>
-            <div class="page-subtitle">Bienvenue sur TokCenter</div>
+            <div class="page-subtitle">
+                Bienvenue sur TokCenter
+            </div>
         </div>
 
-        <button class="primary-btn" onclick="openTeamModal()">+ Nouvelle team</button>
+        <button class="primary-btn" onclick="openTeamModal()">
+            + Nouvelle team
+        </button>
+
     </div>
+
 
     <div class="stats-grid">
 
@@ -929,22 +966,38 @@ button{
 
     </div>
 
+
     <div class="dashboard-grid">
 
         <div class="panel">
+
             <div class="panel-title">
                 <h3>Prochains matchs</h3>
-                <button class="secondary-btn" onclick="showPage('matches')">Voir tout</button>
+
+                <button class="secondary-btn"
+                        onclick="showPage('matches')">
+                    Voir tout
+                </button>
             </div>
+
             <div id="dashboardMatches"></div>
+
         </div>
 
+
         <div class="panel">
+
             <div class="panel-title">
                 <h3>Vos teams</h3>
-                <button class="secondary-btn" onclick="showPage('teams')">Voir tout</button>
+
+                <button class="secondary-btn"
+                        onclick="showPage('teams')">
+                    Voir tout
+                </button>
             </div>
+
             <div id="dashboardTeamsList"></div>
+
         </div>
 
     </div>
@@ -952,17 +1005,26 @@ button{
 </section>
 
 
-<!-- TEAMS -->
+<!-- =========================
+     TEAMS
+========================= -->
 
 <section id="teams" class="page" style="display:none">
 
     <div class="topbar">
+
         <div>
             <div class="page-title">Teams</div>
-            <div class="page-subtitle">Organisez vos créateurs par team</div>
+            <div class="page-subtitle">
+                Organisez vos créateurs par team
+            </div>
         </div>
 
-        <button class="primary-btn" onclick="openTeamModal()">+ Créer une team</button>
+        <button class="primary-btn"
+                onclick="openTeamModal()">
+            + Créer une team
+        </button>
+
     </div>
 
     <div id="teamsGrid" class="teams-grid"></div>
@@ -970,17 +1032,26 @@ button{
 </section>
 
 
-<!-- MEMBERS -->
+<!-- =========================
+     MEMBRES
+========================= -->
 
 <section id="members" class="page" style="display:none">
 
     <div class="topbar">
+
         <div>
             <div class="page-title">Créateurs</div>
-            <div class="page-subtitle">Tous les membres de l'agence</div>
+            <div class="page-subtitle">
+                Tous les membres de l'agence
+            </div>
         </div>
 
-        <button class="primary-btn" onclick="openMemberModal()">+ Ajouter un créateur</button>
+        <button class="primary-btn"
+                onclick="openMemberModal()">
+            + Ajouter un créateur
+        </button>
+
     </div>
 
     <div id="membersGrid" class="members-grid"></div>
@@ -988,17 +1059,26 @@ button{
 </section>
 
 
-<!-- MATCHES -->
+<!-- =========================
+     MATCHS
+========================= -->
 
 <section id="matches" class="page" style="display:none">
 
     <div class="topbar">
+
         <div>
             <div class="page-title">Matchs</div>
-            <div class="page-subtitle">Gérez vos matchs TikTok</div>
+            <div class="page-subtitle">
+                Gérez vos matchs TikTok
+            </div>
         </div>
 
-        <button class="primary-btn" onclick="openMatchModal()">+ Nouveau match</button>
+        <button class="primary-btn"
+                onclick="openMatchModal()">
+            + Nouveau match
+        </button>
+
     </div>
 
     <div id="matchesList" class="matches-list"></div>
@@ -1006,38 +1086,67 @@ button{
 </section>
 
 
-<!-- CALENDAR -->
+<!-- =========================
+     CALENDRIER
+========================= -->
 
 <section id="calendar" class="page" style="display:none">
 
     <div class="topbar">
+
         <div>
             <div class="page-title">Calendrier</div>
-            <div class="page-subtitle">Vue mensuelle de vos matchs</div>
+            <div class="page-subtitle">
+                Vue mensuelle de vos matchs
+            </div>
         </div>
+
     </div>
 
     <div class="panel">
 
         <div class="calendar-header">
-            <button class="secondary-btn" onclick="changeMonth(-1)">‹</button>
-            <div class="calendar-title" id="calendarTitle"></div>
-            <button class="secondary-btn" onclick="changeMonth(1)">›</button>
+
+            <button class="secondary-btn"
+                    onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+            <div class="calendar-title"
+                 id="calendarTitle">
+            </div>
+
+            <button class="secondary-btn"
+                    onclick="changeMonth(1)">
+                ›
+            </button>
+
         </div>
 
-        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="calendar-grid"
+             id="calendarGrid">
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- MEMBER PROFILE -->
+<!-- =========================
+     PROFIL
+========================= -->
 
-<section id="memberProfile" class="page" style="display:none">
+<section id="memberProfile"
+         class="page"
+         style="display:none">
 
     <div class="topbar">
-        <button class="secondary-btn" onclick="showPage('members')">← Retour aux créateurs</button>
+
+        <button class="secondary-btn"
+                onclick="showPage('members')">
+            ← Retour aux créateurs
+        </button>
+
     </div>
 
     <div id="memberProfileContent"></div>
@@ -1048,278 +1157,514 @@ button{
 </div>
 
 
-<!-- TEAM MODAL -->
+<!-- =========================
+     MODAL TEAM
+========================= -->
 
 <div class="modal-bg" id="teamModal">
 
-<div class="modal">
+    <div class="modal">
 
-    <div class="modal-header">
-        <h2>Créer une team</h2>
-        <button class="close" onclick="closeModal('teamModal')">×</button>
-    </div>
+        <div class="modal-header">
 
-    <form onsubmit="saveTeam(event)">
+            <h2>Créer une team</h2>
 
-        <div class="form-grid">
+            <button class="close"
+                    onclick="closeModal('teamModal')">
+                ×
+            </button>
 
-            <div class="form-group full">
-                <label>Nom de la team</label>
-                <input id="teamName" required placeholder="Ex : Team Alpha">
+        </div>
+
+
+        <form onsubmit="saveTeam(event)">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label>Nom de la team</label>
+
+                    <input id="teamName"
+                           placeholder="Ex : Team Alpha"
+                           required>
+
+                </div>
+
             </div>
 
-        </div>
 
-        <div class="form-footer">
-            <button type="button" class="secondary-btn" onclick="closeModal('teamModal')">Annuler</button>
-            <button class="primary-btn">Créer la team</button>
-        </div>
+            <div class="form-footer">
 
-    </form>
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('teamModal')">
+                    Annuler
+                </button>
+
+                <button class="primary-btn">
+                    Créer la team
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
-</div>
 
 
-<!-- MEMBER MODAL -->
+<!-- =========================
+     MODAL MEMBRE
+========================= -->
 
 <div class="modal-bg" id="memberModal">
 
-<div class="modal">
+    <div class="modal">
 
-    <div class="modal-header">
-        <h2>Ajouter un créateur</h2>
-        <button class="close" onclick="closeModal('memberModal')">×</button>
+        <div class="modal-header">
+
+            <h2>Ajouter un créateur</h2>
+
+            <button class="close"
+                    onclick="closeModal('memberModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="memberForm"
+              onsubmit="saveMember(event)">
+
+            <div class="avatar-upload">
+
+                <div class="avatar-preview"
+                     id="avatarPreview">
+                    👤
+                </div>
+
+                <label class="upload-btn">
+
+                    📷 Choisir une photo
+
+                    <input type="file"
+                           id="memberAvatar"
+                           accept="image/*"
+                           onchange="previewAvatar(event)">
+
+                </label>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Nom</label>
+
+                    <input id="memberName"
+                           placeholder="Nom du créateur"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Pseudo TikTok</label>
+
+                    <input id="memberUsername"
+                           placeholder="@pseudo"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Rôle</label>
+
+                    <select id="memberRole"
+                            required>
+
+                        <option value="">
+                            Sélectionner
+                        </option>
+
+                        <option value="Fondateur">
+                            Fondateur
+                        </option>
+
+                        <option value="Manager">
+                            Manager
+                        </option>
+
+                        <option value="Agent">
+                            Agent
+                        </option>
+
+                        <option value="Créateur">
+                            Créateur
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Team</label>
+
+                    <select id="memberTeam">
+
+                        <option value="">
+                            Aucune team
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Date d'arrivée dans l'agence
+                    </label>
+
+                    <!-- FACULTATIF -->
+                    <input type="date"
+                           id="memberJoinDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Statut</label>
+
+                    <select id="memberStatus">
+
+                        <option value="Actif">
+                            Actif
+                        </option>
+
+                        <option value="Inactif">
+                            Inactif
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('memberModal')">
+                    Annuler
+                </button>
+
+                <button class="primary-btn"
+                        type="submit">
+                    Ajouter le créateur
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <form onsubmit="saveMember(event)">
-
-        <div class="avatar-upload">
-
-            <div class="avatar-preview" id="avatarPreview">
-                👤
-            </div>
-
-            <label class="upload-btn">
-                📷 Choisir une photo
-                <input type="file"
-                       id="memberAvatar"
-                       accept="image/*"
-                       onchange="previewAvatar(event)">
-            </label>
-
-        </div>
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>Nom</label>
-                <input id="memberName" required placeholder="Nom du créateur">
-            </div>
-
-            <div class="form-group">
-                <label>Pseudo TikTok</label>
-                <input id="memberUsername" required placeholder="@pseudo">
-            </div>
-
-            <div class="form-group">
-                <label>Rôle</label>
-
-                <select id="memberRole" required>
-                    <option value="">Sélectionner</option>
-                    <option value="Fondateur">Fondateur</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Créateur">Créateur</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Team</label>
-                <select id="memberTeam">
-                    <option value="">Aucune team</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Date d'arrivée dans l'agence</label>
-                <input type="date" id="memberJoinDate">
-            </div>
-
-            <div class="form-group">
-                <label>Statut</label>
-                <select id="memberStatus">
-                    <option value="Actif">Actif</option>
-                    <option value="Inactif">Inactif</option>
-                </select>
-            </div>
-
-        </div>
-
-        <div class="form-footer">
-            <button type="button" class="secondary-btn" onclick="closeModal('memberModal')">Annuler</button>
-            <button class="primary-btn">Ajouter</button>
-        </div>
-
-    </form>
-
-</div>
 </div>
 
 
-<!-- MATCH MODAL -->
+<!-- =========================
+     MODAL MATCH
+========================= -->
 
 <div class="modal-bg" id="matchModal">
 
-<div class="modal large">
+    <div class="modal large">
 
-    <div class="modal-header">
-        <h2>Créer un match</h2>
-        <button class="close" onclick="closeModal('matchModal')">×</button>
+        <div class="modal-header">
+
+            <h2>Créer un match</h2>
+
+            <button class="close"
+                    onclick="closeModal('matchModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveMatch(event)">
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>Notre team</label>
+
+                    <select id="matchTeam"
+                            onchange="updateMatchCreators()"
+                            required>
+
+                        <option value="">
+                            Sélectionner une team
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Notre créateur</label>
+
+                    <select id="matchCreator"
+                            required>
+
+                        <option value="">
+                            Sélectionner un créateur
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>Agence adverse</label>
+
+                    <input id="opponentAgency"
+                           placeholder="Nom de l'agence adverse"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Team adverse</label>
+
+                    <input id="opponentTeam"
+                           placeholder="Nom de la team adverse">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Nom de l'adversaire</label>
+
+                    <input id="opponentName"
+                           placeholder="Nom de l'adversaire"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Pseudo de l'adversaire</label>
+
+                    <input id="opponentUsername"
+                           placeholder="@pseudo"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input type="date"
+                           id="matchDate"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Heure</label>
+
+                    <input type="time"
+                           id="matchTime"
+                           required>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('matchModal')">
+                    Annuler
+                </button>
+
+                <button class="primary-btn">
+                    Créer le match
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <form onsubmit="saveMatch(event)">
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>Notre team</label>
-
-                <select id="matchTeam" required onchange="updateMatchCreators()">
-                    <option value="">Sélectionner une team</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Notre créateur</label>
-
-                <select id="matchCreator" required>
-                    <option value="">Sélectionner un créateur</option>
-                </select>
-            </div>
-
-
-            <div class="form-group full">
-                <label>Agence adverse</label>
-                <input id="opponentAgency" required placeholder="Nom de l'agence adverse">
-            </div>
-
-            <div class="form-group">
-                <label>Team adverse</label>
-                <input id="opponentTeam" placeholder="Nom de la team adverse">
-            </div>
-
-            <div class="form-group">
-                <label>Nom de l'adversaire</label>
-                <input id="opponentName" required placeholder="Nom de l'adversaire">
-            </div>
-
-            <div class="form-group">
-                <label>Pseudo de l'adversaire</label>
-                <input id="opponentUsername" required placeholder="@pseudo">
-            </div>
-
-            <div class="form-group">
-                <label>Date</label>
-                <input type="date" id="matchDate" required>
-            </div>
-
-            <div class="form-group">
-                <label>Heure</label>
-                <input type="time" id="matchTime" required>
-            </div>
-
-        </div>
-
-        <div class="form-footer">
-            <button type="button" class="secondary-btn" onclick="closeModal('matchModal')">Annuler</button>
-            <button class="primary-btn">Créer le match</button>
-        </div>
-
-    </form>
-
-</div>
 </div>
 
 
-<!-- SCORE MODAL -->
+<!-- =========================
+     MODAL SCORE
+========================= -->
 
 <div class="modal-bg" id="scoreModal">
 
-<div class="modal">
+    <div class="modal">
 
-    <div class="modal-header">
-        <h2>Résultat du match</h2>
-        <button class="close" onclick="closeModal('scoreModal')">×</button>
+        <div class="modal-header">
+
+            <h2>Résultat du match</h2>
+
+            <button class="close"
+                    onclick="closeModal('scoreModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="scoreMatchInfo"
+             style="margin-bottom:15px;color:#aaa">
+        </div>
+
+
+        <form onsubmit="saveScore(event)">
+
+            <input type="hidden"
+                   id="scoreMatchId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Notre score</label>
+
+                    <input type="number"
+                           id="ourScore"
+                           min="0"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Score adverse</label>
+
+                    <input type="number"
+                           id="opponentScore"
+                           min="0"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('scoreModal')">
+                    Annuler
+                </button>
+
+                <button class="primary-btn">
+                    Enregistrer
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <div id="scoreMatchInfo" style="margin-bottom:15px;color:#aaa"></div>
-
-    <form onsubmit="saveScore(event)">
-
-        <input type="hidden" id="scoreMatchId">
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>Notre score</label>
-                <input type="number" id="ourScore" min="0" required>
-            </div>
-
-            <div class="form-group">
-                <label>Score adverse</label>
-                <input type="number" id="opponentScore" min="0" required>
-            </div>
-
-        </div>
-
-        <div class="form-footer">
-            <button type="button" class="secondary-btn" onclick="closeModal('scoreModal')">Annuler</button>
-            <button class="primary-btn">Enregistrer</button>
-        </div>
-
-    </form>
-
-</div>
 </div>
 
 
 <script>
 
-/* =========================
+/* =====================================================
    DONNÉES
-========================= */
+===================================================== */
 
-let teams = JSON.parse(localStorage.getItem("tokcenter_teams")) || [];
-let members = JSON.parse(localStorage.getItem("tokcenter_members")) || [];
-let matches = JSON.parse(localStorage.getItem("tokcenter_matches")) || [];
+let teams =
+    JSON.parse(localStorage.getItem("tokcenter_teams")) || [];
 
-let currentCalendarDate = new Date();
+let members =
+    JSON.parse(localStorage.getItem("tokcenter_members")) || [];
+
+let matches =
+    JSON.parse(localStorage.getItem("tokcenter_matches")) || [];
+
 let currentAvatar = "";
 
+let currentCalendarDate = new Date();
 
-/* =========================
-   STOCKAGE
-========================= */
+
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
 
 function saveData(){
 
-    localStorage.setItem("tokcenter_teams",JSON.stringify(teams));
-    localStorage.setItem("tokcenter_members",JSON.stringify(members));
-    localStorage.setItem("tokcenter_matches",JSON.stringify(matches));
+    localStorage.setItem(
+        "tokcenter_teams",
+        JSON.stringify(teams)
+    );
 
+    localStorage.setItem(
+        "tokcenter_members",
+        JSON.stringify(members)
+    );
+
+    localStorage.setItem(
+        "tokcenter_matches",
+        JSON.stringify(matches)
+    );
 }
 
 
-/* =========================
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
-function showPage(page,button=null){
+function showPage(page, button=null){
 
-    document.querySelectorAll(".page").forEach(p=>{
-        p.style.display="none";
-    });
+    document.querySelectorAll(".page").forEach(
+        p => p.style.display="none"
+    );
 
     const target=document.getElementById(page);
 
@@ -1327,9 +1672,8 @@ function showPage(page,button=null){
         target.style.display="block";
     }
 
-    document.querySelectorAll(".nav button").forEach(b=>{
-        b.classList.remove("active");
-    });
+    document.querySelectorAll(".nav button")
+        .forEach(b=>b.classList.remove("active"));
 
     if(button){
         button.classList.add("active");
@@ -1340,98 +1684,71 @@ function showPage(page,button=null){
     if(page==="members") renderMembers();
     if(page==="matches") renderMatches();
     if(page==="calendar") renderCalendar();
-
 }
 
 
-/* =========================
+/* =====================================================
    MODALES
-========================= */
+===================================================== */
 
 function closeModal(id){
-    document.getElementById(id).classList.remove("open");
+
+    const modal=document.getElementById(id);
+
+    if(modal){
+        modal.classList.remove("open");
+    }
 }
+
+
+/* =====================================================
+   TEAM
+===================================================== */
 
 function openTeamModal(){
 
     document.getElementById("teamName").value="";
-    document.getElementById("teamModal").classList.add("open");
 
+    document.getElementById("teamModal")
+        .classList.add("open");
 }
 
-function openMemberModal(){
-
-    if(teams.length===0){
-
-        alert("Crée d'abord une team avant d'ajouter un créateur.");
-
-        return;
-    }
-
-    document.getElementById("memberName").value="";
-    document.getElementById("memberUsername").value="";
-    document.getElementById("memberRole").value="";
-    document.getElementById("memberJoinDate").value="";
-    document.getElementById("memberStatus").value="Actif";
-
-    currentAvatar="";
-
-    document.getElementById("avatarPreview").innerHTML="👤";
-
-    fillTeamSelect("memberTeam");
-
-    document.getElementById("memberModal").classList.add("open");
-
-}
-
-function openMatchModal(){
-
-    if(teams.length===0){
-
-        alert("Crée d'abord une team avant de créer un match.");
-
-        return;
-    }
-
-    fillTeamSelect("matchTeam");
-
-    document.getElementById("matchCreator").innerHTML=
-        '<option value="">Sélectionner un créateur</option>';
-
-    document.getElementById("opponentAgency").value="";
-    document.getElementById("opponentTeam").value="";
-    document.getElementById("opponentName").value="";
-    document.getElementById("opponentUsername").value="";
-
-    const today=new Date();
-
-    document.getElementById("matchDate").value=
-        today.toISOString().split("T")[0];
-
-    document.getElementById("matchTime").value="20:00";
-
-    document.getElementById("matchModal").classList.add("open");
-
-}
-
-
-/* =========================
-   TEAMS
-========================= */
 
 function saveTeam(event){
 
     event.preventDefault();
 
-    const name=document.getElementById("teamName").value.trim();
+    const name=
+        document.getElementById("teamName")
+        .value
+        .trim();
 
     if(!name) return;
 
+
+    const duplicate=teams.some(
+        team =>
+        team.name.toLowerCase()===name.toLowerCase()
+    );
+
+    if(duplicate){
+
+        alert("Cette team existe déjà.");
+
+        return;
+    }
+
+
     teams.push({
+
         id:Date.now(),
+
         name:name,
+
         createdAt:new Date().toISOString()
+
     });
+
 
     saveData();
 
@@ -1443,66 +1760,43 @@ function saveTeam(event){
 }
 
 
-function deleteTeam(id){
+/* =====================================================
+   MEMBRES
+===================================================== */
 
-    const team=teams.find(t=>t.id===id);
+function openMemberModal(){
 
-    if(!team) return;
+    if(teams.length===0){
 
-    const attached=members.filter(m=>String(m.teamId)===String(id));
-
-    if(attached.length>0){
-
-        alert("Cette team contient encore des créateurs. Retire-les de la team avant de la supprimer.");
+        alert(
+            "Crée d'abord une team avant d'ajouter un créateur."
+        );
 
         return;
     }
 
-    if(!confirm("Supprimer cette team ?")) return;
 
-    teams=teams.filter(t=>t.id!==id);
+    /*
+       On remet TOUJOURS le formulaire à zéro
+       à chaque ouverture.
+    */
 
-    saveData();
+    document.getElementById("memberForm").reset();
 
-    renderTeams();
-    renderDashboard();
+    currentAvatar="";
 
+    document.getElementById("avatarPreview")
+        .innerHTML="👤";
+
+    fillTeamSelect("memberTeam");
+
+    document.getElementById("memberStatus")
+        .value="Actif";
+
+    document.getElementById("memberModal")
+        .classList.add("open");
 }
 
-
-function fillTeamSelect(id){
-
-    const select=document.getElementById(id);
-
-    select.innerHTML="";
-
-    if(id==="memberTeam"){
-
-        select.innerHTML='<option value="">Aucune team</option>';
-
-    }else{
-
-        select.innerHTML='<option value="">Sélectionner une team</option>';
-
-    }
-
-    teams.forEach(team=>{
-
-        const option=document.createElement("option");
-
-        option.value=team.id;
-        option.textContent=team.name;
-
-        select.appendChild(option);
-
-    });
-
-}
-
-
-/* =========================
-   MEMBRES
-========================= */
 
 function previewAvatar(event){
 
@@ -1510,19 +1804,19 @@ function previewAvatar(event){
 
     if(!file) return;
 
+
     const reader=new FileReader();
 
     reader.onload=function(e){
 
         currentAvatar=e.target.result;
 
-        document.getElementById("avatarPreview").innerHTML=
+        document.getElementById("avatarPreview")
+            .innerHTML=
             `<img src="${currentAvatar}" alt="Avatar">`;
-
     };
 
     reader.readAsDataURL(file);
-
 }
 
 
@@ -1530,38 +1824,126 @@ function saveMember(event){
 
     event.preventDefault();
 
-    const name=document.getElementById("memberName").value.trim();
-    const username=document.getElementById("memberUsername").value.trim();
-    const role=document.getElementById("memberRole").value;
-    const teamId=document.getElementById("memberTeam").value;
-    const joinDate=document.getElementById("memberJoinDate").value;
-    const status=document.getElementById("memberStatus").value;
 
-    members.push({
+    const name=
+        document.getElementById("memberName")
+        .value
+        .trim();
+
+    const username=
+        document.getElementById("memberUsername")
+        .value
+        .trim();
+
+    const normalizedUsername=
+        normalizeUsername(username);
+
+    const role=
+        document.getElementById("memberRole")
+        .value;
+
+    const teamId=
+        document.getElementById("memberTeam")
+        .value;
+
+    const joinDate=
+        document.getElementById("memberJoinDate")
+        .value;
+
+    const status=
+        document.getElementById("memberStatus")
+        .value;
+
+
+    if(!name || !username || !role){
+
+        alert(
+            "Merci de renseigner le nom, le pseudo et le rôle."
+        );
+
+        return;
+    }
+
+
+    /*
+       PROTECTION CONTRE LES DOUBLONS
+    */
+
+    const alreadyExists=members.some(
+        member =>
+        normalizeUsername(member.username)
+        .toLowerCase()
+        ===
+        normalizedUsername.toLowerCase()
+    );
+
+
+    if(alreadyExists){
+
+        alert(
+            "Ce créateur existe déjà dans TokCenter."
+        );
+
+        return;
+    }
+
+
+    /*
+       CRÉATION
+    */
+
+    const newMember={
 
         id:Date.now(),
 
         name:name,
 
-        username:username.startsWith("@")
-            ? username
-            : "@"+username,
+        username:normalizedUsername,
 
         role:role,
 
         teamId:teamId || null,
 
-        joinDate:joinDate,
+        /*
+           La date est volontairement facultative.
+        */
+        joinDate:joinDate || "",
 
         status:status,
 
         avatar:currentAvatar || ""
 
-    });
+    };
+
+
+    members.push(newMember);
 
     saveData();
 
+
+    /*
+       IMPORTANT :
+       fermeture immédiate de la fenêtre.
+    */
+
     closeModal("memberModal");
+
+
+    /*
+       Nettoyage complet du formulaire.
+    */
+
+    document.getElementById("memberForm").reset();
+
+    currentAvatar="";
+
+    document.getElementById("avatarPreview")
+        .innerHTML="👤";
+
+
+    /*
+       Actualisation immédiate.
+    */
 
     renderMembers();
     renderTeams();
@@ -1570,108 +1952,222 @@ function saveMember(event){
 }
 
 
+/* =====================================================
+   SUPPRESSION MEMBRE
+===================================================== */
+
 function deleteMember(id){
 
-    const member=members.find(m=>m.id===id);
+    const member=members.find(
+        m=>m.id===id
+    );
 
     if(!member) return;
 
-    if(!confirm(`Supprimer ${member.name} ?`)) return;
 
-    members=members.filter(m=>m.id!==id);
+    if(
+        !confirm(
+            `Supprimer ${member.name} ?`
+        )
+    ){
+        return;
+    }
+
+
+    members=members.filter(
+        m=>m.id!==id
+    );
+
+
+    /*
+       On conserve les matchs historiques.
+       Le créateur sera simplement indiqué
+       comme supprimé.
+    */
 
     saveData();
 
     renderMembers();
     renderTeams();
     renderDashboard();
+}
 
+
+/* =====================================================
+   TEAM UTILITAIRES
+===================================================== */
+
+function fillTeamSelect(id){
+
+    const select=document.getElementById(id);
+
+    select.innerHTML="";
+
+
+    if(id==="memberTeam"){
+
+        select.innerHTML=
+            '<option value="">Aucune team</option>';
+
+    }else{
+
+        select.innerHTML=
+            '<option value="">Sélectionner une team</option>';
+
+    }
+
+
+    teams.forEach(team=>{
+
+        const option=
+            document.createElement("option");
+
+        option.value=team.id;
+
+        option.textContent=team.name;
+
+        select.appendChild(option);
+
+    });
 }
 
 
 function getTeamName(teamId){
 
-    const team=teams.find(t=>String(t.id)===String(teamId));
+    const team=teams.find(
+        t=>String(t.id)===String(teamId)
+    );
 
-    return team ? team.name : "Sans team";
-
+    return team
+        ? team.name
+        : "Sans team";
 }
 
 
-/* =========================
-   AFFICHAGE TEAMS
-========================= */
+/* =====================================================
+   TEAMS AFFICHAGE
+===================================================== */
 
 function renderTeams(){
 
-    const container=document.getElementById("teamsGrid");
+    const container=
+        document.getElementById("teamsGrid");
+
 
     if(teams.length===0){
 
-        container.innerHTML=
-            `<div class="panel" style="grid-column:1/-1">
+        container.innerHTML=`
+
+            <div class="panel"
+                 style="grid-column:1/-1">
+
                 <div class="empty">
-                    Aucune team créée.<br><br>
-                    <button class="primary-btn" onclick="openTeamModal()">Créer ma première team</button>
+
+                    Aucune team créée.
+
+                    <br><br>
+
+                    <button class="primary-btn"
+                            onclick="openTeamModal()">
+
+                        Créer ma première team
+
+                    </button>
+
                 </div>
-            </div>`;
+
+            </div>
+
+        `;
 
         return;
     }
 
+
     container.innerHTML="";
+
 
     teams.forEach(team=>{
 
-        const teamMembers=members.filter(
-            m=>String(m.teamId)===String(team.id)
-        );
+        const teamMembers=
+            members.filter(
+                m =>
+                String(m.teamId)
+                ===
+                String(team.id)
+            );
+
 
         let memberHTML="";
 
+
         if(teamMembers.length===0){
 
-            memberHTML=
-                `<div class="empty" style="padding:20px 5px">
+            memberHTML=`
+
+                <div class="empty"
+                     style="padding:20px 5px">
+
                     Aucun créateur dans cette team.
-                </div>`;
+
+                </div>
+
+            `;
 
         }else{
 
-            memberHTML=teamMembers.map(member=>`
+            memberHTML=
+                teamMembers
+                .map(member=>`
 
-                <div class="member-mini"
-                     onclick="openMemberProfile(${member.id})">
+                    <div class="member-mini"
+                         onclick="openMemberProfile(${member.id})">
 
-                    <div class="avatar">
+                        <div class="avatar">
 
-                        ${
-                            member.avatar
-                            ? `<img src="${member.avatar}" alt="">`
-                            : member.name.charAt(0).toUpperCase()
-                        }
+                            ${
+                                member.avatar
+                                ?
+                                `<img src="${member.avatar}" alt="">`
+                                :
+                                escapeHTML(
+                                    member.name
+                                    .charAt(0)
+                                    .toUpperCase()
+                                )
+                            }
 
-                    </div>
+                        </div>
 
-                    <div class="member-info">
+                        <div class="member-info">
 
-                        <div class="member-name">${escapeHTML(member.name)}</div>
+                            <div class="member-name">
 
-                        <div class="member-username">
-                            ${escapeHTML(member.username)}
+                                ${escapeHTML(member.name)}
+
+                            </div>
+
+                            <div class="member-username">
+
+                                ${escapeHTML(member.username)}
+
+                            </div>
+
+                        </div>
+
+                        <div class="role">
+
+                            ${escapeHTML(member.role)}
+
                         </div>
 
                     </div>
 
-                    <div class="role">
-                        ${escapeHTML(member.role)}
-                    </div>
-
-                </div>
-
-            `).join("");
+                `)
+                .join("");
 
         }
+
 
         container.innerHTML+=`
 
@@ -1680,20 +2176,28 @@ function renderTeams(){
                 <div class="team-head">
 
                     <div>
+
                         <div class="team-name">
+
                             ${escapeHTML(team.name)}
+
                         </div>
 
                         <div class="team-count">
-                            ${teamMembers.length}
-                            ${teamMembers.length>1 ? "créateurs":"créateur"}
-                        </div>
-                    </div>
 
-                    <button class="danger-btn"
-                            onclick="event.stopPropagation();deleteTeam(${team.id})">
-                        Supprimer
-                    </button>
+                            ${teamMembers.length}
+
+                            ${
+                                teamMembers.length>1
+                                ?
+                                "créateurs"
+                                :
+                                "créateur"
+                            }
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -1704,39 +2208,56 @@ function renderTeams(){
         `;
 
     });
-
 }
 
 
-/* =========================
-   AFFICHAGE MEMBRES
-========================= */
+/* =====================================================
+   MEMBRES AFFICHAGE
+===================================================== */
 
 function renderMembers(){
 
-    const container=document.getElementById("membersGrid");
+    const container=
+        document.getElementById("membersGrid");
+
 
     if(members.length===0){
 
-        container.innerHTML=
-            `<div class="panel" style="grid-column:1/-1">
+        container.innerHTML=`
+
+            <div class="panel"
+                 style="grid-column:1/-1">
+
                 <div class="empty">
+
                     Aucun créateur enregistré.
+
                 </div>
-            </div>`;
+
+            </div>
+
+        `;
 
         return;
     }
 
+
     container.innerHTML="";
+
 
     members.forEach(member=>{
 
-        const teamName=getTeamName(member.teamId);
+        const teamName=
+            getTeamName(member.teamId);
 
-        const totalMatches=matches.filter(
-            m=>String(m.creatorId)===String(member.id)
-        ).length;
+        const totalMatches=
+            matches.filter(
+                m =>
+                String(m.creatorId)
+                ===
+                String(member.id)
+            ).length;
+
 
         container.innerHTML+=`
 
@@ -1749,8 +2270,14 @@ function renderMembers(){
 
                         ${
                             member.avatar
-                            ? `<img src="${member.avatar}" alt="">`
-                            : member.name.charAt(0).toUpperCase()
+                            ?
+                            `<img src="${member.avatar}" alt="">`
+                            :
+                            escapeHTML(
+                                member.name
+                                .charAt(0)
+                                .toUpperCase()
+                            )
                         }
 
                     </div>
@@ -1758,36 +2285,60 @@ function renderMembers(){
                     <div style="flex:1">
 
                         <div class="member-card-name">
+
                             ${escapeHTML(member.name)}
+
                         </div>
 
                         <div class="member-card-username">
+
                             ${escapeHTML(member.username)}
+
                         </div>
 
                     </div>
 
                     <div class="role">
+
                         ${escapeHTML(member.role)}
+
                     </div>
 
                 </div>
 
+
                 <div class="member-details">
 
                     <div class="detail-line">
+
                         <span>Team</span>
-                        <strong>${escapeHTML(teamName)}</strong>
+
+                        <strong>
+                            ${escapeHTML(teamName)}
+                        </strong>
+
                     </div>
 
+
                     <div class="detail-line">
+
                         <span>Statut</span>
-                        <strong>${escapeHTML(member.status)}</strong>
+
+                        <strong>
+                            ${escapeHTML(member.status)}
+                        </strong>
+
                     </div>
 
+
                     <div class="detail-line">
+
                         <span>Matchs</span>
-                        <strong>${totalMatches}</strong>
+
+                        <strong>
+                            ${totalMatches}
+                        </strong>
+
                     </div>
 
                 </div>
@@ -1797,73 +2348,113 @@ function renderMembers(){
         `;
 
     });
-
 }
 
 
-/* =========================
-   PROFIL + STATISTIQUES
-========================= */
+/* =====================================================
+   PROFIL MEMBRE
+===================================================== */
 
 function openMemberProfile(id){
 
-    const member=members.find(m=>m.id===id);
+    const member=
+        members.find(
+            m=>String(m.id)===String(id)
+        );
 
     if(!member) return;
 
-    document.querySelectorAll(".page").forEach(p=>{
-        p.style.display="none";
-    });
 
-    document.getElementById("memberProfile").style.display="block";
+    document.querySelectorAll(".page")
+        .forEach(p=>p.style.display="none");
 
-    document.querySelectorAll(".nav button").forEach(b=>{
-        b.classList.remove("active");
-    });
 
-    const memberMatches=matches.filter(
-        m=>String(m.creatorId)===String(member.id)
-    );
+    document.getElementById("memberProfile")
+        .style.display="block";
+
+
+    document.querySelectorAll(".nav button")
+        .forEach(b=>b.classList.remove("active"));
+
+
+    const memberMatches=
+        matches.filter(
+            m =>
+            String(m.creatorId)
+            ===
+            String(member.id)
+        );
+
 
     const now=new Date();
 
-    const monthMatches=memberMatches.filter(match=>{
 
-        const date=new Date(match.date+"T"+match.time);
+    const monthMatches=
+        memberMatches.filter(match=>{
 
-        return date.getMonth()===now.getMonth()
-            && date.getFullYear()===now.getFullYear();
+            const date=
+                new Date(
+                    match.date+"T"+match.time
+                );
 
-    });
+            return(
+                date.getMonth()===now.getMonth()
+                &&
+                date.getFullYear()===now.getFullYear()
+            );
 
-    const completed=memberMatches.filter(
-        m=>isMatchCompleted(m)
-    ).length;
+        });
 
-    const upcoming=memberMatches.filter(
-        m=>!isMatchCompleted(m)
-    ).length;
 
-    const teamName=getTeamName(member.teamId);
+    const completed=
+        memberMatches.filter(
+            m=>isMatchCompleted(m)
+        ).length;
+
+
+    const upcoming=
+        memberMatches.filter(
+            m=>!isMatchCompleted(m)
+        ).length;
+
+
+    const teamName=
+        getTeamName(member.teamId);
+
 
     let history="";
 
+
     if(memberMatches.length===0){
 
-        history=
-            `<div class="empty">Aucun match enregistré pour ce membre.</div>`;
+        history=`
+
+            <div class="empty">
+
+                Aucun match enregistré
+                pour ce membre.
+
+            </div>
+
+        `;
 
     }else{
 
-        const sorted=[...memberMatches].sort(
-            (a,b)=>new Date(b.date+"T"+b.time)-new Date(a.date+"T"+a.time)
-        );
+        const sorted=
+            [...memberMatches].sort(
+                (a,b)=>
+                new Date(
+                    b.date+"T"+b.time
+                )
+                -
+                new Date(
+                    a.date+"T"+a.time
+                )
+            );
 
-        history=sorted.map(match=>{
 
-            const completed=isMatchCompleted(match);
-
-            return `
+        history=
+            sorted.map(match=>`
 
                 <div class="member-mini">
 
@@ -1874,29 +2465,45 @@ function openMemberProfile(id){
                     <div class="member-info">
 
                         <div class="member-name">
-                            ${escapeHTML(match.opponentAgency)}
+
+                            ${escapeHTML(
+                                match.opponentAgency
+                            )}
+
                         </div>
 
                         <div class="member-username">
+
                             ${formatDate(match.date)}
-                            — ${match.time}
+                            —
+                            ${escapeHTML(match.time)}
+
                         </div>
 
                     </div>
 
                     <div class="role">
-                        ${completed ? "Terminé":"À venir"}
+
+                        ${
+                            isMatchCompleted(match)
+                            ?
+                            "Terminé"
+                            :
+                            "À venir"
+                        }
+
                     </div>
 
                 </div>
 
-            `;
-
-        }).join("");
+            `).join("");
 
     }
 
-    document.getElementById("memberProfileContent").innerHTML=`
+
+    document.getElementById(
+        "memberProfileContent"
+    ).innerHTML=`
 
         <div class="panel">
 
@@ -1906,117 +2513,202 @@ function openMemberProfile(id){
 
                     ${
                         member.avatar
-                        ? `<img src="${member.avatar}" alt="">`
-                        : member.name.charAt(0).toUpperCase()
+                        ?
+                        `<img src="${member.avatar}" alt="">`
+                        :
+                        escapeHTML(
+                            member.name
+                            .charAt(0)
+                            .toUpperCase()
+                        )
                     }
 
                 </div>
 
+
                 <div style="flex:1">
 
                     <div class="profile-name">
+
                         ${escapeHTML(member.name)}
+
                     </div>
 
                     <div class="profile-username">
+
                         ${escapeHTML(member.username)}
+
                     </div>
 
                     <div class="role profile-role">
+
                         ${escapeHTML(member.role)}
+
                     </div>
 
                 </div>
 
+
                 <button class="danger-btn"
                         onclick="deleteMemberFromProfile(${member.id})">
+
                     Supprimer
+
                 </button>
 
             </div>
 
+
             <div class="profile-stats">
 
                 <div class="profile-stat">
-                    <div class="stat-label">Team</div>
+
+                    <div class="stat-label">
+                        Team
+                    </div>
+
                     <div class="profile-stat-number"
                          style="font-size:17px">
+
                         ${escapeHTML(teamName)}
+
                     </div>
+
                 </div>
 
+
                 <div class="profile-stat">
-                    <div class="stat-label">Matchs</div>
+
+                    <div class="stat-label">
+                        Matchs
+                    </div>
+
                     <div class="profile-stat-number">
+
                         ${memberMatches.length}
+
                     </div>
+
                 </div>
 
+
                 <div class="profile-stat">
-                    <div class="stat-label">Matchs terminés</div>
+
+                    <div class="stat-label">
+                        Matchs terminés
+                    </div>
+
                     <div class="profile-stat-number">
+
                         ${completed}
+
                     </div>
+
                 </div>
 
+
                 <div class="profile-stat">
-                    <div class="stat-label">Matchs à venir</div>
-                    <div class="profile-stat-number">
-                        ${upcoming}
+
+                    <div class="stat-label">
+                        Matchs à venir
                     </div>
+
+                    <div class="profile-stat-number">
+
+                        ${upcoming}
+
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="panel" style="padding:17px;margin-bottom:15px">
+
+            <div class="panel"
+                 style="padding:17px;margin-bottom:15px">
 
                 <div class="month-title">
+
                     📊 Activité du mois
+
                 </div>
+
 
                 <div class="profile-stats"
                      style="margin:0">
 
                     <div class="profile-stat">
+
                         <div class="stat-label">
+
                             Matchs ce mois
+
                         </div>
 
                         <div class="profile-stat-number">
+
                             ${monthMatches.length}
+
                         </div>
+
                     </div>
 
+
                     <div class="profile-stat">
+
                         <div class="stat-label">
+
                             Agences rencontrées
+
                         </div>
 
                         <div class="profile-stat-number">
-                            ${new Set(monthMatches.map(m=>m.opponentAgency)).size}
+
+                            ${
+                                new Set(
+                                    monthMatches.map(
+                                        m=>m.opponentAgency
+                                    )
+                                ).size
+                            }
+
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-            <div class="panel" style="padding:17px">
+
+            <div class="panel"
+                 style="padding:17px">
 
                 <div class="month-title">
+
                     ⚔ Historique des matchs
+
                 </div>
 
                 ${history}
 
             </div>
 
-            <div style="margin-top:15px;color:#888;font-size:12px">
+
+            <div style="
+                margin-top:15px;
+                color:#888;
+                font-size:12px;
+            ">
 
                 ${
                     member.joinDate
-                    ? "Membre depuis le "+formatDate(member.joinDate)
-                    : "Date d'arrivée non renseignée"
+                    ?
+                    "Membre depuis le "
+                    +
+                    formatDate(member.joinDate)
+                    :
+                    "Date d'arrivée non renseignée"
                 }
 
             </div>
@@ -2032,7 +2724,10 @@ function deleteMemberFromProfile(id){
 
     if(!confirm("Supprimer ce créateur ?")) return;
 
-    members=members.filter(m=>m.id!==id);
+    members=
+        members.filter(
+            m=>String(m.id)!==String(id)
+        );
 
     saveData();
 
@@ -2041,32 +2736,88 @@ function deleteMemberFromProfile(id){
     renderDashboard();
 
     showPage("members");
+}
+
+
+/* =====================================================
+   MATCH
+===================================================== */
+
+function openMatchModal(){
+
+    if(teams.length===0){
+
+        alert(
+            "Crée d'abord une team avant de créer un match."
+        );
+
+        return;
+    }
+
+
+    fillTeamSelect("matchTeam");
+
+
+    document.getElementById("matchCreator")
+        .innerHTML=
+        '<option value="">Sélectionner un créateur</option>';
+
+
+    document.getElementById("opponentAgency").value="";
+    document.getElementById("opponentTeam").value="";
+    document.getElementById("opponentName").value="";
+    document.getElementById("opponentUsername").value="";
+
+
+    const today=new Date();
+
+
+    document.getElementById("matchDate")
+        .value=
+        today.toISOString().split("T")[0];
+
+
+    document.getElementById("matchTime")
+        .value="20:00";
+
+
+    document.getElementById("matchModal")
+        .classList.add("open");
 
 }
 
 
-/* =========================
-   MATCHS
-========================= */
-
 function updateMatchCreators(){
 
-    const teamId=document.getElementById("matchTeam").value;
+    const teamId=
+        document.getElementById("matchTeam")
+        .value;
 
-    const select=document.getElementById("matchCreator");
+
+    const select=
+        document.getElementById("matchCreator");
+
 
     select.innerHTML=
         '<option value="">Sélectionner un créateur</option>';
 
+
     if(!teamId) return;
 
-    const teamMembers=members.filter(
-        m=>String(m.teamId)===String(teamId)
-    );
+
+    const teamMembers=
+        members.filter(
+            m =>
+            String(m.teamId)
+            ===
+            String(teamId)
+        );
+
 
     teamMembers.forEach(member=>{
 
-        const option=document.createElement("option");
+        const option=
+            document.createElement("option");
 
         option.value=member.id;
 
@@ -2084,15 +2835,24 @@ function saveMatch(event){
 
     event.preventDefault();
 
-    const teamId=document.getElementById("matchTeam").value;
-    const creatorId=document.getElementById("matchCreator").value;
+
+    const teamId=
+        document.getElementById("matchTeam").value;
+
+
+    const creatorId=
+        document.getElementById("matchCreator").value;
+
 
     if(!teamId || !creatorId){
 
-        alert("Sélectionne une team et un créateur.");
+        alert(
+            "Sélectionne une team et un créateur."
+        );
 
         return;
     }
+
 
     matches.push({
 
@@ -2103,30 +2863,47 @@ function saveMatch(event){
         creatorId:creatorId,
 
         opponentAgency:
-            document.getElementById("opponentAgency").value.trim(),
+            document
+            .getElementById("opponentAgency")
+            .value
+            .trim(),
 
         opponentTeam:
-            document.getElementById("opponentTeam").value.trim(),
+            document
+            .getElementById("opponentTeam")
+            .value
+            .trim(),
 
         opponentName:
-            document.getElementById("opponentName").value.trim(),
+            document
+            .getElementById("opponentName")
+            .value
+            .trim(),
 
         opponentUsername:
             normalizeUsername(
-                document.getElementById("opponentUsername").value.trim()
+                document
+                .getElementById("opponentUsername")
+                .value
+                .trim()
             ),
 
         date:
-            document.getElementById("matchDate").value,
+            document
+            .getElementById("matchDate")
+            .value,
 
         time:
-            document.getElementById("matchTime").value,
+            document
+            .getElementById("matchTime")
+            .value,
 
         ourScore:null,
 
         opponentScore:null
 
     });
+
 
     saveData();
 
@@ -2139,54 +2916,93 @@ function saveMatch(event){
 }
 
 
-function isMatchCompleted(match){
-
-    if(match.ourScore!==null && match.opponentScore!==null){
-        return true;
-    }
-
-    const date=new Date(match.date+"T"+match.time);
-
-    return date < new Date();
-
-}
-
+/* =====================================================
+   SCORE
+===================================================== */
 
 function canEnterScore(match){
 
-    const date=new Date(match.date+"T"+match.time);
+    const date=
+        new Date(
+            match.date+"T"+match.time
+        );
 
-    return date <= new Date();
+    return date<=new Date();
+}
 
+
+function isMatchCompleted(match){
+
+    if(
+        match.ourScore!==null
+        &&
+        match.opponentScore!==null
+    ){
+        return true;
+    }
+
+
+    return canEnterScore(match);
 }
 
 
 function openScoreModal(id){
 
-    const match=matches.find(m=>m.id===id);
+    const match=
+        matches.find(
+            m=>String(m.id)===String(id)
+        );
 
     if(!match) return;
 
+
     if(!canEnterScore(match)){
 
-        alert("Le match n'est pas encore terminé.");
+        alert(
+            "Le match n'est pas encore terminé."
+        );
 
         return;
     }
 
-    document.getElementById("scoreMatchId").value=id;
 
-    document.getElementById("ourScore").value=
-        match.ourScore!==null ? match.ourScore : "";
+    document.getElementById("scoreMatchId")
+        .value=match.id;
 
-    document.getElementById("opponentScore").value=
-        match.opponentScore!==null ? match.opponentScore : "";
 
-    document.getElementById("scoreMatchInfo").innerHTML=
-        `<strong>${escapeHTML(match.opponentAgency)}</strong>
-         — ${formatDate(match.date)} à ${match.time}`;
+    document.getElementById("ourScore")
+        .value=
+        match.ourScore!==null
+        ?
+        match.ourScore
+        :
+        "";
 
-    document.getElementById("scoreModal").classList.add("open");
+
+    document.getElementById("opponentScore")
+        .value=
+        match.opponentScore!==null
+        ?
+        match.opponentScore
+        :
+        "";
+
+
+    document.getElementById("scoreMatchInfo")
+        .innerHTML=
+        `
+            <strong>
+                ${escapeHTML(match.opponentAgency)}
+            </strong>
+            —
+            ${formatDate(match.date)}
+            à
+            ${escapeHTML(match.time)}
+        `;
+
+
+    document.getElementById("scoreModal")
+        .classList.add("open");
 
 }
 
@@ -2195,17 +3011,34 @@ function saveScore(event){
 
     event.preventDefault();
 
-    const id=Number(document.getElementById("scoreMatchId").value);
 
-    const match=matches.find(m=>m.id===id);
+    const id=
+        document.getElementById("scoreMatchId")
+        .value;
+
+
+    const match=
+        matches.find(
+            m=>String(m.id)===String(id)
+        );
+
 
     if(!match) return;
 
+
     match.ourScore=
-        Number(document.getElementById("ourScore").value);
+        Number(
+            document.getElementById("ourScore")
+            .value
+        );
+
 
     match.opponentScore=
-        Number(document.getElementById("opponentScore").value);
+        Number(
+            document.getElementById("opponentScore")
+            .value
+        );
+
 
     saveData();
 
@@ -2222,7 +3055,12 @@ function deleteMatch(id){
 
     if(!confirm("Supprimer ce match ?")) return;
 
-    matches=matches.filter(m=>m.id!==id);
+
+    matches=
+        matches.filter(
+            m=>String(m.id)!==String(id)
+        );
+
 
     saveData();
 
@@ -2233,72 +3071,136 @@ function deleteMatch(id){
 }
 
 
-/* =========================
+/* =====================================================
    AFFICHAGE MATCHS
-========================= */
+===================================================== */
 
 function renderMatches(){
 
-    const container=document.getElementById("matchesList");
+    const container=
+        document.getElementById("matchesList");
+
 
     if(matches.length===0){
 
-        container.innerHTML=
-            `<div class="panel">
+        container.innerHTML=`
+
+            <div class="panel">
+
                 <div class="empty">
+
                     Aucun match enregistré.
+
                 </div>
-            </div>`;
+
+            </div>
+
+        `;
 
         return;
     }
 
-    const sorted=[...matches].sort(
-        (a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time)
-    );
+
+    const sorted=
+        [...matches].sort(
+            (a,b)=>
+            new Date(
+                a.date+"T"+a.time
+            )
+            -
+            new Date(
+                b.date+"T"+b.time
+            )
+        );
+
 
     container.innerHTML="";
 
+
     sorted.forEach(match=>{
 
-        const teamName=getTeamName(match.teamId);
+        const teamName=
+            getTeamName(match.teamId);
 
-        const creator=members.find(
-            m=>String(m.id)===String(match.creatorId)
-        );
 
-        const completed=isMatchCompleted(match);
+        const creator=
+            members.find(
+                m =>
+                String(m.id)
+                ===
+                String(match.creatorId)
+            );
+
+
+        const completed=
+            isMatchCompleted(match);
+
 
         let scoreHTML="";
 
-        if(match.ourScore!==null && match.opponentScore!==null){
+
+        if(
+            match.ourScore!==null
+            &&
+            match.opponentScore!==null
+        ){
 
             scoreHTML=`
+
                 <div class="score">
-                    ${match.ourScore} — ${match.opponentScore}
+
+                    ${match.ourScore}
+                    —
+                    ${match.opponentScore}
+
                 </div>
+
             `;
 
         }
 
+
         container.innerHTML+=`
 
-            <div class="match-card ${completed ? "completed":"upcoming"}">
+            <div class="match-card
+                        ${completed
+                            ?
+                            "completed"
+                            :
+                            "upcoming"}">
+
 
                 <div class="match-top">
 
                     <div class="match-date">
-                        📅 ${formatDate(match.date)}
+
+                        📅
+                        ${formatDate(match.date)}
+
                         &nbsp; • &nbsp;
-                        🕐 ${match.time}
+
+                        🕐
+                        ${escapeHTML(match.time)}
+
                     </div>
 
-                    <div class="match-status
-                        ${completed
-                            ? "status-completed"
-                            : "status-upcoming"}">
 
-                        ${completed ? "MATCH TERMINÉ":"MATCH À VENIR"}
+                    <div class="match-status
+                        ${
+                            completed
+                            ?
+                            "status-completed"
+                            :
+                            "status-upcoming"
+                        }">
+
+                        ${
+                            completed
+                            ?
+                            "MATCH TERMINÉ"
+                            :
+                            "MATCH À VENIR"
+                        }
 
                     </div>
 
@@ -2307,67 +3209,120 @@ function renderMatches(){
 
                 <div class="match-versus">
 
-                    <!-- NOTRE COTE -->
+
+                    <!-- NOTRE CÔTÉ -->
 
                     <div class="match-side">
 
                         <div class="match-side-title">
+
                             Notre agence
+
                         </div>
+
 
                         <div class="match-agency">
+
                             LVF Agency
+
                         </div>
+
 
                         <div class="match-team">
-                            Team : ${escapeHTML(teamName)}
+
+                            Team :
+                            ${escapeHTML(teamName)}
+
                         </div>
 
+
                         <div class="match-creator">
-                            ${creator
-                                ? escapeHTML(creator.name)
-                                : "Créateur supprimé"}
 
                             ${
                                 creator
-                                ? `<span>${escapeHTML(creator.username)}</span>`
-                                : ""
+                                ?
+                                escapeHTML(creator.name)
+                                :
+                                "Créateur supprimé"
                             }
+
+
+                            ${
+                                creator
+                                ?
+                                `<span>
+                                    ${escapeHTML(
+                                        creator.username
+                                    )}
+                                </span>`
+                                :
+                                ""
+                            }
+
                         </div>
 
                     </div>
 
 
                     <div class="vs">
+
                         VS
+
                     </div>
 
 
-                    <!-- ADVERSAIRE -->
+                    <!-- CÔTÉ ADVERSE -->
 
                     <div class="match-side">
 
                         <div class="match-side-title">
+
                             Agence adverse
+
                         </div>
+
 
                         <div class="match-agency">
-                            ${escapeHTML(match.opponentAgency)}
+
+                            ${escapeHTML(
+                                match.opponentAgency
+                            )}
+
                         </div>
 
+
                         <div class="match-team">
+
                             Team :
                             ${
                                 match.opponentTeam
-                                ? escapeHTML(match.opponentTeam)
-                                : "—"
+                                ?
+                                escapeHTML(
+                                    match.opponentTeam
+                                )
+                                :
+                                "—"
                             }
+
                         </div>
 
+
                         <div class="match-creator">
-                            ${escapeHTML(match.opponentName)}
-                            <span>${escapeHTML(match.opponentUsername)}</span>
+
+                            ${escapeHTML(
+                                match.opponentName
+                            )}
+
+                            <span>
+
+                                ${escapeHTML(
+                                    match.opponentUsername
+                                )}
+
+                            </span>
+
                         </div>
+
 
                         ${scoreHTML}
 
@@ -2378,22 +3333,40 @@ function renderMatches(){
 
                 <div class="match-actions">
 
+
                     ${
                         canEnterScore(match)
-                        ? `
-                            <button class="secondary-btn"
-                                    onclick="openScoreModal(${match.id})">
-                                ${match.ourScore!==null
-                                    ? "Modifier le score"
-                                    : "Ajouter le résultat"}
+                        ?
+                        `
+                            <button
+                                class="secondary-btn"
+                                onclick="
+                                openScoreModal(${match.id})
+                                ">
+
+                                ${
+                                    match.ourScore!==null
+                                    ?
+                                    "Modifier le résultat"
+                                    :
+                                    "Ajouter le résultat"
+                                }
+
                             </button>
                         `
-                        : ""
+                        :
+                        ""
                     }
 
-                    <button class="danger-btn"
-                            onclick="deleteMatch(${match.id})">
+
+                    <button
+                        class="danger-btn"
+                        onclick="
+                        deleteMatch(${match.id})
+                        ">
+
                         Supprimer
+
                     </button>
 
                 </div>
@@ -2403,82 +3376,138 @@ function renderMatches(){
         `;
 
     });
-
 }
 
 
-/* =========================
+/* =====================================================
    DASHBOARD
-========================= */
+===================================================== */
 
 function renderDashboard(){
 
-    document.getElementById("dashboardTeams").textContent=
-        teams.length;
+    document.getElementById(
+        "dashboardTeams"
+    ).textContent=teams.length;
 
-    document.getElementById("dashboardCreators").textContent=
-        members.length;
 
-    const upcoming=matches.filter(
-        m=>!isMatchCompleted(m)
-    );
+    document.getElementById(
+        "dashboardCreators"
+    ).textContent=members.length;
 
-    const completed=matches.filter(
-        m=>isMatchCompleted(m)
-    );
 
-    document.getElementById("dashboardUpcoming").textContent=
-        upcoming.length;
+    const upcoming=
+        matches.filter(
+            m=>!isMatchCompleted(m)
+        );
 
-    document.getElementById("dashboardCompleted").textContent=
-        completed.length;
+
+    const completed=
+        matches.filter(
+            m=>isMatchCompleted(m)
+        );
+
+
+    document.getElementById(
+        "dashboardUpcoming"
+    ).textContent=upcoming.length;
+
+
+    document.getElementById(
+        "dashboardCompleted"
+    ).textContent=completed.length;
 
 
     const matchContainer=
-        document.getElementById("dashboardMatches");
+        document.getElementById(
+            "dashboardMatches"
+        );
+
 
     if(upcoming.length===0){
 
-        matchContainer.innerHTML=
-            `<div class="empty">
+        matchContainer.innerHTML=`
+
+            <div class="empty">
+
                 Aucun match à venir.
-            </div>`;
+
+            </div>
+
+        `;
 
     }else{
 
-        const sorted=[...upcoming].sort(
-            (a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time)
-        );
+        const sorted=
+            [...upcoming].sort(
+                (a,b)=>
+                new Date(
+                    a.date+"T"+a.time
+                )
+                -
+                new Date(
+                    b.date+"T"+b.time
+                )
+            );
 
-        matchContainer.innerHTML=sorted
-            .slice(0,4)
+
+        matchContainer.innerHTML=
+            sorted
+            .slice(0,5)
             .map(match=>{
 
-                const creator=members.find(
-                    m=>String(m.id)===String(match.creatorId)
-                );
+                const creator=
+                    members.find(
+                        m =>
+                        String(m.id)
+                        ===
+                        String(match.creatorId)
+                    );
+
 
                 return `
 
                     <div class="member-mini">
 
-                        <div class="avatar">⚔</div>
+                        <div class="avatar">
+                            ⚔
+                        </div>
+
 
                         <div class="member-info">
 
                             <div class="member-name">
-                                ${escapeHTML(
+
+                                ${
                                     creator
-                                    ? creator.name
-                                    : "Créateur"
-                                )}
+                                    ?
+                                    escapeHTML(
+                                        creator.name
+                                    )
+                                    :
+                                    "Créateur"
+                                }
+
                                 vs
-                                ${escapeHTML(match.opponentAgency)}
+
+                                ${escapeHTML(
+                                    match.opponentAgency
+                                )}
+
                             </div>
 
+
                             <div class="member-username">
-                                ${formatDate(match.date)}
-                                à ${match.time}
+
+                                ${formatDate(
+                                    match.date
+                                )}
+
+                                à
+
+                                ${escapeHTML(
+                                    match.time
+                                )}
+
                             </div>
 
                         </div>
@@ -2487,30 +3516,45 @@ function renderDashboard(){
 
                 `;
 
-            }).join("");
+            })
+            .join("");
 
     }
 
 
     const teamContainer=
-        document.getElementById("dashboardTeamsList");
+        document.getElementById(
+            "dashboardTeamsList"
+        );
+
 
     if(teams.length===0){
 
-        teamContainer.innerHTML=
-            `<div class="empty">
+        teamContainer.innerHTML=`
+
+            <div class="empty">
+
                 Aucune team.
-            </div>`;
+
+            </div>
+
+        `;
 
     }else{
 
-        teamContainer.innerHTML=teams
+        teamContainer.innerHTML=
+            teams
             .slice(0,5)
             .map(team=>{
 
-                const count=members.filter(
-                    m=>String(m.teamId)===String(team.id)
-                ).length;
+                const count=
+                    members.filter(
+                        m =>
+                        String(m.teamId)
+                        ===
+                        String(team.id)
+                    ).length;
+
 
                 return `
 
@@ -2520,15 +3564,29 @@ function renderDashboard(){
                             👥
                         </div>
 
+
                         <div class="member-info">
 
                             <div class="member-name">
-                                ${escapeHTML(team.name)}
+
+                                ${escapeHTML(
+                                    team.name
+                                )}
+
                             </div>
 
+
                             <div class="member-username">
+
                                 ${count}
-                                ${count>1?"créateurs":"créateur"}
+                                ${
+                                    count>1
+                                    ?
+                                    "créateurs"
+                                    :
+                                    "créateur"
+                                }
+
                             </div>
 
                         </div>
@@ -2537,118 +3595,233 @@ function renderDashboard(){
 
                 `;
 
-            }).join("");
+            })
+            .join("");
 
     }
 
 }
 
 
-/* =========================
+/* =====================================================
    CALENDRIER
-========================= */
+===================================================== */
 
 function changeMonth(amount){
 
     currentCalendarDate.setMonth(
-        currentCalendarDate.getMonth()+amount
+        currentCalendarDate.getMonth()
+        +
+        amount
     );
 
     renderCalendar();
-
 }
 
 
 function renderCalendar(){
 
-    const year=currentCalendarDate.getFullYear();
-    const month=currentCalendarDate.getMonth();
+    const year=
+        currentCalendarDate.getFullYear();
+
+    const month=
+        currentCalendarDate.getMonth();
+
 
     const months=[
-        "Janvier","Février","Mars","Avril","Mai","Juin",
-        "Juillet","Août","Septembre","Octobre","Novembre","Décembre"
+        "Janvier",
+        "Février",
+        "Mars",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juillet",
+        "Août",
+        "Septembre",
+        "Octobre",
+        "Novembre",
+        "Décembre"
     ];
 
-    document.getElementById("calendarTitle").textContent=
+
+    document.getElementById(
+        "calendarTitle"
+    ).textContent=
         `${months[month]} ${year}`;
 
-    const grid=document.getElementById("calendarGrid");
+
+    const grid=
+        document.getElementById(
+            "calendarGrid"
+        );
+
 
     const dayNames=[
-        "Lun","Mar","Mer","Jeu","Ven","Sam","Dim"
+        "Lun",
+        "Mar",
+        "Mer",
+        "Jeu",
+        "Ven",
+        "Sam",
+        "Dim"
     ];
 
-    grid.innerHTML=dayNames.map(
-        day=>`<div class="calendar-day-name">${day}</div>`
-    ).join("");
 
-    const firstDay=new Date(year,month,1);
+    grid.innerHTML=
+        dayNames
+        .map(
+            day=>
+            `
+            <div class="calendar-day-name">
+                ${day}
+            </div>
+            `
+        )
+        .join("");
 
-    let startDay=firstDay.getDay();
 
-    startDay=startDay===0 ? 6 : startDay-1;
+    const firstDay=
+        new Date(
+            year,
+            month,
+            1
+        );
+
+
+    let startDay=
+        firstDay.getDay();
+
+
+    startDay=
+        startDay===0
+        ?
+        6
+        :
+        startDay-1;
+
 
     const daysInMonth=
-        new Date(year,month+1,0).getDate();
+        new Date(
+            year,
+            month+1,
+            0
+        ).getDate();
+
 
     const previousMonthDays=
-        new Date(year,month,0).getDate();
+        new Date(
+            year,
+            month,
+            0
+        ).getDate();
+
 
     for(let i=0;i<42;i++){
 
-        let dayNumber=i-startDay+1;
+        let dayNumber=
+            i-startDay+1;
+
 
         let cellDate;
+
         let other=false;
+
 
         if(dayNumber<1){
 
-            dayNumber=previousMonthDays+dayNumber;
+            dayNumber=
+                previousMonthDays
+                +
+                dayNumber;
 
-            cellDate=new Date(year,month-1,dayNumber);
+            cellDate=
+                new Date(
+                    year,
+                    month-1,
+                    dayNumber
+                );
 
             other=true;
 
-        }else if(dayNumber>daysInMonth){
+        }else if(
+            dayNumber>daysInMonth
+        ){
 
-            dayNumber=dayNumber-daysInMonth;
+            dayNumber=
+                dayNumber
+                -
+                daysInMonth;
 
-            cellDate=new Date(year,month+1,dayNumber);
+            cellDate=
+                new Date(
+                    year,
+                    month+1,
+                    dayNumber
+                );
 
             other=true;
 
         }else{
 
-            cellDate=new Date(year,month,dayNumber);
+            cellDate=
+                new Date(
+                    year,
+                    month,
+                    dayNumber
+                );
 
         }
 
+
         const dateString=
-            cellDate.getFullYear()+"-"+
-            String(cellDate.getMonth()+1).padStart(2,"0")+"-"+
-            String(cellDate.getDate()).padStart(2,"0");
+            cellDate.getFullYear()
+            +
+            "-"
+            +
+            String(
+                cellDate.getMonth()+1
+            ).padStart(2,"0")
+            +
+            "-"
+            +
+            String(
+                cellDate.getDate()
+            ).padStart(2,"0");
 
-        const dayMatches=matches.filter(
-            m=>m.date===dateString
-        );
 
-        const matchHTML=dayMatches.map(match=>{
+        const dayMatches=
+            matches.filter(
+                m=>m.date===dateString
+            );
 
-            return `
+
+        const matchHTML=
+            dayMatches
+            .map(match=>`
+
                 <div class="calendar-match">
-                    ${escapeHTML(match.time)}
-                    — ${escapeHTML(match.opponentAgency)}
-                </div>
-            `;
 
-        }).join("");
+                    ${escapeHTML(match.time)}
+                    —
+                    ${escapeHTML(
+                        match.opponentAgency
+                    )}
+
+                </div>
+
+            `)
+            .join("");
+
 
         grid.innerHTML+=`
 
-            <div class="calendar-cell ${other?"other":""}">
+            <div class="calendar-cell
+                        ${other ? "other":""}">
 
                 <div class="day-number">
+
                     ${dayNumber}
+
                 </div>
 
                 ${matchHTML}
@@ -2662,18 +3835,21 @@ function renderCalendar(){
 }
 
 
-/* =========================
-   OUTILS
-========================= */
+/* =====================================================
+   UTILITAIRES
+===================================================== */
 
 function normalizeUsername(username){
 
     if(!username) return "";
 
-    return username.startsWith("@")
-        ? username
-        : "@"+username;
+    username=username.trim();
 
+    return username.startsWith("@")
+        ?
+        username
+        :
+        "@"+username;
 }
 
 
@@ -2681,7 +3857,12 @@ function formatDate(dateString){
 
     if(!dateString) return "—";
 
-    const date=new Date(dateString+"T00:00:00");
+
+    const date=
+        new Date(
+            dateString+"T00:00:00"
+        );
+
 
     return date.toLocaleDateString(
         "fr-FR",
@@ -2697,7 +3878,14 @@ function formatDate(dateString){
 
 function escapeHTML(value){
 
-    if(value===null || value===undefined) return "";
+    if(
+        value===null
+        ||
+        value===undefined
+    ){
+        return "";
+    }
+
 
     return String(value)
         .replace(/&/g,"&amp;")
@@ -2709,9 +3897,9 @@ function escapeHTML(value){
 }
 
 
-/* =========================
+/* =====================================================
    INITIALISATION
-========================= */
+===================================================== */
 
 renderDashboard();
 renderTeams();
