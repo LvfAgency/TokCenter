@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#09090d">
+<meta name="theme-color" content="#08080c">
 <title>TokCenter</title>
 
 <style>
@@ -26,10 +26,6 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
 }
 
 body{
@@ -75,7 +71,7 @@ button{
     font-size:27px;
     font-weight:900;
     letter-spacing:-1px;
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
 .logo span{
@@ -109,6 +105,13 @@ button{
 .nav-btn.active{
     color:white;
     background:var(--pink);
+}
+
+.sidebar-bottom{
+    position:absolute;
+    left:16px;
+    right:16px;
+    bottom:20px;
 }
 
 /* =========================
@@ -146,6 +149,89 @@ button{
 
 .page-header p{
     color:var(--muted);
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.global-search{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.search-input{
+    width:100%;
+    padding:14px 17px 14px 45px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    color:white;
+    outline:none;
+}
+
+.search-input:focus{
+    border-color:var(--pink);
+}
+
+.search-icon{
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    pointer-events:none;
+}
+
+.search-results{
+    position:absolute;
+    top:calc(100% + 7px);
+    left:0;
+    right:0;
+    background:#15151c;
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    z-index:40;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+.search-result{
+    padding:13px 15px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+}
+
+.search-result:last-child{
+    border-bottom:0;
+}
+
+.search-result:hover{
+    background:var(--panel3);
+}
+
+.search-result-type{
+    color:var(--pink);
+    font-size:10px;
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:4px;
+}
+
+.search-result-title{
+    font-weight:750;
+}
+
+.search-result-sub{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.search-empty{
+    padding:18px;
+    color:var(--muted);
+    text-align:center;
 }
 
 /* =========================
@@ -190,6 +276,16 @@ button{
 .btn-small{
     padding:8px 11px;
     font-size:13px;
+}
+
+.btn-tiktok{
+    background:#24242d;
+    color:white;
+    border:1px solid #383842;
+}
+
+.btn-tiktok:hover{
+    background:#30303a;
 }
 
 /* =========================
@@ -358,6 +454,7 @@ button{
 
 .member-actions{
     display:flex;
+    flex-wrap:wrap;
     gap:6px;
     margin-top:10px;
 }
@@ -461,13 +558,6 @@ button{
     margin-top:3px;
 }
 
-.match-team{
-    color:var(--pink2);
-    font-size:13px;
-    font-weight:700;
-    margin-top:5px;
-}
-
 .vs{
     color:var(--muted);
     font-weight:900;
@@ -477,6 +567,7 @@ button{
 .match-actions{
     display:flex;
     justify-content:center;
+    flex-wrap:wrap;
     gap:8px;
     margin-top:18px;
     padding-top:16px;
@@ -577,6 +668,66 @@ button{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+}
+
+/* =========================
+   AGENCES
+========================= */
+
+.agency-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;
+}
+
+.agency-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+}
+
+.agency-card h3{
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.agency-card p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.setting-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+}
+
+.setting-card h2{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.setting-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:17px;
+}
+
+.file-input{
+    display:none;
 }
 
 /* =========================
@@ -822,6 +973,10 @@ button{
     .agency{
         font-size:17px;
     }
+
+    .team-footer{
+        flex-direction:column;
+    }
 }
 </style>
 </head>
@@ -831,14 +986,39 @@ button{
 <div class="app">
 
 <header class="mobile-header">
-    <div class="mobile-logo">TOK<span>CENTER</span></div>
+
+    <div class="mobile-logo">
+        TOK<span>CENTER</span>
+    </div>
 
     <select class="mobile-select" id="mobileNavigation">
-        <option value="dashboard">Accueil</option>
-        <option value="teams">Teams</option>
-        <option value="matches">Matchs</option>
-        <option value="calendar">Calendrier</option>
+
+        <option value="dashboard">
+            Accueil
+        </option>
+
+        <option value="teams">
+            Teams
+        </option>
+
+        <option value="matches">
+            Matchs
+        </option>
+
+        <option value="calendar">
+            Calendrier
+        </option>
+
+        <option value="agencies">
+            Agences
+        </option>
+
+        <option value="settings">
+            Paramètres
+        </option>
+
     </select>
+
 </header>
 
 
@@ -850,27 +1030,47 @@ button{
 
     <nav class="nav">
 
-        <button class="nav-btn active" data-page="dashboard">
+        <button class="nav-btn active"
+                data-page="dashboard">
             🏠
             <span>Tableau de bord</span>
         </button>
 
-        <button class="nav-btn" data-page="teams">
+        <button class="nav-btn"
+                data-page="teams">
             👥
             <span>Teams</span>
         </button>
 
-        <button class="nav-btn" data-page="matches">
+        <button class="nav-btn"
+                data-page="matches">
             ⚔️
             <span>Matchs</span>
         </button>
 
-        <button class="nav-btn" data-page="calendar">
+        <button class="nav-btn"
+                data-page="calendar">
             📅
             <span>Calendrier</span>
         </button>
 
+        <button class="nav-btn"
+                data-page="agencies">
+            🏢
+            <span>Agences</span>
+        </button>
+
     </nav>
+
+    <div class="sidebar-bottom">
+
+        <button class="nav-btn"
+                data-page="settings">
+            ⚙️
+            <span>Paramètres</span>
+        </button>
+
+    </div>
 
 </aside>
 
@@ -878,16 +1078,51 @@ button{
 <main class="main">
 
 <!-- =========================
+     RECHERCHE GLOBALE
+========================= -->
+
+<div class="global-search">
+
+    <span class="search-icon">
+        🔎
+    </span>
+
+    <input
+        id="globalSearch"
+        class="search-input"
+        type="search"
+        placeholder="Rechercher une Team, un créateur, un match ou une agence..."
+        autocomplete="off"
+    >
+
+    <div
+        id="searchResults"
+        class="search-results"
+        style="display:none;">
+    </div>
+
+</div>
+
+
+<!-- =========================
      DASHBOARD
 ========================= -->
 
-<section id="page-dashboard" class="page active">
+<section id="page-dashboard"
+         class="page active">
 
     <div class="page-header">
 
         <div>
-            <h1>Tableau de bord</h1>
-            <p>Vue d'ensemble de votre activité TokCenter.</p>
+
+            <h1>
+                Tableau de bord
+            </h1>
+
+            <p>
+                Vue d'ensemble de votre activité TokCenter.
+            </p>
+
         </div>
 
     </div>
@@ -896,27 +1131,74 @@ button{
     <div class="stats">
 
         <div class="stat-card">
-            <div class="stat-icon">👥</div>
-            <div class="stat-label">Teams</div>
-            <div class="stat-number" id="dashboardTeams">0</div>
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div class="stat-label">
+                Teams
+            </div>
+
+            <div class="stat-number"
+                 id="dashboardTeams">
+                0
+            </div>
+
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">🎥</div>
-            <div class="stat-label">Membres</div>
-            <div class="stat-number" id="dashboardMembers">0</div>
-        </div>
 
         <div class="stat-card">
-            <div class="stat-icon">⚔️</div>
-            <div class="stat-label">Matchs à venir</div>
-            <div class="stat-number" id="dashboardUpcoming">0</div>
+
+            <div class="stat-icon">
+                🎥
+            </div>
+
+            <div class="stat-label">
+                Membres
+            </div>
+
+            <div class="stat-number"
+                 id="dashboardMembers">
+                0
+            </div>
+
         </div>
 
+
         <div class="stat-card">
-            <div class="stat-icon">✅</div>
-            <div class="stat-label">Matchs effectués</div>
-            <div class="stat-number" id="dashboardFinished">0</div>
+
+            <div class="stat-icon">
+                ⚔️
+            </div>
+
+            <div class="stat-label">
+                Matchs à venir
+            </div>
+
+            <div class="stat-number"
+                 id="dashboardUpcoming">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div class="stat-label">
+                Matchs effectués
+            </div>
+
+            <div class="stat-number"
+                 id="dashboardFinished">
+                0
+            </div>
+
         </div>
 
     </div>
@@ -927,12 +1209,17 @@ button{
         <div class="panel">
 
             <div class="panel-title">
-                <h2>Prochains matchs</h2>
 
-                <button class="btn btn-secondary btn-small"
-                        onclick="navigate('matches')">
+                <h2>
+                    Prochains matchs
+                </h2>
+
+                <button
+                    class="btn btn-secondary btn-small"
+                    onclick="navigate('matches')">
                     Voir tous
                 </button>
+
             </div>
 
             <div id="dashboardMatches"></div>
@@ -943,12 +1230,17 @@ button{
         <div class="panel">
 
             <div class="panel-title">
-                <h2>Vos Teams</h2>
 
-                <button class="btn btn-secondary btn-small"
-                        onclick="navigate('teams')">
+                <h2>
+                    Vos Teams
+                </h2>
+
+                <button
+                    class="btn btn-secondary btn-small"
+                    onclick="navigate('teams')">
                     Gérer
                 </button>
+
             </div>
 
             <div id="dashboardTeamsList"></div>
@@ -964,23 +1256,34 @@ button{
      TEAMS
 ========================= -->
 
-<section id="page-teams" class="page">
+<section id="page-teams"
+         class="page">
 
     <div class="page-header">
 
         <div>
-            <h1>Teams</h1>
-            <p>Créez vos Teams et gérez leurs membres.</p>
+
+            <h1>
+                Teams
+            </h1>
+
+            <p>
+                Créez vos Teams et gérez leurs membres.
+            </p>
+
         </div>
 
-        <button class="btn btn-primary"
-                onclick="openTeamModal()">
+        <button
+            class="btn btn-primary"
+            onclick="openTeamModal()">
             ＋ Créer une Team
         </button>
 
     </div>
 
-    <div id="teamsContainer" class="team-grid"></div>
+    <div id="teamsContainer"
+         class="team-grid">
+    </div>
 
 </section>
 
@@ -989,23 +1292,34 @@ button{
      MATCHS
 ========================= -->
 
-<section id="page-matches" class="page">
+<section id="page-matches"
+         class="page">
 
     <div class="page-header">
 
         <div>
-            <h1>Matchs</h1>
-            <p>Gérez vos matchs contre les agences adverses.</p>
+
+            <h1>
+                Matchs
+            </h1>
+
+            <p>
+                Gérez vos matchs contre les agences adverses.
+            </p>
+
         </div>
 
-        <button class="btn btn-primary"
-                onclick="openMatchModal()">
+        <button
+            class="btn btn-primary"
+            onclick="openMatchModal()">
             ＋ Ajouter un match
         </button>
 
     </div>
 
-    <div id="matchesContainer" class="match-list"></div>
+    <div id="matchesContainer"
+         class="match-list">
+    </div>
 
 </section>
 
@@ -1014,13 +1328,21 @@ button{
      CALENDRIER
 ========================= -->
 
-<section id="page-calendar" class="page">
+<section id="page-calendar"
+         class="page">
 
     <div class="page-header">
 
         <div>
-            <h1>Calendrier</h1>
-            <p>Retrouvez tous vos matchs par date.</p>
+
+            <h1>
+                Calendrier
+            </h1>
+
+            <p>
+                Retrouvez tous vos matchs par date.
+            </p>
+
         </div>
 
     </div>
@@ -1030,23 +1352,158 @@ button{
 
         <div class="calendar-toolbar">
 
-            <button class="btn btn-secondary"
-                    onclick="changeMonth(-1)">
+            <button
+                class="btn btn-secondary"
+                onclick="changeMonth(-1)">
                 ‹
             </button>
 
-            <div class="calendar-title"
-                 id="calendarTitle"></div>
+            <div
+                class="calendar-title"
+                id="calendarTitle">
+            </div>
 
-            <button class="btn btn-secondary"
-                    onclick="changeMonth(1)">
+            <button
+                class="btn btn-secondary"
+                onclick="changeMonth(1)">
                 ›
             </button>
 
         </div>
 
-        <div class="calendar"
-             id="calendar"></div>
+        <div
+            class="calendar"
+            id="calendar">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AGENCES
+========================= -->
+
+<section id="page-agencies"
+         class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Agences
+            </h1>
+
+            <p>
+                Les agences apparaissent automatiquement depuis vos matchs.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div
+        id="agenciesContainer"
+        class="agency-grid">
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PARAMÈTRES
+========================= -->
+
+<section id="page-settings"
+         class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Paramètres
+            </h1>
+
+            <p>
+                Gérez la sauvegarde de vos données TokCenter.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="settings-grid">
+
+
+        <div class="setting-card">
+
+            <h2>
+                💾 Exporter mes données
+            </h2>
+
+            <p>
+                Téléchargez une sauvegarde complète de vos Teams,
+                créateurs et matchs.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="exportData()">
+                Exporter les données
+            </button>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <h2>
+                📥 Importer mes données
+            </h2>
+
+            <p>
+                Restaurez une sauvegarde TokCenter précédemment exportée.
+            </p>
+
+            <input
+                id="importFile"
+                class="file-input"
+                type="file"
+                accept=".json,application/json"
+                onchange="importData(event)"
+            >
+
+            <button
+                class="btn btn-secondary"
+                onclick="document.getElementById('importFile').click()">
+                Importer une sauvegarde
+            </button>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <h2>
+                🗑️ Réinitialiser
+            </h2>
+
+            <p>
+                Supprime définitivement les données enregistrées
+                sur cet appareil.
+            </p>
+
+            <button
+                class="btn btn-danger"
+                onclick="resetData()">
+                Réinitialiser TokCenter
+            </button>
+
+        </div>
 
     </div>
 
@@ -1060,7 +1517,8 @@ button{
      MODAL TEAM
 ========================= -->
 
-<div class="modal" id="teamModal">
+<div class="modal"
+     id="teamModal">
 
 <div class="modal-box">
 
@@ -1070,14 +1528,18 @@ button{
             Créer une Team
         </h2>
 
-        <button class="close"
-                onclick="closeModal('teamModal')">
+        <button
+            class="close"
+            onclick="closeModal('teamModal')">
             ×
         </button>
 
     </div>
 
-    <input type="hidden" id="editTeamId">
+    <input
+        type="hidden"
+        id="editTeamId"
+    >
 
     <div class="form-group">
 
@@ -1096,20 +1558,21 @@ button{
 
     <div class="modal-footer">
 
-        <button class="btn btn-secondary"
-                onclick="closeModal('teamModal')">
+        <button
+            class="btn btn-secondary"
+            onclick="closeModal('teamModal')">
             Annuler
         </button>
 
-        <button class="btn btn-primary"
-                onclick="saveTeam()">
+        <button
+            class="btn btn-primary"
+            onclick="saveTeam()">
             Enregistrer
         </button>
 
     </div>
 
 </div>
-
 </div>
 
 
@@ -1117,7 +1580,8 @@ button{
      MODAL MEMBRE
 ========================= -->
 
-<div class="modal" id="memberModal">
+<div class="modal"
+     id="memberModal">
 
 <div class="modal-box">
 
@@ -1127,15 +1591,23 @@ button{
             Ajouter un membre
         </h2>
 
-        <button class="close"
-                onclick="closeModal('memberModal')">
+        <button
+            class="close"
+            onclick="closeModal('memberModal')">
             ×
         </button>
 
     </div>
 
-    <input type="hidden" id="memberTeamId">
-    <input type="hidden" id="editMemberId">
+    <input
+        type="hidden"
+        id="memberTeamId"
+    >
+
+    <input
+        type="hidden"
+        id="editMemberId"
+    >
 
     <div class="form-group">
 
@@ -1152,6 +1624,7 @@ button{
 
     </div>
 
+
     <div class="form-group">
 
         <label for="memberPseudo">
@@ -1167,14 +1640,16 @@ button{
 
     </div>
 
+
     <div class="form-group">
 
         <label for="memberRole">
             Rôle
         </label>
 
-        <select class="form-control"
-                id="memberRole">
+        <select
+            class="form-control"
+            id="memberRole">
 
             <option value="Fondateur">
                 Fondateur
@@ -1188,7 +1663,8 @@ button{
                 Agent
             </option>
 
-            <option value="Créateur" selected>
+            <option value="Créateur"
+                    selected>
                 Créateur
             </option>
 
@@ -1196,22 +1672,24 @@ button{
 
     </div>
 
+
     <div class="modal-footer">
 
-        <button class="btn btn-secondary"
-                onclick="closeModal('memberModal')">
+        <button
+            class="btn btn-secondary"
+            onclick="closeModal('memberModal')">
             Annuler
         </button>
 
-        <button class="btn btn-primary"
-                onclick="saveMember()">
+        <button
+            class="btn btn-primary"
+            onclick="saveMember()">
             Enregistrer
         </button>
 
     </div>
 
 </div>
-
 </div>
 
 
@@ -1219,7 +1697,8 @@ button{
      MODAL MATCH
 ========================= -->
 
-<div class="modal" id="matchModal">
+<div class="modal"
+     id="matchModal">
 
 <div class="modal-box">
 
@@ -1229,17 +1708,19 @@ button{
             Ajouter un match
         </h2>
 
-        <button class="close"
-                onclick="closeModal('matchModal')">
+        <button
+            class="close"
+            onclick="closeModal('matchModal')">
             ×
         </button>
 
     </div>
 
-    <input type="hidden" id="editMatchId">
+    <input
+        type="hidden"
+        id="editMatchId"
+    >
 
-
-    <!-- NOTRE TEAM -->
 
     <div class="form-section">
 
@@ -1285,16 +1766,10 @@ button{
 
             </select>
 
-            <div class="form-help">
-                La liste est automatiquement remplie avec les membres de la Team sélectionnée.
-            </div>
-
         </div>
 
     </div>
 
-
-    <!-- AGENCE ADVERSE -->
 
     <div class="form-section">
 
@@ -1353,8 +1828,6 @@ button{
     </div>
 
 
-    <!-- DATE / HEURE -->
-
     <div class="form-section">
 
         <div class="form-section-title">
@@ -1383,13 +1856,6 @@ button{
                 Heure
             </label>
 
-            <!--
-                input type=time :
-                sur téléphone, le système affiche
-                le sélecteur d'heure natif avec
-                défilement.
-            -->
-
             <input
                 class="form-control"
                 id="matchTime"
@@ -1403,43 +1869,41 @@ button{
 
     <div class="modal-footer">
 
-        <button class="btn btn-secondary"
-                onclick="closeModal('matchModal')">
+        <button
+            class="btn btn-secondary"
+            onclick="closeModal('matchModal')">
             Annuler
         </button>
 
-        <button class="btn btn-primary"
-                onclick="saveMatch()">
+        <button
+            class="btn btn-primary"
+            onclick="saveMatch()">
             Enregistrer
         </button>
 
     </div>
 
 </div>
-
 </div>
 
 
 <div class="toast-container"
-     id="toastContainer"></div>
+     id="toastContainer">
+</div>
 
 
 <script>
 
 /* =========================================================
-   DONNÉES
+   STOCKAGE
 ========================================================= */
 
-const STORAGE_KEY = "tokcenter_data_v4";
+const STORAGE_KEY = "tokcenter_data_v5";
 
 let data = loadData();
 
 let calendarDate = new Date();
 
-
-/* =========================================================
-   CHARGEMENT
-========================================================= */
 
 function loadData(){
 
@@ -1459,6 +1923,14 @@ function loadData(){
                 Array.isArray(parsed.matches)
             ){
 
+                parsed.teams.forEach(team => {
+
+                    if(!Array.isArray(team.members)){
+                        team.members = [];
+                    }
+
+                });
+
                 return parsed;
 
             }
@@ -1467,10 +1939,7 @@ function loadData(){
 
     }catch(error){
 
-        console.error(
-            "Erreur de chargement :",
-            error
-        );
+        console.error(error);
 
     }
 
@@ -1482,10 +1951,6 @@ function loadData(){
 
 }
 
-
-/* =========================================================
-   SAUVEGARDE
-========================================================= */
 
 function saveData(){
 
@@ -1744,25 +2209,9 @@ function deleteTeam(teamId){
     if(!team) return;
 
 
-    const count =
-        Array.isArray(team.members)
-            ? team.members.length
-            : 0;
-
-
-    let message =
-        `Supprimer la Team « ${team.name} » ?`;
-
-
-    if(count){
-
-        message +=
-            `\n\nCette Team contient ${count} membre${count > 1 ? "s" : ""}.`;
-
-    }
-
-
-    if(!confirm(message)) return;
+    if(!confirm(
+        `Supprimer la Team « ${team.name} » ?`
+    )) return;
 
 
     data.teams =
@@ -1935,7 +2384,8 @@ function saveMember(){
 
     if(!pseudo.startsWith("@")){
 
-        pseudo = "@" + pseudo;
+        pseudo =
+            "@" + pseudo;
 
     }
 
@@ -2023,17 +2473,8 @@ function deleteMember(
     if(!team) return;
 
 
-    const member =
-        team.members.find(
-            m => m.id === memberId
-        );
-
-
-    if(!member) return;
-
-
     if(!confirm(
-        `Supprimer ${member.name} de cette Team ?`
+        "Supprimer ce membre de la Team ?"
     )) return;
 
 
@@ -2055,7 +2496,7 @@ function deleteMember(
 
 
 /* =========================================================
-   LISTE DES TEAMS DANS LE FORMULAIRE MATCH
+   MATCHS
 ========================================================= */
 
 function populateMatchTeams(){
@@ -2080,7 +2521,9 @@ function populateMatchTeams(){
     data.teams.forEach(team => {
 
         const option =
-            document.createElement("option");
+            document.createElement(
+                "option"
+            );
 
 
         option.value =
@@ -2091,35 +2534,32 @@ function populateMatchTeams(){
             team.name;
 
 
-        select.appendChild(option);
+        select.appendChild(
+            option
+        );
 
     });
 
 
-    if(current &&
-       data.teams.some(
-           team => String(team.id) === String(current)
-       )
-    ){
+    if(current){
 
-        select.value = current;
+        select.value =
+            current;
 
     }
 
 }
 
 
-/* =========================================================
-   LISTE AUTOMATIQUE DES CRÉATEURS
-========================================================= */
-
 function updateCreatorList(
     selectedCreatorId = null
 ){
 
-    const teamSelect =
-        document.getElementById(
-            "matchTeam"
+    const teamId =
+        Number(
+            document.getElementById(
+                "matchTeam"
+            ).value
         );
 
 
@@ -2127,10 +2567,6 @@ function updateCreatorList(
         document.getElementById(
             "matchCreator"
         );
-
-
-    const teamId =
-        Number(teamSelect.value);
 
 
     creatorSelect.innerHTML = "";
@@ -2160,12 +2596,6 @@ function updateCreatorList(
     if(!team){
 
         creatorSelect.disabled = true;
-
-        creatorSelect.innerHTML = `
-            <option value="">
-                Team introuvable
-            </option>
-        `;
 
         return;
 
@@ -2206,7 +2636,9 @@ function updateCreatorList(
     members.forEach(member => {
 
         const option =
-            document.createElement("option");
+            document.createElement(
+                "option"
+            );
 
 
         option.value =
@@ -2217,7 +2649,9 @@ function updateCreatorList(
             `${member.name} — ${member.pseudo}`;
 
 
-        creatorSelect.appendChild(option);
+        creatorSelect.appendChild(
+            option
+        );
 
     });
 
@@ -2232,10 +2666,6 @@ function updateCreatorList(
 }
 
 
-/* =========================================================
-   MATCHS
-========================================================= */
-
 function openMatchModal(
     matchId = null
 ){
@@ -2244,6 +2674,9 @@ function openMatchModal(
         "editMatchId"
     ).value =
         matchId || "";
+
+
+    populateMatchTeams();
 
 
     document.getElementById(
@@ -2271,9 +2704,6 @@ function openMatchModal(
     ).value = "";
 
 
-    populateMatchTeams();
-
-
     if(matchId){
 
         const match =
@@ -2294,42 +2724,42 @@ function openMatchModal(
         document.getElementById(
             "matchTeam"
         ).value =
-            match.teamId || "";
+            match.teamId;
 
 
         updateCreatorList(
-            match.creatorId || null
+            match.creatorId
         );
 
 
         document.getElementById(
             "matchAgency"
         ).value =
-            match.agency || "";
+            match.agency;
 
 
         document.getElementById(
             "matchOpponent"
         ).value =
-            match.opponent || "";
+            match.opponent;
 
 
         document.getElementById(
             "matchOpponentPseudo"
         ).value =
-            match.opponentPseudo || "";
+            match.opponentPseudo;
 
 
         document.getElementById(
             "matchDate"
         ).value =
-            match.date || "";
+            match.date;
 
 
         document.getElementById(
             "matchTime"
         ).value =
-            match.time || "";
+            match.time;
 
     }else{
 
@@ -2343,32 +2773,20 @@ function openMatchModal(
             new Date();
 
 
-        const year =
-            today.getFullYear();
-
-
-        const month =
-            String(
-                today.getMonth()+1
-            ).padStart(2,"0");
-
-
-        const day =
-            String(
-                today.getDate()
-            ).padStart(2,"0");
-
-
         document.getElementById(
             "matchDate"
         ).value =
-            `${year}-${month}-${day}`;
+            today.toISOString()
+                .split("T")[0];
 
 
         document.getElementById(
             "matchTime"
         ).value =
             "21:00";
+
+
+        updateCreatorList();
 
     }
 
@@ -2457,7 +2875,7 @@ function saveMatch(){
     if(!agency){
 
         showToast(
-            "Veuillez renseigner le nom de l'agence adverse."
+            "Veuillez renseigner l'agence adverse."
         );
 
         return;
@@ -2479,7 +2897,7 @@ function saveMatch(){
     if(!opponentPseudo){
 
         showToast(
-            "Veuillez renseigner le pseudo TikTok de l'adversaire."
+            "Veuillez renseigner le pseudo TikTok."
         );
 
         return;
@@ -2495,21 +2913,10 @@ function saveMatch(){
     }
 
 
-    if(!date){
+    if(!date || !time){
 
         showToast(
-            "Veuillez sélectionner une date."
-        );
-
-        return;
-
-    }
-
-
-    if(!time){
-
-        showToast(
-            "Veuillez sélectionner une heure."
+            "Veuillez renseigner la date et l'heure."
         );
 
         return;
@@ -2532,15 +2939,7 @@ function saveMatch(){
         );
 
 
-    if(!creator){
-
-        showToast(
-            "Le créateur sélectionné est introuvable."
-        );
-
-        return;
-
-    }
+    if(!creator) return;
 
 
     if(editId){
@@ -2556,44 +2955,39 @@ function saveMatch(){
             match.teamId =
                 teamId;
 
+            match.teamName =
+                team.name;
 
             match.creatorId =
                 creatorId;
 
-
             match.creatorName =
                 creator.name;
-
 
             match.creatorPseudo =
                 creator.pseudo;
 
-
             match.agency =
                 agency;
-
 
             match.opponent =
                 opponent;
 
-
             match.opponentPseudo =
                 opponentPseudo;
-
 
             match.date =
                 date;
 
-
             match.time =
                 time;
 
-
-            showToast(
-                "Match modifié."
-            );
-
         }
+
+
+        showToast(
+            "Match modifié."
+        );
 
     }else{
 
@@ -2694,12 +3088,189 @@ function toggleMatch(matchId){
 
     renderAll();
 
+}
 
-    showToast(
-        match.completed
-            ? "Match marqué comme effectué."
-            : "Match remis dans les matchs à venir."
+
+/* =========================================================
+   TIKTOK
+========================================================= */
+
+function openTikTok(pseudo){
+
+    if(!pseudo) return;
+
+
+    const clean =
+        pseudo
+            .trim()
+            .replace(/^@/,"");
+
+
+    if(!clean) return;
+
+
+    window.open(
+        "https://www.tiktok.com/@" +
+        encodeURIComponent(clean),
+        "_blank"
     );
+
+}
+
+
+/* =========================================================
+   AGENCES AUTOMATIQUES
+========================================================= */
+
+function getAgencies(){
+
+    const map = new Map();
+
+
+    data.matches.forEach(match => {
+
+        const name =
+            (match.agency || "").trim();
+
+
+        if(!name) return;
+
+
+        const key =
+            name.toLowerCase();
+
+
+        if(!map.has(key)){
+
+            map.set(
+                key,
+                {
+                    name:name,
+                    matches:0,
+                    lastMatch:null
+                }
+            );
+
+        }
+
+
+        const agency =
+            map.get(key);
+
+
+        agency.matches++;
+
+
+        if(
+            !agency.lastMatch ||
+            getDateTime(match) >
+            getDateTime(agency.lastMatch)
+        ){
+
+            agency.lastMatch =
+                match;
+
+        }
+
+    });
+
+
+    return Array.from(
+        map.values()
+    ).sort(
+        (a,b) =>
+            a.name.localeCompare(
+                b.name,
+                "fr"
+            )
+    );
+
+}
+
+
+function renderAgencies(){
+
+    const container =
+        document.getElementById(
+            "agenciesContainer"
+        );
+
+
+    const agencies =
+        getAgencies();
+
+
+    if(!agencies.length){
+
+        container.innerHTML = `
+
+            <div class="panel"
+                 style="grid-column:1/-1;">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🏢
+                    </div>
+
+                    <div>
+                        Les agences apparaîtront automatiquement
+                        lorsque vous créerez des matchs.
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        agencies.map(agency => {
+
+            const last =
+                agency.lastMatch;
+
+
+            return `
+
+                <div class="agency-card">
+
+                    <h3>
+                        ${escapeHTML(
+                            agency.name
+                        )}
+                    </h3>
+
+                    <p>
+                        ${agency.matches}
+                        match${agency.matches > 1 ? "s" : ""}
+                    </p>
+
+                    ${
+                        last
+
+                        ?
+
+                        `<p style="margin-top:7px;">
+                            Dernier match :
+                            ${formatDate(last.date)}
+                        </p>`
+
+                        :
+
+                        ""
+                    }
+
+                </div>
+
+            `;
+
+        }).join("");
 
 }
 
@@ -2761,10 +3332,6 @@ function getFinishedMatches(){
 }
 
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
 function renderDashboard(){
 
     document.getElementById(
@@ -2814,10 +3381,19 @@ function renderDashboardMatches(){
     if(!upcoming.length){
 
         container.innerHTML = `
+
             <div class="empty">
-                <div class="empty-icon">📅</div>
-                <div>Aucun match à venir.</div>
+
+                <div class="empty-icon">
+                    📅
+                </div>
+
+                <div>
+                    Aucun match à venir.
+                </div>
+
             </div>
+
         `;
 
         return;
@@ -2854,15 +3430,21 @@ function renderDashboardMatches(){
                         </div>
 
                         <div class="agency">
-                            ${escapeHTML(match.teamName || "Team")}
+                            ${escapeHTML(
+                                match.teamName
+                            )}
                         </div>
 
                         <div class="match-person">
-                            ${escapeHTML(match.creatorName || "")}
+                            ${escapeHTML(
+                                match.creatorName
+                            )}
                         </div>
 
                         <div class="match-pseudo">
-                            ${escapeHTML(match.creatorPseudo || "")}
+                            ${escapeHTML(
+                                match.creatorPseudo
+                            )}
                         </div>
 
                     </div>
@@ -2880,15 +3462,21 @@ function renderDashboardMatches(){
                         </div>
 
                         <div class="agency">
-                            ${escapeHTML(match.agency)}
+                            ${escapeHTML(
+                                match.agency
+                            )}
                         </div>
 
                         <div class="match-person">
-                            ${escapeHTML(match.opponent || "")}
+                            ${escapeHTML(
+                                match.opponent
+                            )}
                         </div>
 
                         <div class="match-pseudo">
-                            ${escapeHTML(match.opponentPseudo || "")}
+                            ${escapeHTML(
+                                match.opponentPseudo
+                            )}
                         </div>
 
                     </div>
@@ -2913,10 +3501,17 @@ function renderDashboardTeams(){
     if(!data.teams.length){
 
         container.innerHTML = `
+
             <div class="empty">
-                <div class="empty-icon">👥</div>
-                <div>Aucune Team créée.</div>
+                <div class="empty-icon">
+                    👥
+                </div>
+
+                <div>
+                    Aucune Team créée.
+                </div>
             </div>
+
         `;
 
         return;
@@ -2976,7 +3571,7 @@ function renderDashboardTeams(){
 
 
 /* =========================================================
-   TEAMS
+   TEAMS RENDER
 ========================================================= */
 
 function renderTeams(){
@@ -3098,6 +3693,12 @@ function renderTeams(){
                                     <div class="member-actions">
 
                                         <button
+                                            class="btn btn-tiktok btn-small"
+                                            onclick="openTikTok('${escapeJS(member.pseudo)}')">
+                                            TikTok
+                                        </button>
+
+                                        <button
                                             class="btn btn-secondary btn-small"
                                             onclick="openMemberModal(${team.id},${member.id})">
                                             Modifier
@@ -3156,7 +3757,7 @@ function renderTeams(){
 
 
 /* =========================================================
-   MATCHS
+   MATCHS RENDER
 ========================================================= */
 
 function renderMatches(){
@@ -3247,21 +3848,28 @@ function renderMatches(){
 
                         <div class="agency">
                             ${escapeHTML(
-                                match.teamName || "Team"
+                                match.teamName
                             )}
                         </div>
 
                         <div class="match-person">
                             ${escapeHTML(
-                                match.creatorName || ""
+                                match.creatorName
                             )}
                         </div>
 
                         <div class="match-pseudo">
                             ${escapeHTML(
-                                match.creatorPseudo || ""
+                                match.creatorPseudo
                             )}
                         </div>
+
+                        <button
+                            class="btn btn-tiktok btn-small"
+                            style="margin-top:10px;"
+                            onclick="openTikTok('${escapeJS(match.creatorPseudo)}')">
+                            TikTok
+                        </button>
 
                     </div>
 
@@ -3278,20 +3886,29 @@ function renderMatches(){
                         </div>
 
                         <div class="agency">
-                            ${escapeHTML(match.agency)}
+                            ${escapeHTML(
+                                match.agency
+                            )}
                         </div>
 
                         <div class="match-person">
                             ${escapeHTML(
-                                match.opponent || ""
+                                match.opponent
                             )}
                         </div>
 
                         <div class="match-pseudo">
                             ${escapeHTML(
-                                match.opponentPseudo || ""
+                                match.opponentPseudo
                             )}
                         </div>
+
+                        <button
+                            class="btn btn-tiktok btn-small"
+                            style="margin-top:10px;"
+                            onclick="openTikTok('${escapeJS(match.opponentPseudo)}')">
+                            TikTok
+                        </button>
 
                     </div>
 
@@ -3303,18 +3920,22 @@ function renderMatches(){
                     <button
                         class="btn btn-secondary btn-small"
                         onclick="toggleMatch(${match.id})">
+
                         ${
                             match.completed
                                 ? "↩ Remettre à venir"
                                 : "✓ Marquer effectué"
                         }
+
                     </button>
+
 
                     <button
                         class="btn btn-secondary btn-small"
                         onclick="openMatchModal(${match.id})">
                         Modifier
                     </button>
+
 
                     <button
                         class="btn btn-danger btn-small"
@@ -3338,7 +3959,8 @@ function renderMatches(){
 function changeMonth(direction){
 
     calendarDate.setMonth(
-        calendarDate.getMonth() + direction
+        calendarDate.getMonth() +
+        direction
     );
 
     renderCalendar();
@@ -3366,7 +3988,9 @@ function renderCalendar(){
         new Intl.DateTimeFormat(
             "fr-FR",
             {month:"long"}
-        ).format(calendarDate);
+        ).format(
+            calendarDate
+        );
 
 
     document.getElementById(
@@ -3407,9 +4031,7 @@ function renderCalendar(){
 
 
     if(firstDay === 0){
-
         firstDay = 7;
-
     }
 
 
@@ -3423,14 +4045,6 @@ function renderCalendar(){
 
     const previousDays =
         firstDay - 1;
-
-
-    const previousMonthDays =
-        new Date(
-            year,
-            month,
-            0
-        ).getDate();
 
 
     const totalCells =
@@ -3453,21 +4067,32 @@ function renderCalendar(){
     ){
 
         const dayIndex =
-            i - previousDays + 1;
+            i -
+            previousDays +
+            1;
 
 
         let date;
 
-        let currentMonth = true;
+        let currentMonth =
+            true;
 
 
         if(dayIndex < 1){
+
+            const previousMonthDays =
+                new Date(
+                    year,
+                    month,
+                    0
+                ).getDate();
 
             date =
                 previousMonthDays +
                 dayIndex;
 
-            currentMonth = false;
+            currentMonth =
+                false;
 
         }else if(
             dayIndex > daysInMonth
@@ -3477,7 +4102,8 @@ function renderCalendar(){
                 dayIndex -
                 daysInMonth;
 
-            currentMonth = false;
+            currentMonth =
+                false;
 
         }else{
 
@@ -3487,9 +4113,11 @@ function renderCalendar(){
         }
 
 
-        let cellYear = year;
+        let cellYear =
+            year;
 
-        let cellMonth = month;
+        let cellMonth =
+            month;
 
 
         if(
@@ -3502,7 +4130,6 @@ function renderCalendar(){
             if(cellMonth < 0){
 
                 cellMonth = 11;
-
                 cellYear--;
 
             }
@@ -3520,7 +4147,6 @@ function renderCalendar(){
             if(cellMonth > 11){
 
                 cellMonth = 0;
-
                 cellYear++;
 
             }
@@ -3566,16 +4192,15 @@ function renderCalendar(){
 
                         <div
                             class="calendar-match"
-                            onclick="openMatchModal(${match.id})"
-                            title="VS ${escapeHTML(match.agency)}"
-                        >
+                            onclick="openMatchModal(${match.id})">
 
                             <div class="calendar-match-time">
                                 ${escapeHTML(match.time)}
                             </div>
 
                             <div class="calendar-match-agency">
-                                VS ${escapeHTML(match.agency)}
+                                VS
+                                ${escapeHTML(match.agency)}
                             </div>
 
                         </div>
@@ -3592,6 +4217,517 @@ function renderCalendar(){
 
     calendar.innerHTML =
         html;
+
+}
+
+
+/* =========================================================
+   RECHERCHE GLOBALE
+========================================================= */
+
+const globalSearch =
+    document.getElementById(
+        "globalSearch"
+    );
+
+
+const searchResults =
+    document.getElementById(
+        "searchResults"
+    );
+
+
+globalSearch.addEventListener(
+    "input",
+    function(){
+
+        performSearch(
+            this.value.trim()
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !event.target.closest(
+                ".global-search"
+            )
+        ){
+
+            searchResults.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+function performSearch(query){
+
+    if(!query){
+
+        searchResults.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const q =
+        query.toLowerCase();
+
+
+    const results = [];
+
+
+    /* TEAMS */
+
+    data.teams.forEach(team => {
+
+        if(
+            team.name
+                .toLowerCase()
+                .includes(q)
+        ){
+
+            results.push({
+
+                type:"Team",
+
+                title:team.name,
+
+                sub:
+                    `${team.members.length} membre${
+                        team.members.length > 1
+                            ? "s"
+                            : ""
+                    }`,
+
+                action:
+                    `navigate('teams')`
+
+            });
+
+        }
+
+
+        /* MEMBRES */
+
+        team.members.forEach(member => {
+
+            if(
+                member.name
+                    .toLowerCase()
+                    .includes(q) ||
+
+                member.pseudo
+                    .toLowerCase()
+                    .includes(q) ||
+
+                member.role
+                    .toLowerCase()
+                    .includes(q)
+            ){
+
+                results.push({
+
+                    type:"Créateur / membre",
+
+                    title:
+                        `${member.name} ${member.pseudo}`,
+
+                    sub:
+                        `${member.role} · ${team.name}`,
+
+                    action:
+                        `navigate('teams')`
+
+                });
+
+            }
+
+        });
+
+    });
+
+
+    /* MATCHS */
+
+    data.matches.forEach(match => {
+
+        const searchable = [
+
+            match.agency,
+
+            match.opponent,
+
+            match.opponentPseudo,
+
+            match.creatorName,
+
+            match.creatorPseudo,
+
+            match.teamName
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        if(
+            searchable.includes(q)
+        ){
+
+            results.push({
+
+                type:"Match",
+
+                title:
+                    `${match.teamName} VS ${match.agency}`,
+
+                sub:
+                    `${formatDate(match.date)} · ${match.time}`,
+
+                action:
+                    `navigate('matches')`
+
+            });
+
+        }
+
+    });
+
+
+    /* AGENCES */
+
+    getAgencies().forEach(agency => {
+
+        if(
+            agency.name
+                .toLowerCase()
+                .includes(q)
+        ){
+
+            results.push({
+
+                type:"Agence",
+
+                title:
+                    agency.name,
+
+                sub:
+                    `${agency.matches} match${
+                        agency.matches > 1
+                            ? "s"
+                            : ""
+                    }`,
+
+                action:
+                    `navigate('agencies')`
+
+            });
+
+        }
+
+    });
+
+
+    const limited =
+        results.slice(0,12);
+
+
+    if(!limited.length){
+
+        searchResults.innerHTML = `
+            <div class="search-empty">
+                Aucun résultat.
+            </div>
+        `;
+
+        searchResults.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    searchResults.innerHTML =
+        limited.map(result => `
+
+            <div
+                class="search-result"
+                onclick="${result.action};closeSearch();">
+
+                <div class="search-result-type">
+                    ${escapeHTML(result.type)}
+                </div>
+
+                <div class="search-result-title">
+                    ${escapeHTML(result.title)}
+                </div>
+
+                <div class="search-result-sub">
+                    ${escapeHTML(result.sub)}
+                </div>
+
+            </div>
+
+        `).join("");
+
+
+    searchResults.style.display =
+        "block";
+
+}
+
+
+function closeSearch(){
+
+    searchResults.style.display =
+        "none";
+
+    globalSearch.value = "";
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportData(){
+
+    const backup = {
+
+        app:"TokCenter",
+
+        version:5,
+
+        exportedAt:
+            new Date().toISOString(),
+
+        data:data
+
+    };
+
+
+    const json =
+        JSON.stringify(
+            backup,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:"application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    const date =
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        `tokcenter-sauvegarde-${date}.json`;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    showToast(
+        "Sauvegarde exportée."
+    );
+
+}
+
+
+/* =========================================================
+   IMPORT
+========================================================= */
+
+function importData(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file) return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(){
+
+            try{
+
+                const imported =
+                    JSON.parse(
+                        reader.result
+                    );
+
+
+                const importedData =
+                    imported.data ||
+                    imported;
+
+
+                if(
+                    !importedData ||
+                    !Array.isArray(
+                        importedData.teams
+                    ) ||
+                    !Array.isArray(
+                        importedData.matches
+                    )
+                ){
+
+                    throw new Error(
+                        "Format invalide"
+                    );
+
+                }
+
+
+                if(!confirm(
+                    "Importer cette sauvegarde remplacera les données actuellement présentes sur cet appareil. Continuer ?"
+                )){
+
+                    event.target.value =
+                        "";
+
+                    return;
+
+                }
+
+
+                data =
+                    importedData;
+
+
+                data.teams.forEach(team => {
+
+                    if(
+                        !Array.isArray(
+                            team.members
+                        )
+                    ){
+
+                        team.members = [];
+
+                    }
+
+                });
+
+
+                saveData();
+
+                renderAll();
+
+                showToast(
+                    "Sauvegarde importée avec succès."
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    "Impossible d'importer cette sauvegarde."
+                );
+
+            }
+
+
+            event.target.value =
+                "";
+
+        };
+
+
+    reader.readAsText(
+        file
+    );
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetData(){
+
+    if(!confirm(
+        "ATTENTION : toutes les Teams, membres et matchs seront supprimés de cet appareil. Continuer ?"
+    )){
+
+        return;
+
+    }
+
+
+    data = {
+
+        teams:[],
+
+        matches:[]
+
+    };
+
+
+    saveData();
+
+    renderAll();
+
+    showToast(
+        "TokCenter a été réinitialisé."
+    );
 
 }
 
@@ -3639,6 +4775,19 @@ function escapeHTML(value){
 }
 
 
+function escapeJS(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/\n/g,"\\n")
+    .replace(/\r/g,"\\r");
+
+}
+
+
 function showToast(message){
 
     const container =
@@ -3675,7 +4824,7 @@ function showToast(message){
 
 
 /* =========================================================
-   INITIALISATION
+   RENDER GLOBAL
 ========================================================= */
 
 function renderAll(){
@@ -3687,6 +4836,8 @@ function renderAll(){
     renderMatches();
 
     renderCalendar();
+
+    renderAgencies();
 
 }
 
@@ -3702,18 +4853,28 @@ document.addEventListener(
         if(event.key === "Escape"){
 
             document
-                .querySelectorAll(".modal.show")
+                .querySelectorAll(
+                    ".modal.show"
+                )
                 .forEach(modal => {
 
-                    modal.classList.remove("show");
+                    modal.classList.remove(
+                        "show"
+                    );
 
                 });
+
+            closeSearch();
 
         }
 
     }
 );
 
+
+/* =========================================================
+   LANCEMENT
+========================================================= */
 
 renderAll();
 
