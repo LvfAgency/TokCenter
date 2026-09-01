@@ -126,21 +126,42 @@ button{
 }
 
 .nav button.active{
-    background:linear-gradient(90deg,rgba(139,92,246,.20),rgba(139,92,246,.08));
+    background:linear-gradient(
+        90deg,
+        rgba(139,92,246,.20),
+        rgba(139,92,246,.08)
+    );
     color:#fff;
     box-shadow:inset 3px 0 0 var(--purple);
 }
 
+/* =========================
+   VRAIES ICÔNES SVG
+========================= */
+
 .nav-icon{
-    width:23px;
-    height:23px;
-    min-width:23px;
+    width:24px;
+    height:24px;
+    min-width:24px;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#a78bfa;
-    font-size:17px;
-    font-weight:700;
+}
+
+.nav-icon svg{
+    width:22px;
+    height:22px;
+    display:block;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.nav button:hover .nav-icon{
+    color:#ffffff;
 }
 
 .nav button.active .nav-icon{
@@ -175,11 +196,6 @@ button{
     color:var(--muted);
     margin-top:5px;
     font-size:14px;
-}
-
-.top-actions{
-    display:flex;
-    gap:9px;
 }
 
 /* =========================
@@ -384,13 +400,6 @@ button{
     gap:12px;
     margin-bottom:17px;
     flex-wrap:wrap;
-}
-
-.toolbar-left,
-.toolbar-right{
-    display:flex;
-    gap:8px;
-    align-items:center;
 }
 
 .search{
@@ -796,6 +805,7 @@ textarea{
 ========================= */
 
 @media(max-width:1100px){
+
     .stats-grid{
         grid-template-columns:repeat(2,1fr);
     }
@@ -807,9 +817,11 @@ textarea{
     .dashboard-grid{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:760px){
+
     .sidebar{
         width:72px;
         min-width:72px;
@@ -829,13 +841,25 @@ textarea{
 
     .brand-sub,
     .nav-title,
-    .nav button span{
+    .nav button > span:not(.nav-icon){
         display:none;
     }
 
     .nav button{
         justify-content:center;
         padding:13px 8px;
+    }
+
+    .nav-icon{
+        width:30px;
+        height:30px;
+        min-width:30px;
+    }
+
+    .nav-icon svg{
+        width:25px;
+        height:25px;
+        stroke-width:2.2;
     }
 
     .main{
@@ -876,6 +900,19 @@ textarea{
         min-width:0;
         width:100%;
     }
+
+    .topbar{
+        align-items:flex-start;
+    }
+
+    .page-title{
+        font-size:23px;
+    }
+
+    .topbar .btn{
+        white-space:nowrap;
+    }
+
 }
 </style>
 </head>
@@ -887,59 +924,167 @@ textarea{
 <aside class="sidebar">
 
     <div class="brand">
+
         <div class="brand-name">
             <span class="brand-t">T</span>ok<span class="brand-c">C</span>enter
         </div>
-        <div class="brand-sub">LVF — La Vraie Famille</div>
+
+        <div class="brand-sub">
+            LVF — La Vraie Famille
+        </div>
+
     </div>
 
-    <div class="nav-title">Navigation</div>
+    <div class="nav-title">
+        Navigation
+    </div>
 
     <nav class="nav">
 
+        <!-- TABLEAU DE BORD -->
         <button class="active" data-page="dashboard">
-            <span class="nav-icon">⌂</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 11.5 12 4l9 7.5"></path>
+                    <path d="M5 10.5V20h14v-9.5"></path>
+                    <path d="M9 20v-6h6v6"></path>
+                </svg>
+            </span>
+
             <span>Tableau de bord</span>
+
         </button>
 
+        <!-- TEAMS -->
         <button data-page="teams">
-            <span class="nav-icon">◆</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3Z"></path>
+                    <path d="m4.5 7.5 7.5 4 7.5-4"></path>
+                    <path d="M12 11.5V21"></path>
+                </svg>
+            </span>
+
             <span>Teams</span>
+
         </button>
 
+        <!-- CREATEURS -->
         <button data-page="creators">
-            <span class="nav-icon">♙</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5 20c.8-3.5 3.2-5.5 7-5.5s6.2 2 7 5.5"></path>
+                </svg>
+            </span>
+
             <span>Créateurs</span>
+
         </button>
 
+        <!-- AGENCES -->
         <button data-page="agencies">
-            <span class="nav-icon">▣</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 21V5h16v16"></path>
+                    <path d="M8 9h2"></path>
+                    <path d="M14 9h2"></path>
+                    <path d="M8 13h2"></path>
+                    <path d="M14 13h2"></path>
+                    <path d="M8 17h2"></path>
+                    <path d="M14 17h2"></path>
+                </svg>
+            </span>
+
             <span>Agences adverses</span>
+
         </button>
 
+        <!-- MATCH OFF -->
         <button data-page="matches">
-            <span class="nav-icon">⚔</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m5 5 14 14"></path>
+                    <path d="m19 5-14 14"></path>
+                    <path d="M7 3v4"></path>
+                    <path d="M17 17v4"></path>
+                    <path d="M3 7h4"></path>
+                    <path d="M17 17h4"></path>
+                </svg>
+            </span>
+
             <span>Match OFF</span>
+
         </button>
 
+        <!-- CALENDRIER -->
         <button data-page="calendar">
-            <span class="nav-icon">□</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+                    <path d="M8 3v4"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M4 10h16"></path>
+                    <path d="M8 14h.01"></path>
+                    <path d="M12 14h.01"></path>
+                    <path d="M16 14h.01"></path>
+                    <path d="M8 17h.01"></path>
+                    <path d="M12 17h.01"></path>
+                </svg>
+            </span>
+
             <span>Calendrier</span>
+
         </button>
 
+        <!-- STATISTIQUES -->
         <button data-page="statistics">
-            <span class="nav-icon">▥</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 20V10"></path>
+                    <path d="M12 20V4"></path>
+                    <path d="M19 20v-7"></path>
+                </svg>
+            </span>
+
             <span>Statistiques</span>
+
         </button>
 
+        <!-- HISTORIQUE -->
         <button data-page="history">
-            <span class="nav-icon">◷</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 12a8 8 0 1 0 2.3-5.7"></path>
+                    <path d="M4 5v5h5"></path>
+                    <path d="M12 8v4l3 2"></path>
+                </svg>
+            </span>
+
             <span>Historique</span>
+
         </button>
 
+        <!-- DONNEES -->
         <button data-page="settings">
-            <span class="nav-icon">⚙</span>
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V22h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1A1.7 1.7 0 0 0 8 15a1.7 1.7 0 0 0-1.5-1H6v-2.6h.5A1.7 1.7 0 0 0 8 10a1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1A1.7 1.7 0 0 0 19.4 10c.2.6.8 1 1.5 1h.1v2.6h-.1c-.7 0-1.3.4-1.5 1.4Z"></path>
+                </svg>
+            </span>
+
             <span>Données</span>
+
         </button>
 
     </nav>
@@ -955,38 +1100,85 @@ textarea{
 <section class="page active" id="page-dashboard">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Tableau de bord</div>
+
+            <div class="page-title">
+                Tableau de bord
+            </div>
+
             <div class="page-description">
                 Vue d’ensemble de LVF et des informations importantes.
             </div>
+
         </div>
+
     </div>
 
     <div class="grid stats-grid">
 
         <div class="card">
-            <div class="stat-label">Teams</div>
-            <div class="stat-value" id="dashTeams">0</div>
-            <div class="stat-extra">Teams enregistrées</div>
+
+            <div class="stat-label">
+                Teams
+            </div>
+
+            <div class="stat-value" id="dashTeams">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Teams enregistrées
+            </div>
+
         </div>
 
         <div class="card">
-            <div class="stat-label">Créateurs</div>
-            <div class="stat-value" id="dashCreators">0</div>
-            <div class="stat-extra">Créateurs enregistrés</div>
+
+            <div class="stat-label">
+                Créateurs
+            </div>
+
+            <div class="stat-value" id="dashCreators">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Créateurs enregistrés
+            </div>
+
         </div>
 
         <div class="card">
-            <div class="stat-label">Matchs à venir</div>
-            <div class="stat-value" id="dashMatches">0</div>
-            <div class="stat-extra">Match OFF programmés</div>
+
+            <div class="stat-label">
+                Matchs à venir
+            </div>
+
+            <div class="stat-value" id="dashMatches">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Match OFF programmés
+            </div>
+
         </div>
 
         <div class="card">
-            <div class="stat-label">Agences adverses</div>
-            <div class="stat-value" id="dashAgencies">0</div>
-            <div class="stat-extra">Agences enregistrées</div>
+
+            <div class="stat-label">
+                Agences adverses
+            </div>
+
+            <div class="stat-value" id="dashAgencies">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Agences enregistrées
+            </div>
+
         </div>
 
     </div>
@@ -994,50 +1186,103 @@ textarea{
     <div class="dashboard-grid">
 
         <div class="card next-match">
-            <div class="section-label">Prochain Match OFF</div>
+
+            <div class="section-label">
+                Prochain Match OFF
+            </div>
 
             <div id="nextMatchContent">
+
                 <div class="empty">
                     Aucun Match OFF programmé.
                 </div>
+
             </div>
+
         </div>
 
         <div class="card">
-            <div class="section-label">Performances LVF</div>
+
+            <div class="section-label">
+                Performances LVF
+            </div>
 
             <div class="list">
+
                 <div class="list-row">
+
                     <div class="row-main">
-                        <div class="row-title">Diamants</div>
-                        <div class="row-sub">Total enregistré</div>
+
+                        <div class="row-title">
+                            Diamants
+                        </div>
+
+                        <div class="row-sub">
+                            Total enregistré
+                        </div>
+
                     </div>
-                    <strong id="dashDiamonds">0</strong>
+
+                    <strong id="dashDiamonds">
+                        0
+                    </strong>
+
                 </div>
 
                 <div class="list-row">
+
                     <div class="row-main">
-                        <div class="row-title">Heures</div>
-                        <div class="row-sub">Total enregistré</div>
+
+                        <div class="row-title">
+                            Heures
+                        </div>
+
+                        <div class="row-sub">
+                            Total enregistré
+                        </div>
+
                     </div>
-                    <strong id="dashHours">0</strong>
+
+                    <strong id="dashHours">
+                        0
+                    </strong>
+
                 </div>
 
                 <div class="list-row">
+
                     <div class="row-main">
-                        <div class="row-title">Dernier mois</div>
-                        <div class="row-sub">Dernière période enregistrée</div>
+
+                        <div class="row-title">
+                            Dernier mois
+                        </div>
+
+                        <div class="row-sub">
+                            Dernière période enregistrée
+                        </div>
+
                     </div>
-                    <strong id="dashLastMonth">—</strong>
+
+                    <strong id="dashLastMonth">
+                        —
+                    </strong>
+
                 </div>
+
             </div>
+
         </div>
 
     </div>
 
     <div class="card" style="margin-top:16px;">
-        <div class="section-label">Top Teams</div>
+
+        <div class="section-label">
+            Top Teams
+        </div>
+
         <div id="dashboardTeams" class="list"></div>
+
     </div>
 
 </section>
@@ -1050,22 +1295,37 @@ textarea{
 <section class="page" id="page-teams">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Teams</div>
+
+            <div class="page-title">
+                Teams
+            </div>
+
             <div class="page-description">
                 Créez et gérez les Teams de LVF.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openTeamModal()">
             + Nouvelle Team
         </button>
+
     </div>
 
     <div class="toolbar">
-        <div class="toolbar-left">
-            <input class="search" id="teamSearch" placeholder="Rechercher une Team..." oninput="renderTeams()">
+
+        <div>
+
+            <input
+                class="search"
+                id="teamSearch"
+                placeholder="Rechercher une Team..."
+                oninput="renderTeams()">
+
         </div>
+
     </div>
 
     <div class="team-grid" id="teamGrid"></div>
@@ -1080,25 +1340,41 @@ textarea{
 <section class="page" id="page-creators">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Créateurs</div>
+
+            <div class="page-title">
+                Créateurs
+            </div>
+
             <div class="page-description">
                 Gérez les créateurs rattachés aux Teams.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openCreatorModal()">
             + Nouveau créateur
         </button>
+
     </div>
 
     <div class="toolbar">
-        <input class="search" id="creatorSearch" placeholder="Rechercher un créateur..." oninput="renderCreators()">
+
+        <input
+            class="search"
+            id="creatorSearch"
+            placeholder="Rechercher un créateur..."
+            oninput="renderCreators">
+
     </div>
 
     <div class="table-wrap">
+
         <table>
+
             <thead>
+
                 <tr>
                     <th>Pseudo</th>
                     <th>Team</th>
@@ -1107,9 +1383,13 @@ textarea{
                     <th>Notes privées</th>
                     <th></th>
                 </tr>
+
             </thead>
+
             <tbody id="creatorTable"></tbody>
+
         </table>
+
     </div>
 
 </section>
@@ -1122,16 +1402,23 @@ textarea{
 <section class="page" id="page-agencies">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Agences adverses</div>
+
+            <div class="page-title">
+                Agences adverses
+            </div>
+
             <div class="page-description">
                 Enregistrez les agences rencontrées lors des Match OFF.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openAgencyModal()">
             + Nouvelle agence
         </button>
+
     </div>
 
     <div class="team-grid" id="agencyGrid"></div>
@@ -1146,21 +1433,31 @@ textarea{
 <section class="page" id="page-matches">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Match OFF</div>
+
+            <div class="page-title">
+                Match OFF
+            </div>
+
             <div class="page-description">
                 Créez et consultez vos Match OFF.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openMatchModal()">
             + Nouveau Match OFF
         </button>
+
     </div>
 
     <div class="table-wrap">
+
         <table>
+
             <thead>
+
                 <tr>
                     <th>Date</th>
                     <th>Créateur</th>
@@ -1171,9 +1468,13 @@ textarea{
                     <th>Gagnant</th>
                     <th></th>
                 </tr>
+
             </thead>
+
             <tbody id="matchTable"></tbody>
+
         </table>
+
     </div>
 
 </section>
@@ -1186,24 +1487,39 @@ textarea{
 <section class="page" id="page-calendar">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Calendrier</div>
+
+            <div class="page-title">
+                Calendrier
+            </div>
+
             <div class="page-description">
                 Tous les Match OFF sont automatiquement ajoutés ici.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openMatchModal()">
             + Match OFF
         </button>
+
     </div>
 
     <div class="card calendar-card">
 
         <div class="calendar-header">
-            <button class="btn btn-small" onclick="changeMonth(-1)">‹</button>
+
+            <button class="btn btn-small" onclick="changeMonth(-1)">
+                ‹
+            </button>
+
             <div class="calendar-month" id="calendarMonth"></div>
-            <button class="btn btn-small" onclick="changeMonth(1)">›</button>
+
+            <button class="btn btn-small" onclick="changeMonth(1)">
+                ›
+            </button>
+
         </div>
 
         <div class="calendar-grid" id="calendarGrid"></div>
@@ -1220,61 +1536,114 @@ textarea{
 <section class="page" id="page-statistics">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Statistiques</div>
+
+            <div class="page-title">
+                Statistiques
+            </div>
+
             <div class="page-description">
                 Diamants et heures enregistrés Team par Team.
             </div>
+
         </div>
 
         <button class="btn btn-primary" onclick="openStatsModal()">
             + Saisir un mois
         </button>
+
     </div>
 
     <div class="stat-hero">
 
         <div class="card">
-            <div class="stat-label">Diamants LVF</div>
-            <div class="stat-value" id="statDiamonds">0</div>
-            <div class="stat-extra">Total des Teams</div>
+
+            <div class="stat-label">
+                Diamants LVF
+            </div>
+
+            <div class="stat-value" id="statDiamonds">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Total des Teams
+            </div>
+
         </div>
 
         <div class="card">
-            <div class="stat-label">Heures LVF</div>
-            <div class="stat-value" id="statHours">0</div>
-            <div class="stat-extra">Total des Teams</div>
+
+            <div class="stat-label">
+                Heures LVF
+            </div>
+
+            <div class="stat-value" id="statHours">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Total des Teams
+            </div>
+
         </div>
 
         <div class="card">
-            <div class="stat-label">Teams actives</div>
-            <div class="stat-value" id="statActiveTeams">0</div>
-            <div class="stat-extra">Avec statistiques enregistrées</div>
+
+            <div class="stat-label">
+                Teams actives
+            </div>
+
+            <div class="stat-value" id="statActiveTeams">
+                0
+            </div>
+
+            <div class="stat-extra">
+                Avec statistiques enregistrées
+            </div>
+
         </div>
 
     </div>
 
     <div class="card">
-        <div class="section-label">Évolution des diamants</div>
+
+        <div class="section-label">
+            Évolution des diamants
+        </div>
+
         <div class="chart" id="diamondChart"></div>
+
     </div>
 
     <div class="card" style="margin-top:16px;">
-        <div class="section-label">Classement des Teams</div>
+
+        <div class="section-label">
+            Classement des Teams
+        </div>
 
         <div class="table-wrap" style="margin-top:14px;">
+
             <table>
+
                 <thead>
+
                     <tr>
                         <th>#</th>
                         <th>Team</th>
                         <th>Diamants</th>
                         <th>Heures</th>
                     </tr>
+
                 </thead>
+
                 <tbody id="rankingTable"></tbody>
+
             </table>
+
         </div>
+
     </div>
 
 </section>
@@ -1287,17 +1656,27 @@ textarea{
 <section class="page" id="page-history">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Historique</div>
+
+            <div class="page-title">
+                Historique
+            </div>
+
             <div class="page-description">
                 Historique mensuel des performances de LVF et des Teams.
             </div>
+
         </div>
+
     </div>
 
     <div class="table-wrap">
+
         <table>
+
             <thead>
+
                 <tr>
                     <th>Mois</th>
                     <th>Diamants LVF</th>
@@ -1305,9 +1684,13 @@ textarea{
                     <th>Évolution diamants</th>
                     <th>Évolution heures</th>
                 </tr>
+
             </thead>
+
             <tbody id="historyTable"></tbody>
+
         </table>
+
     </div>
 
 </section>
@@ -1320,18 +1703,28 @@ textarea{
 <section class="page" id="page-settings">
 
     <div class="topbar">
+
         <div>
-            <div class="page-title">Données</div>
+
+            <div class="page-title">
+                Données
+            </div>
+
             <div class="page-description">
                 Sauvegardez ou restaurez les données de TokCenter.
             </div>
+
         </div>
+
     </div>
 
     <div class="dashboard-grid">
 
         <div class="card">
-            <div class="section-label">Sauvegarde</div>
+
+            <div class="section-label">
+                Sauvegarde
+            </div>
 
             <p style="color:#92929f;margin:13px 0 18px;font-size:13px;">
                 Exportez toutes vos données dans un fichier afin de conserver une sauvegarde.
@@ -1340,16 +1733,25 @@ textarea{
             <button class="btn btn-primary" onclick="exportData()">
                 Exporter les données
             </button>
+
         </div>
 
         <div class="card">
-            <div class="section-label">Restauration</div>
+
+            <div class="section-label">
+                Restauration
+            </div>
 
             <p style="color:#92929f;margin:13px 0 18px;font-size:13px;">
                 Importez une sauvegarde précédemment créée.
             </p>
 
-            <input type="file" id="importFile" accept=".json" onchange="importData(event)">
+            <input
+                type="file"
+                id="importFile"
+                accept=".json"
+                onchange="importData(event)">
+
         </div>
 
     </div>
@@ -1369,8 +1771,15 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title" id="teamModalTitle">Nouvelle Team</div>
-        <button class="close" onclick="closeModal('teamModal')">×</button>
+
+        <div class="modal-title" id="teamModalTitle">
+            Nouvelle Team
+        </div>
+
+        <button class="close" onclick="closeModal('teamModal')">
+            ×
+        </button>
+
     </div>
 
     <div class="modal-body">
@@ -1378,13 +1787,25 @@ textarea{
         <div class="form-grid">
 
             <div class="form-group">
-                <label>Nom de la Team</label>
+
+                <label>
+                    Nom de la Team
+                </label>
+
                 <input id="teamName">
+
             </div>
 
             <div class="form-group">
-                <label>Logo / Photo</label>
-                <input id="teamLogo" placeholder="URL de l'image">
+
+                <label>
+                    Logo / Photo
+                </label>
+
+                <input
+                    id="teamLogo"
+                    placeholder="URL de l'image">
+
             </div>
 
         </div>
@@ -1392,8 +1813,19 @@ textarea{
     </div>
 
     <div class="modal-footer">
-        <button class="btn" onclick="closeModal('teamModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveTeam()">Enregistrer</button>
+
+        <button
+            class="btn"
+            onclick="closeModal('teamModal')">
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="saveTeam()">
+            Enregistrer
+        </button>
+
     </div>
 
 </div>
@@ -1409,8 +1841,17 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title" id="creatorModalTitle">Nouveau créateur</div>
-        <button class="close" onclick="closeModal('creatorModal')">×</button>
+
+        <div class="modal-title" id="creatorModalTitle">
+            Nouveau créateur
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModal('creatorModal')">
+            ×
+        </button>
+
     </div>
 
     <div class="modal-body">
@@ -1418,32 +1859,69 @@ textarea{
         <div class="form-grid">
 
             <div class="form-group">
-                <label>Pseudo</label>
+
+                <label>
+                    Pseudo
+                </label>
+
                 <input id="creatorPseudo">
+
             </div>
 
             <div class="form-group">
-                <label>Team</label>
+
+                <label>
+                    Team
+                </label>
+
                 <select id="creatorTeam"></select>
+
             </div>
 
             <div class="form-group">
-                <label>Date d’arrivée</label>
-                <input type="date" id="creatorDate">
+
+                <label>
+                    Date d’arrivée
+                </label>
+
+                <input
+                    type="date"
+                    id="creatorDate">
+
             </div>
 
             <div class="form-group">
-                <label>Statut</label>
+
+                <label>
+                    Statut
+                </label>
+
                 <select id="creatorStatus">
-                    <option value="Actif">Actif</option>
-                    <option value="Inactif">Inactif</option>
-                    <option value="En pause">En pause</option>
+
+                    <option value="Actif">
+                        Actif
+                    </option>
+
+                    <option value="Inactif">
+                        Inactif
+                    </option>
+
+                    <option value="En pause">
+                        En pause
+                    </option>
+
                 </select>
+
             </div>
 
             <div class="form-group full">
-                <label>Notes privées</label>
+
+                <label>
+                    Notes privées
+                </label>
+
                 <textarea id="creatorNotes"></textarea>
+
             </div>
 
         </div>
@@ -1451,8 +1929,19 @@ textarea{
     </div>
 
     <div class="modal-footer">
-        <button class="btn" onclick="closeModal('creatorModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveCreator()">Enregistrer</button>
+
+        <button
+            class="btn"
+            onclick="closeModal('creatorModal')">
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="saveCreator()">
+            Enregistrer
+        </button>
+
     </div>
 
 </div>
@@ -1468,8 +1957,17 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title">Nouvelle agence adverse</div>
-        <button class="close" onclick="closeModal('agencyModal')">×</button>
+
+        <div class="modal-title">
+            Nouvelle agence adverse
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModal('agencyModal')">
+            ×
+        </button>
+
     </div>
 
     <div class="modal-body">
@@ -1477,13 +1975,25 @@ textarea{
         <div class="form-grid">
 
             <div class="form-group full">
-                <label>Nom exact de l’agence</label>
+
+                <label>
+                    Nom exact de l’agence
+                </label>
+
                 <input id="agencyName">
+
             </div>
 
             <div class="form-group full">
-                <label>Logo / Photo</label>
-                <input id="agencyLogo" placeholder="URL de l'image">
+
+                <label>
+                    Logo / Photo
+                </label>
+
+                <input
+                    id="agencyLogo"
+                    placeholder="URL de l'image">
+
             </div>
 
         </div>
@@ -1491,8 +2001,19 @@ textarea{
     </div>
 
     <div class="modal-footer">
-        <button class="btn" onclick="closeModal('agencyModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveAgency()">Enregistrer</button>
+
+        <button
+            class="btn"
+            onclick="closeModal('agencyModal')">
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="saveAgency()">
+            Enregistrer
+        </button>
+
     </div>
 
 </div>
@@ -1508,8 +2029,17 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title">Nouveau Match OFF</div>
-        <button class="close" onclick="closeModal('matchModal')">×</button>
+
+        <div class="modal-title">
+            Nouveau Match OFF
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModal('matchModal')">
+            ×
+        </button>
+
     </div>
 
     <div class="modal-body">
@@ -1517,48 +2047,109 @@ textarea{
         <div class="form-grid">
 
             <div class="form-group">
-                <label>Date</label>
-                <input type="date" id="matchDate">
+
+                <label>
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="matchDate">
+
             </div>
 
             <div class="form-group">
-                <label>Heure</label>
-                <input type="time" id="matchTime">
+
+                <label>
+                    Heure
+                </label>
+
+                <input
+                    type="time"
+                    id="matchTime">
+
             </div>
 
             <div class="form-group">
-                <label>Créateur</label>
+
+                <label>
+                    Créateur
+                </label>
+
                 <select id="matchCreator"></select>
+
             </div>
 
             <div class="form-group">
-                <label>Team</label>
+
+                <label>
+                    Team
+                </label>
+
                 <select id="matchTeam"></select>
+
             </div>
 
             <div class="form-group">
-                <label>Agence adverse</label>
+
+                <label>
+                    Agence adverse
+                </label>
+
                 <select id="matchAgency"></select>
+
             </div>
 
             <div class="form-group">
-                <label>Thème</label>
-                <input id="matchTheme" placeholder="Ex : Battle, classement...">
+
+                <label>
+                    Thème
+                </label>
+
+                <input
+                    id="matchTheme"
+                    placeholder="Ex : Battle, classement...">
+
             </div>
 
             <div class="form-group">
-                <label>Résultat</label>
+
+                <label>
+                    Résultat
+                </label>
+
                 <select id="matchResult">
-                    <option value="">À venir</option>
-                    <option value="Victoire">Victoire</option>
-                    <option value="Défaite">Défaite</option>
-                    <option value="Égalité">Égalité</option>
+
+                    <option value="">
+                        À venir
+                    </option>
+
+                    <option value="Victoire">
+                        Victoire
+                    </option>
+
+                    <option value="Défaite">
+                        Défaite
+                    </option>
+
+                    <option value="Égalité">
+                        Égalité
+                    </option>
+
                 </select>
+
             </div>
 
             <div class="form-group">
-                <label>Gagnant</label>
-                <input id="matchWinner" placeholder="Agence ou créateur">
+
+                <label>
+                    Gagnant
+                </label>
+
+                <input
+                    id="matchWinner"
+                    placeholder="Agence ou créateur">
+
             </div>
 
         </div>
@@ -1566,8 +2157,19 @@ textarea{
     </div>
 
     <div class="modal-footer">
-        <button class="btn" onclick="closeModal('matchModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveMatch()">Enregistrer</button>
+
+        <button
+            class="btn"
+            onclick="closeModal('matchModal')">
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="saveMatch()">
+            Enregistrer
+        </button>
+
     </div>
 
 </div>
@@ -1583,11 +2185,23 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title">Détails du Match OFF</div>
-        <button class="close" onclick="closeModal('matchDetailModal')">×</button>
+
+        <div class="modal-title">
+            Détails du Match OFF
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModal('matchDetailModal')">
+            ×
+        </button>
+
     </div>
 
-    <div class="modal-body" id="matchDetailBody"></div>
+    <div
+        class="modal-body"
+        id="matchDetailBody">
+    </div>
 
 </div>
 </div>
@@ -1602,8 +2216,17 @@ textarea{
 <div class="modal">
 
     <div class="modal-head">
-        <div class="modal-title">Statistiques mensuelles</div>
-        <button class="close" onclick="closeModal('statsModal')">×</button>
+
+        <div class="modal-title">
+            Statistiques mensuelles
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModal('statsModal')">
+            ×
+        </button>
+
     </div>
 
     <div class="modal-body">
@@ -1611,19 +2234,40 @@ textarea{
         <div class="form-grid">
 
             <div class="form-group full">
-                <label>Mois</label>
-                <input type="month" id="statsMonth">
+
+                <label>
+                    Mois
+                </label>
+
+                <input
+                    type="month"
+                    id="statsMonth">
+
             </div>
 
         </div>
 
-        <div id="statsTeamFields" style="margin-top:18px;"></div>
+        <div
+            id="statsTeamFields"
+            style="margin-top:18px;">
+        </div>
 
     </div>
 
     <div class="modal-footer">
-        <button class="btn" onclick="closeModal('statsModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveStats()">Enregistrer</button>
+
+        <button
+            class="btn"
+            onclick="closeModal('statsModal')">
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="saveStats()">
+            Enregistrer
+        </button>
+
     </div>
 
 </div>
@@ -1646,6 +2290,10 @@ let editingCreatorId = null;
 let calendarDate = new Date();
 
 
+/* =========================================================
+   DATA
+========================================================= */
+
 function defaultData(){
 
     return {
@@ -1663,20 +2311,28 @@ function loadData(){
 
     try{
 
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw =
+            localStorage.getItem(STORAGE_KEY);
 
         if(!raw){
             return defaultData();
         }
 
-        const parsed = JSON.parse(raw);
+        const parsed =
+            JSON.parse(raw);
 
         return {
+
             teams:parsed.teams || [],
+
             creators:parsed.creators || [],
+
             agencies:parsed.agencies || [],
+
             matches:parsed.matches || [],
+
             statistics:parsed.statistics || []
+
         };
 
     }catch(e){
@@ -1692,7 +2348,10 @@ function loadData(){
 
 function saveData(){
 
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
 
     renderAll();
 
@@ -1705,7 +2364,8 @@ function saveData(){
 
 function uid(){
 
-    return Date.now().toString(36)+Math.random().toString(36).slice(2);
+    return Date.now().toString(36) +
+        Math.random().toString(36).slice(2);
 
 }
 
@@ -1728,57 +2388,74 @@ function esc(value){
 
 function formatDate(date){
 
-    if(!date) return "—";
+    if(!date){
+        return "—";
+    }
 
-    const d = new Date(date+"T00:00:00");
+    const d =
+        new Date(date+"T00:00:00");
 
-    return d.toLocaleDateString("fr-FR",{
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric"
-    });
+    return d.toLocaleDateString(
+        "fr-FR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
 
 }
 
 
 function formatNumber(value){
 
-    return Number(value || 0).toLocaleString("fr-FR");
+    return Number(value || 0)
+        .toLocaleString("fr-FR");
 
 }
 
 
 function getTeam(id){
 
-    return data.teams.find(t=>t.id===id);
+    return data.teams.find(
+        t=>t.id===id
+    );
 
 }
 
 
 function getCreator(id){
 
-    return data.creators.find(c=>c.id===id);
+    return data.creators.find(
+        c=>c.id===id
+    );
 
 }
 
 
 function getAgency(id){
 
-    return data.agencies.find(a=>a.id===id);
+    return data.agencies.find(
+        a=>a.id===id
+    );
 
 }
 
 
 function closeModal(id){
 
-    document.getElementById(id).classList.remove("open");
+    document
+        .getElementById(id)
+        .classList.remove("open");
 
 }
 
 
 function openModal(id){
 
-    document.getElementById(id).classList.add("open");
+    document
+        .getElementById(id)
+        .classList.add("open");
 
 }
 
@@ -1787,40 +2464,55 @@ function openModal(id){
    NAVIGATION
 ========================================================= */
 
-document.querySelectorAll(".nav button").forEach(button=>{
+document
+.querySelectorAll(".nav button")
+.forEach(button=>{
 
-    button.addEventListener("click",()=>{
+    button.addEventListener(
+        "click",
+        ()=>{
 
-        const page = button.dataset.page;
+            const page =
+                button.dataset.page;
 
-        document.querySelectorAll(".nav button").forEach(b=>{
-            b.classList.remove("active");
-        });
+            document
+            .querySelectorAll(".nav button")
+            .forEach(b=>{
+                b.classList.remove("active");
+            });
 
-        button.classList.add("active");
+            button.classList.add("active");
 
-        document.querySelectorAll(".page").forEach(p=>{
-            p.classList.remove("active");
-        });
+            document
+            .querySelectorAll(".page")
+            .forEach(p=>{
+                p.classList.remove("active");
+            });
 
-        document.getElementById("page-"+page).classList.add("active");
+            document
+                .getElementById("page-"+page)
+                .classList.add("active");
 
-        if(page==="calendar"){
-            renderCalendar();
+            if(page==="calendar"){
+                renderCalendar();
+            }
+
+            if(page==="statistics"){
+                renderStatistics();
+            }
+
         }
-
-        if(page==="statistics"){
-            renderStatistics();
-        }
-
-    });
+    );
 
 });
 
 
 function goToPage(page){
 
-    const button = document.querySelector(`.nav button[data-page="${page}"]`);
+    const button =
+        document.querySelector(
+            `.nav button[data-page="${page}"]`
+        );
 
     if(button){
         button.click();
@@ -1837,14 +2529,26 @@ function openTeamModal(id=null){
 
     editingTeamId = id;
 
-    document.getElementById("teamModalTitle").textContent =
-        id ? "Modifier la Team" : "Nouvelle Team";
+    document
+        .getElementById("teamModalTitle")
+        .textContent =
+            id
+            ? "Modifier la Team"
+            : "Nouvelle Team";
 
-    document.getElementById("teamName").value =
-        id ? getTeam(id)?.name || "" : "";
+    document
+        .getElementById("teamName")
+        .value =
+            id
+            ? getTeam(id)?.name || ""
+            : "";
 
-    document.getElementById("teamLogo").value =
-        id ? getTeam(id)?.logo || "" : "";
+    document
+        .getElementById("teamLogo")
+        .value =
+            id
+            ? getTeam(id)?.logo || ""
+            : "";
 
     openModal("teamModal");
 
@@ -1853,30 +2557,50 @@ function openTeamModal(id=null){
 
 function saveTeam(){
 
-    const name = document.getElementById("teamName").value.trim();
+    const name =
+        document
+        .getElementById("teamName")
+        .value
+        .trim();
 
     if(!name){
-        alert("Veuillez saisir le nom de la Team.");
+
+        alert(
+            "Veuillez saisir le nom de la Team."
+        );
+
         return;
+
     }
 
-    const logo = document.getElementById("teamLogo").value.trim();
+    const logo =
+        document
+        .getElementById("teamLogo")
+        .value
+        .trim();
 
     if(editingTeamId){
 
-        const team = getTeam(editingTeamId);
+        const team =
+            getTeam(editingTeamId);
 
         if(team){
+
             team.name = name;
             team.logo = logo;
+
         }
 
     }else{
 
         data.teams.push({
+
             id:uid(),
+
             name,
+
             logo
+
         });
 
     }
@@ -1892,16 +2616,22 @@ function saveTeam(){
 
 function deleteTeam(id){
 
-    const team = getTeam(id);
+    const team =
+        getTeam(id);
 
-    if(!team) return;
+    if(!team){
+        return;
+    }
 
-    const linkedCreators = data.creators.filter(c=>c.teamId===id);
+    const linkedCreators =
+        data.creators.filter(
+            c=>c.teamId===id
+        );
 
     if(linkedCreators.length){
 
         alert(
-            "Cette Team possède encore des créateurs. "+
+            "Cette Team possède encore des créateurs. " +
             "Déplacez-les ou supprimez-les avant de supprimer la Team."
         );
 
@@ -1909,11 +2639,18 @@ function deleteTeam(id){
 
     }
 
-    if(!confirm(`Supprimer la Team « ${team.name} » ?`)){
+    if(!confirm(
+        `Supprimer la Team « ${team.name} » ?`
+    )){
+
         return;
+
     }
 
-    data.teams = data.teams.filter(t=>t.id!==id);
+    data.teams =
+        data.teams.filter(
+            t=>t.id!==id
+        );
 
     saveData();
 
@@ -1922,94 +2659,161 @@ function deleteTeam(id){
 
 function renderTeams(){
 
-    const search = (document.getElementById("teamSearch")?.value || "").toLowerCase();
+    const search =
+        (
+            document
+            .getElementById("teamSearch")
+            ?.value || ""
+        )
+        .toLowerCase();
 
-    const teams = data.teams.filter(t=>
-        t.name.toLowerCase().includes(search)
-    );
+    const teams =
+        data.teams.filter(
+            t=>
+                t.name
+                .toLowerCase()
+                .includes(search)
+        );
 
-    const grid = document.getElementById("teamGrid");
+    const grid =
+        document.getElementById("teamGrid");
 
     if(!teams.length){
 
-        grid.innerHTML = `
-            <div class="card" style="grid-column:1/-1;">
+        grid.innerHTML=`
+
+            <div
+                class="card"
+                style="grid-column:1/-1;">
+
                 <div class="empty">
                     Aucune Team enregistrée.
                 </div>
+
             </div>
+
         `;
 
         return;
 
     }
 
-    grid.innerHTML = teams.map(team=>{
+    grid.innerHTML =
+        teams.map(team=>{
 
-        const creatorCount =
-            data.creators.filter(c=>c.teamId===team.id).length;
+            const creatorCount =
+                data.creators.filter(
+                    c=>c.teamId===team.id
+                ).length;
 
-        const teamStats =
-            getLatestStatsForTeam(team.id);
+            const teamStats =
+                getLatestStatsForTeam(
+                    team.id
+                );
 
-        return `
+            return `
 
-            <div class="card team-card">
+                <div class="card team-card">
 
-                <div class="team-head">
+                    <div class="team-head">
 
-                    <div class="team-logo">
-                        ${
-                            team.logo
-                            ? `<img src="${esc(team.logo)}" alt="">`
-                            : esc(team.name.charAt(0).toUpperCase())
-                        }
-                    </div>
+                        <div class="team-logo">
 
-                    <div>
-                        <div class="team-name">${esc(team.name)}</div>
-                        <div class="team-small">
-                            ${creatorCount} créateur${creatorCount>1?"s":""}
+                            ${
+                                team.logo
+
+                                ? `
+                                    <img
+                                        src="${esc(team.logo)}"
+                                        alt="">
+                                  `
+
+                                : esc(
+                                    team.name
+                                    .charAt(0)
+                                    .toUpperCase()
+                                  )
+                            }
+
                         </div>
+
+                        <div>
+
+                            <div class="team-name">
+                                ${esc(team.name)}
+                            </div>
+
+                            <div class="team-small">
+                                ${creatorCount}
+                                créateur${creatorCount>1?"s":""}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="team-stats">
+
+                        <div class="team-stat">
+
+                            <strong>
+                                ${formatNumber(
+                                    teamStats?.diamonds || 0
+                                )}
+                            </strong>
+
+                            <span>
+                                Diamants
+                            </span>
+
+                        </div>
+
+                        <div class="team-stat">
+
+                            <strong>
+                                ${formatNumber(
+                                    teamStats?.hours || 0
+                                )}
+                            </strong>
+
+                            <span>
+                                Heures
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:7px;
+                            margin-top:15px;
+                        ">
+
+                        <button
+                            class="btn btn-small"
+                            onclick="openTeamModal('${team.id}')">
+
+                            Modifier
+
+                        </button>
+
+                        <button
+                            class="btn btn-small btn-danger"
+                            onclick="deleteTeam('${team.id}')">
+
+                            Supprimer
+
+                        </button>
+
                     </div>
 
                 </div>
 
-                <div class="team-stats">
+            `;
 
-                    <div class="team-stat">
-                        <strong>${formatNumber(teamStats?.diamonds || 0)}</strong>
-                        <span>Diamants</span>
-                    </div>
-
-                    <div class="team-stat">
-                        <strong>${formatNumber(teamStats?.hours || 0)}</strong>
-                        <span>Heures</span>
-                    </div>
-
-                </div>
-
-                <div style="display:flex;gap:7px;margin-top:15px;">
-
-                    <button
-                        class="btn btn-small"
-                        onclick="openTeamModal('${team.id}')">
-                        Modifier
-                    </button>
-
-                    <button
-                        class="btn btn-small btn-danger"
-                        onclick="deleteTeam('${team.id}')">
-                        Supprimer
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }).join("");
+        }).join("");
 
 }
 
@@ -2022,24 +2826,42 @@ function openCreatorModal(id=null){
 
     editingCreatorId = id;
 
-    const creator = id ? getCreator(id) : null;
+    const creator =
+        id
+        ? getCreator(id)
+        : null;
 
-    document.getElementById("creatorModalTitle").textContent =
-        id ? "Modifier le créateur" : "Nouveau créateur";
+    document
+        .getElementById("creatorModalTitle")
+        .textContent =
+            id
+            ? "Modifier le créateur"
+            : "Nouveau créateur";
 
-    document.getElementById("creatorPseudo").value =
-        creator?.pseudo || "";
+    document
+        .getElementById("creatorPseudo")
+        .value =
+            creator?.pseudo || "";
 
-    document.getElementById("creatorDate").value =
-        creator?.date || "";
+    document
+        .getElementById("creatorDate")
+        .value =
+            creator?.date || "";
 
-    document.getElementById("creatorStatus").value =
-        creator?.status || "Actif";
+    document
+        .getElementById("creatorStatus")
+        .value =
+            creator?.status || "Actif";
 
-    document.getElementById("creatorNotes").value =
-        creator?.notes || "";
+    document
+        .getElementById("creatorNotes")
+        .value =
+            creator?.notes || "";
 
-    fillTeamSelect("creatorTeam",creator?.teamId || "");
+    fillTeamSelect(
+        "creatorTeam",
+        creator?.teamId || ""
+    );
 
     openModal("creatorModal");
 
@@ -2049,19 +2871,34 @@ function openCreatorModal(id=null){
 function saveCreator(){
 
     const pseudo =
-        document.getElementById("creatorPseudo").value.trim();
+        document
+        .getElementById("creatorPseudo")
+        .value
+        .trim();
 
     const teamId =
-        document.getElementById("creatorTeam").value;
+        document
+        .getElementById("creatorTeam")
+        .value;
 
     if(!pseudo){
-        alert("Veuillez saisir le pseudo du créateur.");
+
+        alert(
+            "Veuillez saisir le pseudo du créateur."
+        );
+
         return;
+
     }
 
     if(!teamId){
-        alert("Veuillez sélectionner une Team.");
+
+        alert(
+            "Veuillez sélectionner une Team."
+        );
+
         return;
+
     }
 
     const creator = {
@@ -2070,23 +2907,39 @@ function saveCreator(){
 
         teamId,
 
-        date:document.getElementById("creatorDate").value,
+        date:
+            document
+            .getElementById("creatorDate")
+            .value,
 
-        status:document.getElementById("creatorStatus").value,
+        status:
+            document
+            .getElementById("creatorStatus")
+            .value,
 
-        notes:document.getElementById("creatorNotes").value.trim()
+        notes:
+            document
+            .getElementById("creatorNotes")
+            .value
+            .trim()
 
     };
 
     if(editingCreatorId){
 
-        Object.assign(getCreator(editingCreatorId),creator);
+        Object.assign(
+            getCreator(editingCreatorId),
+            creator
+        );
 
     }else{
 
         data.creators.push({
+
             id:uid(),
+
             ...creator
+
         });
 
     }
@@ -2102,16 +2955,25 @@ function saveCreator(){
 
 function deleteCreator(id){
 
-    const creator = getCreator(id);
+    const creator =
+        getCreator(id);
 
-    if(!creator) return;
-
-    if(!confirm(`Supprimer ${creator.pseudo} ?`)){
+    if(!creator){
         return;
     }
 
+    if(!confirm(
+        `Supprimer ${creator.pseudo} ?`
+    )){
+
+        return;
+
+    }
+
     data.creators =
-        data.creators.filter(c=>c.id!==id);
+        data.creators.filter(
+            c=>c.id!==id
+        );
 
     saveData();
 
@@ -2121,80 +2983,44 @@ function deleteCreator(id){
 function renderCreators(){
 
     const search =
-        (document.getElementById("creatorSearch")?.value || "")
+        (
+            document
+            .getElementById("creatorSearch")
+            ?.value || ""
+        )
         .toLowerCase();
 
     const creators =
-        data.creators.filter(c=>
-            c.pseudo.toLowerCase().includes(search) ||
-            (getTeam(c.teamId)?.name || "").toLowerCase().includes(search)
+        data.creators.filter(
+            c=>
+                c.pseudo
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                (
+                    getTeam(c.teamId)?.name || ""
+                )
+                .toLowerCase()
+                .includes(search)
         );
 
     const tbody =
-        document.getElementById("creatorTable");
+        document.getElementById(
+            "creatorTable"
+        );
 
     if(!creators.length){
 
-        tbody.innerHTML = `
+        tbody.innerHTML=`
+
             <tr>
+
                 <td colspan="6">
-                    <div class="empty">Aucun créateur enregistré.</div>
-                </td>
-            </tr>
-        `;
 
-        return;
-
-    }
-
-    tbody.innerHTML = creators.map(c=>{
-
-        const team = getTeam(c.teamId);
-
-        return `
-
-            <tr>
-
-                <td>
-                    <strong>${esc(c.pseudo)}</strong>
-                </td>
-
-                <td>
-                    ${esc(team?.name || "Team supprimée")}
-                </td>
-
-                <td>
-                    ${formatDate(c.date)}
-                </td>
-
-                <td>
-                    <span class="badge">${esc(c.status)}</span>
-                </td>
-
-                <td>
-                    ${
-                        c.notes
-                        ? esc(c.notes)
-                        : `<span style="color:#666;">Aucune note</span>`
-                    }
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn btn-small"
-                            onclick="openCreatorModal('${c.id}')">
-                            Modifier
-                        </button>
-
-                        <button
-                            class="btn btn-small btn-danger"
-                            onclick="deleteCreator('${c.id}')">
-                            Supprimer
-                        </button>
-
+                    <div class="empty">
+                        Aucun créateur enregistré.
                     </div>
 
                 </td>
@@ -2203,7 +3029,90 @@ function renderCreators(){
 
         `;
 
-    }).join("");
+        return;
+
+    }
+
+    tbody.innerHTML =
+        creators.map(c=>{
+
+            const team =
+                getTeam(c.teamId);
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${esc(c.pseudo)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${esc(
+                            team?.name ||
+                            "Team supprimée"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(c.date)}
+                    </td>
+
+                    <td>
+
+                        <span class="badge">
+                            ${esc(c.status)}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        ${
+                            c.notes
+
+                            ? esc(c.notes)
+
+                            : `
+                                <span style="color:#666;">
+                                    Aucune note
+                                </span>
+                              `
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn btn-small"
+                                onclick="openCreatorModal('${c.id}')">
+
+                                Modifier
+
+                            </button>
+
+                            <button
+                                class="btn btn-small btn-danger"
+                                onclick="deleteCreator('${c.id}')">
+
+                                Supprimer
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
 
 }
 
@@ -2214,8 +3123,13 @@ function renderCreators(){
 
 function openAgencyModal(){
 
-    document.getElementById("agencyName").value="";
-    document.getElementById("agencyLogo").value="";
+    document
+        .getElementById("agencyName")
+        .value="";
+
+    document
+        .getElementById("agencyLogo")
+        .value="";
 
     openModal("agencyModal");
 
@@ -2225,21 +3139,34 @@ function openAgencyModal(){
 function saveAgency(){
 
     const name =
-        document.getElementById("agencyName").value.trim();
+        document
+        .getElementById("agencyName")
+        .value
+        .trim();
 
     if(!name){
-        alert("Veuillez saisir le nom de l’agence.");
+
+        alert(
+            "Veuillez saisir le nom de l’agence."
+        );
+
         return;
+
     }
 
     const existing =
-        data.agencies.find(a=>
-            a.name.toLowerCase()===name.toLowerCase()
+        data.agencies.find(
+            a=>
+                a.name
+                .toLowerCase() ===
+                name.toLowerCase()
         );
 
     if(existing){
 
-        alert("Cette agence existe déjà.");
+        alert(
+            "Cette agence existe déjà."
+        );
 
         return;
 
@@ -2252,7 +3179,10 @@ function saveAgency(){
         name,
 
         logo:
-            document.getElementById("agencyLogo").value.trim()
+            document
+            .getElementById("agencyLogo")
+            .value
+            .trim()
 
     });
 
@@ -2265,16 +3195,25 @@ function saveAgency(){
 
 function deleteAgency(id){
 
-    const agency = getAgency(id);
+    const agency =
+        getAgency(id);
 
-    if(!agency) return;
-
-    if(!confirm(`Supprimer l'agence « ${agency.name} » ?`)){
+    if(!agency){
         return;
     }
 
+    if(!confirm(
+        `Supprimer l'agence « ${agency.name} » ?`
+    )){
+
+        return;
+
+    }
+
     data.agencies =
-        data.agencies.filter(a=>a.id!==id);
+        data.agencies.filter(
+            a=>a.id!==id
+        );
 
     saveData();
 
@@ -2284,16 +3223,24 @@ function deleteAgency(id){
 function renderAgencies(){
 
     const grid =
-        document.getElementById("agencyGrid");
+        document.getElementById(
+            "agencyGrid"
+        );
 
     if(!data.agencies.length){
 
         grid.innerHTML=`
-            <div class="card" style="grid-column:1/-1;">
+
+            <div
+                class="card"
+                style="grid-column:1/-1;">
+
                 <div class="empty">
                     Aucune agence adverse enregistrée.
                 </div>
+
             </div>
+
         `;
 
         return;
@@ -2304,18 +3251,18 @@ function renderAgencies(){
         data.agencies.map(agency=>{
 
             const matches =
-                data.matches.filter(m=>
-                    m.agencyId===agency.id
+                data.matches.filter(
+                    m=>m.agencyId===agency.id
                 );
 
             const wins =
-                matches.filter(m=>
-                    m.result==="Victoire"
+                matches.filter(
+                    m=>m.result==="Victoire"
                 ).length;
 
             const losses =
-                matches.filter(m=>
-                    m.result==="Défaite"
+                matches.filter(
+                    m=>m.result==="Défaite"
                 ).length;
 
             return `
@@ -2328,8 +3275,18 @@ function renderAgencies(){
 
                             ${
                                 agency.logo
-                                ? `<img src="${esc(agency.logo)}">`
-                                : esc(agency.name.charAt(0).toUpperCase())
+
+                                ? `
+                                    <img
+                                        src="${esc(agency.logo)}"
+                                        alt="">
+                                  `
+
+                                : esc(
+                                    agency.name
+                                    .charAt(0)
+                                    .toUpperCase()
+                                  )
                             }
 
                         </div>
@@ -2341,7 +3298,8 @@ function renderAgencies(){
                             </div>
 
                             <div class="team-small">
-                                ${matches.length} Match OFF
+                                ${matches.length}
+                                Match OFF
                             </div>
 
                         </div>
@@ -2351,13 +3309,27 @@ function renderAgencies(){
                     <div class="team-stats">
 
                         <div class="team-stat">
-                            <strong>${wins}</strong>
-                            <span>Victoires</span>
+
+                            <strong>
+                                ${wins}
+                            </strong>
+
+                            <span>
+                                Victoires
+                            </span>
+
                         </div>
 
                         <div class="team-stat">
-                            <strong>${losses}</strong>
-                            <span>Défaites</span>
+
+                            <strong>
+                                ${losses}
+                            </strong>
+
+                            <span>
+                                Défaites
+                            </span>
+
                         </div>
 
                     </div>
@@ -2366,7 +3338,9 @@ function renderAgencies(){
                         class="btn btn-small btn-danger"
                         style="margin-top:15px;"
                         onclick="deleteAgency('${agency.id}')">
+
                         Supprimer
+
                     </button>
 
                 </div>
@@ -2388,12 +3362,19 @@ function fillTeamSelect(id,value=""){
         document.getElementById(id);
 
     select.innerHTML =
-        `<option value="">Sélectionner une Team</option>`+
-        data.teams.map(t=>
-            `<option value="${t.id}"
-                ${t.id===value?"selected":""}>
-                ${esc(t.name)}
-            </option>`
+        `<option value="">
+            Sélectionner une Team
+        </option>`+
+
+        data.teams.map(
+            t=>
+                `<option
+                    value="${t.id}"
+                    ${t.id===value?"selected":""}>
+
+                    ${esc(t.name)}
+
+                </option>`
         ).join("");
 
 }
@@ -2405,12 +3386,19 @@ function fillCreatorSelect(id,value=""){
         document.getElementById(id);
 
     select.innerHTML =
-        `<option value="">Sélectionner un créateur</option>`+
-        data.creators.map(c=>
-            `<option value="${c.id}"
-                ${c.id===value?"selected":""}>
-                ${esc(c.pseudo)}
-            </option>`
+        `<option value="">
+            Sélectionner un créateur
+        </option>`+
+
+        data.creators.map(
+            c=>
+                `<option
+                    value="${c.id}"
+                    ${c.id===value?"selected":""}>
+
+                    ${esc(c.pseudo)}
+
+                </option>`
         ).join("");
 
 }
@@ -2422,12 +3410,19 @@ function fillAgencySelect(id,value=""){
         document.getElementById(id);
 
     select.innerHTML =
-        `<option value="">Sélectionner une agence</option>`+
-        data.agencies.map(a=>
-            `<option value="${a.id}"
-                ${a.id===value?"selected":""}>
-                ${esc(a.name)}
-            </option>`
+        `<option value="">
+            Sélectionner une agence
+        </option>`+
+
+        data.agencies.map(
+            a=>
+                `<option
+                    value="${a.id}"
+                    ${a.id===value?"selected":""}>
+
+                    ${esc(a.name)}
+
+                </option>`
         ).join("");
 
 }
@@ -2439,77 +3434,133 @@ function fillAgencySelect(id,value=""){
 
 function openMatchModal(){
 
-    document.getElementById("matchDate").value =
-        new Date().toISOString().split("T")[0];
+    document
+        .getElementById("matchDate")
+        .value =
+            new Date()
+            .toISOString()
+            .split("T")[0];
 
-    document.getElementById("matchTime").value="";
+    document
+        .getElementById("matchTime")
+        .value="";
 
-    document.getElementById("matchTheme").value="";
+    document
+        .getElementById("matchTheme")
+        .value="";
 
-    document.getElementById("matchResult").value="";
+    document
+        .getElementById("matchResult")
+        .value="";
 
-    document.getElementById("matchWinner").value="";
+    document
+        .getElementById("matchWinner")
+        .value="";
 
-    fillCreatorSelect("matchCreator");
+    fillCreatorSelect(
+        "matchCreator"
+    );
 
-    fillTeamSelect("matchTeam");
+    fillTeamSelect(
+        "matchTeam"
+    );
 
-    fillAgencySelect("matchAgency");
+    fillAgencySelect(
+        "matchAgency"
+    );
 
     openModal("matchModal");
 
 }
 
 
-document.getElementById("matchCreator").addEventListener("change",function(){
+document
+    .getElementById("matchCreator")
+    .addEventListener(
+        "change",
+        function(){
 
-    const creator = getCreator(this.value);
+            const creator =
+                getCreator(this.value);
 
-    if(creator){
+            if(creator){
 
-        document.getElementById("matchTeam").value =
-            creator.teamId;
+                document
+                    .getElementById("matchTeam")
+                    .value =
+                        creator.teamId;
 
-    }
+            }
 
-});
+        }
+    );
 
 
 function saveMatch(){
 
     const date =
-        document.getElementById("matchDate").value;
+        document
+        .getElementById("matchDate")
+        .value;
 
     const time =
-        document.getElementById("matchTime").value;
+        document
+        .getElementById("matchTime")
+        .value;
 
     const creatorId =
-        document.getElementById("matchCreator").value;
+        document
+        .getElementById("matchCreator")
+        .value;
 
     const teamId =
-        document.getElementById("matchTeam").value;
+        document
+        .getElementById("matchTeam")
+        .value;
 
     const agencyId =
-        document.getElementById("matchAgency").value;
+        document
+        .getElementById("matchAgency")
+        .value;
 
     if(!date){
-        alert("Veuillez sélectionner une date.");
+
+        alert(
+            "Veuillez sélectionner une date."
+        );
+
         return;
+
     }
 
     if(!creatorId){
-        alert("Veuillez sélectionner un créateur.");
+
+        alert(
+            "Veuillez sélectionner un créateur."
+        );
+
         return;
+
     }
 
     if(!teamId){
-        alert("Veuillez sélectionner une Team.");
+
+        alert(
+            "Veuillez sélectionner une Team."
+        );
+
         return;
+
     }
 
     if(!agencyId){
-        alert("Veuillez sélectionner une agence adverse.");
+
+        alert(
+            "Veuillez sélectionner une agence adverse."
+        );
+
         return;
+
     }
 
     data.matches.push({
@@ -2527,13 +3578,21 @@ function saveMatch(){
         agencyId,
 
         theme:
-            document.getElementById("matchTheme").value.trim(),
+            document
+            .getElementById("matchTheme")
+            .value
+            .trim(),
 
         result:
-            document.getElementById("matchResult").value,
+            document
+            .getElementById("matchResult")
+            .value,
 
         winner:
-            document.getElementById("matchWinner").value.trim()
+            document
+            .getElementById("matchWinner")
+            .value
+            .trim()
 
     });
 
@@ -2546,12 +3605,18 @@ function saveMatch(){
 
 function deleteMatch(id){
 
-    if(!confirm("Supprimer ce Match OFF ?")){
+    if(!confirm(
+        "Supprimer ce Match OFF ?"
+    )){
+
         return;
+
     }
 
     data.matches =
-        data.matches.filter(m=>m.id!==id);
+        data.matches.filter(
+            m=>m.id!==id
+        );
 
     saveData();
 
@@ -2561,31 +3626,45 @@ function deleteMatch(id){
 function renderMatches(){
 
     const tbody =
-        document.getElementById("matchTable");
+        document.getElementById(
+            "matchTable"
+        );
 
     const matches =
-        [...data.matches].sort((a,b)=>{
+        [...data.matches].sort(
+            (a,b)=>{
 
-            const da =
-                new Date(`${a.date}T${a.time || "00:00"}`);
+                const da =
+                    new Date(
+                        `${a.date}T${a.time || "00:00"}`
+                    );
 
-            const db =
-                new Date(`${b.date}T${b.time || "00:00"}`);
+                const db =
+                    new Date(
+                        `${b.date}T${b.time || "00:00"}`
+                    );
 
-            return da-db;
+                return da-db;
 
-        });
+            }
+        );
 
     if(!matches.length){
 
         tbody.innerHTML=`
+
             <tr>
+
                 <td colspan="8">
+
                     <div class="empty">
                         Aucun Match OFF enregistré.
                     </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -2595,36 +3674,76 @@ function renderMatches(){
     tbody.innerHTML =
         matches.map(m=>{
 
-            const creator=getCreator(m.creatorId);
+            const creator =
+                getCreator(m.creatorId);
 
-            const team=getTeam(m.teamId);
+            const team =
+                getTeam(m.teamId);
 
-            const agency=getAgency(m.agencyId);
+            const agency =
+                getAgency(m.agencyId);
 
             return `
 
                 <tr>
 
                     <td>
+
                         ${formatDate(m.date)}
-                        ${m.time ? `<br><small style="color:#777;">${esc(m.time)}</small>` : ""}
+
+                        ${
+                            m.time
+                            ? `
+                                <br>
+                                <small style="color:#777;">
+                                    ${esc(m.time)}
+                                </small>
+                              `
+                            : ""
+                        }
+
                     </td>
-
-                    <td>${esc(creator?.pseudo || "—")}</td>
-
-                    <td>${esc(team?.name || "—")}</td>
-
-                    <td>${esc(agency?.name || "—")}</td>
-
-                    <td>${esc(m.theme || "—")}</td>
 
                     <td>
-                        <span class="badge">
-                            ${esc(m.result || "À venir")}
-                        </span>
+                        ${esc(
+                            creator?.pseudo || "—"
+                        )}
                     </td>
 
-                    <td>${esc(m.winner || "—")}</td>
+                    <td>
+                        ${esc(
+                            team?.name || "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${esc(
+                            agency?.name || "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${esc(
+                            m.theme || "—"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span class="badge">
+                            ${esc(
+                                m.result ||
+                                "À venir"
+                            )}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${esc(
+                            m.winner || "—"
+                        )}
+                    </td>
 
                     <td>
 
@@ -2633,13 +3752,17 @@ function renderMatches(){
                             <button
                                 class="btn btn-small"
                                 onclick="showMatchDetail('${m.id}')">
+
                                 Voir
+
                             </button>
 
                             <button
                                 class="btn btn-small btn-danger"
                                 onclick="deleteMatch('${m.id}')">
+
                                 Supprimer
+
                             </button>
 
                         </div>
@@ -2662,17 +3785,26 @@ function renderMatches(){
 function showMatchDetail(id){
 
     const m =
-        data.matches.find(x=>x.id===id);
+        data.matches.find(
+            x=>x.id===id
+        );
 
-    if(!m) return;
+    if(!m){
+        return;
+    }
 
-    const creator=getCreator(m.creatorId);
+    const creator =
+        getCreator(m.creatorId);
 
-    const team=getTeam(m.teamId);
+    const team =
+        getTeam(m.teamId);
 
-    const agency=getAgency(m.agencyId);
+    const agency =
+        getAgency(m.agencyId);
 
-    document.getElementById("matchDetailBody").innerHTML=`
+    document
+        .getElementById("matchDetailBody")
+        .innerHTML=`
 
         <div style="margin-bottom:18px;">
 
@@ -2681,7 +3813,12 @@ function showMatchDetail(id){
             </div>
 
             <div class="match-title">
-                ${esc(creator?.pseudo || "Créateur")}
+
+                ${esc(
+                    creator?.pseudo ||
+                    "Créateur"
+                )}
+
             </div>
 
         </div>
@@ -2689,48 +3826,122 @@ function showMatchDetail(id){
         <div class="detail-grid">
 
             <div class="detail-item">
-                <span>Créateur</span>
-                <strong>${esc(creator?.pseudo || "—")}</strong>
-            </div>
 
-            <div class="detail-item">
-                <span>Team</span>
-                <strong>${esc(team?.name || "—")}</strong>
-            </div>
+                <span>
+                    Créateur
+                </span>
 
-            <div class="detail-item">
-                <span>Agence adverse</span>
-                <strong>${esc(agency?.name || "—")}</strong>
-            </div>
-
-            <div class="detail-item">
-                <span>Date</span>
                 <strong>
-                    ${formatDate(m.date)}
-                    ${m.time ? " à "+esc(m.time) : ""}
+                    ${esc(
+                        creator?.pseudo ||
+                        "—"
+                    )}
                 </strong>
+
             </div>
 
             <div class="detail-item">
-                <span>Thème</span>
-                <strong>${esc(m.theme || "—")}</strong>
+
+                <span>
+                    Team
+                </span>
+
+                <strong>
+                    ${esc(
+                        team?.name ||
+                        "—"
+                    )}
+                </strong>
+
             </div>
 
             <div class="detail-item">
-                <span>Résultat</span>
-                <strong>${esc(m.result || "À venir")}</strong>
+
+                <span>
+                    Agence adverse
+                </span>
+
+                <strong>
+                    ${esc(
+                        agency?.name ||
+                        "—"
+                    )}
+                </strong>
+
             </div>
 
             <div class="detail-item">
-                <span>Gagnant</span>
-                <strong>${esc(m.winner || "—")}</strong>
+
+                <span>
+                    Date
+                </span>
+
+                <strong>
+
+                    ${formatDate(m.date)}
+
+                    ${
+                        m.time
+                        ? " à "+esc(m.time)
+                        : ""
+                    }
+
+                </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>
+                    Thème
+                </span>
+
+                <strong>
+                    ${esc(
+                        m.theme ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>
+                    Résultat
+                </span>
+
+                <strong>
+                    ${esc(
+                        m.result ||
+                        "À venir"
+                    )}
+                </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>
+                    Gagnant
+                </span>
+
+                <strong>
+                    ${esc(
+                        m.winner ||
+                        "—"
+                    )}
+                </strong>
+
             </div>
 
         </div>
 
     `;
 
-    openModal("matchDetailModal");
+    openModal(
+        "matchDetailModal"
+    );
 
 }
 
@@ -2742,7 +3953,8 @@ function showMatchDetail(id){
 function changeMonth(amount){
 
     calendarDate.setMonth(
-        calendarDate.getMonth()+amount
+        calendarDate.getMonth()+
+        amount
     );
 
     renderCalendar();
@@ -2758,43 +3970,85 @@ function renderCalendar(){
     const month =
         calendarDate.getMonth();
 
-    document.getElementById("calendarMonth").textContent =
-        new Date(year,month,1).toLocaleDateString(
-            "fr-FR",
-            {
-                month:"long",
-                year:"numeric"
-            }
-        ).replace(/^./,c=>c.toUpperCase());
+    document
+        .getElementById("calendarMonth")
+        .textContent =
+            new Date(
+                year,
+                month,
+                1
+            )
+            .toLocaleDateString(
+                "fr-FR",
+                {
+                    month:"long",
+                    year:"numeric"
+                }
+            )
+            .replace(
+                /^./,
+                c=>c.toUpperCase()
+            );
 
     const grid =
-        document.getElementById("calendarGrid");
+        document.getElementById(
+            "calendarGrid"
+        );
 
     const names =
-        ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+        [
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam",
+            "Dim"
+        ];
 
     let html =
-        names.map(n=>
-            `<div class="calendar-day-name">${n}</div>`
+        names.map(
+            n=>
+                `<div class="calendar-day-name">
+                    ${n}
+                </div>`
         ).join("");
 
     const first =
-        new Date(year,month,1);
+        new Date(
+            year,
+            month,
+            1
+        );
 
     let start =
         first.getDay();
 
-    start = start===0 ? 6 : start-1;
+    start =
+        start===0
+        ? 6
+        : start-1;
 
     const days =
-        new Date(year,month+1,0).getDate();
+        new Date(
+            year,
+            month+1,
+            0
+        ).getDate();
 
-    for(let i=0;i<start;i++){
+    for(
+        let i=0;
+        i<start;
+        i++
+    ){
 
         html+=`
-            <div class="calendar-day"
-                 style="opacity:.25;">
+
+            <div
+                class="calendar-day"
+                style="opacity:.25;">
             </div>
+
         `;
 
     }
@@ -2802,10 +4056,18 @@ function renderCalendar(){
     const today =
         new Date();
 
-    for(let day=1;day<=days;day++){
+    for(
+        let day=1;
+        day<=days;
+        day++
+    ){
 
         const dateString =
-            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+            `${year}-${String(
+                month+1
+            ).padStart(2,"0")}-${String(
+                day
+            ).padStart(2,"0")}`;
 
         const isToday =
             today.getFullYear()===year &&
@@ -2813,22 +4075,32 @@ function renderCalendar(){
             today.getDate()===day;
 
         const matches =
-            data.matches.filter(m=>
-                m.date===dateString
+            data.matches.filter(
+                m=>m.date===dateString
             );
 
         html+=`
 
-            <div class="calendar-day ${isToday?"today":""}">
+            <div
+                class="calendar-day
+                ${isToday?"today":""}">
 
-                <div class="day-number">${day}</div>
+                <div class="day-number">
+                    ${day}
+                </div>
 
                 ${
                     matches.map(m=>{
 
-                        const creator=getCreator(m.creatorId);
+                        const creator =
+                            getCreator(
+                                m.creatorId
+                            );
 
-                        const team=getTeam(m.teamId);
+                        const team =
+                            getTeam(
+                                m.teamId
+                            );
 
                         return `
 
@@ -2837,11 +4109,22 @@ function renderCalendar(){
                                 onclick="showMatchDetail('${m.id}')">
 
                                 <div class="calendar-match-title">
-                                    Match OFF — ${esc(creator?.pseudo || "Créateur")}
+
+                                    Match OFF —
+                                    ${esc(
+                                        creator?.pseudo ||
+                                        "Créateur"
+                                    )}
+
                                 </div>
 
                                 <div class="calendar-match-team">
-                                    ${esc(team?.name || "Team")}
+
+                                    ${esc(
+                                        team?.name ||
+                                        "Team"
+                                    )}
+
                                 </div>
 
                             </div>
@@ -2857,7 +4140,8 @@ function renderCalendar(){
 
     }
 
-    grid.innerHTML=html;
+    grid.innerHTML =
+        html;
 
 }
 
@@ -2870,8 +4154,15 @@ function getLatestStatsForTeam(teamId){
 
     const entries =
         data.statistics
-        .filter(s=>s.teamId===teamId)
-        .sort((a,b)=>b.month.localeCompare(a.month));
+        .filter(
+            s=>s.teamId===teamId
+        )
+        .sort(
+            (a,b)=>
+                b.month.localeCompare(
+                    a.month
+                )
+        );
 
     return entries[0] || null;
 
@@ -2885,12 +4176,16 @@ function getLatestStats(){
     }
 
     const latestMonth =
-        [...new Set(data.statistics.map(s=>s.month))]
+        [...new Set(
+            data.statistics.map(
+                s=>s.month
+            )
+        )]
         .sort()
         .pop();
 
-    return data.statistics.filter(s=>
-        s.month===latestMonth
+    return data.statistics.filter(
+        s=>s.month===latestMonth
     );
 
 }
@@ -2904,15 +4199,31 @@ function getTotals(){
     return {
 
         diamonds:
-            latest.reduce((sum,s)=>
-                sum+Number(s.diamonds||0),0),
+            latest.reduce(
+                (sum,s)=>
+                    sum+
+                    Number(
+                        s.diamonds||0
+                    ),
+                0
+            ),
 
         hours:
-            latest.reduce((sum,s)=>
-                sum+Number(s.hours||0),0),
+            latest.reduce(
+                (sum,s)=>
+                    sum+
+                    Number(
+                        s.hours||0
+                    ),
+                0
+            ),
 
         teams:
-            new Set(latest.map(s=>s.teamId)).size
+            new Set(
+                latest.map(
+                    s=>s.teamId
+                )
+            ).size
 
     };
 
@@ -2923,14 +4234,20 @@ function openStatsModal(){
 
     if(!data.teams.length){
 
-        alert("Créez d’abord au moins une Team.");
+        alert(
+            "Créez d’abord au moins une Team."
+        );
 
         return;
 
     }
 
-    document.getElementById("statsMonth").value =
-        new Date().toISOString().slice(0,7);
+    document
+        .getElementById("statsMonth")
+        .value =
+            new Date()
+            .toISOString()
+            .slice(0,7);
 
     renderStatsFields();
 
@@ -2939,81 +4256,103 @@ function openStatsModal(){
 }
 
 
-document.getElementById("statsMonth").addEventListener(
-    "change",
-    renderStatsFields
-);
+document
+    .getElementById("statsMonth")
+    .addEventListener(
+        "change",
+        renderStatsFields
+    );
 
 
 function renderStatsFields(){
 
     const month =
-        document.getElementById("statsMonth").value;
+        document
+        .getElementById("statsMonth")
+        .value;
 
     const container =
-        document.getElementById("statsTeamFields");
+        document.getElementById(
+            "statsTeamFields"
+        );
 
     container.innerHTML =
-        data.teams.map(team=>{
+        data.teams.map(
+            team=>{
 
-            const existing =
-                data.statistics.find(s=>
-                    s.teamId===team.id &&
-                    s.month===month
-                );
+                const existing =
+                    data.statistics.find(
+                        s=>
+                            s.teamId===team.id &&
+                            s.month===month
+                    );
 
-            return `
+                return `
 
-                <div
-                    style="
-                        background:#171720;
-                        border:1px solid #252530;
-                        border-radius:13px;
-                        padding:14px;
-                        margin-bottom:9px;
-                    ">
+                    <div
+                        style="
+                            background:#171720;
+                            border:1px solid #252530;
+                            border-radius:13px;
+                            padding:14px;
+                            margin-bottom:9px;
+                        ">
 
-                    <div style="
-                        font-weight:800;
-                        margin-bottom:11px;
-                    ">
-                        ${esc(team.name)}
-                    </div>
+                        <div
+                            style="
+                                font-weight:800;
+                                margin-bottom:11px;
+                            ">
 
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>Diamants</label>
-
-                            <input
-                                type="number"
-                                min="0"
-                                id="diamonds_${team.id}"
-                                value="${existing?.diamonds || 0}">
+                            ${esc(team.name)}
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-grid">
 
-                            <label>Heures</label>
+                            <div class="form-group">
 
-                            <input
-                                type="number"
-                                min="0"
-                                step="0.1"
-                                id="hours_${team.id}"
-                                value="${existing?.hours || 0}">
+                                <label>
+                                    Diamants
+                                </label>
+
+                                <input
+                                    type="number"
+                                    min="0"
+                                    id="diamonds_${team.id}"
+                                    value="${
+                                        existing?.diamonds ||
+                                        0
+                                    }">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+                                    Heures
+                                </label>
+
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="0.1"
+                                    id="hours_${team.id}"
+                                    value="${
+                                        existing?.hours ||
+                                        0
+                                    }">
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
+                `;
 
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
@@ -3021,64 +4360,81 @@ function renderStatsFields(){
 function saveStats(){
 
     const month =
-        document.getElementById("statsMonth").value;
+        document
+        .getElementById("statsMonth")
+        .value;
 
     if(!month){
 
-        alert("Veuillez sélectionner un mois.");
+        alert(
+            "Veuillez sélectionner un mois."
+        );
 
         return;
 
     }
 
-    data.teams.forEach(team=>{
+    data.teams.forEach(
+        team=>{
 
-        const diamonds =
-            Number(
-                document.getElementById(
-                    "diamonds_"+team.id
-                ).value || 0
-            );
+            const diamonds =
+                Number(
+                    document
+                    .getElementById(
+                        "diamonds_"+team.id
+                    )
+                    .value || 0
+                );
 
-        const hours =
-            Number(
-                document.getElementById(
-                    "hours_"+team.id
-                ).value || 0
-            );
+            const hours =
+                Number(
+                    document
+                    .getElementById(
+                        "hours_"+team.id
+                    )
+                    .value || 0
+                );
 
-        const existing =
-            data.statistics.find(s=>
-                s.teamId===team.id &&
-                s.month===month
-            );
+            const existing =
+                data.statistics.find(
+                    s=>
+                        s.teamId===team.id &&
+                        s.month===month
+                );
 
-        if(existing){
+            if(existing){
 
-            existing.diamonds=diamonds;
-            existing.hours=hours;
+                existing.diamonds =
+                    diamonds;
 
-        }else{
+                existing.hours =
+                    hours;
 
-            data.statistics.push({
+            }else{
 
-                id:uid(),
+                data.statistics.push({
 
-                month,
+                    id:uid(),
 
-                teamId:team.id,
+                    month,
 
-                diamonds,
+                    teamId:
+                        team.id,
 
-                hours
+                    diamonds,
 
-            });
+                    hours
+
+                });
+
+            }
 
         }
+    );
 
-    });
-
-    closeModal("statsModal");
+    closeModal(
+        "statsModal"
+    );
 
     saveData();
 
@@ -3090,14 +4446,24 @@ function renderStatistics(){
     const totals =
         getTotals();
 
-    document.getElementById("statDiamonds").textContent =
-        formatNumber(totals.diamonds);
+    document
+        .getElementById("statDiamonds")
+        .textContent =
+            formatNumber(
+                totals.diamonds
+            );
 
-    document.getElementById("statHours").textContent =
-        formatNumber(totals.hours);
+    document
+        .getElementById("statHours")
+        .textContent =
+            formatNumber(
+                totals.hours
+            );
 
-    document.getElementById("statActiveTeams").textContent =
-        totals.teams;
+    document
+        .getElementById("statActiveTeams")
+        .textContent =
+            totals.teams;
 
     renderRanking();
 
@@ -3116,23 +4482,33 @@ function renderRanking(){
         getLatestStats();
 
     const tbody =
-        document.getElementById("rankingTable");
+        document.getElementById(
+            "rankingTable"
+        );
 
     const sorted =
         [...latest].sort(
-            (a,b)=>Number(b.diamonds)-Number(a.diamonds)
+            (a,b)=>
+                Number(b.diamonds)-
+                Number(a.diamonds)
         );
 
     if(!sorted.length){
 
         tbody.innerHTML=`
+
             <tr>
+
                 <td colspan="4">
+
                     <div class="empty">
                         Aucune statistique enregistrée.
                     </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -3140,35 +4516,49 @@ function renderRanking(){
     }
 
     tbody.innerHTML =
-        sorted.map((s,index)=>{
+        sorted.map(
+            (s,index)=>{
 
-            const team=getTeam(s.teamId);
+                const team =
+                    getTeam(
+                        s.teamId
+                    );
 
-            return `
+                return `
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        <strong>${index+1}</strong>
-                    </td>
+                        <td>
+                            <strong>
+                                ${index+1}
+                            </strong>
+                        </td>
 
-                    <td>
-                        ${esc(team?.name || "—")}
-                    </td>
+                        <td>
+                            ${esc(
+                                team?.name ||
+                                "—"
+                            )}
+                        </td>
 
-                    <td>
-                        ${formatNumber(s.diamonds)}
-                    </td>
+                        <td>
+                            ${formatNumber(
+                                s.diamonds
+                            )}
+                        </td>
 
-                    <td>
-                        ${formatNumber(s.hours)}
-                    </td>
+                        <td>
+                            ${formatNumber(
+                                s.hours
+                            )}
+                        </td>
 
-                </tr>
+                    </tr>
 
-            `;
+                `;
 
-        }).join("");
+            }
+        ).join("");
 
 }
 
@@ -3180,11 +4570,15 @@ function renderRanking(){
 function renderChart(){
 
     const container =
-        document.getElementById("diamondChart");
+        document.getElementById(
+            "diamondChart"
+        );
 
     const months =
         [...new Set(
-            data.statistics.map(s=>s.month)
+            data.statistics.map(
+                s=>s.month
+            )
         )]
         .sort()
         .slice(-8);
@@ -3192,10 +4586,16 @@ function renderChart(){
     if(!months.length){
 
         container.innerHTML=`
-            <div class="empty" style="width:100%;">
+
+            <div
+                class="empty"
+                style="width:100%;">
+
                 Enregistrez vos premières statistiques
                 pour voir l’évolution.
+
             </div>
+
         `;
 
         return;
@@ -3203,57 +4603,77 @@ function renderChart(){
     }
 
     const totals =
-        months.map(month=>{
+        months.map(
+            month=>{
 
-            return data.statistics
-                .filter(s=>s.month===month)
-                .reduce(
-                    (sum,s)=>sum+Number(s.diamonds||0),
-                    0
-                );
+                return data.statistics
+                    .filter(
+                        s=>s.month===month
+                    )
+                    .reduce(
+                        (sum,s)=>
+                            sum+
+                            Number(
+                                s.diamonds||0
+                            ),
+                        0
+                    );
 
-        });
+            }
+        );
 
     const max =
-        Math.max(...totals,1);
+        Math.max(
+            ...totals,
+            1
+        );
 
     container.innerHTML =
-        months.map((month,index)=>{
+        months.map(
+            (month,index)=>{
 
-            const value=totals[index];
+                const value =
+                    totals[index];
 
-            const height =
-                Math.max(
-                    5,
-                    (value/max)*190
-                );
+                const height =
+                    Math.max(
+                        5,
+                        (value/max)*190
+                    );
 
-            const label =
-                month.slice(5)+"/"+month.slice(0,4);
+                const label =
+                    month.slice(5)+
+                    "/"+
+                    month.slice(0,4);
 
-            return `
+                return `
 
-                <div class="bar-wrap">
+                    <div class="bar-wrap">
 
-                    <div class="bar-value">
-                        ${formatNumber(value)}
+                        <div class="bar-value">
+                            ${formatNumber(
+                                value
+                            )}
+                        </div>
+
+                        <div
+                            class="bar"
+                            style="height:${height}px;"
+                            title="${formatNumber(
+                                value
+                            )} diamants">
+                        </div>
+
+                        <div class="bar-label">
+                            ${label}
+                        </div>
+
                     </div>
 
-                    <div
-                        class="bar"
-                        style="height:${height}px;"
-                        title="${formatNumber(value)} diamants">
-                    </div>
+                `;
 
-                    <div class="bar-label">
-                        ${label}
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
@@ -3265,11 +4685,15 @@ function renderChart(){
 function renderHistory(){
 
     const tbody =
-        document.getElementById("historyTable");
+        document.getElementById(
+            "historyTable"
+        );
 
     const months =
         [...new Set(
-            data.statistics.map(s=>s.month)
+            data.statistics.map(
+                s=>s.month
+            )
         )]
         .sort()
         .reverse();
@@ -3277,13 +4701,19 @@ function renderHistory(){
     if(!months.length){
 
         tbody.innerHTML=`
+
             <tr>
+
                 <td colspan="5">
+
                     <div class="empty">
                         Aucun historique disponible.
                     </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -3291,91 +4721,158 @@ function renderHistory(){
     }
 
     tbody.innerHTML =
-        months.map((month,index)=>{
+        months.map(
+            (month,index)=>{
 
-            const total =
-                data.statistics
-                .filter(s=>s.month===month)
-                .reduce(
-                    (sum,s)=>sum+Number(s.diamonds||0),
-                    0
-                );
-
-            const hours =
-                data.statistics
-                .filter(s=>s.month===month)
-                .reduce(
-                    (sum,s)=>sum+Number(s.hours||0),
-                    0
-                );
-
-            const previousMonth =
-                months[index+1];
-
-            let diamondEvolution="—";
-            let hoursEvolution="—";
-
-            if(previousMonth){
-
-                const previousDiamond =
+                const total =
                     data.statistics
-                    .filter(s=>s.month===previousMonth)
+                    .filter(
+                        s=>s.month===month
+                    )
                     .reduce(
-                        (sum,s)=>sum+Number(s.diamonds||0),
+                        (sum,s)=>
+                            sum+
+                            Number(
+                                s.diamonds||0
+                            ),
                         0
                     );
 
-                const previousHours =
+                const hours =
                     data.statistics
-                    .filter(s=>s.month===previousMonth)
+                    .filter(
+                        s=>s.month===month
+                    )
                     .reduce(
-                        (sum,s)=>sum+Number(s.hours||0),
+                        (sum,s)=>
+                            sum+
+                            Number(
+                                s.hours||0
+                            ),
                         0
                     );
 
-                if(previousDiamond){
+                const previousMonth =
+                    months[index+1];
 
-                    const diff =
-                        ((total-previousDiamond)/previousDiamond)*100;
+                let diamondEvolution =
+                    "—";
 
-                    diamondEvolution =
-                        `${diff>=0?"+":""}${diff.toFixed(1)} %`;
+                let hoursEvolution =
+                    "—";
+
+                if(previousMonth){
+
+                    const previousDiamond =
+                        data.statistics
+                        .filter(
+                            s=>
+                                s.month===
+                                previousMonth
+                        )
+                        .reduce(
+                            (sum,s)=>
+                                sum+
+                                Number(
+                                    s.diamonds||0
+                                ),
+                            0
+                        );
+
+                    const previousHours =
+                        data.statistics
+                        .filter(
+                            s=>
+                                s.month===
+                                previousMonth
+                        )
+                        .reduce(
+                            (sum,s)=>
+                                sum+
+                                Number(
+                                    s.hours||0
+                                ),
+                            0
+                        );
+
+                    if(previousDiamond){
+
+                        const diff =
+                            (
+                                (total-
+                                previousDiamond)/
+                                previousDiamond
+                            )*100;
+
+                        diamondEvolution =
+                            `${
+                                diff>=0
+                                ? "+"
+                                : ""
+                            }${
+                                diff.toFixed(1)
+                            } %`;
+
+                    }
+
+                    if(previousHours){
+
+                        const diff =
+                            (
+                                (hours-
+                                previousHours)/
+                                previousHours
+                            )*100;
+
+                        hoursEvolution =
+                            `${
+                                diff>=0
+                                ? "+"
+                                : ""
+                            }${
+                                diff.toFixed(1)
+                            } %`;
+
+                    }
 
                 }
 
-                if(previousHours){
+                return `
 
-                    const diff =
-                        ((hours-previousHours)/previousHours)*100;
+                    <tr>
 
-                    hoursEvolution =
-                        `${diff>=0?"+":""}${diff.toFixed(1)} %`;
+                        <td>
+                            <strong>
+                                ${month}
+                            </strong>
+                        </td>
 
-                }
+                        <td>
+                            ${formatNumber(
+                                total
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatNumber(
+                                hours
+                            )}
+                        </td>
+
+                        <td>
+                            ${diamondEvolution}
+                        </td>
+
+                        <td>
+                            ${hoursEvolution}
+                        </td>
+
+                    </tr>
+
+                `;
 
             }
-
-            return `
-
-                <tr>
-
-                    <td>
-                        <strong>${month}</strong>
-                    </td>
-
-                    <td>${formatNumber(total)}</td>
-
-                    <td>${formatNumber(hours)}</td>
-
-                    <td>${diamondEvolution}</td>
-
-                    <td>${hoursEvolution}</td>
-
-                </tr>
-
-            `;
-
-        }).join("");
+        ).join("");
 
 }
 
@@ -3386,50 +4883,81 @@ function renderHistory(){
 
 function renderDashboard(){
 
-    document.getElementById("dashTeams").textContent =
-        data.teams.length;
+    document
+        .getElementById("dashTeams")
+        .textContent =
+            data.teams.length;
 
-    document.getElementById("dashCreators").textContent =
-        data.creators.length;
+    document
+        .getElementById("dashCreators")
+        .textContent =
+            data.creators.length;
 
     const now =
         new Date();
 
     const upcoming =
         data.matches
-        .filter(m=>
-            new Date(`${m.date}T${m.time || "23:59"}`)>=now
+        .filter(
+            m=>
+                new Date(
+                    `${m.date}T${m.time || "23:59"}`
+                ) >= now
         )
-        .sort((a,b)=>
-            new Date(`${a.date}T${a.time || "00:00"}`) -
-            new Date(`${b.date}T${b.time || "00:00"}`)
+        .sort(
+            (a,b)=>
+                new Date(
+                    `${a.date}T${a.time || "00:00"}`
+                ) -
+                new Date(
+                    `${b.date}T${b.time || "00:00"}`
+                )
         );
 
-    document.getElementById("dashMatches").textContent =
-        upcoming.length;
+    document
+        .getElementById("dashMatches")
+        .textContent =
+            upcoming.length;
 
-    document.getElementById("dashAgencies").textContent =
-        data.agencies.length;
+    document
+        .getElementById("dashAgencies")
+        .textContent =
+            data.agencies.length;
 
     const totals =
         getTotals();
 
-    document.getElementById("dashDiamonds").textContent =
-        formatNumber(totals.diamonds);
+    document
+        .getElementById("dashDiamonds")
+        .textContent =
+            formatNumber(
+                totals.diamonds
+            );
 
-    document.getElementById("dashHours").textContent =
-        formatNumber(totals.hours);
+    document
+        .getElementById("dashHours")
+        .textContent =
+            formatNumber(
+                totals.hours
+            );
 
     const latestMonth =
         data.statistics
-        .map(s=>s.month)
+        .map(
+            s=>s.month
+        )
         .sort()
         .pop();
 
-    document.getElementById("dashLastMonth").textContent =
-        latestMonth || "—";
+    document
+        .getElementById("dashLastMonth")
+        .textContent =
+            latestMonth ||
+            "—";
 
-    renderNextMatch(upcoming[0]);
+    renderNextMatch(
+        upcoming[0]
+    );
 
     renderDashboardTeams();
 
@@ -3439,53 +4967,99 @@ function renderDashboard(){
 function renderNextMatch(match){
 
     const container =
-        document.getElementById("nextMatchContent");
+        document.getElementById(
+            "nextMatchContent"
+        );
 
     if(!match){
 
         container.innerHTML=`
+
             <div class="empty">
                 Aucun Match OFF à venir.
             </div>
+
         `;
 
         return;
 
     }
 
-    const creator=getCreator(match.creatorId);
+    const creator =
+        getCreator(
+            match.creatorId
+        );
 
-    const team=getTeam(match.teamId);
+    const team =
+        getTeam(
+            match.teamId
+        );
 
-    const agency=getAgency(match.agencyId);
+    const agency =
+        getAgency(
+            match.agencyId
+        );
 
     container.innerHTML=`
 
         <div class="match-title">
-            ${esc(creator?.pseudo || "Créateur")}
-            <span style="color:#777;">vs</span>
-            ${esc(agency?.name || "Agence")}
+
+            ${esc(
+                creator?.pseudo ||
+                "Créateur"
+            )}
+
+            <span style="color:#777;">
+                vs
+            </span>
+
+            ${esc(
+                agency?.name ||
+                "Agence"
+            )}
+
         </div>
 
         <div class="match-meta">
 
             <span class="badge">
-                📅 ${formatDate(match.date)}
+
+                📅
+                ${formatDate(
+                    match.date
+                )}
+
             </span>
 
             ${
                 match.time
-                ? `<span class="badge">🕐 ${esc(match.time)}</span>`
+                ? `
+                    <span class="badge">
+                        🕐
+                        ${esc(match.time)}
+                    </span>
+                  `
                 : ""
             }
 
             <span class="badge">
-                ◆ ${esc(team?.name || "Team")}
+
+                ◆
+                ${esc(
+                    team?.name ||
+                    "Team"
+                )}
+
             </span>
 
             ${
                 match.theme
-                ? `<span class="badge"># ${esc(match.theme)}</span>`
+                ? `
+                    <span class="badge">
+                        #
+                        ${esc(match.theme)}
+                    </span>
+                  `
                 : ""
             }
 
@@ -3495,7 +5069,9 @@ function renderNextMatch(match){
             class="btn btn-primary"
             style="margin-top:20px;"
             onclick="showMatchDetail('${match.id}')">
+
             Voir les informations
+
         </button>
 
     `;
@@ -3506,7 +5082,9 @@ function renderNextMatch(match){
 function renderDashboardTeams(){
 
     const container =
-        document.getElementById("dashboardTeams");
+        document.getElementById(
+            "dashboardTeams"
+        );
 
     const latest =
         getLatestStats();
@@ -3514,9 +5092,11 @@ function renderDashboardTeams(){
     if(!latest.length){
 
         container.innerHTML=`
+
             <div class="empty">
                 Aucune statistique enregistrée.
             </div>
+
         `;
 
         return;
@@ -3526,40 +5106,63 @@ function renderDashboardTeams(){
     const sorted =
         [...latest]
         .sort(
-            (a,b)=>Number(b.diamonds)-Number(a.diamonds)
+            (a,b)=>
+                Number(b.diamonds)-
+                Number(a.diamonds)
         )
         .slice(0,5);
 
     container.innerHTML =
-        sorted.map((s,index)=>{
+        sorted.map(
+            (s,index)=>{
 
-            const team=getTeam(s.teamId);
+                const team =
+                    getTeam(
+                        s.teamId
+                    );
 
-            return `
+                return `
 
-                <div class="list-row">
+                    <div class="list-row">
 
-                    <div class="row-main">
+                        <div class="row-main">
 
-                        <div class="row-title">
-                            #${index+1} — ${esc(team?.name || "—")}
+                            <div class="row-title">
+
+                                #${index+1}
+                                —
+                                ${esc(
+                                    team?.name ||
+                                    "—"
+                                )}
+
+                            </div>
+
+                            <div class="row-sub">
+
+                                ${formatNumber(
+                                    s.hours
+                                )}
+                                heures
+
+                            </div>
+
                         </div>
 
-                        <div class="row-sub">
-                            ${formatNumber(s.hours)} heures
-                        </div>
+                        <strong>
+
+                            ${formatNumber(
+                                s.diamonds
+                            )}
+
+                        </strong>
 
                     </div>
 
-                    <strong>
-                        ${formatNumber(s.diamonds)}
-                    </strong>
+                `;
 
-                </div>
-
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
@@ -3572,24 +5175,43 @@ function exportData(){
 
     const blob =
         new Blob(
-            [JSON.stringify(data,null,2)],
-            {type:"application/json"}
+            [
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:"application/json"
+            }
         );
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     const a =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
-    a.href=url;
+    a.href =
+        url;
 
-    a.download=
-        `tokcenter-sauvegarde-${new Date().toISOString().slice(0,10)}.json`;
+    a.download =
+        `tokcenter-sauvegarde-${
+            new Date()
+            .toISOString()
+            .slice(0,10)
+        }.json`;
 
     a.click();
 
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 
 }
 
@@ -3599,52 +5221,83 @@ function importData(event){
     const file =
         event.target.files[0];
 
-    if(!file) return;
+    if(!file){
+        return;
+    }
 
     const reader =
         new FileReader();
 
-    reader.onload = function(){
+    reader.onload =
+        function(){
 
-        try{
+            try{
 
-            const imported =
-                JSON.parse(reader.result);
+                const imported =
+                    JSON.parse(
+                        reader.result
+                    );
 
-            if(
-                !imported ||
-                !Array.isArray(imported.teams) ||
-                !Array.isArray(imported.creators) ||
-                !Array.isArray(imported.agencies) ||
-                !Array.isArray(imported.matches) ||
-                !Array.isArray(imported.statistics)
-            ){
+                if(
+                    !imported ||
 
-                throw new Error("Format invalide");
+                    !Array.isArray(
+                        imported.teams
+                    ) ||
+
+                    !Array.isArray(
+                        imported.creators
+                    ) ||
+
+                    !Array.isArray(
+                        imported.agencies
+                    ) ||
+
+                    !Array.isArray(
+                        imported.matches
+                    ) ||
+
+                    !Array.isArray(
+                        imported.statistics
+                    )
+                ){
+
+                    throw new Error(
+                        "Format invalide"
+                    );
+
+                }
+
+                if(!confirm(
+                    "L’import remplacera les données actuelles. Continuer ?"
+                )){
+
+                    return;
+
+                }
+
+                data =
+                    imported;
+
+                saveData();
+
+                alert(
+                    "Données importées avec succès."
+                );
+
+            }catch(e){
+
+                alert(
+                    "Impossible d’importer ce fichier."
+                );
 
             }
 
-            if(!confirm(
-                "L’import remplacera les données actuelles. Continuer ?"
-            )){
-                return;
-            }
+        };
 
-            data=imported;
-
-            saveData();
-
-            alert("Données importées avec succès.");
-
-        }catch(e){
-
-            alert("Impossible d’importer ce fichier.");
-
-        }
-
-    };
-
-    reader.readAsText(file);
+    reader.readAsText(
+        file
+    );
 
 }
 
@@ -3683,15 +5336,24 @@ renderAll();
 
 /* Fermeture des modales en cliquant à l'extérieur */
 
-document.querySelectorAll(".modal-bg").forEach(bg=>{
+document
+.querySelectorAll(".modal-bg")
+.forEach(bg=>{
 
-    bg.addEventListener("click",function(e){
+    bg.addEventListener(
+        "click",
+        function(e){
 
-        if(e.target===bg){
-            bg.classList.remove("open");
+            if(e.target===bg){
+
+                bg.classList.remove(
+                    "open"
+                );
+
+            }
+
         }
-
-    });
+    );
 
 });
 
