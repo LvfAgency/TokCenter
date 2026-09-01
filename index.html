@@ -7,20 +7,18 @@
 
 <style>
 :root{
-    --bg:#08090d;
-    --panel:#101219;
-    --panel2:#151720;
-    --panel3:#1b1e29;
-    --border:rgba(255,255,255,.08);
+    --bg:#09090d;
+    --sidebar:#0d0d13;
+    --panel:#111118;
+    --panel2:#161620;
+    --border:#272733;
     --text:#f5f5f7;
-    --muted:#8f93a3;
+    --muted:#92929f;
     --purple:#8b5cf6;
-    --purple2:#a855f7;
-    --purpleSoft:rgba(139,92,246,.14);
-    --green:#22c55e;
-    --red:#ef4444;
-    --orange:#f59e0b;
-    --blue:#3b82f6;
+    --purple2:#a78bfa;
+    --danger:#ef4444;
+    --success:#22c55e;
+    --warning:#f59e0b;
     --radius:18px;
 }
 
@@ -30,15 +28,9 @@
     padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:
-        radial-gradient(circle at 70% -10%,rgba(139,92,246,.13),transparent 35%),
-        var(--bg);
+    background:var(--bg);
     color:var(--text);
     min-height:100vh;
 }
@@ -62,41 +54,49 @@ button{
 
 .sidebar{
     width:250px;
-    background:#090a0f;
+    min-width:250px;
+    background:linear-gradient(180deg,#101017 0%,#0b0b10 100%);
     border-right:1px solid var(--border);
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    z-index:50;
-    display:flex;
-    flex-direction:column;
     padding:22px 14px;
+    position:fixed;
+    inset:0 auto 0 0;
+    z-index:20;
 }
 
 .brand{
-    padding:6px 14px 28px;
-    font-size:25px;
+    padding:7px 12px 25px;
+}
+
+.brand-name{
+    font-size:27px;
     font-weight:800;
-    letter-spacing:-1px;
+    letter-spacing:-1.3px;
     white-space:nowrap;
 }
 
-.brand .tok{
+.brand-name .brand-t{
     color:#fff;
 }
 
-.brand .center{
+.brand-name .brand-c{
     color:var(--purple2);
 }
 
 .brand-sub{
-    color:var(--muted);
-    font-size:10px;
+    color:#70707d;
+    font-size:11px;
     margin-top:5px;
-    font-weight:500;
-    letter-spacing:.8px;
+    letter-spacing:1.2px;
     text-transform:uppercase;
+}
+
+.nav-title{
+    color:#595966;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+    padding:10px 12px;
 }
 
 .nav{
@@ -105,86 +105,46 @@ button{
     gap:5px;
 }
 
-.nav-title{
-    color:#5f6372;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.4px;
-    font-weight:700;
-    padding:15px 14px 7px;
-}
-
 .nav button{
     width:100%;
     border:0;
     background:transparent;
-    color:#969aa9;
-    padding:11px 13px;
-    border-radius:12px;
+    color:#a5a5b0;
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:13px;
+    padding:12px 13px;
+    border-radius:12px;
     text-align:left;
-    transition:.18s ease;
-    font-size:14px;
+    transition:.18s;
+    font-weight:600;
 }
 
 .nav button:hover{
-    background:rgba(255,255,255,.045);
+    background:#191923;
     color:#fff;
 }
 
 .nav button.active{
-    background:var(--purpleSoft);
+    background:linear-gradient(90deg,rgba(139,92,246,.20),rgba(139,92,246,.08));
     color:#fff;
+    box-shadow:inset 3px 0 0 var(--purple);
 }
 
 .nav-icon{
-    width:28px;
-    height:28px;
-    min-width:28px;
-    border-radius:9px;
+    width:23px;
+    height:23px;
+    min-width:23px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#171923;
-    font-size:15px;
+    color:#a78bfa;
+    font-size:17px;
+    font-weight:700;
 }
 
 .nav button.active .nav-icon{
-    background:rgba(139,92,246,.25);
-}
-
-.sidebar-bottom{
-    margin-top:auto;
-    padding:10px 5px 0;
-}
-
-.storage{
-    background:#11131b;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:13px;
-}
-
-.storage-title{
-    font-size:11px;
-    color:var(--muted);
-    margin-bottom:5px;
-}
-
-.storage-status{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:12px;
-}
-
-.dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--green);
+    color:#c4b5fd;
 }
 
 /* =========================
@@ -194,32 +154,27 @@ button{
 .main{
     margin-left:250px;
     width:calc(100% - 250px);
-    min-height:100vh;
+    padding:28px;
 }
 
 .topbar{
-    height:72px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 34px;
-    border-bottom:1px solid var(--border);
-    background:rgba(8,9,13,.8);
-    backdrop-filter:blur(18px);
-    position:sticky;
-    top:0;
-    z-index:40;
+    gap:20px;
+    margin-bottom:26px;
 }
 
 .page-title{
-    font-size:20px;
-    font-weight:750;
+    font-size:27px;
+    font-weight:800;
+    letter-spacing:-.7px;
 }
 
-.page-date{
+.page-description{
     color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
+    margin-top:5px;
+    font-size:14px;
 }
 
 .top-actions{
@@ -227,323 +182,232 @@ button{
     gap:9px;
 }
 
-.icon-btn,
-.small-btn{
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
     border:1px solid var(--border);
-    background:#11131a;
-    color:#dfe1e8;
-    border-radius:10px;
-    padding:9px 12px;
+    background:#171720;
+    color:#fff;
+    border-radius:11px;
+    padding:10px 14px;
+    font-weight:700;
+    transition:.18s;
+}
+
+.btn:hover{
+    background:#20202b;
+}
+
+.btn-primary{
+    background:var(--purple);
+    border-color:var(--purple);
+}
+
+.btn-primary:hover{
+    background:#7c4de8;
+}
+
+.btn-danger{
+    background:rgba(239,68,68,.1);
+    color:#f87171;
+    border-color:rgba(239,68,68,.25);
+}
+
+.btn-small{
+    padding:7px 10px;
     font-size:12px;
 }
 
-.icon-btn:hover,
-.small-btn:hover{
-    border-color:rgba(139,92,246,.45);
-}
+/* =========================
+   PAGES
+========================= */
 
-.content{
-    padding:28px 34px 50px;
-    max-width:1600px;
-    margin:auto;
-}
-
-.view{
+.page{
     display:none;
 }
 
-.view.active{
+.page.active{
     display:block;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid{
+    display:grid;
+    gap:16px;
+}
+
+.stats-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.card{
+    background:linear-gradient(145deg,#14141c,#101017);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:19px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+}
+
+.stat-value{
+    font-size:30px;
+    font-weight:800;
+    margin-top:8px;
+    letter-spacing:-1px;
+}
+
+.stat-extra{
+    color:#777784;
+    font-size:12px;
+    margin-top:6px;
 }
 
 /* =========================
    DASHBOARD
 ========================= */
 
-.dashboard-hero{
+.dashboard-grid{
     display:grid;
-    grid-template-columns:1.45fr .8fr;
-    gap:18px;
-    margin-bottom:20px;
+    grid-template-columns:1.4fr .8fr;
+    gap:16px;
+    margin-top:16px;
 }
 
 .next-match{
-    min-height:225px;
-    border:1px solid rgba(139,92,246,.22);
-    border-radius:22px;
-    padding:25px;
-    background:
-        radial-gradient(circle at 90% 0%,rgba(139,92,246,.22),transparent 42%),
-        linear-gradient(135deg,#151320,#101118);
+    min-height:240px;
     position:relative;
     overflow:hidden;
 }
 
-.next-label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:#b8a5ff;
+.next-match:after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:rgba(139,92,246,.12);
+    filter:blur(55px);
+    right:-70px;
+    top:-90px;
+    pointer-events:none;
+}
+
+.section-label{
     font-size:11px;
     text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-weight:750;
-    margin-bottom:18px;
-}
-
-.live-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--purple2);
-    box-shadow:0 0 12px var(--purple2);
-}
-
-.match-main{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.match-team{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    flex:1;
-}
-
-.team-logo{
-    width:54px;
-    height:54px;
-    border-radius:15px;
-    object-fit:cover;
-    background:#242735;
-    border:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    font-size:20px;
+    letter-spacing:1px;
+    color:var(--purple2);
     font-weight:800;
 }
 
-.team-logo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.match-team-name{
-    font-size:17px;
-    font-weight:750;
-}
-
-.match-team-sub{
-    font-size:11px;
-    color:var(--muted);
-    margin-top:3px;
-}
-
-.vs{
-    font-size:12px;
+.match-title{
+    font-size:25px;
     font-weight:800;
-    color:#626676;
+    margin-top:14px;
 }
 
 .match-meta{
     display:flex;
-    gap:20px;
-    margin-top:23px;
-    padding-top:17px;
-    border-top:1px solid var(--border);
-}
-
-.meta-item{
-    font-size:11px;
-    color:var(--muted);
-}
-
-.meta-item strong{
-    display:block;
-    color:#fff;
-    font-size:13px;
-    margin-top:3px;
-}
-
-.quick-panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:21px;
-}
-
-.quick-title{
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.quick-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.quick-stat{
-    background:#151720;
-    border-radius:13px;
-    padding:15px;
-}
-
-.quick-stat-label{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.quick-stat-value{
-    font-size:24px;
-    font-weight:800;
-    margin-top:5px;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-bottom:20px;
-}
-
-.stat-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:17px;
-    padding:18px;
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.stat-icon{
-    width:36px;
-    height:36px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#181a24;
-    border-radius:11px;
-}
-
-.stat-name{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.stat-number{
-    font-size:28px;
-    font-weight:800;
-    margin-top:11px;
-}
-
-.section-grid{
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:18px;
-}
-
-.panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:18px;
-    overflow:hidden;
-}
-
-.panel-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 20px;
-    border-bottom:1px solid var(--border);
-}
-
-.panel-title{
-    font-size:14px;
-    font-weight:750;
-}
-
-.panel-sub{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:3px;
-}
-
-.panel-body{
-    padding:18px 20px;
-}
-
-/* =========================
-   GENERAL
-========================= */
-
-.page-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.page-head h1{
-    font-size:24px;
-    letter-spacing:-.5px;
-}
-
-.page-head p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.actions{
-    display:flex;
+    flex-wrap:wrap;
     gap:9px;
+    margin-top:17px;
 }
 
-.btn{
-    border:0;
-    border-radius:11px;
-    padding:11px 15px;
-    font-weight:700;
-    font-size:12px;
-    background:#20232e;
-    color:#fff;
-}
-
-.btn:hover{
-    filter:brightness(1.1);
-}
-
-.btn-primary{
-    background:linear-gradient(135deg,var(--purple),var(--purple2));
-}
-
-.btn-danger{
-    background:rgba(239,68,68,.12);
-    color:#ff8a8a;
-    border:1px solid rgba(239,68,68,.2);
-}
-
-.btn-secondary{
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
     border:1px solid var(--border);
-    background:#11131a;
+    background:#181821;
+    color:#c4c4ce;
+    border-radius:999px;
+    padding:6px 9px;
+    font-size:12px;
 }
 
 .empty{
-    padding:40px 20px;
+    color:#777784;
+    padding:30px 0;
     text-align:center;
+}
+
+.list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    margin-top:15px;
+}
+
+.list-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px;
+    background:#16161f;
+    border:1px solid #22222c;
+    border-radius:12px;
+}
+
+.row-main{
+    min-width:0;
+}
+
+.row-title{
+    font-weight:750;
+}
+
+.row-sub{
     color:var(--muted);
-    font-size:13px;
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:17px;
+    flex-wrap:wrap;
+}
+
+.toolbar-left,
+.toolbar-right{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.search{
+    background:#111118;
+    border:1px solid var(--border);
+    color:#fff;
+    border-radius:11px;
+    padding:10px 12px;
+    min-width:230px;
+    outline:none;
+}
+
+.search:focus,
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--purple);
 }
 
 /* =========================
@@ -552,234 +416,310 @@ button{
 
 .table-wrap{
     overflow:auto;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:#101017;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
+    min-width:700px;
+}
+
+th,td{
+    padding:13px 14px;
+    text-align:left;
+    border-bottom:1px solid #20202a;
 }
 
 th{
-    text-align:left;
-    color:#707486;
-    font-size:10px;
+    color:#7e7e8a;
+    font-size:11px;
     text-transform:uppercase;
     letter-spacing:.7px;
-    padding:13px 15px;
-    border-bottom:1px solid var(--border);
-    white-space:nowrap;
 }
 
 td{
-    padding:14px 15px;
-    border-bottom:1px solid rgba(255,255,255,.045);
-    font-size:12px;
+    font-size:13px;
 }
 
 tr:last-child td{
     border-bottom:0;
 }
 
-tr:hover td{
-    background:rgba(255,255,255,.018);
+.actions{
+    display:flex;
+    gap:6px;
 }
 
-.entity{
+/* =========================
+   TEAM CARDS
+========================= */
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;
+}
+
+.team-card{
+    min-height:205px;
+    position:relative;
+}
+
+.team-head{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
 }
 
-.entity-logo{
-    width:36px;
-    height:36px;
-    border-radius:10px;
-    background:#1b1e29;
+.team-logo{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    object-fit:cover;
+    background:#20202a;
+    border:1px solid #30303c;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
+    color:#a78bfa;
     font-weight:800;
+    overflow:hidden;
 }
 
-.entity-logo img{
+.team-logo img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.entity-name{
-    font-weight:700;
+.team-name{
+    font-size:17px;
+    font-weight:800;
 }
 
-.entity-sub{
+.team-small{
     color:var(--muted);
-    font-size:10px;
-    margin-top:2px;
+    font-size:12px;
+    margin-top:3px;
 }
 
-.badge{
-    display:inline-flex;
-    padding:5px 8px;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:700;
-}
-
-.badge-green{
-    color:#66e49a;
-    background:rgba(34,197,94,.1);
-}
-
-.badge-orange{
-    color:#ffc96a;
-    background:rgba(245,158,11,.1);
-}
-
-.badge-red{
-    color:#ff8787;
-    background:rgba(239,68,68,.1);
-}
-
-.row-actions{
-    display:flex;
-    gap:6px;
-}
-
-.row-actions button{
-    border:1px solid var(--border);
-    background:#161821;
-    color:#aaaeba;
-    border-radius:7px;
-    width:28px;
-    height:28px;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:14px;
-}
-
-.team-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:18px;
-    transition:.18s;
-}
-
-.team-card:hover{
-    transform:translateY(-2px);
-    border-color:rgba(139,92,246,.25);
-}
-
-.team-card-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-}
-
-.team-card-name{
-    font-size:16px;
-    font-weight:750;
-    margin-top:10px;
-}
-
-.team-card-manager{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-.team-card-stats{
+.team-stats{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:8px;
-    margin-top:17px;
+    margin-top:18px;
 }
 
-.mini-stat{
-    background:#151720;
+.team-stat{
     padding:11px;
+    background:#181821;
+    border:1px solid #23232d;
     border-radius:11px;
 }
 
-.mini-stat span{
-    color:var(--muted);
-    font-size:9px;
+.team-stat strong{
     display:block;
+    font-size:18px;
 }
 
-.mini-stat strong{
-    display:block;
-    font-size:15px;
-    margin-top:4px;
+.team-stat span{
+    color:#777784;
+    font-size:11px;
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stat-hero{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:18px;
+}
+
+.chart{
+    height:250px;
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    padding-top:20px;
+}
+
+.bar-wrap{
+    flex:1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    gap:7px;
+}
+
+.bar{
+    width:100%;
+    max-width:45px;
+    min-height:4px;
+    border-radius:8px 8px 3px 3px;
+    background:linear-gradient(180deg,#a78bfa,#6d3de7);
+}
+
+.bar-label{
+    color:#777784;
+    font-size:10px;
+}
+
+.bar-value{
+    color:#c4b5fd;
+    font-size:10px;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar-card{
+    padding:17px;
+}
+
+.calendar-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.calendar-month{
+    font-size:20px;
+    font-weight:800;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:7px;
+}
+
+.calendar-day-name{
+    color:#696974;
+    font-size:10px;
+    text-align:center;
+    padding:7px 0;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.calendar-day{
+    aspect-ratio:1/1;
+    min-height:80px;
+    background:#12121a;
+    border:1px solid #23232d;
+    border-radius:11px;
+    padding:8px;
+    position:relative;
+    overflow:hidden;
+}
+
+.calendar-day.today{
+    border-color:rgba(139,92,246,.7);
+}
+
+.day-number{
+    color:#888893;
+    font-size:11px;
+    font-weight:700;
+}
+
+.calendar-match{
+    margin-top:7px;
+    background:rgba(139,92,246,.16);
+    border:1px solid rgba(139,92,246,.3);
+    border-radius:8px;
+    padding:7px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.calendar-match:hover{
+    background:rgba(139,92,246,.27);
+}
+
+.calendar-match-title{
+    color:#ddd6fe;
+    font-size:10px;
+    font-weight:800;
+    line-height:1.25;
+}
+
+.calendar-match-team{
+    color:#92929f;
+    font-size:9px;
+    margin-top:3px;
 }
 
 /* =========================
    MODAL
 ========================= */
 
-.modal-backdrop{
+.modal-bg{
+    display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.7);
-    backdrop-filter:blur(8px);
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(7px);
     z-index:100;
-    display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
 }
 
-.modal-backdrop.show{
+.modal-bg.open{
     display:flex;
 }
 
 .modal{
-    width:min(650px,100%);
+    width:min(620px,100%);
     max-height:90vh;
     overflow:auto;
-    background:#11131a;
-    border:1px solid var(--border);
+    background:#111118;
+    border:1px solid #30303b;
     border-radius:20px;
-    box-shadow:0 30px 100px rgba(0,0,0,.5);
+    box-shadow:0 30px 90px rgba(0,0,0,.5);
 }
 
 .modal-head{
+    padding:19px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:19px 21px;
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid #24242e;
 }
 
-.modal-head h2{
-    font-size:16px;
+.modal-title{
+    font-size:18px;
+    font-weight:800;
 }
 
 .close{
-    border:0;
-    background:#1b1e28;
-    color:#aaa;
-    width:31px;
-    height:31px;
+    width:34px;
+    height:34px;
     border-radius:9px;
+    border:1px solid var(--border);
+    background:#191922;
+    color:#aaa;
 }
 
 .modal-body{
-    padding:21px;
+    padding:20px;
 }
 
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
+    gap:13px;
 }
 
 .form-group{
@@ -793,410 +733,148 @@ tr:hover td{
 }
 
 label{
-    color:#a5a8b5;
+    color:#9a9aa5;
     font-size:11px;
-    font-weight:650;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.5px;
 }
 
 input,select,textarea{
     width:100%;
-    border:1px solid var(--border);
-    background:#191b24;
+    background:#0d0d13;
     color:#fff;
+    border:1px solid #292934;
     border-radius:10px;
-    padding:11px 12px;
+    padding:11px;
     outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
-    border-color:rgba(139,92,246,.65);
-    box-shadow:0 0 0 3px rgba(139,92,246,.08);
-}
-
 textarea{
-    min-height:90px;
+    min-height:100px;
     resize:vertical;
 }
 
-.modal-foot{
-    padding:16px 21px;
-    border-top:1px solid var(--border);
+.modal-footer{
     display:flex;
     justify-content:flex-end;
-    gap:9px;
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.calendar-title{
-    font-size:18px;
-    font-weight:800;
-}
-
-.calendar-nav{
-    display:flex;
-    gap:6px;
-}
-
-.calendar-nav button{
-    width:34px;
-    height:34px;
-    border:1px solid var(--border);
-    background:#11131a;
-    color:#fff;
-    border-radius:9px;
-}
-
-.calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
     gap:8px;
+    padding:16px 20px;
+    border-top:1px solid #24242e;
 }
 
-.day-name{
-    text-align:center;
-    color:#686c7b;
-    font-size:10px;
-    font-weight:750;
-    padding:5px;
-    text-transform:uppercase;
+/* =========================
+   DETAIL
+========================= */
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.day{
-    min-height:125px;
-    aspect-ratio:1/1;
-    background:#101219;
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:9px;
-    overflow:hidden;
-    cursor:pointer;
-    transition:.15s;
+.detail-item{
+    background:#171720;
+    border:1px solid #24242e;
+    border-radius:12px;
+    padding:13px;
 }
 
-.day:hover{
-    border-color:rgba(139,92,246,.35);
-    background:#131620;
-}
-
-.day.other{
-    opacity:.35;
-}
-
-.day.today{
-    border-color:rgba(139,92,246,.65);
-    box-shadow:inset 0 0 0 1px rgba(139,92,246,.15);
-}
-
-.day-number{
+.detail-item span{
+    display:block;
+    color:#777784;
     font-size:11px;
-    color:#aeb1bd;
-    margin-bottom:7px;
-}
-
-.day.today .day-number{
-    color:#bca8ff;
-    font-weight:800;
-}
-
-.event{
-    background:rgba(139,92,246,.13);
-    border-left:3px solid var(--purple);
-    border-radius:7px;
-    padding:7px 6px;
     margin-bottom:5px;
-    overflow:hidden;
 }
 
-.event-title{
-    font-size:9px;
-    font-weight:750;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.event-sub{
-    color:#9d9faf;
-    font-size:8px;
-    margin-top:2px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-/* =========================
-   STATISTICS
-========================= */
-
-.stats-overview{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-bottom:18px;
-}
-
-.big-stat{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:17px;
-    padding:20px;
-}
-
-.big-stat-label{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.big-stat-value{
-    font-size:29px;
-    font-weight:850;
-    margin-top:7px;
-}
-
-.chart{
-    height:250px;
-    display:flex;
-    align-items:flex-end;
-    gap:10px;
-    padding:20px;
-}
-
-.bar-container{
-    flex:1;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-    gap:7px;
-}
-
-.bar{
-    width:100%;
-    max-width:42px;
-    border-radius:7px 7px 3px 3px;
-    background:linear-gradient(to top,var(--purple),#b36cff);
-    min-height:3px;
-}
-
-.bar-label{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.bar-value{
-    color:#b9bcc8;
-    font-size:8px;
-}
-
-/* =========================
-   MATCH DETAILS
-========================= */
-
-.match-details{
-    text-align:center;
-}
-
-.match-details-date{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:18px;
-}
-
-.match-details-versus{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:25px;
-}
-
-.detail-side{
-    width:150px;
-}
-
-.detail-side .team-logo{
-    margin:auto;
-    width:75px;
-    height:75px;
-    border-radius:20px;
-}
-
-.detail-side-name{
-    margin-top:9px;
-    font-weight:800;
-}
-
-.detail-vs{
-    font-size:13px;
-    color:#666a78;
-    font-weight:800;
-}
-
-.detail-boxes{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-top:24px;
-}
-
-.detail-box{
-    background:#181a23;
-    padding:14px;
-    border-radius:11px;
-    text-align:left;
-}
-
-.detail-box span{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-}
-
-.detail-box strong{
-    display:block;
-    margin-top:4px;
-    font-size:13px;
+.detail-item strong{
+    font-size:14px;
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-.mobile-menu{
-    display:none;
-}
-
 @media(max-width:1100px){
-    .dashboard-hero,
-    .section-grid{
-        grid-template-columns:1fr;
-    }
-
     .stats-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
+    .team-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
 }
 
-@media(max-width:800px){
+@media(max-width:760px){
     .sidebar{
         width:72px;
-        padding:15px 9px;
+        min-width:72px;
+        padding:14px 8px;
     }
 
     .brand{
-        font-size:0;
-        padding:10px 5px 25px;
+        padding:7px 4px 20px;
         text-align:center;
     }
 
-    .brand .tok,
-    .brand .center{
-        font-size:0;
-    }
-
-    .brand:after{
-        content:"T";
-        font-size:23px;
-        color:#fff;
-        font-weight:900;
+    .brand-name{
+        font-size:15px;
+        white-space:normal;
+        line-height:1.1;
     }
 
     .brand-sub,
     .nav-title,
-    .nav button span:not(.nav-icon),
-    .storage{
+    .nav button span{
         display:none;
     }
 
     .nav button{
         justify-content:center;
-        padding:9px;
-    }
-
-    .nav-icon{
-        width:38px;
-        height:38px;
+        padding:13px 8px;
     }
 
     .main{
         margin-left:72px;
         width:calc(100% - 72px);
+        padding:17px;
     }
 
-    .topbar{
-        padding:0 18px;
+    .stats-grid,
+    .team-grid,
+    .stat-hero{
+        grid-template-columns:1fr;
     }
 
-    .content{
-        padding:20px 15px 40px;
+    .form-grid,
+    .detail-grid{
+        grid-template-columns:1fr;
     }
 
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .calendar-grid{
-        gap:4px;
-    }
-
-    .day{
-        min-height:80px;
+    .calendar-day{
+        min-height:52px;
         padding:5px;
-        border-radius:8px;
     }
 
-    .event{
+    .calendar-match{
         padding:4px;
     }
 
-    .event-title{
-        font-size:7px;
-    }
-
-    .event-sub{
+    .calendar-match-team{
         display:none;
     }
-}
 
-@media(max-width:550px){
-    .stats-grid,
-    .stats-overview{
-        grid-template-columns:1fr;
+    .calendar-match-title{
+        font-size:8px;
     }
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .match-main{
-        gap:10px;
-    }
-
-    .match-team-name{
-        font-size:13px;
-    }
-
-    .match-meta{
-        gap:10px;
-    }
-
-    .calendar-grid{
-        grid-template-columns:repeat(7,minmax(42px,1fr));
-        overflow-x:auto;
+    .search{
+        min-width:0;
+        width:100%;
     }
 }
 </style>
@@ -1206,349 +884,326 @@ textarea{
 
 <div class="app">
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <aside class="sidebar">
 
     <div class="brand">
-        <span class="tok">Tok</span><span class="center">Center</span>
+        <div class="brand-name">
+            <span class="brand-t">T</span>ok<span class="brand-c">C</span>enter
+        </div>
         <div class="brand-sub">LVF — La Vraie Famille</div>
     </div>
 
+    <div class="nav-title">Navigation</div>
+
     <nav class="nav">
 
-        <div class="nav-title">Principal</div>
-
-        <button class="nav-btn active" data-view="dashboard">
+        <button class="active" data-page="dashboard">
             <span class="nav-icon">⌂</span>
             <span>Tableau de bord</span>
         </button>
 
-        <button class="nav-btn" data-view="teams">
-            <span class="nav-icon">♟</span>
+        <button data-page="teams">
+            <span class="nav-icon">◆</span>
             <span>Teams</span>
         </button>
 
-        <button class="nav-btn" data-view="creators">
+        <button data-page="creators">
             <span class="nav-icon">♙</span>
             <span>Créateurs</span>
         </button>
 
-        <button class="nav-btn" data-view="agencies">
-            <span class="nav-icon">◈</span>
-            <span>Agences</span>
+        <button data-page="agencies">
+            <span class="nav-icon">▣</span>
+            <span>Agences adverses</span>
         </button>
 
-        <div class="nav-title">Matchs</div>
-
-        <button class="nav-btn" data-view="calendar">
-            <span class="nav-icon">▦</span>
-            <span>Calendrier</span>
-        </button>
-
-        <button class="nav-btn" data-view="matches">
+        <button data-page="matches">
             <span class="nav-icon">⚔</span>
             <span>Match OFF</span>
         </button>
 
-        <div class="nav-title">Performances</div>
+        <button data-page="calendar">
+            <span class="nav-icon">□</span>
+            <span>Calendrier</span>
+        </button>
 
-        <button class="nav-btn" data-view="statistics">
+        <button data-page="statistics">
             <span class="nav-icon">▥</span>
             <span>Statistiques</span>
         </button>
 
-        <div class="nav-title">Données</div>
+        <button data-page="history">
+            <span class="nav-icon">◷</span>
+            <span>Historique</span>
+        </button>
 
-        <button class="nav-btn" data-view="settings">
+        <button data-page="settings">
             <span class="nav-icon">⚙</span>
-            <span>Paramètres</span>
+            <span>Données</span>
         </button>
 
     </nav>
 
-    <div class="sidebar-bottom">
-        <div class="storage">
-            <div class="storage-title">Données locales</div>
-            <div class="storage-status">
-                <span class="dot"></span>
-                Sauvegarde automatique
-            </div>
-        </div>
-    </div>
-
 </aside>
 
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="main">
-
-<header class="topbar">
-
-    <div>
-        <div class="page-title" id="pageTitle">Tableau de bord</div>
-        <div class="page-date" id="pageDate"></div>
-    </div>
-
-    <div class="top-actions">
-        <button class="small-btn" onclick="openModal('matchModal')">＋ Match OFF</button>
-        <button class="small-btn" onclick="openModal('teamModal')">＋ Team</button>
-    </div>
-
-</header>
-
-<div class="content">
 
 <!-- =========================
      DASHBOARD
 ========================= -->
 
-<section class="view active" id="dashboard">
+<section class="page active" id="page-dashboard">
 
-    <div class="dashboard-hero">
-
-        <div class="next-match">
-
-            <div class="next-label">
-                <span class="live-dot"></span>
-                PROCHAIN MATCH OFF
+    <div class="topbar">
+        <div>
+            <div class="page-title">Tableau de bord</div>
+            <div class="page-description">
+                Vue d’ensemble de LVF et des informations importantes.
             </div>
+        </div>
+    </div>
 
-            <div id="dashboardNextMatch">
-                <!-- JS -->
-            </div>
+    <div class="grid stats-grid">
 
+        <div class="card">
+            <div class="stat-label">Teams</div>
+            <div class="stat-value" id="dashTeams">0</div>
+            <div class="stat-extra">Teams enregistrées</div>
         </div>
 
-        <div class="quick-panel">
+        <div class="card">
+            <div class="stat-label">Créateurs</div>
+            <div class="stat-value" id="dashCreators">0</div>
+            <div class="stat-extra">Créateurs enregistrés</div>
+        </div>
 
-            <div class="quick-title">Vue LVF</div>
+        <div class="card">
+            <div class="stat-label">Matchs à venir</div>
+            <div class="stat-value" id="dashMatches">0</div>
+            <div class="stat-extra">Match OFF programmés</div>
+        </div>
 
-            <div class="quick-grid">
-
-                <div class="quick-stat">
-                    <div class="quick-stat-label">Teams</div>
-                    <div class="quick-stat-value" id="quickTeams">0</div>
-                </div>
-
-                <div class="quick-stat">
-                    <div class="quick-stat-label">Créateurs</div>
-                    <div class="quick-stat-value" id="quickCreators">0</div>
-                </div>
-
-                <div class="quick-stat">
-                    <div class="quick-stat-label">Matchs à venir</div>
-                    <div class="quick-stat-value" id="quickMatches">0</div>
-                </div>
-
-                <div class="quick-stat">
-                    <div class="quick-stat-label">Agences adverses</div>
-                    <div class="quick-stat-value" id="quickAgencies">0</div>
-                </div>
-
-            </div>
-
+        <div class="card">
+            <div class="stat-label">Agences adverses</div>
+            <div class="stat-value" id="dashAgencies">0</div>
+            <div class="stat-extra">Agences enregistrées</div>
         </div>
 
     </div>
 
-    <div class="stats-grid">
+    <div class="dashboard-grid">
 
-        <div class="stat-card">
-            <div class="stat-top">
-                <span class="stat-name">Diamants LVF</span>
-                <span class="stat-icon">💎</span>
+        <div class="card next-match">
+            <div class="section-label">Prochain Match OFF</div>
+
+            <div id="nextMatchContent">
+                <div class="empty">
+                    Aucun Match OFF programmé.
+                </div>
             </div>
-            <div class="stat-number" id="dashDiamonds">0</div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-top">
-                <span class="stat-name">Heures LVF</span>
-                <span class="stat-icon">◷</span>
-            </div>
-            <div class="stat-number" id="dashHours">0 h</div>
-        </div>
+        <div class="card">
+            <div class="section-label">Performances LVF</div>
 
-        <div class="stat-card">
-            <div class="stat-top">
-                <span class="stat-name">Matchs joués</span>
-                <span class="stat-icon">⚔</span>
-            </div>
-            <div class="stat-number" id="dashPlayed">0</div>
-        </div>
+            <div class="list">
+                <div class="list-row">
+                    <div class="row-main">
+                        <div class="row-title">Diamants</div>
+                        <div class="row-sub">Total enregistré</div>
+                    </div>
+                    <strong id="dashDiamonds">0</strong>
+                </div>
 
-        <div class="stat-card">
-            <div class="stat-top">
-                <span class="stat-name">Teams actives</span>
-                <span class="stat-icon">♟</span>
+                <div class="list-row">
+                    <div class="row-main">
+                        <div class="row-title">Heures</div>
+                        <div class="row-sub">Total enregistré</div>
+                    </div>
+                    <strong id="dashHours">0</strong>
+                </div>
+
+                <div class="list-row">
+                    <div class="row-main">
+                        <div class="row-title">Dernier mois</div>
+                        <div class="row-sub">Dernière période enregistrée</div>
+                    </div>
+                    <strong id="dashLastMonth">—</strong>
+                </div>
             </div>
-            <div class="stat-number" id="dashActiveTeams">0</div>
         </div>
 
     </div>
 
-    <div class="section-grid">
-
-        <div class="panel">
-            <div class="panel-head">
-                <div>
-                    <div class="panel-title">Performance des Teams</div>
-                    <div class="panel-sub">Diamants cumulés enregistrés</div>
-                </div>
-                <button class="small-btn" onclick="navigate('statistics')">Voir statistiques</button>
-            </div>
-            <div class="panel-body">
-                <div id="dashboardTeams"></div>
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-head">
-                <div>
-                    <div class="panel-title">Derniers Match OFF</div>
-                    <div class="panel-sub">Activité récente</div>
-                </div>
-                <button class="small-btn" onclick="navigate('calendar')">Calendrier</button>
-            </div>
-            <div class="panel-body">
-                <div id="dashboardMatches"></div>
-            </div>
-        </div>
-
+    <div class="card" style="margin-top:16px;">
+        <div class="section-label">Top Teams</div>
+        <div id="dashboardTeams" class="list"></div>
     </div>
 
 </section>
+
 
 <!-- =========================
      TEAMS
 ========================= -->
 
-<section class="view" id="teams">
+<section class="page" id="page-teams">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Teams</h1>
-            <p>Gère les Teams de LVF et leurs performances.</p>
+            <div class="page-title">Teams</div>
+            <div class="page-description">
+                Créez et gérez les Teams de LVF.
+            </div>
         </div>
 
-        <div class="actions">
-            <button class="btn btn-primary" onclick="openModal('teamModal')">＋ Créer une Team</button>
+        <button class="btn btn-primary" onclick="openTeamModal()">
+            + Nouvelle Team
+        </button>
+    </div>
+
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <input class="search" id="teamSearch" placeholder="Rechercher une Team..." oninput="renderTeams()">
         </div>
     </div>
 
-    <div class="cards" id="teamsCards"></div>
+    <div class="team-grid" id="teamGrid"></div>
 
 </section>
+
 
 <!-- =========================
      CREATORS
 ========================= -->
 
-<section class="view" id="creators">
+<section class="page" id="page-creators">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Créateurs</h1>
-            <p>Retrouve rapidement tous les créateurs et leur Team.</p>
+            <div class="page-title">Créateurs</div>
+            <div class="page-description">
+                Gérez les créateurs rattachés aux Teams.
+            </div>
         </div>
 
-        <button class="btn btn-primary" onclick="openModal('creatorModal')">
-            ＋ Ajouter un créateur
+        <button class="btn btn-primary" onclick="openCreatorModal()">
+            + Nouveau créateur
         </button>
     </div>
 
-    <div class="panel">
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Créateur</th>
-                        <th>Team</th>
-                        <th>Date d'arrivée</th>
-                        <th>Statut</th>
-                        <th>Notes privées</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="creatorsTable"></tbody>
-            </table>
-        </div>
+    <div class="toolbar">
+        <input class="search" id="creatorSearch" placeholder="Rechercher un créateur..." oninput="renderCreators()">
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Team</th>
+                    <th>Date d’arrivée</th>
+                    <th>Statut</th>
+                    <th>Notes privées</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="creatorTable"></tbody>
+        </table>
     </div>
 
 </section>
+
 
 <!-- =========================
      AGENCIES
 ========================= -->
 
-<section class="view" id="agencies">
+<section class="page" id="page-agencies">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Agences adverses</h1>
-            <p>Les agences utilisées dans tes Match OFF sont conservées automatiquement.</p>
+            <div class="page-title">Agences adverses</div>
+            <div class="page-description">
+                Enregistrez les agences rencontrées lors des Match OFF.
+            </div>
         </div>
 
-        <button class="btn btn-primary" onclick="openModal('agencyModal')">
-            ＋ Ajouter une agence
+        <button class="btn btn-primary" onclick="openAgencyModal()">
+            + Nouvelle agence
         </button>
     </div>
 
-    <div class="panel">
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Agence</th>
-                        <th>Matchs</th>
-                        <th>Victoires LVF</th>
-                        <th>Défaites LVF</th>
-                        <th>Dernier match</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="agenciesTable"></tbody>
-            </table>
+    <div class="team-grid" id="agencyGrid"></div>
+
+</section>
+
+
+<!-- =========================
+     MATCH OFF
+========================= -->
+
+<section class="page" id="page-matches">
+
+    <div class="topbar">
+        <div>
+            <div class="page-title">Match OFF</div>
+            <div class="page-description">
+                Créez et consultez vos Match OFF.
+            </div>
         </div>
+
+        <button class="btn btn-primary" onclick="openMatchModal()">
+            + Nouveau Match OFF
+        </button>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Créateur</th>
+                    <th>Team</th>
+                    <th>Agence adverse</th>
+                    <th>Thème</th>
+                    <th>Résultat</th>
+                    <th>Gagnant</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="matchTable"></tbody>
+        </table>
     </div>
 
 </section>
+
 
 <!-- =========================
      CALENDAR
 ========================= -->
 
-<section class="view" id="calendar">
+<section class="page" id="page-calendar">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Calendrier</h1>
-            <p>Tous tes Match OFF apparaissent automatiquement ici.</p>
+            <div class="page-title">Calendrier</div>
+            <div class="page-description">
+                Tous les Match OFF sont automatiquement ajoutés ici.
+            </div>
         </div>
 
-        <button class="btn btn-primary" onclick="openModal('matchModal')">
-            ＋ Créer un Match OFF
+        <button class="btn btn-primary" onclick="openMatchModal()">
+            + Match OFF
         </button>
     </div>
 
-    <div class="panel" style="padding:20px">
+    <div class="card calendar-card">
 
-        <div class="calendar-head">
-
-            <button class="small-btn" id="calendarToday">Aujourd'hui</button>
-
-            <div class="calendar-title" id="calendarMonth"></div>
-
-            <div class="calendar-nav">
-                <button onclick="changeMonth(-1)">‹</button>
-                <button onclick="changeMonth(1)">›</button>
-            </div>
-
+        <div class="calendar-header">
+            <button class="btn btn-small" onclick="changeMonth(-1)">‹</button>
+            <div class="calendar-month" id="calendarMonth"></div>
+            <button class="btn btn-small" onclick="changeMonth(1)">›</button>
         </div>
 
         <div class="calendar-grid" id="calendarGrid"></div>
@@ -1557,348 +1212,303 @@ textarea{
 
 </section>
 
-<!-- =========================
-     MATCHES
-========================= -->
-
-<section class="view" id="matches">
-
-    <div class="page-head">
-        <div>
-            <h1>Match OFF</h1>
-            <p>Crée et retrouve tous les Match OFF de LVF.</p>
-        </div>
-
-        <button class="btn btn-primary" onclick="openModal('matchModal')">
-            ＋ Nouveau Match OFF
-        </button>
-    </div>
-
-    <div class="panel">
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Créateur</th>
-                        <th>Team</th>
-                        <th>Agence adverse</th>
-                        <th>Thème</th>
-                        <th>Résultat</th>
-                        <th>Gagnant</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="matchesTable"></tbody>
-            </table>
-        </div>
-    </div>
-
-</section>
 
 <!-- =========================
      STATISTICS
 ========================= -->
 
-<section class="view" id="statistics">
+<section class="page" id="page-statistics">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Statistiques</h1>
-            <p>Diamants et heures enregistrés au niveau des Teams.</p>
+            <div class="page-title">Statistiques</div>
+            <div class="page-description">
+                Diamants et heures enregistrés Team par Team.
+            </div>
         </div>
 
-        <button class="btn btn-primary" onclick="openModal('statsModal')">
-            ＋ Saisir les statistiques
+        <button class="btn btn-primary" onclick="openStatsModal()">
+            + Saisir un mois
         </button>
     </div>
 
-    <div class="stats-overview">
+    <div class="stat-hero">
 
-        <div class="big-stat">
-            <div class="big-stat-label">Total diamants LVF</div>
-            <div class="big-stat-value" id="totalDiamonds">0</div>
+        <div class="card">
+            <div class="stat-label">Diamants LVF</div>
+            <div class="stat-value" id="statDiamonds">0</div>
+            <div class="stat-extra">Total des Teams</div>
         </div>
 
-        <div class="big-stat">
-            <div class="big-stat-label">Total heures LVF</div>
-            <div class="big-stat-value" id="totalHours">0 h</div>
+        <div class="card">
+            <div class="stat-label">Heures LVF</div>
+            <div class="stat-value" id="statHours">0</div>
+            <div class="stat-extra">Total des Teams</div>
         </div>
 
-        <div class="big-stat">
-            <div class="big-stat-label">Mois enregistrés</div>
-            <div class="big-stat-value" id="totalMonths">0</div>
+        <div class="card">
+            <div class="stat-label">Teams actives</div>
+            <div class="stat-value" id="statActiveTeams">0</div>
+            <div class="stat-extra">Avec statistiques enregistrées</div>
         </div>
 
     </div>
 
-    <div class="panel" style="margin-bottom:18px">
-
-        <div class="panel-head">
-            <div>
-                <div class="panel-title">Évolution mensuelle de LVF</div>
-                <div class="panel-sub">Diamants enregistrés par mois</div>
-            </div>
-        </div>
-
-        <div class="chart" id="monthlyChart"></div>
-
+    <div class="card">
+        <div class="section-label">Évolution des diamants</div>
+        <div class="chart" id="diamondChart"></div>
     </div>
 
-    <div class="panel">
+    <div class="card" style="margin-top:16px;">
+        <div class="section-label">Classement des Teams</div>
 
-        <div class="panel-head">
-            <div>
-                <div class="panel-title">Classement des Teams</div>
-                <div class="panel-sub">Diamants et heures cumulés</div>
-            </div>
-        </div>
-
-        <div class="table-wrap">
+        <div class="table-wrap" style="margin-top:14px;">
             <table>
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Team</th>
-                        <th>Créateurs</th>
                         <th>Diamants</th>
                         <th>Heures</th>
-                        <th>Part LVF</th>
                     </tr>
                 </thead>
-                <tbody id="statisticsTable"></tbody>
+                <tbody id="rankingTable"></tbody>
             </table>
         </div>
-
     </div>
 
 </section>
+
 
 <!-- =========================
-     SETTINGS
+     HISTORY
 ========================= -->
 
-<section class="view" id="settings">
+<section class="page" id="page-history">
 
-    <div class="page-head">
+    <div class="topbar">
         <div>
-            <h1>Paramètres</h1>
-            <p>Sauvegarde et restauration des données TokCenter.</p>
+            <div class="page-title">Historique</div>
+            <div class="page-description">
+                Historique mensuel des performances de LVF et des Teams.
+            </div>
         </div>
     </div>
 
-    <div class="section-grid">
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mois</th>
+                    <th>Diamants LVF</th>
+                    <th>Heures LVF</th>
+                    <th>Évolution diamants</th>
+                    <th>Évolution heures</th>
+                </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+        </table>
+    </div>
 
-        <div class="panel">
-            <div class="panel-head">
-                <div>
-                    <div class="panel-title">Sauvegarde</div>
-                    <div class="panel-sub">Exporter toutes les données TokCenter</div>
-                </div>
-            </div>
+</section>
 
-            <div class="panel-body">
-                <p style="color:#999dab;font-size:12px;line-height:1.6;margin-bottom:15px">
-                    Télécharge une copie complète de tes Teams, créateurs, agences,
-                    Match OFF et statistiques.
-                </p>
 
-                <button class="btn btn-primary" onclick="exportData()">
-                    Exporter mes données
-                </button>
+<!-- =========================
+     DATA
+========================= -->
+
+<section class="page" id="page-settings">
+
+    <div class="topbar">
+        <div>
+            <div class="page-title">Données</div>
+            <div class="page-description">
+                Sauvegardez ou restaurez les données de TokCenter.
             </div>
         </div>
+    </div>
 
-        <div class="panel">
-            <div class="panel-head">
-                <div>
-                    <div class="panel-title">Restaurer</div>
-                    <div class="panel-sub">Importer une sauvegarde TokCenter</div>
-                </div>
-            </div>
+    <div class="dashboard-grid">
 
-            <div class="panel-body">
+        <div class="card">
+            <div class="section-label">Sauvegarde</div>
 
-                <input
-                    type="file"
-                    id="importFile"
-                    accept=".json"
-                    style="margin-bottom:12px"
-                >
+            <p style="color:#92929f;margin:13px 0 18px;font-size:13px;">
+                Exportez toutes vos données dans un fichier afin de conserver une sauvegarde.
+            </p>
 
-                <button class="btn btn-secondary" onclick="importData()">
-                    Importer les données
-                </button>
+            <button class="btn btn-primary" onclick="exportData()">
+                Exporter les données
+            </button>
+        </div>
 
-            </div>
+        <div class="card">
+            <div class="section-label">Restauration</div>
+
+            <p style="color:#92929f;margin:13px 0 18px;font-size:13px;">
+                Importez une sauvegarde précédemment créée.
+            </p>
+
+            <input type="file" id="importFile" accept=".json" onchange="importData(event)">
         </div>
 
     </div>
 
 </section>
 
-</div>
 </main>
-
 </div>
+
 
 <!-- =========================
      TEAM MODAL
 ========================= -->
 
-<div class="modal-backdrop" id="teamModal">
+<div class="modal-bg" id="teamModal">
 
 <div class="modal">
 
     <div class="modal-head">
-        <h2 id="teamModalTitle">Créer une Team</h2>
+        <div class="modal-title" id="teamModalTitle">Nouvelle Team</div>
         <button class="close" onclick="closeModal('teamModal')">×</button>
     </div>
 
     <div class="modal-body">
 
-        <form id="teamForm">
+        <div class="form-grid">
 
-            <input type="hidden" id="teamId">
-
-            <div class="form-grid">
-
-                <div class="form-group">
-                    <label>Nom de la Team</label>
-                    <input id="teamName" required placeholder="Ex. Team Phoenix">
-                </div>
-
-                <div class="form-group">
-                    <label>Logo de la Team</label>
-                    <input id="teamLogo" placeholder="URL de l'image">
-                </div>
-
-                <div class="form-group full">
-                    <label>Description</label>
-                    <textarea id="teamDescription" placeholder="Informations sur la Team..."></textarea>
-                </div>
-
+            <div class="form-group">
+                <label>Nom de la Team</label>
+                <input id="teamName">
             </div>
 
-        </form>
+            <div class="form-group">
+                <label>Logo / Photo</label>
+                <input id="teamLogo" placeholder="URL de l'image">
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('teamModal')">Annuler</button>
+    <div class="modal-footer">
+        <button class="btn" onclick="closeModal('teamModal')">Annuler</button>
         <button class="btn btn-primary" onclick="saveTeam()">Enregistrer</button>
     </div>
 
 </div>
-
 </div>
+
 
 <!-- =========================
      CREATOR MODAL
 ========================= -->
 
-<div class="modal-backdrop" id="creatorModal">
+<div class="modal-bg" id="creatorModal">
 
 <div class="modal">
 
     <div class="modal-head">
-        <h2>Ajouter un créateur</h2>
+        <div class="modal-title" id="creatorModalTitle">Nouveau créateur</div>
         <button class="close" onclick="closeModal('creatorModal')">×</button>
     </div>
 
     <div class="modal-body">
 
-        <form id="creatorForm">
+        <div class="form-grid">
 
-            <input type="hidden" id="creatorId">
-
-            <div class="form-grid">
-
-                <div class="form-group">
-                    <label>Pseudo</label>
-                    <input id="creatorPseudo" required placeholder="@pseudo">
-                </div>
-
-                <div class="form-group">
-                    <label>Team</label>
-                    <select id="creatorTeam"></select>
-                </div>
-
-                <div class="form-group">
-                    <label>Date d'arrivée</label>
-                    <input type="date" id="creatorDate">
-                </div>
-
-                <div class="form-group">
-                    <label>Statut</label>
-                    <select id="creatorStatus">
-                        <option value="Actif">Actif</option>
-                        <option value="En pause">En pause</option>
-                        <option value="Inactif">Inactif</option>
-                    </select>
-                </div>
-
-                <div class="form-group full">
-                    <label>Notes privées</label>
-                    <textarea id="creatorNotes" placeholder="Informations privées..."></textarea>
-                </div>
-
+            <div class="form-group">
+                <label>Pseudo</label>
+                <input id="creatorPseudo">
             </div>
 
-        </form>
+            <div class="form-group">
+                <label>Team</label>
+                <select id="creatorTeam"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Date d’arrivée</label>
+                <input type="date" id="creatorDate">
+            </div>
+
+            <div class="form-group">
+                <label>Statut</label>
+                <select id="creatorStatus">
+                    <option value="Actif">Actif</option>
+                    <option value="Inactif">Inactif</option>
+                    <option value="En pause">En pause</option>
+                </select>
+            </div>
+
+            <div class="form-group full">
+                <label>Notes privées</label>
+                <textarea id="creatorNotes"></textarea>
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('creatorModal')">Annuler</button>
+    <div class="modal-footer">
+        <button class="btn" onclick="closeModal('creatorModal')">Annuler</button>
         <button class="btn btn-primary" onclick="saveCreator()">Enregistrer</button>
     </div>
 
 </div>
-
 </div>
+
 
 <!-- =========================
      AGENCY MODAL
 ========================= -->
 
-<div class="modal-backdrop" id="agencyModal">
+<div class="modal-bg" id="agencyModal">
 
 <div class="modal">
 
     <div class="modal-head">
-        <h2>Ajouter une agence adverse</h2>
+        <div class="modal-title">Nouvelle agence adverse</div>
         <button class="close" onclick="closeModal('agencyModal')">×</button>
     </div>
 
     <div class="modal-body">
 
-        <div class="form-group">
-            <label>Nom de l'agence</label>
-            <input id="agencyName" placeholder="Ex. Prédateurs Agency">
+        <div class="form-grid">
+
+            <div class="form-group full">
+                <label>Nom exact de l’agence</label>
+                <input id="agencyName">
+            </div>
+
+            <div class="form-group full">
+                <label>Logo / Photo</label>
+                <input id="agencyLogo" placeholder="URL de l'image">
+            </div>
+
         </div>
 
     </div>
 
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('agencyModal')">Annuler</button>
+    <div class="modal-footer">
+        <button class="btn" onclick="closeModal('agencyModal')">Annuler</button>
         <button class="btn btn-primary" onclick="saveAgency()">Enregistrer</button>
     </div>
 
 </div>
-
 </div>
+
 
 <!-- =========================
      MATCH MODAL
 ========================= -->
 
-<div class="modal-backdrop" id="matchModal">
+<div class="modal-bg" id="matchModal">
 
 <div class="modal">
 
     <div class="modal-head">
-        <h2>Créer un Match OFF</h2>
+        <div class="modal-title">Nouveau Match OFF</div>
         <button class="close" onclick="closeModal('matchModal')">×</button>
     </div>
 
@@ -1917,12 +1527,12 @@ textarea{
             </div>
 
             <div class="form-group">
-                <label>Créateur LVF</label>
+                <label>Créateur</label>
                 <select id="matchCreator"></select>
             </div>
 
             <div class="form-group">
-                <label>Team LVF</label>
+                <label>Team</label>
                 <select id="matchTeam"></select>
             </div>
 
@@ -1933,52 +1543,66 @@ textarea{
 
             <div class="form-group">
                 <label>Thème</label>
-                <input id="matchTheme" placeholder="Ex. Battle classique">
+                <input id="matchTheme" placeholder="Ex : Battle, classement...">
             </div>
 
             <div class="form-group">
                 <label>Résultat</label>
                 <select id="matchResult">
-                    <option value="À venir">À venir</option>
-                    <option value="Victoire">Victoire LVF</option>
-                    <option value="Défaite">Défaite LVF</option>
+                    <option value="">À venir</option>
+                    <option value="Victoire">Victoire</option>
+                    <option value="Défaite">Défaite</option>
                     <option value="Égalité">Égalité</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label>Gagnant</label>
-                <input id="matchWinner" placeholder="LVF ou nom de l'agence">
-            </div>
-
-            <div class="form-group full">
-                <label>Informations supplémentaires</label>
-                <textarea id="matchNotes" placeholder="Informations concernant le Match OFF..."></textarea>
+                <input id="matchWinner" placeholder="Agence ou créateur">
             </div>
 
         </div>
 
     </div>
 
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('matchModal')">Annuler</button>
-        <button class="btn btn-primary" onclick="saveMatch()">Enregistrer le Match OFF</button>
+    <div class="modal-footer">
+        <button class="btn" onclick="closeModal('matchModal')">Annuler</button>
+        <button class="btn btn-primary" onclick="saveMatch()">Enregistrer</button>
     </div>
 
 </div>
-
 </div>
 
+
 <!-- =========================
-     STATISTICS MODAL
+     MATCH DETAIL MODAL
 ========================= -->
 
-<div class="modal-backdrop" id="statsModal">
+<div class="modal-bg" id="matchDetailModal">
 
 <div class="modal">
 
     <div class="modal-head">
-        <h2>Statistiques mensuelles</h2>
+        <div class="modal-title">Détails du Match OFF</div>
+        <button class="close" onclick="closeModal('matchDetailModal')">×</button>
+    </div>
+
+    <div class="modal-body" id="matchDetailBody"></div>
+
+</div>
+</div>
+
+
+<!-- =========================
+     STATS MODAL
+========================= -->
+
+<div class="modal-bg" id="statsModal">
+
+<div class="modal">
+
+    <div class="modal-head">
+        <div class="modal-title">Statistiques mensuelles</div>
         <button class="close" onclick="closeModal('statsModal')">×</button>
     </div>
 
@@ -1986,277 +1610,111 @@ textarea{
 
         <div class="form-grid">
 
-            <div class="form-group">
+            <div class="form-group full">
                 <label>Mois</label>
                 <input type="month" id="statsMonth">
             </div>
 
-            <div class="form-group">
-                <label>Team</label>
-                <select id="statsTeam"></select>
-            </div>
-
-            <div class="form-group">
-                <label>Diamants</label>
-                <input type="number" min="0" id="statsDiamonds" placeholder="0">
-            </div>
-
-            <div class="form-group">
-                <label>Heures</label>
-                <input type="number" min="0" step="0.1" id="statsHours" placeholder="0">
-            </div>
-
         </div>
 
-        <p style="font-size:11px;color:#777b8b;margin-top:15px;line-height:1.5">
-            Les statistiques sont enregistrées au niveau de la Team.
-            Le total de l'agence LVF est calculé automatiquement.
-        </p>
+        <div id="statsTeamFields" style="margin-top:18px;"></div>
 
     </div>
 
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('statsModal')">Annuler</button>
+    <div class="modal-footer">
+        <button class="btn" onclick="closeModal('statsModal')">Annuler</button>
         <button class="btn btn-primary" onclick="saveStats()">Enregistrer</button>
     </div>
 
 </div>
-
 </div>
 
-<!-- =========================
-     MATCH DETAILS MODAL
-========================= -->
-
-<div class="modal-backdrop" id="matchDetailsModal">
-
-<div class="modal">
-
-    <div class="modal-head">
-        <h2>Détails du Match OFF</h2>
-        <button class="close" onclick="closeModal('matchDetailsModal')">×</button>
-    </div>
-
-    <div class="modal-body" id="matchDetailsContent"></div>
-
-    <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeModal('matchDetailsModal')">Fermer</button>
-    </div>
-
-</div>
-
-</div>
 
 <script>
 
-/* ==========================================================
-   TOKCENTER
-   Application interne LVF
-========================================================== */
+/* =========================================================
+   TOKCENTER — APPLICATION
+========================================================= */
 
-const STORAGE_KEY = "tokcenter_lvf_data_v1";
+const STORAGE_KEY = "tokcenter_lvf_data_v3";
 
-let data = {
-    teams: [],
-    creators: [],
-    agencies: [],
-    matches: [],
-    stats: []
-};
+let data = loadData();
+
+let editingTeamId = null;
+let editingCreatorId = null;
 
 let calendarDate = new Date();
 
-const pageNames = {
-    dashboard:"Tableau de bord",
-    teams:"Teams",
-    creators:"Créateurs",
-    agencies:"Agences adverses",
-    calendar:"Calendrier",
-    matches:"Match OFF",
-    statistics:"Statistiques",
-    settings:"Paramètres"
-};
 
-/* =========================
-   INITIALISATION
-========================= */
+function defaultData(){
 
-document.addEventListener("DOMContentLoaded",()=>{
+    return {
+        teams:[],
+        creators:[],
+        agencies:[],
+        matches:[],
+        statistics:[]
+    };
 
-    loadData();
+}
 
-    updateDate();
-
-    setupNavigation();
-
-    renderAll();
-
-    document.getElementById("calendarToday").addEventListener("click",()=>{
-        calendarDate = new Date();
-        renderCalendar();
-    });
-
-    document.getElementById("matchTeam").addEventListener("change",()=>{
-        updateCreatorSelectForTeam();
-    });
-
-});
-
-/* =========================
-   STORAGE
-========================= */
 
 function loadData(){
 
-    const saved = localStorage.getItem(STORAGE_KEY);
+    try{
 
-    if(saved){
+        const raw = localStorage.getItem(STORAGE_KEY);
 
-        try{
-            const parsed = JSON.parse(saved);
-
-            data = {
-                teams:parsed.teams || [],
-                creators:parsed.creators || [],
-                agencies:parsed.agencies || [],
-                matches:parsed.matches || [],
-                stats:parsed.stats || []
-            };
-
-        }catch(e){
-            console.error("Erreur données",e);
+        if(!raw){
+            return defaultData();
         }
 
+        const parsed = JSON.parse(raw);
+
+        return {
+            teams:parsed.teams || [],
+            creators:parsed.creators || [],
+            agencies:parsed.agencies || [],
+            matches:parsed.matches || [],
+            statistics:parsed.statistics || []
+        };
+
+    }catch(e){
+
+        console.error(e);
+
+        return defaultData();
+
     }
+
 }
+
 
 function saveData(){
+
     localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-}
 
-function renderAll(){
-
-    populateSelects();
-
-    renderDashboard();
-    renderTeams();
-    renderCreators();
-    renderAgencies();
-    renderMatches();
-    renderCalendar();
-    renderStatistics();
+    renderAll();
 
 }
 
-/* =========================
-   NAVIGATION
-========================= */
 
-function setupNavigation(){
-
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-
-        btn.addEventListener("click",()=>{
-
-            navigate(btn.dataset.view);
-
-        });
-
-    });
-
-}
-
-function navigate(view){
-
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-        btn.classList.toggle("active",btn.dataset.view===view);
-    });
-
-    document.querySelectorAll(".view").forEach(v=>{
-        v.classList.remove("active");
-    });
-
-    const target = document.getElementById(view);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    document.getElementById("pageTitle").textContent =
-        pageNames[view] || "TokCenter";
-
-    if(view==="calendar"){
-        renderCalendar();
-    }
-
-    if(view==="statistics"){
-        renderStatistics();
-    }
-
-    window.scrollTo({top:0,behavior:"smooth"});
-}
-
-/* =========================
-   DATE
-========================= */
-
-function updateDate(){
-
-    const date = new Date();
-
-    document.getElementById("pageDate").textContent =
-        date.toLocaleDateString("fr-FR",{
-            weekday:"long",
-            day:"numeric",
-            month:"long",
-            year:"numeric"
-        });
-
-}
-
-/* =========================
-   MODALS
-========================= */
-
-function openModal(id){
-
-    populateSelects();
-
-    document.getElementById(id).classList.add("show");
-
-}
-
-function closeModal(id){
-
-    document.getElementById(id).classList.remove("show");
-
-}
-
-document.querySelectorAll(".modal-backdrop").forEach(modal=>{
-
-    modal.addEventListener("click",(e)=>{
-
-        if(e.target===modal){
-            modal.classList.remove("show");
-        }
-
-    });
-
-});
-
-/* =========================
-   HELPERS
-========================= */
+/* =========================================================
+   UTILITIES
+========================================================= */
 
 function uid(){
 
-    return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+    return Date.now().toString(36)+Math.random().toString(36).slice(2);
 
 }
 
-function escapeHtml(value){
 
-    if(value===undefined || value===null) return "";
+function esc(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
 
     return String(value)
         .replaceAll("&","&amp;")
@@ -2267,11 +1725,6 @@ function escapeHtml(value){
 
 }
 
-function formatNumber(number){
-
-    return Number(number || 0).toLocaleString("fr-FR");
-
-}
 
 function formatDate(date){
 
@@ -2287,1135 +1740,1118 @@ function formatDate(date){
 
 }
 
-function teamById(id){
+
+function formatNumber(value){
+
+    return Number(value || 0).toLocaleString("fr-FR");
+
+}
+
+
+function getTeam(id){
+
     return data.teams.find(t=>t.id===id);
+
 }
 
-function creatorById(id){
+
+function getCreator(id){
+
     return data.creators.find(c=>c.id===id);
+
 }
 
-function agencyById(id){
+
+function getAgency(id){
+
     return data.agencies.find(a=>a.id===id);
-}
-
-function creatorTeam(creator){
-
-    return creator ? teamById(creator.teamId) : null;
 
 }
 
-function getTeamStats(teamId){
 
-    return data.stats
-        .filter(s=>s.teamId===teamId)
-        .reduce((acc,s)=>{
+function closeModal(id){
 
-            acc.diamonds += Number(s.diamonds)||0;
-            acc.hours += Number(s.hours)||0;
-
-            return acc;
-
-        },{diamonds:0,hours:0});
+    document.getElementById(id).classList.remove("open");
 
 }
 
-function totalStats(){
 
-    return data.stats.reduce((acc,s)=>{
+function openModal(id){
 
-        acc.diamonds += Number(s.diamonds)||0;
-        acc.hours += Number(s.hours)||0;
-
-        return acc;
-
-    },{diamonds:0,hours:0});
+    document.getElementById(id).classList.add("open");
 
 }
 
-/* =========================
-   SELECTS
-========================= */
 
-function populateSelects(){
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-    const creatorTeamSelect = document.getElementById("creatorTeam");
+document.querySelectorAll(".nav button").forEach(button=>{
 
-    creatorTeamSelect.innerHTML =
-        `<option value="">Aucune Team</option>`+
-        data.teams.map(t=>
-            `<option value="${t.id}">${escapeHtml(t.name)}</option>`
-        ).join("");
+    button.addEventListener("click",()=>{
 
-    const matchTeamSelect = document.getElementById("matchTeam");
+        const page = button.dataset.page;
 
-    matchTeamSelect.innerHTML =
-        `<option value="">Sélectionner une Team</option>`+
-        data.teams.map(t=>
-            `<option value="${t.id}">${escapeHtml(t.name)}</option>`
-        ).join("");
+        document.querySelectorAll(".nav button").forEach(b=>{
+            b.classList.remove("active");
+        });
 
-    const statsTeamSelect = document.getElementById("statsTeam");
+        button.classList.add("active");
 
-    statsTeamSelect.innerHTML =
-        `<option value="">Sélectionner une Team</option>`+
-        data.teams.map(t=>
-            `<option value="${t.id}">${escapeHtml(t.name)}</option>`
-        ).join("");
+        document.querySelectorAll(".page").forEach(p=>{
+            p.classList.remove("active");
+        });
 
-    const agencySelect = document.getElementById("matchAgency");
+        document.getElementById("page-"+page).classList.add("active");
 
-    agencySelect.innerHTML =
-        `<option value="">Sélectionner une agence</option>`+
-        data.agencies.map(a=>
-            `<option value="${a.id}">${escapeHtml(a.name)}</option>`
-        ).join("");
-
-    updateCreatorSelectForTeam();
-
-    const creatorSelect = document.getElementById("matchCreator");
-
-    if(!document.getElementById("matchTeam").value){
-
-        creatorSelect.innerHTML =
-            `<option value="">Sélectionner un créateur</option>`+
-            data.creators.map(c=>
-                `<option value="${c.id}">${escapeHtml(c.pseudo)}</option>`
-            ).join("");
-
-    }
-
-}
-
-function updateCreatorSelectForTeam(){
-
-    const teamId = document.getElementById("matchTeam").value;
-
-    const creatorSelect = document.getElementById("matchCreator");
-
-    const creators = teamId
-        ? data.creators.filter(c=>c.teamId===teamId)
-        : data.creators;
-
-    creatorSelect.innerHTML =
-        `<option value="">Sélectionner un créateur</option>`+
-        creators.map(c=>
-            `<option value="${c.id}">${escapeHtml(c.pseudo)}</option>`
-        ).join("");
-
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-function renderDashboard(){
-
-    document.getElementById("quickTeams").textContent = data.teams.length;
-    document.getElementById("quickCreators").textContent = data.creators.length;
-
-    const today = new Date();
-
-    const upcoming = data.matches
-        .filter(m=>new Date(m.date+"T"+(m.time||"00:00"))>=today)
-        .sort((a,b)=>
-            new Date(a.date+"T"+(a.time||"00:00"))-
-            new Date(b.date+"T"+(b.time||"00:00"))
-        );
-
-    document.getElementById("quickMatches").textContent = upcoming.length;
-    document.getElementById("quickAgencies").textContent = data.agencies.length;
-
-    const totals = totalStats();
-
-    document.getElementById("dashDiamonds").textContent =
-        formatNumber(totals.diamonds);
-
-    document.getElementById("dashHours").textContent =
-        totals.hours.toLocaleString("fr-FR",{maximumFractionDigits:1})+" h";
-
-    const played = data.matches.filter(m=>m.result && m.result!=="À venir").length;
-
-    document.getElementById("dashPlayed").textContent = played;
-
-    document.getElementById("dashActiveTeams").textContent =
-        data.teams.filter(t=>
-            data.creators.some(c=>c.teamId===t.id && c.status==="Actif")
-        ).length;
-
-    renderDashboardNextMatch(upcoming[0]);
-
-    const teamContainer = document.getElementById("dashboardTeams");
-
-    const ranking = data.teams
-        .map(t=>({
-            team:t,
-            stats:getTeamStats(t.id)
-        }))
-        .sort((a,b)=>b.stats.diamonds-a.stats.diamonds)
-        .slice(0,6);
-
-    if(!ranking.length){
-
-        teamContainer.innerHTML =
-            `<div class="empty">Aucune Team enregistrée.</div>`;
-
-    }else{
-
-        teamContainer.innerHTML = ranking.map(item=>{
-
-            const t=item.team;
-            const s=item.stats;
-
-            return `
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)">
-                <div class="entity">
-                    ${logoHtml(t,36)}
-                    <div>
-                        <div class="entity-name">${escapeHtml(t.name)}</div>
-                        <div class="entity-sub">${data.creators.filter(c=>c.teamId===t.id).length} créateur(s)</div>
-                    </div>
-                </div>
-
-                <div style="text-align:right">
-                    <strong>${formatNumber(s.diamonds)}</strong>
-                    <div class="entity-sub">${s.hours.toLocaleString("fr-FR",{maximumFractionDigits:1})} h</div>
-                </div>
-            </div>
-            `;
-
-        }).join("");
-
-    }
-
-    const matchContainer=document.getElementById("dashboardMatches");
-
-    const recent=[...data.matches]
-        .sort((a,b)=>
-            new Date(b.date+"T"+(b.time||"00:00"))-
-            new Date(a.date+"T"+(a.time||"00:00"))
-        )
-        .slice(0,5);
-
-    if(!recent.length){
-
-        matchContainer.innerHTML =
-            `<div class="empty">Aucun Match OFF enregistré.</div>`;
-
-    }else{
-
-        matchContainer.innerHTML=recent.map(m=>{
-
-            const c=creatorById(m.creatorId);
-            const t=teamById(m.teamId);
-            const a=agencyById(m.agencyId);
-
-            return `
-            <div onclick="showMatchDetails('${m.id}')"
-                 style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">
-
-                <div>
-                    <div style="font-size:12px;font-weight:700">
-                        Match OFF — ${escapeHtml(c?.pseudo || "Créateur")}
-                    </div>
-
-                    <div class="entity-sub">
-                        ${escapeHtml(t?.name || "Sans Team")} · ${escapeHtml(a?.name || "Agence adverse")}
-                    </div>
-                </div>
-
-                <div style="text-align:right">
-                    <div style="font-size:10px;color:#999dac">${formatDate(m.date)}</div>
-                    <div style="font-size:10px;color:#999dac">${escapeHtml(m.time || "")}</div>
-                </div>
-
-            </div>
-            `;
-
-        }).join("");
-
-    }
-
-}
-
-function renderDashboardNextMatch(match){
-
-    const container=document.getElementById("dashboardNextMatch");
-
-    if(!match){
-
-        container.innerHTML=`
-            <div style="font-size:18px;font-weight:750;margin-top:20px">
-                Aucun Match OFF programmé
-            </div>
-
-            <div style="color:#888c9b;font-size:12px;margin-top:8px">
-                Crée ton prochain Match OFF pour le voir apparaître ici.
-            </div>
-
-            <button class="btn btn-primary" style="margin-top:20px"
-                    onclick="openModal('matchModal')">
-                ＋ Programmer un Match OFF
-            </button>
-        `;
-
-        return;
-    }
-
-    const c=creatorById(match.creatorId);
-    const t=teamById(match.teamId);
-    const a=agencyById(match.agencyId);
-
-    container.innerHTML=`
-
-        <div class="match-main">
-
-            <div class="match-team">
-                ${logoHtml(t,54)}
-                <div>
-                    <div class="match-team-name">
-                        ${escapeHtml(c?.pseudo || "Créateur")}
-                    </div>
-                    <div class="match-team-sub">
-                        ${escapeHtml(t?.name || "Sans Team")}
-                    </div>
-                </div>
-            </div>
-
-            <div class="vs">VS</div>
-
-            <div class="match-team">
-                <div>
-                    <div class="match-team-name">
-                        ${escapeHtml(a?.name || "Agence adverse")}
-                    </div>
-                    <div class="match-team-sub">Agence adverse</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="match-meta">
-
-            <div class="meta-item">
-                DATE
-                <strong>${formatDate(match.date)}</strong>
-            </div>
-
-            <div class="meta-item">
-                HEURE
-                <strong>${escapeHtml(match.time || "—")}</strong>
-            </div>
-
-            <div class="meta-item">
-                THÈME
-                <strong>${escapeHtml(match.theme || "—")}</strong>
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-/* =========================
-   TEAMS
-========================= */
-
-function logoHtml(team,size=36){
-
-    if(team?.logo){
-
-        return `
-        <div class="team-logo" style="width:${size}px;height:${size}px">
-            <img src="${escapeHtml(team.logo)}"
-                 onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml((team.name||"T").charAt(0).toUpperCase())}'">
-        </div>
-        `;
-
-    }
-
-    return `
-    <div class="team-logo" style="width:${size}px;height:${size}px">
-        ${(team?.name||"T").charAt(0).toUpperCase()}
-    </div>
-    `;
-
-}
-
-function renderTeams(){
-
-    const container=document.getElementById("teamsCards");
-
-    if(!data.teams.length){
-
-        container.innerHTML=`
-            <div class="empty" style="grid-column:1/-1">
-                Aucune Team pour le moment.<br><br>
-                <button class="btn btn-primary" onclick="openModal('teamModal')">
-                    ＋ Créer la première Team
-                </button>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML=data.teams.map(team=>{
-
-        const stats=getTeamStats(team.id);
-
-        const creators=data.creators.filter(c=>c.teamId===team.id);
-
-        return `
-
-        <div class="team-card">
-
-            <div class="team-card-top">
-
-                <div>
-                    ${logoHtml(team,50)}
-                    <div class="team-card-name">${escapeHtml(team.name)}</div>
-                    <div class="team-card-manager">
-                        ${creators.length} créateur(s)
-                    </div>
-                </div>
-
-                <div class="row-actions">
-                    <button title="Modifier"
-                            onclick="editTeam('${team.id}')">✎</button>
-
-                    <button title="Supprimer"
-                            onclick="deleteTeam('${team.id}')">×</button>
-                </div>
-
-            </div>
-
-            <div class="team-card-stats">
-
-                <div class="mini-stat">
-                    <span>DIAMANTS</span>
-                    <strong>💎 ${formatNumber(stats.diamonds)}</strong>
-                </div>
-
-                <div class="mini-stat">
-                    <span>HEURES</span>
-                    <strong>${stats.hours.toLocaleString("fr-FR",{maximumFractionDigits:1})} h</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    }).join("");
-
-}
-
-function saveTeam(){
-
-    const id=document.getElementById("teamId").value;
-
-    const team={
-        id:id||uid(),
-        name:document.getElementById("teamName").value.trim(),
-        logo:document.getElementById("teamLogo").value.trim(),
-        description:document.getElementById("teamDescription").value.trim()
-    };
-
-    if(!team.name){
-
-        alert("Le nom de la Team est obligatoire.");
-        return;
-
-    }
-
-    if(id){
-
-        const index=data.teams.findIndex(t=>t.id===id);
-
-        if(index>=0){
-            data.teams[index]=team;
+        if(page==="calendar"){
+            renderCalendar();
         }
 
-    }else{
+        if(page==="statistics"){
+            renderStatistics();
+        }
 
-        data.teams.push(team);
+    });
 
+});
+
+
+function goToPage(page){
+
+    const button = document.querySelector(`.nav button[data-page="${page}"]`);
+
+    if(button){
+        button.click();
     }
-
-    saveData();
-    closeModal("teamModal");
-
-    document.getElementById("teamForm").reset();
-    document.getElementById("teamId").value="";
-
-    renderAll();
 
 }
 
-function editTeam(id){
 
-    const team=teamById(id);
+/* =========================================================
+   TEAMS
+========================================================= */
 
-    if(!team) return;
+function openTeamModal(id=null){
 
-    document.getElementById("teamId").value=team.id;
-    document.getElementById("teamName").value=team.name;
-    document.getElementById("teamLogo").value=team.logo||"";
-    document.getElementById("teamDescription").value=team.description||"";
+    editingTeamId = id;
 
-    document.getElementById("teamModalTitle").textContent="Modifier la Team";
+    document.getElementById("teamModalTitle").textContent =
+        id ? "Modifier la Team" : "Nouvelle Team";
+
+    document.getElementById("teamName").value =
+        id ? getTeam(id)?.name || "" : "";
+
+    document.getElementById("teamLogo").value =
+        id ? getTeam(id)?.logo || "" : "";
 
     openModal("teamModal");
 
 }
 
-function deleteTeam(id){
 
-    const team=teamById(id);
+function saveTeam(){
 
-    if(!team) return;
+    const name = document.getElementById("teamName").value.trim();
 
-    if(!confirm(`Supprimer la Team "${team.name}" ?`)) return;
-
-    data.teams=data.teams.filter(t=>t.id!==id);
-
-    data.creators.forEach(c=>{
-        if(c.teamId===id) c.teamId="";
-    });
-
-    data.matches.forEach(m=>{
-        if(m.teamId===id) m.teamId="";
-    });
-
-    saveData();
-    renderAll();
-
-}
-
-/* =========================
-   CREATORS
-========================= */
-
-function renderCreators(){
-
-    const tbody=document.getElementById("creatorsTable");
-
-    if(!data.creators.length){
-
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="6">
-                <div class="empty">Aucun créateur enregistré.</div>
-            </td>
-        </tr>
-        `;
-
+    if(!name){
+        alert("Veuillez saisir le nom de la Team.");
         return;
     }
 
-    tbody.innerHTML=data.creators.map(c=>{
+    const logo = document.getElementById("teamLogo").value.trim();
 
-        const team=teamById(c.teamId);
+    if(editingTeamId){
 
-        const statusClass=
-            c.status==="Actif" ? "badge-green":
-            c.status==="En pause" ? "badge-orange":
-            "badge-red";
+        const team = getTeam(editingTeamId);
+
+        if(team){
+            team.name = name;
+            team.logo = logo;
+        }
+
+    }else{
+
+        data.teams.push({
+            id:uid(),
+            name,
+            logo
+        });
+
+    }
+
+    closeModal("teamModal");
+
+    editingTeamId = null;
+
+    saveData();
+
+}
+
+
+function deleteTeam(id){
+
+    const team = getTeam(id);
+
+    if(!team) return;
+
+    const linkedCreators = data.creators.filter(c=>c.teamId===id);
+
+    if(linkedCreators.length){
+
+        alert(
+            "Cette Team possède encore des créateurs. "+
+            "Déplacez-les ou supprimez-les avant de supprimer la Team."
+        );
+
+        return;
+
+    }
+
+    if(!confirm(`Supprimer la Team « ${team.name} » ?`)){
+        return;
+    }
+
+    data.teams = data.teams.filter(t=>t.id!==id);
+
+    saveData();
+
+}
+
+
+function renderTeams(){
+
+    const search = (document.getElementById("teamSearch")?.value || "").toLowerCase();
+
+    const teams = data.teams.filter(t=>
+        t.name.toLowerCase().includes(search)
+    );
+
+    const grid = document.getElementById("teamGrid");
+
+    if(!teams.length){
+
+        grid.innerHTML = `
+            <div class="card" style="grid-column:1/-1;">
+                <div class="empty">
+                    Aucune Team enregistrée.
+                </div>
+            </div>
+        `;
+
+        return;
+
+    }
+
+    grid.innerHTML = teams.map(team=>{
+
+        const creatorCount =
+            data.creators.filter(c=>c.teamId===team.id).length;
+
+        const teamStats =
+            getLatestStatsForTeam(team.id);
 
         return `
-        <tr>
 
-            <td>
-                <div class="entity">
-                    ${logoHtml(team,36)}
-                    <div>
-                        <div class="entity-name">${escapeHtml(c.pseudo)}</div>
+            <div class="card team-card">
+
+                <div class="team-head">
+
+                    <div class="team-logo">
+                        ${
+                            team.logo
+                            ? `<img src="${esc(team.logo)}" alt="">`
+                            : esc(team.name.charAt(0).toUpperCase())
+                        }
                     </div>
+
+                    <div>
+                        <div class="team-name">${esc(team.name)}</div>
+                        <div class="team-small">
+                            ${creatorCount} créateur${creatorCount>1?"s":""}
+                        </div>
+                    </div>
+
                 </div>
-            </td>
 
-            <td>${escapeHtml(team?.name || "Sans Team")}</td>
+                <div class="team-stats">
 
-            <td>${formatDate(c.date)}</td>
+                    <div class="team-stat">
+                        <strong>${formatNumber(teamStats?.diamonds || 0)}</strong>
+                        <span>Diamants</span>
+                    </div>
 
-            <td>
-                <span class="badge ${statusClass}">
-                    ${escapeHtml(c.status)}
-                </span>
-            </td>
+                    <div class="team-stat">
+                        <strong>${formatNumber(teamStats?.hours || 0)}</strong>
+                        <span>Heures</span>
+                    </div>
 
-            <td style="max-width:250px;color:#9296a5">
-                ${escapeHtml(c.notes || "—")}
-            </td>
-
-            <td>
-                <div class="row-actions">
-                    <button onclick="editCreator('${c.id}')">✎</button>
-                    <button onclick="deleteCreator('${c.id}')">×</button>
                 </div>
-            </td>
 
-        </tr>
+                <div style="display:flex;gap:7px;margin-top:15px;">
+
+                    <button
+                        class="btn btn-small"
+                        onclick="openTeamModal('${team.id}')">
+                        Modifier
+                    </button>
+
+                    <button
+                        class="btn btn-small btn-danger"
+                        onclick="deleteTeam('${team.id}')">
+                        Supprimer
+                    </button>
+
+                </div>
+
+            </div>
+
         `;
 
     }).join("");
 
 }
 
-function saveCreator(){
 
-    const id=document.getElementById("creatorId").value;
+/* =========================================================
+   CREATORS
+========================================================= */
 
-    const creator={
-        id:id||uid(),
-        pseudo:document.getElementById("creatorPseudo").value.trim(),
-        teamId:document.getElementById("creatorTeam").value,
-        date:document.getElementById("creatorDate").value,
-        status:document.getElementById("creatorStatus").value,
-        notes:document.getElementById("creatorNotes").value.trim()
-    };
+function openCreatorModal(id=null){
 
-    if(!creator.pseudo){
+    editingCreatorId = id;
 
-        alert("Le pseudo est obligatoire.");
-        return;
+    const creator = id ? getCreator(id) : null;
 
-    }
+    document.getElementById("creatorModalTitle").textContent =
+        id ? "Modifier le créateur" : "Nouveau créateur";
 
-    if(id){
+    document.getElementById("creatorPseudo").value =
+        creator?.pseudo || "";
 
-        const index=data.creators.findIndex(c=>c.id===id);
+    document.getElementById("creatorDate").value =
+        creator?.date || "";
 
-        if(index>=0) data.creators[index]=creator;
+    document.getElementById("creatorStatus").value =
+        creator?.status || "Actif";
 
-    }else{
+    document.getElementById("creatorNotes").value =
+        creator?.notes || "";
 
-        data.creators.push(creator);
-
-    }
-
-    saveData();
-
-    closeModal("creatorModal");
-
-    document.getElementById("creatorForm").reset();
-    document.getElementById("creatorId").value="";
-
-    renderAll();
-
-}
-
-function editCreator(id){
-
-    const c=creatorById(id);
-
-    if(!c) return;
-
-    document.getElementById("creatorId").value=c.id;
-    document.getElementById("creatorPseudo").value=c.pseudo;
-    document.getElementById("creatorTeam").value=c.teamId||"";
-    document.getElementById("creatorDate").value=c.date||"";
-    document.getElementById("creatorStatus").value=c.status||"Actif";
-    document.getElementById("creatorNotes").value=c.notes||"";
+    fillTeamSelect("creatorTeam",creator?.teamId || "");
 
     openModal("creatorModal");
 
 }
 
-function deleteCreator(id){
 
-    const c=creatorById(id);
+function saveCreator(){
 
-    if(!c) return;
+    const pseudo =
+        document.getElementById("creatorPseudo").value.trim();
 
-    if(!confirm(`Supprimer ${c.pseudo} ?`)) return;
+    const teamId =
+        document.getElementById("creatorTeam").value;
 
-    data.creators=data.creators.filter(x=>x.id!==id);
-
-    data.matches=data.matches.map(m=>
-        m.creatorId===id ? {...m,creatorId:""} : m
-    );
-
-    saveData();
-    renderAll();
-
-}
-
-/* =========================
-   AGENCIES
-========================= */
-
-function renderAgencies(){
-
-    const tbody=document.getElementById("agenciesTable");
-
-    if(!data.agencies.length){
-
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="6">
-                <div class="empty">
-                    Aucune agence adverse enregistrée.
-                </div>
-            </td>
-        </tr>
-        `;
-
+    if(!pseudo){
+        alert("Veuillez saisir le pseudo du créateur.");
         return;
     }
 
-    tbody.innerHTML=data.agencies.map(a=>{
+    if(!teamId){
+        alert("Veuillez sélectionner une Team.");
+        return;
+    }
 
-        const matches=data.matches.filter(m=>m.agencyId===a.id);
+    const creator = {
 
-        const wins=matches.filter(m=>m.result==="Victoire").length;
-        const losses=matches.filter(m=>m.result==="Défaite").length;
+        pseudo,
 
-        const last=[...matches]
-            .sort((x,y)=>new Date(y.date)-new Date(x.date))[0];
+        teamId,
+
+        date:document.getElementById("creatorDate").value,
+
+        status:document.getElementById("creatorStatus").value,
+
+        notes:document.getElementById("creatorNotes").value.trim()
+
+    };
+
+    if(editingCreatorId){
+
+        Object.assign(getCreator(editingCreatorId),creator);
+
+    }else{
+
+        data.creators.push({
+            id:uid(),
+            ...creator
+        });
+
+    }
+
+    editingCreatorId = null;
+
+    closeModal("creatorModal");
+
+    saveData();
+
+}
+
+
+function deleteCreator(id){
+
+    const creator = getCreator(id);
+
+    if(!creator) return;
+
+    if(!confirm(`Supprimer ${creator.pseudo} ?`)){
+        return;
+    }
+
+    data.creators =
+        data.creators.filter(c=>c.id!==id);
+
+    saveData();
+
+}
+
+
+function renderCreators(){
+
+    const search =
+        (document.getElementById("creatorSearch")?.value || "")
+        .toLowerCase();
+
+    const creators =
+        data.creators.filter(c=>
+            c.pseudo.toLowerCase().includes(search) ||
+            (getTeam(c.teamId)?.name || "").toLowerCase().includes(search)
+        );
+
+    const tbody =
+        document.getElementById("creatorTable");
+
+    if(!creators.length){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    <div class="empty">Aucun créateur enregistré.</div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML = creators.map(c=>{
+
+        const team = getTeam(c.teamId);
 
         return `
-        <tr>
 
-            <td>
-                <div class="entity">
-                    <div class="entity-logo">A</div>
-                    <div>
-                        <div class="entity-name">${escapeHtml(a.name)}</div>
-                        <div class="entity-sub">Agence adverse</div>
+            <tr>
+
+                <td>
+                    <strong>${esc(c.pseudo)}</strong>
+                </td>
+
+                <td>
+                    ${esc(team?.name || "Team supprimée")}
+                </td>
+
+                <td>
+                    ${formatDate(c.date)}
+                </td>
+
+                <td>
+                    <span class="badge">${esc(c.status)}</span>
+                </td>
+
+                <td>
+                    ${
+                        c.notes
+                        ? esc(c.notes)
+                        : `<span style="color:#666;">Aucune note</span>`
+                    }
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="btn btn-small"
+                            onclick="openCreatorModal('${c.id}')">
+                            Modifier
+                        </button>
+
+                        <button
+                            class="btn btn-small btn-danger"
+                            onclick="deleteCreator('${c.id}')">
+                            Supprimer
+                        </button>
+
                     </div>
-                </div>
-            </td>
 
-            <td>${matches.length}</td>
-            <td>${wins}</td>
-            <td>${losses}</td>
+                </td>
 
-            <td>${last ? formatDate(last.date) : "—"}</td>
+            </tr>
 
-            <td>
-                <div class="row-actions">
-                    <button onclick="deleteAgency('${a.id}')">×</button>
-                </div>
-            </td>
-
-        </tr>
         `;
 
     }).join("");
 
 }
 
+
+/* =========================================================
+   AGENCIES
+========================================================= */
+
+function openAgencyModal(){
+
+    document.getElementById("agencyName").value="";
+    document.getElementById("agencyLogo").value="";
+
+    openModal("agencyModal");
+
+}
+
+
 function saveAgency(){
 
-    const name=document.getElementById("agencyName").value.trim();
+    const name =
+        document.getElementById("agencyName").value.trim();
 
     if(!name){
-
-        alert("Le nom de l'agence est obligatoire.");
+        alert("Veuillez saisir le nom de l’agence.");
         return;
-
     }
 
-    const existing=data.agencies.find(
-        a=>a.name.toLowerCase()===name.toLowerCase()
-    );
+    const existing =
+        data.agencies.find(a=>
+            a.name.toLowerCase()===name.toLowerCase()
+        );
 
     if(existing){
 
         alert("Cette agence existe déjà.");
+
         return;
 
     }
 
     data.agencies.push({
+
         id:uid(),
-        name:name
+
+        name,
+
+        logo:
+            document.getElementById("agencyLogo").value.trim()
+
     });
-
-    saveData();
-
-    document.getElementById("agencyName").value="";
 
     closeModal("agencyModal");
 
-    renderAll();
+    saveData();
 
 }
+
 
 function deleteAgency(id){
 
-    const agency=agencyById(id);
+    const agency = getAgency(id);
 
     if(!agency) return;
 
-    if(data.matches.some(m=>m.agencyId===id)){
-
-        alert("Cette agence est utilisée dans un ou plusieurs Match OFF. Elle ne peut pas être supprimée.");
-
+    if(!confirm(`Supprimer l'agence « ${agency.name} » ?`)){
         return;
     }
 
-    if(!confirm(`Supprimer "${agency.name}" ?`)) return;
-
-    data.agencies=data.agencies.filter(a=>a.id!==id);
+    data.agencies =
+        data.agencies.filter(a=>a.id!==id);
 
     saveData();
 
-    renderAll();
+}
+
+
+function renderAgencies(){
+
+    const grid =
+        document.getElementById("agencyGrid");
+
+    if(!data.agencies.length){
+
+        grid.innerHTML=`
+            <div class="card" style="grid-column:1/-1;">
+                <div class="empty">
+                    Aucune agence adverse enregistrée.
+                </div>
+            </div>
+        `;
+
+        return;
+
+    }
+
+    grid.innerHTML =
+        data.agencies.map(agency=>{
+
+            const matches =
+                data.matches.filter(m=>
+                    m.agencyId===agency.id
+                );
+
+            const wins =
+                matches.filter(m=>
+                    m.result==="Victoire"
+                ).length;
+
+            const losses =
+                matches.filter(m=>
+                    m.result==="Défaite"
+                ).length;
+
+            return `
+
+                <div class="card team-card">
+
+                    <div class="team-head">
+
+                        <div class="team-logo">
+
+                            ${
+                                agency.logo
+                                ? `<img src="${esc(agency.logo)}">`
+                                : esc(agency.name.charAt(0).toUpperCase())
+                            }
+
+                        </div>
+
+                        <div>
+
+                            <div class="team-name">
+                                ${esc(agency.name)}
+                            </div>
+
+                            <div class="team-small">
+                                ${matches.length} Match OFF
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="team-stats">
+
+                        <div class="team-stat">
+                            <strong>${wins}</strong>
+                            <span>Victoires</span>
+                        </div>
+
+                        <div class="team-stat">
+                            <strong>${losses}</strong>
+                            <span>Défaites</span>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-small btn-danger"
+                        style="margin-top:15px;"
+                        onclick="deleteAgency('${agency.id}')">
+                        Supprimer
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
 
 }
 
-/* =========================
-   MATCHES
-========================= */
+
+/* =========================================================
+   SELECTS
+========================================================= */
+
+function fillTeamSelect(id,value=""){
+
+    const select =
+        document.getElementById(id);
+
+    select.innerHTML =
+        `<option value="">Sélectionner une Team</option>`+
+        data.teams.map(t=>
+            `<option value="${t.id}"
+                ${t.id===value?"selected":""}>
+                ${esc(t.name)}
+            </option>`
+        ).join("");
+
+}
+
+
+function fillCreatorSelect(id,value=""){
+
+    const select =
+        document.getElementById(id);
+
+    select.innerHTML =
+        `<option value="">Sélectionner un créateur</option>`+
+        data.creators.map(c=>
+            `<option value="${c.id}"
+                ${c.id===value?"selected":""}>
+                ${esc(c.pseudo)}
+            </option>`
+        ).join("");
+
+}
+
+
+function fillAgencySelect(id,value=""){
+
+    const select =
+        document.getElementById(id);
+
+    select.innerHTML =
+        `<option value="">Sélectionner une agence</option>`+
+        data.agencies.map(a=>
+            `<option value="${a.id}"
+                ${a.id===value?"selected":""}>
+                ${esc(a.name)}
+            </option>`
+        ).join("");
+
+}
+
+
+/* =========================================================
+   MATCH OFF
+========================================================= */
+
+function openMatchModal(){
+
+    document.getElementById("matchDate").value =
+        new Date().toISOString().split("T")[0];
+
+    document.getElementById("matchTime").value="";
+
+    document.getElementById("matchTheme").value="";
+
+    document.getElementById("matchResult").value="";
+
+    document.getElementById("matchWinner").value="";
+
+    fillCreatorSelect("matchCreator");
+
+    fillTeamSelect("matchTeam");
+
+    fillAgencySelect("matchAgency");
+
+    openModal("matchModal");
+
+}
+
+
+document.getElementById("matchCreator").addEventListener("change",function(){
+
+    const creator = getCreator(this.value);
+
+    if(creator){
+
+        document.getElementById("matchTeam").value =
+            creator.teamId;
+
+    }
+
+});
+
 
 function saveMatch(){
 
-    const date=document.getElementById("matchDate").value;
-    const creatorId=document.getElementById("matchCreator").value;
-    const teamId=document.getElementById("matchTeam").value;
-    const agencyId=document.getElementById("matchAgency").value;
+    const date =
+        document.getElementById("matchDate").value;
 
-    if(!date || !creatorId || !teamId || !agencyId){
+    const time =
+        document.getElementById("matchTime").value;
 
-        alert("Date, créateur, Team et agence adverse sont obligatoires.");
+    const creatorId =
+        document.getElementById("matchCreator").value;
+
+    const teamId =
+        document.getElementById("matchTeam").value;
+
+    const agencyId =
+        document.getElementById("matchAgency").value;
+
+    if(!date){
+        alert("Veuillez sélectionner une date.");
         return;
-
     }
 
-    const match={
+    if(!creatorId){
+        alert("Veuillez sélectionner un créateur.");
+        return;
+    }
+
+    if(!teamId){
+        alert("Veuillez sélectionner une Team.");
+        return;
+    }
+
+    if(!agencyId){
+        alert("Veuillez sélectionner une agence adverse.");
+        return;
+    }
+
+    data.matches.push({
 
         id:uid(),
 
-        date:date,
+        date,
 
-        time:document.getElementById("matchTime").value,
+        time,
 
-        creatorId:creatorId,
+        creatorId,
 
-        teamId:teamId,
+        teamId,
 
-        agencyId:agencyId,
+        agencyId,
 
-        theme:document.getElementById("matchTheme").value.trim(),
+        theme:
+            document.getElementById("matchTheme").value.trim(),
 
-        result:document.getElementById("matchResult").value,
+        result:
+            document.getElementById("matchResult").value,
 
-        winner:document.getElementById("matchWinner").value.trim(),
+        winner:
+            document.getElementById("matchWinner").value.trim()
 
-        notes:document.getElementById("matchNotes").value.trim()
-
-    };
-
-    data.matches.push(match);
-
-    saveData();
+    });
 
     closeModal("matchModal");
 
-    document.getElementById("matchModal").querySelectorAll("input,textarea").forEach(el=>{
-        if(el.type!=="hidden") el.value="";
-    });
-
-    document.getElementById("matchResult").value="À venir";
-
-    renderAll();
-
-    navigate("dashboard");
+    saveData();
 
 }
 
-function renderMatches(){
-
-    const tbody=document.getElementById("matchesTable");
-
-    if(!data.matches.length){
-
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="8">
-                <div class="empty">Aucun Match OFF enregistré.</div>
-            </td>
-        </tr>
-        `;
-
-        return;
-    }
-
-    const matches=[...data.matches].sort((a,b)=>
-        new Date(b.date+"T"+(b.time||"00:00"))-
-        new Date(a.date+"T"+(a.time||"00:00"))
-    );
-
-    tbody.innerHTML=matches.map(m=>{
-
-        const c=creatorById(m.creatorId);
-        const t=teamById(m.teamId);
-        const a=agencyById(m.agencyId);
-
-        const resultClass=
-            m.result==="Victoire" ? "badge-green":
-            m.result==="Défaite" ? "badge-red":
-            "badge-orange";
-
-        return `
-        <tr onclick="showMatchDetails('${m.id}')" style="cursor:pointer">
-
-            <td>
-                ${formatDate(m.date)}
-                <div class="entity-sub">${escapeHtml(m.time||"")}</div>
-            </td>
-
-            <td>${escapeHtml(c?.pseudo||"—")}</td>
-
-            <td>${escapeHtml(t?.name||"—")}</td>
-
-            <td>${escapeHtml(a?.name||"—")}</td>
-
-            <td>${escapeHtml(m.theme||"—")}</td>
-
-            <td>
-                <span class="badge ${resultClass}">
-                    ${escapeHtml(m.result)}
-                </span>
-            </td>
-
-            <td>${escapeHtml(m.winner||"—")}</td>
-
-            <td>
-                <div class="row-actions">
-                    <button onclick="event.stopPropagation();deleteMatch('${m.id}')">×</button>
-                </div>
-            </td>
-
-        </tr>
-        `;
-
-    }).join("");
-
-}
 
 function deleteMatch(id){
 
-    if(!confirm("Supprimer ce Match OFF ?")) return;
+    if(!confirm("Supprimer ce Match OFF ?")){
+        return;
+    }
 
-    data.matches=data.matches.filter(m=>m.id!==id);
+    data.matches =
+        data.matches.filter(m=>m.id!==id);
 
     saveData();
 
-    renderAll();
+}
+
+
+function renderMatches(){
+
+    const tbody =
+        document.getElementById("matchTable");
+
+    const matches =
+        [...data.matches].sort((a,b)=>{
+
+            const da =
+                new Date(`${a.date}T${a.time || "00:00"}`);
+
+            const db =
+                new Date(`${b.date}T${b.time || "00:00"}`);
+
+            return da-db;
+
+        });
+
+    if(!matches.length){
+
+        tbody.innerHTML=`
+            <tr>
+                <td colspan="8">
+                    <div class="empty">
+                        Aucun Match OFF enregistré.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML =
+        matches.map(m=>{
+
+            const creator=getCreator(m.creatorId);
+
+            const team=getTeam(m.teamId);
+
+            const agency=getAgency(m.agencyId);
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${formatDate(m.date)}
+                        ${m.time ? `<br><small style="color:#777;">${esc(m.time)}</small>` : ""}
+                    </td>
+
+                    <td>${esc(creator?.pseudo || "—")}</td>
+
+                    <td>${esc(team?.name || "—")}</td>
+
+                    <td>${esc(agency?.name || "—")}</td>
+
+                    <td>${esc(m.theme || "—")}</td>
+
+                    <td>
+                        <span class="badge">
+                            ${esc(m.result || "À venir")}
+                        </span>
+                    </td>
+
+                    <td>${esc(m.winner || "—")}</td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn btn-small"
+                                onclick="showMatchDetail('${m.id}')">
+                                Voir
+                            </button>
+
+                            <button
+                                class="btn btn-small btn-danger"
+                                onclick="deleteMatch('${m.id}')">
+                                Supprimer
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
 
 }
 
-function showMatchDetails(id){
 
-    const m=data.matches.find(x=>x.id===id);
+/* =========================================================
+   MATCH DETAIL
+========================================================= */
+
+function showMatchDetail(id){
+
+    const m =
+        data.matches.find(x=>x.id===id);
 
     if(!m) return;
 
-    const c=creatorById(m.creatorId);
-    const t=teamById(m.teamId);
-    const a=agencyById(m.agencyId);
+    const creator=getCreator(m.creatorId);
 
-    document.getElementById("matchDetailsContent").innerHTML=`
+    const team=getTeam(m.teamId);
 
-        <div class="match-details">
+    const agency=getAgency(m.agencyId);
 
-            <div class="match-details-date">
-                ${formatDate(m.date)} · ${escapeHtml(m.time||"")}
+    document.getElementById("matchDetailBody").innerHTML=`
+
+        <div style="margin-bottom:18px;">
+
+            <div class="section-label">
+                MATCH OFF
             </div>
 
-            <div class="match-details-versus">
-
-                <div class="detail-side">
-
-                    ${logoHtml(t,75)}
-
-                    <div class="detail-side-name">
-                        ${escapeHtml(c?.pseudo||"Créateur")}
-                    </div>
-
-                    <div class="entity-sub">
-                        ${escapeHtml(t?.name||"Sans Team")}
-                    </div>
-
-                </div>
-
-                <div class="detail-vs">VS</div>
-
-                <div class="detail-side">
-
-                    <div class="team-logo" style="width:75px;height:75px;margin:auto">
-                        A
-                    </div>
-
-                    <div class="detail-side-name">
-                        ${escapeHtml(a?.name||"Agence adverse")}
-                    </div>
-
-                    <div class="entity-sub">
-                        Agence adverse
-                    </div>
-
-                </div>
-
+            <div class="match-title">
+                ${esc(creator?.pseudo || "Créateur")}
             </div>
 
-            <div class="detail-boxes">
+        </div>
 
-                <div class="detail-box">
-                    <span>THÈME</span>
-                    <strong>${escapeHtml(m.theme||"Non renseigné")}</strong>
-                </div>
+        <div class="detail-grid">
 
-                <div class="detail-box">
-                    <span>RÉSULTAT</span>
-                    <strong>${escapeHtml(m.result||"À venir")}</strong>
-                </div>
-
-                <div class="detail-box">
-                    <span>GAGNANT</span>
-                    <strong>${escapeHtml(m.winner||"Non renseigné")}</strong>
-                </div>
-
-                <div class="detail-box">
-                    <span>AGENCE ADVERSE</span>
-                    <strong>${escapeHtml(a?.name||"—")}</strong>
-                </div>
-
+            <div class="detail-item">
+                <span>Créateur</span>
+                <strong>${esc(creator?.pseudo || "—")}</strong>
             </div>
 
-            ${
-                m.notes
-                ?
-                `
-                <div style="text-align:left;background:#181a23;border-radius:12px;padding:14px;margin-top:12px">
-                    <div style="font-size:10px;color:#777b8a;margin-bottom:6px">
-                        INFORMATIONS
-                    </div>
-                    <div style="font-size:12px;line-height:1.5;color:#c7c9d2">
-                        ${escapeHtml(m.notes)}
-                    </div>
-                </div>
-                `
-                :""
-            }
+            <div class="detail-item">
+                <span>Team</span>
+                <strong>${esc(team?.name || "—")}</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Agence adverse</span>
+                <strong>${esc(agency?.name || "—")}</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Date</span>
+                <strong>
+                    ${formatDate(m.date)}
+                    ${m.time ? " à "+esc(m.time) : ""}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Thème</span>
+                <strong>${esc(m.theme || "—")}</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Résultat</span>
+                <strong>${esc(m.result || "À venir")}</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Gagnant</span>
+                <strong>${esc(m.winner || "—")}</strong>
+            </div>
 
         </div>
 
     `;
 
-    openModal("matchDetailsModal");
+    openModal("matchDetailModal");
 
 }
 
-/* =========================
+
+/* =========================================================
    CALENDAR
-========================= */
+========================================================= */
 
-function changeMonth(delta){
+function changeMonth(amount){
 
-    calendarDate.setMonth(calendarDate.getMonth()+delta);
+    calendarDate.setMonth(
+        calendarDate.getMonth()+amount
+    );
 
     renderCalendar();
 
 }
 
+
 function renderCalendar(){
 
-    const grid=document.getElementById("calendarGrid");
+    const year =
+        calendarDate.getFullYear();
 
-    const year=calendarDate.getFullYear();
-    const month=calendarDate.getMonth();
+    const month =
+        calendarDate.getMonth();
 
-    document.getElementById("calendarMonth").textContent=
-        new Date(year,month,1).toLocaleDateString("fr-FR",{
-            month:"long",
-            year:"numeric"
-        });
+    document.getElementById("calendarMonth").textContent =
+        new Date(year,month,1).toLocaleDateString(
+            "fr-FR",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        ).replace(/^./,c=>c.toUpperCase());
 
-    const dayNames=["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+    const grid =
+        document.getElementById("calendarGrid");
 
-    let html=dayNames.map(d=>
-        `<div class="day-name">${d}</div>`
-    ).join("");
+    const names =
+        ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
 
-    let first=new Date(year,month,1).getDay();
+    let html =
+        names.map(n=>
+            `<div class="calendar-day-name">${n}</div>`
+        ).join("");
 
-    first=(first+6)%7;
+    const first =
+        new Date(year,month,1);
 
-    const daysInMonth=new Date(year,month+1,0).getDate();
+    let start =
+        first.getDay();
 
-    const previousDays=new Date(year,month,0).getDate();
+    start = start===0 ? 6 : start-1;
 
-    for(let i=0;i<42;i++){
+    const days =
+        new Date(year,month+1,0).getDate();
 
-        const dayNumber=i-first+1;
+    for(let i=0;i<start;i++){
 
-        let date;
-        let other=false;
+        html+=`
+            <div class="calendar-day"
+                 style="opacity:.25;">
+            </div>
+        `;
 
-        if(dayNumber<1){
+    }
 
-            date=new Date(year,month-1,previousDays+dayNumber);
-            other=true;
+    const today =
+        new Date();
 
-        }else if(dayNumber>daysInMonth){
+    for(let day=1;day<=days;day++){
 
-            date=new Date(year,month+1,dayNumber-daysInMonth);
-            other=true;
+        const dateString =
+            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
-        }else{
+        const isToday =
+            today.getFullYear()===year &&
+            today.getMonth()===month &&
+            today.getDate()===day;
 
-            date=new Date(year,month,dayNumber);
-
-        }
-
-        const iso=toISODate(date);
-
-        const todayIso=toISODate(new Date());
-
-        const matches=data.matches.filter(m=>m.date===iso);
+        const matches =
+            data.matches.filter(m=>
+                m.date===dateString
+            );
 
         html+=`
 
-        <div class="day ${other?"other":""} ${iso===todayIso?"today":""}">
+            <div class="calendar-day ${isToday?"today":""}">
 
-            <div class="day-number">${date.getDate()}</div>
+                <div class="day-number">${day}</div>
 
-            ${matches.slice(0,3).map(m=>{
+                ${
+                    matches.map(m=>{
 
-                const c=creatorById(m.creatorId);
-                const t=teamById(m.teamId);
+                        const creator=getCreator(m.creatorId);
 
-                return `
-                <div class="event" onclick="event.stopPropagation();showMatchDetails('${m.id}')">
+                        const team=getTeam(m.teamId);
 
-                    <div class="event-title">
-                        Match OFF — ${escapeHtml(c?.pseudo||"Créateur")}
-                    </div>
+                        return `
 
-                    <div class="event-sub">
-                        ${escapeHtml(t?.name||"Team")}
-                    </div>
+                            <div
+                                class="calendar-match"
+                                onclick="showMatchDetail('${m.id}')">
 
-                </div>
-                `;
+                                <div class="calendar-match-title">
+                                    Match OFF — ${esc(creator?.pseudo || "Créateur")}
+                                </div>
 
-            }).join("")}
+                                <div class="calendar-match-team">
+                                    ${esc(team?.name || "Team")}
+                                </div>
 
-            ${
-                matches.length>3
-                ?
-                `<div style="font-size:8px;color:#8f93a3">+ ${matches.length-3} autre(s)</div>`
-                :""
-            }
+                            </div>
 
-        </div>
+                        `;
+
+                    }).join("")
+                }
+
+            </div>
 
         `;
 
@@ -3425,227 +2861,731 @@ function renderCalendar(){
 
 }
 
-function toISODate(date){
 
-    const y=date.getFullYear();
-    const m=String(date.getMonth()+1).padStart(2,"0");
-    const d=String(date.getDate()).padStart(2,"0");
+/* =========================================================
+   STATISTICS
+========================================================= */
 
-    return `${y}-${m}-${d}`;
+function getLatestStatsForTeam(teamId){
+
+    const entries =
+        data.statistics
+        .filter(s=>s.teamId===teamId)
+        .sort((a,b)=>b.month.localeCompare(a.month));
+
+    return entries[0] || null;
 
 }
 
-/* =========================
-   STATISTICS
-========================= */
+
+function getLatestStats(){
+
+    if(!data.statistics.length){
+        return [];
+    }
+
+    const latestMonth =
+        [...new Set(data.statistics.map(s=>s.month))]
+        .sort()
+        .pop();
+
+    return data.statistics.filter(s=>
+        s.month===latestMonth
+    );
+
+}
+
+
+function getTotals(){
+
+    const latest =
+        getLatestStats();
+
+    return {
+
+        diamonds:
+            latest.reduce((sum,s)=>
+                sum+Number(s.diamonds||0),0),
+
+        hours:
+            latest.reduce((sum,s)=>
+                sum+Number(s.hours||0),0),
+
+        teams:
+            new Set(latest.map(s=>s.teamId)).size
+
+    };
+
+}
+
+
+function openStatsModal(){
+
+    if(!data.teams.length){
+
+        alert("Créez d’abord au moins une Team.");
+
+        return;
+
+    }
+
+    document.getElementById("statsMonth").value =
+        new Date().toISOString().slice(0,7);
+
+    renderStatsFields();
+
+    openModal("statsModal");
+
+}
+
+
+document.getElementById("statsMonth").addEventListener(
+    "change",
+    renderStatsFields
+);
+
+
+function renderStatsFields(){
+
+    const month =
+        document.getElementById("statsMonth").value;
+
+    const container =
+        document.getElementById("statsTeamFields");
+
+    container.innerHTML =
+        data.teams.map(team=>{
+
+            const existing =
+                data.statistics.find(s=>
+                    s.teamId===team.id &&
+                    s.month===month
+                );
+
+            return `
+
+                <div
+                    style="
+                        background:#171720;
+                        border:1px solid #252530;
+                        border-radius:13px;
+                        padding:14px;
+                        margin-bottom:9px;
+                    ">
+
+                    <div style="
+                        font-weight:800;
+                        margin-bottom:11px;
+                    ">
+                        ${esc(team.name)}
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Diamants</label>
+
+                            <input
+                                type="number"
+                                min="0"
+                                id="diamonds_${team.id}"
+                                value="${existing?.diamonds || 0}">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Heures</label>
+
+                            <input
+                                type="number"
+                                min="0"
+                                step="0.1"
+                                id="hours_${team.id}"
+                                value="${existing?.hours || 0}">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
 
 function saveStats(){
 
-    const month=document.getElementById("statsMonth").value;
-    const teamId=document.getElementById("statsTeam").value;
-    const diamonds=Number(document.getElementById("statsDiamonds").value)||0;
-    const hours=Number(document.getElementById("statsHours").value)||0;
+    const month =
+        document.getElementById("statsMonth").value;
 
-    if(!month || !teamId){
+    if(!month){
 
-        alert("Le mois et la Team sont obligatoires.");
+        alert("Veuillez sélectionner un mois.");
+
         return;
 
     }
 
-    const existing=data.stats.find(
-        s=>s.month===month && s.teamId===teamId
-    );
+    data.teams.forEach(team=>{
 
-    if(existing){
+        const diamonds =
+            Number(
+                document.getElementById(
+                    "diamonds_"+team.id
+                ).value || 0
+            );
 
-        existing.diamonds=diamonds;
-        existing.hours=hours;
+        const hours =
+            Number(
+                document.getElementById(
+                    "hours_"+team.id
+                ).value || 0
+            );
 
-    }else{
+        const existing =
+            data.statistics.find(s=>
+                s.teamId===team.id &&
+                s.month===month
+            );
 
-        data.stats.push({
-            id:uid(),
-            month,
-            teamId,
-            diamonds,
-            hours
-        });
+        if(existing){
 
-    }
+            existing.diamonds=diamonds;
+            existing.hours=hours;
 
-    saveData();
+        }else{
+
+            data.statistics.push({
+
+                id:uid(),
+
+                month,
+
+                teamId:team.id,
+
+                diamonds,
+
+                hours
+
+            });
+
+        }
+
+    });
 
     closeModal("statsModal");
 
-    document.getElementById("statsMonth").value="";
-    document.getElementById("statsDiamonds").value="";
-    document.getElementById("statsHours").value="";
-
-    renderAll();
+    saveData();
 
 }
+
 
 function renderStatistics(){
 
-    const totals=totalStats();
+    const totals =
+        getTotals();
 
-    document.getElementById("totalDiamonds").textContent=
+    document.getElementById("statDiamonds").textContent =
         formatNumber(totals.diamonds);
 
-    document.getElementById("totalHours").textContent=
-        totals.hours.toLocaleString("fr-FR",{maximumFractionDigits:1})+" h";
+    document.getElementById("statHours").textContent =
+        formatNumber(totals.hours);
 
-    const months=[...new Set(data.stats.map(s=>s.month))].sort();
+    document.getElementById("statActiveTeams").textContent =
+        totals.teams;
 
-    document.getElementById("totalMonths").textContent=months.length;
+    renderRanking();
 
-    renderMonthlyChart(months);
-
-    const tbody=document.getElementById("statisticsTable");
-
-    const ranking=data.teams
-        .map(team=>({
-
-            team,
-
-            stats:getTeamStats(team.id),
-
-            creators:data.creators.filter(c=>c.teamId===team.id).length
-
-        }))
-        .sort((a,b)=>b.stats.diamonds-a.stats.diamonds);
-
-    if(!ranking.length){
-
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="6">
-                <div class="empty">Aucune Team à classer.</div>
-            </td>
-        </tr>
-        `;
-
-        return;
-    }
-
-    tbody.innerHTML=ranking.map((item,index)=>{
-
-        const percentage=totals.diamonds
-            ? Math.round(item.stats.diamonds/totals.diamonds*100)
-            : 0;
-
-        return `
-        <tr>
-
-            <td style="font-weight:800">
-                ${index+1}
-            </td>
-
-            <td>
-                <div class="entity">
-                    ${logoHtml(item.team,36)}
-                    <div>
-                        <div class="entity-name">
-                            ${escapeHtml(item.team.name)}
-                        </div>
-                    </div>
-                </div>
-            </td>
-
-            <td>${item.creators}</td>
-
-            <td>
-                <strong>💎 ${formatNumber(item.stats.diamonds)}</strong>
-            </td>
-
-            <td>
-                ${item.stats.hours.toLocaleString("fr-FR",{maximumFractionDigits:1})} h
-            </td>
-
-            <td>
-                ${percentage}%
-            </td>
-
-        </tr>
-        `;
-
-    }).join("");
+    renderChart();
 
 }
 
-function renderMonthlyChart(months){
 
-    const chart=document.getElementById("monthlyChart");
+/* =========================================================
+   RANKING
+========================================================= */
+
+function renderRanking(){
+
+    const latest =
+        getLatestStats();
+
+    const tbody =
+        document.getElementById("rankingTable");
+
+    const sorted =
+        [...latest].sort(
+            (a,b)=>Number(b.diamonds)-Number(a.diamonds)
+        );
+
+    if(!sorted.length){
+
+        tbody.innerHTML=`
+            <tr>
+                <td colspan="4">
+                    <div class="empty">
+                        Aucune statistique enregistrée.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML =
+        sorted.map((s,index)=>{
+
+            const team=getTeam(s.teamId);
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>${index+1}</strong>
+                    </td>
+
+                    <td>
+                        ${esc(team?.name || "—")}
+                    </td>
+
+                    <td>
+                        ${formatNumber(s.diamonds)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(s.hours)}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+function renderChart(){
+
+    const container =
+        document.getElementById("diamondChart");
+
+    const months =
+        [...new Set(
+            data.statistics.map(s=>s.month)
+        )]
+        .sort()
+        .slice(-8);
 
     if(!months.length){
 
-        chart.innerHTML=
-            `<div class="empty" style="width:100%">Aucune statistique mensuelle enregistrée.</div>`;
-
-        return;
-    }
-
-    const values=months.map(month=>
-        data.stats
-            .filter(s=>s.month===month)
-            .reduce((sum,s)=>sum+(Number(s.diamonds)||0),0)
-    );
-
-    const max=Math.max(...values,1);
-
-    chart.innerHTML=months.slice(-12).map((month,index)=>{
-
-        const value=values[months.indexOf(month)];
-
-        const height=Math.max(3,(value/max)*180);
-
-        const label=new Date(month+"-01").toLocaleDateString("fr-FR",{
-            month:"short"
-        });
-
-        return `
-
-        <div class="bar-container">
-
-            <div class="bar-value">
-                ${formatNumber(value)}
+        container.innerHTML=`
+            <div class="empty" style="width:100%;">
+                Enregistrez vos premières statistiques
+                pour voir l’évolution.
             </div>
-
-            <div class="bar"
-                 style="height:${height}px"
-                 title="${formatNumber(value)} diamants">
-            </div>
-
-            <div class="bar-label">${label}</div>
-
-        </div>
-
         `;
 
-    }).join("");
+        return;
+
+    }
+
+    const totals =
+        months.map(month=>{
+
+            return data.statistics
+                .filter(s=>s.month===month)
+                .reduce(
+                    (sum,s)=>sum+Number(s.diamonds||0),
+                    0
+                );
+
+        });
+
+    const max =
+        Math.max(...totals,1);
+
+    container.innerHTML =
+        months.map((month,index)=>{
+
+            const value=totals[index];
+
+            const height =
+                Math.max(
+                    5,
+                    (value/max)*190
+                );
+
+            const label =
+                month.slice(5)+"/"+month.slice(0,4);
+
+            return `
+
+                <div class="bar-wrap">
+
+                    <div class="bar-value">
+                        ${formatNumber(value)}
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height:${height}px;"
+                        title="${formatNumber(value)} diamants">
+                    </div>
+
+                    <div class="bar-label">
+                        ${label}
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
 
 }
 
-/* =========================
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+    const tbody =
+        document.getElementById("historyTable");
+
+    const months =
+        [...new Set(
+            data.statistics.map(s=>s.month)
+        )]
+        .sort()
+        .reverse();
+
+    if(!months.length){
+
+        tbody.innerHTML=`
+            <tr>
+                <td colspan="5">
+                    <div class="empty">
+                        Aucun historique disponible.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML =
+        months.map((month,index)=>{
+
+            const total =
+                data.statistics
+                .filter(s=>s.month===month)
+                .reduce(
+                    (sum,s)=>sum+Number(s.diamonds||0),
+                    0
+                );
+
+            const hours =
+                data.statistics
+                .filter(s=>s.month===month)
+                .reduce(
+                    (sum,s)=>sum+Number(s.hours||0),
+                    0
+                );
+
+            const previousMonth =
+                months[index+1];
+
+            let diamondEvolution="—";
+            let hoursEvolution="—";
+
+            if(previousMonth){
+
+                const previousDiamond =
+                    data.statistics
+                    .filter(s=>s.month===previousMonth)
+                    .reduce(
+                        (sum,s)=>sum+Number(s.diamonds||0),
+                        0
+                    );
+
+                const previousHours =
+                    data.statistics
+                    .filter(s=>s.month===previousMonth)
+                    .reduce(
+                        (sum,s)=>sum+Number(s.hours||0),
+                        0
+                    );
+
+                if(previousDiamond){
+
+                    const diff =
+                        ((total-previousDiamond)/previousDiamond)*100;
+
+                    diamondEvolution =
+                        `${diff>=0?"+":""}${diff.toFixed(1)} %`;
+
+                }
+
+                if(previousHours){
+
+                    const diff =
+                        ((hours-previousHours)/previousHours)*100;
+
+                    hoursEvolution =
+                        `${diff>=0?"+":""}${diff.toFixed(1)} %`;
+
+                }
+
+            }
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>${month}</strong>
+                    </td>
+
+                    <td>${formatNumber(total)}</td>
+
+                    <td>${formatNumber(hours)}</td>
+
+                    <td>${diamondEvolution}</td>
+
+                    <td>${hoursEvolution}</td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+    document.getElementById("dashTeams").textContent =
+        data.teams.length;
+
+    document.getElementById("dashCreators").textContent =
+        data.creators.length;
+
+    const now =
+        new Date();
+
+    const upcoming =
+        data.matches
+        .filter(m=>
+            new Date(`${m.date}T${m.time || "23:59"}`)>=now
+        )
+        .sort((a,b)=>
+            new Date(`${a.date}T${a.time || "00:00"}`) -
+            new Date(`${b.date}T${b.time || "00:00"}`)
+        );
+
+    document.getElementById("dashMatches").textContent =
+        upcoming.length;
+
+    document.getElementById("dashAgencies").textContent =
+        data.agencies.length;
+
+    const totals =
+        getTotals();
+
+    document.getElementById("dashDiamonds").textContent =
+        formatNumber(totals.diamonds);
+
+    document.getElementById("dashHours").textContent =
+        formatNumber(totals.hours);
+
+    const latestMonth =
+        data.statistics
+        .map(s=>s.month)
+        .sort()
+        .pop();
+
+    document.getElementById("dashLastMonth").textContent =
+        latestMonth || "—";
+
+    renderNextMatch(upcoming[0]);
+
+    renderDashboardTeams();
+
+}
+
+
+function renderNextMatch(match){
+
+    const container =
+        document.getElementById("nextMatchContent");
+
+    if(!match){
+
+        container.innerHTML=`
+            <div class="empty">
+                Aucun Match OFF à venir.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    const creator=getCreator(match.creatorId);
+
+    const team=getTeam(match.teamId);
+
+    const agency=getAgency(match.agencyId);
+
+    container.innerHTML=`
+
+        <div class="match-title">
+            ${esc(creator?.pseudo || "Créateur")}
+            <span style="color:#777;">vs</span>
+            ${esc(agency?.name || "Agence")}
+        </div>
+
+        <div class="match-meta">
+
+            <span class="badge">
+                📅 ${formatDate(match.date)}
+            </span>
+
+            ${
+                match.time
+                ? `<span class="badge">🕐 ${esc(match.time)}</span>`
+                : ""
+            }
+
+            <span class="badge">
+                ◆ ${esc(team?.name || "Team")}
+            </span>
+
+            ${
+                match.theme
+                ? `<span class="badge"># ${esc(match.theme)}</span>`
+                : ""
+            }
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            style="margin-top:20px;"
+            onclick="showMatchDetail('${match.id}')">
+            Voir les informations
+        </button>
+
+    `;
+
+}
+
+
+function renderDashboardTeams(){
+
+    const container =
+        document.getElementById("dashboardTeams");
+
+    const latest =
+        getLatestStats();
+
+    if(!latest.length){
+
+        container.innerHTML=`
+            <div class="empty">
+                Aucune statistique enregistrée.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    const sorted =
+        [...latest]
+        .sort(
+            (a,b)=>Number(b.diamonds)-Number(a.diamonds)
+        )
+        .slice(0,5);
+
+    container.innerHTML =
+        sorted.map((s,index)=>{
+
+            const team=getTeam(s.teamId);
+
+            return `
+
+                <div class="list-row">
+
+                    <div class="row-main">
+
+                        <div class="row-title">
+                            #${index+1} — ${esc(team?.name || "—")}
+                        </div>
+
+                        <div class="row-sub">
+                            ${formatNumber(s.hours)} heures
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        ${formatNumber(s.diamonds)}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
    EXPORT / IMPORT
-========================= */
+========================================================= */
 
 function exportData(){
 
-    const blob=new Blob(
-        [JSON.stringify(data,null,2)],
-        {type:"application/json"}
-    );
+    const blob =
+        new Blob(
+            [JSON.stringify(data,null,2)],
+            {type:"application/json"}
+        );
 
-    const url=URL.createObjectURL(blob);
+    const url =
+        URL.createObjectURL(blob);
 
-    const a=document.createElement("a");
+    const a =
+        document.createElement("a");
 
     a.href=url;
 
     a.download=
-        "TokCenter_LVF_sauvegarde_"+toISODate(new Date())+".json";
+        `tokcenter-sauvegarde-${new Date().toISOString().slice(0,10)}.json`;
 
     a.click();
 
@@ -3653,26 +3593,23 @@ function exportData(){
 
 }
 
-function importData(){
 
-    const input=document.getElementById("importFile");
+function importData(event){
 
-    if(!input.files.length){
+    const file =
+        event.target.files[0];
 
-        alert("Sélectionne d'abord une sauvegarde JSON.");
-        return;
+    if(!file) return;
 
-    }
+    const reader =
+        new FileReader();
 
-    const file=input.files[0];
-
-    const reader=new FileReader();
-
-    reader.onload=function(e){
+    reader.onload = function(){
 
         try{
 
-            const imported=JSON.parse(e.target.result);
+            const imported =
+                JSON.parse(reader.result);
 
             if(
                 !imported ||
@@ -3680,26 +3617,28 @@ function importData(){
                 !Array.isArray(imported.creators) ||
                 !Array.isArray(imported.agencies) ||
                 !Array.isArray(imported.matches) ||
-                !Array.isArray(imported.stats)
+                !Array.isArray(imported.statistics)
             ){
 
                 throw new Error("Format invalide");
 
             }
 
-            if(!confirm("Importer cette sauvegarde et remplacer les données actuelles ?")) return;
+            if(!confirm(
+                "L’import remplacera les données actuelles. Continuer ?"
+            )){
+                return;
+            }
 
             data=imported;
 
             saveData();
 
-            renderAll();
+            alert("Données importées avec succès.");
 
-            alert("Sauvegarde importée avec succès.");
+        }catch(e){
 
-        }catch(error){
-
-            alert("Impossible d'importer cette sauvegarde.");
+            alert("Impossible d’importer ce fichier.");
 
         }
 
@@ -3709,35 +3648,50 @@ function importData(){
 
 }
 
-/* =========================
-   DEFAULT DATE VALUES
-========================= */
 
-function setDefaultDates(){
+/* =========================================================
+   RENDER ALL
+========================================================= */
 
-    const today=toISODate(new Date());
+function renderAll(){
 
-    document.getElementById("matchDate").value=today;
+    renderDashboard();
 
-    document.getElementById("statsMonth").value=
-        today.slice(0,7);
+    renderTeams();
+
+    renderCreators();
+
+    renderAgencies();
+
+    renderMatches();
+
+    renderCalendar();
+
+    renderStatistics();
+
+    renderHistory();
 
 }
 
-setTimeout(setDefaultDates,100);
 
-/* =========================
-   ESCAPE MODAL
-========================= */
+/* =========================================================
+   INIT
+========================================================= */
 
-document.addEventListener("keydown",e=>{
+renderAll();
 
-    if(e.key==="Escape"){
 
-        document.querySelectorAll(".modal-backdrop.show")
-            .forEach(modal=>modal.classList.remove("show"));
+/* Fermeture des modales en cliquant à l'extérieur */
 
-    }
+document.querySelectorAll(".modal-bg").forEach(bg=>{
+
+    bg.addEventListener("click",function(e){
+
+        if(e.target===bg){
+            bg.classList.remove("open");
+        }
+
+    });
 
 });
 
