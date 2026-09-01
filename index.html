@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0d0e12">
+
 <title>TokCenter</title>
 
 <style>
+
 :root{
     --bg:#0d0e12;
     --panel:#17191f;
@@ -227,36 +229,6 @@ main{
     display:none!important;
 }
 
-/* HEURE 24 H */
-
-.time-picker{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.time-box{
-    position:relative;
-}
-
-.time-box select{
-    appearance:none;
-    -webkit-appearance:none;
-    text-align:center;
-    font-weight:700;
-    font-size:18px;
-    padding:13px 8px;
-}
-
-.time-label{
-    color:var(--muted);
-    font-size:11px;
-    text-align:center;
-    margin-top:5px;
-}
-
-/* CREATEURS / ADVERSAIRES */
-
 .search{
     margin-bottom:15px;
 }
@@ -277,17 +249,16 @@ main{
     gap:14px;
 }
 
-.avatar{
-    width:68px;
-    height:68px;
+.person-icon{
+    width:60px;
+    height:60px;
     border-radius:50%;
-    object-fit:cover;
     background:var(--panel2);
     border:1px solid var(--border);
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:28px;
+    justify-content:center;
+    font-size:25px;
     flex-shrink:0;
 }
 
@@ -303,9 +274,12 @@ main{
 
 .person-info p{
     color:var(--muted);
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    margin-top:3px;
+}
+
+.team{
+    color:#fff !important;
+    font-weight:600;
 }
 
 .card-actions{
@@ -328,7 +302,27 @@ main{
     color:#ffb5bd;
 }
 
-/* MATCHS */
+.time-picker{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.time-box select{
+    appearance:none;
+    -webkit-appearance:none;
+    text-align:center;
+    font-weight:700;
+    font-size:18px;
+    padding:13px 8px;
+}
+
+.time-label{
+    color:var(--muted);
+    font-size:11px;
+    text-align:center;
+    margin-top:5px;
+}
 
 .match-card{
     position:relative;
@@ -356,6 +350,20 @@ main{
     font-size:14px;
 }
 
+.match-team{
+    color:#fff;
+    font-weight:600;
+    margin-top:5px;
+}
+
+.match-vs{
+    text-align:center;
+    font-size:20px;
+    font-weight:800;
+    margin:12px 0;
+    color:var(--accent);
+}
+
 .match-actions{
     display:flex;
     gap:8px;
@@ -376,8 +384,6 @@ main{
     background:#54202b;
     color:#ffb5c0;
 }
-
-/* CALENDRIER */
 
 .calendar-header{
     display:flex;
@@ -556,10 +562,6 @@ footer{
     .calendar-match{
         font-size:9px;
     }
-
-    .logo{
-        font-size:30px;
-    }
 }
 
 @media(max-width:480px){
@@ -589,23 +591,25 @@ footer{
         padding:3px;
         font-size:8px;
     }
-
-    .avatar{
-        width:58px;
-        height:58px;
-    }
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Tok<span>Center</span></div>
-    <div class="header-subtitle">
-        Gestion des créateurs et des matchs TikTok
-    </div>
+
+<div class="logo">
+Tok<span>Center</span>
+</div>
+
+<div class="header-subtitle">
+Gestion des créateurs et des matchs TikTok
+</div>
+
 </header>
+
 
 <nav>
 
@@ -631,7 +635,9 @@ footer{
 
 </nav>
 
+
 <main>
+
 
 <!-- ACCUEIL -->
 
@@ -644,6 +650,7 @@ Tableau de bord
 <p class="page-description">
 Bienvenue sur TokCenter.
 </p>
+
 
 <div class="dashboard">
 
@@ -669,16 +676,23 @@ Bienvenue sur TokCenter.
 
 </div>
 
+
 <div class="notice">
 
-<strong>💡 TokCenter</strong><br><br>
+<strong>💡 TokCenter</strong>
 
-Ajoute tes créateurs et tes adversaires,
+<br><br>
+
+Ajoute tes créateurs et leurs teams,
+enregistre tes adversaires réguliers,
 puis programme facilement tes matchs.
 
 </div>
 
-<h2>⚔️ Prochains matchs</h2>
+
+<h2>
+⚔️ Prochains matchs
+</h2>
 
 <div id="homeMatches"></div>
 
@@ -694,12 +708,14 @@ puis programme facilement tes matchs.
 </h2>
 
 <p class="page-description">
-Gère les créateurs que tu utilises pour tes matchs.
+Gère tes créateurs et leurs teams.
 </p>
+
 
 <div class="actions">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="openCreatorForm()">
 
 + Ajouter un créateur
@@ -708,13 +724,16 @@ onclick="openCreatorForm()">
 
 </div>
 
+
 <div id="creatorForm" class="form hidden">
 
 <h3 id="creatorFormTitle">
 Ajouter un créateur
 </h3>
 
+
 <div class="form-grid">
+
 
 <div class="field">
 
@@ -728,10 +747,11 @@ placeholder="Ex : Lucas">
 
 </div>
 
+
 <div class="field">
 
 <label>
-@pseudo TikTok
+@Pseudo TikTok
 </label>
 
 <input
@@ -740,31 +760,35 @@ placeholder="Ex : @lucas">
 
 </div>
 
+
 <div class="field">
 
 <label>
-Photo / avatar
+🏆 Team
 </label>
 
 <input
-id="creatorPhoto"
-type="url"
-placeholder="Lien de la photo (facultatif)">
+id="creatorTeam"
+placeholder="Ex : Team LVF">
 
 </div>
 
+
 </div>
+
 
 <div class="form-buttons">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="saveCreator()">
 
 Enregistrer
 
 </button>
 
-<button class="btn secondary"
+<button
+class="btn secondary"
 onclick="closeCreatorForm()">
 
 Annuler
@@ -775,6 +799,7 @@ Annuler
 
 </div>
 
+
 <div class="search">
 
 <input
@@ -783,6 +808,7 @@ placeholder="🔎 Rechercher un créateur..."
 oninput="renderCreators()">
 
 </div>
+
 
 <div id="creatorList"></div>
 
@@ -801,9 +827,11 @@ oninput="renderCreators()">
 Enregistre les adversaires qui reviennent régulièrement.
 </p>
 
+
 <div class="actions">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="openOpponentForm()">
 
 + Ajouter un adversaire
@@ -812,13 +840,16 @@ onclick="openOpponentForm()">
 
 </div>
 
+
 <div id="opponentForm" class="form hidden">
 
 <h3 id="opponentFormTitle">
 Ajouter un adversaire
 </h3>
 
+
 <div class="form-grid">
+
 
 <div class="field">
 
@@ -832,10 +863,11 @@ placeholder="Ex : Thomas">
 
 </div>
 
+
 <div class="field">
 
 <label>
-@pseudo TikTok
+@Pseudo TikTok
 </label>
 
 <input
@@ -844,18 +876,22 @@ placeholder="Ex : @thomas">
 
 </div>
 
+
 </div>
+
 
 <div class="form-buttons">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="saveOpponent()">
 
 Enregistrer
 
 </button>
 
-<button class="btn secondary"
+<button
+class="btn secondary"
 onclick="closeOpponentForm()">
 
 Annuler
@@ -866,6 +902,7 @@ Annuler
 
 </div>
 
+
 <div class="search">
 
 <input
@@ -874,6 +911,7 @@ placeholder="🔎 Rechercher un adversaire..."
 oninput="renderOpponents()">
 
 </div>
+
 
 <div id="opponentList"></div>
 
@@ -892,9 +930,11 @@ oninput="renderOpponents()">
 Crée et programme tes prochains matchs.
 </p>
 
+
 <div class="actions">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="openMatchForm()">
 
 + Créer un match
@@ -903,13 +943,16 @@ onclick="openMatchForm()">
 
 </div>
 
+
 <div id="matchForm" class="form hidden">
 
 <h3 id="matchFormTitle">
 Créer un match
 </h3>
 
+
 <div class="form-grid">
+
 
 <div class="field">
 
@@ -917,9 +960,16 @@ Créer un match
 Créateur
 </label>
 
-<select id="matchCreator"></select>
+<select id="matchCreator">
+
+<option value="">
+Choisir un créateur
+</option>
+
+</select>
 
 </div>
+
 
 <div class="field">
 
@@ -927,9 +977,16 @@ Créateur
 Adversaire
 </label>
 
-<select id="matchOpponent"></select>
+<select id="matchOpponent">
+
+<option value="">
+Choisir un adversaire
+</option>
+
+</select>
 
 </div>
+
 
 <div class="field">
 
@@ -943,13 +1000,16 @@ type="date">
 
 </div>
 
+
 <div class="field">
 
 <label>
 Heure du match — 24 h
 </label>
 
+
 <div class="time-picker">
+
 
 <div class="time-box">
 
@@ -987,6 +1047,7 @@ HEURES
 </div>
 
 </div>
+
 
 <div class="time-box">
 
@@ -1067,16 +1128,19 @@ MINUTES
 
 </div>
 
+
 <div class="form-buttons">
 
-<button class="btn primary"
+<button
+class="btn primary"
 onclick="saveMatch()">
 
 Enregistrer le match
 
 </button>
 
-<button class="btn secondary"
+<button
+class="btn secondary"
 onclick="closeMatchForm()">
 
 Annuler
@@ -1086,6 +1150,7 @@ Annuler
 </div>
 
 </div>
+
 
 <div id="matchList"></div>
 
@@ -1104,6 +1169,7 @@ Annuler
 Tous tes matchs programmés.
 </p>
 
+
 <div class="card">
 
 <div class="calendar-header">
@@ -1116,7 +1182,9 @@ Tous tes matchs programmés.
 
 </div>
 
+
 <h3 id="calendarTitle"></h3>
+
 
 <div class="calendar-nav">
 
@@ -1128,9 +1196,11 @@ Tous tes matchs programmés.
 
 </div>
 
+
 <div
 class="calendar-grid"
 id="calendarGrid">
+
 </div>
 
 </div>
@@ -1139,14 +1209,17 @@ id="calendarGrid">
 
 </main>
 
+
 <footer>
+
 TokCenter © 2026
+
 </footer>
 
 
-<!-- MODAL -->
-
-<div id="matchModal" class="modal hidden">
+<div
+id="matchModal"
+class="modal hidden">
 
 <div class="modal-box">
 
@@ -1172,10 +1245,12 @@ onclick="closeModal()">
 
 </div>
 
+
 <div id="toast" class="toast"></div>
 
 
 <script>
+
 
 /* =========================
 DONNÉES
@@ -1196,9 +1271,11 @@ JSON.parse(
 localStorage.getItem("tokcenter_matches")
 ) || [];
 
+
 let editingCreatorId=null;
 let editingOpponentId=null;
 let editingMatchId=null;
+
 
 let calendarDate=new Date();
 
@@ -1243,6 +1320,7 @@ document
 .getElementById(page)
 .classList.add("active");
 
+
 document
 .querySelectorAll("nav button")
 .forEach(b =>
@@ -1250,6 +1328,7 @@ b.classList.remove("active")
 );
 
 button.classList.add("active");
+
 
 refreshAll();
 
@@ -1264,54 +1343,72 @@ function openCreatorForm(id=null){
 
 editingCreatorId=id;
 
+
 const form=
-document.getElementById("creatorForm");
+document.getElementById(
+"creatorForm"
+);
 
 form.classList.remove("hidden");
+
 
 if(id){
 
 const creator=
-creators.find(c=>c.id===id);
+creators.find(
+c=>c.id===id
+);
+
 
 document.getElementById(
 "creatorFormTitle"
 ).textContent=
 "Modifier le créateur";
 
+
 document.getElementById(
 "creatorName"
-).value=creator.name;
+).value=
+creator.name;
+
 
 document.getElementById(
 "creatorUsername"
-).value=creator.username;
+).value=
+creator.username;
+
 
 document.getElementById(
-"creatorPhoto"
+"creatorTeam"
 ).value=
-creator.photo || "";
+creator.team || "";
+
 
 }else{
+
 
 document.getElementById(
 "creatorFormTitle"
 ).textContent=
 "Ajouter un créateur";
 
+
 document.getElementById(
 "creatorName"
 ).value="";
+
 
 document.getElementById(
 "creatorUsername"
 ).value="";
 
+
 document.getElementById(
-"creatorPhoto"
+"creatorTeam"
 ).value="";
 
 }
+
 
 form.scrollIntoView({
 behavior:"smooth",
@@ -1339,25 +1436,29 @@ document
 .getElementById("creatorName")
 .value.trim();
 
+
 const username=
 document
 .getElementById("creatorUsername")
 .value.trim();
 
-const photo=
+
+const team=
 document
-.getElementById("creatorPhoto")
+.getElementById("creatorTeam")
 .value.trim();
 
-if(!name || !username){
+
+if(!name || !username || !team){
 
 alert(
-"Le nom et le pseudo TikTok sont obligatoires."
+"Le nom, le pseudo TikTok et la team sont obligatoires."
 );
 
 return;
 
 }
+
 
 if(editingCreatorId){
 
@@ -1366,13 +1467,19 @@ creators.find(
 c=>c.id===editingCreatorId
 );
 
+
 creator.name=name;
 creator.username=username;
-creator.photo=photo;
+creator.team=team;
 
-showToast("Créateur modifié.");
+
+showToast(
+"Créateur modifié."
+);
+
 
 }else{
+
 
 creators.push({
 
@@ -1382,13 +1489,17 @@ name:name,
 
 username:username,
 
-photo:photo
+team:team
 
 });
 
-showToast("Créateur ajouté.");
+
+showToast(
+"Créateur ajouté."
+);
 
 }
+
 
 saveData();
 
@@ -1406,6 +1517,7 @@ document.getElementById(
 "creatorList"
 );
 
+
 const search=
 (
 document.getElementById(
@@ -1413,14 +1525,24 @@ document.getElementById(
 )?.value || ""
 ).toLowerCase();
 
+
 const filtered=
 creators.filter(c=>
 
 c.name.toLowerCase().includes(search)
+
 ||
+
 c.username.toLowerCase().includes(search)
 
+||
+
+(c.team || "")
+.toLowerCase()
+.includes(search)
+
 );
+
 
 if(filtered.length===0){
 
@@ -1431,22 +1553,18 @@ return;
 
 }
 
+
 list.innerHTML=
 
 filtered.map(c=>`
 
 <div class="card person">
 
-${
-c.photo
-?
-`<img
-class="avatar"
-src="${escapeHtml(c.photo)}"
-alt="">`
-:
-`<div class="avatar">👤</div>`
-}
+
+<div class="person-icon">
+👤
+</div>
+
 
 <div class="person-info">
 
@@ -1458,7 +1576,12 @@ ${escapeHtml(c.name)}
 ${escapeHtml(c.username)}
 </p>
 
+<p class="team">
+🏆 ${escapeHtml(c.team || "Sans team")}
+</p>
+
 </div>
+
 
 <div class="card-actions">
 
@@ -1470,6 +1593,7 @@ Modifier
 
 </button>
 
+
 <button
 class="small-btn delete"
 onclick="deleteCreator(${c.id})">
@@ -1479,6 +1603,7 @@ Supprimer
 </button>
 
 </div>
+
 
 </div>
 
@@ -1494,6 +1619,7 @@ matches.some(
 m=>m.creatorId===id
 );
 
+
 if(hasMatches){
 
 alert(
@@ -1504,14 +1630,17 @@ return;
 
 }
 
+
 if(!confirm(
 "Supprimer ce créateur ?"
 )) return;
+
 
 creators=
 creators.filter(
 c=>c.id!==id
 );
+
 
 saveData();
 
@@ -1532,12 +1661,14 @@ function openOpponentForm(id=null){
 
 editingOpponentId=id;
 
+
 const form=
 document.getElementById(
 "opponentForm"
 );
 
 form.classList.remove("hidden");
+
 
 if(id){
 
@@ -1546,37 +1677,45 @@ opponents.find(
 o=>o.id===id
 );
 
+
 document.getElementById(
 "opponentFormTitle"
 ).textContent=
 "Modifier l'adversaire";
+
 
 document.getElementById(
 "opponentName"
 ).value=
 opponent.name;
 
+
 document.getElementById(
 "opponentUsername"
 ).value=
 opponent.username;
 
+
 }else{
+
 
 document.getElementById(
 "opponentFormTitle"
 ).textContent=
 "Ajouter un adversaire";
 
+
 document.getElementById(
 "opponentName"
 ).value="";
+
 
 document.getElementById(
 "opponentUsername"
 ).value="";
 
 }
+
 
 form.scrollIntoView({
 behavior:"smooth",
@@ -1604,10 +1743,12 @@ document
 .getElementById("opponentName")
 .value.trim();
 
+
 const username=
 document
 .getElementById("opponentUsername")
 .value.trim();
+
 
 if(!name || !username){
 
@@ -1619,6 +1760,7 @@ return;
 
 }
 
+
 if(editingOpponentId){
 
 const opponent=
@@ -1626,14 +1768,18 @@ opponents.find(
 o=>o.id===editingOpponentId
 );
 
+
 opponent.name=name;
 opponent.username=username;
+
 
 showToast(
 "Adversaire modifié."
 );
 
+
 }else{
+
 
 opponents.push({
 
@@ -1645,11 +1791,13 @@ username:username
 
 });
 
+
 showToast(
 "Adversaire ajouté."
 );
 
 }
+
 
 saveData();
 
@@ -1667,6 +1815,7 @@ document.getElementById(
 "opponentList"
 );
 
+
 const search=
 (
 document
@@ -1675,14 +1824,18 @@ document
 )?.value || ""
 ).toLowerCase();
 
+
 const filtered=
 opponents.filter(o=>
 
 o.name.toLowerCase().includes(search)
+
 ||
+
 o.username.toLowerCase().includes(search)
 
 );
+
 
 if(filtered.length===0){
 
@@ -1693,15 +1846,18 @@ return;
 
 }
 
+
 list.innerHTML=
 
 filtered.map(o=>`
 
 <div class="card person">
 
-<div class="avatar">
+
+<div class="person-icon">
 🆚
 </div>
+
 
 <div class="person-info">
 
@@ -1715,6 +1871,7 @@ ${escapeHtml(o.username)}
 
 </div>
 
+
 <div class="card-actions">
 
 <button
@@ -1725,6 +1882,7 @@ Modifier
 
 </button>
 
+
 <button
 class="small-btn delete"
 onclick="deleteOpponent(${o.id})">
@@ -1734,6 +1892,7 @@ Supprimer
 </button>
 
 </div>
+
 
 </div>
 
@@ -1749,6 +1908,7 @@ matches.some(
 m=>m.opponentId===id
 );
 
+
 if(hasMatches){
 
 alert(
@@ -1759,14 +1919,17 @@ return;
 
 }
 
+
 if(!confirm(
 "Supprimer cet adversaire ?"
 )) return;
+
 
 opponents=
 opponents.filter(
 o=>o.id!==id
 );
+
 
 saveData();
 
@@ -1789,12 +1952,14 @@ editingMatchId=id;
 
 refreshSelects();
 
+
 const form=
 document.getElementById(
 "matchForm"
 );
 
 form.classList.remove("hidden");
+
 
 if(id){
 
@@ -1803,73 +1968,87 @@ matches.find(
 m=>m.id===id
 );
 
+
 document.getElementById(
 "matchFormTitle"
 ).textContent=
 "Modifier le match";
+
 
 document.getElementById(
 "matchCreator"
 ).value=
 match.creatorId;
 
+
 document.getElementById(
 "matchOpponent"
 ).value=
 match.opponentId;
+
 
 document.getElementById(
 "matchDate"
 ).value=
 match.date;
 
-const time=
-normalizeTime(match.time);
 
 const parts=
-time.split(":");
+normalizeTime(match.time)
+.split(":");
+
 
 document.getElementById(
 "matchHour"
 ).value=
 parts[0];
 
+
 document.getElementById(
 "matchMinute"
 ).value=
 parts[1];
 
+
 }else{
+
 
 document.getElementById(
 "matchFormTitle"
 ).textContent=
 "Créer un match";
 
+
 document.getElementById(
 "matchCreator"
 ).value="";
+
 
 document.getElementById(
 "matchOpponent"
 ).value="";
 
+
 const now=new Date();
+
 
 document.getElementById(
 "matchDate"
 ).value=
 toDateInput(now);
 
+
 document.getElementById(
 "matchHour"
 ).value="20";
+
 
 document.getElementById(
 "matchMinute"
 ).value="00";
 
 }
+
 
 form.scrollIntoView({
 behavior:"smooth",
@@ -1899,6 +2078,7 @@ document.getElementById(
 ).value
 );
 
+
 const opponentId=
 Number(
 document.getElementById(
@@ -1906,23 +2086,28 @@ document.getElementById(
 ).value
 );
 
+
 const date=
 document.getElementById(
 "matchDate"
 ).value;
+
 
 const hour=
 document.getElementById(
 "matchHour"
 ).value;
 
+
 const minute=
 document.getElementById(
 "matchMinute"
 ).value;
 
+
 const time=
 hour+":"+minute;
+
 
 if(
 !creatorId ||
@@ -1938,6 +2123,7 @@ return;
 
 }
 
+
 if(editingMatchId){
 
 const match=
@@ -1945,16 +2131,20 @@ matches.find(
 m=>m.id===editingMatchId
 );
 
+
 match.creatorId=creatorId;
 match.opponentId=opponentId;
 match.date=date;
 match.time=time;
 
+
 showToast(
 "Match modifié."
 );
 
+
 }else{
+
 
 matches.push({
 
@@ -1970,11 +2160,13 @@ time:time
 
 });
 
+
 showToast(
 "Match créé à "+time+"."
 );
 
 }
+
 
 saveData();
 
@@ -1996,29 +2188,34 @@ document.getElementById(
 "matchCreator"
 );
 
+
 const opponentSelect=
 document.getElementById(
 "matchOpponent"
 );
 
+
 creatorSelect.innerHTML=
 '<option value="">Choisir un créateur</option>'+
+
 creators.map(c=>`
 
 <option value="${c.id}">
-${escapeHtml(c.name)} —
-${escapeHtml(c.username)}
+${escapeHtml(c.name)}
+ — ${escapeHtml(c.team || "")}
 </option>
 
 `).join("");
 
+
 opponentSelect.innerHTML=
 '<option value="">Choisir un adversaire</option>'+
+
 opponents.map(o=>`
 
 <option value="${o.id}">
-${escapeHtml(o.name)} —
-${escapeHtml(o.username)}
+${escapeHtml(o.name)}
+ — ${escapeHtml(o.username)}
 </option>
 
 `).join("");
@@ -2027,7 +2224,7 @@ ${escapeHtml(o.username)}
 
 
 /* =========================
-LISTE MATCHS
+AFFICHAGE MATCHS
 ========================= */
 
 function renderMatches(){
@@ -2037,8 +2234,10 @@ document.getElementById(
 "matchList"
 );
 
+
 const sorted=
 [...matches].sort(sortMatches);
+
 
 if(sorted.length===0){
 
@@ -2049,22 +2248,27 @@ return;
 
 }
 
+
 list.innerHTML=
 
 sorted.map(match=>{
+
 
 const creator=
 creators.find(
 c=>c.id===match.creatorId
 );
 
+
 const opponent=
 opponents.find(
 o=>o.id===match.opponentId
 );
 
+
 if(!creator || !opponent)
 return "";
+
 
 const dateTime=
 new Date(
@@ -2073,19 +2277,22 @@ match.date+
 normalizeTime(match.time)
 );
 
+
 const today=
 isSameDay(
 dateTime,
 new Date()
 );
 
+
 const past=
 dateTime<new Date();
 
+
 return `
 
-<div class="card match-card
-${!past?"upcoming":""}">
+<div class="card match-card ${!past?"upcoming":""}">
+
 
 ${
 today
@@ -2105,6 +2312,7 @@ PASSÉ
 </div>`
 }
 
+
 <div class="match-date">
 
 📅 ${formatDate(match.date)}
@@ -2114,6 +2322,7 @@ PASSÉ
 ⏰ ${formatTime(match.time)}
 
 </div>
+
 
 <div class="match-title">
 
@@ -2125,15 +2334,24 @@ ${escapeHtml(opponent.name)}
 
 </div>
 
+
 <div class="match-users">
 
 ${escapeHtml(creator.username)}
 
-contre
+&nbsp; contre &nbsp;
 
 ${escapeHtml(opponent.username)}
 
 </div>
+
+
+<div class="match-team">
+
+🏆 ${escapeHtml(creator.team || "Sans team")}
+
+</div>
+
 
 <div class="match-actions">
 
@@ -2145,6 +2363,7 @@ Modifier
 
 </button>
 
+
 <button
 class="small-btn delete"
 onclick="deleteMatch(${match.id})">
@@ -2154,6 +2373,7 @@ Supprimer
 </button>
 
 </div>
+
 
 </div>
 
@@ -2170,10 +2390,12 @@ if(!confirm(
 "Supprimer ce match ?"
 )) return;
 
+
 matches=
 matches.filter(
 m=>m.id!==id
 );
+
 
 saveData();
 
@@ -2195,8 +2417,10 @@ function renderCalendar(){
 const year=
 calendarDate.getFullYear();
 
+
 const month=
 calendarDate.getMonth();
+
 
 const title=
 calendarDate.toLocaleDateString(
@@ -2207,28 +2431,35 @@ year:"numeric"
 }
 );
 
+
 document.getElementById(
 "calendarTitle"
 ).textContent=
 title.charAt(0).toUpperCase()+
 title.slice(1);
 
+
 const grid=
 document.getElementById(
 "calendarGrid"
 );
+
 
 const weekdays=[
 "Lun","Mar","Mer","Jeu",
 "Ven","Sam","Dim"
 ];
 
+
 let html=
 weekdays.map(day=>
+
 `<div class="calendar-weekday">
 ${day}
 </div>`
+
 ).join("");
+
 
 const first=
 new Date(
@@ -2237,12 +2468,16 @@ month,
 1
 );
 
-let start=first.getDay();
+
+let start=
+first.getDay();
+
 
 start=
 start===0
 ?6
 :start-1;
+
 
 const daysInMonth=
 new Date(
@@ -2251,6 +2486,7 @@ month+1,
 0
 ).getDate();
 
+
 const previousDays=
 new Date(
 year,
@@ -2258,10 +2494,12 @@ month,
 0
 ).getDate();
 
+
 const totalCells=
 Math.ceil(
 (start+daysInMonth)/7
 )*7;
+
 
 for(
 let i=0;
@@ -2269,11 +2507,14 @@ i<totalCells;
 i++
 ){
 
+
 const dayNumber=
 i-start+1;
 
+
 let cellDate;
 let other=false;
+
 
 if(dayNumber<1){
 
@@ -2285,6 +2526,7 @@ previousDays+dayNumber
 );
 
 other=true;
+
 
 }else if(
 dayNumber>daysInMonth
@@ -2299,6 +2541,7 @@ dayNumber-daysInMonth
 
 other=true;
 
+
 }else{
 
 cellDate=
@@ -2310,13 +2553,16 @@ dayNumber
 
 }
 
+
 const dateString=
 toDateInput(cellDate);
+
 
 const dayMatches=
 matches.filter(
 m=>m.date===dateString
 );
+
 
 const today=
 isSameDay(
@@ -2324,31 +2570,38 @@ cellDate,
 new Date()
 );
 
+
 html+=`
 
 <div class="calendar-day
 ${other?"other":""}
 ${today?"today":""}">
 
+
 <div class="day-number">
 ${cellDate.getDate()}
 </div>
 
+
 ${
 dayMatches.map(m=>{
+
 
 const creator=
 creators.find(
 c=>c.id===m.creatorId
 );
 
+
 const opponent=
 opponents.find(
 o=>o.id===m.opponentId
 );
 
+
 if(!creator || !opponent)
 return "";
+
 
 return `
 
@@ -2366,14 +2619,17 @@ ${escapeHtml(opponent.name)}
 
 `;
 
+
 }).join("")
 }
+
 
 </div>
 
 `;
 
 }
+
 
 grid.innerHTML=html;
 
@@ -2403,7 +2659,7 @@ renderCalendar();
 
 
 /* =========================
-MODAL
+MODAL MATCH
 ========================= */
 
 function openCalendarMatch(id){
@@ -2413,32 +2669,39 @@ matches.find(
 m=>m.id===id
 );
 
+
 if(!match)
 return;
+
 
 const creator=
 creators.find(
 c=>c.id===match.creatorId
 );
 
+
 const opponent=
 opponents.find(
 o=>o.id===match.opponentId
 );
 
+
 if(!creator || !opponent)
 return;
+
 
 document.getElementById(
 "modalTitle"
 ).textContent=
 "⚔️ Match";
 
+
 document.getElementById(
 "modalContent"
 ).innerHTML=`
 
 <div class="card">
+
 
 <div class="match-date">
 
@@ -2450,6 +2713,7 @@ document.getElementById(
 
 </div>
 
+
 <h2>
 
 ${escapeHtml(creator.name)}
@@ -2460,15 +2724,24 @@ ${escapeHtml(opponent.name)}
 
 </h2>
 
+
 <p class="match-users">
 
 ${escapeHtml(creator.username)}
 
-contre
+&nbsp; contre &nbsp;
 
 ${escapeHtml(opponent.username)}
 
 </p>
+
+
+<p class="match-team">
+
+🏆 ${escapeHtml(creator.team || "Sans team")}
+
+</p>
+
 
 <div class="form-buttons">
 
@@ -2483,6 +2756,7 @@ Modifier
 
 </button>
 
+
 <button
 class="btn danger"
 onclick="
@@ -2496,9 +2770,11 @@ Supprimer
 
 </div>
 
+
 </div>
 
 `;
+
 
 document.getElementById(
 "matchModal"
@@ -2527,17 +2803,21 @@ document.getElementById(
 ).textContent=
 creators.length;
 
+
 document.getElementById(
 "statOpponents"
 ).textContent=
 opponents.length;
+
 
 document.getElementById(
 "statMatches"
 ).textContent=
 matches.length;
 
+
 const now=new Date();
+
 
 const upcoming=
 matches.filter(
@@ -2549,15 +2829,18 @@ normalizeTime(m.time)
 )>now
 ).length;
 
+
 document.getElementById(
 "statUpcoming"
 ).textContent=
 upcoming;
 
+
 const home=
 document.getElementById(
 "homeMatches"
 );
+
 
 const upcomingMatches=
 [...matches]
@@ -2572,6 +2855,7 @@ normalizeTime(m.time)
 .sort(sortMatches)
 .slice(0,5);
 
+
 if(upcomingMatches.length===0){
 
 home.innerHTML=
@@ -2581,26 +2865,32 @@ return;
 
 }
 
+
 home.innerHTML=
 
 upcomingMatches.map(match=>{
+
 
 const creator=
 creators.find(
 c=>c.id===match.creatorId
 );
 
+
 const opponent=
 opponents.find(
 o=>o.id===match.opponentId
 );
 
+
 if(!creator || !opponent)
 return "";
+
 
 return `
 
 <div class="card match-card upcoming">
+
 
 <div class="match-date">
 
@@ -2612,6 +2902,7 @@ return `
 
 </div>
 
+
 <div class="match-title">
 
 ${escapeHtml(creator.name)}
@@ -2622,15 +2913,24 @@ ${escapeHtml(opponent.name)}
 
 </div>
 
+
 <div class="match-users">
 
 ${escapeHtml(creator.username)}
 
-contre
+&nbsp; contre &nbsp;
 
 ${escapeHtml(opponent.username)}
 
 </div>
+
+
+<div class="match-team">
+
+🏆 ${escapeHtml(creator.team || "Sans team")}
+
+</div>
+
 
 </div>
 
@@ -2642,7 +2942,7 @@ ${escapeHtml(opponent.username)}
 
 
 /* =========================
-HEURE
+HEURE 24 H
 ========================= */
 
 function normalizeTime(time){
@@ -2650,16 +2950,20 @@ function normalizeTime(time){
 if(!time)
 return "00:00";
 
+
 const value=
 String(time).trim();
+
 
 const match=
 value.match(
 /^(\d{1,2}):(\d{2})/
 );
 
+
 if(!match)
 return "00:00";
+
 
 const hours=
 String(
@@ -2672,6 +2976,7 @@ Number(match[1])
 )
 ).padStart(2,"0");
 
+
 const minutes=
 String(
 Math.max(
@@ -2683,6 +2988,7 @@ Number(match[2])
 )
 ).padStart(2,"0");
 
+
 return hours+":"+minutes;
 
 }
@@ -2691,107 +2997,6 @@ return hours+":"+minutes;
 function formatTime(time){
 
 return normalizeTime(time);
-
-}
-
-
-/* =========================
-NOTIFICATIONS
-========================= */
-
-async function requestNotifications(){
-
-if(!("Notification" in window))
-return;
-
-if(
-Notification.permission==="default"
-){
-
-try{
-
-await Notification.requestPermission();
-
-}catch(e){}
-
-}
-
-}
-
-
-function checkNotifications(){
-
-if(!("Notification" in window))
-return;
-
-if(
-Notification.permission!=="granted"
-)
-return;
-
-const now=new Date();
-
-matches.forEach(match=>{
-
-const matchDate=
-new Date(
-match.date+
-"T"+
-normalizeTime(match.time)
-);
-
-const difference=
-matchDate-now;
-
-if(
-difference>0 &&
-difference<=30*60*1000
-){
-
-const key=
-"tokcenter_notified_"+
-match.id;
-
-if(
-!localStorage.getItem(key)
-){
-
-const creator=
-creators.find(
-c=>c.id===match.creatorId
-);
-
-const opponent=
-opponents.find(
-o=>o.id===match.opponentId
-);
-
-if(creator && opponent){
-
-new Notification(
-"⚔️ Match TokCenter",
-{
-body:
-creator.name+
-" ⚔️ "+
-opponent.name+
-" à "+
-formatTime(match.time)
-}
-);
-
-localStorage.setItem(
-key,
-"1"
-);
-
-}
-
-}
-
-}
-
-});
 
 }
 
@@ -2839,15 +3044,18 @@ function toDateInput(date){
 const y=
 date.getFullYear();
 
+
 const m=
 String(
 date.getMonth()+1
 ).padStart(2,"0");
 
+
 const d=
 String(
 date.getDate()
 ).padStart(2,"0");
+
 
 return y+"-"+m+"-"+d;
 
@@ -2857,11 +3065,17 @@ return y+"-"+m+"-"+d;
 function isSameDay(a,b){
 
 return(
+
 a.getFullYear()===b.getFullYear()
+
 &&
+
 a.getMonth()===b.getMonth()
+
 &&
+
 a.getDate()===b.getDate()
+
 );
 
 }
@@ -2872,9 +3086,13 @@ function escapeHtml(text){
 return String(text)
 
 .replaceAll("&","&amp;")
+
 .replaceAll("<","&lt;")
+
 .replaceAll(">","&gt;")
+
 .replaceAll('"',"&quot;")
+
 .replaceAll("'","&#039;");
 
 }
@@ -2887,9 +3105,12 @@ document.getElementById(
 "toast"
 );
 
+
 toast.textContent=message;
 
+
 toast.style.display="block";
+
 
 setTimeout(
 ()=>{
@@ -2902,10 +3123,12 @@ toast.style.display="none";
 
 
 /* =========================
-DEMARRAGE
+REFRESH
 ========================= */
 
 function refreshAll(){
+
+renderDashboard();
 
 renderCreators();
 
@@ -2917,20 +3140,14 @@ renderMatches();
 
 renderCalendar();
 
-renderDashboard();
-
 }
 
+
+/* =========================
+DEMARRAGE
+========================= */
+
 refreshAll();
-
-requestNotifications();
-
-checkNotifications();
-
-setInterval(
-checkNotifications,
-60000
-);
 
 </script>
 
