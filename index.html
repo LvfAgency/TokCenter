@@ -15,8 +15,11 @@
     --line:#e5e7eb;
     --primary:#7c3aed;
     --primary-dark:#5b21b6;
+    --primary-soft:#ede9fe;
     --danger:#dc2626;
+    --danger-soft:#fee2e2;
     --success:#059669;
+    --blue:#2563eb;
     --shadow:0 10px 30px rgba(17,24,39,.08);
     --radius:18px;
 }
@@ -45,60 +48,91 @@ button{
 }
 
 .app{
-    display:flex;
     min-height:100vh;
+    display:flex;
 }
 
-/* SIDEBAR */
+/* =========================
+   BARRE LATÉRALE
+========================= */
 
 .sidebar{
-    width:250px;
-    background:#111827;
+    width:255px;
+    background:linear-gradient(180deg,#111827 0%,#171b2e 100%);
     color:white;
-    padding:22px 16px;
+    padding:20px 14px;
     position:fixed;
     inset:0 auto 0 0;
-    z-index:20;
+    z-index:30;
+    box-shadow:8px 0 25px rgba(0,0,0,.08);
 }
 
 .logo{
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:-1px;
-    padding:8px 12px 24px;
+    padding:8px 13px 25px;
+    font-size:27px;
+    font-weight:950;
+    letter-spacing:-1.5px;
 }
 
 .logo span{
     color:#a78bfa;
 }
 
-.nav{
-    display:grid;
-    gap:7px;
-}
-
-.nav button{
-    background:transparent;
-    color:#d1d5db;
-    text-align:left;
-    padding:13px 14px;
-    border-radius:12px;
+.logo-sub{
+    display:block;
+    font-size:10px;
+    letter-spacing:1.4px;
+    color:#9ca3af;
+    text-transform:uppercase;
+    margin-top:4px;
     font-weight:700;
 }
 
-.nav button:hover,
-.nav button.active{
-    background:#312e81;
+.nav{
+    display:grid;
+    gap:6px;
+}
+
+.nav button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    color:#cbd5e1;
+    text-align:left;
+    padding:12px 13px;
+    border-radius:13px;
+    font-weight:750;
+    transition:.18s;
+}
+
+.nav button:hover{
+    background:rgba(124,58,237,.18);
     color:white;
 }
 
-/* MAIN */
+.nav button.active{
+    background:linear-gradient(135deg,#6d28d9,#7c3aed);
+    color:white;
+    box-shadow:0 7px 18px rgba(124,58,237,.28);
+}
+
+.nav-icon{
+    width:27px;
+    text-align:center;
+    font-size:18px;
+}
+
+/* =========================
+   CONTENU
+========================= */
 
 .main{
-    margin-left:250px;
-    width:calc(100% - 250px);
+    margin-left:255px;
+    width:calc(100% - 255px);
     padding:28px;
-    max-width:1500px;
+    max-width:1550px;
 }
 
 .topbar{
@@ -112,6 +146,7 @@ button{
 .title h1{
     margin:0;
     font-size:30px;
+    letter-spacing:-.7px;
 }
 
 .title p{
@@ -119,12 +154,19 @@ button{
     color:var(--muted);
 }
 
-/* BUTTONS */
+/* =========================
+   BOUTONS
+========================= */
 
 .btn{
     padding:11px 16px;
     border-radius:11px;
     font-weight:800;
+    transition:.15s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
 }
 
 .primary{
@@ -141,17 +183,25 @@ button{
     color:#4338ca;
 }
 
-.danger{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
 .ghost{
     background:#f3f4f6;
     color:#374151;
 }
 
-/* CARDS */
+.danger{
+    background:var(--danger-soft);
+    color:#991b1b;
+}
+
+.star{
+    background:#fff7ed;
+    color:#f59e0b;
+    font-size:19px;
+}
+
+/* =========================
+   CARTES
+========================= */
 
 .grid{
     display:grid;
@@ -163,7 +213,7 @@ button{
 }
 
 .cards{
-    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
 }
 
 .card{
@@ -174,6 +224,10 @@ button{
     box-shadow:var(--shadow);
 }
 
+.card:hover{
+    border-color:#ddd6fe;
+}
+
 .stat .label{
     color:var(--muted);
     font-weight:700;
@@ -181,12 +235,12 @@ button{
 
 .stat .num{
     font-size:32px;
-    font-weight:900;
+    font-weight:950;
     margin-top:8px;
 }
 
 .section{
-    margin-top:24px;
+    margin-top:25px;
 }
 
 .section h2{
@@ -195,7 +249,7 @@ button{
 }
 
 .empty{
-    padding:35px;
+    padding:38px;
     text-align:center;
     color:var(--muted);
     background:white;
@@ -212,7 +266,7 @@ button{
 
 .actions{
     display:flex;
-    gap:7px;
+    gap:8px;
     flex-wrap:wrap;
 }
 
@@ -221,11 +275,24 @@ button{
     align-items:center;
     padding:5px 9px;
     border-radius:999px;
-    background:#ede9fe;
+    background:var(--primary-soft);
     color:#5b21b6;
     font-size:12px;
-    font-weight:800;
+    font-weight:850;
 }
+
+.muted{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.small{
+    font-size:12px;
+}
+
+/* =========================
+   AVATARS
+========================= */
 
 .avatar{
     width:54px;
@@ -252,16 +319,9 @@ button{
     gap:12px;
 }
 
-.muted{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.small{
-    font-size:12px;
-}
-
-/* SEARCH */
+/* =========================
+   RECHERCHE
+========================= */
 
 .search{
     margin-bottom:16px;
@@ -273,9 +333,20 @@ button{
     border:1px solid var(--line);
     border-radius:12px;
     background:white;
+    outline:none;
 }
 
-/* TEAMS */
+.search input:focus,
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:#a78bfa;
+    box-shadow:0 0 0 3px rgba(124,58,237,.1);
+}
+
+/* =========================
+   TEAMS
+========================= */
 
 .teamhead{
     display:flex;
@@ -288,15 +359,13 @@ button{
     width:55px;
     height:55px;
     border-radius:15px;
-    background:#111827;
+    background:linear-gradient(135deg,#111827,#312e81);
     color:white;
     display:grid;
     place-items:center;
     font-weight:900;
     font-size:20px;
 }
-
-/* LIST */
 
 .list{
     display:grid;
@@ -310,7 +379,9 @@ button{
     background:#fafafa;
 }
 
-/* MATCH */
+/* =========================
+   MATCHS
+========================= */
 
 .match{
     border-left:5px solid var(--primary);
@@ -323,6 +394,7 @@ button{
 .vs{
     font-size:17px;
     font-weight:900;
+    line-height:1.45;
 }
 
 .status{
@@ -331,46 +403,111 @@ button{
 }
 
 .upcoming{
-    color:#2563eb;
+    color:var(--blue);
 }
 
 .done{
-    color:#059669;
+    color:var(--success);
 }
 
-/* FAVORITE */
+/* =========================
+   AGENCES
+========================= */
 
 .favorite{
-    background:#fffbeb;
+    background:#fffdf7;
+    border-color:#fde68a;
 }
 
-.star{
-    color:#f59e0b;
-    background:#fff7ed;
-    font-size:18px;
+.agency-card{
+    position:relative;
+    overflow:hidden;
 }
 
-/* NOTICE */
+.agency-card.favorite::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:3px;
+    background:#f59e0b;
+}
+
+.agency-icon{
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    background:#111827;
+    color:white;
+    font-weight:950;
+    font-size:20px;
+}
 
 .notice{
-    padding:12px 14px;
+    padding:13px 15px;
     background:#f5f3ff;
-    border-radius:12px;
+    border:1px solid #ddd6fe;
+    border-radius:13px;
     color:#4c1d95;
-    margin-bottom:14px;
+    margin-bottom:15px;
 }
 
-/* MODAL */
+.saved-agency{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px 13px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    background:#fafafa;
+}
+
+.saved-agency:hover{
+    background:#f5f3ff;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    overflow:auto;
+    margin-bottom:18px;
+}
+
+.tab{
+    background:#e5e7eb;
+    padding:10px 15px;
+    border-radius:10px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.tab.active{
+    background:#111827;
+    color:white;
+}
+
+/* =========================
+   MODALE
+========================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(17,24,39,.58);
+    background:rgba(17,24,39,.62);
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
-    z-index:50;
+    z-index:100;
+    backdrop-filter:blur(3px);
 }
 
 .modal.open{
@@ -379,18 +516,19 @@ button{
 
 .modalbox{
     background:white;
-    border-radius:20px;
-    width:min(680px,100%);
+    border-radius:21px;
+    width:min(720px,100%);
     max-height:92vh;
     overflow:auto;
-    padding:24px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
 .modalhead{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
+    margin-bottom:19px;
 }
 
 .modalhead h2{
@@ -403,7 +541,9 @@ button{
     padding:8px 11px;
 }
 
-/* FORMS */
+/* =========================
+   FORMULAIRES
+========================= */
 
 .formgrid{
     display:grid;
@@ -433,6 +573,7 @@ button{
     border-radius:10px;
     padding:11px;
     background:white;
+    outline:none;
 }
 
 .field textarea{
@@ -457,55 +598,42 @@ hr{
     margin:18px 0;
 }
 
-/* TABS */
-
-.tabs{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    margin-bottom:18px;
-}
-
-.tab{
-    background:#e5e7eb;
-    padding:10px 15px;
-    border-radius:10px;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.tab.active{
-    background:#111827;
-    color:white;
-}
-
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:900px){
 
     .sidebar{
         width:76px;
-        padding:15px 10px;
+        padding:15px 9px;
     }
 
     .logo{
         font-size:0;
         text-align:center;
+        padding-left:0;
+        padding-right:0;
     }
 
-    .logo:after{
+    .logo:before{
         content:"TC";
-        font-size:21px;
+        font-size:22px;
+    }
+
+    .logo span,
+    .logo-sub,
+    .nav button span{
+        display:none;
     }
 
     .nav button{
-        font-size:0;
-        text-align:center;
+        justify-content:center;
+        padding:13px;
     }
 
-    .nav button:before{
-        content:"•";
-        font-size:22px;
+    .nav-icon{
+        width:auto;
     }
 
     .main{
@@ -525,6 +653,10 @@ hr{
         grid-template-columns:1fr;
     }
 
+    .field.full{
+        grid-column:auto;
+    }
+
     .stats{
         grid-template-columns:1fr 1fr;
     }
@@ -532,6 +664,14 @@ hr{
     .topbar{
         align-items:flex-start;
         flex-direction:column;
+    }
+
+    .topbar .btn{
+        width:100%;
+    }
+
+    .modalbox{
+        padding:19px;
     }
 }
 </style>
@@ -545,11 +685,13 @@ hr{
 
     <div class="logo">
         Tok<span>Center</span>
+        <span class="logo-sub">Gestion d'agence</span>
     </div>
 
     <nav class="nav" id="nav"></nav>
 
 </aside>
+
 
 <main class="main">
 
@@ -574,8 +716,6 @@ hr{
 
 </div>
 
-
-<!-- MODALE -->
 
 <div class="modal" id="modal">
 
@@ -604,27 +744,33 @@ hr{
    BASE DE DONNÉES LOCALE
 ========================================================= */
 
-const STORAGE_KEY = "tokcenter_v5";
+const STORAGE_KEY = "tokcenter_v6";
 
-let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {
-
-    creators: [],
-    teams: [],
-    matches: [],
-    agencies: [],
-
-    settings: {
-        agencyName: "LVF Agency"
-    }
-
-};
+let db =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "null"
+    ) ||
+    {
+        creators:[],
+        teams:[],
+        matches:[],
+        agencies:[],
+        settings:{
+            agencyName:"LVF Agency"
+        }
+    };
 
 let page = "dashboard";
+
 let pendingAvatar = "";
+
+let creatorSearch = "";
+
+let agencySearch = "";
 
 
 /* =========================================================
-   OUTILS
+   SAUVEGARDE
 ========================================================= */
 
 function save(){
@@ -637,10 +783,14 @@ function save(){
 }
 
 
+/* =========================================================
+   OUTILS
+========================================================= */
+
 function uid(){
 
     return Date.now().toString(36) +
-        Math.random().toString(36).slice(2,8);
+        Math.random().toString(36).slice(2,9);
 
 }
 
@@ -649,19 +799,13 @@ function esc(value=""){
 
     return String(value).replace(
         /[&<>"']/g,
-        function(char){
-
-            return {
-
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-
-            }[char];
-
-        }
+        char => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[char])
     );
 
 }
@@ -689,9 +833,9 @@ function fmtDT(value){
 
     if(!value) return "—";
 
-    const date = new Date(value);
+    const d = new Date(value);
 
-    return date.toLocaleDateString(
+    return d.toLocaleDateString(
         "fr-FR",
         {
             day:"2-digit",
@@ -700,7 +844,7 @@ function fmtDT(value){
         }
     ) +
     " à " +
-    date.toLocaleTimeString(
+    d.toLocaleTimeString(
         "fr-FR",
         {
             hour:"2-digit",
@@ -715,47 +859,11 @@ function initials(name){
 
     return (name || "?")
         .split(/\s+/)
+        .filter(Boolean)
         .slice(0,2)
         .map(x => x[0])
         .join("")
         .toUpperCase();
-
-}
-
-
-function avatar(creator,big=false){
-
-    if(
-        creator &&
-        creator.avatar
-    ){
-
-        return `
-            <img
-                class="avatar ${big ? "big" : ""}"
-                src="${creator.avatar}"
-                alt=""
-            >
-        `;
-
-    }
-
-    return `
-        <div class="avatar ${big ? "big" : ""}">
-            ${esc(initials(creator?.name || "?"))}
-        </div>
-    `;
-
-}
-
-
-function roleBadge(role){
-
-    return `
-        <span class="badge">
-            ${esc(role || "Créateur")}
-        </span>
-    `;
 
 }
 
@@ -787,6 +895,40 @@ function agency(id){
 }
 
 
+function avatar(c,big=false){
+
+    if(c && c.avatar){
+
+        return `
+            <img
+                class="avatar ${big ? "big" : ""}"
+                src="${c.avatar}"
+                alt=""
+            >
+        `;
+
+    }
+
+    return `
+        <div class="avatar ${big ? "big" : ""}">
+            ${esc(initials(c?.name || "?"))}
+        </div>
+    `;
+
+}
+
+
+function roleBadge(role){
+
+    return `
+        <span class="badge">
+            ${esc(role || "Créateur")}
+        </span>
+    `;
+
+}
+
+
 /* =========================================================
    NAVIGATION
 ========================================================= */
@@ -797,7 +939,7 @@ const navItems = [
     ["teams","👥","Teams"],
     ["creators","👤","Créateurs"],
     ["matches","⚔️","Matchs"],
-    ["agencies","🏢","Agences"],
+    ["agencies","🏢","Agences adverses"],
     ["calendar","📅","Calendrier"]
 
 ];
@@ -806,19 +948,26 @@ const navItems = [
 function renderNav(){
 
     document.getElementById("nav").innerHTML =
-        navItems.map(item => `
+        navItems.map(
+            item => `
 
-            <button
-                class="${page === item[0] ? "active" : ""}"
-                onclick="go('${item[0]}')"
-            >
+                <button
+                    class="${page === item[0] ? "active" : ""}"
+                    onclick="go('${item[0]}')"
+                >
 
-                ${item[1]}
-                <span>${item[2]}</span>
+                    <span class="nav-icon">
+                        ${item[1]}
+                    </span>
 
-            </button>
+                    <span>
+                        ${item[2]}
+                    </span>
 
-        `).join("");
+                </button>
+
+            `
+        ).join("");
 
 }
 
@@ -835,8 +984,11 @@ function go(newPage){
 
 
 /* =========================================================
-   RENDU PRINCIPAL
+   RENDU
 ========================================================= */
+
+const views = {};
+
 
 function render(){
 
@@ -844,7 +996,7 @@ function render(){
 
         dashboard:[
             "Tableau de bord",
-            "Vue d'ensemble de TokCenter."
+            "Votre centre de gestion d'agence."
         ],
 
         teams:[
@@ -887,17 +1039,18 @@ function render(){
 
 
 /* =========================================================
-   TABLEAU DE BORD
+   DASHBOARD
 ========================================================= */
-
-const views = {};
-
 
 views.dashboard = function(){
 
-    const upcoming = db.matches
+    const now = new Date();
+
+    const upcoming =
+        db.matches
         .filter(
-            m => new Date(m.datetime) > new Date()
+            m =>
+                new Date(m.datetime) > now
         )
         .sort(
             (a,b) =>
@@ -910,30 +1063,43 @@ views.dashboard = function(){
         <div class="grid stats">
 
             <div class="card stat">
-                <div class="label">Teams</div>
+                <div class="label">
+                    Teams
+                </div>
+
                 <div class="num">
                     ${db.teams.length}
                 </div>
             </div>
 
+
             <div class="card stat">
-                <div class="label">Créateurs</div>
+                <div class="label">
+                    Créateurs
+                </div>
+
                 <div class="num">
                     ${db.creators.length}
                 </div>
             </div>
 
+
             <div class="card stat">
-                <div class="label">Matchs à venir</div>
+                <div class="label">
+                    Matchs à venir
+                </div>
+
                 <div class="num">
                     ${upcoming.length}
                 </div>
             </div>
 
+
             <div class="card stat">
                 <div class="label">
-                    Agences enregistrées
+                    Agences adverses
                 </div>
+
                 <div class="num">
                     ${db.agencies.length}
                 </div>
@@ -948,11 +1114,7 @@ views.dashboard = function(){
                 Prochains matchs
             </h2>
 
-            ${
-                matchList(
-                    upcoming.slice(0,4)
-                )
-            }
+            ${matchList(upcoming.slice(0,4))}
 
         </div>
 
@@ -982,44 +1144,45 @@ views.dashboard = function(){
                                     new Date(a.datetime)
                             )
                             .slice(0,5)
-                            .map(m => `
+                            .map(
+                                m => `
 
-                                <div class="listitem">
+                                    <div class="listitem">
 
-                                    <div class="row">
+                                        <div class="row">
 
-                                        <div>
+                                            <div>
 
-                                            <b>
-                                                ${esc(
-                                                    m.ourTeamName ||
-                                                    team(m.teamId)?.name ||
-                                                    "Team"
-                                                )}
-                                            </b>
+                                                <b>
+                                                    ${esc(
+                                                        m.ourTeamName ||
+                                                        team(m.teamId)?.name ||
+                                                        "Team"
+                                                    )}
+                                                </b>
 
-                                            vs
+                                                vs
 
-                                            <b>
-                                                ${esc(
-                                                    m.agencyName ||
-                                                    "Agence adverse"
-                                                )}
-                                            </b>
+                                                <b>
+                                                    ${esc(
+                                                        m.agencyName ||
+                                                        "Agence adverse"
+                                                    )}
+                                                </b>
+
+                                            </div>
+
+                                            <span class="muted">
+                                                ${fmtDT(m.datetime)}
+                                            </span>
 
                                         </div>
 
-                                        <span class="muted">
-                                            ${fmtDT(m.datetime)}
-                                        </span>
-
                                     </div>
 
-                                </div>
-
-                            `)
+                                `
+                            )
                             .join("")
-
                         }
 
                     </div>
@@ -1051,24 +1214,22 @@ views.dashboard = function(){
 views.creators = function(){
 
     const q =
-        (window.creatorSearch || "")
+        creatorSearch
         .toLowerCase();
 
-    const creators =
-        db.creators.filter(c =>
-
-            (
-                c.name +
-                " " +
-                c.username +
-                " " +
-                c.role
-            )
-            .toLowerCase()
-            .includes(q)
-
+    const list =
+        db.creators.filter(
+            c =>
+                (
+                    c.name +
+                    " " +
+                    c.username +
+                    " " +
+                    c.role
+                )
+                .toLowerCase()
+                .includes(q)
         );
-
 
     return `
 
@@ -1076,9 +1237,9 @@ views.creators = function(){
 
             <input
                 placeholder="🔎 Rechercher un créateur..."
-                value="${esc(window.creatorSearch || "")}"
+                value="${esc(creatorSearch)}"
                 oninput="
-                    window.creatorSearch=this.value;
+                    creatorSearch=this.value;
                     render();
                 "
             >
@@ -1102,7 +1263,7 @@ views.creators = function(){
 
 
         ${
-            creators.length
+            list.length
 
             ?
 
@@ -1110,95 +1271,105 @@ views.creators = function(){
             <div class="grid cards">
 
                 ${
-                    creators.map(c => `
+                    list.map(
+                        c => `
 
-                        <div class="card">
+                            <div class="card">
 
-                            <div class="row">
+                                <div class="row">
 
-                                <div class="person">
+                                    <div class="person">
 
-                                    ${avatar(c)}
+                                        ${avatar(c)}
 
-                                    <div>
+                                        <div>
 
-                                        <b>
-                                            ${esc(c.name)}
-                                        </b>
+                                            <b>
+                                                ${esc(c.name)}
+                                            </b>
 
-                                        <div class="muted">
-                                            @${esc(c.username)}
+                                            <div class="muted">
+                                                @${esc(c.username)}
+                                            </div>
+
                                         </div>
 
                                     </div>
 
+                                    ${roleBadge(c.role)}
+
                                 </div>
 
-                                ${roleBadge(c.role)}
 
-                            </div>
-
-
-                            <div
-                                class="muted"
-                                style="margin-top:14px"
-                            >
-
-                                ${
-                                    c.joinDate
-                                    ? "Arrivé le " +
-                                      fmtDate(c.joinDate)
-                                    : "Date d'arrivée non renseignée"
-                                }
-
-                                ·
-
-                                ${
-                                    db.teams
-                                    .filter(
-                                        t =>
-                                            t.memberIds?.includes(c.id)
-                                    )
-                                    .map(
-                                        t => esc(t.name)
-                                    )
-                                    .join(", ")
-                                    ||
-                                    "Aucune team"
-                                }
-
-                            </div>
-
-
-                            <div
-                                class="actions"
-                                style="margin-top:14px"
-                            >
-
-                                <button
-                                    class="btn secondary"
-                                    onclick="
-                                        creatorDetails('${c.id}')
-                                    "
+                                <div
+                                    class="muted"
+                                    style="margin-top:14px"
                                 >
-                                    Voir la fiche
-                                </button>
 
-                                <button
-                                    class="btn ghost"
-                                    onclick="
-                                        openCreator('${c.id}')
-                                    "
+                                    ${
+                                        c.joinDate
+                                        ? "Arrivé le " +
+                                          fmtDate(c.joinDate)
+                                        : "Date d'arrivée non renseignée"
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="muted"
+                                    style="margin-top:5px"
                                 >
-                                    Modifier
-                                </button>
+
+                                    Teams :
+
+                                    ${
+                                        db.teams
+                                        .filter(
+                                            t =>
+                                                t.memberIds?.includes(c.id)
+                                        )
+                                        .map(
+                                            t =>
+                                                esc(t.name)
+                                        )
+                                        .join(", ")
+                                        ||
+                                        "Aucune"
+                                    }
+
+                                </div>
+
+
+                                <div
+                                    class="actions"
+                                    style="margin-top:14px"
+                                >
+
+                                    <button
+                                        class="btn secondary"
+                                        onclick="
+                                            creatorDetails('${c.id}')
+                                        "
+                                    >
+                                        Voir la fiche
+                                    </button>
+
+                                    <button
+                                        class="btn ghost"
+                                        onclick="
+                                            openCreator('${c.id}')
+                                        "
+                                    >
+                                        Modifier
+                                    </button>
+
+                                </div>
 
                             </div>
 
-                        </div>
-
-                    `).join("")
-
+                        `
+                    ).join("")
                 }
 
             </div>
@@ -1208,10 +1379,7 @@ views.creators = function(){
 
             `
             <div class="empty">
-
-                Aucun créateur.
-                Ajoutez votre premier membre.
-
+                Aucun créateur enregistré.
             </div>
             `
 
@@ -1254,119 +1422,120 @@ views.teams = function(){
             <div class="grid cards">
 
                 ${
-                    db.teams.map(t => {
+                    db.teams.map(
+                        t => {
 
-                        const members =
-                            db.creators.filter(
-                                c =>
-                                    t.memberIds?.includes(c.id)
-                            );
+                            const members =
+                                db.creators.filter(
+                                    c =>
+                                        t.memberIds?.includes(c.id)
+                                );
 
-                        return `
+                            return `
 
-                            <div class="card">
+                                <div class="card">
 
-                                <div class="teamhead">
+                                    <div class="teamhead">
 
-                                    <div class="teamicon">
-                                        ${esc(
-                                            initials(t.name)
-                                        )}
+                                        <div class="teamicon">
+                                            ${esc(
+                                                initials(t.name)
+                                            )}
+                                        </div>
+
+                                        <div>
+
+                                            <h3 style="margin:0">
+                                                ${esc(t.name)}
+                                            </h3>
+
+                                            <span class="muted">
+                                                ${members.length}
+                                                créateur${members.length > 1 ? "s" : ""}
+                                            </span>
+
+                                        </div>
+
                                     </div>
 
-                                    <div>
 
-                                        <h3 style="margin:0">
-                                            ${esc(t.name)}
-                                        </h3>
+                                    <div class="list">
 
-                                        <span class="muted">
-                                            ${members.length}
-                                            créateur${members.length > 1 ? "s" : ""}
-                                        </span>
+                                        ${
+                                            members.length
 
-                                    </div>
+                                            ?
 
-                                </div>
+                                            members.map(
+                                                c => `
 
+                                                    <div class="person">
 
-                                <div class="list">
+                                                        ${avatar(c)}
 
-                                    ${
-                                        members.length
+                                                        <div>
 
-                                        ?
+                                                            <b>
+                                                                ${esc(c.name)}
+                                                            </b>
 
-                                        members.map(c => `
+                                                            <div class="muted">
+                                                                @${esc(c.username)}
+                                                                ·
+                                                                ${esc(c.role)}
+                                                            </div>
 
-                                            <div class="person">
-
-                                                ${avatar(c)}
-
-                                                <div>
-
-                                                    <b>
-                                                        ${esc(c.name)}
-                                                    </b>
-
-                                                    <div class="muted">
-
-                                                        @${esc(c.username)}
-                                                        ·
-                                                        ${esc(c.role)}
+                                                        </div>
 
                                                     </div>
 
-                                                </div>
+                                                `
+                                            ).join("")
 
+                                            :
+
+                                            `
+                                            <div class="muted">
+                                                Aucun membre.
                                             </div>
+                                            `
 
-                                        `).join("")
+                                        }
 
-                                        :
+                                    </div>
 
-                                        `
-                                        <div class="muted">
-                                            Aucun membre.
-                                        </div>
-                                        `
 
-                                    }
+                                    <div
+                                        class="actions"
+                                        style="margin-top:15px"
+                                    >
+
+                                        <button
+                                            class="btn secondary"
+                                            onclick="
+                                                teamDetails('${t.id}')
+                                            "
+                                        >
+                                            Ouvrir
+                                        </button>
+
+                                        <button
+                                            class="btn ghost"
+                                            onclick="
+                                                openTeam('${t.id}')
+                                            "
+                                        >
+                                            Modifier
+                                        </button>
+
+                                    </div>
 
                                 </div>
 
+                            `;
 
-                                <div
-                                    class="actions"
-                                    style="margin-top:15px"
-                                >
-
-                                    <button
-                                        class="btn secondary"
-                                        onclick="
-                                            teamDetails('${t.id}')
-                                        "
-                                    >
-                                        Ouvrir
-                                    </button>
-
-                                    <button
-                                        class="btn ghost"
-                                        onclick="
-                                            openTeam('${t.id}')
-                                        "
-                                    >
-                                        Modifier
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        `;
-
-                    }).join("")
-
+                        }
+                    ).join("")
                 }
 
             </div>
@@ -1393,6 +1562,20 @@ views.teams = function(){
 
 views.matches = function(){
 
+    const now = new Date();
+
+    const upcoming =
+        db.matches.filter(
+            m =>
+                new Date(m.datetime) > now
+        );
+
+    const finished =
+        db.matches.filter(
+            m =>
+                new Date(m.datetime) <= now
+        );
+
     return `
 
         <div
@@ -1417,39 +1600,25 @@ views.matches = function(){
             </button>
 
             <button class="tab">
-                À venir
-                (${
-                    db.matches.filter(
-                        m =>
-                            new Date(m.datetime) > new Date()
-                    ).length
-                })
+                À venir (${upcoming.length})
             </button>
 
             <button class="tab">
-                Terminés
-                (${
-                    db.matches.filter(
-                        m =>
-                            new Date(m.datetime) <= new Date()
-                    ).length
-                })
+                Terminés (${finished.length})
             </button>
 
         </div>
 
 
-        ${
-            matchList(
-                db.matches
-                .slice()
-                .sort(
-                    (a,b) =>
-                        new Date(a.datetime) -
-                        new Date(b.datetime)
-                )
+        ${matchList(
+            db.matches
+            .slice()
+            .sort(
+                (a,b) =>
+                    new Date(a.datetime) -
+                    new Date(b.datetime)
             )
-        }
+        )}
 
     `;
 
@@ -1468,168 +1637,170 @@ function matchList(matches){
 
     }
 
+    const now = new Date();
 
     return `
 
         <div class="grid">
 
             ${
-                matches.map(m => {
+                matches.map(
+                    m => {
 
-                    const c =
-                        creator(m.creatorId);
+                        const c =
+                            creator(m.creatorId);
 
-                    const isUpcoming =
-                        new Date(m.datetime) >
-                        new Date();
+                        const isUpcoming =
+                            new Date(m.datetime) > now;
 
+                        return `
 
-                    return `
+                            <div class="card match">
 
-                        <div class="card match">
+                                <div class="row">
 
-                            <div class="row">
+                                    <div class="date">
+                                        ${fmtDT(m.datetime)}
+                                    </div>
 
-                                <div class="date">
-                                    ${fmtDT(m.datetime)}
-                                </div>
-
-                                <span
-                                    class="
-                                        status
+                                    <span
+                                        class="
+                                            status
+                                            ${
+                                                isUpcoming
+                                                ? "upcoming"
+                                                : "done"
+                                            }
+                                        "
+                                    >
                                         ${
                                             isUpcoming
-                                            ? "upcoming"
-                                            : "done"
+                                            ? "À venir"
+                                            : "Terminé"
                                         }
-                                    "
-                                >
-
-                                    ${
-                                        isUpcoming
-                                        ? "À venir"
-                                        : "Terminé"
-                                    }
-
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                style="margin:16px 0"
-                            >
-
-                                <div class="vs">
-
-                                    ${esc(
-                                        m.ourAgency ||
-                                        "LVF Agency"
-                                    )}
-
-                                    ·
-
-                                    ${esc(
-                                        m.ourTeamName ||
-                                        team(m.teamId)?.name ||
-                                        "Team"
-                                    )}
-
-                                    ·
-
-                                    ${
-                                        c
-                                        ? esc(c.name) +
-                                          " (@" +
-                                          esc(c.username) +
-                                          ")"
-                                        : "Créateur non renseigné"
-                                    }
+                                    </span>
 
                                 </div>
 
 
                                 <div
-                                    class="muted"
-                                    style="margin-top:7px"
+                                    style="margin:16px 0"
                                 >
-                                    VS
-                                </div>
+
+                                    <div class="vs">
+
+                                        ${esc(
+                                            m.ourAgency ||
+                                            db.settings.agencyName
+                                        )}
+
+                                        ·
+
+                                        ${esc(
+                                            m.ourTeamName ||
+                                            team(m.teamId)?.name ||
+                                            "Team"
+                                        )}
+
+                                        ·
+
+                                        ${
+                                            c
+                                            ?
+                                            esc(c.name) +
+                                            " (@" +
+                                            esc(c.username) +
+                                            ")"
+                                            :
+                                            "Créateur non renseigné"
+                                        }
+
+                                    </div>
 
 
-                                <div class="vs">
+                                    <div
+                                        class="muted"
+                                        style="margin:8px 0"
+                                    >
+                                        VS
+                                    </div>
 
-                                    ${esc(
-                                        m.agencyName ||
-                                        "Agence adverse"
-                                    )}
 
-                                    ·
+                                    <div class="vs">
 
-                                    ${esc(
-                                        m.opponentTeam ||
-                                        "Team adverse"
-                                    )}
+                                        ${esc(
+                                            m.agencyName ||
+                                            "Agence adverse"
+                                        )}
 
-                                    ·
+                                        ·
 
-                                    ${esc(
-                                        m.opponentName ||
-                                        "Adversaire"
-                                    )}
+                                        ${esc(
+                                            m.opponentTeam ||
+                                            "Team adverse"
+                                        )}
 
-                                    ${
-                                        m.opponentUsername
-                                        ? `
+                                        ·
+
+                                        ${esc(
+                                            m.opponentName ||
+                                            "Adversaire"
+                                        )}
+
+                                        ${
+                                            m.opponentUsername
+                                            ?
+                                            `
                                             (@${esc(
                                                 m.opponentUsername
                                             )})
-                                        `
-                                        : ""
-                                    }
+                                            `
+                                            :
+                                            ""
+                                        }
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        class="btn secondary"
+                                        onclick="
+                                            matchDetails('${m.id}')
+                                        "
+                                    >
+                                        Détails
+                                    </button>
+
+                                    <button
+                                        class="btn ghost"
+                                        onclick="
+                                            openMatch('${m.id}')
+                                        "
+                                    >
+                                        Modifier
+                                    </button>
+
+                                    <button
+                                        class="btn danger"
+                                        onclick="
+                                            deleteMatch('${m.id}')
+                                        "
+                                    >
+                                        Supprimer
+                                    </button>
 
                                 </div>
 
                             </div>
 
+                        `;
 
-                            <div class="actions">
-
-                                <button
-                                    class="btn secondary"
-                                    onclick="
-                                        matchDetails('${m.id}')
-                                    "
-                                >
-                                    Détails
-                                </button>
-
-                                <button
-                                    class="btn ghost"
-                                    onclick="
-                                        openMatch('${m.id}')
-                                    "
-                                >
-                                    Modifier
-                                </button>
-
-                                <button
-                                    class="btn danger"
-                                    onclick="
-                                        deleteMatch('${m.id}')
-                                    "
-                                >
-                                    Supprimer
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }).join("")
-
+                    }
+                ).join("")
             }
 
         </div>
@@ -1640,41 +1811,46 @@ function matchList(matches){
 
 
 /* =========================================================
-   AGENCES
+   AGENCES ADVERSAIRES
 ========================================================= */
 
 views.agencies = function(){
 
     const q =
-        (window.agencySearch || "")
+        agencySearch
         .toLowerCase();
 
-
     const agencies =
-        db.agencies.filter(a =>
-
-            (
-                a.name +
-                " " +
-                (a.notes || "")
-            )
-            .toLowerCase()
-            .includes(q)
-
+        db.agencies
+        .filter(
+            a =>
+                (
+                    a.name +
+                    " " +
+                    (a.notes || "")
+                )
+                .toLowerCase()
+                .includes(q)
+        )
+        .sort(
+            (a,b) =>
+                Number(b.favorite) -
+                Number(a.favorite)
         );
-
 
     return `
 
         <div class="notice">
 
-            💡 Une agence n'est ajoutée à ce carnet
-            que lorsque <b>vous</b> décidez de
-            l'enregistrer.
+            <b>🏢 Votre carnet d'agences adverses</b>
 
-            Une agence simplement écrite dans un match
-            ne devient jamais automatiquement une agence
-            enregistrée.
+            <br><br>
+
+            Vous décidez vous-même quelles agences sont
+            enregistrées.
+
+            Une agence simplement saisie dans un match
+            ne sera <b>jamais enregistrée automatiquement</b>.
 
         </div>
 
@@ -1682,10 +1858,10 @@ views.agencies = function(){
         <div class="search">
 
             <input
-                placeholder="🔎 Rechercher une agence enregistrée..."
-                value="${esc(window.agencySearch || "")}"
+                placeholder="🔎 Rechercher une agence..."
+                value="${esc(agencySearch)}"
                 oninput="
-                    window.agencySearch=this.value;
+                    agencySearch=this.value;
                     render();
                 "
             >
@@ -1717,157 +1893,184 @@ views.agencies = function(){
             <div class="grid cards">
 
                 ${
-                    agencies.map(a => {
+                    agencies.map(
+                        a => {
 
-                        const matches =
-                            db.matches.filter(
-                                m =>
-                                    m.agencyId === a.id
-                                    ||
-                                    (
-                                        m.agencyName &&
-                                        m.agencyName.toLowerCase()
-                                        ===
-                                        a.name.toLowerCase()
-                                    )
-                            );
-
-
-                        const teams = [
-                            ...new Set(
-                                matches
-                                .map(m => m.opponentTeam)
-                                .filter(Boolean)
-                            )
-                        ];
-
-
-                        const people = [
-                            ...new Set(
-                                matches
-                                .map(
+                            const matches =
+                                db.matches.filter(
                                     m =>
-                                        m.opponentUsername ||
-                                        m.opponentName
+                                        m.agencyId === a.id
+                                        ||
+                                        (
+                                            m.agencyName &&
+                                            m.agencyName
+                                            .toLowerCase()
+                                            ===
+                                            a.name
+                                            .toLowerCase()
+                                        )
+                                );
+
+                            const teams = [
+                                ...new Set(
+                                    matches
+                                    .map(
+                                        m =>
+                                            m.opponentTeam
+                                    )
+                                    .filter(Boolean)
                                 )
-                                .filter(Boolean)
-                            )
-                        ];
+                            ];
 
+                            const people = [
+                                ...new Set(
+                                    matches
+                                    .map(
+                                        m =>
+                                            m.opponentUsername
+                                            ||
+                                            m.opponentName
+                                    )
+                                    .filter(Boolean)
+                                )
+                            ];
 
-                        return `
+                            return `
 
-                            <div
-                                class="
-                                    card
-                                    ${a.favorite ? "favorite" : ""}
-                                "
-                            >
+                                <div
+                                    class="
+                                        card
+                                        agency-card
+                                        ${
+                                            a.favorite
+                                            ? "favorite"
+                                            : ""
+                                        }
+                                    "
+                                >
 
-                                <div class="row">
+                                    <div class="row">
 
-                                    <div>
+                                        <div class="person">
 
-                                        <h3 style="margin:0">
-                                            ${esc(a.name)}
-                                        </h3>
+                                            <div class="agency-icon">
+                                                ${esc(
+                                                    initials(a.name)
+                                                )}
+                                            </div>
 
-                                        <div class="muted">
+                                            <div>
 
-                                            ${matches.length}
-                                            match${matches.length > 1 ? "s" : ""}
-                                            associé${matches.length > 1 ? "s" : ""}
+                                                <h3 style="margin:0">
+                                                    ${esc(a.name)}
+                                                </h3>
+
+                                                <div class="muted">
+                                                    ${matches.length}
+                                                    match${matches.length > 1 ? "s" : ""}
+                                                </div>
+
+                                            </div>
 
                                         </div>
+
+
+                                        <button
+                                            class="btn star"
+                                            onclick="
+                                                toggleFavorite('${a.id}')
+                                            "
+                                            title="Favori"
+                                        >
+                                            ${
+                                                a.favorite
+                                                ? "★"
+                                                : "☆"
+                                            }
+                                        </button>
 
                                     </div>
 
 
-                                    <button
-                                        class="btn ghost star"
-                                        onclick="
-                                            toggleFavorite('${a.id}')
-                                        "
+                                    <div
+                                        class="muted"
+                                        style="margin-top:16px"
                                     >
+
+                                        <b>
+                                            Teams rencontrées :
+                                        </b>
+
+                                        <br>
 
                                         ${
-                                            a.favorite
-                                            ? "★"
-                                            : "☆"
+                                            teams.length
+                                            ?
+                                            teams
+                                            .map(esc)
+                                            .join(", ")
+                                            :
+                                            "Aucune donnée pour le moment"
                                         }
 
-                                    </button>
-
-                                </div>
+                                    </div>
 
 
-                                <div
-                                    style="margin-top:15px"
-                                    class="muted"
-                                >
-
-                                    <b>
-                                        Teams :
-                                    </b>
-
-                                    ${
-                                        teams.length
-                                        ? teams.map(esc).join(", ")
-                                        : "Aucune encore"
-                                    }
-
-                                </div>
-
-
-                                <div
-                                    class="muted"
-                                    style="margin-top:6px"
-                                >
-
-                                    <b>
-                                        Adversaires :
-                                    </b>
-
-                                    ${
-                                        people.length
-                                        ? people.map(esc).join(", ")
-                                        : "Aucun encore"
-                                    }
-
-                                </div>
-
-
-                                <div
-                                    class="actions"
-                                    style="margin-top:15px"
-                                >
-
-                                    <button
-                                        class="btn secondary"
-                                        onclick="
-                                            agencyDetails('${a.id}')
-                                        "
+                                    <div
+                                        class="muted"
+                                        style="margin-top:8px"
                                     >
-                                        Ouvrir
-                                    </button>
 
-                                    <button
-                                        class="btn ghost"
-                                        onclick="
-                                            openAgency('${a.id}')
-                                        "
+                                        <b>
+                                            Adversaires connus :
+                                        </b>
+
+                                        <br>
+
+                                        ${
+                                            people.length
+                                            ?
+                                            people
+                                            .map(esc)
+                                            .join(", ")
+                                            :
+                                            "Aucune donnée pour le moment"
+                                        }
+
+                                    </div>
+
+
+                                    <div
+                                        class="actions"
+                                        style="margin-top:16px"
                                     >
-                                        Modifier
-                                    </button>
+
+                                        <button
+                                            class="btn secondary"
+                                            onclick="
+                                                agencyDetails('${a.id}')
+                                            "
+                                        >
+                                            Ouvrir
+                                        </button>
+
+                                        <button
+                                            class="btn ghost"
+                                            onclick="
+                                                openAgency('${a.id}')
+                                            "
+                                        >
+                                            Modifier
+                                        </button>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                            `;
 
-                        `;
-
-                    }).join("")
-
+                        }
+                    ).join("")
                 }
 
             </div>
@@ -1878,7 +2081,18 @@ views.agencies = function(){
             `
             <div class="empty">
 
-                Aucune agence enregistrée par vous.
+                <div style="font-size:35px">
+                    🏢
+                </div>
+
+                <br>
+
+                Aucune agence adverse enregistrée.
+
+                <br><br>
+
+                C'est vous qui décidez quelles agences
+                doivent entrer dans votre carnet.
 
             </div>
             `
@@ -1905,85 +2119,90 @@ views.calendar = function(){
                 new Date(b.datetime)
         );
 
-
     return `
 
         <div class="card">
 
-            <div class="list">
+            ${
+                matches.length
 
-                ${
-                    matches.length
+                ?
 
-                    ?
+                `
+                <div class="list">
 
-                    matches.map(m => `
+                    ${
+                        matches.map(
+                            m => `
 
-                        <div class="listitem">
+                                <div class="listitem">
 
-                            <div class="row">
+                                    <div class="row">
 
-                                <div>
+                                        <div>
 
-                                    <b>
-                                        ${fmtDT(m.datetime)}
-                                    </b>
+                                            <b>
+                                                ${fmtDT(m.datetime)}
+                                            </b>
 
-                                    <div style="margin-top:5px">
+                                            <div style="margin-top:6px">
 
-                                        ${esc(
-                                            m.ourTeamName ||
-                                            team(m.teamId)?.name ||
-                                            "Team"
-                                        )}
+                                                ${esc(
+                                                    m.ourTeamName ||
+                                                    team(m.teamId)?.name ||
+                                                    "Team"
+                                                )}
 
-                                        vs
+                                                vs
 
-                                        ${esc(
-                                            m.agencyName ||
-                                            "Agence adverse"
-                                        )}
+                                                ${esc(
+                                                    m.agencyName ||
+                                                    "Agence adverse"
+                                                )}
 
-                                        —
+                                                ${
+                                                    m.opponentTeam
+                                                    ?
+                                                    " · " +
+                                                    esc(m.opponentTeam)
+                                                    :
+                                                    ""
+                                                }
 
-                                        ${esc(
-                                            m.opponentTeam ||
-                                            ""
-                                        )}
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            class="btn secondary"
+                                            onclick="
+                                                matchDetails('${m.id}')
+                                            "
+                                        >
+                                            Voir
+                                        </button>
 
                                     </div>
 
                                 </div>
 
+                            `
+                        ).join("")
+                    }
 
-                                <button
-                                    class="btn secondary"
-                                    onclick="
-                                        matchDetails('${m.id}')
-                                    "
-                                >
-                                    Voir
-                                </button>
+                </div>
+                `
 
-                            </div>
+                :
 
-                        </div>
+                `
+                <div class="empty">
+                    Le calendrier est vide.
+                </div>
+                `
 
-                    `).join("")
-
-                    :
-
-                    `
-                    <div class="empty">
-
-                        Le calendrier est vide.
-
-                    </div>
-                    `
-
-                }
-
-            </div>
+            }
 
         </div>
 
@@ -1993,7 +2212,7 @@ views.calendar = function(){
 
 
 /* =========================================================
-   MODALES
+   MODALE
 ========================================================= */
 
 function openModal(title,body){
@@ -2041,9 +2260,7 @@ function openCreator(id){
             avatar:""
         };
 
-
     pendingAvatar = "";
-
 
     openModal(
 
@@ -2101,25 +2318,34 @@ function openCreator(id){
                     <select id="crole">
 
                         <option
+                            value="Fondateur"
                             ${c.role === "Fondateur" ? "selected" : ""}
                         >
                             Fondateur
                         </option>
 
                         <option
+                            value="Manager"
                             ${c.role === "Manager" ? "selected" : ""}
                         >
                             Manager
                         </option>
 
                         <option
+                            value="Agent"
                             ${c.role === "Agent" ? "selected" : ""}
                         >
                             Agent
                         </option>
 
                         <option
-                            ${(!c.role || c.role === "Créateur") ? "selected" : ""}
+                            value="Créateur"
+                            ${
+                                !c.role ||
+                                c.role === "Créateur"
+                                ? "selected"
+                                : ""
+                            }
                         >
                             Créateur
                         </option>
@@ -2150,7 +2376,7 @@ function openCreator(id){
                 <div class="field full">
 
                     <label>
-                        Avatar
+                        Photo / avatar
                         <span class="muted">
                             (facultatif)
                         </span>
@@ -2173,10 +2399,12 @@ function openCreator(id){
                             ${
                                 c.avatar
                                 ?
-                                `<img
+                                `
+                                <img
                                     src="${c.avatar}"
                                     class="avatar big"
-                                >`
+                                >
+                                `
                                 :
                                 ""
                             }
@@ -2200,13 +2428,11 @@ function openCreator(id){
                     type="submit"
                     class="btn primary"
                 >
-
                     ${
                         id
                         ? "Enregistrer"
                         : "Ajouter le créateur"
                     }
-
                 </button>
 
 
@@ -2231,34 +2457,37 @@ function openCreator(id){
 
 function previewAvatar(input){
 
-    const file = input.files[0];
+    const file =
+        input.files?.[0];
 
     if(!file) return;
-
 
     const reader =
         new FileReader();
 
+    reader.onload =
+        function(){
 
-    reader.onload = function(){
+            pendingAvatar =
+                reader.result;
 
-        pendingAvatar =
-            reader.result;
+            const preview =
+                document.getElementById(
+                    "avatarPreview"
+                );
 
+            if(preview){
 
-        document.getElementById(
-            "avatarPreview"
-        ).innerHTML = `
+                preview.innerHTML = `
+                    <img
+                        src="${pendingAvatar}"
+                        class="avatar big"
+                    >
+                `;
 
-            <img
-                src="${pendingAvatar}"
-                class="avatar big"
-            >
+            }
 
-        `;
-
-    };
-
+        };
 
     reader.readAsDataURL(file);
 
@@ -2269,53 +2498,47 @@ function submitCreator(event,id){
 
     event.preventDefault();
 
-
     const c =
         id
         ? creator(id)
-        : {
+        :
+        {
             id:uid()
         };
 
-
     c.name =
-        document.getElementById(
-            "cname"
-        ).value.trim();
-
+        document
+        .getElementById("cname")
+        .value
+        .trim();
 
     c.username =
-        document.getElementById(
-            "cuser"
-        ).value
+        document
+        .getElementById("cuser")
+        .value
         .trim()
         .replace(/^@/,"");
 
-
     c.role =
-        document.getElementById(
-            "crole"
-        ).value;
-
+        document
+        .getElementById("crole")
+        .value;
 
     c.joinDate =
-        document.getElementById(
-            "cdate"
-        ).value;
-
+        document
+        .getElementById("cdate")
+        .value;
 
     c.avatar =
         pendingAvatar ||
         c.avatar ||
         "";
 
-
     if(!id){
 
         db.creators.push(c);
 
     }
-
 
     pendingAvatar = "";
 
@@ -2334,7 +2557,8 @@ function submitCreator(event,id){
 
 function creatorDetails(id){
 
-    const c = creator(id);
+    const c =
+        creator(id);
 
     const matches =
         db.matches.filter(
@@ -2342,13 +2566,11 @@ function creatorDetails(id){
                 m.creatorId === id
         );
 
-
     const teams =
         db.teams.filter(
             t =>
                 t.memberIds?.includes(id)
         );
-
 
     openModal(
 
@@ -2394,15 +2616,20 @@ function creatorDetails(id){
                         : "Non renseignée"
                     }
 
-                    <br>
+                    <br><br>
 
                     Team(s) :
                     ${
                         teams.length
-                        ? teams
-                            .map(t => esc(t.name))
-                            .join(", ")
-                        : "Aucune"
+                        ?
+                        teams
+                        .map(
+                            t =>
+                                esc(t.name)
+                        )
+                        .join(", ")
+                        :
+                        "Aucune"
                     }
 
                 </p>
@@ -2417,7 +2644,6 @@ function creatorDetails(id){
             <h3>
                 Statistiques de matchs
             </h3>
-
 
             <div class="grid stats">
 
@@ -2465,9 +2691,7 @@ function creatorDetails(id){
                 Historique
             </h3>
 
-            ${
-                matchList(matches)
-            }
+            ${matchList(matches)}
 
         </div>
 
@@ -2479,7 +2703,7 @@ function creatorDetails(id){
 
 
 /* =========================================================
-   TEAM
+   TEAMS
 ========================================================= */
 
 function openTeam(id){
@@ -2490,7 +2714,6 @@ function openTeam(id){
             name:"",
             memberIds:[]
         };
-
 
     openModal(
 
@@ -2538,34 +2761,36 @@ function openTeam(id){
 
                         ?
 
-                        db.creators.map(c => `
+                        db.creators.map(
+                            c => `
 
-                            <label class="listitem">
+                                <label class="listitem">
 
-                                <input
-                                    type="checkbox"
-                                    class="tm"
-                                    value="${c.id}"
-                                    ${
-                                        t.memberIds?.includes(c.id)
-                                        ? "checked"
-                                        : ""
-                                    }
-                                >
+                                    <input
+                                        type="checkbox"
+                                        class="tm"
+                                        value="${c.id}"
+                                        ${
+                                            t.memberIds?.includes(c.id)
+                                            ? "checked"
+                                            : ""
+                                        }
+                                    >
 
-                                ${esc(c.name)}
+                                    ${esc(c.name)}
 
-                                —
+                                    —
 
-                                @${esc(c.username)}
+                                    @${esc(c.username)}
 
-                                ·
+                                    ·
 
-                                ${esc(c.role)}
+                                    ${esc(c.role)}
 
-                            </label>
+                                </label>
 
-                        `).join("")
+                            `
+                        ).join("")
 
                         :
 
@@ -2608,36 +2833,32 @@ function submitTeam(event,id){
 
     event.preventDefault();
 
-
     const t =
         id
         ? team(id)
-        : {
+        :
+        {
             id:uid()
         };
 
-
     t.name =
-        document.getElementById(
-            "tname"
-        ).value.trim();
-
+        document
+        .getElementById("tname")
+        .value
+        .trim();
 
     t.memberIds =
-        [...document.querySelectorAll(
-            ".tm:checked"
-        )]
+        [...document.querySelectorAll(".tm:checked")]
         .map(
-            x => x.value
+            x =>
+                x.value
         );
-
 
     if(!id){
 
         db.teams.push(t);
 
     }
-
 
     save();
 
@@ -2648,14 +2869,10 @@ function submitTeam(event,id){
 }
 
 
-/* =========================================================
-   FICHE TEAM
-========================================================= */
-
 function teamDetails(id){
 
-    const t = team(id);
-
+    const t =
+        team(id);
 
     const members =
         db.creators.filter(
@@ -2663,13 +2880,11 @@ function teamDetails(id){
                 t.memberIds?.includes(c.id)
         );
 
-
     const matches =
         db.matches.filter(
             m =>
                 m.teamId === id
         );
-
 
     openModal(
 
@@ -2711,31 +2926,31 @@ function teamDetails(id){
 
                     ?
 
-                    members.map(c => `
+                    members.map(
+                        c => `
 
-                        <div class="person">
+                            <div class="person">
 
-                            ${avatar(c)}
+                                ${avatar(c)}
 
-                            <div>
+                                <div>
 
-                                <b>
-                                    ${esc(c.name)}
-                                </b>
+                                    <b>
+                                        ${esc(c.name)}
+                                    </b>
 
-                                <div class="muted">
-
-                                    @${esc(c.username)}
-                                    ·
-                                    ${esc(c.role)}
+                                    <div class="muted">
+                                        @${esc(c.username)}
+                                        ·
+                                        ${esc(c.role)}
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                        </div>
-
-                    `).join("")
+                        `
+                    ).join("")
 
                     :
 
@@ -2758,9 +2973,7 @@ function teamDetails(id){
                 Matchs de la team
             </h3>
 
-            ${
-                matchList(matches)
-            }
+            ${matchList(matches)}
 
         </div>
 
@@ -2785,12 +2998,11 @@ function openAgency(id){
             notes:""
         };
 
-
     openModal(
 
         id
-        ? "Modifier l'agence"
-        : "Enregistrer une agence",
+        ? "Modifier l'agence adverse"
+        : "Enregistrer une agence adverse",
 
         `
 
@@ -2802,8 +3014,8 @@ function openAgency(id){
 
             <div class="notice">
 
-                Cette agence sera ajoutée à votre carnet
-                uniquement après validation de ce formulaire.
+                Cette agence entrera dans votre carnet
+                uniquement après validation.
 
             </div>
 
@@ -2821,6 +3033,7 @@ function openAgency(id){
                         id="aname"
                         required
                         value="${esc(a.name)}"
+                        placeholder="Ex. Predator Live Agency"
                     >
 
                 </div>
@@ -2829,7 +3042,7 @@ function openAgency(id){
                 <div class="field">
 
                     <label>
-                        Agence favorite
+                        Favori
                     </label>
 
                     <select id="afav">
@@ -2862,12 +3075,12 @@ function openAgency(id){
                         </span>
                     </label>
 
-                    <textarea id="anotes">${esc(
-                        a.notes || ""
-                    )}</textarea>
+                    <textarea
+                        id="anotes"
+                        placeholder="Informations utiles sur cette agence..."
+                    >${esc(a.notes || "")}</textarea>
 
                 </div>
-
 
             </div>
 
@@ -2881,6 +3094,15 @@ function openAgency(id){
                     class="btn primary"
                 >
                     Enregistrer l'agence
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn ghost"
+                    onclick="closeModal()"
+                >
+                    Annuler
                 </button>
 
             </div>
@@ -2898,39 +3120,36 @@ function submitAgency(event,id){
 
     event.preventDefault();
 
-
     const a =
         id
         ? agency(id)
-        : {
+        :
+        {
             id:uid()
         };
 
-
     a.name =
-        document.getElementById(
-            "aname"
-        ).value.trim();
-
+        document
+        .getElementById("aname")
+        .value
+        .trim();
 
     a.favorite =
-        document.getElementById(
-            "afav"
-        ).value === "1";
-
+        document
+        .getElementById("afav")
+        .value === "1";
 
     a.notes =
-        document.getElementById(
-            "anotes"
-        ).value.trim();
-
+        document
+        .getElementById("anotes")
+        .value
+        .trim();
 
     if(!id){
 
         db.agencies.push(a);
 
     }
-
 
     save();
 
@@ -2943,9 +3162,13 @@ function submitAgency(event,id){
 
 function toggleFavorite(id){
 
-    const a = agency(id);
+    const a =
+        agency(id);
 
-    a.favorite = !a.favorite;
+    if(!a) return;
+
+    a.favorite =
+        !a.favorite;
 
     save();
 
@@ -2960,8 +3183,8 @@ function toggleFavorite(id){
 
 function agencyDetails(id){
 
-    const a = agency(id);
-
+    const a =
+        agency(id);
 
     const matches =
         db.matches.filter(
@@ -2970,15 +3193,15 @@ function agencyDetails(id){
                 ||
                 (
                     m.agencyName &&
-                    m.agencyName.toLowerCase()
+                    m.agencyName
+                    .toLowerCase()
                     ===
-                    a.name.toLowerCase()
+                    a.name
+                    .toLowerCase()
                 )
         );
 
-
     const teams = [
-
         ...new Set(
             matches
             .map(
@@ -2987,24 +3210,20 @@ function agencyDetails(id){
             )
             .filter(Boolean)
         )
-
     ];
 
-
     const people = [
-
         ...new Set(
             matches
             .map(
                 m =>
-                    m.opponentUsername ||
+                    m.opponentUsername
+                    ||
                     m.opponentName
             )
             .filter(Boolean)
         )
-
     ];
-
 
     openModal(
 
@@ -3014,19 +3233,27 @@ function agencyDetails(id){
 
         <div class="row">
 
-            <div>
+            <div class="person">
 
-                <h2 style="margin:0">
-                    ${esc(a.name)}
-                </h2>
+                <div class="agency-icon">
+                    ${esc(initials(a.name))}
+                </div>
 
-                <div class="muted">
+                <div>
 
-                    ${
-                        a.favorite
-                        ? "⭐ Agence favorite"
-                        : "Agence enregistrée"
-                    }
+                    <h2 style="margin:0">
+                        ${esc(a.name)}
+                    </h2>
+
+                    <div class="muted">
+
+                        ${
+                            a.favorite
+                            ? "⭐ Agence favorite"
+                            : "Agence enregistrée"
+                        }
+
+                    </div>
 
                 </div>
 
@@ -3072,7 +3299,7 @@ function agencyDetails(id){
         <div class="section">
 
             <h3>
-                Teams rencontrées
+                Teams adverses rencontrées
             </h3>
 
             <div class="list">
@@ -3094,7 +3321,7 @@ function agencyDetails(id){
 
                     `
                     <div class="muted">
-                        Aucune donnée.
+                        Aucune donnée pour le moment.
                     </div>
                     `
 
@@ -3144,12 +3371,10 @@ function agencyDetails(id){
         <div class="section">
 
             <h3>
-                Historique
+                Historique des matchs
             </h3>
 
-            ${
-                matchList(matches)
-            }
+            ${matchList(matches)}
 
         </div>
 
@@ -3181,15 +3406,17 @@ function agencyDetails(id){
 
 
 /* =========================================================
-   CRÉATION / MODIFICATION D'UN MATCH
+   CRÉATION MATCH
 ========================================================= */
 
 function openMatch(id){
 
     const m =
         id
-        ? db.matches.find(
-            x => x.id === id
+        ?
+        db.matches.find(
+            x =>
+                x.id === id
         )
         :
         {
@@ -3207,7 +3434,6 @@ function openMatch(id){
             datetime:""
         };
 
-
     const savedAgencies =
         db.agencies
         .slice()
@@ -3216,7 +3442,6 @@ function openMatch(id){
                 Number(b.favorite) -
                 Number(a.favorite)
         );
-
 
     openModal(
 
@@ -3270,21 +3495,22 @@ function openMatch(id){
                         </option>
 
                         ${
-                            db.teams.map(t => `
+                            db.teams.map(
+                                t => `
 
-                                <option
-                                    value="${t.id}"
-                                    ${
-                                        m.teamId === t.id
-                                        ? "selected"
-                                        : ""
-                                    }
-                                >
-                                    ${esc(t.name)}
-                                </option>
+                                    <option
+                                        value="${t.id}"
+                                        ${
+                                            m.teamId === t.id
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        ${esc(t.name)}
+                                    </option>
 
-                            `).join("")
-
+                                `
+                            ).join("")
                         }
 
                     </select>
@@ -3292,7 +3518,7 @@ function openMatch(id){
                 </div>
 
 
-                <div class="field">
+                <div class="field full">
 
                     <label>
                         Notre créateur *
@@ -3304,7 +3530,7 @@ function openMatch(id){
                     >
 
                         <option value="">
-                            Choisir après la team...
+                            Choisissez d'abord une team...
                         </option>
 
                     </select>
@@ -3319,20 +3545,18 @@ function openMatch(id){
                     </label>
 
 
-                    <div class="actions">
+                    <select
+                        id="agencySelect"
+                        onchange="selectSavedAgency()"
+                    >
 
-                        <select
-                            id="agencySelect"
-                            style="flex:1"
-                            onchange="selectSavedAgency()"
-                        >
+                        <option value="">
+                            ✏️ Nouvelle agence / saisie libre
+                        </option>
 
-                            <option value="">
-                                ✏️ Écrire une agence / choisir...
-                            </option>
-
-                            ${
-                                savedAgencies.map(a => `
+                        ${
+                            savedAgencies.map(
+                                a => `
 
                                     <option
                                         value="${a.id}"
@@ -3353,32 +3577,31 @@ function openMatch(id){
 
                                     </option>
 
-                                `).join("")
+                                `
+                            ).join("")
+                        }
 
-                            }
-
-                        </select>
-
-
-                        <button
-                            type="button"
-                            class="btn secondary"
-                            onclick="openAgency()"
-                        >
-                            ＋ Enregistrer une agence
-                        </button>
-
-                    </div>
+                    </select>
 
 
                     <input
                         id="agencyName"
                         style="margin-top:8px"
-                        placeholder="Nom de l'agence adverse (saisie libre)"
+                        placeholder="Nom de l'agence adverse"
                         value="${esc(
                             m.agencyName || ""
                         )}"
                     >
+
+
+                    <div
+                        class="muted"
+                        style="margin-top:6px"
+                    >
+                        💡 Une agence sélectionnée est
+                        réutilisée. Une agence écrite ici
+                        n'est pas enregistrée automatiquement.
+                    </div>
 
                 </div>
 
@@ -3394,7 +3617,7 @@ function openMatch(id){
                         value="${esc(
                             m.opponentTeam || ""
                         )}"
-                        placeholder="Ex. Team Predator"
+                        placeholder="Nom de la team adverse"
                     >
 
                 </div>
@@ -3411,6 +3634,7 @@ function openMatch(id){
                         value="${esc(
                             m.opponentName || ""
                         )}"
+                        placeholder="Nom"
                     >
 
                 </div>
@@ -3445,8 +3669,10 @@ function openMatch(id){
                         required
                         value="${
                             m.datetime
-                            ? m.datetime.slice(0,10)
-                            : ""
+                            ?
+                            m.datetime.slice(0,10)
+                            :
+                            ""
                         }"
                     >
 
@@ -3465,31 +3691,22 @@ function openMatch(id){
                         required
                         value="${
                             m.datetime
-                            ? m.datetime.slice(11,16)
-                            : ""
+                            ?
+                            m.datetime.slice(11,16)
+                            :
+                            ""
                         }"
                     >
 
                 </div>
 
-
             </div>
 
 
             <div
-                class="notice"
-                style="margin-top:14px"
+                class="actions"
+                style="margin-top:18px"
             >
-
-                Une agence sélectionnée ici est réutilisée.
-
-                Une agence écrite manuellement n'est
-                <b>pas</b> enregistrée automatiquement.
-
-            </div>
-
-
-            <div class="actions">
 
                 <button
                     class="btn primary"
@@ -3532,31 +3749,32 @@ function openMatch(id){
 
 
 /* =========================================================
-   CRÉATEURS D'UNE TEAM
+   CRÉATEURS SELON TEAM
 ========================================================= */
 
 function fillCreators(selected=""){
 
     const teamId =
-        document.getElementById(
-            "mteam"
-        )?.value;
-
+        document
+        .getElementById("mteam")
+        ?.value;
 
     const select =
-        document.getElementById(
-            "mcreator"
-        );
-
+        document
+        .getElementById("mcreator");
 
     if(!select) return;
-
 
     const ids =
         team(teamId)
         ?.memberIds ||
         [];
 
+    const members =
+        db.creators.filter(
+            c =>
+                ids.includes(c.id)
+        );
 
     select.innerHTML =
 
@@ -3568,63 +3786,51 @@ function fillCreators(selected=""){
 
         +
 
-        db.creators
-        .filter(
-            c =>
-                ids.includes(c.id)
-        )
-        .map(c => `
+        members.map(
+            c => `
 
-            <option
-                value="${c.id}"
-                ${
-                    c.id === selected
-                    ? "selected"
-                    : ""
-                }
-            >
+                <option
+                    value="${c.id}"
+                    ${
+                        c.id === selected
+                        ? "selected"
+                        : ""
+                    }
+                >
+                    ${esc(c.name)}
+                    —
+                    @${esc(c.username)}
+                </option>
 
-                ${esc(c.name)}
-                —
-                @${esc(c.username)}
-
-            </option>
-
-        `)
-        .join("");
+            `
+        ).join("");
 
 }
 
 
 /* =========================================================
-   AGENCE ENREGISTRÉE
+   AGENCE EXISTANTE
 ========================================================= */
 
 function selectSavedAgency(){
 
     const select =
-        document.getElementById(
-            "agencySelect"
-        );
-
+        document
+        .getElementById("agencySelect");
 
     const input =
-        document.getElementById(
-            "agencyName"
-        );
-
+        document
+        .getElementById("agencyName");
 
     if(!select || !input) return;
 
-
-    const selectedAgency =
+    const a =
         agency(select.value);
 
-
-    if(selectedAgency){
+    if(a){
 
         input.value =
-            selectedAgency.name;
+            a.name;
 
     }
 
@@ -3639,11 +3845,12 @@ function submitMatch(event,id){
 
     event.preventDefault();
 
-
     const m =
         id
-        ? db.matches.find(
-            x => x.id === id
+        ?
+        db.matches.find(
+            x =>
+                x.id === id
         )
         :
         {
@@ -3652,9 +3859,9 @@ function submitMatch(event,id){
 
 
     const agencyId =
-        document.getElementById(
-            "agencySelect"
-        ).value;
+        document
+        .getElementById("agencySelect")
+        .value;
 
 
     const selectedAgency =
@@ -3662,17 +3869,18 @@ function submitMatch(event,id){
 
 
     m.ourAgency =
-        document.getElementById(
-            "ourAgency"
-        ).value.trim()
+        document
+        .getElementById("ourAgency")
+        .value
+        .trim()
         ||
         "LVF Agency";
 
 
     m.teamId =
-        document.getElementById(
-            "mteam"
-        ).value;
+        document
+        .getElementById("mteam")
+        .value;
 
 
     m.ourTeamName =
@@ -3682,60 +3890,63 @@ function submitMatch(event,id){
 
 
     m.creatorId =
-        document.getElementById(
-            "mcreator"
-        ).value;
+        document
+        .getElementById("mcreator")
+        .value;
 
 
     /*
-       IMPORTANT :
-       L'agence n'est liée à la base enregistrée
-       que si elle a réellement été sélectionnée
-       dans la liste des agences enregistrées.
+       L'agence n'est liée à une agence enregistrée
+       que si l'utilisateur l'a explicitement sélectionnée.
     */
 
     m.agencyId =
         selectedAgency
-        ? selectedAgency.id
-        : "";
+        ?
+        selectedAgency.id
+        :
+        "";
 
 
     m.agencyName =
-        document.getElementById(
-            "agencyName"
-        ).value.trim();
+        document
+        .getElementById("agencyName")
+        .value
+        .trim();
 
 
     m.opponentTeam =
-        document.getElementById(
-            "oppTeam"
-        ).value.trim();
+        document
+        .getElementById("oppTeam")
+        .value
+        .trim();
 
 
     m.opponentName =
-        document.getElementById(
-            "oppName"
-        ).value.trim();
+        document
+        .getElementById("oppName")
+        .value
+        .trim();
 
 
     m.opponentUsername =
-        document.getElementById(
-            "oppUser"
-        ).value
+        document
+        .getElementById("oppUser")
+        .value
         .trim()
         .replace(/^@/,"");
 
 
     const date =
-        document.getElementById(
-            "mdate"
-        ).value;
+        document
+        .getElementById("mdate")
+        .value;
 
 
     const time =
-        document.getElementById(
-            "mtime"
-        ).value;
+        document
+        .getElementById("mtime")
+        .value;
 
 
     m.datetime =
@@ -3768,13 +3979,12 @@ function matchDetails(id){
 
     const m =
         db.matches.find(
-            x => x.id === id
+            x =>
+                x.id === id
         );
-
 
     const c =
         creator(m.creatorId);
-
 
     openModal(
 
@@ -3791,11 +4001,17 @@ function matchDetails(id){
 
             <h2>
 
-                ${esc(m.ourAgency)}
+                ${esc(
+                    m.ourAgency ||
+                    "LVF Agency"
+                )}
 
                 ·
 
-                ${esc(m.ourTeamName)}
+                ${esc(
+                    m.ourTeamName ||
+                    "Team"
+                )}
 
             </h2>
 
@@ -3804,18 +4020,21 @@ function matchDetails(id){
 
                 ${
                     c
-                    ? avatar(c)
-                    : ""
+                    ?
+                    avatar(c)
+                    :
+                    ""
                 }
-
 
                 <div>
 
                     <b>
                         ${
                             c
-                            ? esc(c.name)
-                            : "—"
+                            ?
+                            esc(c.name)
+                            :
+                            "Créateur non renseigné"
                         }
                     </b>
 
@@ -3823,8 +4042,11 @@ function matchDetails(id){
 
                         ${
                             c
-                            ? "@" + esc(c.username)
-                            : ""
+                            ?
+                            "@" +
+                            esc(c.username)
+                            :
+                            ""
                         }
 
                     </div>
@@ -3849,12 +4071,16 @@ function matchDetails(id){
                     "—"
                 )}
 
-                ·
-
-                ${esc(
-                    m.opponentTeam ||
-                    "—"
-                )}
+                ${
+                    m.opponentTeam
+                    ?
+                    `
+                    ·
+                    ${esc(m.opponentTeam)}
+                    `
+                    :
+                    ""
+                }
 
             </h2>
 
@@ -3868,12 +4094,9 @@ function matchDetails(id){
                     )}
                 </b>
 
-
                 ${
                     m.opponentUsername
-
                     ?
-
                     `
                     <span class="muted">
                         (@${esc(
@@ -3881,9 +4104,7 @@ function matchDetails(id){
                         )})
                     </span>
                     `
-
                     :
-
                     ""
                 }
 
@@ -3933,7 +4154,7 @@ function deleteMatch(id){
 
     if(
         !confirm(
-            "Supprimer ce match ?"
+            "Voulez-vous vraiment supprimer ce match ?"
         )
     ){
 
@@ -3941,13 +4162,11 @@ function deleteMatch(id){
 
     }
 
-
     db.matches =
         db.matches.filter(
             m =>
                 m.id !== id
         );
-
 
     save();
 
@@ -3959,30 +4178,32 @@ function deleteMatch(id){
 
 
 /* =========================================================
-   FERMETURE MODALE
+   FERMETURE MODALE EN CLIQUANT À L'EXTÉRIEUR
 ========================================================= */
 
 document
-    .getElementById("modal")
-    .addEventListener(
-        "click",
-        function(event){
+.getElementById("modal")
+.addEventListener(
+    "click",
+    function(event){
 
-            if(
-                event.target.id === "modal"
-            ){
+        if(
+            event.target.id === "modal"
+        ){
 
-                closeModal();
-
-            }
+            closeModal();
 
         }
-    );
+
+    }
+);
 
 
 /* =========================================================
    INITIALISATION
 ========================================================= */
+
+renderNav();
 
 render();
 
