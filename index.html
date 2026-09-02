@@ -3,29 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>LVF — La Vraie Famille</title>
 
 <style>
 :root{
-    --bg:#070914;
-    --panel:#101426;
-    --panel2:#151a31;
-    --border:#293150;
-    --text:#f7f8ff;
-    --muted:#929bb7;
-    --purple:#8b5cf6;
-    --purple2:#a78bfa;
-    --pink:#ec4899;
-    --blue:#38bdf8;
-    --green:#34d399;
-    --orange:#fb923c;
-    --gold:#fbbf24;
-    --red:#fb7185;
+    --bg:#08090f;
+    --panel:#10121b;
+    --panel2:#151824;
+    --border:rgba(255,255,255,.09);
+    --text:#f7f7fb;
+    --muted:#9296a8;
+    --purple:#9d72ff;
+    --purple2:#6c43e8;
+    --pink:#ff6bb5;
+    --blue:#55a8ff;
+    --green:#55d99a;
+    --gold:#ffc95a;
+    --red:#ff6575;
+    --shadow:0 25px 70px rgba(0,0,0,.35);
 }
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
@@ -33,20 +34,17 @@ html{
 }
 
 body{
-    margin:0;
     min-height:100vh;
-    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    color:var(--text);
     background:
-        radial-gradient(circle at 10% 0%,rgba(139,92,246,.20),transparent 30%),
-        radial-gradient(circle at 90% 10%,rgba(56,189,248,.12),transparent 28%),
+        radial-gradient(circle at 10% 0%,rgba(157,114,255,.16),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(255,107,181,.10),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(85,168,255,.07),transparent 30%),
         var(--bg);
+    color:var(--text);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-button,
-input,
-select,
-textarea{
+button,input,select,textarea{
     font:inherit;
 }
 
@@ -54,429 +52,460 @@ button{
     cursor:pointer;
 }
 
-.container{
-    width:min(1450px,94%);
-    margin:auto;
+::-webkit-scrollbar{
+    width:8px;
+}
+::-webkit-scrollbar-track{
+    background:#090a10;
+}
+::-webkit-scrollbar-thumb{
+    background:#292b39;
+    border-radius:20px;
 }
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
-header{
+.topbar{
     position:sticky;
     top:0;
     z-index:50;
-    background:rgba(7,9,20,.84);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.nav{
-    min-height:76px;
+    height:76px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
+    padding:0 34px;
+    border-bottom:1px solid var(--border);
+    background:rgba(8,9,15,.82);
+    backdrop-filter:blur(22px);
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:12px;
-    font-weight:900;
+    gap:13px;
 }
 
-.logo{
-    width:46px;
-    height:46px;
-    border-radius:15px;
+.brand-mark{
+    width:42px;
+    height:42px;
     display:grid;
     place-items:center;
-    font-weight:950;
+    border-radius:13px;
+    background:linear-gradient(145deg,#b58cff,#6335dc);
+    box-shadow:0 10px 30px rgba(125,75,255,.3);
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.brand-text strong{
+    display:block;
     font-size:15px;
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    box-shadow:0 12px 35px rgba(139,92,246,.30);
+    letter-spacing:.04em;
 }
 
-.nav-actions{
+.brand-text span{
+    display:block;
+    margin-top:2px;
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+}
+
+.top-actions{
     display:flex;
-    gap:8px;
+    gap:9px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
+.small-btn{
     border:1px solid var(--border);
-    background:#171d34;
-    color:var(--text);
+    color:#dddfea;
+    background:#11131c;
     padding:10px 14px;
-    border-radius:12px;
-    font-weight:750;
+    border-radius:11px;
     transition:.2s;
 }
 
-.btn:hover{
-    transform:translateY(-1px);
-    filter:brightness(1.12);
+.small-btn:hover{
+    background:#1a1d28;
+    border-color:rgba(157,114,255,.35);
 }
 
-.btn.primary{
-    border:0;
-    background:linear-gradient(135deg,var(--purple),#6843d8);
+.small-btn.danger:hover{
+    border-color:rgba(255,101,117,.4);
+    color:#ff9ba6;
 }
 
-.btn.danger{
-    background:rgba(251,113,133,.08);
-    border-color:rgba(251,113,133,.30);
-    color:#fecdd3;
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    width:min(1420px,calc(100% - 40px));
+    margin:auto;
+    padding:42px 0 80px;
 }
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-    padding:34px 0 70px;
-}
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
-    display:grid;
-    grid-template-columns:1.35fr .65fr;
-    gap:18px;
-    margin-bottom:18px;
-}
-
-.hero-card{
-    min-height:260px;
-    padding:34px;
-    border-radius:28px;
-    border:1px solid var(--border);
-    background:
-        linear-gradient(145deg,rgba(21,27,52,.97),rgba(12,17,34,.97));
-    box-shadow:0 25px 70px rgba(0,0,0,.32);
     position:relative;
     overflow:hidden;
+    min-height:270px;
+    display:flex;
+    align-items:flex-end;
+    padding:38px;
+    border:1px solid var(--border);
+    border-radius:30px;
+    background:
+        linear-gradient(120deg,rgba(157,114,255,.13),transparent 45%),
+        linear-gradient(310deg,rgba(255,107,181,.07),transparent 45%),
+        var(--panel);
+    box-shadow:var(--shadow);
 }
 
-.hero-card::after{
+.hero:before{
     content:"";
     position:absolute;
     width:330px;
     height:330px;
+    right:-100px;
+    top:-130px;
     border-radius:50%;
-    right:-120px;
-    top:-170px;
-    background:radial-gradient(circle,rgba(139,92,246,.30),transparent 65%);
+    background:rgba(157,114,255,.13);
+    filter:blur(2px);
 }
 
-.kicker{
-    color:var(--purple2);
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow{
+    color:#b99aff;
     font-size:11px;
-    font-weight:900;
-    letter-spacing:2px;
+    font-weight:800;
     text-transform:uppercase;
+    letter-spacing:.24em;
+    margin-bottom:13px;
 }
 
 .hero h1{
-    font-size:clamp(38px,5vw,64px);
+    font-size:clamp(38px,6vw,72px);
     line-height:.95;
-    margin:12px 0 18px;
+    letter-spacing:-.065em;
+    max-width:800px;
+}
+
+.hero h1 span{
+    background:linear-gradient(90deg,#fff,#b999ff 55%,#ff83c3);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
 .hero p{
     color:var(--muted);
-    max-width:760px;
-    line-height:1.7;
-    margin:0;
+    margin-top:17px;
+    max-width:620px;
+    line-height:1.6;
 }
 
-.hero-side{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.hero-orbit{
+    position:absolute;
+    right:8%;
+    bottom:12%;
+    width:145px;
+    height:145px;
+    border:1px solid rgba(157,114,255,.22);
+    border-radius:50%;
 }
 
-.hero-side strong{
-    font-size:48px;
-    line-height:1;
-    margin-top:8px;
+.hero-orbit:after{
+    content:"LVF";
+    position:absolute;
+    inset:25px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:rgba(157,114,255,.12);
+    border:1px solid rgba(157,114,255,.28);
+    color:#c5a9ff;
+    font-weight:900;
+    letter-spacing:.15em;
 }
 
-.hero-side span{
-    color:var(--muted);
-    margin-top:8px;
-}
+/* =========================================================
+   KPIs
+========================================================= */
 
-/* =========================
-   KPI
-========================= */
-
-.metrics{
+.kpis{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:13px;
-    margin-bottom:30px;
+    gap:14px;
+    margin:18px 0 34px;
 }
 
-.metric{
-    padding:20px;
-    border-radius:21px;
+.kpi{
+    padding:22px;
     border:1px solid var(--border);
-    background:linear-gradient(145deg,#151b34,#0e1428);
+    border-radius:20px;
+    background:rgba(16,18,27,.9);
 }
 
-.metric-icon{
-    font-size:22px;
+.kpi-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.metric b{
-    display:block;
-    font-size:30px;
-    margin:6px 0;
+.kpi-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:#181b27;
+    font-size:18px;
 }
 
-.metric span{
+.kpi-label{
     color:var(--muted);
-    font-size:13px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.11em;
 }
 
-/* =========================
-   TITLES
-========================= */
+.kpi-value{
+    margin-top:18px;
+    font-size:31px;
+    font-weight:850;
+    letter-spacing:-.04em;
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section-title{
     display:flex;
-    align-items:end;
     justify-content:space-between;
-    gap:15px;
-    margin:30px 0 15px;
+    align-items:end;
+    margin:34px 2px 14px;
 }
 
 .section-title h2{
-    margin:0;
-    font-size:21px;
+    font-size:20px;
+    letter-spacing:-.03em;
 }
 
-.section-title span{
+.section-title p{
     color:var(--muted);
     font-size:12px;
+    margin-top:4px;
 }
 
-/* =========================
+/* =========================================================
    MODULES
-========================= */
+========================================================= */
 
 .modules{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(12,1fr);
     gap:15px;
 }
 
 .module{
-    min-height:175px;
-    padding:22px;
-    text-align:left;
-    color:var(--text);
-    border-radius:22px;
-    border:1px solid var(--border);
-    background:linear-gradient(145deg,#13192f,#0c1225);
-    transition:.22s;
     position:relative;
+    min-height:190px;
+    grid-column:span 4;
     overflow:hidden;
+    padding:25px;
+    border:1px solid var(--border);
+    border-radius:23px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.035),transparent 60%),
+        var(--panel);
+    transition:transform .22s,border-color .22s,box-shadow .22s;
+}
+
+.module.large{
+    grid-column:span 6;
 }
 
 .module:hover{
     transform:translateY(-4px);
-    border-color:#4b587f;
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    border-color:rgba(157,114,255,.34);
+    box-shadow:0 20px 55px rgba(0,0,0,.28);
 }
 
 .module-icon{
     width:48px;
     height:48px;
-    border-radius:15px;
     display:grid;
     place-items:center;
-    font-size:23px;
-    background:rgba(139,92,246,.13);
-    margin-bottom:16px;
+    border-radius:15px;
+    background:#1a1d29;
+    font-size:21px;
 }
 
 .module h3{
-    margin:0 0 8px;
-    font-size:17px;
+    margin-top:24px;
+    font-size:20px;
+    letter-spacing:-.03em;
 }
 
 .module p{
-    margin:0;
     color:var(--muted);
     font-size:13px;
-    line-height:1.55;
+    line-height:1.5;
+    margin-top:7px;
+    max-width:330px;
 }
 
-.count{
+.module-count{
     position:absolute;
-    right:18px;
-    top:18px;
-    color:var(--muted);
-    font-size:12px;
-}
-
-.module.pink .module-icon{
-    background:rgba(236,72,153,.13);
-}
-
-.module.blue .module-icon{
-    background:rgba(56,189,248,.13);
-}
-
-.module.green .module-icon{
-    background:rgba(52,211,153,.13);
-}
-
-.module.orange .module-icon{
-    background:rgba(251,146,60,.13);
-}
-
-.module.gold .module-icon{
-    background:rgba(251,191,36,.13);
-}
-
-/* =========================
-   DASHBOARD PREVIEWS
-========================= */
-
-.dashboard{
+    right:22px;
+    top:22px;
+    min-width:36px;
+    height:36px;
+    padding:0 10px;
     display:grid;
-    grid-template-columns:1fr 1fr;
+    place-items:center;
+    border-radius:50px;
+    background:#191c28;
+    color:#c7b5ff;
+    font-weight:800;
+}
+
+.module-glow{
+    position:absolute;
+    width:120px;
+    height:120px;
+    right:-50px;
+    bottom:-50px;
+    border-radius:50%;
+    background:rgba(157,114,255,.12);
+    filter:blur(20px);
+}
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.overview{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
     gap:15px;
     margin-top:15px;
 }
 
 .panel{
-    padding:21px;
-    border-radius:22px;
     border:1px solid var(--border);
-    background:rgba(16,21,42,.94);
+    border-radius:23px;
+    background:var(--panel);
+    padding:23px;
 }
 
-.panel h3{
-    margin:0 0 15px;
-}
-
-.empty{
-    padding:28px 12px;
-    text-align:center;
-    color:var(--muted);
-    border:1px dashed #394563;
-    border-radius:15px;
-}
-
-.list{
-    display:grid;
-    gap:9px;
-}
-
-.row{
+.panel-heading{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:12px;
-    padding:13px;
-    border:1px solid #252f4e;
-    border-radius:14px;
-    background:#0d1428;
+    margin-bottom:20px;
 }
 
-.row-main{
-    min-width:0;
+.panel-heading h3{
+    font-size:16px;
 }
 
-.row-main strong{
-    display:block;
-}
-
-.row-main small{
+.panel-heading span{
     color:var(--muted);
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    padding:5px 9px;
-    border-radius:999px;
-    background:#1a2240;
-    color:#cbd3ed;
     font-size:11px;
-    font-weight:800;
-    white-space:nowrap;
+    text-transform:uppercase;
+    letter-spacing:.1em;
 }
 
-/* =========================
-   MODALS
-========================= */
+.empty{
+    min-height:150px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    color:var(--muted);
+    border:1px dashed rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:25px;
+}
 
-.modal{
+.empty strong{
+    display:block;
+    color:#d7d8e2;
+    margin-bottom:6px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
     position:fixed;
     inset:0;
     z-index:100;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:16px;
-    background:rgba(2,4,12,.78);
+    padding:20px;
+    background:rgba(0,0,0,.72);
     backdrop-filter:blur(10px);
 }
 
-.modal.open{
+.modal-backdrop.open{
     display:flex;
 }
 
-.dialog{
+.modal{
     width:min(760px,100%);
-    max-height:92vh;
+    max-height:90vh;
     overflow:auto;
-    border-radius:24px;
-    border:1px solid #344064;
-    background:#10162b;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    background:#10121a;
     box-shadow:0 35px 100px rgba(0,0,0,.55);
 }
 
-.dialog-head{
+.modal-head{
+    position:sticky;
+    top:0;
+    z-index:2;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:20px 22px;
+    align-items:center;
+    padding:22px 24px;
+    background:rgba(16,18,26,.94);
+    backdrop-filter:blur(15px);
     border-bottom:1px solid var(--border);
 }
 
-.dialog-head h2{
-    margin:0;
+.modal-head h2{
     font-size:20px;
 }
 
 .close{
-    width:36px;
-    height:36px;
-    border:0;
+    width:38px;
+    height:38px;
+    border:1px solid var(--border);
     border-radius:11px;
-    background:#1c2541;
+    background:#171a24;
     color:#fff;
-    font-size:21px;
 }
 
-.form{
-    padding:22px;
+.modal-body{
+    padding:24px;
+}
+
+.form-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
 .field{
@@ -485,215 +514,215 @@ main{
     gap:7px;
 }
 
-.field.full,
-.form-actions{
+.field.full{
     grid-column:1/-1;
 }
 
 .field label{
-    color:#b9c2df;
+    color:#c5c7d2;
     font-size:12px;
-    font-weight:800;
+    font-weight:700;
 }
 
-input,
-select,
-textarea{
+.field input,
+.field select,
+.field textarea{
     width:100%;
-    padding:11px 12px;
-    border-radius:12px;
-    border:1px solid #303b5c;
+    border:1px solid rgba(255,255,255,.1);
     outline:none;
     color:#fff;
-    background:#0a1020;
+    background:#0c0e15;
+    border-radius:12px;
+    padding:12px 13px;
+    transition:.2s;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:var(--purple);
-}
-
-textarea{
-    min-height:90px;
+.field textarea{
+    min-height:100px;
     resize:vertical;
 }
 
-.form-actions{
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:rgba(157,114,255,.65);
+    box-shadow:0 0 0 3px rgba(157,114,255,.08);
+}
+
+.modal-actions{
     display:flex;
     justify-content:flex-end;
-    gap:8px;
-}
-
-.modal-content{
-    padding:0 22px 22px;
-}
-
-.search{
-    margin-bottom:12px;
-}
-
-.notice{
-    margin:0 22px 20px;
-    padding:13px 14px;
-    border-radius:13px;
-    border:1px solid rgba(52,211,153,.25);
-    background:rgba(52,211,153,.07);
-    color:#c8f8e8;
-    font-size:13px;
-    line-height:1.55;
-}
-
-/* =========================
-   CHART
-========================= */
-
-.chart{
-    height:250px;
-    display:flex;
-    align-items:end;
     gap:10px;
-    padding:12px 4px 4px;
-    border-bottom:1px solid #303956;
+    margin-top:22px;
 }
 
-.bar-wrap{
-    height:100%;
-    flex:1;
+.primary{
+    border:0;
+    border-radius:12px;
+    padding:12px 18px;
+    color:#fff;
+    font-weight:800;
+    background:linear-gradient(135deg,#9d72ff,#6c43e8);
+    box-shadow:0 12px 30px rgba(108,67,232,.25);
+}
+
+.secondary{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 18px;
+    color:#ddd;
+    background:#171a24;
+}
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+.records{
     display:flex;
     flex-direction:column;
-    justify-content:end;
-    align-items:center;
-    gap:7px;
-}
-
-.bar{
-    width:min(48px,75%);
-    min-height:3px;
-    border-radius:9px 9px 2px 2px;
-    background:linear-gradient(180deg,var(--purple2),var(--purple));
-}
-
-.bar-wrap small{
-    color:var(--muted);
-    font-size:10px;
-    white-space:nowrap;
-}
-
-/* =========================
-   RANKING
-========================= */
-
-.rank{
-    display:grid;
-    grid-template-columns:40px 1fr auto;
-    align-items:center;
     gap:10px;
-    padding:12px;
-    border-bottom:1px solid #252e4c;
 }
 
-.rank:last-child{
-    border-bottom:0;
+.record{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+    padding:15px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    background:#0d0f16;
 }
 
-.rank-num{
-    font-size:20px;
-    font-weight:900;
+.record-main{
+    min-width:0;
 }
 
-.rank small{
+.record-title{
+    font-weight:800;
+}
+
+.record-sub{
     color:var(--muted);
-}
-
-/* =========================
-   FOOTER / TOAST
-========================= */
-
-.footer{
-    text-align:center;
-    color:#687390;
     font-size:12px;
-    margin-top:28px;
+    margin-top:4px;
 }
 
-.toast{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    z-index:200;
-    display:none;
-    padding:13px 16px;
-    border-radius:14px;
-    background:#171e38;
-    border:1px solid #394568;
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
+.record-actions{
+    display:flex;
+    gap:7px;
+    flex-shrink:0;
 }
 
-.toast.show{
-    display:block;
+.icon-btn{
+    width:35px;
+    height:35px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:#171a24;
+    color:#d8d9e2;
 }
 
-/* =========================
+.icon-btn.delete:hover{
+    color:#ff8491;
+    border-color:rgba(255,101,117,.35);
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    border-radius:30px;
+    padding:5px 9px;
+    font-size:10px;
+    font-weight:800;
+    background:#191c27;
+    color:#bca6ff;
+}
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart-wrap{
+    width:100%;
+    overflow:hidden;
+}
+
+canvas{
+    width:100%;
+    height:280px;
+}
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
-@media(max-width:900px){
-
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .metrics{
+@media(max-width:1000px){
+    .kpis{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .modules{
-        grid-template-columns:repeat(2,1fr);
+    .module,
+    .module.large{
+        grid-column:span 6;
     }
 
-    .dashboard{
+    .overview{
         grid-template-columns:1fr;
     }
 }
 
-@media(max-width:600px){
-
-    .nav{
-        min-height:68px;
+@media(max-width:680px){
+    .topbar{
+        padding:0 16px;
     }
 
-    .nav-actions .btn:first-child{
+    .top-actions .small-btn:first-child{
         display:none;
     }
 
-    .modules{
-        grid-template-columns:1fr;
+    .page{
+        width:min(100% - 22px,1420px);
+        padding-top:20px;
     }
 
-    .metrics{
+    .hero{
+        min-height:300px;
+        padding:25px;
+        border-radius:23px;
+    }
+
+    .hero-orbit{
+        opacity:.4;
+        right:-30px;
+        bottom:15px;
+    }
+
+    .kpis{
+        grid-template-columns:1fr 1fr;
         gap:9px;
     }
 
-    .metric{
-        padding:15px;
+    .kpi{
+        padding:16px;
     }
 
-    .metric b{
+    .kpi-value{
         font-size:25px;
     }
 
-    .form{
+    .module,
+    .module.large{
+        grid-column:1/-1;
+    }
+
+    .form-grid{
         grid-template-columns:1fr;
     }
 
-    .field.full,
-    .form-actions{
+    .field.full{
         grid-column:auto;
-    }
-
-    .hero-card{
-        padding:25px;
     }
 }
 </style>
@@ -701,3208 +730,1635 @@ textarea{
 
 <body>
 
-<header>
-    <div class="container nav">
-
-        <div class="brand">
-            <div class="logo">LVF</div>
-            <span>La Vraie Famille</span>
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-mark">LVF</div>
+        <div class="brand-text">
+            <strong>LA VRAIE FAMILLE</strong>
+            <span>Centre de contrôle</span>
         </div>
+    </div>
 
-        <div class="nav-actions">
-            <button class="btn" onclick="exportData()">Exporter</button>
-            <button class="btn danger" onclick="resetData()">Réinitialiser</button>
-        </div>
-
+    <div class="top-actions">
+        <button class="small-btn" onclick="exportData()">Exporter</button>
+        <button class="small-btn danger" onclick="resetData()">Réinitialiser</button>
     </div>
 </header>
 
-
-<main class="container">
-
-    <!-- HERO -->
+<main class="page">
 
     <section class="hero">
-
-        <div class="hero-card">
-
-            <div class="kicker">
-                Centre de contrôle
-            </div>
-
-            <h1>
-                LVF<br>
-                La Vraie Famille
-            </h1>
-
+        <div class="hero-content">
+            <div class="eyebrow">LVF · LA VRAIE FAMILLE</div>
+            <h1>Le centre de contrôle<br><span>de LVF.</span></h1>
             <p>
-                Un espace unique pour gérer les créateurs, les managers,
-                les Teams, les matchs, les candidatures et les performances
-                de LVF.
+                Gérez vos créateurs, vos Teams, vos managers, vos agences,
+                vos candidatures, vos matchs et vos performances depuis un seul espace.
             </p>
-
         </div>
+        <div class="hero-orbit"></div>
+    </section>
 
-
-        <div class="hero-card hero-side">
-
-            <div class="kicker">
-                Effectif actuel
+    <section class="kpis">
+        <div class="kpi">
+            <div class="kpi-top">
+                <span class="kpi-label">Créateurs</span>
+                <div class="kpi-icon">👤</div>
             </div>
-
-            <strong id="heroCreators">0</strong>
-
-            <span>
-                créateur(s) enregistré(s)
-            </span>
-
+            <div class="kpi-value" id="kpiCreators">0</div>
         </div>
 
+        <div class="kpi">
+            <div class="kpi-top">
+                <span class="kpi-label">Teams</span>
+                <div class="kpi-icon">🏷️</div>
+            </div>
+            <div class="kpi-value" id="kpiTeams">0</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-top">
+                <span class="kpi-label">Diamants LVF</span>
+                <div class="kpi-icon">💎</div>
+            </div>
+            <div class="kpi-value" id="kpiDiamonds">0</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-top">
+                <span class="kpi-label">Matchs</span>
+                <div class="kpi-icon">⚔️</div>
+            </div>
+            <div class="kpi-value" id="kpiMatches">0</div>
+        </div>
     </section>
-
-
-    <!-- KPI -->
-
-    <section class="metrics">
-
-        <div class="metric">
-            <div class="metric-icon">👤</div>
-            <b id="mCreators">0</b>
-            <span>Créateurs</span>
-        </div>
-
-        <div class="metric">
-            <div class="metric-icon">🏷️</div>
-            <b id="mTeams">0</b>
-            <span>Teams</span>
-        </div>
-
-        <div class="metric">
-            <div class="metric-icon">💎</div>
-            <b id="mDiamonds">0</b>
-            <span>Diamants LVF</span>
-        </div>
-
-        <div class="metric">
-            <div class="metric-icon">⚔️</div>
-            <b id="mMatches">0</b>
-            <span>Matchs</span>
-        </div>
-
-    </section>
-
-
-    <!-- MODULES -->
 
     <div class="section-title">
-        <h2>Gestion LVF</h2>
-        <span>Le tableau de bord sert directement de navigation</span>
+        <div>
+            <h2>Gestion LVF</h2>
+            <p>Chaque espace possède sa propre gestion.</p>
+        </div>
     </div>
-
 
     <section class="modules">
 
-        <button class="module" onclick="openModal('creatorModal')">
-
-            <span class="count" id="cCreators">0</span>
-
+        <article class="module" onclick="openModal('creators')">
             <div class="module-icon">👤</div>
-
+            <div class="module-count" id="countCreators">0</div>
             <h3>Créateurs</h3>
+            <p>Ajoutez et gérez les créateurs qui composent LVF.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Ajouter, modifier et affecter les créateurs
-                à une Team.
-            </p>
-
-        </button>
-
-
-        <button class="module pink" onclick="openModal('managerModal')">
-
-            <span class="count" id="cManagers">0</span>
-
+        <article class="module" onclick="openModal('managers')">
             <div class="module-icon">👑</div>
-
+            <div class="module-count" id="countManagers">0</div>
             <h3>Managers</h3>
+            <p>Gérez les personnes responsables de vos Teams.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Gérer les responsables et les Teams
-                qu’ils accompagnent.
-            </p>
-
-        </button>
-
-
-        <button class="module blue" onclick="openModal('teamModal')">
-
-            <span class="count" id="cTeams">0</span>
-
+        <article class="module" onclick="openModal('teams')">
             <div class="module-icon">🏷️</div>
-
+            <div class="module-count" id="countTeams">0</div>
             <h3>Teams</h3>
+            <p>Créez vos équipes et suivez leur organisation.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Créer les Teams et suivre leur composition.
-            </p>
+        <article class="module" onclick="openModal('agencies')">
+            <div class="module-icon">🏢</div>
+            <div class="module-count" id="countAgencies">0</div>
+            <h3>Agences</h3>
+            <p>Enregistrez les agences et retrouvez-les dans vos matchs.</p>
+            <div class="module-glow"></div>
+        </article>
 
-        </button>
-
-
-        <button class="module orange" onclick="openModal('matchModal')">
-
-            <span class="count" id="cMatches">0</span>
-
+        <article class="module large" onclick="openModal('matches')">
             <div class="module-icon">⚔️</div>
-
+            <div class="module-count" id="countMatches">0</div>
             <h3>Matchs</h3>
+            <p>Match OFF, adversaires, agences, thèmes, dates, résultats, scores et historique.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Préparer et conserver l’historique
-                des Match OFF.
-            </p>
-
-        </button>
-
-
-        <button class="module green" onclick="openModal('applicationModal')">
-
-            <span class="count" id="cApplications">0</span>
-
+        <article class="module large" onclick="openModal('applications')">
             <div class="module-icon">📝</div>
-
+            <div class="module-count" id="countApplications">0</div>
             <h3>Candidatures</h3>
+            <p>Suivez les personnes repérées et intégrez-les directement à LVF.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Suivre les prospects puis les intégrer
-                directement à LVF.
-            </p>
-
-        </button>
-
-
-        <button class="module gold" onclick="openModal('diamondModal')">
-
-            <span class="count" id="cDiamondMonths">0</span>
-
+        <article class="module" onclick="openModal('diamonds')">
             <div class="module-icon">💎</div>
-
+            <div class="module-count">+</div>
             <h3>Diamants</h3>
+            <p>Enregistrez les performances mensuelles de chaque Team.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <p>
-                Enregistrer les performances
-                par mois et par Team.
-            </p>
-
-        </button>
-
-
-        <button class="module" onclick="openModal('statsModal')">
-
+        <article class="module" onclick="openModal('stats')">
             <div class="module-icon">📊</div>
+            <div class="module-count">↗</div>
+            <h3>Statistiques</h3>
+            <p>Analysez l'évolution des diamants mois après mois.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <h3>Statistiques mensuelles</h3>
-
-            <p>
-                Visualiser l’évolution des diamants
-                mois par mois.
-            </p>
-
-        </button>
-
-
-        <button class="module gold" onclick="openModal('rankingModal')">
-
+        <article class="module" onclick="openModal('ranking')">
             <div class="module-icon">🏆</div>
+            <div class="module-count">#</div>
+            <h3>Classement</h3>
+            <p>Comparez les performances de toutes vos Teams.</p>
+            <div class="module-glow"></div>
+        </article>
 
-            <h3>Classement des Teams</h3>
-
-            <p>
-                Classement automatique selon
-                les diamants.
-            </p>
-
-        </button>
-
-
-        <button class="module blue" onclick="openModal('settingsModal')">
-
+        <article class="module" onclick="openModal('settings')">
             <div class="module-icon">⚙️</div>
-
+            <div class="module-count">•</div>
             <h3>Paramètres</h3>
-
-            <p>
-                Exporter ou réinitialiser
-                les données locales.
-            </p>
-
-        </button>
+            <p>Export, sauvegarde locale et gestion des données.</p>
+            <div class="module-glow"></div>
+        </article>
 
     </section>
 
-
-    <!-- APERÇU -->
-
-    <section class="dashboard">
-
-        <div class="panel">
-
-            <h3>👥 Teams</h3>
-
-            <div id="teamPreview" class="empty">
-                Aucune Team enregistrée.
-            </div>
-
+    <div class="section-title">
+        <div>
+            <h2>Vue d'ensemble</h2>
+            <p>Les données apparaîtront ici dès que vous les aurez enregistrées.</p>
         </div>
-
-
-        <div class="panel">
-
-            <h3>🏆 Classement actuel</h3>
-
-            <div id="rankPreview" class="empty">
-                Aucun diamant enregistré.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <div class="footer">
-        LVF — données conservées localement sur cet appareil.
     </div>
+
+    <section class="overview">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>Teams LVF</h3>
+                <span>Organisation</span>
+            </div>
+
+            <div id="teamOverview" class="empty">
+                <div>
+                    <strong>Aucune Team enregistrée</strong>
+                    Commencez par créer votre première Team.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>Classement</h3>
+                <span>Diamants</span>
+            </div>
+
+            <div id="rankingOverview" class="empty">
+                <div>
+                    <strong>Aucune donnée</strong>
+                    Le classement apparaîtra ici.
+                </div>
+            </div>
+        </div>
+
+    </section>
 
 </main>
 
+<!-- =========================================================
+     MODAL PRINCIPALE
+========================================================= -->
 
-<!-- =====================================================
-     CRÉATEURS
-===================================================== -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)">
+    <div class="modal">
 
-<div class="modal" id="creatorModal">
+        <div class="modal-head">
+            <h2 id="modalTitle">Gestion</h2>
+            <button class="close" onclick="closeModal()">×</button>
+        </div>
 
-<div class="dialog">
+        <div class="modal-body" id="modalBody"></div>
 
-<div class="dialog-head">
-
-<h2>👤 Créateurs</h2>
-
-<button class="close"
-onclick="closeModal('creatorModal')">
-×
-</button>
-
-</div>
-
-
-<form class="form" onsubmit="saveCreator(event)">
-
-<input type="hidden" id="creatorId">
-
-
-<div class="field">
-
-<label>Prénom / nom</label>
-
-<input
-id="creatorName"
-required
->
-
-</div>
-
-
-<div class="field">
-
-<label>@TikTok</label>
-
-<input
-id="creatorTikTok"
-placeholder="@"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Lien TikTok</label>
-
-<input
-id="creatorLink"
-type="url"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Team</label>
-
-<select id="creatorTeam"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>Date d’arrivée</label>
-
-<input
-id="creatorDate"
-type="date"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Statut</label>
-
-<select id="creatorStatus">
-
-<option>Actif</option>
-<option>En pause</option>
-<option>Parti</option>
-
-</select>
-
-</div>
-
-
-<div class="field full">
-
-<label>Notes</label>
-
-<textarea id="creatorNotes"></textarea>
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('creatorModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Enregistrer
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<input
-class="search"
-placeholder="Rechercher un créateur..."
-oninput="renderCreators(this.value)"
->
-
-<div id="creatorList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MANAGERS
-===================================================== -->
-
-<div class="modal" id="managerModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>👑 Managers</h2>
-
-<button
-class="close"
-onclick="closeModal('managerModal')">
-×
-</button>
-
-</div>
-
-
-<form class="form" onsubmit="saveManager(event)">
-
-<input type="hidden" id="managerId">
-
-
-<div class="field">
-
-<label>Nom / prénom</label>
-
-<input
-id="managerName"
-required
->
-
-</div>
-
-
-<div class="field">
-
-<label>@TikTok</label>
-
-<input
-id="managerTikTok"
-placeholder="@"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Team principale</label>
-
-<select id="managerTeam"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>Date d’arrivée</label>
-
-<input
-id="managerDate"
-type="date"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Statut</label>
-
-<select id="managerStatus">
-
-<option>Actif</option>
-<option>En pause</option>
-<option>Parti</option>
-
-</select>
-
-</div>
-
-
-<div class="field full">
-
-<label>Notes</label>
-
-<textarea id="managerNotes"></textarea>
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('managerModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Enregistrer
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<input
-class="search"
-placeholder="Rechercher un manager..."
-oninput="renderManagers(this.value)"
->
-
-<div id="managerList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     TEAMS
-===================================================== -->
-
-<div class="modal" id="teamModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>🏷️ Teams</h2>
-
-<button
-class="close"
-onclick="closeModal('teamModal')">
-×
-</button>
-
-</div>
-
-
-<form class="form" onsubmit="saveTeam(event)">
-
-<input type="hidden" id="teamId">
-
-
-<div class="field">
-
-<label>Nom de la Team</label>
-
-<input
-id="teamName"
-placeholder="Ex. 🦊 Team Lulu 🦊"
-required
->
-
-</div>
-
-
-<div class="field">
-
-<label>Couleur</label>
-
-<input
-id="teamColor"
-type="color"
-value="#8b5cf6"
->
-
-</div>
-
-
-<div class="field full">
-
-<label>Description</label>
-
-<textarea id="teamDescription"></textarea>
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('teamModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Créer la Team
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<div id="teamList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MATCHS
-===================================================== -->
-
-<div class="modal" id="matchModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>⚔️ Matchs</h2>
-
-<button
-class="close"
-onclick="closeModal('matchModal')">
-×
-</button>
-
-</div>
-
-
-<form class="form" onsubmit="saveMatch(event)">
-
-<input type="hidden" id="matchId">
-
-
-<div class="field">
-
-<label>Type</label>
-
-<select id="matchType">
-
-<option>Match OFF</option>
-<option>Match personnalisé</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>Créateur LVF</label>
-
-<select id="matchCreator"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>Adversaire</label>
-
-<input id="matchOpponent">
-
-</div>
-
-
-<div class="field">
-
-<label>@ adversaire</label>
-
-<input
-id="matchOpponentTikTok"
-placeholder="@"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Date</label>
-
-<input
-id="matchDate"
-type="date"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Heure</label>
-
-<input
-id="matchTime"
-type="time"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Thème</label>
-
-<input
-id="matchTheme"
-placeholder="Ex. Bataille des Nounours"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Statut</label>
-
-<select id="matchStatus">
-
-<option>Prévu</option>
-<option>Terminé</option>
-<option>Annulé</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>Résultat</label>
-
-<input
-id="matchResult"
-placeholder="Victoire / Défaite / Égalité"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Score</label>
-
-<input id="matchScore">
-
-</div>
-
-
-<div class="field full">
-
-<label>Notes</label>
-
-<textarea id="matchNotes"></textarea>
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('matchModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Enregistrer
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<div id="matchList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CANDIDATURES
-===================================================== -->
-
-<div class="modal" id="applicationModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>📝 Candidatures</h2>
-
-<button
-class="close"
-onclick="closeModal('applicationModal')">
-×
-</button>
-
-</div>
-
-
-<div class="notice">
-
-Les candidatures servent de liste de prospects.
-Lorsqu’une personne est recrutée, le bouton
-<b>Intégrer à LVF</b> reprend ses informations
-pour créer automatiquement son profil créateur.
-
-</div>
-
-
-<form class="form" onsubmit="saveApplication(event)">
-
-<input type="hidden" id="applicationId">
-
-
-<div class="field">
-
-<label>Prénom / nom</label>
-
-<input
-id="appName"
-required
->
-
-</div>
-
-
-<div class="field">
-
-<label>@TikTok</label>
-
-<input
-id="appTikTok"
-placeholder="@"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Lien TikTok</label>
-
-<input
-id="appLink"
-type="url"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Date repérée</label>
-
-<input
-id="appDate"
-type="date"
->
-
-</div>
-
-
-<div class="field">
-
-<label>Source</label>
-
-<input
-id="appSource"
-placeholder="TikTok, recommandation..."
->
-
-</div>
-
-
-<div class="field">
-
-<label>Team envisagée</label>
-
-<select id="appTeam"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>Manager envisagé</label>
-
-<select id="appManager"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>Statut</label>
-
-<select id="appStatus">
-
-<option>👀 À contacter</option>
-<option>💬 Contacté</option>
-<option>🤝 En discussion</option>
-<option>✅ Accepté</option>
-<option>❌ Refusé</option>
-<option>⏸️ En attente</option>
-<option>🎉 Intégré à LVF</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>Priorité</label>
-
-<select id="appPriority">
-
-<option>Normale</option>
-<option>Haute</option>
-<option>Très haute</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>Date potentielle d’intégration</label>
-
-<input
-id="appJoinDate"
-type="date"
->
-
-</div>
-
-
-<div class="field full">
-
-<label>Notes</label>
-
-<textarea id="appNotes"></textarea>
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('applicationModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Enregistrer
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<input
-class="search"
-placeholder="Rechercher une candidature..."
-oninput="renderApplications(this.value)"
->
-
-<div id="applicationList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     DIAMANTS
-===================================================== -->
-
-<div class="modal" id="diamondModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>💎 Diamants</h2>
-
-<button
-class="close"
-onclick="closeModal('diamondModal')">
-×
-</button>
-
-</div>
-
-
-<form class="form" onsubmit="saveDiamond(event)">
-
-<input type="hidden" id="diamondId">
-
-
-<div class="field">
-
-<label>Mois</label>
-
-<input
-id="diamondMonth"
-type="month"
-required
->
-
-</div>
-
-
-<div class="field">
-
-<label>Team</label>
-
-<select id="diamondTeam"></select>
-
-</div>
-
-
-<div class="field full">
-
-<label>Nombre de diamants</label>
-
-<input
-id="diamondValue"
-type="number"
-min="0"
-step="1"
-required
->
-
-</div>
-
-
-<div class="form-actions">
-
-<button
-type="button"
-class="btn"
-onclick="closeModal('diamondModal')">
-Annuler
-</button>
-
-<button class="btn primary">
-Enregistrer
-</button>
-
-</div>
-
-</form>
-
-
-<div class="modal-content">
-
-<div id="diamondList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     STATISTIQUES
-===================================================== -->
-
-<div class="modal" id="statsModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>📊 Statistiques mensuelles</h2>
-
-<button
-class="close"
-onclick="closeModal('statsModal')">
-×
-</button>
-
-</div>
-
-
-<div style="padding:22px">
-
-<div
-id="statsChart"
-class="chart">
-</div>
-
-
-<div
-id="statsTable"
-style="margin-top:20px">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CLASSEMENT
-===================================================== -->
-
-<div class="modal" id="rankingModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>🏆 Classement des Teams</h2>
-
-<button
-class="close"
-onclick="closeModal('rankingModal')">
-×
-</button>
-
-</div>
-
-
-<div style="padding:22px">
-
-<div id="rankingList"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PARAMÈTRES
-===================================================== -->
-
-<div class="modal" id="settingsModal">
-
-<div class="dialog">
-
-<div class="dialog-head">
-
-<h2>⚙️ Paramètres</h2>
-
-<button
-class="close"
-onclick="closeModal('settingsModal')">
-×
-</button>
-
-</div>
-
-
-<div style="padding:22px;display:grid;gap:14px">
-
-
-<div class="panel">
-
-<h3>💾 Données</h3>
-
-<p style="color:var(--muted);line-height:1.6">
-
-Les données sont enregistrées automatiquement
-dans le stockage local de ce navigateur.
-
-</p>
-
-<button
-class="btn primary"
-onclick="exportData()">
-
-Exporter mes données
-
-</button>
-
-</div>
-
-
-<div class="panel">
-
-<h3>⚠️ Zone sensible</h3>
-
-<p style="color:var(--muted);line-height:1.6">
-
-Cette action supprime toutes les données
-enregistrées sur cet appareil.
-
-</p>
-
-<button
-class="btn danger"
-onclick="resetData()">
-
-Tout effacer
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
+    </div>
 </div>
-
-
-<div id="toast" class="toast"></div>
-
 
 <script>
 
-/* =====================================================
+/* =========================================================
    DONNÉES
-===================================================== */
+========================================================= */
 
-const STORAGE_KEY = "LVF_CONTROL_CENTER";
+const STORAGE_KEY = "LVF_CONTROL_CENTER_V2";
 
-let data = JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-) || {
-
+let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
     creators: [],
     managers: [],
     teams: [],
+    agencies: [],
     matches: [],
     applications: [],
     diamonds: []
-
 };
 
-
-/* =====================================================
-   OUTILS
-===================================================== */
-
-const $ = id => document.getElementById(id);
-
-
-function uid(){
-
-    return Date.now().toString(36)
-    +
-    Math.random().toString(36).slice(2,8);
-
-}
-
+let currentEdit = null;
 
 function save(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-    renderAll();
-
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    refresh();
 }
 
+function id(){
+    return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+}
 
-function esc(value){
-
+function escapeHTML(value){
     return String(value ?? "")
-        .replace(/[&<>"']/g, char => ({
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            '"':"&quot;",
-            "'":"&#039;"
-        }[char]));
-
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
+/* =========================================================
+   MODAL
+========================================================= */
 
-function formatNumber(number){
+function openModal(type){
+    currentEdit = null;
 
-    return Number(number || 0)
-        .toLocaleString("fr-FR");
+    const titles = {
+        creators:"👤 Créateurs",
+        managers:"👑 Managers",
+        teams:"🏷️ Teams",
+        agencies:"🏢 Agences",
+        matches:"⚔️ Matchs",
+        applications:"📝 Candidatures",
+        diamonds:"💎 Diamants",
+        stats:"📊 Statistiques mensuelles",
+        ranking:"🏆 Classement des Teams",
+        settings:"⚙️ Paramètres"
+    };
 
+    document.getElementById("modalTitle").textContent = titles[type] || "Gestion";
+
+    const body = document.getElementById("modalBody");
+
+    if(type === "creators") body.innerHTML = creatorsView();
+    if(type === "managers") body.innerHTML = managersView();
+    if(type === "teams") body.innerHTML = teamsView();
+    if(type === "agencies") body.innerHTML = agenciesView();
+    if(type === "matches") body.innerHTML = matchesView();
+    if(type === "applications") body.innerHTML = applicationsView();
+    if(type === "diamonds") body.innerHTML = diamondsView();
+    if(type === "stats") body.innerHTML = statsView();
+    if(type === "ranking") body.innerHTML = rankingView();
+    if(type === "settings") body.innerHTML = settingsView();
+
+    document.getElementById("modalBackdrop").classList.add("open");
+
+    if(type === "stats"){
+        setTimeout(drawChart,100);
+    }
 }
 
-
-function teamName(id){
-
-    const team = data.teams.find(
-        team => team.id === id
-    );
-
-    return team
-        ? team.name
-        : "Sans Team";
-
+function closeModal(){
+    document.getElementById("modalBackdrop").classList.remove("open");
 }
 
-
-function teamDiamonds(id){
-
-    return data.diamonds
-        .filter(item => item.team === id)
-        .reduce(
-            (total,item) =>
-                total + Number(item.value || 0),
-            0
-        );
-
+function backdropClose(e){
+    if(e.target.id === "modalBackdrop") closeModal();
 }
 
-
-function showToast(message){
-
-    const toast = $("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    },2200);
-
-}
-
-
-/* =====================================================
-   MODALES
-===================================================== */
-
-function openModal(id){
-
-    $(id).classList.add("open");
-
-    populateSelects();
-
-    renderAll();
-
-}
-
-
-function closeModal(id){
-
-    $(id).classList.remove("open");
-
-}
-
-
-document
-.querySelectorAll(".modal")
-.forEach(modal => {
-
-    modal.addEventListener("click",event => {
-
-        if(event.target === modal){
-
-            modal.classList.remove("open");
-
-        }
-
-    });
-
-});
-
-
-/* =====================================================
+/* =========================================================
    SELECTS
-===================================================== */
+========================================================= */
 
 function teamOptions(selected=""){
-
-    return `
-        <option value="">
-            — Aucune —
-        </option>
-
-        ${data.teams.map(team => `
-
-            <option
-                value="${team.id}"
-                ${team.id === selected ? "selected" : ""}
-            >
-
-                ${esc(team.name)}
-
-            </option>
-
-        `).join("")}
-    `;
-
+    return `<option value="">— Aucun —</option>` +
+        data.teams.map(t =>
+            `<option value="${t.id}" ${t.id===selected?"selected":""}>
+                ${escapeHTML(t.name)}
+            </option>`
+        ).join("");
 }
-
-
-function creatorOptions(selected=""){
-
-    return `
-        <option value="">
-            — Choisir —
-        </option>
-
-        ${data.creators.map(creator => `
-
-            <option
-                value="${creator.id}"
-                ${creator.id === selected ? "selected" : ""}
-            >
-
-                ${esc(creator.name)}
-                ${esc(creator.tiktok)}
-
-            </option>
-
-        `).join("")}
-    `;
-
-}
-
 
 function managerOptions(selected=""){
-
-    return `
-        <option value="">
-            — Aucun —
-        </option>
-
-        ${data.managers.map(manager => `
-
-            <option
-                value="${manager.id}"
-                ${manager.id === selected ? "selected" : ""}
-            >
-
-                ${esc(manager.name)}
-
-            </option>
-
-        `).join("")}
-    `;
-
+    return `<option value="">— Aucun —</option>` +
+        data.managers.map(m =>
+            `<option value="${m.id}" ${m.id===selected?"selected":""}>
+                ${escapeHTML(m.name)}
+            </option>`
+        ).join("");
 }
 
-
-function populateSelects(){
-
-    const creatorTeamValue =
-        $("creatorTeam").value;
-
-    const managerTeamValue =
-        $("managerTeam").value;
-
-    const appTeamValue =
-        $("appTeam").value;
-
-    const appManagerValue =
-        $("appManager").value;
-
-    const diamondTeamValue =
-        $("diamondTeam").value;
-
-    const matchCreatorValue =
-        $("matchCreator").value;
-
-
-    $("creatorTeam").innerHTML =
-        teamOptions(creatorTeamValue);
-
-    $("managerTeam").innerHTML =
-        teamOptions(managerTeamValue);
-
-    $("appTeam").innerHTML =
-        teamOptions(appTeamValue);
-
-    $("appManager").innerHTML =
-        managerOptions(appManagerValue);
-
-    $("diamondTeam").innerHTML =
-        teamOptions(diamondTeamValue);
-
-    $("matchCreator").innerHTML =
-        creatorOptions(matchCreatorValue);
-
+function creatorOptions(selected=""){
+    return `<option value="">— Aucun —</option>` +
+        data.creators.map(c =>
+            `<option value="${c.id}" ${c.id===selected?"selected":""}>
+                ${escapeHTML(c.name)} ${c.tiktok ? "· "+escapeHTML(c.tiktok) : ""}
+            </option>`
+        ).join("");
 }
 
+function agencyOptions(selected=""){
+    return `<option value="">— Aucune agence —</option>` +
+        data.agencies.map(a =>
+            `<option value="${a.id}" ${a.id===selected?"selected":""}>
+                ${escapeHTML(a.name)}
+            </option>`
+        ).join("");
+}
 
-/* =====================================================
+/* =========================================================
    CRÉATEURS
-===================================================== */
+========================================================= */
 
-function saveCreator(event){
+function creatorsView(){
+    return `
+        <form onsubmit="addCreator(event)">
+            <div class="form-grid">
 
-    event.preventDefault();
-
-
-    const id =
-        $("creatorId").value || uid();
-
-
-    const creator = {
-
-        id,
-
-        name:
-            $("creatorName")
-            .value
-            .trim(),
-
-        tiktok:
-            $("creatorTikTok")
-            .value
-            .trim(),
-
-        link:
-            $("creatorLink")
-            .value
-            .trim(),
-
-        team:
-            $("creatorTeam")
-            .value,
-
-        date:
-            $("creatorDate")
-            .value,
-
-        status:
-            $("creatorStatus")
-            .value,
-
-        notes:
-            $("creatorNotes")
-            .value
-            .trim()
-
-    };
-
-
-    const index =
-        data.creators.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.creators.push(creator);
-
-    }else{
-
-        data.creators[index] = creator;
-
-    }
-
-
-    event.target.reset();
-
-    $("creatorId").value = "";
-
-    save();
-
-    showToast("Créateur enregistré");
-
-}
-
-
-function renderCreators(search=""){
-
-    const list =
-        data.creators.filter(
-            creator =>
-                (
-                    creator.name +
-                    " " +
-                    creator.tiktok
-                )
-                .toLowerCase()
-                .includes(
-                    search.toLowerCase()
-                )
-        );
-
-
-    $("creatorList").innerHTML =
-
-        list.length
-
-        ?
-
-        list.map(creator => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-                        ${esc(creator.name)}
-                    </strong>
-
-                    <small>
-
-                        ${esc(creator.tiktok)}
-                        ·
-                        ${esc(teamName(creator.team))}
-
-                    </small>
-
+                <div class="field">
+                    <label>Nom / prénom</label>
+                    <input id="creatorName" required>
                 </div>
 
-                <span class="badge">
+                <div class="field">
+                    <label>@TikTok</label>
+                    <input id="creatorTikTok" placeholder="@pseudo">
+                </div>
 
-                    ${esc(creator.status)}
+                <div class="field">
+                    <label>Lien TikTok</label>
+                    <input id="creatorLink" type="url">
+                </div>
 
-                </span>
+                <div class="field">
+                    <label>Team</label>
+                    <select id="creatorTeam">${teamOptions()}</select>
+                </div>
+
+                <div class="field">
+                    <label>Date d'arrivée</label>
+                    <input id="creatorDate" type="date">
+                </div>
+
+                <div class="field">
+                    <label>Statut</label>
+                    <select id="creatorStatus">
+                        <option>Actif</option>
+                        <option>En pause</option>
+                        <option>Inactif</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>Notes</label>
+                    <textarea id="creatorNotes"></textarea>
+                </div>
 
             </div>
 
-        `).join("")
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Ajouter le créateur</button>
+            </div>
+        </form>
 
-        :
+        <div class="section-title">
+            <div>
+                <h2>Créateurs enregistrés</h2>
+            </div>
+        </div>
 
-        `<div class="empty">
-            Aucun créateur enregistré.
-        </div>`;
-
-}
-
-
-/* =====================================================
-   MANAGERS
-===================================================== */
-
-function saveManager(event){
-
-    event.preventDefault();
-
-
-    const id =
-        $("managerId").value || uid();
-
-
-    const manager = {
-
-        id,
-
-        name:
-            $("managerName")
-            .value
-            .trim(),
-
-        tiktok:
-            $("managerTikTok")
-            .value
-            .trim(),
-
-        team:
-            $("managerTeam")
-            .value,
-
-        date:
-            $("managerDate")
-            .value,
-
-        status:
-            $("managerStatus")
-            .value,
-
-        notes:
-            $("managerNotes")
-            .value
-            .trim()
-
-    };
-
-
-    const index =
-        data.managers.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.managers.push(manager);
-
-    }else{
-
-        data.managers[index] = manager;
-
-    }
-
-
-    event.target.reset();
-
-    $("managerId").value = "";
-
-    save();
-
-    showToast("Manager enregistré");
-
-}
-
-
-function renderManagers(search=""){
-
-    const list =
-        data.managers.filter(
-            manager =>
-                (
-                    manager.name +
-                    " " +
-                    manager.tiktok
-                )
-                .toLowerCase()
-                .includes(
-                    search.toLowerCase()
-                )
-        );
-
-
-    $("managerList").innerHTML =
-
-        list.length
-
-        ?
-
-        list.map(manager => {
-
-            const creators =
-                data.creators.filter(
-                    creator =>
-                        creator.team === manager.team
-                ).length;
-
-
-            return `
-
-                <div class="row">
-
-                    <div class="row-main">
-
-                        <strong>
-                            ${esc(manager.name)}
-                        </strong>
-
-                        <small>
-
-                            ${esc(manager.tiktok)}
-                            ·
-                            ${esc(teamName(manager.team))}
-                            ·
-                            ${creators}
-                            créateur(s)
-
-                        </small>
-
+        <div class="records">
+            ${
+                data.creators.length
+                ? data.creators.map(c => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(c.name)}</div>
+                            <div class="record-sub">
+                                ${escapeHTML(c.tiktok || "Pas de @")}
+                                ${c.team ? " · "+escapeHTML(teamName(c.team)) : ""}
+                                · ${escapeHTML(c.status)}
+                            </div>
+                        </div>
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('creators','${c.id}')">×</button>
+                        </div>
                     </div>
-
-                    <span class="badge">
-                        ${esc(manager.status)}
-                    </span>
-
-                </div>
-
-            `;
-
-        }).join("")
-
-        :
-
-        `<div class="empty">
-            Aucun manager enregistré.
-        </div>`;
-
+                `).join("")
+                : `<div class="empty"><div><strong>Aucun créateur</strong>La liste est actuellement vide.</div></div>`
+            }
+        </div>
+    `;
 }
 
+function addCreator(e){
+    e.preventDefault();
 
-/* =====================================================
+    data.creators.push({
+        id:id(),
+        name:creatorName.value.trim(),
+        tiktok:creatorTikTok.value.trim(),
+        link:creatorLink.value.trim(),
+        team:creatorTeam.value,
+        date:creatorDate.value,
+        status:creatorStatus.value,
+        notes:creatorNotes.value.trim()
+    });
+
+    save();
+    openModal("creators");
+}
+
+/* =========================================================
+   MANAGERS
+========================================================= */
+
+function managersView(){
+    return `
+        <form onsubmit="addManager(event)">
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Nom / prénom</label>
+                    <input id="managerName" required>
+                </div>
+
+                <div class="field">
+                    <label>@TikTok</label>
+                    <input id="managerTikTok" placeholder="@pseudo">
+                </div>
+
+                <div class="field">
+                    <label>Team principale</label>
+                    <select id="managerTeam">${teamOptions()}</select>
+                </div>
+
+                <div class="field">
+                    <label>Date d'arrivée</label>
+                    <input id="managerDate" type="date">
+                </div>
+
+                <div class="field">
+                    <label>Statut</label>
+                    <select id="managerStatus">
+                        <option>Actif</option>
+                        <option>En pause</option>
+                        <option>Inactif</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>Notes</label>
+                    <textarea id="managerNotes"></textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Ajouter le manager</button>
+            </div>
+        </form>
+
+        <div class="section-title"><div><h2>Managers</h2></div></div>
+
+        <div class="records">
+            ${
+                data.managers.length
+                ? data.managers.map(m => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(m.name)}</div>
+                            <div class="record-sub">
+                                ${escapeHTML(m.tiktok || "Pas de @")}
+                                ${m.team ? " · "+escapeHTML(teamName(m.team)) : ""}
+                                · ${escapeHTML(m.status)}
+                            </div>
+                        </div>
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('managers','${m.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucun manager</strong>La liste est actuellement vide.</div></div>`
+            }
+        </div>
+    `;
+}
+
+function addManager(e){
+    e.preventDefault();
+
+    data.managers.push({
+        id:id(),
+        name:managerName.value.trim(),
+        tiktok:managerTikTok.value.trim(),
+        team:managerTeam.value,
+        date:managerDate.value,
+        status:managerStatus.value,
+        notes:managerNotes.value.trim()
+    });
+
+    save();
+    openModal("managers");
+}
+
+/* =========================================================
    TEAMS
-===================================================== */
+========================================================= */
 
-function saveTeam(event){
+function teamsView(){
+    return `
+        <form onsubmit="addTeam(event)">
+            <div class="form-grid">
 
-    event.preventDefault();
+                <div class="field">
+                    <label>Nom de la Team</label>
+                    <input id="teamName" required placeholder="Ex : 🦊 Team Lulu 🦊">
+                </div>
 
+                <div class="field">
+                    <label>Couleur / identité</label>
+                    <input id="teamColor" placeholder="Ex : violet">
+                </div>
 
-    const id =
-        $("teamId").value || uid();
+                <div class="field full">
+                    <label>Description</label>
+                    <textarea id="teamDescription"></textarea>
+                </div>
 
+            </div>
 
-    const team = {
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Créer la Team</button>
+            </div>
+        </form>
 
-        id,
+        <div class="section-title"><div><h2>Teams enregistrées</h2></div></div>
 
-        name:
-            $("teamName")
-            .value
-            .trim(),
+        <div class="records">
+            ${
+                data.teams.length
+                ? data.teams.map(t => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(t.name)}</div>
+                            <div class="record-sub">
+                                ${escapeHTML(t.color || "Aucune couleur")}
+                                · ${data.creators.filter(c=>c.team===t.id).length} créateur(s)
+                            </div>
+                        </div>
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('teams','${t.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucune Team</strong>Créez votre première équipe.</div></div>`
+            }
+        </div>
+    `;
+}
 
-        color:
-            $("teamColor")
-            .value,
+function addTeam(e){
+    e.preventDefault();
 
-        description:
-            $("teamDescription")
-            .value
-            .trim()
-
-    };
-
-
-    const index =
-        data.teams.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.teams.push(team);
-
-    }else{
-
-        data.teams[index] = team;
-
-    }
-
-
-    event.target.reset();
-
-    $("teamId").value = "";
+    data.teams.push({
+        id:id(),
+        name:teamName.value.trim(),
+        color:teamColor.value.trim(),
+        description:teamDescription.value.trim()
+    });
 
     save();
-
-    showToast("Team enregistrée");
-
+    openModal("teams");
 }
 
+/* =========================================================
+   AGENCES
+========================================================= */
 
-function renderTeams(){
+function agenciesView(){
+    return `
+        <form onsubmit="addAgency(event)">
+            <div class="form-grid">
 
-    $("teamList").innerHTML =
-
-        data.teams.length
-
-        ?
-
-        data.teams.map(team => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-                        ${esc(team.name)}
-                    </strong>
-
-                    <small>
-
-                        ${
-                            data.creators
-                            .filter(
-                                creator =>
-                                    creator.team === team.id
-                            ).length
-                        }
-                        créateur(s)
-
-                        ·
-
-                        ${formatNumber(
-                            teamDiamonds(team.id)
-                        )}
-                        💎
-
-                    </small>
-
+                <div class="field">
+                    <label>Nom de l'agence</label>
+                    <input id="agencyName" required>
                 </div>
 
-                <span
-                    class="badge"
-                    style="
-                        border:1px solid ${esc(team.color)}
-                    "
-                >
+                <div class="field">
+                    <label>@TikTok / compte</label>
+                    <input id="agencyTikTok" placeholder="@agence">
+                </div>
 
-                    Team
+                <div class="field">
+                    <label>Lien TikTok</label>
+                    <input id="agencyLink" type="url">
+                </div>
 
-                </span>
+                <div class="field">
+                    <label>Responsable / contact</label>
+                    <input id="agencyContact">
+                </div>
+
+                <div class="field">
+                    <label>Date d'enregistrement</label>
+                    <input id="agencyDate" type="date">
+                </div>
+
+                <div class="field full">
+                    <label>Notes</label>
+                    <textarea id="agencyNotes"></textarea>
+                </div>
 
             </div>
 
-        `).join("")
-
-        :
-
-        `<div class="empty">
-            Aucune Team enregistrée.
-        </div>`;
-
-
-    $("teamPreview").innerHTML =
-
-        data.teams.length
-
-        ?
-
-        data.teams.map(team => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-                        ${esc(team.name)}
-                    </strong>
-
-                    <small>
-                        ${
-                            data.creators.filter(
-                                c => c.team === team.id
-                            ).length
-                        }
-                        créateur(s)
-                    </small>
-
-                </div>
-
-                <b>
-                    💎 ${formatNumber(
-                        teamDiamonds(team.id)
-                    )}
-                </b>
-
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Enregistrer l'agence</button>
             </div>
+        </form>
 
-        `).join("")
+        <div class="section-title"><div><h2>Agences enregistrées</h2></div></div>
 
-        :
-
-        `<div class="empty">
-            Aucune Team enregistrée.
-        </div>`;
-
+        <div class="records">
+            ${
+                data.agencies.length
+                ? data.agencies.map(a => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(a.name)}</div>
+                            <div class="record-sub">
+                                ${escapeHTML(a.tiktok || "Pas de compte")}
+                                ${a.contact ? " · "+escapeHTML(a.contact) : ""}
+                            </div>
+                        </div>
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('agencies','${a.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucune agence</strong>Enregistrez ici les agences avec lesquelles vous avez des matchs ou contacts.</div></div>`
+            }
+        </div>
+    `;
 }
 
+function addAgency(e){
+    e.preventDefault();
 
-/* =====================================================
+    data.agencies.push({
+        id:id(),
+        name:agencyName.value.trim(),
+        tiktok:agencyTikTok.value.trim(),
+        link:agencyLink.value.trim(),
+        contact:agencyContact.value.trim(),
+        date:agencyDate.value,
+        notes:agencyNotes.value.trim()
+    });
+
+    save();
+    openModal("agencies");
+}
+
+/* =========================================================
    MATCHS
-===================================================== */
+========================================================= */
 
-function saveMatch(event){
+function matchesView(){
+    return `
+        <form onsubmit="addMatch(event)">
+            <div class="form-grid">
 
-    event.preventDefault();
-
-
-    const id =
-        $("matchId").value || uid();
-
-
-    const match = {
-
-        id,
-
-        type:
-            $("matchType")
-            .value,
-
-        creator:
-            $("matchCreator")
-            .value,
-
-        opponent:
-            $("matchOpponent")
-            .value
-            .trim(),
-
-        opponentTikTok:
-            $("matchOpponentTikTok")
-            .value
-            .trim(),
-
-        date:
-            $("matchDate")
-            .value,
-
-        time:
-            $("matchTime")
-            .value,
-
-        theme:
-            $("matchTheme")
-            .value
-            .trim(),
-
-        status:
-            $("matchStatus")
-            .value,
-
-        result:
-            $("matchResult")
-            .value
-            .trim(),
-
-        score:
-            $("matchScore")
-            .value
-            .trim(),
-
-        notes:
-            $("matchNotes")
-            .value
-            .trim()
-
-    };
-
-
-    const index =
-        data.matches.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.matches.push(match);
-
-    }else{
-
-        data.matches[index] = match;
-
-    }
-
-
-    event.target.reset();
-
-    $("matchId").value = "";
-
-    save();
-
-    showToast("Match enregistré");
-
-}
-
-
-function renderMatches(){
-
-    const list =
-        data.matches
-        .slice()
-        .sort(
-            (a,b) =>
-                (b.date || "")
-                .localeCompare(
-                    a.date || ""
-                )
-        );
-
-
-    $("matchList").innerHTML =
-
-        list.length
-
-        ?
-
-        list.map(match => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-
-                        ⚔️
-                        ${esc(match.type)}
-
-                        ·
-
-                        ${esc(
-                            match.theme ||
-                            "Sans thème"
-                        )}
-
-                    </strong>
-
-                    <small>
-
-                        ${esc(
-                            match.date ||
-                            "Date non définie"
-                        )}
-
-                        ${esc(
-                            match.time ||
-                            ""
-                        )}
-
-                        ·
-
-                        ${
-                            esc(
-                                data.creators.find(
-                                    creator =>
-                                        creator.id === match.creator
-                                )?.name ||
-                                "Créateur non défini"
-                            )
-                        }
-
-                        vs
-
-                        ${
-                            esc(
-                                match.opponent ||
-                                "Adversaire"
-                            )
-                        }
-
-                    </small>
-
+                <div class="field">
+                    <label>Type de match</label>
+                    <select id="matchType">
+                        <option>Match OFF</option>
+                        <option>Autre match</option>
+                    </select>
                 </div>
 
-                <span class="badge">
-                    ${esc(match.status)}
-                </span>
+                <div class="field">
+                    <label>Créateur LVF</label>
+                    <select id="matchCreator">${creatorOptions()}</select>
+                </div>
+
+                <div class="field">
+                    <label>Adversaire</label>
+                    <input id="matchOpponent" required>
+                </div>
+
+                <div class="field">
+                    <label>@TikTok adversaire</label>
+                    <input id="matchOpponentTikTok" placeholder="@pseudo">
+                </div>
+
+                <div class="field">
+                    <label>Agence adverse</label>
+                    <select id="matchAgency">${agencyOptions()}</select>
+                </div>
+
+                <div class="field">
+                    <label>Date</label>
+                    <input id="matchDate" type="date" required>
+                </div>
+
+                <div class="field">
+                    <label>Heure</label>
+                    <input id="matchTime" type="time" required>
+                </div>
+
+                <div class="field">
+                    <label>Thème</label>
+                    <input id="matchTheme" placeholder="Ex : Bataille des Nounours">
+                </div>
+
+                <div class="field">
+                    <label>Statut</label>
+                    <select id="matchStatus">
+                        <option>Prévu</option>
+                        <option>En cours</option>
+                        <option>Terminé</option>
+                        <option>Annulé</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Résultat</label>
+                    <select id="matchResult">
+                        <option>Non défini</option>
+                        <option>Victoire LVF</option>
+                        <option>Défaite LVF</option>
+                        <option>Égalité</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Score</label>
+                    <input id="matchScore" placeholder="0 - 0">
+                </div>
+
+                <div class="field full">
+                    <label>Notes</label>
+                    <textarea id="matchNotes"></textarea>
+                </div>
 
             </div>
 
-        `).join("")
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Enregistrer le match</button>
+            </div>
+        </form>
 
-        :
+        <div class="section-title">
+            <div>
+                <h2>Historique des matchs</h2>
+                <p>Les matchs enregistrés restent accessibles ici.</p>
+            </div>
+        </div>
 
-        `<div class="empty">
-            Aucun match enregistré.
-        </div>`;
+        <div class="records">
+            ${
+                data.matches.length
+                ? [...data.matches].reverse().map(m => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">
+                                ${escapeHTML(m.type)} · ${escapeHTML(m.opponent)}
+                            </div>
 
+                            <div class="record-sub">
+                                ${m.date ? formatDate(m.date) : "Date inconnue"}
+                                ${m.time ? " · "+m.time : ""}
+                                ${m.theme ? " · "+escapeHTML(m.theme) : ""}
+                                ${m.agency ? " · "+escapeHTML(agencyName(m.agency)) : ""}
+                            </div>
+
+                            <div style="margin-top:8px">
+                                <span class="badge">${escapeHTML(m.result || "Non défini")}</span>
+                                ${m.score ? `<span class="badge">${escapeHTML(m.score)}</span>` : ""}
+                            </div>
+                        </div>
+
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('matches','${m.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucun match</strong>Votre historique est vide.</div></div>`
+            }
+        </div>
+    `;
 }
 
+function addMatch(e){
+    e.preventDefault();
 
-/* =====================================================
+    data.matches.push({
+        id:id(),
+        type:matchType.value,
+        creator:matchCreator.value,
+        opponent:matchOpponent.value.trim(),
+        opponentTikTok:matchOpponentTikTok.value.trim(),
+        agency:matchAgency.value,
+        date:matchDate.value,
+        time:matchTime.value,
+        theme:matchTheme.value.trim(),
+        status:matchStatus.value,
+        result:matchResult.value,
+        score:matchScore.value.trim(),
+        notes:matchNotes.value.trim()
+    });
+
+    save();
+    openModal("matches");
+}
+
+/* =========================================================
    CANDIDATURES
-===================================================== */
+========================================================= */
 
-function saveApplication(event){
+function applicationsView(){
+    return `
+        <form onsubmit="addApplication(event)">
+            <div class="form-grid">
 
-    event.preventDefault();
-
-
-    const id =
-        $("applicationId").value || uid();
-
-
-    const application = {
-
-        id,
-
-        name:
-            $("appName")
-            .value
-            .trim(),
-
-        tiktok:
-            $("appTikTok")
-            .value
-            .trim(),
-
-        link:
-            $("appLink")
-            .value
-            .trim(),
-
-        date:
-            $("appDate")
-            .value,
-
-        source:
-            $("appSource")
-            .value
-            .trim(),
-
-        team:
-            $("appTeam")
-            .value,
-
-        manager:
-            $("appManager")
-            .value,
-
-        status:
-            $("appStatus")
-            .value,
-
-        priority:
-            $("appPriority")
-            .value,
-
-        joinDate:
-            $("appJoinDate")
-            .value,
-
-        notes:
-            $("appNotes")
-            .value
-            .trim()
-
-    };
-
-
-    const index =
-        data.applications.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.applications.push(
-            application
-        );
-
-    }else{
-
-        data.applications[index] =
-            application;
-
-    }
-
-
-    event.target.reset();
-
-    $("applicationId").value = "";
-
-    save();
-
-    showToast(
-        "Candidature enregistrée"
-    );
-
-}
-
-
-function renderApplications(search=""){
-
-    const list =
-        data.applications.filter(
-            application =>
-                (
-                    application.name +
-                    " " +
-                    application.tiktok +
-                    " " +
-                    application.status
-                )
-                .toLowerCase()
-                .includes(
-                    search.toLowerCase()
-                )
-        );
-
-
-    $("applicationList").innerHTML =
-
-        list.length
-
-        ?
-
-        list.map(application => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-
-                        ${esc(
-                            application.name
-                        )}
-
-                        ${
-                            application.priority ===
-                            "Très haute"
-                            ? " 🔥"
-                            :
-                            application.priority ===
-                            "Haute"
-                            ? " ⭐"
-                            :
-                            ""
-                        }
-
-                    </strong>
-
-                    <small>
-
-                        ${esc(
-                            application.tiktok
-                        )}
-
-                        ·
-
-                        ${esc(
-                            application.status
-                        )}
-
-                        ·
-
-                        ${esc(
-                            teamName(
-                                application.team
-                            )
-                        )}
-
-                    </small>
-
+                <div class="field">
+                    <label>Nom / prénom</label>
+                    <input id="appName" required>
                 </div>
 
+                <div class="field">
+                    <label>@TikTok</label>
+                    <input id="appTikTok" placeholder="@pseudo">
+                </div>
 
-                ${
-                    application.status !==
-                    "🎉 Intégré à LVF"
+                <div class="field">
+                    <label>Lien TikTok</label>
+                    <input id="appLink" type="url">
+                </div>
 
-                    ?
+                <div class="field">
+                    <label>Date repérée</label>
+                    <input id="appDate" type="date">
+                </div>
 
-                    `<button
-                        class="btn primary"
-                        onclick="integrateApplication('${application.id}')"
-                    >
-                        Intégrer à LVF
-                    </button>`
+                <div class="field">
+                    <label>Source</label>
+                    <input id="appSource" placeholder="TikTok, live, recommandation...">
+                </div>
 
-                    :
+                <div class="field">
+                    <label>Team envisagée</label>
+                    <select id="appTeam">${teamOptions()}</select>
+                </div>
 
-                    `<span class="badge">
-                        Intégré
-                    </span>`
-                }
+                <div class="field">
+                    <label>Manager envisagé</label>
+                    <select id="appManager">${managerOptions()}</select>
+                </div>
+
+                <div class="field">
+                    <label>Statut</label>
+                    <select id="appStatus">
+                        <option>👀 À contacter</option>
+                        <option>💬 Contacté</option>
+                        <option>🤝 En discussion</option>
+                        <option>✅ Accepté</option>
+                        <option>❌ Refusé</option>
+                        <option>⏸️ En attente</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Priorité / potentiel</label>
+                    <select id="appPriority">
+                        <option>Normal</option>
+                        <option>⭐ Intéressant</option>
+                        <option>🔥 Prioritaire</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Date potentielle d'intégration</label>
+                    <input id="appIntegrationDate" type="date">
+                </div>
+
+                <div class="field full">
+                    <label>Notes</label>
+                    <textarea id="appNotes"></textarea>
+                </div>
 
             </div>
 
-        `).join("")
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Ajouter la candidature</button>
+            </div>
+        </form>
 
-        :
+        <div class="section-title">
+            <div>
+                <h2>Pipeline recrutement</h2>
+                <p>Prospect → contact → discussion → intégration.</p>
+            </div>
+        </div>
 
-        `<div class="empty">
-            Aucune candidature enregistrée.
-        </div>`;
+        <div class="records">
+            ${
+                data.applications.length
+                ? data.applications.map(a => `
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(a.name)}</div>
 
+                            <div class="record-sub">
+                                ${escapeHTML(a.tiktok || "Pas de @")}
+                                ${a.team ? " · "+escapeHTML(teamName(a.team)) : ""}
+                                ${a.manager ? " · "+escapeHTML(managerName(a.manager)) : ""}
+                            </div>
+
+                            <div style="margin-top:8px">
+                                <span class="badge">${escapeHTML(a.status)}</span>
+                                <span class="badge">${escapeHTML(a.priority)}</span>
+                            </div>
+                        </div>
+
+                        <div class="record-actions">
+                            ${
+                                a.status !== "Intégré à LVF"
+                                ? `<button class="icon-btn" title="Intégrer à LVF" onclick="integrateApplication('${a.id}')">✓</button>`
+                                : ""
+                            }
+                            <button class="icon-btn delete" onclick="deleteItem('applications','${a.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucune candidature</strong>Ajoutez ici vos futurs recrutements.</div></div>`
+            }
+        </div>
+    `;
 }
 
+function addApplication(e){
+    e.preventDefault();
 
-/* =====================================================
-   TRANSFERT CANDIDATURE → CRÉATEUR
-===================================================== */
+    data.applications.push({
+        id:id(),
+        name:appName.value.trim(),
+        tiktok:appTikTok.value.trim(),
+        link:appLink.value.trim(),
+        date:appDate.value,
+        source:appSource.value.trim(),
+        team:appTeam.value,
+        manager:appManager.value,
+        status:appStatus.value,
+        priority:appPriority.value,
+        integrationDate:appIntegrationDate.value,
+        notes:appNotes.value.trim()
+    });
 
-function integrateApplication(id){
+    save();
+    openModal("applications");
+}
 
-    const application =
-        data.applications.find(
-            item => item.id === id
-        );
+function integrateApplication(applicationId){
 
+    const a = data.applications.find(x=>x.id===applicationId);
 
-    if(!application){
+    if(!a) return;
 
-        return;
-
-    }
-
-
-    if(!confirm(
-        `Intégrer ${application.name} comme créateur LVF ?`
-    )){
-
-        return;
-
-    }
-
-
-    let team =
-        application.team;
-
+    let team = a.team;
 
     if(!team && data.teams.length){
+        team = prompt(
+            "Indiquez le numéro de la Team :\n\n" +
+            data.teams.map((t,i)=>`${i+1}. ${t.name}`).join("\n")
+        );
 
-        const names =
-            data.teams
-            .map(
-                (team,index) =>
-                    `${index + 1}. ${team.name}`
-            )
-            .join("\n");
-
-
-        const choice =
-            prompt(
-                "Choisis la Team :\n\n" +
-                names +
-                "\n\nEntre le numéro."
-            );
-
-
-        const index =
-            Number(choice) - 1;
-
-
-        if(
-            index >= 0 &&
-            index < data.teams.length
-        ){
-
-            team =
-                data.teams[index].id;
-
+        if(team){
+            const index = parseInt(team)-1;
+            team = data.teams[index]?.id || "";
         }
-
     }
 
+    data.creators.push({
+        id:id(),
+        name:a.name,
+        tiktok:a.tiktok,
+        link:a.link,
+        team:team || "",
+        date:a.integrationDate || new Date().toISOString().slice(0,10),
+        status:"Actif",
+        notes:a.notes
+    });
 
-    const creator = {
-
-        id:uid(),
-
-        name:
-            application.name,
-
-        tiktok:
-            application.tiktok,
-
-        link:
-            application.link,
-
-        team,
-
-        date:
-            application.joinDate ||
-            new Date()
-                .toISOString()
-                .slice(0,10),
-
-        status:
-            "Actif",
-
-        notes:
-            application.notes
-
-    };
-
-
-    data.creators.push(
-        creator
-    );
-
-
-    application.status =
-        "🎉 Intégré à LVF";
-
+    a.status = "Intégré à LVF";
 
     save();
-
-
-    showToast(
-        "Candidature transférée vers Créateurs"
-    );
-
+    openModal("applications");
 }
 
-
-/* =====================================================
+/* =========================================================
    DIAMANTS
-===================================================== */
+========================================================= */
 
-function saveDiamond(event){
+function diamondsView(){
 
-    event.preventDefault();
+    return `
+        <form onsubmit="addDiamonds(event)">
+            <div class="form-grid">
 
+                <div class="field">
+                    <label>Mois</label>
+                    <input id="diamondMonth" type="month" required>
+                </div>
 
-    const id =
-        $("diamondId").value || uid();
+                <div class="field">
+                    <label>Team</label>
+                    <select id="diamondTeam" required>
+                        <option value="">— Choisir une Team —</option>
+                        ${data.teams.map(t=>`
+                            <option value="${t.id}">
+                                ${escapeHTML(t.name)}
+                            </option>
+                        `).join("")}
+                    </select>
+                </div>
 
+                <div class="field full">
+                    <label>Nombre de diamants</label>
+                    <input id="diamondAmount" type="number" min="0" required placeholder="0">
+                </div>
 
-    const diamond = {
+            </div>
 
-        id,
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
+                <button class="primary">Enregistrer les diamants</button>
+            </div>
+        </form>
 
-        month:
-            $("diamondMonth")
-            .value,
+        <div class="section-title"><div><h2>Historique des diamants</h2></div></div>
 
-        team:
-            $("diamondTeam")
-            .value,
+        <div class="records">
+            ${
+                data.diamonds.length
+                ? [...data.diamonds].reverse().map(d=>`
+                    <div class="record">
+                        <div class="record-main">
+                            <div class="record-title">
+                                ${escapeHTML(teamName(d.team))}
+                            </div>
+                            <div class="record-sub">
+                                ${escapeHTML(d.month)}
+                            </div>
+                        </div>
 
-        value:
-            Number(
-                $("diamondValue")
-                .value || 0
-            )
+                        <strong>💎 ${numberFormat(d.amount)}</strong>
 
-    };
+                        <div class="record-actions">
+                            <button class="icon-btn delete" onclick="deleteItem('diamonds','${d.id}')">×</button>
+                        </div>
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucune donnée</strong>Enregistrez vos premiers diamants.</div></div>`
+            }
+        </div>
+    `;
+}
 
+function addDiamonds(e){
+    e.preventDefault();
 
-    const index =
-        data.diamonds.findIndex(
-            item => item.id === id
-        );
-
-
-    if(index === -1){
-
-        data.diamonds.push(
-            diamond
-        );
-
-    }else{
-
-        data.diamonds[index] =
-            diamond;
-
-    }
-
-
-    event.target.reset();
-
-    $("diamondId").value = "";
+    data.diamonds.push({
+        id:id(),
+        month:diamondMonth.value,
+        team:diamondTeam.value,
+        amount:Number(diamondAmount.value)
+    });
 
     save();
+    openModal("diamonds");
+}
 
-    showToast(
-        "Diamants enregistrés"
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+function statsView(){
+
+    const months = [...new Set(data.diamonds.map(d=>d.month))].sort();
+
+    return `
+        <div class="panel" style="padding:0;border:0;background:transparent">
+            <div class="chart-wrap">
+                <canvas id="diamondChart"></canvas>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <div>
+                <h2>Évolution mensuelle</h2>
+                <p>Total des diamants générés par LVF.</p>
+            </div>
+        </div>
+
+        <div class="records">
+            ${
+                months.length
+                ? months.map(month=>{
+                    const total = data.diamonds
+                        .filter(d=>d.month===month)
+                        .reduce((s,d)=>s+d.amount,0);
+
+                    return `
+                        <div class="record">
+                            <div class="record-main">
+                                <div class="record-title">${escapeHTML(month)}</div>
+                                <div class="record-sub">Total LVF</div>
+                            </div>
+                            <strong>💎 ${numberFormat(total)}</strong>
+                        </div>
+                    `;
+                }).join("")
+                : `<div class="empty"><div><strong>Aucune statistique</strong>Les données apparaîtront après vos premiers enregistrements.</div></div>`
+            }
+        </div>
+    `;
+}
+
+function drawChart(){
+
+    const canvas = document.getElementById("diamondChart");
+    if(!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = 280 * devicePixelRatio;
+
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+
+    const width = rect.width;
+    const height = 280;
+
+    const months = [...new Set(data.diamonds.map(d=>d.month))].sort();
+
+    if(!months.length){
+
+        ctx.fillStyle="#666a7b";
+        ctx.font="14px system-ui";
+        ctx.textAlign="center";
+        ctx.fillText("Aucune donnée à afficher",width/2,height/2);
+        return;
+    }
+
+    const values = months.map(m =>
+        data.diamonds
+            .filter(d=>d.month===m)
+            .reduce((s,d)=>s+d.amount,0)
     );
 
+    const max = Math.max(...values,1);
+
+    ctx.strokeStyle="rgba(255,255,255,.08)";
+    ctx.lineWidth=1;
+
+    for(let i=0;i<5;i++){
+        const y=30+i*((height-60)/4);
+        ctx.beginPath();
+        ctx.moveTo(25,y);
+        ctx.lineTo(width-25,y);
+        ctx.stroke();
+    }
+
+    const step = months.length===1 ? width/2 : (width-70)/(months.length-1);
+
+    ctx.beginPath();
+
+    values.forEach((value,i)=>{
+
+        const x = months.length===1 ? width/2 : 35+i*step;
+        const y = height-35-(value/max)*(height-75);
+
+        if(i===0) ctx.moveTo(x,y);
+        else ctx.lineTo(x,y);
+    });
+
+    ctx.strokeStyle="#9d72ff";
+    ctx.lineWidth=3;
+    ctx.stroke();
+
+    values.forEach((value,i)=>{
+
+        const x = months.length===1 ? width/2 : 35+i*step;
+        const y = height-35-(value/max)*(height-75);
+
+        ctx.beginPath();
+        ctx.arc(x,y,5,0,Math.PI*2);
+        ctx.fillStyle="#bda3ff";
+        ctx.fill();
+
+        ctx.fillStyle="#85899b";
+        ctx.font="10px system-ui";
+        ctx.textAlign="center";
+        ctx.fillText(months[i],x,height-12);
+
+        ctx.fillStyle="#fff";
+        ctx.font="bold 11px system-ui";
+        ctx.fillText(numberFormat(value),x,y-12);
+    });
 }
 
-
-function renderDiamonds(){
-
-    const list =
-        data.diamonds
-        .slice()
-        .sort(
-            (a,b) =>
-                b.month.localeCompare(
-                    a.month
-                )
-        );
-
-
-    $("diamondList").innerHTML =
-
-        list.length
-
-        ?
-
-        list.map(diamond => `
-
-            <div class="row">
-
-                <div class="row-main">
-
-                    <strong>
-
-                        ${esc(
-                            teamName(
-                                diamond.team
-                            )
-                        )}
-
-                    </strong>
-
-                    <small>
-                        ${esc(diamond.month)}
-                    </small>
-
-                </div>
-
-                <b>
-                    💎
-                    ${formatNumber(
-                        diamond.value
-                    )}
-                </b>
-
-            </div>
-
-        `).join("")
-
-        :
-
-        `<div class="empty">
-            Aucun diamant enregistré.
-        </div>`;
-
-}
-
-
-/* =====================================================
+/* =========================================================
    CLASSEMENT
-===================================================== */
+========================================================= */
 
-function getRanking(){
+function rankingView(){
 
-    return data.teams
+    const ranking = data.teams.map(team=>{
 
-        .map(team => ({
+        const diamonds = data.diamonds
+            .filter(d=>d.team===team.id)
+            .reduce((s,d)=>s+d.amount,0);
 
-            team,
+        return {
+            ...team,
+            diamonds,
+            creators:data.creators.filter(c=>c.team===team.id).length
+        };
 
-            total:
-                teamDiamonds(
-                    team.id
-                )
+    }).sort((a,b)=>b.diamonds-a.diamonds);
 
-        }))
-
-        .sort(
-            (a,b) =>
-                b.total - a.total
-        );
-
-}
-
-
-function renderRanking(){
-
-    const ranking =
-        getRanking();
-
-
-    $("rankingList").innerHTML =
-
-        ranking.length
-
-        ?
-
-        ranking.map(
-            (item,index) => `
-
-            <div class="rank">
-
-                <div class="rank-num">
-
-                    ${index + 1}
-
-                </div>
-
-                <div>
-
-                    <strong>
-                        ${esc(
-                            item.team.name
-                        )}
-                    </strong>
-
-                    <br>
-
-                    <small>
-
-                        ${
-                            data.creators
-                            .filter(
-                                creator =>
-                                    creator.team ===
-                                    item.team.id
-                            ).length
-                        }
-                        créateur(s)
-
-                    </small>
-
-                </div>
-
-                <b>
-
-                    💎
-                    ${formatNumber(
-                        item.total
-                    )}
-
-                </b>
-
-            </div>
-
-        `).join("")
-
-        :
-
-        `<div class="empty">
-            Aucune Team.
-        </div>`;
-
-
-    $("rankPreview").innerHTML =
-
-        ranking.length &&
-        ranking.some(
-            item => item.total > 0
-        )
-
-        ?
-
-        ranking
-        .slice(0,5)
-        .map(
-            (item,index) => `
-
-            <div class="rank">
-
-                <div class="rank-num">
-                    ${index + 1}
-                </div>
-
-                <div>
-                    <strong>
-                        ${esc(
-                            item.team.name
-                        )}
-                    </strong>
-                </div>
-
-                <b>
-                    💎
-                    ${formatNumber(
-                        item.total
-                    )}
-                </b>
-
-            </div>
-
-        `).join("")
-
-        :
-
-        `<div class="empty">
-            Aucun diamant enregistré.
-        </div>`;
-
-}
-
-
-/* =====================================================
-   STATISTIQUES
-===================================================== */
-
-function renderStats(){
-
-    const months =
-        [
-            ...new Set(
-                data.diamonds
-                .map(
-                    diamond =>
-                        diamond.month
-                )
-                .filter(Boolean)
-            )
-        ]
-        .sort();
-
-
-    const values =
-        months.map(
-            month =>
-                data.diamonds
-                .filter(
-                    diamond =>
-                        diamond.month === month
-                )
-                .reduce(
-                    (total,diamond) =>
-                        total +
-                        Number(
-                            diamond.value || 0
-                        ),
-                    0
-                )
-        );
-
-
-    const max =
-        Math.max(
-            ...values,
-            1
-        );
-
-
-    $("statsChart").innerHTML =
-
-        months.length
-
-        ?
-
-        months.map(
-            (month,index) => `
-
-            <div class="bar-wrap">
-
-                <div
-                    class="bar"
-                    title="${formatNumber(values[index])} diamants"
-                    style="
-                        height:
-                        ${Math.max(
-                            3,
-                            values[index] /
-                            max *
-                            88
-                        )}%;
-                    "
-                ></div>
-
-                <small>
-                    ${esc(month)}
-                </small>
-
-            </div>
-
-        `).join("")
-
-        :
-
-        `<div
-            class="empty"
-            style="width:100%"
-        >
-            Ajoute des diamants pour voir
-            l’évolution.
-        </div>`;
-
-
-    $("statsTable").innerHTML =
-
-        months.length
-
-        ?
-
-        `
-
-        <table
-            style="
-                width:100%;
-                border-collapse:collapse;
-            "
-        >
-
-            <tr>
-
-                <th
-                    style="
-                        text-align:left;
-                        color:#9ba6c5;
-                        padding:10px 0;
-                    "
-                >
-                    Mois
-                </th>
-
-                <th
-                    style="
-                        text-align:right;
-                        color:#9ba6c5;
-                        padding:10px 0;
-                    "
-                >
-                    Diamants
-                </th>
-
-            </tr>
-
+    return `
+        <div class="records">
 
             ${
-                months
-                .slice()
-                .reverse()
-                .map(
-                    month => {
+                ranking.length
+                ? ranking.map((t,i)=>`
+                    <div class="record">
 
-                        const total =
-                            data.diamonds
-                            .filter(
-                                diamond =>
-                                    diamond.month ===
-                                    month
-                            )
-                            .reduce(
-                                (sum,diamond) =>
-                                    sum +
-                                    Number(
-                                        diamond.value ||
-                                        0
-                                    ),
-                                0
-                            );
+                        <div style="
+                            width:40px;
+                            height:40px;
+                            display:grid;
+                            place-items:center;
+                            border-radius:12px;
+                            background:#191c27;
+                            font-weight:900;
+                        ">
+                            #${i+1}
+                        </div>
 
+                        <div class="record-main">
+                            <div class="record-title">${escapeHTML(t.name)}</div>
+                            <div class="record-sub">
+                                ${t.creators} créateur(s)
+                            </div>
+                        </div>
 
-                        return `
+                        <strong>💎 ${numberFormat(t.diamonds)}</strong>
 
-                        <tr>
-
-                            <td
-                                style="
-                                    padding:10px 0;
-                                    border-bottom:
-                                    1px solid #252e4c;
-                                "
-                            >
-
-                                ${esc(month)}
-
-                            </td>
-
-                            <td
-                                style="
-                                    text-align:right;
-                                    padding:10px 0;
-                                    border-bottom:
-                                    1px solid #252e4c;
-                                "
-                            >
-
-                                💎
-                                ${formatNumber(
-                                    total
-                                )}
-
-                            </td>
-
-                        </tr>
-
-                        `;
-
-                    }
-                ).join("")
+                    </div>
+                `).join("")
+                : `<div class="empty"><div><strong>Aucune Team</strong>Le classement sera disponible après la création de vos Teams.</div></div>`
             }
 
-        </table>
-
-        `
-
-        :
-
-        "";
-
+        </div>
+    `;
 }
 
+/* =========================================================
+   PARAMÈTRES
+========================================================= */
 
-/* =====================================================
+function settingsView(){
+    return `
+        <div class="panel" style="margin-bottom:15px">
+            <div class="panel-heading">
+                <h3>Données locales</h3>
+                <span>Stockage</span>
+            </div>
+
+            <p style="color:var(--muted);line-height:1.6;font-size:13px">
+                Les informations saisies dans ce centre de contrôle sont
+                enregistrées localement dans votre navigateur.
+                Aucune donnée fictive n'est ajoutée automatiquement.
+            </p>
+        </div>
+
+        <div class="modal-actions">
+            <button class="secondary" onclick="exportData()">Exporter les données</button>
+            <button class="secondary" onclick="importData()">Importer des données</button>
+            <button class="secondary" onclick="resetData()">Réinitialiser toutes les données</button>
+        </div>
+
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+    `;
+}
+
+/* =========================================================
+   UTILITAIRES
+========================================================= */
+
+function teamName(idValue){
+    return data.teams.find(t=>t.id===idValue)?.name || "Sans Team";
+}
+
+function managerName(idValue){
+    return data.managers.find(m=>m.id===idValue)?.name || "Sans manager";
+}
+
+function agencyName(idValue){
+    return data.agencies.find(a=>a.id===idValue)?.name || "Sans agence";
+}
+
+function formatDate(value){
+
+    if(!value) return "";
+
+    const d=new Date(value+"T00:00:00");
+
+    return d.toLocaleDateString("fr-FR",{
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    });
+}
+
+function numberFormat(value){
+    return Number(value || 0).toLocaleString("fr-FR");
+}
+
+/* =========================================================
+   SUPPRESSION
+========================================================= */
+
+function deleteItem(collection,itemId){
+
+    if(!confirm("Supprimer définitivement cet élément ?")) return;
+
+    data[collection] = data[collection].filter(x=>x.id!==itemId);
+
+    save();
+
+    const modalMap = {
+        creators:"creators",
+        managers:"managers",
+        teams:"teams",
+        agencies:"agencies",
+        matches:"matches",
+        applications:"applications",
+        diamonds:"diamonds"
+    };
+
+    if(modalMap[collection]){
+        openModal(modalMap[collection]);
+    }
+}
+
+/* =========================================================
    EXPORT
-===================================================== */
+========================================================= */
 
 function exportData(){
 
-    const blob =
-        new Blob(
-            [
-                JSON.stringify(
-                    data,
-                    null,
-                    2
-                )
-            ],
-            {
-                type:
-                    "application/json"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const link =
-        document.createElement("a");
-
-
-    link.href = url;
-
-    link.download =
-        "LVF-donnees.json";
-
-
-    link.click();
-
-
-    URL.revokeObjectURL(url);
-
-
-    showToast(
-        "Export créé"
+    const blob = new Blob(
+        [JSON.stringify(data,null,2)],
+        {type:"application/json"}
     );
 
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="LVF-donnees.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
 }
 
+/* =========================================================
+   IMPORT
+========================================================= */
 
-/* =====================================================
-   RESET
-===================================================== */
+function importData(){
+    document.getElementById("importFile").click();
+}
 
-function resetData(){
+function handleImport(event){
 
-    if(
-        !confirm(
-            "Supprimer toutes les données LVF de cet appareil ?"
-        )
-    ){
+    const file=event.target.files[0];
 
-        return;
+    if(!file) return;
 
-    }
+    const reader=new FileReader();
 
+    reader.onload=function(){
 
-    data = {
+        try{
 
-        creators:[],
-        managers:[],
-        teams:[],
-        matches:[],
-        applications:[],
-        diamonds:[]
+            const imported=JSON.parse(reader.result);
+
+            data={
+                creators:imported.creators || [],
+                managers:imported.managers || [],
+                teams:imported.teams || [],
+                agencies:imported.agencies || [],
+                matches:imported.matches || [],
+                applications:imported.applications || [],
+                diamonds:imported.diamonds || []
+            };
+
+            save();
+
+            alert("Données importées avec succès.");
+
+            openModal("settings");
+
+        }catch(error){
+
+            alert("Le fichier sélectionné n'est pas un fichier LVF valide.");
+
+        }
 
     };
 
+    reader.readAsText(file);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetData(){
+
+    if(!confirm(
+        "ATTENTION\n\n" +
+        "Cette action supprimera toutes les données LVF enregistrées " +
+        "sur ce navigateur.\n\nContinuer ?"
+    )) return;
+
+    data={
+        creators:[],
+        managers:[],
+        teams:[],
+        agencies:[],
+        matches:[],
+        applications:[],
+        diamonds:[]
+    };
 
     save();
 
-
-    showToast(
-        "Données réinitialisées"
-    );
-
+    closeModal();
 }
 
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
-/* =====================================================
-   RENDU GLOBAL
-===================================================== */
+function refresh(){
 
-function renderAll(){
+    document.getElementById("kpiCreators").textContent =
+        numberFormat(data.creators.length);
 
-    const totalDiamonds =
-        data.diamonds.reduce(
-            (total,diamond) =>
-                total +
-                Number(
-                    diamond.value || 0
-                ),
-            0
+    document.getElementById("kpiTeams").textContent =
+        numberFormat(data.teams.length);
+
+    document.getElementById("kpiDiamonds").textContent =
+        numberFormat(
+            data.diamonds.reduce((s,d)=>s+Number(d.amount||0),0)
         );
 
+    document.getElementById("kpiMatches").textContent =
+        numberFormat(data.matches.length);
 
-    $("heroCreators").textContent =
-        formatNumber(
-            data.creators.length
-        );
-
-
-    $("mCreators").textContent =
-        formatNumber(
-            data.creators.length
-        );
-
-
-    $("mTeams").textContent =
-        formatNumber(
-            data.teams.length
-        );
-
-
-    $("mDiamonds").textContent =
-        formatNumber(
-            totalDiamonds
-        );
-
-
-    $("mMatches").textContent =
-        formatNumber(
-            data.matches.length
-        );
-
-
-    $("cCreators").textContent =
+    document.getElementById("countCreators").textContent =
         data.creators.length;
 
-
-    $("cManagers").textContent =
+    document.getElementById("countManagers").textContent =
         data.managers.length;
 
-
-    $("cTeams").textContent =
+    document.getElementById("countTeams").textContent =
         data.teams.length;
 
+    document.getElementById("countAgencies").textContent =
+        data.agencies.length;
 
-    $("cMatches").textContent =
+    document.getElementById("countMatches").textContent =
         data.matches.length;
 
-
-    $("cApplications").textContent =
+    document.getElementById("countApplications").textContent =
         data.applications.length;
 
-
-    $("cDiamondMonths").textContent =
-        new Set(
-            data.diamonds.map(
-                diamond =>
-                    diamond.month
-            )
-        ).size;
-
-
-    renderCreators(
-        document
-        .querySelector(
-            "#creatorModal .search"
-        )?.value || ""
-    );
-
-
-    renderManagers(
-        document
-        .querySelector(
-            "#managerModal .search"
-        )?.value || ""
-    );
-
-
-    renderTeams();
-
-    renderMatches();
-
-    renderApplications(
-        document
-        .querySelector(
-            "#applicationModal .search"
-        )?.value || ""
-    );
-
-    renderDiamonds();
-
-    renderStats();
-
-    renderRanking();
-
-    populateSelects();
-
+    renderOverview();
 }
 
+function renderOverview(){
 
-/* =====================================================
+    const teamBox=document.getElementById("teamOverview");
+
+    if(data.teams.length){
+
+        teamBox.className="records";
+
+        teamBox.innerHTML=data.teams.map(t=>{
+
+            const creators=data.creators.filter(c=>c.team===t.id).length;
+
+            const diamonds=data.diamonds
+                .filter(d=>d.team===t.id)
+                .reduce((s,d)=>s+d.amount,0);
+
+            return `
+                <div class="record">
+                    <div class="record-main">
+                        <div class="record-title">${escapeHTML(t.name)}</div>
+                        <div class="record-sub">
+                            ${creators} créateur(s)
+                        </div>
+                    </div>
+                    <strong>💎 ${numberFormat(diamonds)}</strong>
+                </div>
+            `;
+
+        }).join("");
+
+    }else{
+
+        teamBox.className="empty";
+
+        teamBox.innerHTML=`
+            <div>
+                <strong>Aucune Team enregistrée</strong>
+                Commencez par créer votre première Team.
+            </div>
+        `;
+    }
+
+    const rankingBox=document.getElementById("rankingOverview");
+
+    const ranking=data.teams.map(t=>({
+        ...t,
+        diamonds:data.diamonds
+            .filter(d=>d.team===t.id)
+            .reduce((s,d)=>s+d.amount,0)
+    })).sort((a,b)=>b.diamonds-a.diamonds).slice(0,5);
+
+    if(ranking.length){
+
+        rankingBox.className="records";
+
+        rankingBox.innerHTML=ranking.map((t,i)=>`
+            <div class="record">
+                <div style="
+                    width:35px;
+                    height:35px;
+                    display:grid;
+                    place-items:center;
+                    border-radius:10px;
+                    background:#191c27;
+                    font-weight:800;
+                ">${i+1}</div>
+
+                <div class="record-main">
+                    <div class="record-title">${escapeHTML(t.name)}</div>
+                </div>
+
+                <strong>💎 ${numberFormat(t.diamonds)}</strong>
+            </div>
+        `).join("");
+
+    }else{
+
+        rankingBox.className="empty";
+
+        rankingBox.innerHTML=`
+            <div>
+                <strong>Aucune donnée</strong>
+                Le classement apparaîtra ici.
+            </div>
+        `;
+    }
+}
+
+/* =========================================================
    INITIALISATION
-===================================================== */
+========================================================= */
 
-renderAll();
+refresh();
 
 </script>
 
