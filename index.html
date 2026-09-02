@@ -2,25 +2,31 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LVF — La Vraie Famille</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#09090d">
+<title>TokCenter — Gestion d'agence TikTok</title>
 
 <style>
 :root{
-    --bg:#08090f;
-    --panel:#10121b;
-    --panel2:#151824;
-    --border:rgba(255,255,255,.09);
-    --text:#f7f7fb;
-    --muted:#9296a8;
-    --purple:#9d72ff;
-    --purple2:#6c43e8;
-    --pink:#ff6bb5;
-    --blue:#55a8ff;
-    --green:#55d99a;
-    --gold:#ffc95a;
-    --red:#ff6575;
-    --shadow:0 25px 70px rgba(0,0,0,.35);
+    --bg:#08090d;
+    --surface:#101117;
+    --surface-2:#151720;
+    --surface-3:#1b1d27;
+    --line:rgba(255,255,255,.08);
+    --text:#f7f7fa;
+    --muted:#8d91a2;
+
+    --purple:#9b6cff;
+    --purple-dark:#6d3fe5;
+    --pink:#ff69b4;
+    --blue:#5da8ff;
+    --green:#4ed99a;
+    --orange:#ff9b55;
+    --red:#ff6677;
+    --gold:#ffd15c;
+
+    --radius:24px;
+    --shadow:0 20px 70px rgba(0,0,0,.35);
 }
 
 *{
@@ -36,15 +42,18 @@ html{
 body{
     min-height:100vh;
     background:
-        radial-gradient(circle at 10% 0%,rgba(157,114,255,.16),transparent 30%),
-        radial-gradient(circle at 90% 10%,rgba(255,107,181,.10),transparent 28%),
-        radial-gradient(circle at 50% 100%,rgba(85,168,255,.07),transparent 30%),
+        radial-gradient(circle at 15% -10%,rgba(155,108,255,.18),transparent 30%),
+        radial-gradient(circle at 100% 10%,rgba(255,105,180,.10),transparent 25%),
         var(--bg);
     color:var(--text);
-    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    padding-bottom:90px;
 }
 
-button,input,select,textarea{
+button,
+input,
+select,
+textarea{
     font:inherit;
 }
 
@@ -52,489 +61,588 @@ button{
     cursor:pointer;
 }
 
-::-webkit-scrollbar{
-    width:8px;
-}
-::-webkit-scrollbar-track{
-    background:#090a10;
-}
-::-webkit-scrollbar-thumb{
-    background:#292b39;
-    border-radius:20px;
+button:active{
+    transform:scale(.97);
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* =====================================================
+   TOP BAR
+===================================================== */
 
 .topbar{
     position:sticky;
     top:0;
     z-index:50;
-    height:76px;
+    height:68px;
+    padding:0 18px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 34px;
-    border-bottom:1px solid var(--border);
-    background:rgba(8,9,15,.82);
-    backdrop-filter:blur(22px);
+
+    background:rgba(8,9,13,.82);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    border-bottom:1px solid var(--line);
 }
 
-.brand{
+.logo{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:10px;
 }
 
-.brand-mark{
-    width:42px;
-    height:42px;
+.logo-mark{
+    width:38px;
+    height:38px;
     display:grid;
     place-items:center;
-    border-radius:13px;
-    background:linear-gradient(145deg,#b58cff,#6335dc);
-    box-shadow:0 10px 30px rgba(125,75,255,.3);
+    border-radius:12px;
+    background:linear-gradient(145deg,#b18cff,#693ce0);
+    box-shadow:0 8px 25px rgba(120,70,240,.3);
+    font-size:12px;
     font-weight:900;
-    letter-spacing:-2px;
+    letter-spacing:-.05em;
 }
 
-.brand-text strong{
-    display:block;
-    font-size:15px;
-    letter-spacing:.04em;
+.logo-text{
+    font-size:16px;
+    font-weight:850;
+    letter-spacing:-.03em;
 }
 
-.brand-text span{
+.logo-text span{
     display:block;
-    margin-top:2px;
     color:var(--muted);
-    font-size:11px;
+    font-size:9px;
+    font-weight:600;
     text-transform:uppercase;
-    letter-spacing:.16em;
+    letter-spacing:.15em;
+    margin-top:1px;
 }
 
-.top-actions{
-    display:flex;
-    gap:9px;
+.header-avatar{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    font-size:16px;
 }
 
-.small-btn{
-    border:1px solid var(--border);
-    color:#dddfea;
-    background:#11131c;
-    padding:10px 14px;
-    border-radius:11px;
-    transition:.2s;
-}
+/* =====================================================
+   APP
+===================================================== */
 
-.small-btn:hover{
-    background:#1a1d28;
-    border-color:rgba(157,114,255,.35);
-}
-
-.small-btn.danger:hover{
-    border-color:rgba(255,101,117,.4);
-    color:#ff9ba6;
-}
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.page{
-    width:min(1420px,calc(100% - 40px));
+.app{
+    width:min(100%,680px);
     margin:auto;
-    padding:42px 0 80px;
+    padding:20px 16px 30px;
 }
 
-.hero{
+.screen{
+    display:none;
+}
+
+.screen.active{
+    display:block;
+}
+
+/* =====================================================
+   TITRES
+===================================================== */
+
+.screen-head{
+    margin:8px 2px 22px;
+}
+
+.screen-kicker{
+    color:#a984ff;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.19em;
+    margin-bottom:7px;
+}
+
+.screen-title{
+    font-size:31px;
+    line-height:1;
+    letter-spacing:-.055em;
+}
+
+.screen-subtitle{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    margin-top:9px;
+}
+
+/* =====================================================
+   HERO ACCUEIL
+===================================================== */
+
+.home-hero{
     position:relative;
     overflow:hidden;
-    min-height:270px;
-    display:flex;
-    align-items:flex-end;
-    padding:38px;
-    border:1px solid var(--border);
+    min-height:220px;
+    padding:26px;
+    border:1px solid var(--line);
     border-radius:30px;
+
     background:
-        linear-gradient(120deg,rgba(157,114,255,.13),transparent 45%),
-        linear-gradient(310deg,rgba(255,107,181,.07),transparent 45%),
-        var(--panel);
+        radial-gradient(circle at 100% 0%,rgba(155,108,255,.22),transparent 40%),
+        linear-gradient(145deg,#12131c,#0e0f15);
+
     box-shadow:var(--shadow);
 }
 
-.hero:before{
+.home-hero:after{
     content:"";
     position:absolute;
-    width:330px;
-    height:330px;
-    right:-100px;
-    top:-130px;
+    width:170px;
+    height:170px;
+    right:-80px;
+    bottom:-80px;
     border-radius:50%;
-    background:rgba(157,114,255,.13);
-    filter:blur(2px);
+    border:1px solid rgba(155,108,255,.18);
 }
 
-.hero-content{
-    position:relative;
-    z-index:2;
-}
-
-.eyebrow{
-    color:#b99aff;
-    font-size:11px;
-    font-weight:800;
+.hero-small{
+    color:#aa8aff;
+    font-size:10px;
     text-transform:uppercase;
-    letter-spacing:.24em;
-    margin-bottom:13px;
+    font-weight:800;
+    letter-spacing:.2em;
 }
 
-.hero h1{
-    font-size:clamp(38px,6vw,72px);
+.home-hero h1{
+    margin-top:12px;
+    font-size:39px;
     line-height:.95;
     letter-spacing:-.065em;
-    max-width:800px;
 }
 
-.hero h1 span{
-    background:linear-gradient(90deg,#fff,#b999ff 55%,#ff83c3);
+.home-hero h1 span{
+    background:linear-gradient(90deg,#fff,#b695ff,#ff86c3);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
 }
 
-.hero p{
+.home-hero p{
+    max-width:400px;
     color:var(--muted);
-    margin-top:17px;
-    max-width:620px;
+    font-size:12px;
     line-height:1.6;
-}
-
-.hero-orbit{
-    position:absolute;
-    right:8%;
-    bottom:12%;
-    width:145px;
-    height:145px;
-    border:1px solid rgba(157,114,255,.22);
-    border-radius:50%;
-}
-
-.hero-orbit:after{
-    content:"LVF";
-    position:absolute;
-    inset:25px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:rgba(157,114,255,.12);
-    border:1px solid rgba(157,114,255,.28);
-    color:#c5a9ff;
-    font-weight:900;
-    letter-spacing:.15em;
-}
-
-/* =========================================================
-   KPIs
-========================================================= */
-
-.kpis{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin:18px 0 34px;
-}
-
-.kpi{
-    padding:22px;
-    border:1px solid var(--border);
-    border-radius:20px;
-    background:rgba(16,18,27,.9);
-}
-
-.kpi-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.kpi-icon{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    display:grid;
-    place-items:center;
-    background:#181b27;
-    font-size:18px;
-}
-
-.kpi-label{
-    color:var(--muted);
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:.11em;
-}
-
-.kpi-value{
-    margin-top:18px;
-    font-size:31px;
-    font-weight:850;
-    letter-spacing:-.04em;
-}
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin:34px 2px 14px;
-}
-
-.section-title h2{
-    font-size:20px;
-    letter-spacing:-.03em;
-}
-
-.section-title p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-/* =========================================================
-   MODULES
-========================================================= */
-
-.modules{
-    display:grid;
-    grid-template-columns:repeat(12,1fr);
-    gap:15px;
-}
-
-.module{
-    position:relative;
-    min-height:190px;
-    grid-column:span 4;
-    overflow:hidden;
-    padding:25px;
-    border:1px solid var(--border);
-    border-radius:23px;
-    background:
-        linear-gradient(145deg,rgba(255,255,255,.035),transparent 60%),
-        var(--panel);
-    transition:transform .22s,border-color .22s,box-shadow .22s;
-}
-
-.module.large{
-    grid-column:span 6;
-}
-
-.module:hover{
-    transform:translateY(-4px);
-    border-color:rgba(157,114,255,.34);
-    box-shadow:0 20px 55px rgba(0,0,0,.28);
-}
-
-.module-icon{
-    width:48px;
-    height:48px;
-    display:grid;
-    place-items:center;
-    border-radius:15px;
-    background:#1a1d29;
-    font-size:21px;
-}
-
-.module h3{
-    margin-top:24px;
-    font-size:20px;
-    letter-spacing:-.03em;
-}
-
-.module p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.5;
-    margin-top:7px;
-    max-width:330px;
-}
-
-.module-count{
-    position:absolute;
-    right:22px;
-    top:22px;
-    min-width:36px;
-    height:36px;
-    padding:0 10px;
-    display:grid;
-    place-items:center;
-    border-radius:50px;
-    background:#191c28;
-    color:#c7b5ff;
-    font-weight:800;
-}
-
-.module-glow{
-    position:absolute;
-    width:120px;
-    height:120px;
-    right:-50px;
-    bottom:-50px;
-    border-radius:50%;
-    background:rgba(157,114,255,.12);
-    filter:blur(20px);
-}
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-.overview{
-    display:grid;
-    grid-template-columns:1.3fr .7fr;
-    gap:15px;
     margin-top:15px;
 }
 
-.panel{
-    border:1px solid var(--border);
-    border-radius:23px;
-    background:var(--panel);
-    padding:23px;
+.quick-add{
+    position:absolute;
+    right:20px;
+    bottom:20px;
+    width:46px;
+    height:46px;
+    border:0;
+    border-radius:15px;
+    background:linear-gradient(145deg,#a77aff,#7042df);
+    color:#fff;
+    font-size:23px;
+    box-shadow:0 10px 25px rgba(112,66,223,.3);
 }
 
-.panel-heading{
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:12px 0;
+}
+
+.stat-card{
+    padding:17px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:rgba(16,17,23,.92);
+}
+
+.stat-top{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
 }
 
-.panel-heading h3{
-    font-size:16px;
-}
-
-.panel-heading span{
-    color:var(--muted);
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-}
-
-.empty{
-    min-height:150px;
+.stat-icon{
+    width:33px;
+    height:33px;
     display:grid;
     place-items:center;
-    text-align:center;
+    border-radius:11px;
+    background:var(--surface-3);
+}
+
+.stat-label{
     color:var(--muted);
-    border:1px dashed rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:25px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    font-weight:700;
 }
 
-.empty strong{
+.stat-value{
+    margin-top:12px;
+    font-size:26px;
+    font-weight:850;
+    letter-spacing:-.05em;
+}
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+    margin-top:24px;
+}
+
+.section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin:0 2px 11px;
+}
+
+.section-head h2{
+    font-size:17px;
+    letter-spacing:-.03em;
+}
+
+.section-head button{
+    border:0;
+    background:none;
+    color:#aa8aff;
+    font-size:11px;
+    font-weight:750;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.action-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.action{
+    position:relative;
+    min-height:120px;
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:21px;
+    background:var(--surface);
+    text-align:left;
+    color:#fff;
+    transition:.2s;
+}
+
+.action:hover{
+    border-color:rgba(155,108,255,.35);
+}
+
+.action-icon{
+    width:39px;
+    height:39px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:var(--surface-3);
+    font-size:18px;
+}
+
+.action h3{
+    margin-top:15px;
+    font-size:14px;
+}
+
+.action p{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.4;
+}
+
+.action .arrow{
+    position:absolute;
+    right:15px;
+    top:16px;
+    color:#626677;
+}
+
+/* =====================================================
+   LIST CARDS
+===================================================== */
+
+.list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.list-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:var(--surface);
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    flex-shrink:0;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:linear-gradient(145deg,#292333,#171820);
+    font-size:18px;
+}
+
+.list-info{
+    min-width:0;
+    flex:1;
+}
+
+.list-title{
+    font-size:13px;
+    font-weight:800;
+}
+
+.list-sub{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.list-right{
+    text-align:right;
+}
+
+.list-right strong{
     display:block;
-    color:#d7d8e2;
-    margin-bottom:6px;
+    font-size:12px;
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
+.list-right span{
+    color:var(--muted);
+    font-size:9px;
+}
 
-.modal-backdrop{
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty-state{
+    padding:35px 20px;
+    text-align:center;
+    border:1px dashed rgba(255,255,255,.1);
+    border-radius:20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    width:52px;
+    height:52px;
+    margin:0 auto 12px;
+    display:grid;
+    place-items:center;
+    border-radius:17px;
+    background:var(--surface-2);
+    font-size:22px;
+}
+
+.empty-state strong{
+    display:block;
+    color:#dedfe7;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.empty-state p{
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+    position:fixed;
+    z-index:60;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:min(100%,680px);
+    height:78px;
+    padding:7px 9px calc(7px + env(safe-area-inset-bottom));
+
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+
+    background:rgba(12,13,18,.92);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    border-top:1px solid var(--line);
+}
+
+.nav-item{
+    border:0;
+    background:none;
+    color:#6f7383;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.nav-item .nav-icon{
+    font-size:18px;
+    line-height:1;
+}
+
+.nav-item.active{
+    color:#b18cff;
+}
+
+.nav-item.active .nav-icon{
+    filter:drop-shadow(0 3px 8px rgba(155,108,255,.35));
+}
+
+/* =====================================================
+   FULL SCREEN PANEL / FORM
+===================================================== */
+
+.overlay{
     position:fixed;
     inset:0;
     z-index:100;
     display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(10px);
+    background:var(--bg);
+    overflow-y:auto;
 }
 
-.modal-backdrop.open{
-    display:flex;
+.overlay.open{
+    display:block;
 }
 
-.modal{
-    width:min(760px,100%);
-    max-height:90vh;
-    overflow:auto;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:25px;
-    background:#10121a;
-    box-shadow:0 35px 100px rgba(0,0,0,.55);
+.overlay-inner{
+    width:min(100%,680px);
+    margin:auto;
+    min-height:100%;
+    padding-bottom:35px;
 }
 
-.modal-head{
+.overlay-top{
     position:sticky;
     top:0;
-    z-index:2;
+    z-index:3;
+    height:65px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:22px 24px;
-    background:rgba(16,18,26,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid var(--border);
+    gap:13px;
+    padding:0 17px;
+
+    background:rgba(8,9,13,.9);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);
 }
 
-.modal-head h2{
-    font-size:20px;
-}
-
-.close{
+.back{
     width:38px;
     height:38px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    background:#171a24;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--surface);
     color:#fff;
+    font-size:18px;
 }
 
-.modal-body{
-    padding:24px;
+.overlay-title{
+    font-size:16px;
+    font-weight:800;
 }
 
-.form-grid{
+.overlay-content{
+    padding:20px 16px;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-section{
+    margin-bottom:23px;
+}
+
+.form-section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.form-section-number{
+    width:28px;
+    height:28px;
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+    place-items:center;
+    border-radius:9px;
+    background:rgba(155,108,255,.12);
+    color:#b89bff;
+    font-size:11px;
+    font-weight:850;
+}
+
+.form-section-title strong{
+    font-size:13px;
 }
 
 .field{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.field.full{
-    grid-column:1/-1;
+    margin-bottom:10px;
 }
 
 .field label{
-    color:#c5c7d2;
-    font-size:12px;
-    font-weight:700;
+    display:block;
+    color:#b8bbc8;
+    font-size:10px;
+    font-weight:750;
+    margin:0 3px 6px;
 }
 
 .field input,
 .field select,
 .field textarea{
     width:100%;
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid var(--line);
     outline:none;
+    border-radius:15px;
+    padding:14px;
+    background:var(--surface);
     color:#fff;
-    background:#0c0e15;
-    border-radius:12px;
-    padding:12px 13px;
-    transition:.2s;
+    font-size:13px;
 }
 
 .field textarea{
@@ -545,184 +653,176 @@ button{
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
-    border-color:rgba(157,114,255,.65);
-    box-shadow:0 0 0 3px rgba(157,114,255,.08);
+    border-color:rgba(155,108,255,.6);
+    box-shadow:0 0 0 3px rgba(155,108,255,.08);
 }
 
-.modal-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:22px;
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
 }
 
-.primary{
+.save-button{
+    width:100%;
     border:0;
-    border-radius:12px;
-    padding:12px 18px;
+    padding:16px;
+    border-radius:16px;
     color:#fff;
-    font-weight:800;
-    background:linear-gradient(135deg,#9d72ff,#6c43e8);
-    box-shadow:0 12px 30px rgba(108,67,232,.25);
+    font-weight:850;
+    background:linear-gradient(135deg,#a77aff,#6e40df);
+    box-shadow:0 15px 35px rgba(110,64,223,.24);
 }
 
-.secondary{
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px 18px;
-    color:#ddd;
-    background:#171a24;
+/* =====================================================
+   MATCH SPECIAL
+===================================================== */
+
+.match-preview{
+    position:relative;
+    padding:22px 16px;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(155,108,255,.18),transparent 45%),
+        #11131b;
+    margin-bottom:20px;
 }
 
-/* =========================================================
-   LISTS
-========================================================= */
-
-.records{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+.match-preview-top{
+    text-align:center;
+    color:#a98bff;
+    font-size:9px;
+    font-weight:850;
+    letter-spacing:.2em;
 }
 
-.record{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
+.match-versus{
+    display:grid;
+    grid-template-columns:1fr 42px 1fr;
     align-items:center;
-    padding:15px;
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:15px;
-    background:#0d0f16;
+    gap:5px;
+    margin-top:18px;
 }
 
-.record-main{
-    min-width:0;
+.match-person{
+    text-align:center;
 }
 
-.record-title{
+.match-avatar{
+    width:64px;
+    height:64px;
+    margin:auto;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:linear-gradient(145deg,#292332,#171820);
+    border:2px solid rgba(255,255,255,.08);
+    font-size:24px;
+}
+
+.match-person strong{
+    display:block;
+    font-size:11px;
+    margin-top:8px;
+}
+
+.match-person span{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
+}
+
+.vs{
+    display:grid;
+    place-items:center;
+    color:#8f92a0;
+    font-size:10px;
+    font-weight:900;
+}
+
+.match-info{
+    margin-top:18px;
+    padding-top:15px;
+    border-top:1px solid var(--line);
+    text-align:center;
+}
+
+.match-theme{
+    font-size:13px;
     font-weight:800;
 }
 
-.record-sub{
+.match-date{
     color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
+    font-size:10px;
+    margin-top:5px;
 }
 
-.record-actions{
+/* =====================================================
+   FILTER BAR
+===================================================== */
+
+.filter-bar{
     display:flex;
     gap:7px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    margin-bottom:13px;
+}
+
+.filter{
     flex-shrink:0;
-}
-
-.icon-btn{
-    width:35px;
-    height:35px;
-    border:1px solid var(--border);
-    border-radius:9px;
-    background:#171a24;
-    color:#d8d9e2;
-}
-
-.icon-btn.delete:hover{
-    color:#ff8491;
-    border-color:rgba(255,101,117,.35);
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
+    padding:9px 12px;
+    border:1px solid var(--line);
     border-radius:30px;
-    padding:5px 9px;
+    background:var(--surface);
+    color:#858998;
     font-size:10px;
-    font-weight:800;
-    background:#191c27;
-    color:#bca6ff;
+    font-weight:700;
 }
 
-/* =========================================================
-   CHART
-========================================================= */
-
-.chart-wrap{
-    width:100%;
-    overflow:hidden;
+.filter.active{
+    background:rgba(155,108,255,.12);
+    color:#b99cff;
+    border-color:rgba(155,108,255,.25);
 }
 
-canvas{
-    width:100%;
-    height:280px;
-}
+/* =====================================================
+   DESKTOP
+===================================================== */
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+@media(min-width:700px){
 
-@media(max-width:1000px){
-    .kpis{
-        grid-template-columns:repeat(2,1fr);
+    body{
+        padding-bottom:0;
     }
 
-    .module,
-    .module.large{
-        grid-column:span 6;
+    .app{
+        padding-top:35px;
     }
 
-    .overview{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:680px){
-    .topbar{
-        padding:0 16px;
-    }
-
-    .top-actions .small-btn:first-child{
+    .bottom-nav{
         display:none;
     }
 
-    .page{
-        width:min(100% - 22px,1420px);
-        padding-top:20px;
+    .action-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .hero{
-        min-height:300px;
-        padding:25px;
-        border-radius:23px;
+    .stats-grid{
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .hero-orbit{
-        opacity:.4;
-        right:-30px;
-        bottom:15px;
+    .home-hero{
+        min-height:270px;
+        padding:34px;
     }
 
-    .kpis{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-    }
-
-    .kpi{
-        padding:16px;
-    }
-
-    .kpi-value{
-        font-size:25px;
-    }
-
-    .module,
-    .module.large{
-        grid-column:1/-1;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .field.full{
-        grid-column:auto;
+    .home-hero h1{
+        font-size:52px;
     }
 }
 </style>
@@ -730,245 +830,384 @@ canvas{
 
 <body>
 
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
 <header class="topbar">
-    <div class="brand">
-        <div class="brand-mark">LVF</div>
-        <div class="brand-text">
-            <strong>LA VRAIE FAMILLE</strong>
-            <span>Centre de contrôle</span>
+    <div class="logo">
+        <div class="logo-mark">TC</div>
+        <div class="logo-text">
+            TokCenter
+            <span>Gestion d'agence TikTok</span>
         </div>
     </div>
 
-    <div class="top-actions">
-        <button class="small-btn" onclick="exportData()">Exporter</button>
-        <button class="small-btn danger" onclick="resetData()">Réinitialiser</button>
-    </div>
+    <div class="header-avatar">⚙️</div>
 </header>
 
-<main class="page">
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="eyebrow">LVF · LA VRAIE FAMILLE</div>
-            <h1>Le centre de contrôle<br><span>de LVF.</span></h1>
+<main class="app">
+
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
+
+<section class="screen active" id="screen-home">
+
+    <div class="home-hero">
+        <div class="hero-small">TON ESPACE DE GESTION</div>
+
+        <h1>
+            Toute ton agence.<br>
+            <span>Un seul endroit.</span>
+        </h1>
+
+        <p>
+            Créateurs, Teams, managers, candidatures,
+            agences, matchs et performances.
+        </p>
+
+        <button class="quick-add" onclick="openQuickAdd()">+</button>
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-top">
+                <span class="stat-label">Créateurs</span>
+                <div class="stat-icon">👤</div>
+            </div>
+            <div class="stat-value" id="homeCreators">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-top">
+                <span class="stat-label">Teams</span>
+                <div class="stat-icon">🏷️</div>
+            </div>
+            <div class="stat-value" id="homeTeams">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-top">
+                <span class="stat-label">Diamants</span>
+                <div class="stat-icon">💎</div>
+            </div>
+            <div class="stat-value" id="homeDiamonds">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-top">
+                <span class="stat-label">Matchs</span>
+                <div class="stat-icon">⚔️</div>
+            </div>
+            <div class="stat-value" id="homeMatches">0</div>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-head">
+            <h2>Accès rapide</h2>
+            <button onclick="openQuickAdd()">+ Ajouter</button>
+        </div>
+
+        <div class="action-grid">
+
+            <button class="action" onclick="openManager('creators')">
+                <div class="action-icon">👤</div>
+                <span class="arrow">›</span>
+                <h3>Créateurs</h3>
+                <p>Gérer les membres de LVF</p>
+            </button>
+
+            <button class="action" onclick="openManager('teams')">
+                <div class="action-icon">🏷️</div>
+                <span class="arrow">›</span>
+                <h3>Teams</h3>
+                <p>Organiser les équipes</p>
+            </button>
+
+            <button class="action" onclick="openManager('managers')">
+                <div class="action-icon">👑</div>
+                <span class="arrow">›</span>
+                <h3>Managers</h3>
+                <p>Responsables des Teams</p>
+            </button>
+
+            <button class="action" onclick="openManager('agencies')">
+                <div class="action-icon">🏢</div>
+                <span class="arrow">›</span>
+                <h3>Agences</h3>
+                <p>Agences enregistrées</p>
+            </button>
+
+            <button class="action" onclick="openManager('matches')">
+                <div class="action-icon">⚔️</div>
+                <span class="arrow">›</span>
+                <h3>Matchs</h3>
+                <p>Match OFF & historique</p>
+            </button>
+
+            <button class="action" onclick="openManager('applications')">
+                <div class="action-icon">📝</div>
+                <span class="arrow">›</span>
+                <h3>Candidatures</h3>
+                <p>Suivre les recrutements</p>
+            </button>
+
+        </div>
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-head">
+            <h2>Performance</h2>
+            <button onclick="openManager('stats')">Voir tout</button>
+        </div>
+
+        <div id="homePerformance" class="empty-state">
+            <div class="empty-icon">📊</div>
+            <strong>Aucune donnée pour le moment</strong>
             <p>
-                Gérez vos créateurs, vos Teams, vos managers, vos agences,
-                vos candidatures, vos matchs et vos performances depuis un seul espace.
+                Les performances de LVF apparaîtront ici
+                lorsque tu enregistreras tes premiers diamants.
             </p>
         </div>
-        <div class="hero-orbit"></div>
-    </section>
 
-    <section class="kpis">
-        <div class="kpi">
-            <div class="kpi-top">
-                <span class="kpi-label">Créateurs</span>
-                <div class="kpi-icon">👤</div>
-            </div>
-            <div class="kpi-value" id="kpiCreators">0</div>
-        </div>
-
-        <div class="kpi">
-            <div class="kpi-top">
-                <span class="kpi-label">Teams</span>
-                <div class="kpi-icon">🏷️</div>
-            </div>
-            <div class="kpi-value" id="kpiTeams">0</div>
-        </div>
-
-        <div class="kpi">
-            <div class="kpi-top">
-                <span class="kpi-label">Diamants LVF</span>
-                <div class="kpi-icon">💎</div>
-            </div>
-            <div class="kpi-value" id="kpiDiamonds">0</div>
-        </div>
-
-        <div class="kpi">
-            <div class="kpi-top">
-                <span class="kpi-label">Matchs</span>
-                <div class="kpi-icon">⚔️</div>
-            </div>
-            <div class="kpi-value" id="kpiMatches">0</div>
-        </div>
-    </section>
-
-    <div class="section-title">
-        <div>
-            <h2>Gestion LVF</h2>
-            <p>Chaque espace possède sa propre gestion.</p>
-        </div>
     </div>
 
-    <section class="modules">
+</section>
 
-        <article class="module" onclick="openModal('creators')">
-            <div class="module-icon">👤</div>
-            <div class="module-count" id="countCreators">0</div>
+
+<!-- =====================================================
+     EQUIPE
+===================================================== -->
+
+<section class="screen" id="screen-team">
+
+    <div class="screen-head">
+        <div class="screen-kicker">ORGANISATION</div>
+        <h1 class="screen-title">Mon équipe</h1>
+        <p class="screen-subtitle">
+            Créateurs, Teams et managers de ton agence.
+        </p>
+    </div>
+
+    <div class="action-grid">
+
+        <button class="action" onclick="openManager('creators')">
+            <div class="action-icon">👤</div>
             <h3>Créateurs</h3>
-            <p>Ajoutez et gérez les créateurs qui composent LVF.</p>
-            <div class="module-glow"></div>
-        </article>
+            <p id="teamCreatorCount">0 membre</p>
+        </button>
 
-        <article class="module" onclick="openModal('managers')">
-            <div class="module-icon">👑</div>
-            <div class="module-count" id="countManagers">0</div>
-            <h3>Managers</h3>
-            <p>Gérez les personnes responsables de vos Teams.</p>
-            <div class="module-glow"></div>
-        </article>
-
-        <article class="module" onclick="openModal('teams')">
-            <div class="module-icon">🏷️</div>
-            <div class="module-count" id="countTeams">0</div>
+        <button class="action" onclick="openManager('teams')">
+            <div class="action-icon">🏷️</div>
             <h3>Teams</h3>
-            <p>Créez vos équipes et suivez leur organisation.</p>
-            <div class="module-glow"></div>
-        </article>
+            <p id="teamCount">0 équipe</p>
+        </button>
 
-        <article class="module" onclick="openModal('agencies')">
-            <div class="module-icon">🏢</div>
-            <div class="module-count" id="countAgencies">0</div>
-            <h3>Agences</h3>
-            <p>Enregistrez les agences et retrouvez-les dans vos matchs.</p>
-            <div class="module-glow"></div>
-        </article>
+        <button class="action" onclick="openManager('managers')">
+            <div class="action-icon">👑</div>
+            <h3>Managers</h3>
+            <p id="managerCount">0 manager</p>
+        </button>
 
-        <article class="module large" onclick="openModal('matches')">
-            <div class="module-icon">⚔️</div>
-            <div class="module-count" id="countMatches">0</div>
-            <h3>Matchs</h3>
-            <p>Match OFF, adversaires, agences, thèmes, dates, résultats, scores et historique.</p>
-            <div class="module-glow"></div>
-        </article>
-
-        <article class="module large" onclick="openModal('applications')">
-            <div class="module-icon">📝</div>
-            <div class="module-count" id="countApplications">0</div>
+        <button class="action" onclick="openManager('applications')">
+            <div class="action-icon">📝</div>
             <h3>Candidatures</h3>
-            <p>Suivez les personnes repérées et intégrez-les directement à LVF.</p>
-            <div class="module-glow"></div>
-        </article>
+            <p id="applicationCount">0 candidature</p>
+        </button>
 
-        <article class="module" onclick="openModal('diamonds')">
-            <div class="module-icon">💎</div>
-            <div class="module-count">+</div>
-            <h3>Diamants</h3>
-            <p>Enregistrez les performances mensuelles de chaque Team.</p>
-            <div class="module-glow"></div>
-        </article>
+    </div>
 
-        <article class="module" onclick="openModal('stats')">
-            <div class="module-icon">📊</div>
-            <div class="module-count">↗</div>
-            <h3>Statistiques</h3>
-            <p>Analysez l'évolution des diamants mois après mois.</p>
-            <div class="module-glow"></div>
-        </article>
 
-        <article class="module" onclick="openModal('ranking')">
-            <div class="module-icon">🏆</div>
-            <div class="module-count">#</div>
-            <h3>Classement</h3>
-            <p>Comparez les performances de toutes vos Teams.</p>
-            <div class="module-glow"></div>
-        </article>
+    <div class="section">
 
-        <article class="module" onclick="openModal('settings')">
-            <div class="module-icon">⚙️</div>
-            <div class="module-count">•</div>
-            <h3>Paramètres</h3>
-            <p>Export, sauvegarde locale et gestion des données.</p>
-            <div class="module-glow"></div>
-        </article>
+        <div class="section-head">
+            <h2>Teams</h2>
+        </div>
 
-    </section>
+        <div id="teamList"></div>
 
-    <div class="section-title">
-        <div>
-            <h2>Vue d'ensemble</h2>
-            <p>Les données apparaîtront ici dès que vous les aurez enregistrées.</p>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MATCHS
+===================================================== -->
+
+<section class="screen" id="screen-matches">
+
+    <div class="screen-head">
+        <div class="screen-kicker">ACTIVITÉ</div>
+        <h1 class="screen-title">Matchs</h1>
+        <p class="screen-subtitle">
+            Prépare, enregistre et retrouve tous les matchs de LVF.
+        </p>
+    </div>
+
+    <button
+        class="save-button"
+        style="margin-bottom:18px"
+        onclick="openManager('matches')"
+    >
+        + Créer un nouveau match
+    </button>
+
+    <div class="section">
+        <div class="section-head">
+            <h2>Historique</h2>
+        </div>
+
+        <div id="matchList"></div>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="screen" id="screen-stats">
+
+    <div class="screen-head">
+        <div class="screen-kicker">PERFORMANCE</div>
+        <h1 class="screen-title">Statistiques</h1>
+        <p class="screen-subtitle">
+            Suis les performances de tes Teams et de LVF.
+        </p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Total LVF</span>
+            <div class="stat-icon">💎</div>
+        </div>
+        <div class="stat-value" id="statsTotal">0</div>
+    </div>
+
+    <div class="section">
+        <div class="section-head">
+            <h2>Diamants par Team</h2>
+            <button onclick="openManager('diamonds')">+ Ajouter</button>
+        </div>
+
+        <div id="statsTeams"></div>
+    </div>
+
+    <div class="section">
+        <div class="section-head">
+            <h2>Évolution mensuelle</h2>
+        </div>
+
+        <div id="monthlyStats" class="empty-state">
+            <div class="empty-icon">📈</div>
+            <strong>Aucune donnée</strong>
+            <p>
+                Enregistre des diamants pour commencer à voir l'évolution.
+            </p>
         </div>
     </div>
 
-    <section class="overview">
-
-        <div class="panel">
-            <div class="panel-heading">
-                <h3>Teams LVF</h3>
-                <span>Organisation</span>
-            </div>
-
-            <div id="teamOverview" class="empty">
-                <div>
-                    <strong>Aucune Team enregistrée</strong>
-                    Commencez par créer votre première Team.
-                </div>
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-heading">
-                <h3>Classement</h3>
-                <span>Diamants</span>
-            </div>
-
-            <div id="rankingOverview" class="empty">
-                <div>
-                    <strong>Aucune donnée</strong>
-                    Le classement apparaîtra ici.
-                </div>
-            </div>
-        </div>
-
-    </section>
+</section>
 
 </main>
 
-<!-- =========================================================
-     MODAL PRINCIPALE
-========================================================= -->
 
-<div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)">
-    <div class="modal">
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-        <div class="modal-head">
-            <h2 id="modalTitle">Gestion</h2>
-            <button class="close" onclick="closeModal()">×</button>
+<nav class="bottom-nav">
+
+    <button class="nav-item active" onclick="navigate('home',this)">
+        <span class="nav-icon">⌂</span>
+        Accueil
+    </button>
+
+    <button class="nav-item" onclick="navigate('team',this)">
+        <span class="nav-icon">👥</span>
+        Équipe
+    </button>
+
+    <button class="nav-item" onclick="navigate('matches',this)">
+        <span class="nav-icon">⚔️</span>
+        Matchs
+    </button>
+
+    <button class="nav-item" onclick="navigate('stats',this)">
+        <span class="nav-icon">💎</span>
+        Stats
+    </button>
+
+    <button class="nav-item" onclick="openManager('more')">
+        <span class="nav-icon">☰</span>
+        Plus
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
+     OVERLAY
+===================================================== -->
+
+<div class="overlay" id="overlay">
+
+    <div class="overlay-inner">
+
+        <div class="overlay-top">
+
+            <button class="back" onclick="closeManager()">‹</button>
+
+            <div class="overlay-title" id="overlayTitle">
+                Gestion
+            </div>
+
         </div>
 
-        <div class="modal-body" id="modalBody"></div>
+        <div class="overlay-content" id="overlayContent"></div>
 
     </div>
+
 </div>
+
 
 <script>
 
-/* =========================================================
-   DONNÉES
-========================================================= */
+/* =====================================================
+   STORAGE
+===================================================== */
 
-const STORAGE_KEY = "LVF_CONTROL_CENTER_V2";
+const STORAGE_KEY = "TOKCENTER_DATA";
 
 let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
-    creators: [],
-    managers: [],
-    teams: [],
-    agencies: [],
-    matches: [],
-    applications: [],
-    diamonds: []
+    creators:[],
+    managers:[],
+    teams:[],
+    agencies:[],
+    matches:[],
+    applications:[],
+    diamonds:[]
 };
 
-let currentEdit = null;
-
 function save(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
     refresh();
 }
 
-function id(){
-    return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+function uid(){
+    return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 }
 
 function escapeHTML(value){
@@ -980,108 +1219,240 @@ function escapeHTML(value){
         .replaceAll("'","&#039;");
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
+function formatNumber(value){
+    return Number(value || 0).toLocaleString("fr-FR");
+}
 
-function openModal(type){
-    currentEdit = null;
+function formatDate(value){
+
+    if(!value) return "";
+
+    return new Date(value+"T00:00:00")
+        .toLocaleDateString("fr-FR",{
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        });
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function navigate(screen,button){
+
+    document.querySelectorAll(".screen")
+        .forEach(x=>x.classList.remove("active"));
+
+    document.getElementById("screen-"+screen)
+        .classList.add("active");
+
+    document.querySelectorAll(".nav-item")
+        .forEach(x=>x.classList.remove("active"));
+
+    if(button) button.classList.add("active");
+
+    window.scrollTo(0,0);
+
+    refresh();
+}
+
+
+/* =====================================================
+   QUICK ADD
+===================================================== */
+
+function openQuickAdd(){
+
+    openManager("quick");
+}
+
+function quickView(){
+
+    return `
+        <div class="screen-head">
+            <div class="screen-kicker">ACTION RAPIDE</div>
+            <h1 class="screen-title">Ajouter</h1>
+            <p class="screen-subtitle">
+                Que veux-tu enregistrer dans TokCenter ?
+            </p>
+        </div>
+
+        <div class="action-grid">
+
+            <button class="action" onclick="openManager('creators')">
+                <div class="action-icon">👤</div>
+                <h3>Créateur</h3>
+                <p>Ajouter un membre</p>
+            </button>
+
+            <button class="action" onclick="openManager('teams')">
+                <div class="action-icon">🏷️</div>
+                <h3>Team</h3>
+                <p>Créer une équipe</p>
+            </button>
+
+            <button class="action" onclick="openManager('managers')">
+                <div class="action-icon">👑</div>
+                <h3>Manager</h3>
+                <p>Ajouter un manager</p>
+            </button>
+
+            <button class="action" onclick="openManager('agencies')">
+                <div class="action-icon">🏢</div>
+                <h3>Agence</h3>
+                <p>Enregistrer une agence</p>
+            </button>
+
+            <button class="action" onclick="openManager('matches')">
+                <div class="action-icon">⚔️</div>
+                <h3>Match</h3>
+                <p>Créer un Match OFF</p>
+            </button>
+
+            <button class="action" onclick="openManager('applications')">
+                <div class="action-icon">📝</div>
+                <h3>Candidature</h3>
+                <p>Ajouter un prospect</p>
+            </button>
+
+            <button class="action" onclick="openManager('diamonds')">
+                <div class="action-icon">💎</div>
+                <h3>Diamants</h3>
+                <p>Enregistrer une performance</p>
+            </button>
+
+        </div>
+    `;
+}
+
+
+/* =====================================================
+   MANAGER OVERLAY
+===================================================== */
+
+function openManager(type){
 
     const titles = {
-        creators:"👤 Créateurs",
-        managers:"👑 Managers",
-        teams:"🏷️ Teams",
-        agencies:"🏢 Agences",
-        matches:"⚔️ Matchs",
-        applications:"📝 Candidatures",
-        diamonds:"💎 Diamants",
-        stats:"📊 Statistiques mensuelles",
-        ranking:"🏆 Classement des Teams",
-        settings:"⚙️ Paramètres"
+        quick:"Ajouter",
+        creators:"Créateurs",
+        teams:"Teams",
+        managers:"Managers",
+        agencies:"Agences",
+        matches:"Nouveau match",
+        applications:"Candidatures",
+        diamonds:"Diamants",
+        stats:"Statistiques",
+        ranking:"Classement",
+        more:"Plus"
     };
 
-    document.getElementById("modalTitle").textContent = titles[type] || "Gestion";
+    document.getElementById("overlayTitle").textContent =
+        titles[type] || "TokCenter";
 
-    const body = document.getElementById("modalBody");
+    const content=document.getElementById("overlayContent");
 
-    if(type === "creators") body.innerHTML = creatorsView();
-    if(type === "managers") body.innerHTML = managersView();
-    if(type === "teams") body.innerHTML = teamsView();
-    if(type === "agencies") body.innerHTML = agenciesView();
-    if(type === "matches") body.innerHTML = matchesView();
-    if(type === "applications") body.innerHTML = applicationsView();
-    if(type === "diamonds") body.innerHTML = diamondsView();
-    if(type === "stats") body.innerHTML = statsView();
-    if(type === "ranking") body.innerHTML = rankingView();
-    if(type === "settings") body.innerHTML = settingsView();
+    if(type==="quick") content.innerHTML=quickView();
+    if(type==="creators") content.innerHTML=creatorsView();
+    if(type==="teams") content.innerHTML=teamsView();
+    if(type==="managers") content.innerHTML=managersView();
+    if(type==="agencies") content.innerHTML=agenciesView();
+    if(type==="matches") content.innerHTML=matchesView();
+    if(type==="applications") content.innerHTML=applicationsView();
+    if(type==="diamonds") content.innerHTML=diamondsView();
+    if(type==="stats") content.innerHTML=statsOverlayView();
+    if(type==="ranking") content.innerHTML=rankingView();
+    if(type==="more") content.innerHTML=moreView();
 
-    document.getElementById("modalBackdrop").classList.add("open");
+    document.getElementById("overlay").classList.add("open");
 
-    if(type === "stats"){
-        setTimeout(drawChart,100);
-    }
+    window.scrollTo(0,0);
 }
 
-function closeModal(){
-    document.getElementById("modalBackdrop").classList.remove("open");
+function closeManager(){
+
+    document.getElementById("overlay")
+        .classList.remove("open");
+
+    refresh();
 }
 
-function backdropClose(e){
-    if(e.target.id === "modalBackdrop") closeModal();
-}
 
-/* =========================================================
+/* =====================================================
    SELECTS
-========================================================= */
+===================================================== */
 
-function teamOptions(selected=""){
-    return `<option value="">— Aucun —</option>` +
-        data.teams.map(t =>
-            `<option value="${t.id}" ${t.id===selected?"selected":""}>
+function teamOptions(){
+
+    return `
+        <option value="">Aucune Team</option>
+        ${data.teams.map(t=>`
+            <option value="${t.id}">
                 ${escapeHTML(t.name)}
-            </option>`
-        ).join("");
+            </option>
+        `).join("")}
+    `;
 }
 
-function managerOptions(selected=""){
-    return `<option value="">— Aucun —</option>` +
-        data.managers.map(m =>
-            `<option value="${m.id}" ${m.id===selected?"selected":""}>
+function managerOptions(){
+
+    return `
+        <option value="">Aucun manager</option>
+        ${data.managers.map(m=>`
+            <option value="${m.id}">
                 ${escapeHTML(m.name)}
-            </option>`
-        ).join("");
+            </option>
+        `).join("")}
+    `;
 }
 
-function creatorOptions(selected=""){
-    return `<option value="">— Aucun —</option>` +
-        data.creators.map(c =>
-            `<option value="${c.id}" ${c.id===selected?"selected":""}>
-                ${escapeHTML(c.name)} ${c.tiktok ? "· "+escapeHTML(c.tiktok) : ""}
-            </option>`
-        ).join("");
+function creatorOptions(){
+
+    return `
+        <option value="">Aucun créateur</option>
+        ${data.creators.map(c=>`
+            <option value="${c.id}">
+                ${escapeHTML(c.name)}
+                ${c.tiktok ? " · "+escapeHTML(c.tiktok) : ""}
+            </option>
+        `).join("")}
+    `;
 }
 
-function agencyOptions(selected=""){
-    return `<option value="">— Aucune agence —</option>` +
-        data.agencies.map(a =>
-            `<option value="${a.id}" ${a.id===selected?"selected":""}>
+function agencyOptions(){
+
+    return `
+        <option value="">Aucune agence</option>
+        ${data.agencies.map(a=>`
+            <option value="${a.id}">
                 ${escapeHTML(a.name)}
-            </option>`
-        ).join("");
+            </option>
+        `).join("")}
+    `;
 }
 
-/* =========================================================
+
+/* =====================================================
    CRÉATEURS
-========================================================= */
+===================================================== */
 
 function creatorsView(){
+
     return `
+
         <form onsubmit="addCreator(event)">
-            <div class="form-grid">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Identité</strong>
+                </div>
 
                 <div class="field">
                     <label>Nom / prénom</label>
-                    <input id="creatorName" required>
+                    <input id="creatorName" required placeholder="Ex : Prénom Nom">
                 </div>
 
                 <div class="field">
@@ -1091,12 +1462,24 @@ function creatorsView(){
 
                 <div class="field">
                     <label>Lien TikTok</label>
-                    <input id="creatorLink" type="url">
+                    <input id="creatorLink" type="url" placeholder="https://www.tiktok.com/...">
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">02</div>
+                    <strong>Organisation LVF</strong>
                 </div>
 
                 <div class="field">
                     <label>Team</label>
-                    <select id="creatorTeam">${teamOptions()}</select>
+                    <select id="creatorTeam">
+                        ${teamOptions()}
+                    </select>
                 </div>
 
                 <div class="field">
@@ -1113,54 +1496,89 @@ function creatorsView(){
                     </select>
                 </div>
 
-                <div class="field full">
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">03</div>
+                    <strong>Informations complémentaires</strong>
+                </div>
+
+                <div class="field">
                     <label>Notes</label>
-                    <textarea id="creatorNotes"></textarea>
+                    <textarea id="creatorNotes" placeholder="Informations utiles..."></textarea>
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Ajouter le créateur</button>
-            </div>
+            <button class="save-button">
+                Ajouter le créateur
+            </button>
+
         </form>
 
-        <div class="section-title">
-            <div>
+
+        <div class="section">
+
+            <div class="section-head">
                 <h2>Créateurs enregistrés</h2>
             </div>
+
+            <div class="list">
+
+                ${
+                    data.creators.length
+                    ? data.creators.map(c=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">👤</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(c.name)}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${escapeHTML(c.tiktok || "Pas de @")}
+                                    ${c.team ? " · "+escapeHTML(teamName(c.team)) : ""}
+                                </div>
+                            </div>
+
+                            <div class="list-right">
+                                <button
+                                    class="back"
+                                    style="width:34px;height:34px;font-size:14px"
+                                    onclick="deleteItem('creators','${c.id}')"
+                                >×</button>
+                            </div>
+
+                        </div>
+
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">👤</div>
+                        <strong>Aucun créateur</strong>
+                        <p>La liste est vide.</p>
+                    </div>`
+                }
+
+            </div>
+
         </div>
 
-        <div class="records">
-            ${
-                data.creators.length
-                ? data.creators.map(c => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(c.name)}</div>
-                            <div class="record-sub">
-                                ${escapeHTML(c.tiktok || "Pas de @")}
-                                ${c.team ? " · "+escapeHTML(teamName(c.team)) : ""}
-                                · ${escapeHTML(c.status)}
-                            </div>
-                        </div>
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('creators','${c.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucun créateur</strong>La liste est actuellement vide.</div></div>`
-            }
-        </div>
     `;
 }
 
 function addCreator(e){
+
     e.preventDefault();
 
     data.creators.push({
-        id:id(),
+        id:uid(),
         name:creatorName.value.trim(),
         tiktok:creatorTikTok.value.trim(),
         link:creatorLink.value.trim(),
@@ -1171,17 +1589,143 @@ function addCreator(e){
     });
 
     save();
-    openModal("creators");
+    openManager("creators");
 }
 
-/* =========================================================
+
+/* =====================================================
+   TEAMS
+===================================================== */
+
+function teamsView(){
+
+    return `
+
+        <form onsubmit="addTeam(event)">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Nouvelle Team</strong>
+                </div>
+
+                <div class="field">
+                    <label>Nom de la Team</label>
+                    <input
+                        id="teamName"
+                        required
+                        placeholder="Ex : 🦊 Team Lulu 🦊"
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Identité / couleur</label>
+                    <input
+                        id="teamColor"
+                        placeholder="Ex : Orange & noir"
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Description</label>
+                    <textarea id="teamDescription"></textarea>
+                </div>
+
+            </div>
+
+            <button class="save-button">
+                Créer la Team
+            </button>
+
+        </form>
+
+
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Teams</h2>
+            </div>
+
+            <div class="list">
+
+                ${
+                    data.teams.length
+                    ? data.teams.map(t=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">🏷️</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(t.name)}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${data.creators.filter(c=>c.team===t.id).length}
+                                    créateur(s)
+                                </div>
+                            </div>
+
+                            <div class="list-right">
+                                <button
+                                    class="back"
+                                    style="width:34px;height:34px;font-size:14px"
+                                    onclick="deleteItem('teams','${t.id}')"
+                                >×</button>
+                            </div>
+
+                        </div>
+
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">🏷️</div>
+                        <strong>Aucune Team</strong>
+                        <p>Crée ta première équipe.</p>
+                    </div>`
+                }
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+function addTeam(e){
+
+    e.preventDefault();
+
+    data.teams.push({
+        id:uid(),
+        name:teamName.value.trim(),
+        color:teamColor.value.trim(),
+        description:teamDescription.value.trim()
+    });
+
+    save();
+    openManager("teams");
+}
+
+
+/* =====================================================
    MANAGERS
-========================================================= */
+===================================================== */
 
 function managersView(){
+
     return `
+
         <form onsubmit="addManager(event)">
-            <div class="form-grid">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Identité</strong>
+                </div>
 
                 <div class="field">
                     <label>Nom / prénom</label>
@@ -1193,69 +1737,113 @@ function managersView(){
                     <input id="managerTikTok" placeholder="@pseudo">
                 </div>
 
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">02</div>
+                    <strong>Organisation</strong>
+                </div>
+
                 <div class="field">
                     <label>Team principale</label>
-                    <select id="managerTeam">${teamOptions()}</select>
-                </div>
-
-                <div class="field">
-                    <label>Date d'arrivée</label>
-                    <input id="managerDate" type="date">
-                </div>
-
-                <div class="field">
-                    <label>Statut</label>
-                    <select id="managerStatus">
-                        <option>Actif</option>
-                        <option>En pause</option>
-                        <option>Inactif</option>
+                    <select id="managerTeam">
+                        ${teamOptions()}
                     </select>
                 </div>
 
-                <div class="field full">
-                    <label>Notes</label>
-                    <textarea id="managerNotes"></textarea>
+                <div class="form-row">
+
+                    <div class="field">
+                        <label>Date d'arrivée</label>
+                        <input id="managerDate" type="date">
+                    </div>
+
+                    <div class="field">
+                        <label>Statut</label>
+                        <select id="managerStatus">
+                            <option>Actif</option>
+                            <option>En pause</option>
+                            <option>Inactif</option>
+                        </select>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Ajouter le manager</button>
+
+            <div class="field">
+                <label>Notes</label>
+                <textarea id="managerNotes"></textarea>
             </div>
+
+            <button class="save-button">
+                Ajouter le manager
+            </button>
+
         </form>
 
-        <div class="section-title"><div><h2>Managers</h2></div></div>
 
-        <div class="records">
-            ${
-                data.managers.length
-                ? data.managers.map(m => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(m.name)}</div>
-                            <div class="record-sub">
-                                ${escapeHTML(m.tiktok || "Pas de @")}
-                                ${m.team ? " · "+escapeHTML(teamName(m.team)) : ""}
-                                · ${escapeHTML(m.status)}
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Managers</h2>
+            </div>
+
+            <div class="list">
+
+                ${
+                    data.managers.length
+                    ? data.managers.map(m=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">👑</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(m.name)}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${escapeHTML(m.tiktok || "Pas de @")}
+                                    ${m.team ? " · "+escapeHTML(teamName(m.team)) : ""}
+                                </div>
                             </div>
+
+                            <button
+                                class="back"
+                                style="width:34px;height:34px;font-size:14px"
+                                onclick="deleteItem('managers','${m.id}')"
+                            >×</button>
+
                         </div>
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('managers','${m.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucun manager</strong>La liste est actuellement vide.</div></div>`
-            }
+
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">👑</div>
+                        <strong>Aucun manager</strong>
+                        <p>La liste est vide.</p>
+                    </div>`
+                }
+
+            </div>
+
         </div>
+
     `;
 }
 
 function addManager(e){
+
     e.preventDefault();
 
     data.managers.push({
-        id:id(),
+        id:uid(),
         name:managerName.value.trim(),
         tiktok:managerTikTok.value.trim(),
         team:managerTeam.value,
@@ -1265,88 +1853,26 @@ function addManager(e){
     });
 
     save();
-    openModal("managers");
+    openManager("managers");
 }
 
-/* =========================================================
-   TEAMS
-========================================================= */
 
-function teamsView(){
-    return `
-        <form onsubmit="addTeam(event)">
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>Nom de la Team</label>
-                    <input id="teamName" required placeholder="Ex : 🦊 Team Lulu 🦊">
-                </div>
-
-                <div class="field">
-                    <label>Couleur / identité</label>
-                    <input id="teamColor" placeholder="Ex : violet">
-                </div>
-
-                <div class="field full">
-                    <label>Description</label>
-                    <textarea id="teamDescription"></textarea>
-                </div>
-
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Créer la Team</button>
-            </div>
-        </form>
-
-        <div class="section-title"><div><h2>Teams enregistrées</h2></div></div>
-
-        <div class="records">
-            ${
-                data.teams.length
-                ? data.teams.map(t => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(t.name)}</div>
-                            <div class="record-sub">
-                                ${escapeHTML(t.color || "Aucune couleur")}
-                                · ${data.creators.filter(c=>c.team===t.id).length} créateur(s)
-                            </div>
-                        </div>
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('teams','${t.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucune Team</strong>Créez votre première équipe.</div></div>`
-            }
-        </div>
-    `;
-}
-
-function addTeam(e){
-    e.preventDefault();
-
-    data.teams.push({
-        id:id(),
-        name:teamName.value.trim(),
-        color:teamColor.value.trim(),
-        description:teamDescription.value.trim()
-    });
-
-    save();
-    openModal("teams");
-}
-
-/* =========================================================
+/* =====================================================
    AGENCES
-========================================================= */
+===================================================== */
 
 function agenciesView(){
+
     return `
+
         <form onsubmit="addAgency(event)">
-            <div class="form-grid">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Agence</strong>
+                </div>
 
                 <div class="field">
                     <label>Nom de l'agence</label>
@@ -1354,7 +1880,7 @@ function agenciesView(){
                 </div>
 
                 <div class="field">
-                    <label>@TikTok / compte</label>
+                    <label>@TikTok</label>
                     <input id="agencyTikTok" placeholder="@agence">
                 </div>
 
@@ -1363,8 +1889,18 @@ function agenciesView(){
                     <input id="agencyLink" type="url">
                 </div>
 
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">02</div>
+                    <strong>Contact</strong>
+                </div>
+
                 <div class="field">
-                    <label>Responsable / contact</label>
+                    <label>Nom du contact / responsable</label>
                     <input id="agencyContact">
                 </div>
 
@@ -1373,49 +1909,79 @@ function agenciesView(){
                     <input id="agencyDate" type="date">
                 </div>
 
-                <div class="field full">
+                <div class="field">
                     <label>Notes</label>
                     <textarea id="agencyNotes"></textarea>
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Enregistrer l'agence</button>
-            </div>
+            <button class="save-button">
+                Enregistrer l'agence
+            </button>
+
         </form>
 
-        <div class="section-title"><div><h2>Agences enregistrées</h2></div></div>
 
-        <div class="records">
-            ${
-                data.agencies.length
-                ? data.agencies.map(a => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(a.name)}</div>
-                            <div class="record-sub">
-                                ${escapeHTML(a.tiktok || "Pas de compte")}
-                                ${a.contact ? " · "+escapeHTML(a.contact) : ""}
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Agences enregistrées</h2>
+            </div>
+
+            <div class="list">
+
+                ${
+                    data.agencies.length
+                    ? data.agencies.map(a=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">🏢</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(a.name)}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${escapeHTML(a.tiktok || "Pas de compte")}
+                                </div>
                             </div>
+
+                            <button
+                                class="back"
+                                style="width:34px;height:34px;font-size:14px"
+                                onclick="deleteItem('agencies','${a.id}')"
+                            >×</button>
+
                         </div>
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('agencies','${a.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucune agence</strong>Enregistrez ici les agences avec lesquelles vous avez des matchs ou contacts.</div></div>`
-            }
+
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">🏢</div>
+                        <strong>Aucune agence</strong>
+                        <p>
+                            Enregistre ici les agences rencontrées
+                            ou associées à tes matchs.
+                        </p>
+                    </div>`
+                }
+
+            </div>
+
         </div>
+
     `;
 }
 
 function addAgency(e){
+
     e.preventDefault();
 
     data.agencies.push({
-        id:id(),
+        id:uid(),
         name:agencyName.value.trim(),
         tiktok:agencyTikTok.value.trim(),
         link:agencyLink.value.trim(),
@@ -1425,34 +1991,89 @@ function addAgency(e){
     });
 
     save();
-    openModal("agencies");
+    openManager("agencies");
 }
 
-/* =========================================================
+
+/* =====================================================
    MATCHS
-========================================================= */
+===================================================== */
 
 function matchesView(){
-    return `
-        <form onsubmit="addMatch(event)">
-            <div class="form-grid">
 
-                <div class="field">
-                    <label>Type de match</label>
-                    <select id="matchType">
-                        <option>Match OFF</option>
-                        <option>Autre match</option>
-                    </select>
+    return `
+
+        <div class="match-preview">
+
+            <div class="match-preview-top">
+                MATCH OFF
+            </div>
+
+            <div class="match-versus">
+
+                <div class="match-person">
+                    <div class="match-avatar">👤</div>
+                    <strong id="previewCreator">Créateur LVF</strong>
+                    <span>LVF</span>
+                </div>
+
+                <div class="vs">VS</div>
+
+                <div class="match-person">
+                    <div class="match-avatar">👤</div>
+                    <strong id="previewOpponent">Adversaire</strong>
+                    <span>Agence</span>
+                </div>
+
+            </div>
+
+            <div class="match-info">
+                <div class="match-theme">
+                    Nouveau Match OFF
+                </div>
+
+                <div class="match-date">
+                    Renseigne les informations ci-dessous
+                </div>
+            </div>
+
+        </div>
+
+
+        <form onsubmit="addMatch(event)">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Qui joue ?</strong>
                 </div>
 
                 <div class="field">
                     <label>Créateur LVF</label>
-                    <select id="matchCreator">${creatorOptions()}</select>
+                    <select id="matchCreator" onchange="updateMatchPreview()">
+                        ${creatorOptions()}
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">02</div>
+                    <strong>Contre qui ?</strong>
                 </div>
 
                 <div class="field">
                     <label>Adversaire</label>
-                    <input id="matchOpponent" required>
+                    <input
+                        id="matchOpponent"
+                        required
+                        placeholder="Nom / prénom"
+                        oninput="updateMatchPreview()"
+                    >
                 </div>
 
                 <div class="field">
@@ -1462,22 +2083,51 @@ function matchesView(){
 
                 <div class="field">
                     <label>Agence adverse</label>
-                    <select id="matchAgency">${agencyOptions()}</select>
+                    <select id="matchAgency">
+                        ${agencyOptions()}
+                    </select>
                 </div>
 
-                <div class="field">
-                    <label>Date</label>
-                    <input id="matchDate" type="date" required>
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">03</div>
+                    <strong>Quand ?</strong>
                 </div>
 
-                <div class="field">
-                    <label>Heure</label>
-                    <input id="matchTime" type="time" required>
+                <div class="form-row">
+
+                    <div class="field">
+                        <label>Date</label>
+                        <input id="matchDate" type="date" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Heure</label>
+                        <input id="matchTime" type="time" required>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">04</div>
+                    <strong>Le match</strong>
                 </div>
 
                 <div class="field">
                     <label>Thème</label>
-                    <input id="matchTheme" placeholder="Ex : Bataille des Nounours">
+                    <input
+                        id="matchTheme"
+                        placeholder="Ex : Bataille des Nounours"
+                    >
                 </div>
 
                 <div class="field">
@@ -1490,81 +2140,90 @@ function matchesView(){
                     </select>
                 </div>
 
-                <div class="field">
-                    <label>Résultat</label>
-                    <select id="matchResult">
-                        <option>Non défini</option>
-                        <option>Victoire LVF</option>
-                        <option>Défaite LVF</option>
-                        <option>Égalité</option>
-                    </select>
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">05</div>
+                    <strong>Résultat</strong>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="field">
+                        <label>Résultat</label>
+                        <select id="matchResult">
+                            <option>Non défini</option>
+                            <option>Victoire LVF</option>
+                            <option>Défaite LVF</option>
+                            <option>Égalité</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Score</label>
+                        <input id="matchScore" placeholder="0 - 0">
+                    </div>
+
                 </div>
 
                 <div class="field">
-                    <label>Score</label>
-                    <input id="matchScore" placeholder="0 - 0">
-                </div>
-
-                <div class="field full">
                     <label>Notes</label>
                     <textarea id="matchNotes"></textarea>
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Enregistrer le match</button>
-            </div>
+
+            <button class="save-button">
+                ⚔️ Enregistrer le Match OFF
+            </button>
+
         </form>
 
-        <div class="section-title">
-            <div>
-                <h2>Historique des matchs</h2>
-                <p>Les matchs enregistrés restent accessibles ici.</p>
+
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Historique</h2>
             </div>
+
+            <div id="overlayMatchList"></div>
+
         </div>
 
-        <div class="records">
-            ${
-                data.matches.length
-                ? [...data.matches].reverse().map(m => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">
-                                ${escapeHTML(m.type)} · ${escapeHTML(m.opponent)}
-                            </div>
-
-                            <div class="record-sub">
-                                ${m.date ? formatDate(m.date) : "Date inconnue"}
-                                ${m.time ? " · "+m.time : ""}
-                                ${m.theme ? " · "+escapeHTML(m.theme) : ""}
-                                ${m.agency ? " · "+escapeHTML(agencyName(m.agency)) : ""}
-                            </div>
-
-                            <div style="margin-top:8px">
-                                <span class="badge">${escapeHTML(m.result || "Non défini")}</span>
-                                ${m.score ? `<span class="badge">${escapeHTML(m.score)}</span>` : ""}
-                            </div>
-                        </div>
-
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('matches','${m.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucun match</strong>Votre historique est vide.</div></div>`
-            }
-        </div>
     `;
 }
 
+function updateMatchPreview(){
+
+    const creator=document.getElementById("matchCreator");
+    const opponent=document.getElementById("matchOpponent");
+
+    if(creator){
+
+        const selected=creator.options[creator.selectedIndex];
+
+        document.getElementById("previewCreator")
+            .textContent=selected?.textContent.trim() || "Créateur LVF";
+    }
+
+    if(opponent){
+
+        document.getElementById("previewOpponent")
+            .textContent=opponent.value.trim() || "Adversaire";
+    }
+}
+
 function addMatch(e){
+
     e.preventDefault();
 
     data.matches.push({
-        id:id(),
-        type:matchType.value,
+        id:uid(),
+        type:"Match OFF",
         creator:matchCreator.value,
         opponent:matchOpponent.value.trim(),
         opponentTikTok:matchOpponentTikTok.value.trim(),
@@ -1579,17 +2238,26 @@ function addMatch(e){
     });
 
     save();
-    openModal("matches");
+    openManager("matches");
 }
 
-/* =========================================================
+
+/* =====================================================
    CANDIDATURES
-========================================================= */
+===================================================== */
 
 function applicationsView(){
+
     return `
+
         <form onsubmit="addApplication(event)">
-            <div class="form-grid">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>La personne</strong>
+                </div>
 
                 <div class="field">
                     <label>Nom / prénom</label>
@@ -1606,14 +2274,19 @@ function applicationsView(){
                     <input id="appLink" type="url">
                 </div>
 
-                <div class="field">
-                    <label>Date repérée</label>
-                    <input id="appDate" type="date">
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">02</div>
+                    <strong>Suivi</strong>
                 </div>
 
                 <div class="field">
                     <label>Source</label>
-                    <input id="appSource" placeholder="TikTok, live, recommandation...">
+                    <input id="appSource" placeholder="TikTok, recommandation, live...">
                 </div>
 
                 <div class="field">
@@ -1638,8 +2311,18 @@ function applicationsView(){
                     </select>
                 </div>
 
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">03</div>
+                    <strong>Potentiel</strong>
+                </div>
+
                 <div class="field">
-                    <label>Priorité / potentiel</label>
+                    <label>Priorité</label>
                     <select id="appPriority">
                         <option>Normal</option>
                         <option>⭐ Intéressant</option>
@@ -1652,71 +2335,83 @@ function applicationsView(){
                     <input id="appIntegrationDate" type="date">
                 </div>
 
-                <div class="field full">
+                <div class="field">
                     <label>Notes</label>
                     <textarea id="appNotes"></textarea>
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Ajouter la candidature</button>
-            </div>
+
+            <button class="save-button">
+                Ajouter à mes candidatures
+            </button>
+
         </form>
 
-        <div class="section-title">
-            <div>
-                <h2>Pipeline recrutement</h2>
-                <p>Prospect → contact → discussion → intégration.</p>
+
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Pipeline</h2>
             </div>
-        </div>
 
-        <div class="records">
-            ${
-                data.applications.length
-                ? data.applications.map(a => `
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(a.name)}</div>
+            <div class="list">
 
-                            <div class="record-sub">
-                                ${escapeHTML(a.tiktok || "Pas de @")}
-                                ${a.team ? " · "+escapeHTML(teamName(a.team)) : ""}
-                                ${a.manager ? " · "+escapeHTML(managerName(a.manager)) : ""}
+                ${
+                    data.applications.length
+                    ? data.applications.map(a=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">📝</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(a.name)}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${escapeHTML(a.tiktok || "Pas de @")}
+                                    · ${escapeHTML(a.status)}
+                                </div>
                             </div>
 
-                            <div style="margin-top:8px">
-                                <span class="badge">${escapeHTML(a.status)}</span>
-                                <span class="badge">${escapeHTML(a.priority)}</span>
-                            </div>
+                            <button
+                                class="back"
+                                style="width:34px;height:34px;font-size:14px"
+                                onclick="integrateApplication('${a.id}')"
+                            >✓</button>
+
                         </div>
 
-                        <div class="record-actions">
-                            ${
-                                a.status !== "Intégré à LVF"
-                                ? `<button class="icon-btn" title="Intégrer à LVF" onclick="integrateApplication('${a.id}')">✓</button>`
-                                : ""
-                            }
-                            <button class="icon-btn delete" onclick="deleteItem('applications','${a.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucune candidature</strong>Ajoutez ici vos futurs recrutements.</div></div>`
-            }
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <strong>Aucune candidature</strong>
+                        <p>
+                            Tes prospects apparaîtront ici.
+                        </p>
+                    </div>`
+                }
+
+            </div>
+
         </div>
+
     `;
 }
 
 function addApplication(e){
+
     e.preventDefault();
 
     data.applications.push({
-        id:id(),
+        id:uid(),
         name:appName.value.trim(),
         tiktok:appTikTok.value.trim(),
         link:appLink.value.trim(),
-        date:appDate.value,
         source:appSource.value.trim(),
         team:appTeam.value,
         manager:appManager.value,
@@ -1727,55 +2422,69 @@ function addApplication(e){
     });
 
     save();
-    openModal("applications");
+    openManager("applications");
 }
+
+
+/* =====================================================
+   INTÉGRATION CANDIDATURE
+===================================================== */
 
 function integrateApplication(applicationId){
 
-    const a = data.applications.find(x=>x.id===applicationId);
+    const application=
+        data.applications.find(a=>a.id===applicationId);
 
-    if(!a) return;
-
-    let team = a.team;
-
-    if(!team && data.teams.length){
-        team = prompt(
-            "Indiquez le numéro de la Team :\n\n" +
-            data.teams.map((t,i)=>`${i+1}. ${t.name}`).join("\n")
-        );
-
-        if(team){
-            const index = parseInt(team)-1;
-            team = data.teams[index]?.id || "";
-        }
-    }
+    if(!application) return;
 
     data.creators.push({
-        id:id(),
-        name:a.name,
-        tiktok:a.tiktok,
-        link:a.link,
-        team:team || "",
-        date:a.integrationDate || new Date().toISOString().slice(0,10),
+
+        id:uid(),
+
+        name:application.name,
+
+        tiktok:application.tiktok,
+
+        link:application.link,
+
+        team:application.team,
+
+        date:
+            application.integrationDate ||
+            new Date().toISOString().slice(0,10),
+
         status:"Actif",
-        notes:a.notes
+
+        notes:application.notes
+
     });
 
-    a.status = "Intégré à LVF";
+    application.status="Intégré à LVF";
 
     save();
-    openModal("applications");
+
+    alert("La candidature a été intégrée aux créateurs LVF.");
+
+    openManager("applications");
 }
 
-/* =========================================================
+
+/* =====================================================
    DIAMANTS
-========================================================= */
+===================================================== */
 
 function diamondsView(){
 
     return `
+
         <form onsubmit="addDiamonds(event)">
-            <div class="form-grid">
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-section-number">01</div>
+                    <strong>Performance</strong>
+                </div>
 
                 <div class="field">
                     <label>Mois</label>
@@ -1785,7 +2494,7 @@ function diamondsView(){
                 <div class="field">
                     <label>Team</label>
                     <select id="diamondTeam" required>
-                        <option value="">— Choisir une Team —</option>
+                        <option value="">Choisir une Team</option>
                         ${data.teams.map(t=>`
                             <option value="${t.id}">
                                 ${escapeHTML(t.name)}
@@ -1794,347 +2503,490 @@ function diamondsView(){
                     </select>
                 </div>
 
-                <div class="field full">
+                <div class="field">
                     <label>Nombre de diamants</label>
-                    <input id="diamondAmount" type="number" min="0" required placeholder="0">
+                    <input
+                        id="diamondAmount"
+                        type="number"
+                        min="0"
+                        required
+                        placeholder="0"
+                    >
                 </div>
 
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="secondary" onclick="closeModal()">Annuler</button>
-                <button class="primary">Enregistrer les diamants</button>
-            </div>
+            <button class="save-button">
+                💎 Enregistrer les diamants
+            </button>
+
         </form>
 
-        <div class="section-title"><div><h2>Historique des diamants</h2></div></div>
 
-        <div class="records">
-            ${
-                data.diamonds.length
-                ? [...data.diamonds].reverse().map(d=>`
-                    <div class="record">
-                        <div class="record-main">
-                            <div class="record-title">
-                                ${escapeHTML(teamName(d.team))}
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Historique</h2>
+            </div>
+
+            <div class="list">
+
+                ${
+                    data.diamonds.length
+                    ? [...data.diamonds].reverse().map(d=>`
+
+                        <div class="list-card">
+
+                            <div class="avatar">💎</div>
+
+                            <div class="list-info">
+                                <div class="list-title">
+                                    ${escapeHTML(teamName(d.team))}
+                                </div>
+
+                                <div class="list-sub">
+                                    ${escapeHTML(d.month)}
+                                </div>
                             </div>
-                            <div class="record-sub">
-                                ${escapeHTML(d.month)}
+
+                            <div class="list-right">
+                                <strong>${formatNumber(d.amount)}</strong>
+                                <span>diamants</span>
                             </div>
+
                         </div>
 
-                        <strong>💎 ${numberFormat(d.amount)}</strong>
+                    `).join("")
+                    :
+                    `<div class="empty-state">
+                        <div class="empty-icon">💎</div>
+                        <strong>Aucune donnée</strong>
+                        <p>Enregistre tes premières performances.</p>
+                    </div>`
+                }
 
-                        <div class="record-actions">
-                            <button class="icon-btn delete" onclick="deleteItem('diamonds','${d.id}')">×</button>
-                        </div>
-                    </div>
-                `).join("")
-                : `<div class="empty"><div><strong>Aucune donnée</strong>Enregistrez vos premiers diamants.</div></div>`
-            }
+            </div>
+
         </div>
+
     `;
 }
 
 function addDiamonds(e){
+
     e.preventDefault();
 
     data.diamonds.push({
-        id:id(),
+        id:uid(),
         month:diamondMonth.value,
         team:diamondTeam.value,
         amount:Number(diamondAmount.value)
     });
 
     save();
-    openModal("diamonds");
+    openManager("diamonds");
 }
 
-/* =========================================================
+
+/* =====================================================
    STATISTIQUES
-========================================================= */
+===================================================== */
 
-function statsView(){
+function statsOverlayView(){
 
-    const months = [...new Set(data.diamonds.map(d=>d.month))].sort();
+    const total=data.diamonds.reduce(
+        (sum,d)=>sum+Number(d.amount||0),0
+    );
 
     return `
-        <div class="panel" style="padding:0;border:0;background:transparent">
-            <div class="chart-wrap">
-                <canvas id="diamondChart"></canvas>
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">Total LVF</span>
+                <div class="stat-icon">💎</div>
             </div>
+
+            <div class="stat-value">
+                ${formatNumber(total)}
+            </div>
+
         </div>
 
-        <div class="section-title">
-            <div>
-                <h2>Évolution mensuelle</h2>
-                <p>Total des diamants générés par LVF.</p>
+
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Par Team</h2>
             </div>
+
+            ${renderTeamStats()}
+
         </div>
 
-        <div class="records">
-            ${
-                months.length
-                ? months.map(month=>{
-                    const total = data.diamonds
-                        .filter(d=>d.month===month)
-                        .reduce((s,d)=>s+d.amount,0);
 
-                    return `
-                        <div class="record">
-                            <div class="record-main">
-                                <div class="record-title">${escapeHTML(month)}</div>
-                                <div class="record-sub">Total LVF</div>
+        <div class="section">
+
+            <div class="section-head">
+                <h2>Par mois</h2>
+            </div>
+
+            ${renderMonthlyStats()}
+
+        </div>
+
+    `;
+}
+
+function renderTeamStats(){
+
+    if(!data.teams.length){
+
+        return `
+            <div class="empty-state">
+                <div class="empty-icon">🏷️</div>
+                <strong>Aucune Team</strong>
+                <p>Crée des Teams pour suivre leurs performances.</p>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="list">
+
+            ${data.teams.map(t=>{
+
+                const amount=data.diamonds
+                    .filter(d=>d.team===t.id)
+                    .reduce((s,d)=>s+Number(d.amount||0),0);
+
+                return `
+                    <div class="list-card">
+
+                        <div class="avatar">🏷️</div>
+
+                        <div class="list-info">
+                            <div class="list-title">
+                                ${escapeHTML(t.name)}
                             </div>
-                            <strong>💎 ${numberFormat(total)}</strong>
+
+                            <div class="list-sub">
+                                ${data.creators.filter(c=>c.team===t.id).length}
+                                créateur(s)
+                            </div>
                         </div>
-                    `;
-                }).join("")
-                : `<div class="empty"><div><strong>Aucune statistique</strong>Les données apparaîtront après vos premiers enregistrements.</div></div>`
-            }
+
+                        <div class="list-right">
+                            <strong>💎 ${formatNumber(amount)}</strong>
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("")}
+
         </div>
     `;
 }
 
-function drawChart(){
+function renderMonthlyStats(){
 
-    const canvas = document.getElementById("diamondChart");
-    if(!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-
-    const rect = canvas.getBoundingClientRect();
-
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = 280 * devicePixelRatio;
-
-    ctx.scale(devicePixelRatio,devicePixelRatio);
-
-    const width = rect.width;
-    const height = 280;
-
-    const months = [...new Set(data.diamonds.map(d=>d.month))].sort();
+    const months=[...new Set(
+        data.diamonds.map(d=>d.month)
+    )].sort();
 
     if(!months.length){
 
-        ctx.fillStyle="#666a7b";
-        ctx.font="14px system-ui";
-        ctx.textAlign="center";
-        ctx.fillText("Aucune donnée à afficher",width/2,height/2);
-        return;
+        return `
+            <div class="empty-state">
+                <div class="empty-icon">📈</div>
+                <strong>Aucune statistique</strong>
+                <p>Les mois apparaîtront après tes premiers enregistrements.</p>
+            </div>
+        `;
     }
 
-    const values = months.map(m =>
-        data.diamonds
-            .filter(d=>d.month===m)
-            .reduce((s,d)=>s+d.amount,0)
-    );
+    return `
+        <div class="list">
 
-    const max = Math.max(...values,1);
+            ${months.map(month=>{
 
-    ctx.strokeStyle="rgba(255,255,255,.08)";
-    ctx.lineWidth=1;
+                const amount=data.diamonds
+                    .filter(d=>d.month===month)
+                    .reduce((s,d)=>s+Number(d.amount||0),0);
 
-    for(let i=0;i<5;i++){
-        const y=30+i*((height-60)/4);
-        ctx.beginPath();
-        ctx.moveTo(25,y);
-        ctx.lineTo(width-25,y);
-        ctx.stroke();
-    }
+                return `
+                    <div class="list-card">
 
-    const step = months.length===1 ? width/2 : (width-70)/(months.length-1);
+                        <div class="avatar">📅</div>
 
-    ctx.beginPath();
+                        <div class="list-info">
+                            <div class="list-title">${escapeHTML(month)}</div>
+                            <div class="list-sub">Total LVF</div>
+                        </div>
 
-    values.forEach((value,i)=>{
+                        <div class="list-right">
+                            <strong>💎 ${formatNumber(amount)}</strong>
+                        </div>
 
-        const x = months.length===1 ? width/2 : 35+i*step;
-        const y = height-35-(value/max)*(height-75);
+                    </div>
+                `;
 
-        if(i===0) ctx.moveTo(x,y);
-        else ctx.lineTo(x,y);
-    });
+            }).join("")}
 
-    ctx.strokeStyle="#9d72ff";
-    ctx.lineWidth=3;
-    ctx.stroke();
-
-    values.forEach((value,i)=>{
-
-        const x = months.length===1 ? width/2 : 35+i*step;
-        const y = height-35-(value/max)*(height-75);
-
-        ctx.beginPath();
-        ctx.arc(x,y,5,0,Math.PI*2);
-        ctx.fillStyle="#bda3ff";
-        ctx.fill();
-
-        ctx.fillStyle="#85899b";
-        ctx.font="10px system-ui";
-        ctx.textAlign="center";
-        ctx.fillText(months[i],x,height-12);
-
-        ctx.fillStyle="#fff";
-        ctx.font="bold 11px system-ui";
-        ctx.fillText(numberFormat(value),x,y-12);
-    });
+        </div>
+    `;
 }
 
-/* =========================================================
+
+/* =====================================================
    CLASSEMENT
-========================================================= */
+===================================================== */
 
 function rankingView(){
 
-    const ranking = data.teams.map(team=>{
+    const ranking=data.teams.map(t=>({
 
-        const diamonds = data.diamonds
-            .filter(d=>d.team===team.id)
-            .reduce((s,d)=>s+d.amount,0);
+        ...t,
 
-        return {
-            ...team,
-            diamonds,
-            creators:data.creators.filter(c=>c.team===team.id).length
-        };
+        diamonds:data.diamonds
+            .filter(d=>d.team===t.id)
+            .reduce((s,d)=>s+Number(d.amount||0),0)
 
-    }).sort((a,b)=>b.diamonds-a.diamonds);
+    })).sort((a,b)=>b.diamonds-a.diamonds);
+
 
     return `
-        <div class="records">
+
+        <div class="screen-head">
+            <div class="screen-kicker">PERFORMANCE</div>
+            <h1 class="screen-title">Classement</h1>
+            <p class="screen-subtitle">
+                Les Teams classées selon leurs diamants.
+            </p>
+        </div>
+
+
+        <div class="list">
 
             ${
                 ranking.length
                 ? ranking.map((t,i)=>`
-                    <div class="record">
 
-                        <div style="
-                            width:40px;
-                            height:40px;
-                            display:grid;
-                            place-items:center;
-                            border-radius:12px;
-                            background:#191c27;
-                            font-weight:900;
-                        ">
-                            #${i+1}
+                    <div class="list-card">
+
+                        <div class="avatar">
+                            ${i===0 ? "🥇" : i===1 ? "🥈" : i===2 ? "🥉" : "#"+(i+1)}
                         </div>
 
-                        <div class="record-main">
-                            <div class="record-title">${escapeHTML(t.name)}</div>
-                            <div class="record-sub">
-                                ${t.creators} créateur(s)
+                        <div class="list-info">
+                            <div class="list-title">
+                                ${escapeHTML(t.name)}
+                            </div>
+
+                            <div class="list-sub">
+                                ${data.creators.filter(c=>c.team===t.id).length}
+                                créateur(s)
                             </div>
                         </div>
 
-                        <strong>💎 ${numberFormat(t.diamonds)}</strong>
+                        <div class="list-right">
+                            <strong>💎 ${formatNumber(t.diamonds)}</strong>
+                        </div>
 
                     </div>
+
                 `).join("")
-                : `<div class="empty"><div><strong>Aucune Team</strong>Le classement sera disponible après la création de vos Teams.</div></div>`
+                :
+                `<div class="empty-state">
+                    <div class="empty-icon">🏆</div>
+                    <strong>Classement vide</strong>
+                    <p>Crée tes Teams et enregistre leurs diamants.</p>
+                </div>`
             }
 
         </div>
+
     `;
 }
 
-/* =========================================================
-   PARAMÈTRES
-========================================================= */
 
-function settingsView(){
+/* =====================================================
+   PLUS
+===================================================== */
+
+function moreView(){
+
     return `
-        <div class="panel" style="margin-bottom:15px">
-            <div class="panel-heading">
-                <h3>Données locales</h3>
-                <span>Stockage</span>
-            </div>
 
-            <p style="color:var(--muted);line-height:1.6;font-size:13px">
-                Les informations saisies dans ce centre de contrôle sont
-                enregistrées localement dans votre navigateur.
-                Aucune donnée fictive n'est ajoutée automatiquement.
+        <div class="screen-head">
+            <div class="screen-kicker">TOKCENTER</div>
+            <h1 class="screen-title">Plus</h1>
+            <p class="screen-subtitle">
+                Tout ce qui complète la gestion de ton agence.
             </p>
         </div>
 
-        <div class="modal-actions">
-            <button class="secondary" onclick="exportData()">Exporter les données</button>
-            <button class="secondary" onclick="importData()">Importer des données</button>
-            <button class="secondary" onclick="resetData()">Réinitialiser toutes les données</button>
+
+        <div class="action-grid">
+
+            <button class="action" onclick="openManager('agencies')">
+                <div class="action-icon">🏢</div>
+                <h3>Agences</h3>
+                <p>Base des agences</p>
+            </button>
+
+            <button class="action" onclick="openManager('ranking')">
+                <div class="action-icon">🏆</div>
+                <h3>Classement</h3>
+                <p>Classement des Teams</p>
+            </button>
+
+            <button class="action" onclick="exportData()">
+                <div class="action-icon">📤</div>
+                <h3>Exporter</h3>
+                <p>Sauvegarder les données</p>
+            </button>
+
+            <button class="action" onclick="resetData()">
+                <div class="action-icon">🗑️</div>
+                <h3>Réinitialiser</h3>
+                <p>Effacer les données</p>
+            </button>
+
         </div>
 
-        <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+
+        <div class="section">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">TC</div>
+
+                <strong>TokCenter</strong>
+
+                <p>
+                    Centre de gestion d'agence TikTok.
+                    Toutes les données sont conservées
+                    localement sur cet appareil.
+                </p>
+
+            </div>
+
+        </div>
+
     `;
 }
 
-/* =========================================================
-   UTILITAIRES
-========================================================= */
 
-function teamName(idValue){
-    return data.teams.find(t=>t.id===idValue)?.name || "Sans Team";
+/* =====================================================
+   MATCH LIST
+===================================================== */
+
+function renderMatches(targetId){
+
+    const target=document.getElementById(targetId);
+
+    if(!target) return;
+
+    if(!data.matches.length){
+
+        target.innerHTML=`
+            <div class="empty-state">
+                <div class="empty-icon">⚔️</div>
+                <strong>Aucun match</strong>
+                <p>
+                    Ton historique de matchs apparaîtra ici.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    target.innerHTML=`
+
+        <div class="list">
+
+            ${[...data.matches].reverse().map(m=>`
+
+                <div class="list-card">
+
+                    <div class="avatar">⚔️</div>
+
+                    <div class="list-info">
+
+                        <div class="list-title">
+                            ${escapeHTML(m.opponent)}
+                        </div>
+
+                        <div class="list-sub">
+                            ${m.date ? formatDate(m.date) : ""}
+                            ${m.time ? " · "+m.time : ""}
+                            ${m.theme ? " · "+escapeHTML(m.theme) : ""}
+                        </div>
+
+                    </div>
+
+                    <div class="list-right">
+
+                        <strong>
+                            ${escapeHTML(m.result || "À venir")}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(m.score || "")}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+    `;
 }
 
-function managerName(idValue){
-    return data.managers.find(m=>m.id===idValue)?.name || "Sans manager";
-}
 
-function agencyName(idValue){
-    return data.agencies.find(a=>a.id===idValue)?.name || "Sans agence";
-}
-
-function formatDate(value){
-
-    if(!value) return "";
-
-    const d=new Date(value+"T00:00:00");
-
-    return d.toLocaleDateString("fr-FR",{
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric"
-    });
-}
-
-function numberFormat(value){
-    return Number(value || 0).toLocaleString("fr-FR");
-}
-
-/* =========================================================
-   SUPPRESSION
-========================================================= */
+/* =====================================================
+   DELETE
+===================================================== */
 
 function deleteItem(collection,itemId){
 
-    if(!confirm("Supprimer définitivement cet élément ?")) return;
+    if(!confirm("Supprimer définitivement cet élément ?")){
+        return;
+    }
 
-    data[collection] = data[collection].filter(x=>x.id!==itemId);
+    data[collection]=data[collection]
+        .filter(x=>x.id!==itemId);
 
     save();
 
-    const modalMap = {
+    const map={
         creators:"creators",
-        managers:"managers",
         teams:"teams",
+        managers:"managers",
         agencies:"agencies",
         matches:"matches",
         applications:"applications",
         diamonds:"diamonds"
     };
 
-    if(modalMap[collection]){
-        openModal(modalMap[collection]);
+    if(map[collection]){
+        openManager(map[collection]);
     }
 }
 
-/* =========================================================
+
+/* =====================================================
    EXPORT
-========================================================= */
+===================================================== */
 
 function exportData(){
 
-    const blob = new Blob(
+    const blob=new Blob(
         [JSON.stringify(data,null,2)],
         {type:"application/json"}
     );
@@ -2142,73 +2994,27 @@ function exportData(){
     const url=URL.createObjectURL(blob);
 
     const a=document.createElement("a");
+
     a.href=url;
-    a.download="LVF-donnees.json";
+    a.download="TokCenter-donnees.json";
+
     a.click();
 
     URL.revokeObjectURL(url);
 }
 
-/* =========================================================
-   IMPORT
-========================================================= */
 
-function importData(){
-    document.getElementById("importFile").click();
-}
-
-function handleImport(event){
-
-    const file=event.target.files[0];
-
-    if(!file) return;
-
-    const reader=new FileReader();
-
-    reader.onload=function(){
-
-        try{
-
-            const imported=JSON.parse(reader.result);
-
-            data={
-                creators:imported.creators || [],
-                managers:imported.managers || [],
-                teams:imported.teams || [],
-                agencies:imported.agencies || [],
-                matches:imported.matches || [],
-                applications:imported.applications || [],
-                diamonds:imported.diamonds || []
-            };
-
-            save();
-
-            alert("Données importées avec succès.");
-
-            openModal("settings");
-
-        }catch(error){
-
-            alert("Le fichier sélectionné n'est pas un fichier LVF valide.");
-
-        }
-
-    };
-
-    reader.readAsText(file);
-}
-
-/* =========================================================
+/* =====================================================
    RESET
-========================================================= */
+===================================================== */
 
 function resetData(){
 
     if(!confirm(
-        "ATTENTION\n\n" +
-        "Cette action supprimera toutes les données LVF enregistrées " +
-        "sur ce navigateur.\n\nContinuer ?"
-    )) return;
+        "Attention : toutes les données TokCenter de cet appareil seront supprimées.\n\nContinuer ?"
+    )){
+        return;
+    }
 
     data={
         creators:[],
@@ -2221,142 +3027,193 @@ function resetData(){
     };
 
     save();
-
-    closeModal();
+    closeManager();
 }
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+
+/* =====================================================
+   REFRESH
+===================================================== */
 
 function refresh(){
 
-    document.getElementById("kpiCreators").textContent =
-        numberFormat(data.creators.length);
+    const totalDiamonds=data.diamonds.reduce(
+        (s,d)=>s+Number(d.amount||0),0
+    );
 
-    document.getElementById("kpiTeams").textContent =
-        numberFormat(data.teams.length);
+    document.getElementById("homeCreators").textContent=
+        formatNumber(data.creators.length);
 
-    document.getElementById("kpiDiamonds").textContent =
-        numberFormat(
-            data.diamonds.reduce((s,d)=>s+Number(d.amount||0),0)
-        );
+    document.getElementById("homeTeams").textContent=
+        formatNumber(data.teams.length);
 
-    document.getElementById("kpiMatches").textContent =
-        numberFormat(data.matches.length);
+    document.getElementById("homeDiamonds").textContent=
+        formatNumber(totalDiamonds);
 
-    document.getElementById("countCreators").textContent =
-        data.creators.length;
+    document.getElementById("homeMatches").textContent=
+        formatNumber(data.matches.length);
 
-    document.getElementById("countManagers").textContent =
-        data.managers.length;
 
-    document.getElementById("countTeams").textContent =
-        data.teams.length;
+    document.getElementById("teamCreatorCount").textContent=
+        `${data.creators.length} membre${data.creators.length>1?"s":""}`;
 
-    document.getElementById("countAgencies").textContent =
-        data.agencies.length;
+    document.getElementById("teamCount").textContent=
+        `${data.teams.length} équipe${data.teams.length>1?"s":""}`;
 
-    document.getElementById("countMatches").textContent =
-        data.matches.length;
+    document.getElementById("managerCount").textContent=
+        `${data.managers.length} manager${data.managers.length>1?"s":""}`;
 
-    document.getElementById("countApplications").textContent =
-        data.applications.length;
+    document.getElementById("applicationCount").textContent=
+        `${data.applications.length} candidature${data.applications.length>1?"s":""}`;
 
-    renderOverview();
+
+    renderHomePerformance();
+    renderTeamsHome();
+    renderMatches("matchList");
+    renderStatsHome();
 }
 
-function renderOverview(){
 
-    const teamBox=document.getElementById("teamOverview");
+function renderHomePerformance(){
 
-    if(data.teams.length){
+    const box=document.getElementById("homePerformance");
 
-        teamBox.className="records";
+    if(!data.diamonds.length){
 
-        teamBox.innerHTML=data.teams.map(t=>{
+        box.className="empty-state";
 
-            const creators=data.creators.filter(c=>c.team===t.id).length;
+        box.innerHTML=`
+            <div class="empty-icon">📊</div>
+            <strong>Aucune donnée pour le moment</strong>
+            <p>
+                Les performances de LVF apparaîtront ici
+                lorsque tu enregistreras tes premiers diamants.
+            </p>
+        `;
 
-            const diamonds=data.diamonds
-                .filter(d=>d.team===t.id)
-                .reduce((s,d)=>s+d.amount,0);
+        return;
+    }
 
-            return `
-                <div class="record">
-                    <div class="record-main">
-                        <div class="record-title">${escapeHTML(t.name)}</div>
-                        <div class="record-sub">
-                            ${creators} créateur(s)
+    const total=data.diamonds.reduce(
+        (s,d)=>s+Number(d.amount||0),0
+    );
+
+    box.className="list-card";
+
+    box.innerHTML=`
+        <div class="avatar">💎</div>
+
+        <div class="list-info">
+            <div class="list-title">
+                Performance LVF
+            </div>
+
+            <div class="list-sub">
+                Total enregistré
+            </div>
+        </div>
+
+        <div class="list-right">
+            <strong>${formatNumber(total)}</strong>
+            <span>diamants</span>
+        </div>
+    `;
+}
+
+
+function renderTeamsHome(){
+
+    const box=document.getElementById("teamList");
+
+    if(!box) return;
+
+    if(!data.teams.length){
+
+        box.innerHTML=`
+            <div class="empty-state">
+                <div class="empty-icon">🏷️</div>
+                <strong>Aucune Team</strong>
+                <p>
+                    Crée ta première Team pour organiser ton agence.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML=`
+
+        <div class="list">
+
+            ${data.teams.map(t=>`
+
+                <div class="list-card">
+
+                    <div class="avatar">🏷️</div>
+
+                    <div class="list-info">
+                        <div class="list-title">
+                            ${escapeHTML(t.name)}
+                        </div>
+
+                        <div class="list-sub">
+                            ${data.creators.filter(c=>c.team===t.id).length}
+                            créateur(s)
                         </div>
                     </div>
-                    <strong>💎 ${numberFormat(diamonds)}</strong>
+
+                    <div class="list-right">
+                        <strong>
+                            💎 ${formatNumber(
+                                data.diamonds
+                                    .filter(d=>d.team===t.id)
+                                    .reduce((s,d)=>s+Number(d.amount||0),0)
+                            )}
+                        </strong>
+                    </div>
+
                 </div>
-            `;
 
-        }).join("");
+            `).join("")}
 
-    }else{
+        </div>
+    `;
+}
 
-        teamBox.className="empty";
 
-        teamBox.innerHTML=`
-            <div>
-                <strong>Aucune Team enregistrée</strong>
-                Commencez par créer votre première Team.
-            </div>
-        `;
+function renderStatsHome(){
+
+    const box=document.getElementById("statsTeams");
+
+    if(!box) return;
+
+    box.innerHTML=renderTeamStats();
+
+    const total=data.diamonds.reduce(
+        (s,d)=>s+Number(d.amount||0),0
+    );
+
+    const totalElement=document.getElementById("statsTotal");
+
+    if(totalElement){
+        totalElement.textContent=formatNumber(total);
     }
 
-    const rankingBox=document.getElementById("rankingOverview");
+    const monthly=document.getElementById("monthlyStats");
 
-    const ranking=data.teams.map(t=>({
-        ...t,
-        diamonds:data.diamonds
-            .filter(d=>d.team===t.id)
-            .reduce((s,d)=>s+d.amount,0)
-    })).sort((a,b)=>b.diamonds-a.diamonds).slice(0,5);
+    if(monthly){
 
-    if(ranking.length){
+        monthly.innerHTML=
+            renderMonthlyStats();
 
-        rankingBox.className="records";
-
-        rankingBox.innerHTML=ranking.map((t,i)=>`
-            <div class="record">
-                <div style="
-                    width:35px;
-                    height:35px;
-                    display:grid;
-                    place-items:center;
-                    border-radius:10px;
-                    background:#191c27;
-                    font-weight:800;
-                ">${i+1}</div>
-
-                <div class="record-main">
-                    <div class="record-title">${escapeHTML(t.name)}</div>
-                </div>
-
-                <strong>💎 ${numberFormat(t.diamonds)}</strong>
-            </div>
-        `).join("");
-
-    }else{
-
-        rankingBox.className="empty";
-
-        rankingBox.innerHTML=`
-            <div>
-                <strong>Aucune donnée</strong>
-                Le classement apparaîtra ici.
-            </div>
-        `;
     }
 }
 
-/* =========================================================
-   INITIALISATION
-========================================================= */
+
+/* =====================================================
+   INIT
+===================================================== */
 
 refresh();
 
