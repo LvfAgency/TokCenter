@@ -1,2401 +1,2698 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<title>TokCenter — LVF Agency</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TokCenter — Centre de contrôle</title>
 
-<style>
-*{box-sizing:border-box}
-:root{
-  --bg:#f4f6fa;
-  --card:#fff;
-  --text:#172033;
-  --muted:#7b8497;
-  --line:#e7eaf0;
-  --primary:#6c5ce7;
-  --primary-dark:#5748d5;
-  --danger:#ef4444;
-  --success:#16a34a;
-  --warning:#f59e0b;
-  --sidebar:76px;
-  --radius:20px;
-}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-body{min-height:100vh}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
+  <style>
+    :root {
+      --bg: #080d19;
+      --panel: #101728;
+      --panel2: #131c2f;
+      --line: #202b42;
+      --text: #f4f6fb;
+      --muted: #8d99b3;
+      --purple: #7657ff;
+      --purple2: #9a7cff;
+      --orange: #ff8b2b;
+      --green: #36d27a;
+      --red: #ff5c68;
+      --yellow: #ffd45c;
+    }
 
-/* SIDEBAR */
-.sidebar{
-  position:fixed;
-  left:0;top:0;bottom:0;
-  width:var(--sidebar);
-  background:#111827;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:18px 0;
-  z-index:50;
-  box-shadow:4px 0 20px rgba(0,0,0,.08)
-}
-.logo{
-  width:44px;height:44px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#7c6cf0,#5748d5);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  font-size:15px;
-  margin-bottom:26px;
-}
-.nav{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-  width:100%
-}
-.nav-btn{
-  width:48px;height:48px;
-  border:0;
-  background:transparent;
-  color:#8e98aa;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  transition:.18s
-}
-.nav-btn:hover{background:#1d2637;color:#fff}
-.nav-btn.active{
-  background:#6c5ce7;
-  color:#fff;
-  box-shadow:0 8px 20px rgba(108,92,231,.28)
-}
-.nav-btn svg{width:22px;height:22px;stroke:currentColor}
-.nav-btn::after{
-  content:attr(data-label);
-  position:absolute;
-  left:60px;
-  white-space:nowrap;
-  background:#111827;
-  color:#fff;
-  padding:7px 10px;
-  border-radius:8px;
-  font-size:12px;
-  opacity:0;
-  pointer-events:none;
-  transform:translateX(-4px);
-  transition:.15s;
-  box-shadow:0 5px 15px rgba(0,0,0,.15)
-}
-.nav-btn:hover::after{opacity:1;transform:translateX(0)}
+    * {
+      box-sizing: border-box;
+    }
 
-/* APP */
-.app{
-  margin-left:var(--sidebar);
-  min-height:100vh
-}
-.topbar{
-  height:82px;
-  padding:0 34px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(244,246,250,.94);
-  position:sticky;
-  top:0;
-  z-index:30;
-  backdrop-filter:blur(12px)
-}
-.top-title h1{margin:0;font-size:25px}
-.top-title p{margin:5px 0 0;color:var(--muted);font-size:13px}
-.page{
-  padding:12px 34px 40px;
-  max-width:1500px;
-  margin:auto
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
 
-/* COMMON */
-.section{display:none}
-.section.active{display:block}
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:0 8px 28px rgba(17,24,39,.035)
-}
-.toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:22px
-}
-.toolbar h2{margin:0;font-size:21px}
-.toolbar p{margin:4px 0 0;color:var(--muted);font-size:13px}
-.btn{
-  border:0;
-  border-radius:12px;
-  padding:11px 16px;
-  font-weight:700;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:.18s
-}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-dark)}
-.btn-secondary{background:#eef0f5;color:#30394c}
-.btn-danger{background:#fee2e2;color:#b91c1c}
-.btn svg{width:17px;height:17px}
-.empty{
-  text-align:center;
-  padding:60px 20px;
-  color:var(--muted)
-}
-.empty-icon{
-  width:58px;height:58px;
-  border-radius:18px;
-  background:#f0efff;
-  color:var(--primary);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 14px
-}
-.empty-icon svg{width:28px;height:28px}
-.grid{
-  display:grid;
-  gap:18px
-}
-.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    button,
+    input,
+    select {
+      font: inherit;
+    }
 
-/* DASHBOARD */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:22px
-}
-.stat{
-  padding:20px
-}
-.stat-label{font-size:13px;color:var(--muted)}
-.stat-value{font-size:29px;font-weight:800;margin-top:7px}
-.stat-icon{
-  width:40px;height:40px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f0efff;
-  color:var(--primary);
-  margin-bottom:13px
-}
-.stat-icon svg{width:20px;height:20px}
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:18px
-}
-.panel{padding:22px}
-.panel-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px
-}
-.panel-head h3{margin:0;font-size:17px}
-.panel-head span{font-size:12px;color:var(--muted)}
+    button {
+      cursor: pointer;
+    }
 
-/* LIST CARDS */
-.item-list{display:flex;flex-direction:column;gap:10px}
-.list-item{
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px
-}
-.item-left{display:flex;align-items:center;gap:12px;min-width:0}
-.avatar{
-  width:45px;height:45px;
-  border-radius:13px;
-  object-fit:cover;
-  background:#edeef3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#6b7280;
-  font-weight:800;
-  flex:none
-}
-.item-name{font-weight:750}
-.item-sub{font-size:12px;color:var(--muted);margin-top:3px}
-.item-actions{display:flex;gap:7px}
-.icon-btn{
-  width:36px;height:36px;
-  border:0;
-  border-radius:10px;
-  background:#f1f3f7;
-  color:#4b5563;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-.icon-btn:hover{background:#e6e8ee}
-.icon-btn.danger{color:#dc2626;background:#fef0f0}
-.icon-btn svg{width:17px;height:17px}
+    /* =========================
+       STRUCTURE
+    ========================= */
 
-/* MATCH */
-.match-card{
-  padding:20px;
-  margin-bottom:13px
-}
-.match-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:18px
-}
-.match-date{
-  font-size:13px;
-  color:var(--muted);
-  font-weight:650
-}
-.badges{display:flex;gap:7px;flex-wrap:wrap}
-.badge{
-  padding:6px 9px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:750;
-  background:#eef0f5;
-  color:#525b6d
-}
-.badge-purple{background:#eeeaff;color:#5b4bd4}
-.badge-green{background:#eaf8ee;color:#16803b}
-.badge-orange{background:#fff3dc;color:#a36300}
-.match-vs{
-  display:grid;
-  grid-template-columns:1fr 70px 1fr;
-  align-items:center;
-  gap:14px
-}
-.match-side{
-  padding:17px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  min-width:0
-}
-.match-side.right{text-align:right}
-.match-side-title{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--muted);
-  font-weight:800;
-  margin-bottom:7px
-}
-.match-person{font-weight:800;font-size:17px}
-.match-pseudo{color:var(--muted);font-size:12px;margin-top:4px}
-.match-agency{font-size:12px;color:var(--muted);margin-top:7px}
-.vs{
-  width:52px;height:52px;
-  border-radius:50%;
-  background:#f0efff;
-  color:var(--primary);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  margin:auto
-}
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
 
-/* FORMS */
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px
-}
-.field{display:flex;flex-direction:column;gap:7px}
-.field.full{grid-column:1/-1}
-.field label{
-  font-size:13px;
-  font-weight:750;
-  color:#333c4e
-}
-.input,.select,.textarea{
-  width:100%;
-  border:1px solid #dfe3ea;
-  background:#fff;
-  border-radius:12px;
-  padding:12px 13px;
-  color:var(--text);
-  outline:none;
-  transition:.15s
-}
-.input:focus,.select:focus,.textarea:focus{
-  border-color:#9b91ee;
-  box-shadow:0 0 0 3px rgba(108,92,231,.09)
-}
-.textarea{resize:vertical;min-height:90px}
-.help{font-size:11px;color:var(--muted)}
-.form-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:9px;
-  margin-top:20px
-}
+    .sidebar {
+      width: 245px;
+      background: #080d18;
+      border-right: 1px solid var(--line);
+      padding: 22px 15px;
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 10;
+    }
 
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(10,15,25,.52);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:100;
-  backdrop-filter:blur(4px)
-}
-.modal.open{display:flex}
-.modal-box{
-  width:min(900px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:24px;
-  box-shadow:0 25px 80px rgba(0,0,0,.25)
-}
-.modal-head{
-  padding:22px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  background:#fff;
-  z-index:2
-}
-.modal-head h2{margin:0;font-size:21px}
-.close{
-  width:38px;height:38px;
-  border:0;
-  border-radius:11px;
-  background:#f0f2f5;
-  color:#4b5563;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-.close svg{width:18px;height:18px}
-.modal-body{padding:24px}
-.modal-footer{
-  padding:18px 24px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:flex-end;
-  gap:9px
-}
+    .main {
+      margin-left: 245px;
+      width: calc(100% - 245px);
+      padding: 30px;
+      max-width: 1700px;
+    }
 
-/* MATCH FORM */
-.match-form-section{
-  border:1px solid var(--line);
-  border-radius:19px;
-  padding:20px;
-  margin-bottom:17px;
-  background:#fff
-}
-.match-form-section.ours{
-  border-color:#ddd9ff;
-  background:linear-gradient(180deg,#faf9ff,#fff)
-}
-.match-form-section.opponent{
-  border-color:#e8e8ec;
-  background:#fcfcfd
-}
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin-bottom:17px
-}
-.section-title-icon{
-  width:39px;height:39px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#eeeaff;
-  color:#5d4ed8;
-  flex:none
-}
-.opponent .section-title-icon{
-  background:#f0f2f5;
-  color:#4b5563
-}
-.section-title-icon svg{width:19px;height:19px}
-.section-title strong{font-size:16px}
-.section-title small{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  margin-top:2px
-}
-.agency-fixed{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 14px;
-  border-radius:12px;
-  background:#f0efff;
-  border:1px solid #ded9ff;
-  margin-bottom:16px
-}
-.agency-fixed strong{color:#4f42c7}
-.agency-fixed span{font-size:12px;color:#6b63a9}
-.agency-picker{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:9px
-}
-.agency-picker .btn{white-space:nowrap}
-.selected-person{
-  display:none;
-  margin-top:9px;
-  padding:10px 12px;
-  background:#f7f7fa;
-  border-radius:10px;
-  color:#5f6675;
-  font-size:12px
-}
-.selected-person.show{display:block}
-.new-person-box{
-  display:none;
-  margin-top:12px;
-  padding:15px;
-  border-radius:13px;
-  background:#f8f8fb;
-  border:1px dashed #d9dce5
-}
-.new-person-box.show{display:block}
-.new-person-title{
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:12px
-}
-.radio-row{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap
-}
-.radio-option{position:relative}
-.radio-option input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none
-}
-.radio-option label{
-  display:block;
-  padding:11px 15px;
-  border:1px solid #dfe3ea;
-  border-radius:11px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:700;
-  background:#fff;
-  transition:.15s
-}
-.radio-option input:checked+label{
-  border-color:#8d83e8;
-  background:#f0efff;
-  color:#5648cb
-}
+    /* =========================
+       LOGO
+    ========================= */
 
-/* PHOTO */
-.photo-picker{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  border:1px dashed #cfd4df;
-  padding:14px;
-  border-radius:14px;
-  cursor:pointer;
-  background:#fafbfc
-}
-.photo-preview{
-  width:58px;height:58px;
-  border-radius:14px;
-  object-fit:cover;
-  background:#eceef3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#7b8497;
-  flex:none
-}
-.photo-info strong{display:block;font-size:13px}
-.photo-info span{font-size:11px;color:var(--muted)}
-input[type=file]{display:none}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 5px 9px 28px;
+    }
 
-/* CALENDAR */
-.calendar-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px
-}
-.calendar-title{font-weight:800;font-size:17px}
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px
-}
-.day-name{
-  text-align:center;
-  font-size:11px;
-  color:var(--muted);
-  font-weight:800;
-  padding:8px 0
-}
-.day{
-  min-height:105px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:8px
-}
-.day-number{font-size:12px;font-weight:800}
-.day.today{border-color:#9c92ec;background:#faf9ff}
-.event{
-  margin-top:7px;
-  padding:6px 7px;
-  border-radius:8px;
-  background:#eeeaff;
-  color:#5547c8;
-  font-size:10px;
-  font-weight:750;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis
-}
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(
+        135deg,
+        var(--purple),
+        #4d32d8
+      );
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
 
-/* RANKING */
-.rank-row{
-  display:grid;
-  grid-template-columns:55px 1fr 100px 100px;
-  align-items:center;
-  gap:12px;
-  padding:15px 0;
-  border-bottom:1px solid var(--line)
-}
-.rank-row:last-child{border-bottom:0}
-.rank-num{font-size:20px;font-weight:900;text-align:center}
-.rank-score{text-align:right;font-weight:800}
-.rank-count{text-align:right;color:var(--muted);font-size:12px}
+    .logo strong {
+      font-size: 19px;
+    }
 
-/* AGENCIES */
-.agency-card{padding:20px}
-.agency-card h3{margin:0 0 5px}
-.agency-card .count{font-size:12px;color:var(--muted)}
-.contact-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:15px
-}
-.contact{
-  padding:7px 9px;
-  background:#f2f3f6;
-  border-radius:9px;
-  font-size:11px
-}
-.contact b{font-weight:800}
+    .logo small {
+      display: block;
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:22px;
-  left:50%;
-  transform:translate(-50%,20px);
-  background:#111827;
-  color:#fff;
-  padding:12px 17px;
-  border-radius:12px;
-  font-size:13px;
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-  z-index:200;
-  box-shadow:0 10px 30px rgba(0,0,0,.2)
-}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.toast.success{background:#166534}
-.toast.error{background:#991b1b}
+    /* =========================
+       NAVIGATION
+    ========================= */
 
-/* RESPONSIVE */
-@media(max-width:950px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .dashboard-grid{grid-template-columns:1fr}
-  .grid-3{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:700px){
-  :root{--sidebar:62px}
-  .sidebar{width:62px;padding-top:12px}
-  .logo{width:38px;height:38px;font-size:12px;margin-bottom:18px}
-  .nav-btn{width:44px;height:44px}
-  .nav-btn::after{display:none}
-  .app{margin-left:62px}
-  .topbar{height:70px;padding:0 18px}
-  .top-title h1{font-size:20px}
-  .page{padding:10px 16px 30px}
-  .stats{gap:10px}
-  .stat{padding:15px}
-  .stat-value{font-size:23px}
-  .grid-2,.grid-3,.form-grid{grid-template-columns:1fr}
-  .toolbar{align-items:flex-start}
-  .toolbar .btn{padding:10px 12px}
-  .match-vs{grid-template-columns:1fr;gap:7px}
-  .match-side.right{text-align:left}
-  .vs{width:42px;height:42px}
-  .modal{padding:8px}
-  .modal-box{border-radius:19px;max-height:96vh}
-  .modal-body{padding:17px}
-  .modal-head{padding:17px}
-  .agency-picker{grid-template-columns:1fr}
-  .calendar-grid{gap:3px}
-  .day{min-height:78px;padding:5px}
-  .event{font-size:9px;padding:4px}
-  .rank-row{grid-template-columns:40px 1fr 70px}
-  .rank-count{display:none}
-}
+    .nav-title {
+      font-size: 10px;
+      color: #59657d;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin: 5px 12px 9px;
+    }
 
-/* LOADING */
-.saving{
-  opacity:.65;
-  pointer-events:none
-}
-</style>
+    .nav button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #aab4c9;
+      text-align: left;
+      padding: 12px 13px;
+      border-radius: 10px;
+      margin: 2px 0;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      background: #1b1734;
+      color: white;
+    }
+
+    .nav button.active {
+      box-shadow: inset 3px 0 0 var(--purple);
+    }
+
+    /* =========================
+       AGENCY CARD
+    ========================= */
+
+    .agency-card {
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      bottom: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .agency-card small {
+      color: var(--muted);
+    }
+
+    .agency-name {
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       TOP
+    ========================= */
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 9px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: white;
+      border-radius: 9px;
+      padding: 10px 14px;
+    }
+
+    .btn.primary {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .kpi-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kpi {
+      font-size: 27px;
+      font-weight: 850;
+      margin: 8px 0;
+    }
+
+    .trend {
+      font-size: 12px;
+    }
+
+    .up {
+      color: var(--green);
+    }
+
+    .down {
+      color: var(--red);
+    }
+
+    /* =========================
+       GRIDS
+    ========================= */
+
+    .two {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    /* =========================
+       TITLES
+    ========================= */
+
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 800;
+    }
+
+    .card-title span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* =========================
+       CHART
+    ========================= */
+
+    .chart {
+      height: 230px;
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      padding: 10px 5px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bar-wrap {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 52px;
+      background: linear-gradient(
+        180deg,
+        var(--purple2),
+        var(--purple)
+      );
+      border-radius: 7px 7px 0 0;
+      min-height: 8px;
+    }
+
+    .bar-label {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       TEAMS
+    ========================= */
+
+    .team {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #202b42;
+      font-weight: 800;
+    }
+
+    .team-name {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .team-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .progress {
+      height: 6px;
+      background: #20283a;
+      border-radius: 99px;
+      margin-top: 7px;
+      overflow: hidden;
+    }
+
+    .progress i {
+      display: block;
+      height: 100%;
+      background: var(--orange);
+      border-radius: 99px;
+    }
+
+    .amount {
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* =========================
+       LISTES
+    ========================= */
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .row {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #0e1525;
+    }
+
+    .row strong {
+      font-size: 13px;
+    }
+
+    .row small {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap {
+      overflow: auto;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
+
+    .table th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* =========================
+       BADGES
+    ========================= */
+
+    .badge {
+      padding: 4px 8px;
+      border-radius: 99px;
+      background: #172238;
+      color: #cdd6e8;
+    }
+
+    .badge.green {
+      color: #75e7a6;
+      background: #10271c;
+    }
+
+    .badge.red {
+      color: #ff8d98;
+      background: #2c1318;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #0009;
+      display: grid;
+      place-items: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .modal-box {
+      width: min(520px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+    }
+
+    .field {
+      margin: 13px 0;
+    }
+
+    .field label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      background: #0a1120;
+      color: white;
+      border: 1px solid var(--line);
+      padding: 11px;
+      border-radius: 9px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: #161f33;
+      border: 1px solid var(--line);
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+      z-index: 100;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .two,
+      .three {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        width: 70px;
+        padding: 15px 9px;
+      }
+
+      .logo {
+        padding: 0 4px 25px;
+      }
+
+      .logo div:not(.logo-mark),
+      .nav-title,
+      .nav button span,
+      .agency-card {
+        display: none;
+      }
+
+      .nav button {
+        text-align: center;
+        padding: 13px 5px;
+        font-size: 18px;
+      }
+
+      .main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 18px 14px;
+      }
+
+      .top {
+        align-items: flex-start;
+      }
+
+      .top .actions .btn:not(.primary) {
+        display: none;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      .kpi {
+        font-size: 21px;
+      }
+
+      .three {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ICONS -->
-<svg width="0" height="0" style="position:absolute">
-<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></symbol>
-<symbol id="i-match" viewBox="0 0 24 24"><path d="M8 3v4M16 3v4M4 9h16"/><rect x="4" y="5" width="16" height="16" rx="2"/><path d="m9 15 2 2 4-4"/></symbol>
-<symbol id="i-team" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></symbol>
-<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
-<symbol id="i-agency" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-5h6v5"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></symbol>
-<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
-<symbol id="i-rank" viewBox="0 0 24 24"><path d="M8 21V10h8v11"/><path d="M4 21h16"/><path d="M5 10V5h4v5M15 10V3h4v7"/></symbol>
-<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-<symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z"/><path d="m13.5 7.5 3 3"/></symbol>
-<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
-<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-<symbol id="i-user-plus" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M19 8v6M16 11h6"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></symbol>
-<symbol id="i-data" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
-</svg>
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="logo">TC</div>
-  <nav class="nav">
-    <button class="nav-btn active" data-page="home" data-label="Accueil" aria-label="Accueil">
-      <svg><use href="#i-home"/></svg>
-    </button>
-    <button class="nav-btn" data-page="matches" data-label="Match" aria-label="Match">
-      <svg><use href="#i-match"/></svg>
-    </button>
-    <button class="nav-btn" data-page="teams" data-label="Team" aria-label="Team">
-      <svg><use href="#i-team"/></svg>
-    </button>
-    <button class="nav-btn" data-page="creators" data-label="Créateur" aria-label="Créateur">
-      <svg><use href="#i-user"/></svg>
-    </button>
-    <button class="nav-btn" data-page="agencies" data-label="Agence" aria-label="Agence">
-      <svg><use href="#i-agency"/></svg>
-    </button>
-    <button class="nav-btn" data-page="calendar" data-label="Calendrier" aria-label="Calendrier">
-      <svg><use href="#i-calendar"/></svg>
-    </button>
-    <button class="nav-btn" data-page="ranking" data-label="Classement" aria-label="Classement">
-      <svg><use href="#i-rank"/></svg>
-    </button>
-  </nav>
-</aside>
-
 <div class="app">
-  <header class="topbar">
-    <div class="top-title">
-      <h1 id="pageTitle">Accueil</h1>
-      <p>TokCenter · LVF Agency</p>
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-mark">TC</div>
+
+      <div>
+        <strong>TokCenter</strong>
+        <small>Centre de contrôle</small>
+      </div>
     </div>
-  </header>
 
-  <main class="page">
+    <div class="nav-title">
+      Navigation
+    </div>
 
-    <!-- HOME -->
-    <section id="home" class="section active">
-      <div class="stats">
-        <div class="card stat">
-          <div class="stat-icon"><svg><use href="#i-match"/></svg></div>
-          <div class="stat-label">Matchs</div>
-          <div class="stat-value" id="statMatches">0</div>
-        </div>
-        <div class="card stat">
-          <div class="stat-icon"><svg><use href="#i-team"/></svg></div>
-          <div class="stat-label">Teams</div>
-          <div class="stat-value" id="statTeams">0</div>
-        </div>
-        <div class="card stat">
-          <div class="stat-icon"><svg><use href="#i-user"/></svg></div>
-          <div class="stat-label">Créateurs</div>
-          <div class="stat-value" id="statCreators">0</div>
-        </div>
-        <div class="card stat">
-          <div class="stat-icon"><svg><use href="#i-agency"/></svg></div>
-          <div class="stat-label">Agences</div>
-          <div class="stat-value" id="statAgencies">0</div>
-        </div>
+    <nav class="nav">
+
+      <button class="active" data-page="accueil">
+        ⌂ <span>Accueil</span>
+      </button>
+
+      <button data-page="dashboard">
+        ▦ <span>Tableau de bord</span>
+      </button>
+
+      <button data-page="createurs">
+        ♙ <span>Créateurs</span>
+      </button>
+
+      <button data-page="managers">
+        ♙ <span>Managers</span>
+      </button>
+
+      <button data-page="teams">
+        ♟ <span>Teams</span>
+      </button>
+
+      <button data-page="stats">
+        ▥ <span>Statistiques</span>
+      </button>
+
+      <button data-page="matchs">
+        ⚔ <span>Matchs</span>
+      </button>
+
+      <button data-page="candidatures">
+        ✉ <span>Candidatures</span>
+      </button>
+
+      <button data-page="taches">
+        ☑ <span>Tâches</span>
+      </button>
+
+      <button data-page="notes">
+        ▤ <span>Notes</span>
+      </button>
+
+      <button data-page="parametres">
+        ⚙ <span>Paramètres</span>
+      </button>
+
+    </nav>
+
+    <div class="agency-card">
+
+      <small>AGENCE ACTIVE</small>
+
+      <div class="agency-name">
+        🦊 LVF Agency
       </div>
 
-      <div class="dashboard-grid">
-        <div class="card panel">
-          <div class="panel-head">
-            <h3>Prochains matchs</h3>
-            <span id="homeNextCount"></span>
+      <small>
+        La Vraie Famille
+      </small>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="main">
+
+
+    <!-- =========================
+         ACCUEIL
+    ========================== -->
+
+    <section id="page-accueil" class="page">
+
+      <div class="top">
+
+        <div>
+          <h1>Bonjour Bastou</h1>
+
+          <div class="subtitle">
+            Centre de contrôle · LVF Agency
           </div>
-          <div id="homeMatches"></div>
         </div>
 
-        <div class="card panel">
-          <div class="panel-head">
-            <h3>Créateurs</h3>
-            <span>LVF Agency</span>
+        <div class="actions">
+
+          <button
+            class="btn"
+            onclick="openMonth()"
+          >
+            ＋ Clôture mensuelle
+          </button>
+
+          <button
+            class="btn primary"
+            onclick="toast('Données actualisées')"
+          >
+            ↻ Actualiser
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- KPI -->
+
+      <div class="grid">
+
+        <div class="card">
+
+          <div class="kpi-label">
+            💎 Diamants ce mois
           </div>
-          <div id="homeCreators"></div>
+
+          <div class="kpi" id="kpiDiamonds">
+            1 250 000
+          </div>
+
+          <div class="trend up">
+            ↑ 22,5 % vs août
+          </div>
+
         </div>
+
+
+        <div class="card">
+
+          <div class="kpi-label">
+            👥 Créateurs
+          </div>
+
+          <div class="kpi" id="kpiCreators">
+            17
+          </div>
+
+          <div class="trend">
+            <span class="up">
+              14 actifs
+            </span>
+            · 3 à surveiller
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="kpi-label">
+            👑 Managers
+          </div>
+
+          <div class="kpi" id="kpiManagers">
+            3
+          </div>
+
+          <div class="trend">
+            3 équipes gérées
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="kpi-label">
+            ⚔️ Matchs ce mois
+          </div>
+
+          <div class="kpi">
+            8
+          </div>
+
+          <div class="trend">
+            4 terminés · 4 à venir
+          </div>
+
+        </div>
+
       </div>
+
+
+      <!-- CHART + TEAMS -->
+
+      <div class="two">
+
+
+        <!-- Graphique -->
+
+        <div class="card">
+
+          <div class="card-title">
+            Évolution des diamants
+
+            <span>
+              6 derniers mois
+            </span>
+          </div>
+
+          <div class="chart">
+
+            <div class="bar-wrap">
+              <div
+                class="bar"
+                style="height:30%"
+              ></div>
+
+              <div class="bar-label">
+                Avr.
+              </div>
+            </div>
+
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="height:41%"
+              ></div>
+
+              <div class="bar-label">
+                Mai
+              </div>
+
+            </div>
+
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="height:48%"
+              ></div>
+
+              <div class="bar-label">
+                Juin
+              </div>
+
+            </div>
+
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="height:60%"
+              ></div>
+
+              <div class="bar-label">
+                Juil.
+              </div>
+
+            </div>
+
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="height:74%"
+              ></div>
+
+              <div class="bar-label">
+                Août
+              </div>
+
+            </div>
+
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="height:94%"
+              ></div>
+
+              <div class="bar-label">
+                Sept.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Classement Teams -->
+
+        <div class="card">
+
+          <div class="card-title">
+            Classement des Teams
+
+            <span>
+              Voir toutes
+            </span>
+          </div>
+
+
+          <div class="team">
+
+            <div class="rank">
+              1
+            </div>
+
+            <div>
+
+              <div class="team-name">
+                💋 Team Chouchou
+              </div>
+
+              <div class="progress">
+                <i style="width:100%"></i>
+              </div>
+
+            </div>
+
+            <div class="amount">
+              520 000 💎
+            </div>
+
+          </div>
+
+
+          <div class="team">
+
+            <div class="rank">
+              2
+            </div>
+
+            <div>
+
+              <div class="team-name">
+                🦊 Team Lulu
+              </div>
+
+              <div class="progress">
+                <i style="width:86%"></i>
+              </div>
+
+            </div>
+
+            <div class="amount">
+              450 000 💎
+            </div>
+
+          </div>
+
+
+          <div class="team">
+
+            <div class="rank">
+              3
+            </div>
+
+            <div>
+
+              <div class="team-name">
+                🧸 Team Nourson
+              </div>
+
+              <div class="progress">
+                <i style="width:54%"></i>
+              </div>
+
+            </div>
+
+            <div class="amount">
+              280 000 💎
+            </div>
+
+          </div>
+
+
+          <hr
+            style="
+              border:0;
+              border-top:1px solid var(--line);
+              margin:20px 0;
+            "
+          >
+
+
+          <div
+            style="
+              display:flex;
+              justify-content:space-between;
+            "
+          >
+
+            <strong>
+              Total agence
+            </strong>
+
+            <strong>
+              1 250 000 💎
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- INFOS -->
+
+      <div class="three">
+
+
+        <!-- À traiter -->
+
+        <div class="card">
+
+          <div class="card-title">
+
+            🚨 À traiter
+
+            <span class="badge red">
+              5
+            </span>
+
+          </div>
+
+          <div class="list">
+
+            <div class="row">
+
+              <strong>
+                2 candidatures à étudier
+              </strong>
+
+              <small>
+                À traiter rapidement
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                1 créateur à surveiller
+              </strong>
+
+              <small>
+                Activité insuffisante
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                Statistiques à compléter
+              </strong>
+
+              <small>
+                Une Team n'a pas encore été clôturée
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                Réunion managers
+              </strong>
+
+              <small>
+                À préparer
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Activité -->
+
+        <div class="card">
+
+          <div class="card-title">
+            📋 Activité récente
+          </div>
+
+          <div class="list">
+
+            <div class="row">
+
+              <strong>
+                💎 Statistiques mises à jour
+              </strong>
+
+              <small>
+                Septembre · il y a 3 h
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                🦊 Team Lulu en progression
+              </strong>
+
+              <small>
+                Évolution positive
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                ⚔️ Match enregistré
+              </strong>
+
+              <small>
+                Résultat ajouté
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Matchs -->
+
+        <div class="card">
+
+          <div class="card-title">
+
+            ⚔️ Prochains matchs
+
+            <span>
+              4 à venir
+            </span>
+
+          </div>
+
+          <div class="list">
+
+            <div class="row">
+
+              <strong>
+                Laura 💋 VS KENZA~Manageuse ⭐
+              </strong>
+
+              <small>
+                03/09/2026 · 21:30
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                Bastou 🦊 VS Agent Mano 🐺
+              </strong>
+
+              <small>
+                06/09/2026 · 21:00
+              </small>
+
+            </div>
+
+
+            <div class="row">
+
+              <strong>
+                Lolo Petit Chou VS prochain adversaire
+              </strong>
+
+              <small>
+                08/09/2026 · 21:15
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- MATCHES -->
-    <section id="matches" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <section
+      id="page-dashboard"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Matchs</h2>
-          <p>Organise les lives de LVF Agency.</p>
+
+          <h1>
+            Tableau de bord
+          </h1>
+
+          <div class="subtitle">
+            Vue synthétique de LVF
+          </div>
+
         </div>
-        <button class="btn btn-primary" id="newMatchBtn">
-          <svg><use href="#i-plus"/></svg>
-          Nouveau match
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-title">
+          Indicateurs de pilotage
+        </div>
+
+        <div class="table-wrap">
+
+          <table class="table">
+
+            <tr>
+              <th>Indicateur</th>
+              <th>Valeur</th>
+              <th>Tendance</th>
+            </tr>
+
+            <tr>
+              <td>Diamants</td>
+              <td>1 250 000</td>
+              <td class="up">
+                +22,5 %
+              </td>
+            </tr>
+
+            <tr>
+              <td>Créateurs actifs</td>
+              <td>14</td>
+              <td class="up">
+                +2
+              </td>
+            </tr>
+
+            <tr>
+              <td>Teams</td>
+              <td>3</td>
+              <td>
+                Stable
+              </td>
+            </tr>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CREATEURS
+    ========================== -->
+
+    <section
+      id="page-createurs"
+      class="page hidden"
+    >
+
+      <div class="top">
+
+        <div>
+
+          <h1>
+            Créateurs
+          </h1>
+
+          <div class="subtitle">
+            Gestion des membres de LVF
+          </div>
+
+        </div>
+
+        <button
+          class="btn primary"
+          onclick="addCreator()"
+        >
+          ＋ Ajouter
         </button>
+
       </div>
-      <div id="matchesList"></div>
+
+
+      <div class="card">
+
+        <table class="table">
+
+          <thead>
+
+            <tr>
+              <th>Pseudo</th>
+              <th>Team</th>
+              <th>Manager</th>
+              <th>Statut</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="creatorTable"></tbody>
+
+        </table>
+
+      </div>
+
     </section>
 
-    <!-- TEAMS -->
-    <section id="teams" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         MANAGERS
+    ========================== -->
+
+    <section
+      id="page-managers"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Teams</h2>
-          <p>Organise tes créateurs par team.</p>
+
+          <h1>
+            Managers
+          </h1>
+
+          <div class="subtitle">
+            Gestion des responsables d'équipes
+          </div>
+
         </div>
-        <button class="btn btn-primary" id="newTeamBtn">
-          <svg><use href="#i-plus"/></svg>
-          Nouvelle team
+
+      </div>
+
+
+      <div class="card">
+
+        <table class="table">
+
+          <tr>
+
+            <th>
+              Manager
+            </th>
+
+            <th>
+              Team
+            </th>
+
+            <th>
+              Créateurs
+            </th>
+
+            <th>
+              Statut
+            </th>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Laura
+            </td>
+
+            <td>
+              💋 Team Chouchou
+            </td>
+
+            <td>
+              6
+            </td>
+
+            <td>
+              <span class="badge green">
+                Actif
+              </span>
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Manager 2
+            </td>
+
+            <td>
+              🦊 Team Lulu
+            </td>
+
+            <td>
+              6
+            </td>
+
+            <td>
+              <span class="badge green">
+                Actif
+              </span>
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Manager 3
+            </td>
+
+            <td>
+              🧸 Team Nourson
+            </td>
+
+            <td>
+              5
+            </td>
+
+            <td>
+              <span class="badge green">
+                Actif
+              </span>
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TEAMS
+    ========================== -->
+
+    <section
+      id="page-teams"
+      class="page hidden"
+    >
+
+      <div class="top">
+
+        <div>
+
+          <h1>
+            Teams
+          </h1>
+
+          <div class="subtitle">
+            Organisation des équipes
+          </div>
+
+        </div>
+
+        <button
+          class="btn primary"
+          onclick="addTeam()"
+        >
+          ＋ Ajouter une Team
         </button>
+
       </div>
-      <div id="teamsList" class="grid grid-3"></div>
+
+
+      <div class="card">
+
+        <table class="table">
+
+          <tr>
+
+            <th>
+              Team
+            </th>
+
+            <th>
+              Manager
+            </th>
+
+            <th>
+              Créateurs
+            </th>
+
+            <th>
+              Diamants du mois
+            </th>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              💋 Team Chouchou
+            </td>
+
+            <td>
+              Laura
+            </td>
+
+            <td>
+              6
+            </td>
+
+            <td>
+              520 000 💎
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              🦊 Team Lulu
+            </td>
+
+            <td>
+              Manager 2
+            </td>
+
+            <td>
+              6
+            </td>
+
+            <td>
+              450 000 💎
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              🧸 Team Nourson
+            </td>
+
+            <td>
+              Manager 3
+            </td>
+
+            <td>
+              5
+            </td>
+
+            <td>
+              280 000 💎
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
     </section>
 
-    <!-- CREATORS -->
-    <section id="creators" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         STATS
+    ========================== -->
+
+    <section
+      id="page-stats"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Créateurs</h2>
-          <p>Les profils de ton agence.</p>
+
+          <h1>
+            Statistiques
+          </h1>
+
+          <div class="subtitle">
+            Historique et performances
+          </div>
+
         </div>
-        <button class="btn btn-primary" id="newCreatorBtn">
-          <svg><use href="#i-plus"/></svg>
-          Nouveau créateur
+
+        <button
+          class="btn primary"
+          onclick="openMonth()"
+        >
+          ＋ Enregistrer un mois
         </button>
+
       </div>
-      <div id="creatorsList" class="grid grid-3"></div>
+
+
+      <div class="card">
+
+        <div class="card-title">
+          Historique des diamants
+        </div>
+
+        <table class="table">
+
+          <tr>
+            <th>Mois</th>
+            <th>Diamants LVF</th>
+            <th>Évolution</th>
+          </tr>
+
+          <tr>
+            <td>Juin 2026</td>
+            <td>720 000 💎</td>
+            <td>—</td>
+          </tr>
+
+          <tr>
+            <td>Juillet 2026</td>
+            <td>850 000 💎</td>
+            <td class="up">
+              +18,1 %
+            </td>
+          </tr>
+
+          <tr>
+            <td>Août 2026</td>
+            <td>1 020 000 💎</td>
+            <td class="up">
+              +20,0 %
+            </td>
+          </tr>
+
+          <tr>
+            <td>Septembre 2026</td>
+            <td>1 250 000 💎</td>
+            <td class="up">
+              +22,5 %
+            </td>
+          </tr>
+
+        </table>
+
+      </div>
+
     </section>
 
-    <!-- AGENCIES -->
-    <section id="agencies" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         MATCHS
+    ========================== -->
+
+    <section
+      id="page-matchs"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Agences</h2>
-          <p>Les agences que tu connais et leurs créateurs connus.</p>
+
+          <h1>
+            Matchs
+          </h1>
+
+          <div class="subtitle">
+            Suivi des Match OFF
+          </div>
+
         </div>
-        <button class="btn btn-primary" id="newAgencyBtn">
-          <svg><use href="#i-plus"/></svg>
-          Nouvelle agence
+
+        <button
+          class="btn primary"
+          onclick="toast('Formulaire de création de match à connecter')"
+        >
+          ＋ Nouveau match
         </button>
+
       </div>
-      <div id="agenciesList" class="grid grid-3"></div>
+
+
+      <div class="card">
+
+        <div class="list">
+
+          <div class="row">
+
+            <strong>
+              Laura 💋 VS KENZA~Manageuse ⭐
+            </strong>
+
+            <small>
+              03/09/2026 · 21:30 · À venir
+            </small>
+
+          </div>
+
+
+          <div class="row">
+
+            <strong>
+              Bastou 🦊 VS Agent Mano 🐺
+            </strong>
+
+            <small>
+              06/09/2026 · 21:00 · À venir
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- CALENDAR -->
-    <section id="calendar" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         CANDIDATURES
+    ========================== -->
+
+    <section
+      id="page-candidatures"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Calendrier</h2>
-          <p>Vue mensuelle de tes matchs.</p>
+
+          <h1>
+            Candidatures
+          </h1>
+
+          <div class="subtitle">
+            Suivi des recrutements
+          </div>
+
         </div>
+
       </div>
-      <div class="card panel">
-        <div class="calendar-head">
-          <button class="btn btn-secondary" id="prevMonth">‹</button>
-          <div class="calendar-title" id="calendarTitle"></div>
-          <button class="btn btn-secondary" id="nextMonth">›</button>
+
+
+      <div class="card">
+
+        <div class="list">
+
+          <div class="row">
+
+            <strong>
+              Nouvelle candidature
+            </strong>
+
+            <small>
+              Statut : À étudier
+            </small>
+
+          </div>
+
+
+          <div class="row">
+
+            <strong>
+              Candidature en attente
+            </strong>
+
+            <small>
+              Statut : En attente
+            </small>
+
+          </div>
+
         </div>
-        <div class="calendar-grid" id="calendarGrid"></div>
+
       </div>
+
     </section>
 
-    <!-- RANKING -->
-    <section id="ranking" class="section">
-      <div class="toolbar">
+
+    <!-- =========================
+         TACHES
+    ========================== -->
+
+    <section
+      id="page-taches"
+      class="page hidden"
+    >
+
+      <div class="top">
+
         <div>
-          <h2>Classement</h2>
-          <p>Classement basé sur le nombre de matchs.</p>
+
+          <h1>
+            Tâches
+          </h1>
+
+          <div class="subtitle">
+            Actions du fondateur
+          </div>
+
         </div>
+
+        <button
+          class="btn primary"
+          onclick="addTask()"
+        >
+          ＋ Nouvelle tâche
+        </button>
+
       </div>
-      <div class="card panel">
-        <div id="rankingList"></div>
+
+
+      <div class="card">
+
+        <div
+          class="list"
+          id="taskList"
+        >
+
+          <div class="row">
+
+            <strong>
+              🔴 Préparer la prochaine réunion managers
+            </strong>
+
+            <small>
+              Priorité urgente
+            </small>
+
+          </div>
+
+
+          <div class="row">
+
+            <strong>
+              🟠 Vérifier les statistiques du mois
+            </strong>
+
+            <small>
+              Priorité importante
+            </small>
+
+          </div>
+
+        </div>
+
       </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOTES
+    ========================== -->
+
+    <section
+      id="page-notes"
+      class="page hidden"
+    >
+
+      <div class="top">
+
+        <div>
+
+          <h1>
+            Notes
+          </h1>
+
+          <div class="subtitle">
+            Notes privées du fondateur
+          </div>
+
+        </div>
+
+        <button
+          class="btn primary"
+          onclick="addNote()"
+        >
+          ＋ Nouvelle note
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <textarea
+          id="notes"
+          style="
+            width:100%;
+            min-height:300px;
+            background:#0a1120;
+            color:white;
+            border:1px solid var(--line);
+            border-radius:10px;
+            padding:15px;
+            resize:vertical;
+          "
+          placeholder="Écrire une note privée…"
+        ></textarea>
+
+
+        <div style="margin-top:10px">
+
+          <button
+            class="btn primary"
+            onclick="saveNotes()"
+          >
+            Enregistrer
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PARAMETRES
+    ========================== -->
+
+    <section
+      id="page-parametres"
+      class="page hidden"
+    >
+
+      <div class="top">
+
+        <div>
+
+          <h1>
+            Paramètres
+          </h1>
+
+          <div class="subtitle">
+            Configuration de TokCenter
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="list">
+
+          <div class="row">
+
+            <strong>
+              💾 Sauvegarde locale
+            </strong>
+
+            <small>
+              Les données de démonstration sont conservées
+              dans le navigateur.
+            </small>
+
+          </div>
+
+
+          <div class="row">
+
+            <strong>
+              📤 Export / 📥 Import
+            </strong>
+
+            <small>
+              À développer pour la sauvegarde complète des données.
+            </small>
+
+          </div>
+
+
+          <div class="row">
+
+            <strong>
+              🏢 Agence active
+            </strong>
+
+            <small>
+              LVF Agency · La Vraie Famille
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
   </main>
+
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
+
+<!-- =========================
+     MODAL
+========================== -->
+
+<div
+  id="modal"
+  class="modal hidden"
+>
+
   <div class="modal-box">
-    <div class="modal-head">
-      <h2 id="modalTitle">Nouveau</h2>
-      <button class="close" id="closeModal">
-        <svg><use href="#i-x"/></svg>
+
+    <h2 id="modalTitle"></h2>
+
+    <div id="modalContent"></div>
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="closeModal()"
+      >
+        Annuler
       </button>
+
+      <button
+        class="btn primary"
+        id="modalSave"
+      >
+        Enregistrer
+      </button>
+
     </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer" id="modalFooter"></div>
+
   </div>
+
 </div>
 
-<div class="toast" id="toast"></div>
+
+<!-- =========================
+     TOAST
+========================== -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
 
 <script>
-"use strict";
 
 /* =========================
-   DATABASE
+   DONNÉES
 ========================= */
 
-const STORAGE_KEY = "tokcenter_clean_v2";
-const LEGACY_KEY = "tokcenter_clean_v1";
+const creators = [
 
-let raw = localStorage.getItem(STORAGE_KEY);
+  [
+    "@Lulu",
+    "🦊 Team Lulu",
+    "Manager 2",
+    "Actif"
+  ],
 
-if(!raw){
-  const legacy = localStorage.getItem(LEGACY_KEY);
-  if(legacy){
-    localStorage.setItem(STORAGE_KEY, legacy);
-    raw = legacy;
-  }
-}
+  [
+    "@Nounours",
+    "🧸 Team Nourson",
+    "Manager 3",
+    "À surveiller"
+  ],
 
-let db;
+  [
+    "@LoloPetitChou",
+    "💋 Team Chouchou",
+    "Laura",
+    "Actif"
+  ],
 
-try{
-  db = raw ? JSON.parse(raw) : {};
-}catch(e){
-  db = {};
-}
+  [
+    "@Licornasse",
+    "💋 Team Chouchou",
+    "Laura",
+    "Actif"
+  ],
 
-db.teams = Array.isArray(db.teams) ? db.teams : [];
-db.creators = Array.isArray(db.creators) ? db.creators : [];
-db.agencies = Array.isArray(db.agencies) ? db.agencies : [];
-db.matches = Array.isArray(db.matches) ? db.matches : [];
-db.agencyContacts = Array.isArray(db.agencyContacts) ? db.agencyContacts : [];
+  [
+    "@Pims",
+    "🧸 Team Nourson",
+    "Manager 3",
+    "Actif"
+  ],
 
-/* Migration from possible older structures */
-if(!db.agencyContacts.length && Array.isArray(db.agencyPeople)){
-  db.agencyContacts = db.agencyPeople;
-}
+  [
+    "@Thiago",
+    "💋 Team Chouchou",
+    "Laura",
+    "Actif"
+  ]
 
-function saveDB(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-}
+];
 
-function uid(){
-  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
-  return Date.now().toString(36)+"-"+Math.random().toString(36).slice(2);
-}
-
-function esc(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function norm(value){
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"");
-}
-
-function formatDate(date){
-  if(!date) return "";
-  const d = new Date(date+"T12:00:00");
-  if(isNaN(d)) return date;
-  return d.toLocaleDateString("fr-FR",{
-    weekday:"long",
-    day:"numeric",
-    month:"long",
-    year:"numeric"
-  });
-}
-
-function formatShortDate(date){
-  if(!date) return "";
-  const d = new Date(date+"T12:00:00");
-  if(isNaN(d)) return date;
-  return d.toLocaleDateString("fr-FR",{
-    day:"2-digit",
-    month:"2-digit",
-    year:"numeric"
-  });
-}
-
-function todayISO(){
-  const d = new Date();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-  return `${d.getFullYear()}-${m}-${day}`;
-}
-
-function initials(name){
-  const parts = String(name || "?").trim().split(/\s+/);
-  return (parts[0]?.[0] || "?") + (parts[1]?.[0] || "");
-}
-
-function teamById(id){
-  return db.teams.find(t=>t.id===id);
-}
-
-function creatorById(id){
-  return db.creators.find(c=>c.id===id);
-}
 
 /* =========================
-   IMAGE COMPRESSION
+   AFFICHER CREATEURS
 ========================= */
 
-async function compressImage(file){
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
+function renderCreators() {
 
-    reader.onload = e=>{
-      const img = new Image();
+  document.getElementById("creatorTable").innerHTML =
+    creators.map(c => `
 
-      img.onload = ()=>{
-        const max = 560;
-        let w = img.width;
-        let h = img.height;
+      <tr>
 
-        if(w > max || h > max){
-          const ratio = Math.min(max/w,max/h);
-          w = Math.round(w*ratio);
-          h = Math.round(h*ratio);
-        }
+        <td>
+          <strong>
+            ${c[0]}
+          </strong>
+        </td>
 
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
+        <td>
+          ${c[1]}
+        </td>
 
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img,0,0,w,h);
+        <td>
+          ${c[2]}
+        </td>
 
-        const output = canvas.toDataURL("image/webp",.76);
+        <td>
 
-        /* Fallback if browser does not support webp */
-        if(!output.startsWith("data:image/webp")){
-          resolve(canvas.toDataURL("image/jpeg",.76));
-        }else{
-          resolve(output);
-        }
-      };
+          <span
+            class="badge ${
+              c[3] === "Actif"
+              ? "green"
+              : "red"
+            }"
+          >
+            ${c[3]}
+          </span>
 
-      img.onerror = reject;
-      img.src = e.target.result;
-    };
+        </td>
 
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+      </tr>
+
+    `).join("");
+
 }
 
-/* =========================
-   TOAST
-========================= */
+renderCreators();
 
-let toastTimer;
-
-function toast(message,type=""){
-  const el = document.getElementById("toast");
-  el.textContent = message;
-  el.className = "toast show "+type;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>{
-    el.className = "toast";
-  },2400);
-}
 
 /* =========================
    NAVIGATION
 ========================= */
 
-const pageNames = {
-  home:"Accueil",
-  matches:"Match",
-  teams:"Team",
-  creators:"Créateur",
-  agencies:"Agence",
-  calendar:"Calendrier",
-  ranking:"Classement"
-};
+document
+  .querySelectorAll(".nav button")
+  .forEach(btn => {
 
-document.querySelectorAll(".nav-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const page = btn.dataset.page;
+    btn.addEventListener("click", () => {
 
-    document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
+      document
+        .querySelectorAll(".nav button")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
 
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
+      btn.classList.add("active");
 
-    document.getElementById("pageTitle").textContent = pageNames[page];
 
-    renderPage(page);
+      document
+        .querySelectorAll(".page")
+        .forEach(p =>
+          p.classList.add("hidden")
+        );
+
+
+      document
+        .getElementById(
+          "page-" + btn.dataset.page
+        )
+        .classList.remove("hidden");
+
+
+      window.scrollTo(0, 0);
+
+    });
+
   });
-});
 
-function renderPage(page){
-  if(page==="home") renderHome();
-  if(page==="matches") renderMatches();
-  if(page==="teams") renderTeams();
-  if(page==="creators") renderCreators();
-  if(page==="agencies") renderAgencies();
-  if(page==="calendar") renderCalendar();
-  if(page==="ranking") renderRanking();
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(message) {
+
+  const element =
+    document.getElementById("toast");
+
+  element.textContent = message;
+
+  element.style.display = "block";
+
+  setTimeout(() => {
+
+    element.style.display = "none";
+
+  }, 2200);
+
 }
+
 
 /* =========================
    MODAL
 ========================= */
 
-const modal = document.getElementById("modal");
+function closeModal() {
 
-function openModal(title,body,footer){
-  document.getElementById("modalTitle").textContent = title;
-  document.getElementById("modalBody").innerHTML = body;
-  document.getElementById("modalFooter").innerHTML = footer;
-  modal.classList.add("open");
+  document
+    .getElementById("modal")
+    .classList.add("hidden");
+
 }
 
-function closeModal(){
-  modal.classList.remove("open");
+
+function showModal(
+  title,
+  content,
+  callback
+) {
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent = title;
+
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML = content;
+
+
+  document
+    .getElementById("modal")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "modalSave"
+  ).onclick = () => {
+
+    callback();
+
+    closeModal();
+
+  };
+
 }
 
-document.getElementById("closeModal").addEventListener("click",closeModal);
-
-modal.addEventListener("click",e=>{
-  if(e.target===modal) closeModal();
-});
 
 /* =========================
-   HOME
+   CLOTURE MENSUELLE
 ========================= */
 
-function renderHome(){
-  document.getElementById("statMatches").textContent = db.matches.length;
-  document.getElementById("statTeams").textContent = db.teams.length;
-  document.getElementById("statCreators").textContent = db.creators.length;
-  document.getElementById("statAgencies").textContent = db.agencies.length;
+function openMonth() {
 
-  const now = new Date();
+  showModal(
 
-  const upcoming = [...db.matches]
-    .filter(m=>{
-      if(!m.date) return false;
-      const d = new Date(`${m.date}T${m.time || "00:00"}`);
-      return d >= now;
-    })
-    .sort((a,b)=>{
-      return new Date(`${a.date}T${a.time || "00:00"}`) -
-             new Date(`${b.date}T${b.time || "00:00"}`);
-    })
-    .slice(0,4);
+    "Clôture mensuelle",
 
-  document.getElementById("homeNextCount").textContent =
-    upcoming.length ? `${upcoming.length} à venir` : "";
-
-  const hm = document.getElementById("homeMatches");
-
-  if(!upcoming.length){
-    hm.innerHTML = `
-      <div class="empty" style="padding:35px 15px">
-        <div class="empty-icon"><svg><use href="#i-match"/></svg></div>
-        <div>Aucun prochain match.</div>
-      </div>`;
-  }else{
-    hm.innerHTML = upcoming.map(matchMiniHTML).join("");
-  }
-
-  const creators = db.creators.slice(0,5);
-  const hc = document.getElementById("homeCreators");
-
-  if(!creators.length){
-    hc.innerHTML = `
-      <div class="empty" style="padding:35px 15px">
-        Aucun créateur enregistré.
-      </div>`;
-  }else{
-    hc.innerHTML = `<div class="item-list">${
-      creators.map(c=>`
-        <div class="list-item">
-          <div class="item-left">
-            ${avatarHTML(c)}
-            <div>
-              <div class="item-name">${esc(c.name)}</div>
-              <div class="item-sub">${c.pseudo ? "@"+esc(c.pseudo.replace(/^@/,"")) : "Pseudo non renseigné"}</div>
-            </div>
-          </div>
-        </div>
-      `).join("")
-    }</div>`;
-  }
-}
-
-function matchMiniHTML(m){
-  const ourName = m.ourCreatorName || creatorById(m.creatorId)?.name || "Créateur";
-  const teamName = m.teamName || teamById(m.teamId)?.name || "Team";
-  const opponent = m.opponentCreatorName || "Créateur adverse";
-  const agency = m.opponentAgency || "Agence adverse";
-
-  return `
-    <div class="list-item">
-      <div class="item-left">
-        <div class="avatar">${esc(initials(ourName))}</div>
-        <div>
-          <div class="item-name">${esc(ourName)} <span style="color:#a0a5b0">vs</span> ${esc(opponent)}</div>
-          <div class="item-sub">${esc(teamName)} · ${esc(agency)} · ${formatShortDate(m.date)}${m.time ? " à "+esc(m.time) : ""}</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* =========================
-   MATCHES
-========================= */
-
-document.getElementById("newMatchBtn").addEventListener("click",()=>{
-  openMatchModal();
-});
-
-function openMatchModal(editId=null){
-  const existing = editId ? db.matches.find(m=>m.id===editId) : null;
-
-  const teamId = existing?.teamId || "";
-  const creatorId = existing?.creatorId || "";
-
-  let opponentAgency = existing?.opponentAgency || "";
-  let opponentContactId = existing?.opponentContactId || "";
-
-  const knownAgency = db.agencies.find(a=>norm(a.name)===norm(opponentAgency));
-
-  let contact = opponentContactId
-    ? db.agencyContacts.find(c=>c.id===opponentContactId)
-    : null;
-
-  if(!contact && opponentAgency && existing?.opponentCreatorPseudo){
-    contact = db.agencyContacts.find(c=>
-      norm(c.agencyName)===norm(opponentAgency) &&
-      norm(c.pseudo)===norm(existing.opponentCreatorPseudo)
-    );
-  }
-
-  const body = `
-    <div class="match-form-section ours">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg><use href="#i-team"/></svg>
-        </div>
-        <div>
-          <strong>Notre agence</strong>
-          <small>LVF Agency</small>
-        </div>
-      </div>
-
-      <div class="agency-fixed">
-        <svg width="18" height="18"><use href="#i-agency"/></svg>
-        <div>
-          <strong>LVF Agency</strong>
-          <span> — notre agence</span>
-        </div>
-      </div>
-
-      <div class="form-grid">
-        <div class="field">
-          <label for="matchTeam">Team</label>
-          <select class="select" id="matchTeam">
-            <option value="">Choisir une team</option>
-            ${db.teams.map(t=>`
-              <option value="${esc(t.id)}" ${t.id===teamId?"selected":""}>
-                ${esc(t.name)}
-              </option>
-            `).join("")}
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="matchCreator">Créateur</label>
-          <select class="select" id="matchCreator">
-            <option value="">Choisir un créateur</option>
-          </select>
-          <div class="help" id="ourCreatorHelp"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="match-form-section opponent">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg><use href="#i-agency"/></svg>
-        </div>
-        <div>
-          <strong>Agence adverse</strong>
-          <small>Choisis une agence connue ou écris-en une nouvelle</small>
-        </div>
-      </div>
+    `
 
       <div class="field">
-        <label for="opponentAgency">Agence</label>
 
-        <div class="agency-picker">
-          <input
-            class="input"
-            id="opponentAgency"
-            list="knownAgenciesList"
-            value="${esc(opponentAgency)}"
-            placeholder="Ex. Predator Agency"
-            autocomplete="off"
-          >
+        <label>
+          Mois
+        </label>
 
-          <button type="button" class="btn btn-secondary" id="chooseAgencyBtn">
-            Mes agences
-          </button>
-        </div>
+        <input
+          id="month"
+          type="month"
+          value="2026-09"
+        >
 
-        <datalist id="knownAgenciesList">
-          ${db.agencies.map(a=>`<option value="${esc(a.name)}"></option>`).join("")}
-        </datalist>
-
-        <div class="help">
-          Une agence écrite ici n'est pas ajoutée automatiquement à ton répertoire.
-        </div>
       </div>
 
-      <div class="field" style="margin-top:16px">
-        <label for="opponentCreatorSelect">Créateur adverse</label>
-        <select class="select" id="opponentCreatorSelect">
-          <option value="">Choisir un créateur</option>
-        </select>
-        <div class="selected-person" id="selectedOpponentPerson"></div>
 
-        <div class="new-person-box" id="newOpponentPerson">
-          <div class="new-person-title">Nouveau créateur adverse</div>
+      <div class="field">
 
-          <div class="form-grid">
-            <div class="field">
-              <label for="opponentName">Nom</label>
-              <input class="input" id="opponentName" placeholder="Nom du créateur">
-            </div>
+        <label>
+          💎 Diamants Team Lulu
+        </label>
 
-            <div class="field">
-              <label for="opponentPseudo">Pseudo TikTok</label>
-              <input class="input" id="opponentPseudo" placeholder="@pseudo">
-            </div>
-          </div>
+        <input
+          id="lulu"
+          type="number"
+          placeholder="Diamants"
+        >
 
-          <div class="help" style="margin-top:9px">
-            Si cette agence est connue, ce créateur sera automatiquement mémorisé pour les prochains matchs.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="match-form-section">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg><use href="#i-calendar"/></svg>
-        </div>
-        <div>
-          <strong>Informations du match</strong>
-          <small>Date, heure, boost et âge du live</small>
-        </div>
       </div>
 
-      <div class="form-grid">
-        <div class="field">
-          <label for="matchDate">Date</label>
-          <input class="input" id="matchDate" type="date" value="${esc(existing?.date || todayISO())}">
-        </div>
 
-        <div class="field">
-          <label for="matchTime">Heure</label>
-          <input class="input" id="matchTime" type="time" value="${esc(existing?.time || "21:00")}">
-        </div>
+      <div class="field">
 
-        <div class="field">
-          <label>Boost</label>
-          <div class="radio-row">
-            <div class="radio-option">
-              <input type="radio" name="boost" id="boostYes" value="true" ${(existing?.boost === true || existing?.boost === undefined)?"checked":""}>
-              <label for="boostYes">Avec boost</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" name="boost" id="boostNo" value="false" ${existing?.boost === false?"checked":""}>
-              <label for="boostNo">Sans boost</label>
-            </div>
-          </div>
-        </div>
+        <label>
+          💎 Diamants Team Chouchou
+        </label>
 
-        <div class="field">
-          <label>Âge du live</label>
-          <div class="radio-row">
-            <div class="radio-option">
-              <input type="radio" name="age18" id="ageMinus" value="false" ${(existing?.age18 === false || existing?.age18 === undefined)?"checked":""}>
-              <label for="ageMinus">-18 ans</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" name="age18" id="agePlus" value="true" ${existing?.age18 === true?"checked":""}>
-              <label for="agePlus">+18 ans</label>
-            </div>
-          </div>
-        </div>
+        <input
+          id="chouchou"
+          type="number"
+          placeholder="Diamants"
+        >
+
       </div>
-    </div>
-  `;
 
-  const footer = `
-    <button class="btn btn-secondary" id="cancelMatch">Annuler</button>
-    <button class="btn btn-primary" id="saveMatch">
-      ${existing ? "Enregistrer les modifications" : "Créer le match"}
-    </button>
-  `;
 
-  openModal(existing ? "Modifier le match" : "Nouveau match",body,footer);
+      <div class="field">
 
-  const teamSelect = document.getElementById("matchTeam");
-  const creatorSelect = document.getElementById("matchCreator");
+        <label>
+          💎 Diamants Team Nourson
+        </label>
 
-  function updateCreators(selectedId=""){
-    const id = teamSelect.value;
-    const creators = db.creators.filter(c=>c.teamId===id);
+        <input
+          id="nourson"
+          type="number"
+          placeholder="Diamants"
+        >
 
-    creatorSelect.innerHTML =
-      `<option value="">Choisir un créateur</option>` +
-      creators.map(c=>`
-        <option value="${esc(c.id)}" ${c.id===selectedId?"selected":""}>
-          ${esc(c.name)}${c.pseudo ? " — @"+esc(c.pseudo.replace(/^@/,"")) : ""}
-        </option>
-      `).join("");
+      </div>
 
-    const help = document.getElementById("ourCreatorHelp");
+    `,
 
-    if(!id){
-      help.textContent = "Choisis d'abord une team.";
-    }else if(!creators.length){
-      help.textContent = "Aucun créateur n'est associé à cette team.";
-    }else{
-      help.textContent = `${creators.length} créateur${creators.length>1?"s":""} disponible${creators.length>1?"s":""}.`;
-    }
-  }
+    () => {
 
-  updateCreators(creatorId);
+      const total =
 
-  teamSelect.addEventListener("change",()=>{
-    updateCreators("");
-  });
+        (+document.getElementById(
+          "lulu"
+        ).value || 0)
 
-  const agencyInput = document.getElementById("opponentAgency");
-  const agencyBtn = document.getElementById("chooseAgencyBtn");
-  const contactSelect = document.getElementById("opponentCreatorSelect");
-  const selectedPerson = document.getElementById("selectedOpponentPerson");
-  const newPerson = document.getElementById("newOpponentPerson");
+        +
 
-  function agencyContacts(agencyName){
-    if(!agencyName.trim()) return [];
-    return db.agencyContacts.filter(c=>norm(c.agencyName)===norm(agencyName));
-  }
+        (+document.getElementById(
+          "chouchou"
+        ).value || 0)
 
-  function updateContacts(selected=""){
-    const agencyName = agencyInput.value.trim();
-    const contacts = agencyContacts(agencyName);
+        +
 
-    contactSelect.innerHTML = `
-      <option value="">${agencyName ? (contacts.length ? "Choisir un créateur" : "Aucun créateur connu") : "Choisir d'abord une agence"}</option>
-      ${contacts.map(c=>`
-        <option value="${esc(c.id)}" ${c.id===selected?"selected":""}>
-          ${esc(c.name)}${c.pseudo ? " — @"+esc(c.pseudo.replace(/^@/,"")) : ""}
-        </option>
-      `).join("")}
-      <option value="__new__">＋ Nouveau créateur…</option>
-    `;
+        (+document.getElementById(
+          "nourson"
+        ).value || 0);
 
-    const current = contacts.find(c=>c.id===selected);
 
-    if(current){
-      selectedPerson.classList.add("show");
-      selectedPerson.innerHTML = `
-        Créateur sélectionné :
-        <strong>${esc(current.name)}</strong>
-        ${current.pseudo ? " · @"+esc(current.pseudo.replace(/^@/,"")) : ""}
-      `;
-      newPerson.classList.remove("show");
-    }else{
-      selectedPerson.classList.remove("show");
-      selectedPerson.innerHTML = "";
-    }
+      if (total) {
 
-    if(selected==="__new__"){
-      newPerson.classList.add("show");
-    }
-  }
+        document.getElementById(
+          "kpiDiamonds"
+        ).textContent =
+          total.toLocaleString("fr-FR");
 
-  updateContacts(contact?.id || "");
-
-  agencyInput.addEventListener("input",()=>{
-    updateContacts("");
-  });
-
-  agencyInput.addEventListener("change",()=>{
-    updateContacts("");
-  });
-
-  agencyBtn.addEventListener("click",()=>{
-    if(!db.agencies.length){
-      toast("Aucune agence enregistrée pour le moment.");
-      return;
-    }
-
-    const options = db.agencies.map(a=>`
-      <option value="${esc(a.name)}">${esc(a.name)}</option>
-    `).join("");
-
-    const selected = agencyInput.value;
-
-    openAgencyChoiceModal(options,selected,()=>{
-      updateContacts("");
-    });
-  });
-
-  contactSelect.addEventListener("change",()=>{
-    if(contactSelect.value==="__new__"){
-      newPerson.classList.add("show");
-      selectedPerson.classList.remove("show");
-    }else{
-      newPerson.classList.remove("show");
-
-      const c = db.agencyContacts.find(x=>x.id===contactSelect.value);
-
-      if(c){
-        selectedPerson.classList.add("show");
-        selectedPerson.innerHTML = `
-          Créateur sélectionné :
-          <strong>${esc(c.name)}</strong>
-          ${c.pseudo ? " · @"+esc(c.pseudo.replace(/^@/,"")) : ""}
-        `;
-      }else{
-        selectedPerson.classList.remove("show");
-      }
-    }
-  });
-
-  document.getElementById("cancelMatch").addEventListener("click",closeModal);
-
-  document.getElementById("saveMatch").addEventListener("click",async()=>{
-    const saveBtn = document.getElementById("saveMatch");
-
-    const selectedTeam = teamById(teamSelect.value);
-    const selectedCreator = creatorById(creatorSelect.value);
-
-    const agency = agencyInput.value.trim();
-    const date = document.getElementById("matchDate").value;
-    const time = document.getElementById("matchTime").value;
-
-    if(!selectedTeam){
-      toast("Choisis une team.","error");
-      return;
-    }
-
-    if(!selectedCreator){
-      toast("Choisis un créateur.","error");
-      return;
-    }
-
-    if(!agency){
-      toast("Indique l'agence adverse.","error");
-      return;
-    }
-
-    if(!date || !time){
-      toast("Indique la date et l'heure.","error");
-      return;
-    }
-
-    let opponentName = "";
-    let opponentPseudo = "";
-    let selectedContact = null;
-
-    if(contactSelect.value && contactSelect.value!=="__new__"){
-      selectedContact = db.agencyContacts.find(c=>c.id===contactSelect.value);
-
-      if(!selectedContact){
-        toast("Créateur adverse introuvable.","error");
-        return;
       }
 
-      opponentName = selectedContact.name;
-      opponentPseudo = selectedContact.pseudo || "";
 
-    }else{
-      opponentName = document.getElementById("opponentName").value.trim();
-      opponentPseudo = document.getElementById("opponentPseudo").value.trim();
-
-      if(!opponentName){
-        toast("Indique le nom du créateur adverse.","error");
-        return;
-      }
-
-      if(!opponentPseudo){
-        toast("Indique le pseudo TikTok du créateur adverse.","error");
-        return;
-      }
-
-      /* Automatically remember contact */
-      const existingContact = db.agencyContacts.find(c=>
-        norm(c.agencyName)===norm(agency) &&
-        (
-          norm(c.pseudo)===norm(opponentPseudo) ||
-          (norm(c.name)===norm(opponentName) && !c.pseudo)
-        )
+      toast(
+        "Mois enregistré"
       );
 
-      if(existingContact){
-        existingContact.name = opponentName;
-        existingContact.pseudo = opponentPseudo;
-        selectedContact = existingContact;
-      }else{
-        selectedContact = {
-          id:uid(),
-          agencyName:agency,
-          name:opponentName,
-          pseudo:opponentPseudo
-        };
+    }
 
-        db.agencyContacts.push(selectedContact);
+  );
+
+}
+
+
+/* =========================
+   AJOUT CREATEUR
+========================= */
+
+function addCreator() {
+
+  showModal(
+
+    "Ajouter un créateur",
+
+    `
+
+      <div class="field">
+
+        <label>
+          Pseudo TikTok
+        </label>
+
+        <input
+          id="newPseudo"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Team
+        </label>
+
+        <select id="newTeam">
+
+          <option>
+            🦊 Team Lulu
+          </option>
+
+          <option>
+            💋 Team Chouchou
+          </option>
+
+          <option>
+            🧸 Team Nourson
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Manager
+        </label>
+
+        <input
+          id="newManager"
+        >
+
+      </div>
+
+    `,
+
+    () => {
+
+      const pseudo =
+        document
+          .getElementById("newPseudo")
+          .value
+          .trim();
+
+
+      if (!pseudo) {
+        return;
       }
+
+
+      creators.push([
+
+        pseudo,
+
+        document.getElementById(
+          "newTeam"
+        ).value,
+
+        document.getElementById(
+          "newManager"
+        ).value,
+
+        "Actif"
+
+      ]);
+
+
+      renderCreators();
+
+
+      document.getElementById(
+        "kpiCreators"
+      ).textContent =
+        creators.length;
+
+
+      toast(
+        "Créateur ajouté"
+      );
+
     }
 
-    const boost = document.querySelector('input[name="boost"]:checked')?.value==="true";
-    const age18 = document.querySelector('input[name="age18"]:checked')?.value==="true";
+  );
 
-    const matchData = {
-      id: existing?.id || uid(),
-
-      /* Our side */
-      ourAgency:"LVF Agency",
-      teamId:selectedTeam.id,
-      teamName:selectedTeam.name,
-      creatorId:selectedCreator.id,
-      ourCreatorName:selectedCreator.name,
-      ourCreatorPseudo:selectedCreator.pseudo || "",
-
-      /* Opponent */
-      opponentAgency:agency,
-      opponentContactId:selectedContact?.id || "",
-      opponentCreatorName:opponentName,
-      opponentCreatorPseudo:opponentPseudo,
-
-      /* Match information */
-      date,
-      time,
-      boost,
-      age18,
-
-      /* Legacy-compatible */
-      theme:""
-    };
-
-    saveBtn.disabled = true;
-    saveBtn.textContent = "Enregistrement…";
-
-    db.matches = db.matches.filter(m=>m.id!==matchData.id);
-    db.matches.push(matchData);
-
-    saveDB();
-
-    closeModal();
-    renderAll();
-
-    toast(existing ? "Match modifié." : "Match créé.","success");
-  });
 }
 
-/* AGENCY CHOICE */
-function openAgencyChoiceModal(options,selected,onSelect){
-  const body = `
-    <div class="field">
-      <label for="agencyChoice">Choisir une agence</label>
-      <select class="select" id="agencyChoice">
-        ${options}
-      </select>
-    </div>
-  `;
-
-  const footer = `
-    <button class="btn btn-secondary" id="cancelAgencyChoice">Annuler</button>
-    <button class="btn btn-primary" id="confirmAgencyChoice">Choisir</button>
-  `;
-
-  openModal("Mes agences",body,footer);
-
-  document.getElementById("agencyChoice").value = selected;
-
-  document.getElementById("cancelAgencyChoice").addEventListener("click",()=>{
-    closeModal();
-    /* Reopen match modal isn't ideal, so selection is done in parent before closing */
-  });
-
-  document.getElementById("confirmAgencyChoice").addEventListener("click",()=>{
-    const val = document.getElementById("agencyChoice").value;
-
-    /*
-      The match modal is temporarily replaced by this small selector.
-      Put the selected value back and reopen the match form.
-    */
-    closeModal();
-    setTimeout(()=>{
-      openMatchModal();
-      setTimeout(()=>{
-        const input = document.getElementById("opponentAgency");
-        if(input){
-          input.value = val;
-          input.dispatchEvent(new Event("input"));
-        }
-      },0);
-    },0);
-  });
-}
-
-function renderMatches(){
-  const container = document.getElementById("matchesList");
-
-  const sorted = [...db.matches].sort((a,b)=>{
-    return new Date(`${a.date || "9999-12-31"}T${a.time || "00:00"}`) -
-           new Date(`${b.date || "9999-12-31"}T${b.time || "00:00"}`);
-  });
-
-  if(!sorted.length){
-    container.innerHTML = `
-      <div class="card empty">
-        <div class="empty-icon"><svg><use href="#i-match"/></svg></div>
-        <strong>Aucun match</strong>
-        <div style="margin-top:5px">Crée ton premier match avec « Nouveau match ».</div>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = sorted.map(m=>{
-    const boostClass = m.boost ? "badge-purple" : "";
-    const ageClass = m.age18 ? "badge-orange" : "badge-green";
-
-    return `
-      <div class="card match-card">
-        <div class="match-top">
-          <div class="match-date">
-            ${esc(formatDate(m.date))} ${m.time ? " · "+esc(m.time) : ""}
-          </div>
-
-          <div class="badges">
-            <span class="badge ${boostClass}">
-              ${m.boost ? "Avec boost" : "Sans boost"}
-            </span>
-            <span class="badge ${ageClass}">
-              ${m.age18 ? "+18 ans" : "-18 ans"}
-            </span>
-          </div>
-        </div>
-
-        <div class="match-vs">
-          <div class="match-side">
-            <div class="match-side-title">Notre agence · ${esc(m.teamName || "Team")}</div>
-            <div class="match-person">${esc(m.ourCreatorName || "Créateur")}</div>
-            ${m.ourCreatorPseudo ? `<div class="match-pseudo">@${esc(m.ourCreatorPseudo.replace(/^@/,""))}</div>` : ""}
-            <div class="match-agency">LVF Agency</div>
-          </div>
-
-          <div class="vs">VS</div>
-
-          <div class="match-side right">
-            <div class="match-side-title">${esc(m.opponentAgency || "Agence adverse")}</div>
-            <div class="match-person">${esc(m.opponentCreatorName || "Créateur adverse")}</div>
-            ${m.opponentCreatorPseudo ? `<div class="match-pseudo">@${esc(m.opponentCreatorPseudo.replace(/^@/,""))}</div>` : ""}
-            <div class="match-agency">${esc(m.opponentAgency || "")}</div>
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:13px">
-          <button class="icon-btn" title="Modifier" onclick="openMatchModal('${esc(m.id)}')">
-            <svg><use href="#i-edit"/></svg>
-          </button>
-          <button class="icon-btn danger" title="Supprimer" onclick="deleteMatch('${esc(m.id)}')">
-            <svg><use href="#i-trash"/></svg>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function deleteMatch(id){
-  if(!confirm("Supprimer ce match ?")) return;
-
-  db.matches = db.matches.filter(m=>m.id!==id);
-  saveDB();
-  renderAll();
-  toast("Match supprimé.","success");
-}
 
 /* =========================
-   TEAMS
+   AJOUT TEAM
 ========================= */
 
-document.getElementById("newTeamBtn").addEventListener("click",()=>openTeamModal());
+function addTeam() {
 
-function openTeamModal(editId=null){
-  const existing = editId ? db.teams.find(t=>t.id===editId) : null;
+  toast(
+    "La création de Team sera reliée à la base de données dans la prochaine version"
+  );
 
-  const body = `
-    <div class="form-grid">
-      <div class="field full">
-        <label>Photo de la team</label>
-        <label class="photo-picker" for="teamImage">
-          <div class="photo-preview" id="teamPhotoPreview">
-            ${existing?.image ? `<img src="${existing.image}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">` : `<svg width="24" height="24"><use href="#i-image"/></svg>`}
-          </div>
-          <div class="photo-info">
-            <strong>Choisir une photo</strong>
-            <span>Depuis ta galerie</span>
-          </div>
-        </label>
-        <input id="teamImage" type="file" accept="image/*">
-      </div>
-
-      <div class="field">
-        <label for="teamName">Nom de la team</label>
-        <input class="input" id="teamName" value="${esc(existing?.name || "")}" placeholder="Ex. Team LVF">
-      </div>
-
-      <div class="field full">
-        <label for="teamNote">Note</label>
-        <textarea class="textarea" id="teamNote" placeholder="Informations sur cette team...">${esc(existing?.note || "")}</textarea>
-      </div>
-    </div>
-  `;
-
-  const footer = `
-    <button class="btn btn-secondary" id="cancelTeam">Annuler</button>
-    <button class="btn btn-primary" id="saveTeam">${existing ? "Enregistrer" : "Créer la team"}</button>
-  `;
-
-  openModal(existing ? "Modifier la team" : "Nouvelle team",body,footer);
-
-  let imageData = existing?.image || "";
-
-  document.getElementById("teamImage").addEventListener("change",async e=>{
-    const file = e.target.files?.[0];
-    if(!file) return;
-
-    try{
-      imageData = await compressImage(file);
-      document.getElementById("teamPhotoPreview").innerHTML =
-        `<img src="${imageData}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`;
-    }catch{
-      toast("Impossible de charger cette image.","error");
-    }
-  });
-
-  document.getElementById("cancelTeam").addEventListener("click",closeModal);
-
-  document.getElementById("saveTeam").addEventListener("click",()=>{
-    const name = document.getElementById("teamName").value.trim();
-    const note = document.getElementById("teamNote").value.trim();
-
-    if(!name){
-      toast("Indique le nom de la team.","error");
-      return;
-    }
-
-    const team = {
-      id:existing?.id || uid(),
-      name,
-      note,
-      image:imageData
-    };
-
-    db.teams = db.teams.filter(t=>t.id!==team.id);
-    db.teams.push(team);
-
-    saveDB();
-    closeModal();
-    renderAll();
-    toast(existing ? "Team modifiée." : "Team créée.","success");
-  });
 }
 
-function renderTeams(){
-  const container = document.getElementById("teamsList");
-
-  if(!db.teams.length){
-    container.innerHTML = `
-      <div class="card empty" style="grid-column:1/-1">
-        <div class="empty-icon"><svg><use href="#i-team"/></svg></div>
-        <strong>Aucune team</strong>
-        <div style="margin-top:5px">Crée ta première team.</div>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = db.teams.map(t=>{
-    const count = db.creators.filter(c=>c.teamId===t.id).length;
-
-    return `
-      <div class="card agency-card">
-        <div class="item-left">
-          ${avatarHTML(t)}
-          <div>
-            <h3>${esc(t.name)}</h3>
-            <div class="count">${count} créateur${count>1?"s":""}</div>
-          </div>
-        </div>
-
-        ${t.note ? `<div style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5">${esc(t.note)}</div>` : ""}
-
-        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
-          <button class="icon-btn" onclick="openTeamModal('${esc(t.id)}')">
-            <svg><use href="#i-edit"/></svg>
-          </button>
-          <button class="icon-btn danger" onclick="deleteTeam('${esc(t.id)}')">
-            <svg><use href="#i-trash"/></svg>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function deleteTeam(id){
-  const count = db.creators.filter(c=>c.teamId===id).length;
-
-  const msg = count
-    ? `Cette team contient ${count} créateur${count>1?"s":""}. La supprimer laissera ces créateurs sans team. Continuer ?`
-    : "Supprimer cette team ?";
-
-  if(!confirm(msg)) return;
-
-  db.teams = db.teams.filter(t=>t.id!==id);
-  db.creators.forEach(c=>{
-    if(c.teamId===id) c.teamId="";
-  });
-
-  saveDB();
-  renderAll();
-  toast("Team supprimée.","success");
-}
 
 /* =========================
-   CREATORS
+   AJOUT TACHE
 ========================= */
 
-document.getElementById("newCreatorBtn").addEventListener("click",()=>openCreatorModal());
+function addTask() {
 
-function openCreatorModal(editId=null){
-  const existing = editId ? db.creators.find(c=>c.id===editId) : null;
+  showModal(
 
-  const body = `
-    <div class="form-grid">
-      <div class="field full">
-        <label>Photo du créateur</label>
-        <label class="photo-picker" for="creatorImage">
-          <div class="photo-preview" id="creatorPhotoPreview">
-            ${existing?.image ? `<img src="${existing.image}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">` : `<svg width="24" height="24"><use href="#i-image"/></svg>`}
-          </div>
-          <div class="photo-info">
-            <strong>Choisir une photo</strong>
-            <span>Depuis ta galerie</span>
-          </div>
+    "Nouvelle tâche",
+
+    `
+
+      <div class="field">
+
+        <label>
+          Tâche
         </label>
-        <input id="creatorImage" type="file" accept="image/*">
+
+        <input
+          id="task"
+        >
+
       </div>
 
-      <div class="field">
-        <label for="creatorName">Nom</label>
-        <input class="input" id="creatorName" value="${esc(existing?.name || "")}" placeholder="Nom du créateur">
-      </div>
 
       <div class="field">
-        <label for="creatorPseudo">Pseudo TikTok</label>
-        <input class="input" id="creatorPseudo" value="${esc(existing?.pseudo || "")}" placeholder="@pseudo">
-      </div>
 
-      <div class="field">
-        <label for="creatorRole">Rôle</label>
-        <select class="select" id="creatorRole">
-          ${["Fondateur","Manager","Agent","Créateur"].map(r=>`
-            <option ${existing?.role===r?"selected":""}>${r}</option>
-          `).join("")}
+        <label>
+          Priorité
+        </label>
+
+        <select id="priority">
+
+          <option>
+            Urgent
+          </option>
+
+          <option>
+            Important
+          </option>
+
+          <option>
+            Normal
+          </option>
+
         </select>
+
       </div>
 
-      <div class="field">
-        <label for="creatorTeam">Team</label>
-        <select class="select" id="creatorTeam">
-          <option value="">Sans team</option>
-          ${db.teams.map(t=>`
-            <option value="${esc(t.id)}" ${existing?.teamId===t.id?"selected":""}>
-              ${esc(t.name)}
-            </option>
-          `).join("")}
-        </select>
-      </div>
+    `,
 
-      <div class="field full">
-        <label for="creatorNote">Note</label>
-        <textarea class="textarea" id="creatorNote" placeholder="Informations sur ce créateur...">${esc(existing?.note || "")}</textarea>
-      </div>
-    </div>
-  `;
+    () => {
 
-  const footer = `
-    <button class="btn btn-secondary" id="cancelCreator">Annuler</button>
-    <button class="btn btn-primary" id="saveCreator">${existing ? "Enregistrer" : "Créer le créateur"}</button>
-  `;
+      const value =
+        document
+          .getElementById("task")
+          .value
+          .trim();
 
-  openModal(existing ? "Modifier le créateur" : "Nouveau créateur",body,footer);
 
-  let imageData = existing?.image || "";
+      if (!value) {
+        return;
+      }
 
-  document.getElementById("creatorImage").addEventListener("change",async e=>{
-    const file = e.target.files?.[0];
-    if(!file) return;
 
-    try{
-      imageData = await compressImage(file);
-      document.getElementById("creatorPhotoPreview").innerHTML =
-        `<img src="${imageData}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`;
-    }catch{
-      toast("Impossible de charger cette image.","error");
-    }
-  });
+      document
+        .getElementById("taskList")
+        .insertAdjacentHTML(
 
-  document.getElementById("cancelCreator").addEventListener("click",closeModal);
+          "afterbegin",
 
-  document.getElementById("saveCreator").addEventListener("click",()=>{
-    const name = document.getElementById("creatorName").value.trim();
-    const pseudo = document.getElementById("creatorPseudo").value.trim();
-    const role = document.getElementById("creatorRole").value;
-    const teamId = document.getElementById("creatorTeam").value;
-    const note = document.getElementById("creatorNote").value.trim();
+          `
 
-    if(!name){
-      toast("Indique le nom du créateur.","error");
-      return;
-    }
+            <div class="row">
 
-    if(!pseudo){
-      toast("Indique le pseudo TikTok.","error");
-      return;
-    }
+              <strong>
+                📌 ${value}
+              </strong>
 
-    const creator = {
-      id:existing?.id || uid(),
-      name,
-      pseudo,
-      role,
-      teamId,
-      note,
-      image:imageData
-    };
+              <small>
+                Priorité :
+                ${
+                  document
+                    .getElementById("priority")
+                    .value
+                }
+              </small>
 
-    db.creators = db.creators.filter(c=>c.id!==creator.id);
-    db.creators.push(creator);
-
-    saveDB();
-    closeModal();
-    renderAll();
-    toast(existing ? "Créateur modifié." : "Créateur créé.","success");
-  });
-}
-
-function avatarHTML(item){
-  if(item?.image){
-    return `<img class="avatar" src="${item.image}" alt="">`;
-  }
-
-  return `<div class="avatar">${esc(initials(item?.name))}</div>`;
-}
-
-function renderCreators(){
-  const container = document.getElementById("creatorsList");
-
-  if(!db.creators.length){
-    container.innerHTML = `
-      <div class="card empty" style="grid-column:1/-1">
-        <div class="empty-icon"><svg><use href="#i-user"/></svg></div>
-        <strong>Aucun créateur</strong>
-        <div style="margin-top:5px">Ajoute ton premier créateur.</div>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = db.creators.map(c=>{
-    const team = teamById(c.teamId);
-
-    return `
-      <div class="card agency-card">
-        <div class="item-left">
-          ${avatarHTML(c)}
-          <div>
-            <h3>${esc(c.name)}</h3>
-            <div class="count">
-              ${c.pseudo ? "@"+esc(c.pseudo.replace(/^@/,"")) : ""}
             </div>
-          </div>
-        </div>
 
-        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:14px">
-          <span class="badge badge-purple">${esc(c.role || "Créateur")}</span>
-          ${team ? `<span class="badge">${esc(team.name)}</span>` : ""}
-        </div>
+          `
 
-        ${c.note ? `<div style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5">${esc(c.note)}</div>` : ""}
+        );
 
-        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
-          <button class="icon-btn" onclick="openCreatorModal('${esc(c.id)}')">
-            <svg><use href="#i-edit"/></svg>
-          </button>
-          <button class="icon-btn danger" onclick="deleteCreator('${esc(c.id)}')">
-            <svg><use href="#i-trash"/></svg>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
 
-function deleteCreator(id){
-  if(!confirm("Supprimer ce créateur ?")) return;
+      toast(
+        "Tâche ajoutée"
+      );
 
-  db.creators = db.creators.filter(c=>c.id!==id);
-  saveDB();
-  renderAll();
-  toast("Créateur supprimé.","success");
-}
-
-/* =========================
-   AGENCIES
-========================= */
-
-document.getElementById("newAgencyBtn").addEventListener("click",()=>openAgencyModal());
-
-function openAgencyModal(editId=null){
-  const existing = editId ? db.agencies.find(a=>a.id===editId) : null;
-
-  const body = `
-    <div class="form-grid">
-      <div class="field full">
-        <label for="agencyName">Nom de l'agence</label>
-        <input class="input" id="agencyName" value="${esc(existing?.name || "")}" placeholder="Ex. Predator Agency">
-      </div>
-
-      <div class="field full">
-        <label for="agencyNote">Note</label>
-        <textarea class="textarea" id="agencyNote" placeholder="Informations sur cette agence...">${esc(existing?.note || "")}</textarea>
-      </div>
-    </div>
-  `;
-
-  const footer = `
-    <button class="btn btn-secondary" id="cancelAgency">Annuler</button>
-    <button class="btn btn-primary" id="saveAgency">${existing ? "Enregistrer" : "Ajouter l'agence"}</button>
-  `;
-
-  openModal(existing ? "Modifier l'agence" : "Nouvelle agence",body,footer);
-
-  document.getElementById("cancelAgency").addEventListener("click",closeModal);
-
-  document.getElementById("saveAgency").addEventListener("click",()=>{
-    const name = document.getElementById("agencyName").value.trim();
-    const note = document.getElementById("agencyNote").value.trim();
-
-    if(!name){
-      toast("Indique le nom de l'agence.","error");
-      return;
     }
 
-    const duplicate = db.agencies.find(a=>
-      a.id!==existing?.id && norm(a.name)===norm(name)
-    );
+  );
 
-    if(duplicate){
-      toast("Cette agence existe déjà.","error");
-      return;
-    }
-
-    const agency = {
-      id:existing?.id || uid(),
-      name,
-      note
-    };
-
-    db.agencies = db.agencies.filter(a=>a.id!==agency.id);
-    db.agencies.push(agency);
-
-    saveDB();
-    closeModal();
-    renderAll();
-    toast(existing ? "Agence modifiée." : "Agence ajoutée.","success");
-  });
 }
 
-function renderAgencies(){
-  const container = document.getElementById("agenciesList");
-
-  if(!db.agencies.length){
-    container.innerHTML = `
-      <div class="card empty" style="grid-column:1/-1">
-        <div class="empty-icon"><svg><use href="#i-agency"/></svg></div>
-        <strong>Aucune agence</strong>
-        <div style="margin-top:5px">Ajoute les agences que tu connais.</div>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = db.agencies.map(a=>{
-    const contacts = db.agencyContacts.filter(c=>norm(c.agencyName)===norm(a.name));
-
-    return `
-      <div class="card agency-card">
-        <h3>${esc(a.name)}</h3>
-        <div class="count">
-          ${contacts.length} créateur${contacts.length>1?"s":""} connu${contacts.length>1?"s":""}
-        </div>
-
-        ${a.note ? `<div style="font-size:12px;color:var(--muted);margin-top:12px;line-height:1.5">${esc(a.note)}</div>` : ""}
-
-        ${
-          contacts.length
-          ? `<div class="contact-list">
-              ${contacts.map(c=>`
-                <div class="contact">
-                  <b>${esc(c.name)}</b>
-                  ${c.pseudo ? " · @"+esc(c.pseudo.replace(/^@/,"")) : ""}
-                </div>
-              `).join("")}
-            </div>`
-          : `<div style="font-size:12px;color:var(--muted);margin-top:14px">Aucun créateur encore associé.</div>`
-        }
-
-        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
-          <button class="icon-btn" onclick="openAgencyModal('${esc(a.id)}')">
-            <svg><use href="#i-edit"/></svg>
-          </button>
-          <button class="icon-btn danger" onclick="deleteAgency('${esc(a.id)}')">
-            <svg><use href="#i-trash"/></svg>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function deleteAgency(id){
-  const agency = db.agencies.find(a=>a.id===id);
-  if(!agency) return;
-
-  if(!confirm(`Supprimer ${agency.name} de tes agences connues ? Les créateurs associés aux anciens matchs seront conservés.`)) return;
-
-  db.agencies = db.agencies.filter(a=>a.id!==id);
-  saveDB();
-  renderAll();
-  toast("Agence supprimée.","success");
-}
 
 /* =========================
-   CALENDAR
+   NOTES
 ========================= */
 
-let calendarDate = new Date();
+function addNote() {
 
-document.getElementById("prevMonth").addEventListener("click",()=>{
-  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);
-  renderCalendar();
-});
+  document
+    .getElementById("notes")
+    .focus();
 
-document.getElementById("nextMonth").addEventListener("click",()=>{
-  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);
-  renderCalendar();
-});
-
-function renderCalendar(){
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-
-  document.getElementById("calendarTitle").textContent =
-    new Date(year,month,1).toLocaleDateString("fr-FR",{
-      month:"long",
-      year:"numeric"
-    });
-
-  const grid = document.getElementById("calendarGrid");
-
-  const dayNames = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
-
-  let html = dayNames.map(d=>`<div class="day-name">${d}</div>`).join("");
-
-  const first = new Date(year,month,1);
-  let start = first.getDay();
-  start = start===0 ? 6 : start-1;
-
-  const days = new Date(year,month+1,0).getDate();
-
-  for(let i=0;i<start;i++){
-    html += `<div></div>`;
-  }
-
-  for(let day=1;day<=days;day++){
-    const iso = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-    const today = iso===todayISO();
-
-    const events = db.matches
-      .filter(m=>m.date===iso)
-      .sort((a,b)=>(a.time||"").localeCompare(b.time||""));
-
-    html += `
-      <div class="day ${today?"today":""}">
-        <div class="day-number">${day}</div>
-        ${events.map(m=>`
-          <div class="event" title="${esc(m.opponentAgency || "")}">
-            ${m.time ? esc(m.time)+" · " : ""}${esc(m.opponentCreatorName || "Match")}
-          </div>
-        `).join("")}
-      </div>
-    `;
-  }
-
-  grid.innerHTML = html;
 }
 
-/* =========================
-   RANKING
-========================= */
 
-function renderRanking(){
-  const container = document.getElementById("rankingList");
+function saveNotes() {
 
-  if(!db.creators.length){
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon"><svg><use href="#i-rank"/></svg></div>
-        Aucun créateur à classer.
-      </div>`;
-    return;
-  }
+  localStorage.setItem(
 
-  const stats = db.creators.map(c=>{
-    const count = db.matches.filter(m=>m.creatorId===c.id).length;
-    return {creator:c,count};
-  }).sort((a,b)=>b.count-a.count);
+    "tokcenter_notes",
 
-  container.innerHTML = stats.map((s,index)=>`
-    <div class="rank-row">
-      <div class="rank-num">${index+1}</div>
+    document.getElementById(
+      "notes"
+    ).value
 
-      <div class="item-left">
-        ${avatarHTML(s.creator)}
-        <div>
-          <div class="item-name">${esc(s.creator.name)}</div>
-          <div class="item-sub">${s.creator.pseudo ? "@"+esc(s.creator.pseudo.replace(/^@/,"")) : ""}</div>
-        </div>
-      </div>
+  );
 
-      <div class="rank-score">${s.count}</div>
-      <div class="rank-count">match${s.count>1?"s":""}</div>
-    </div>
-  `).join("");
+
+  toast(
+    "Notes enregistrées"
+  );
+
 }
 
-/* =========================
-   GLOBAL RENDER
-========================= */
 
-function renderAll(){
-  renderHome();
-  renderMatches();
-  renderTeams();
-  renderCreators();
-  renderAgencies();
-  renderCalendar();
-  renderRanking();
-}
+document.getElementById(
+  "notes"
+).value =
 
-/* =========================
-   START
-========================= */
+  localStorage.getItem(
+    "tokcenter_notes"
+  ) || "";
 
-renderAll();
 
 </script>
+
 </body>
 </html>
