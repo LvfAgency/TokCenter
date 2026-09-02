@@ -3,24 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#08090d">
+<meta name="theme-color" content="#09070f">
 <title>TokCenter — LVF</title>
 
 <style>
 :root{
-  --bg:#08090d;
-  --surface:#11131a;
-  --surface2:#171923;
-  --surface3:#1d202b;
+  --bg:#09070f;
+  --surface:#12101a;
+  --surface2:#191622;
+  --surface3:#211d2c;
   --line:rgba(255,255,255,.08);
-  --text:#f7f7fa;
-  --muted:#9095a5;
-  --accent:#ff6b35;
-  --accent2:#ff3d81;
+  --text:#f8f6ff;
+  --muted:#9993aa;
+
+  --accent:#8b5cf6;
+  --accent2:#c026d3;
+  --accent3:#6d28d9;
+
   --green:#49d17d;
   --red:#ff5d68;
   --gold:#f5c451;
-  --blue:#5d8dff;
+  --blue:#6d8dff;
+
   --radius:24px;
 }
 
@@ -35,12 +39,21 @@ html{
 
 body{
   margin:0;
+  min-height:100vh;
   background:
-    radial-gradient(circle at 50% -10%,rgba(255,107,53,.12),transparent 35%),
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(139,92,246,.18),
+      transparent 35%
+    ),
     var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
-  min-height:100vh;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
 }
 
 button,
@@ -60,7 +73,7 @@ button{
   max-width:620px;
   margin:auto;
   min-height:100vh;
-  padding-bottom:100px;
+  padding-bottom:105px;
 }
 
 /* =========================
@@ -72,9 +85,9 @@ button{
   top:0;
   z-index:50;
   padding:14px 16px;
-  background:rgba(8,9,13,.82);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  background:rgba(9,7,15,.84);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
   border-bottom:1px solid rgba(255,255,255,.05);
 }
 
@@ -91,35 +104,41 @@ button{
 }
 
 .logo{
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
   border-radius:14px;
   display:grid;
   place-items:center;
   font-size:13px;
   font-weight:950;
-  color:white;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 8px 25px rgba(255,75,95,.2);
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+  box-shadow:
+    0 8px 28px rgba(139,92,246,.28);
 }
 
 .brand{
   font-size:17px;
-  font-weight:900;
+  font-weight:950;
   letter-spacing:-.3px;
 }
 
 .brand small{
   display:block;
-  margin-top:1px;
+  margin-top:2px;
   font-size:10px;
   color:var(--muted);
   font-weight:700;
 }
 
 .icon-btn{
-  width:40px;
-  height:40px;
+  width:41px;
+  height:41px;
   border-radius:13px;
   background:var(--surface2);
   color:var(--text);
@@ -130,7 +149,7 @@ button{
 }
 
 /* =========================
-   SCREEN
+   SCREENS
 ========================= */
 
 .screen{
@@ -169,12 +188,17 @@ button{
 ========================= */
 
 .card{
-  background:linear-gradient(145deg,var(--surface),#0f1117);
+  background:
+    linear-gradient(
+      145deg,
+      var(--surface),
+      #100e17
+    );
   border:1px solid var(--line);
   border-radius:var(--radius);
   padding:17px;
   margin-bottom:13px;
-  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  box-shadow:0 12px 35px rgba(0,0,0,.13);
 }
 
 .card-title{
@@ -195,29 +219,41 @@ button{
 .hero{
   position:relative;
   overflow:hidden;
-  padding:22px;
+  padding:23px;
   border-radius:28px;
   margin-bottom:14px;
   background:
-    radial-gradient(circle at 100% 0%,rgba(255,61,129,.2),transparent 38%),
-    radial-gradient(circle at 0% 100%,rgba(255,107,53,.18),transparent 42%),
-    linear-gradient(145deg,#171923,#101118);
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(192,38,211,.23),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(109,40,217,.24),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #1b1727,
+      #110f18
+    );
   border:1px solid var(--line);
 }
 
 .hero:after{
   content:"";
   position:absolute;
-  width:140px;
-  height:140px;
+  width:150px;
+  height:150px;
   border-radius:50%;
-  right:-70px;
-  bottom:-75px;
-  background:rgba(255,107,53,.08);
+  right:-75px;
+  bottom:-80px;
+  background:rgba(139,92,246,.09);
 }
 
 .hero-label{
-  color:#ff9b78;
+  color:#b99aff;
   font-size:11px;
   font-weight:900;
   text-transform:uppercase;
@@ -226,7 +262,7 @@ button{
 
 .hero h1{
   margin:7px 0 3px;
-  font-size:35px;
+  font-size:36px;
   line-height:1;
   letter-spacing:-1.5px;
   font-weight:950;
@@ -334,10 +370,16 @@ button{
   width:100%;
   min-height:50px;
   border-radius:17px;
-  color:white;
+  color:#fff;
   font-weight:900;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 10px 25px rgba(255,75,95,.16);
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+  box-shadow:
+    0 10px 28px rgba(139,92,246,.2);
 }
 
 .secondary-btn{
@@ -386,6 +428,15 @@ button{
   color:var(--text);
 }
 
+.quick:active,
+.icon-btn:active,
+.secondary-btn:active,
+.choice:active,
+.filter:active,
+.nav button:active{
+  transform:scale(.98);
+}
+
 .quick-icon{
   font-size:21px;
 }
@@ -404,7 +455,7 @@ button{
 }
 
 /* =========================
-   MATCH FILTERS
+   FILTERS
 ========================= */
 
 .filters{
@@ -427,19 +478,32 @@ button{
 }
 
 .filter.active{
-  color:white;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
   border-color:transparent;
 }
 
 /* =========================
-   MATCH CARD — NOUVEL AFFICHAGE
+   MATCH CARD
 ========================= */
 
 .match-card{
   background:
-    radial-gradient(circle at 0% 0%,rgba(255,107,53,.07),transparent 34%),
-    linear-gradient(145deg,var(--surface),#0e1016);
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(139,92,246,.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      var(--surface),
+      #0f0d16
+    );
   border:1px solid var(--line);
   border-radius:25px;
   padding:16px;
@@ -521,11 +585,17 @@ button{
   display:grid;
   place-items:center;
   border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:white;
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+  color:#fff;
   font-size:10px;
   font-weight:950;
-  box-shadow:0 8px 20px rgba(255,75,95,.16);
+  box-shadow:
+    0 8px 20px rgba(139,92,246,.22);
 }
 
 .match-score-box{
@@ -556,8 +626,8 @@ button{
   margin-top:10px;
   padding:12px 13px;
   border-radius:15px;
-  background:rgba(255,107,53,.07);
-  border:1px solid rgba(255,107,53,.12);
+  background:rgba(139,92,246,.08);
+  border:1px solid rgba(139,92,246,.14);
 }
 
 .match-theme-label{
@@ -634,7 +704,7 @@ button{
 }
 
 /* =========================
-   FORM
+   FORMS
 ========================= */
 
 .field{
@@ -666,6 +736,11 @@ button{
   color:var(--text);
 }
 
+.input::placeholder,
+.textarea::placeholder{
+  color:#696475;
+}
+
 .textarea{
   min-height:95px;
   padding:13px;
@@ -675,7 +750,8 @@ button{
 .input:focus,
 .select:focus,
 .textarea:focus{
-  border-color:rgba(255,107,53,.5);
+  border-color:rgba(139,92,246,.55);
+  box-shadow:0 0 0 3px rgba(139,92,246,.08);
 }
 
 .select{
@@ -698,8 +774,8 @@ button{
 }
 
 .choice.active{
-  border-color:rgba(255,107,53,.55);
-  background:rgba(255,107,53,.08);
+  border-color:rgba(139,92,246,.6);
+  background:rgba(139,92,246,.1);
 }
 
 .choice strong{
@@ -753,7 +829,7 @@ button{
   position:absolute;
   inset:0;
   border-radius:30px;
-  background:#30333d;
+  background:#30303a;
   transition:.2s;
 }
 
@@ -765,12 +841,17 @@ button{
   left:3px;
   top:3px;
   border-radius:50%;
-  background:white;
+  background:#fff;
   transition:.2s;
 }
 
 .switch input:checked + .slider{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
 }
 
 .switch input:checked + .slider:before{
@@ -804,7 +885,7 @@ button{
 }
 
 /* =========================
-   RANKING
+   RANK
 ========================= */
 
 .rank{
@@ -876,7 +957,12 @@ button{
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,rgba(255,107,53,.15),rgba(255,61,129,.12));
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139,92,246,.16),
+      rgba(192,38,211,.1)
+    );
   border:1px solid var(--line);
   font-size:17px;
 }
@@ -929,8 +1015,11 @@ button{
   bottom:0;
   transform:translateX(-50%);
   width:min(620px,100%);
-  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
-  background:rgba(8,9,13,.9);
+  padding:
+    9px
+    12px
+    calc(9px + env(safe-area-inset-bottom));
+  background:rgba(9,7,15,.92);
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
   border-top:1px solid rgba(255,255,255,.06);
@@ -955,8 +1044,8 @@ button{
 }
 
 .nav button.active{
-  color:white;
-  background:rgba(255,255,255,.06);
+  color:#fff;
+  background:rgba(139,92,246,.12);
 }
 
 .nav-icon{
@@ -970,7 +1059,7 @@ button{
 }
 
 /* =========================
-   OVERLAYS
+   SHEETS
 ========================= */
 
 .sheet{
@@ -979,9 +1068,9 @@ button{
   z-index:200;
   display:none;
   align-items:flex-end;
-  background:rgba(0,0,0,.62);
-  backdrop-filter:blur(7px);
-  -webkit-backdrop-filter:blur(7px);
+  background:rgba(0,0,0,.66);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 
 .sheet.open{
@@ -993,12 +1082,15 @@ button{
   max-height:94vh;
   overflow-y:auto;
   margin:auto auto 0;
-  padding:10px 16px calc(25px + env(safe-area-inset-bottom));
+  padding:
+    10px
+    16px
+    calc(25px + env(safe-area-inset-bottom));
   border-radius:28px 28px 0 0;
-  background:#0d0f15;
+  background:#0d0b13;
   border:1px solid var(--line);
   border-bottom:0;
-  box-shadow:0 -20px 70px rgba(0,0,0,.4);
+  box-shadow:0 -20px 70px rgba(0,0,0,.45);
 }
 
 .sheet-handle{
@@ -1006,7 +1098,7 @@ button{
   height:4px;
   margin:2px auto 18px;
   border-radius:5px;
-  background:#343742;
+  background:#34313e;
 }
 
 .sheet-head{
@@ -1033,30 +1125,7 @@ button{
 }
 
 /* =========================
-   DIVIDER
-========================= */
-
-.divider{
-  height:1px;
-  background:var(--line);
-  margin:16px 0;
-}
-
-/* =========================
-   MONTH
-========================= */
-
-.month-row{
-  display:flex;
-  gap:8px;
-}
-
-.month-row .select{
-  flex:1;
-}
-
-/* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:390px){
@@ -1091,356 +1160,479 @@ button{
 
 <div class="app">
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+<header class="top">
+  <div class="top-inner">
 
-  <header class="top">
-    <div class="top-inner">
+    <div class="logo-wrap">
 
-      <div class="logo-wrap">
-        <div class="logo">TC</div>
-
-        <div class="brand">
-          TokCenter
-          <small>La Vraie Famille</small>
-        </div>
+      <div class="logo">
+        TC
       </div>
 
-      <button class="icon-btn" onclick="openSettings()">⚙️</button>
+      <div class="brand">
+        TokCenter
+        <small>La Vraie Famille</small>
+      </div>
 
     </div>
-  </header>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="openSettings()">
+      ⚙️
+    </button>
+
+  </div>
+</header>
 
 
-  <!-- =========================
-       ACCUEIL
-  ========================== -->
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
 
-  <main id="home" class="screen active">
+<main id="home" class="screen active">
 
-    <section class="hero">
+  <section class="hero">
 
-      <div class="hero-label">
-        TABLEAU DE BORD
+    <div class="hero-label">
+      TABLEAU DE BORD
+    </div>
+
+    <h1>LVF</h1>
+
+    <p>
+      Suivi de l'évolution de La Vraie Famille
+    </p>
+
+    <div
+      class="hero-number"
+      id="homeDiamonds">
+      0
+      <span>diamants</span>
+    </div>
+
+    <div
+      id="homeEvolution"
+      class="evolution neutral">
+      — Aucune évolution
+    </div>
+
+  </section>
+
+
+  <div class="kpis">
+
+    <div class="kpi">
+      <div class="kpi-label">Teams</div>
+      <div
+        class="kpi-value"
+        id="homeTeams">
+        0
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-label">Créateurs</div>
+      <div
+        class="kpi-value"
+        id="homeCreators">
+        0
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-label">Matchs</div>
+      <div
+        class="kpi-value"
+        id="homeMatches">
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+      Évolution LVF
+    </div>
+
+    <div class="card-subtitle">
+      Diamants enregistrés par mois
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="homeChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <div id="nextMatchContainer"></div>
+
+
+  <div class="section-head">
+
+    <div>
+      <h2
+        class="section-title"
+        style="font-size:18px">
+        Actions rapides
+      </h2>
+    </div>
+
+  </div>
+
+
+  <div class="quick-grid">
+
+    <button
+      class="quick"
+      type="button"
+      onclick="openMatch()">
+
+      <div class="quick-icon">
+        ⚔️
       </div>
 
-      <h1>LVF</h1>
+      <strong>
+        Nouveau Match
+      </strong>
 
-      <p>
-        Suivi de l'évolution de La Vraie Famille
+      <span>
+        Créer un Match OFF
+      </span>
+
+    </button>
+
+
+    <button
+      class="quick"
+      type="button"
+      onclick="openDiamonds()">
+
+      <div class="quick-icon">
+        💎
+      </div>
+
+      <strong>
+        Diamants
+      </strong>
+
+      <span>
+        Entrer les résultats
+      </span>
+
+    </button>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+     MATCHS
+===================================================== -->
+
+<main id="matches" class="screen">
+
+  <div class="section-head">
+
+    <div>
+
+      <h1 class="section-title">
+        Matchs
+      </h1>
+
+      <p class="section-subtitle">
+        Gère tous les Match OFF de LVF.
       </p>
 
-      <div class="hero-number" id="homeDiamonds">
-        0
-        <span>diamants</span>
-      </div>
+    </div>
 
-      <div id="homeEvolution" class="evolution neutral">
-        — Aucune évolution
-      </div>
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="openMatch()">
+      ＋
+    </button>
 
-    </section>
+  </div>
 
 
-    <div class="kpis">
+  <div class="filters">
 
-      <div class="kpi">
-        <div class="kpi-label">Teams</div>
-        <div class="kpi-value" id="homeTeams">0</div>
-      </div>
+    <button
+      class="filter active"
+      type="button"
+      onclick="filterMatches('all',this)">
+      Tous
+    </button>
 
-      <div class="kpi">
-        <div class="kpi-label">Créateurs</div>
-        <div class="kpi-value" id="homeCreators">0</div>
-      </div>
+    <button
+      class="filter"
+      type="button"
+      onclick="filterMatches('upcoming',this)">
+      À venir
+    </button>
 
-      <div class="kpi">
-        <div class="kpi-label">Matchs</div>
-        <div class="kpi-value" id="homeMatches">0</div>
-      </div>
+    <button
+      class="filter"
+      type="button"
+      onclick="filterMatches('done',this)">
+      Terminés
+    </button>
+
+  </div>
+
+
+  <div id="matchesList"></div>
+
+</main>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<main id="stats" class="screen">
+
+  <div class="section-head">
+
+    <div>
+
+      <h1 class="section-title">
+        Stats
+      </h1>
+
+      <p class="section-subtitle">
+        Les performances de LVF au fil des mois.
+      </p>
 
     </div>
 
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="openDiamonds()">
+      ＋
+    </button>
 
-    <div class="card">
+  </div>
 
-      <div class="card-title">
-        Évolution LVF
-      </div>
 
-      <div class="card-subtitle">
-        Diamants enregistrés par mois
-      </div>
+  <div class="card">
 
-      <div class="chart-wrap">
-        <canvas id="homeChart"></canvas>
-      </div>
+    <div class="card-title">
+      Diamants LVF
+    </div>
+
+    <div class="card-subtitle">
+      Total du dernier mois enregistré
+    </div>
+
+    <div
+      id="statsTotal"
+      style="
+        font-size:34px;
+        font-weight:950;
+        margin-top:12px;
+      ">
+      0
+    </div>
+
+    <div
+      id="statsEvolution"
+      class="evolution neutral">
+      — Aucune évolution
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+      Évolution mensuelle
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="statsChart"></canvas>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+      Team du mois
+    </div>
+
+    <div class="card-subtitle">
+      La Team ayant réalisé le plus de diamants
+    </div>
+
+    <div
+      id="bestTeam"
+      style="margin-top:14px">
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+      Classement des Teams
+    </div>
+
+    <div id="teamRanking"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+      Matchs
+    </div>
+
+    <div id="matchStats"></div>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+     LVF
+===================================================== -->
+
+<main id="lvf" class="screen">
+
+  <div class="section-head">
+
+    <div>
+
+      <h1 class="section-title">
+        LVF
+      </h1>
+
+      <p class="section-subtitle">
+        Créateurs, Teams et agences adverses.
+      </p>
 
     </div>
 
+  </div>
 
-    <div id="nextMatchContainer"></div>
 
+  <!-- CREATORS -->
 
-    <div class="section-head">
-      <div>
-        <h2 class="section-title" style="font-size:18px">
-          Actions rapides
-        </h2>
-      </div>
-    </div>
+  <div class="card">
 
-    <div class="quick-grid">
-
-      <button class="quick" onclick="openMatch()">
-        <div class="quick-icon">⚔️</div>
-        <strong>Nouveau Match</strong>
-        <span>Créer un Match OFF</span>
-      </button>
-
-      <button class="quick" onclick="openDiamonds()">
-        <div class="quick-icon">💎</div>
-        <strong>Diamants</strong>
-        <span>Entrer les résultats</span>
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- =========================
-       MATCHS
-  ========================== -->
-
-  <main id="matches" class="screen">
-
-    <div class="section-head">
-
-      <div>
-        <h1 class="section-title">Matchs</h1>
-        <p class="section-subtitle">
-          Gère tous les Match OFF de LVF.
-        </p>
-      </div>
-
-      <button class="icon-btn" onclick="openMatch()">＋</button>
-
-    </div>
-
-
-    <div class="filters">
-
-      <button
-        class="filter active"
-        data-filter="all"
-        onclick="filterMatches('all',this)">
-        Tous
-      </button>
-
-      <button
-        class="filter"
-        data-filter="upcoming"
-        onclick="filterMatches('upcoming',this)">
-        À venir
-      </button>
-
-      <button
-        class="filter"
-        data-filter="done"
-        onclick="filterMatches('done',this)">
-        Terminés
-      </button>
-
-    </div>
-
-
-    <div id="matchesList"></div>
-
-  </main>
-
-
-  <!-- =========================
-       STATS
-  ========================== -->
-
-  <main id="stats" class="screen">
-
-    <div class="section-head">
-
-      <div>
-        <h1 class="section-title">Stats</h1>
-        <p class="section-subtitle">
-          Les performances de LVF au fil des mois.
-        </p>
-      </div>
-
-      <button class="icon-btn" onclick="openDiamonds()">＋</button>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        Diamants LVF
-      </div>
-
-      <div class="card-subtitle">
-        Total du dernier mois enregistré
-      </div>
-
-      <div
-        id="statsTotal"
-        style="font-size:34px;font-weight:950;margin-top:12px">
-        0
-      </div>
-
-      <div id="statsEvolution" class="evolution neutral">
-        — Aucune évolution
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        Évolution mensuelle
-      </div>
-
-      <div class="chart-wrap">
-        <canvas id="statsChart"></canvas>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        Team du mois
-      </div>
-
-      <div class="card-subtitle">
-        La Team ayant réalisé le plus de diamants
-      </div>
-
-      <div id="bestTeam" style="margin-top:14px"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        Classement des Teams
-      </div>
-
-      <div id="teamRanking"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        Matchs
-      </div>
-
-      <div id="matchStats"></div>
-
-    </div>
-
-  </main>
-
-
-  <!-- =========================
-       LVF
-  ========================== -->
-
-  <main id="lvf" class="screen">
-
-    <div class="section-head">
+    <div class="section-head" style="margin-top:0">
 
       <div>
-        <h1 class="section-title">LVF</h1>
-        <p class="section-subtitle">
-          Créateurs, Teams et agences adverses.
-        </p>
-      </div>
 
-    </div>
-
-
-    <div class="card">
-
-      <div class="section-head" style="margin-top:0">
-
-        <div>
-          <div class="card-title">Créateurs</div>
-          <div class="card-subtitle">
-            Les créateurs de LVF
-          </div>
+        <div class="card-title">
+          Créateurs
         </div>
 
-        <button class="icon-btn" onclick="openCreator()">＋</button>
-
-      </div>
-
-      <div id="creatorsList"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="section-head" style="margin-top:0">
-
-        <div>
-          <div class="card-title">Teams</div>
-          <div class="card-subtitle">
-            Les Teams de LVF
-          </div>
+        <div class="card-subtitle">
+          Les créateurs de LVF
         </div>
 
-        <button class="icon-btn" onclick="openTeam()">＋</button>
-
       </div>
 
-      <div id="teamsList"></div>
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="openCreator()">
+        ＋
+      </button>
 
     </div>
 
+    <div id="creatorsList"></div>
 
-    <div class="card">
+  </div>
 
-      <div class="section-head" style="margin-top:0">
 
-        <div>
-          <div class="card-title">Agences adverses</div>
-          <div class="card-subtitle">
-            Agences rencontrées en Match OFF
-          </div>
+  <!-- TEAMS -->
+
+  <div class="card">
+
+    <div class="section-head" style="margin-top:0">
+
+      <div>
+
+        <div class="card-title">
+          Teams
         </div>
 
-        <button class="icon-btn" onclick="openAgency()">＋</button>
+        <div class="card-subtitle">
+          Les Teams de LVF
+        </div>
 
       </div>
 
-      <div id="agenciesList"></div>
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="openTeam()">
+        ＋
+      </button>
 
     </div>
 
-  </main>
+    <div id="teamsList"></div>
+
+  </div>
+
+
+  <!-- AGENCIES -->
+
+  <div class="card">
+
+    <div class="section-head" style="margin-top:0">
+
+      <div>
+
+        <div class="card-title">
+          Agences adverses
+        </div>
+
+        <div class="card-subtitle">
+          Agences rencontrées en Match OFF
+        </div>
+
+      </div>
+
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="openAgency()">
+        ＋
+      </button>
+
+    </div>
+
+    <div id="agenciesList"></div>
+
+  </div>
+
+</main>
 
 </div>
 
 
-<!-- =========================
-     NAVIGATION
-========================== -->
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
 
 <nav class="bottom">
 
@@ -1448,31 +1640,46 @@ button{
 
     <button
       class="active"
+      type="button"
       data-screen="home"
       onclick="go('home')">
+
       <div class="nav-icon">🏠</div>
       <div class="nav-label">Accueil</div>
+
     </button>
 
+
     <button
+      type="button"
       data-screen="matches"
       onclick="go('matches')">
+
       <div class="nav-icon">⚔️</div>
       <div class="nav-label">Matchs</div>
+
     </button>
 
+
     <button
+      type="button"
       data-screen="stats"
       onclick="go('stats')">
+
       <div class="nav-icon">📊</div>
       <div class="nav-label">Stats</div>
+
     </button>
 
+
     <button
+      type="button"
       data-screen="lvf"
       onclick="go('lvf')">
+
       <div class="nav-icon">👥</div>
       <div class="nav-label">LVF</div>
+
     </button>
 
   </div>
@@ -1480,11 +1687,13 @@ button{
 </nav>
 
 
-<!-- =========================================================
-     OVERLAY : MATCH
-========================================================= -->
+<!-- =====================================================
+     MATCH OVERLAY
+===================================================== -->
 
-<div id="matchOverlay" class="sheet">
+<div
+  id="matchOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -1496,7 +1705,10 @@ button{
         Nouveau Match OFF
       </div>
 
-      <button class="close-btn" onclick="closeOverlay('matchOverlay')">
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeOverlay('matchOverlay')">
         ×
       </button>
 
@@ -1510,13 +1722,17 @@ button{
       </div>
 
       <div class="card-subtitle">
-        Renseigne les deux adversaires.
+        Renseigne les informations principales.
       </div>
 
 
-      <div class="field" style="margin-top:15px">
+      <div
+        class="field"
+        style="margin-top:15px">
 
-        <label>Date</label>
+        <label>
+          Date
+        </label>
 
         <input
           id="matchDate"
@@ -1528,7 +1744,9 @@ button{
 
       <div class="field">
 
-        <label>Heure</label>
+        <label>
+          Heure
+        </label>
 
         <input
           id="matchTime"
@@ -1540,7 +1758,9 @@ button{
 
       <div class="field">
 
-        <label>Thème du Match</label>
+        <label>
+          Thème du Match
+        </label>
 
         <input
           id="matchTheme"
@@ -1565,9 +1785,13 @@ button{
       </div>
 
 
-      <div class="field" style="margin-top:15px">
+      <div
+        class="field"
+        style="margin-top:15px">
 
-        <label>Team LVF</label>
+        <label>
+          Team LVF
+        </label>
 
         <select
           id="matchTeam"
@@ -1585,7 +1809,9 @@ button{
 
       <div class="field">
 
-        <label>Créateur LVF</label>
+        <label>
+          Créateur LVF
+        </label>
 
         <select
           id="matchCreator"
@@ -1611,40 +1837,61 @@ button{
       </div>
 
       <div class="card-subtitle">
-        Choisis une agence déjà enregistrée ou crée-en une nouvelle.
+        Choisis une agence existante ou crée-en une nouvelle.
       </div>
 
 
-      <div class="choice-grid" style="margin-top:15px">
+      <div
+        class="choice-grid"
+        style="margin-top:15px">
 
         <button
           id="agencyChoiceExisting"
           class="choice active"
+          type="button"
           onclick="setAgencyMode('existing')">
 
-          <strong>Agence existante</strong>
-          <small>Utiliser une agence enregistrée</small>
+          <strong>
+            Agence existante
+          </strong>
+
+          <small>
+            Utiliser une agence enregistrée
+          </small>
 
         </button>
+
 
         <button
           id="agencyChoiceNew"
           class="choice"
+          type="button"
           onclick="setAgencyMode('new')">
 
-          <strong>Nouvelle agence</strong>
-          <small>Créer une agence</small>
+          <strong>
+            Nouvelle agence
+          </strong>
+
+          <small>
+            Créer une agence
+          </small>
 
         </button>
 
       </div>
 
 
-      <div id="existingAgencyBox" style="margin-top:14px">
+      <!-- EXISTING -->
+
+      <div
+        id="existingAgencyBox"
+        style="margin-top:14px">
 
         <div class="field">
 
-          <label>Agence adverse</label>
+          <label>
+            Agence adverse
+          </label>
 
           <select
             id="matchAgency"
@@ -1662,7 +1909,9 @@ button{
 
         <div class="field">
 
-          <label>Team adverse</label>
+          <label>
+            Team adverse
+          </label>
 
           <select
             id="matchOpponentTeam"
@@ -1680,7 +1929,9 @@ button{
 
         <div class="field">
 
-          <label>Créateur adverse</label>
+          <label>
+            Créateur adverse
+          </label>
 
           <select
             id="matchOpponentCreator"
@@ -1697,18 +1948,30 @@ button{
 
         <button
           class="secondary-btn"
+          type="button"
           onclick="openOpponentCreator()">
+
           ＋ Ajouter un créateur adverse
+
         </button>
 
       </div>
 
 
-      <div id="newAgencyBox" style="display:none;margin-top:14px">
+      <!-- NEW -->
+
+      <div
+        id="newAgencyBox"
+        style="
+          display:none;
+          margin-top:14px;
+        ">
 
         <div class="field">
 
-          <label>Nom de l'agence</label>
+          <label>
+            Nom de l'agence
+          </label>
 
           <input
             id="matchNewAgencyName"
@@ -1720,7 +1983,9 @@ button{
 
         <div class="field">
 
-          <label>@ TikTok</label>
+          <label>
+            @ TikTok
+          </label>
 
           <input
             id="matchNewAgencyHandle"
@@ -1732,7 +1997,9 @@ button{
 
         <div class="field">
 
-          <label>Team adverse</label>
+          <label>
+            Team adverse
+          </label>
 
           <input
             id="matchNewOpponentTeam"
@@ -1744,7 +2011,9 @@ button{
 
         <div class="field">
 
-          <label>Créateur adverse</label>
+          <label>
+            Créateur adverse
+          </label>
 
           <input
             id="matchNewOpponentCreator"
@@ -1767,15 +2036,19 @@ button{
       </div>
 
       <div class="card-subtitle">
-        Tu peux le laisser à 0 — 0 pour un Match à venir.
+        Laisse 0 — 0 pour un Match à venir.
       </div>
 
 
-      <div class="choice-grid" style="margin-top:15px">
+      <div
+        class="choice-grid"
+        style="margin-top:15px">
 
         <div class="field" style="margin:0">
 
-          <label>LVF</label>
+          <label>
+            LVF
+          </label>
 
           <input
             id="matchScoreLVF"
@@ -1786,9 +2059,12 @@ button{
 
         </div>
 
+
         <div class="field" style="margin:0">
 
-          <label>Adversaire</label>
+          <label>
+            Adversaire
+          </label>
 
           <input
             id="matchScoreOpp"
@@ -1802,9 +2078,13 @@ button{
       </div>
 
 
-      <div class="field" style="margin-top:14px">
+      <div
+        class="field"
+        style="margin-top:14px">
 
-        <label>Résultat</label>
+        <label>
+          Résultat
+        </label>
 
         <select
           id="matchResult"
@@ -1835,8 +2115,11 @@ button{
 
     <button
       class="primary-btn"
+      type="button"
       onclick="saveMatch()">
+
       Enregistrer le Match
+
     </button>
 
   </div>
@@ -1844,11 +2127,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : CREATEUR LVF
-========================================================= -->
+<!-- =====================================================
+     CREATOR
+===================================================== -->
 
-<div id="creatorOverlay" class="sheet">
+<div
+  id="creatorOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -1862,6 +2147,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('creatorOverlay')">
         ×
       </button>
@@ -1871,7 +2157,9 @@ button{
 
     <div class="field">
 
-      <label>Nom</label>
+      <label>
+        Nom
+      </label>
 
       <input
         id="creatorName"
@@ -1883,7 +2171,9 @@ button{
 
     <div class="field">
 
-      <label>@ TikTok</label>
+      <label>
+        @ TikTok
+      </label>
 
       <input
         id="creatorHandle"
@@ -1895,7 +2185,9 @@ button{
 
     <div class="field">
 
-      <label>Team</label>
+      <label>
+        Team
+      </label>
 
       <select
         id="creatorTeam"
@@ -1912,8 +2204,11 @@ button{
 
     <button
       class="primary-btn"
+      type="button"
       onclick="saveCreator()">
+
       Enregistrer le créateur
+
     </button>
 
   </div>
@@ -1921,11 +2216,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : TEAM LVF
-========================================================= -->
+<!-- =====================================================
+     TEAM
+===================================================== -->
 
-<div id="teamOverlay" class="sheet">
+<div
+  id="teamOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -1939,6 +2236,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('teamOverlay')">
         ×
       </button>
@@ -1948,7 +2246,9 @@ button{
 
     <div class="field">
 
-      <label>Nom de la Team</label>
+      <label>
+        Nom de la Team
+      </label>
 
       <input
         id="teamName"
@@ -1960,8 +2260,11 @@ button{
 
     <button
       class="primary-btn"
+      type="button"
       onclick="saveTeam()">
+
       Enregistrer la Team
+
     </button>
 
   </div>
@@ -1969,11 +2272,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : AGENCE
-========================================================= -->
+<!-- =====================================================
+     AGENCY
+===================================================== -->
 
-<div id="agencyOverlay" class="sheet">
+<div
+  id="agencyOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -1987,6 +2292,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('agencyOverlay')">
         ×
       </button>
@@ -1996,7 +2302,9 @@ button{
 
     <div class="field">
 
-      <label>Nom de l'agence</label>
+      <label>
+        Nom de l'agence
+      </label>
 
       <input
         id="agencyName"
@@ -2008,7 +2316,9 @@ button{
 
     <div class="field">
 
-      <label>@ TikTok</label>
+      <label>
+        @ TikTok
+      </label>
 
       <input
         id="agencyHandle"
@@ -2020,7 +2330,9 @@ button{
 
     <div class="field">
 
-      <label>Lien TikTok</label>
+      <label>
+        Lien TikTok
+      </label>
 
       <input
         id="agencyLink"
@@ -2032,7 +2344,9 @@ button{
 
     <div class="field">
 
-      <label>Contact</label>
+      <label>
+        Contact
+      </label>
 
       <input
         id="agencyContact"
@@ -2044,7 +2358,9 @@ button{
 
     <div class="field">
 
-      <label>Notes</label>
+      <label>
+        Notes
+      </label>
 
       <textarea
         id="agencyNotes"
@@ -2056,9 +2372,15 @@ button{
 
     <div class="field">
 
-      <label>Teams de l'agence</label>
+      <label>
+        Teams de l'agence
+      </label>
 
-      <div style="display:flex;gap:8px">
+      <div
+        style="
+          display:flex;
+          gap:8px;
+        ">
 
         <input
           id="agencyTeamInput"
@@ -2067,6 +2389,7 @@ button{
 
         <button
           class="icon-btn"
+          type="button"
           onclick="addAgencyTeamField()">
           ＋
         </button>
@@ -2075,15 +2398,19 @@ button{
 
       <div
         id="agencyTeamDraft"
-        class="mini-list"></div>
+        class="mini-list">
+      </div>
 
     </div>
 
 
     <button
       class="primary-btn"
+      type="button"
       onclick="saveAgency()">
+
       Enregistrer l'agence
+
     </button>
 
   </div>
@@ -2091,11 +2418,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : CREATEUR ADVERSAIRE
-========================================================= -->
+<!-- =====================================================
+     OPPONENT CREATOR
+===================================================== -->
 
-<div id="oppCreatorOverlay" class="sheet">
+<div
+  id="oppCreatorOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -2109,6 +2438,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('oppCreatorOverlay')">
         ×
       </button>
@@ -2118,7 +2448,9 @@ button{
 
     <div class="field">
 
-      <label>Agence</label>
+      <label>
+        Agence
+      </label>
 
       <select
         id="oppCreatorAgency"
@@ -2135,7 +2467,9 @@ button{
 
     <div class="field">
 
-      <label>Team</label>
+      <label>
+        Team
+      </label>
 
       <select
         id="oppCreatorTeam"
@@ -2152,7 +2486,9 @@ button{
 
     <div class="field">
 
-      <label>Nom du créateur</label>
+      <label>
+        Nom du créateur
+      </label>
 
       <input
         id="oppCreatorName"
@@ -2164,7 +2500,9 @@ button{
 
     <div class="field">
 
-      <label>@ TikTok</label>
+      <label>
+        @ TikTok
+      </label>
 
       <input
         id="oppCreatorHandle"
@@ -2174,9 +2512,7 @@ button{
     </div>
 
 
-    <div
-      id="oppCreatorSaveBox"
-      class="switch-row">
+    <div class="switch-row">
 
       <div class="switch-text">
 
@@ -2185,10 +2521,11 @@ button{
         </strong>
 
         <small>
-          Le créateur sera disponible pour les prochains matchs.
+          Disponible pour les prochains matchs.
         </small>
 
       </div>
+
 
       <label class="switch">
 
@@ -2206,9 +2543,12 @@ button{
 
     <button
       class="primary-btn"
+      type="button"
       style="margin-top:15px"
       onclick="saveOpponentCreator()">
+
       Ajouter le créateur
+
     </button>
 
   </div>
@@ -2216,11 +2556,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : DIAMANTS
-========================================================= -->
+<!-- =====================================================
+     DIAMONDS
+===================================================== -->
 
-<div id="diamondOverlay" class="sheet">
+<div
+  id="diamondOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -2234,6 +2576,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('diamondOverlay')">
         ×
       </button>
@@ -2243,7 +2586,9 @@ button{
 
     <div class="field">
 
-      <label>Mois</label>
+      <label>
+        Mois
+      </label>
 
       <input
         id="diamondMonth"
@@ -2253,16 +2598,17 @@ button{
     </div>
 
 
-    <div
-      id="diamondFields">
-    </div>
+    <div id="diamondFields"></div>
 
 
     <button
       class="primary-btn"
+      type="button"
       style="margin-top:15px"
       onclick="saveDiamonds()">
+
       Enregistrer les diamants
+
     </button>
 
   </div>
@@ -2270,11 +2616,13 @@ button{
 </div>
 
 
-<!-- =========================================================
-     OVERLAY : PARAMÈTRES
-========================================================= -->
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
 
-<div id="settingsOverlay" class="sheet">
+<div
+  id="settingsOverlay"
+  class="sheet">
 
   <div class="sheet-inner">
 
@@ -2288,6 +2636,7 @@ button{
 
       <button
         class="close-btn"
+        type="button"
         onclick="closeOverlay('settingsOverlay')">
         ×
       </button>
@@ -2302,18 +2651,19 @@ button{
       </div>
 
       <div class="card-subtitle">
-        Tes données sont enregistrées localement sur cet appareil.
+        Les données sont enregistrées localement sur cet appareil.
       </div>
 
-      <div style="margin-top:15px">
 
-        <button
-          class="secondary-btn"
-          onclick="exportData()">
-          Exporter mes données
-        </button>
+      <button
+        class="secondary-btn"
+        type="button"
+        style="margin-top:15px"
+        onclick="exportData()">
 
-      </div>
+        📤 Exporter mes données
+
+      </button>
 
     </div>
 
@@ -2321,18 +2671,22 @@ button{
     <div class="card">
 
       <div class="card-title">
-        Zone de réinitialisation
+        Réinitialisation
       </div>
 
       <div class="card-subtitle">
-        Cette action supprime toutes les données locales de TokCenter.
+        Supprime toutes les données locales de TokCenter.
       </div>
+
 
       <button
         class="danger-btn"
+        type="button"
         style="margin-top:15px"
         onclick="resetData()">
+
         Réinitialiser TokCenter
+
       </button>
 
     </div>
@@ -2345,18 +2699,39 @@ button{
 <script>
 
 /* =========================================================
-   STORAGE
+   DATABASE
 ========================================================= */
 
 const KEY = "TOKCENTER_LVF_V2";
 
-let db = JSON.parse(localStorage.getItem(KEY)) || {
-  creators: [],
-  teams: [],
-  agencies: [],
-  matches: [],
-  diamonds: []
-};
+let db;
+
+try{
+
+  db =
+    JSON.parse(
+      localStorage.getItem(KEY)
+    ) || {
+
+      creators:[],
+      teams:[],
+      agencies:[],
+      matches:[],
+      diamonds:[]
+
+    };
+
+}catch(error){
+
+  db={
+    creators:[],
+    teams:[],
+    agencies:[],
+    matches:[],
+    diamonds:[]
+  };
+
+}
 
 
 /* =========================================================
@@ -2365,15 +2740,20 @@ let db = JSON.parse(localStorage.getItem(KEY)) || {
 
 function uid(){
 
-  return Date.now().toString(36) +
-    Math.random().toString(36).slice(2,8);
+  return Date.now().toString(36)
+    + Math.random()
+      .toString(36)
+      .slice(2,8);
 
 }
 
 
 function save(){
 
-  localStorage.setItem(KEY,JSON.stringify(db));
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(db)
+  );
 
 }
 
@@ -2392,107 +2772,77 @@ function esc(value){
 
 function fmt(value){
 
-  return Number(value || 0).toLocaleString("fr-FR");
+  return Number(value || 0)
+    .toLocaleString("fr-FR");
 
 }
 
 
 function dateFR(value){
 
-  if(!value) return "Date non renseignée";
+  if(!value)
+    return "Date non renseignée";
 
-  const d = new Date(value + "T00:00:00");
+  const d =
+    new Date(
+      value+"T00:00:00"
+    );
 
-  if(Number.isNaN(d.getTime())) return value;
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+    return value;
+  }
 
-  return d.toLocaleDateString("fr-FR",{
-    day:"numeric",
-    month:"long",
-    year:"numeric"
-  });
-
-}
-
-
-function monthFR(value){
-
-  if(!value) return "";
-
-  const d = new Date(value + "-01T00:00:00");
-
-  if(Number.isNaN(d.getTime())) return value;
-
-  return d.toLocaleDateString("fr-FR",{
-    month:"long",
-    year:"numeric"
-  });
+  return d.toLocaleDateString(
+    "fr-FR",
+    {
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    }
+  );
 
 }
 
-
-/* =========================================================
-   NORMALISATION / MIGRATION
-========================================================= */
 
 function normalizeData(){
 
-  if(!Array.isArray(db.creators)) db.creators=[];
-  if(!Array.isArray(db.teams)) db.teams=[];
-  if(!Array.isArray(db.agencies)) db.agencies=[];
-  if(!Array.isArray(db.matches)) db.matches=[];
-  if(!Array.isArray(db.diamonds)) db.diamonds=[];
+  if(!Array.isArray(db.creators))
+    db.creators=[];
+
+  if(!Array.isArray(db.teams))
+    db.teams=[];
+
+  if(!Array.isArray(db.agencies))
+    db.agencies=[];
+
+  if(!Array.isArray(db.matches))
+    db.matches=[];
+
+  if(!Array.isArray(db.diamonds))
+    db.diamonds=[];
 
 
-  db.agencies.forEach(agency=>{
+  db.agencies.forEach(
+    agency=>{
 
-    if(!Array.isArray(agency.creators)){
-      agency.creators=[];
+      if(!Array.isArray(agency.creators))
+        agency.creators=[];
+
+      if(!Array.isArray(agency.teams))
+        agency.teams=[];
+
     }
-
-    if(!Array.isArray(agency.teams)){
-      agency.teams=[];
-    }
-
-
-    agency.creators.forEach(creator=>{
-
-      if(!creator.teamId && creator.team){
-
-        let existingTeam =
-          agency.teams.find(
-            t => t.name === creator.team
-          );
-
-        if(existingTeam){
-
-          creator.teamId=existingTeam.id;
-
-        }else{
-
-          const newTeam={
-            id:uid(),
-            name:creator.team
-          };
-
-          agency.teams.push(newTeam);
-
-          creator.teamId=newTeam.id;
-
-        }
-
-      }
-
-    });
-
-  });
-
-
-  save();
+  );
 
 }
 
 
 normalizeData();
+save();
 
 
 /* =========================================================
@@ -2502,21 +2852,31 @@ normalizeData();
 function go(screen){
 
   document.querySelectorAll(".screen")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
+    .forEach(
+      el=>el.classList.remove("active")
+    );
 
-  document.getElementById(screen)
-    .classList.add("active");
+
+  const target =
+    document.getElementById(screen);
+
+
+  if(!target)
+    return;
+
+
+  target.classList.add("active");
 
 
   document.querySelectorAll(".nav button")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.screen===screen
-      );
-    });
+    .forEach(
+      btn=>{
+        btn.classList.toggle(
+          "active",
+          btn.dataset.screen===screen
+        );
+      }
+    );
 
 
   window.scrollTo({
@@ -2529,23 +2889,31 @@ function go(screen){
 
 function openOverlay(id){
 
-  document.getElementById(id)
-    .classList.add("open");
+  const el =
+    document.getElementById(id);
+
+  if(el)
+    el.classList.add("open");
 
 }
 
 
 function closeOverlay(id){
 
-  document.getElementById(id)
-    .classList.remove("open");
+  const el =
+    document.getElementById(id);
+
+  if(el)
+    el.classList.remove("open");
 
 }
 
 
 function openSettings(){
 
-  openOverlay("settingsOverlay");
+  openOverlay(
+    "settingsOverlay"
+  );
 
 }
 
@@ -2556,19 +2924,33 @@ function openSettings(){
 
 function exportData(){
 
-  const blob = new Blob(
-    [JSON.stringify(db,null,2)],
-    {type:"application/json"}
-  );
+  const blob =
+    new Blob(
+      [JSON.stringify(db,null,2)],
+      {
+        type:"application/json"
+      }
+    );
 
-  const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
 
   a.href=url;
-  a.download="tokcenter-lvf-backup.json";
+  a.download=
+    "tokcenter-lvf-backup.json";
+
+
+  document.body.appendChild(a);
 
   a.click();
+
+  a.remove();
 
   URL.revokeObjectURL(url);
 
@@ -2577,11 +2959,14 @@ function exportData(){
 
 function resetData(){
 
-  const ok=confirm(
-    "Supprimer toutes les données TokCenter ? Cette action est irréversible."
-  );
+  if(
+    !confirm(
+      "Supprimer toutes les données TokCenter ?"
+    )
+  ){
+    return;
+  }
 
-  if(!ok) return;
 
   localStorage.removeItem(KEY);
 
@@ -2591,58 +2976,85 @@ function resetData(){
 
 
 /* =========================================================
-   SELECT HELPERS
+   SELECT
 ========================================================= */
 
 function populateSelect(
-  selectId,
+  id,
   items,
-  placeholder,
-  valueKey="id",
-  labelKey="name"
+  placeholder
 ){
 
-  const select=document.getElementById(selectId);
+  const select =
+    document.getElementById(id);
 
-  if(!select) return;
+
+  if(!select)
+    return;
+
 
   select.innerHTML =
-    `<option value="">${esc(placeholder)}</option>`;
+    `<option value="">
+      ${esc(placeholder)}
+    </option>`;
 
 
-  items.forEach(item=>{
+  items.forEach(
+    item=>{
 
-    const option=document.createElement("option");
+      const option =
+        document.createElement("option");
 
-    option.value=item[valueKey];
 
-    option.textContent=item[labelKey];
+      option.value=item.id;
+      option.textContent=item.name;
 
-    select.appendChild(option);
 
-  });
+      select.appendChild(option);
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   MATCH — OPEN
+   MATCH
 ========================================================= */
 
 function openMatch(){
 
-  document.getElementById("matchDate").value =
-    new Date().toISOString().slice(0,10);
+  document.getElementById(
+    "matchDate"
+  ).value =
+    new Date()
+      .toISOString()
+      .slice(0,10);
 
-  document.getElementById("matchTime").value="";
 
-  document.getElementById("matchTheme").value="";
+  document.getElementById(
+    "matchTime"
+  ).value="";
 
-  document.getElementById("matchScoreLVF").value="0";
 
-  document.getElementById("matchScoreOpp").value="0";
+  document.getElementById(
+    "matchTheme"
+  ).value="";
 
-  document.getElementById("matchResult").value="upcoming";
+
+  document.getElementById(
+    "matchScoreLVF"
+  ).value="0";
+
+
+  document.getElementById(
+    "matchScoreOpp"
+  ).value="0";
+
+
+  document.getElementById(
+    "matchResult"
+  ).value="upcoming";
 
 
   populateSelect(
@@ -2652,234 +3064,341 @@ function openMatch(){
   );
 
 
-  populateSelect(
-    "creatorTeam",
-    db.teams,
-    "Sélectionner une Team"
-  );
-
-
-  document.getElementById("matchCreator").innerHTML=
-    `<option value="">Sélectionner un créateur</option>`;
+  document.getElementById(
+    "matchCreator"
+  ).innerHTML =
+    `<option value="">
+      Sélectionner un créateur
+    </option>`;
 
 
   populateAgencySelect();
 
-  document.getElementById("matchOpponentTeam").innerHTML=
-    `<option value="">Sélectionner une Team</option>`;
 
-  document.getElementById("matchOpponentCreator").innerHTML=
-    `<option value="">Sélectionner un créateur</option>`;
+  document.getElementById(
+    "matchOpponentTeam"
+  ).innerHTML =
+    `<option value="">
+      Sélectionner une Team
+    </option>`;
+
+
+  document.getElementById(
+    "matchOpponentCreator"
+  ).innerHTML =
+    `<option value="">
+      Sélectionner un créateur
+    </option>`;
 
 
   setAgencyMode("existing");
 
 
-  openOverlay("matchOverlay");
+  document.getElementById(
+    "matchNewAgencyName"
+  ).value="";
+
+
+  document.getElementById(
+    "matchNewAgencyHandle"
+  ).value="";
+
+
+  document.getElementById(
+    "matchNewOpponentTeam"
+  ).value="";
+
+
+  document.getElementById(
+    "matchNewOpponentCreator"
+  ).value="";
+
+
+  openOverlay(
+    "matchOverlay"
+  );
 
 }
 
-
-/* =========================================================
-   MATCH — LVF CREATORS
-========================================================= */
 
 function updateLVFCreators(){
 
-  const teamId=
-    document.getElementById("matchTeam").value;
+  const teamId =
+    document.getElementById(
+      "matchTeam"
+    ).value;
 
 
-  const creators=db.creators.filter(c=>
-    !teamId || c.teamId===teamId
+  const creators =
+    db.creators.filter(
+      c=>
+        !teamId ||
+        c.teamId===teamId
+    );
+
+
+  const select =
+    document.getElementById(
+      "matchCreator"
+    );
+
+
+  select.innerHTML =
+    `<option value="">
+      Sélectionner un créateur
+    </option>`;
+
+
+  creators.forEach(
+    creator=>{
+
+      const option =
+        document.createElement("option");
+
+
+      option.value=
+        creator.id;
+
+
+      option.textContent =
+        creator.name +
+        (
+          creator.handle
+            ? " · "+creator.handle
+            : ""
+        );
+
+
+      select.appendChild(
+        option
+      );
+
+    }
   );
-
-
-  const select=
-    document.getElementById("matchCreator");
-
-
-  select.innerHTML=
-    `<option value="">Sélectionner un créateur</option>`;
-
-
-  creators.forEach(c=>{
-
-    const option=document.createElement("option");
-
-    option.value=c.id;
-
-    option.textContent=
-      c.name +
-      (c.handle ? " · "+c.handle : "");
-
-    select.appendChild(option);
-
-  });
 
 }
 
 
-/* =========================================================
-   MATCH — AGENCY
-========================================================= */
-
 function populateAgencySelect(){
 
-  const select=
-    document.getElementById("matchAgency");
+  const select =
+    document.getElementById(
+      "matchAgency"
+    );
 
 
-  select.innerHTML=
-    `<option value="">Sélectionner une agence</option>`;
+  select.innerHTML =
+    `<option value="">
+      Sélectionner une agence
+    </option>`;
 
 
-  db.agencies.forEach(agency=>{
+  db.agencies.forEach(
+    agency=>{
 
-    const option=document.createElement("option");
+      const option =
+        document.createElement("option");
 
-    option.value=agency.id;
 
-    option.textContent=agency.name;
+      option.value=
+        agency.id;
 
-    select.appendChild(option);
 
-  });
+      option.textContent=
+        agency.name;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
 
 }
 
 
 function setAgencyMode(mode){
 
-  const existing=
+  const existing =
     mode==="existing";
 
 
   document.getElementById(
     "agencyChoiceExisting"
-  ).classList.toggle("active",existing);
+  )
+  .classList.toggle(
+    "active",
+    existing
+  );
 
 
   document.getElementById(
     "agencyChoiceNew"
-  ).classList.toggle("active",!existing);
+  )
+  .classList.toggle(
+    "active",
+    !existing
+  );
 
 
   document.getElementById(
     "existingAgencyBox"
-  ).style.display=
-    existing ? "block" : "none";
+  ).style.display =
+    existing
+      ? "block"
+      : "none";
 
 
   document.getElementById(
     "newAgencyBox"
-  ).style.display=
-    existing ? "none" : "block";
+  ).style.display =
+    existing
+      ? "none"
+      : "block";
 
 }
 
 
-/* =========================================================
-   MATCH — OPPONENT TEAMS
-========================================================= */
-
 function updateOpponentTeams(){
 
-  const agencyId=
-    document.getElementById("matchAgency").value;
+  const agencyId =
+    document.getElementById(
+      "matchAgency"
+    ).value;
 
 
-  const agency=
-    db.agencies.find(a=>a.id===agencyId);
+  const agency =
+    db.agencies.find(
+      a=>a.id===agencyId
+    );
 
 
-  const teamSelect=
-    document.getElementById("matchOpponentTeam");
+  const teamSelect =
+    document.getElementById(
+      "matchOpponentTeam"
+    );
 
 
-  const creatorSelect=
-    document.getElementById("matchOpponentCreator");
+  const creatorSelect =
+    document.getElementById(
+      "matchOpponentCreator"
+    );
 
 
-  teamSelect.innerHTML=
-    `<option value="">Sélectionner une Team</option>`;
+  teamSelect.innerHTML =
+    `<option value="">
+      Sélectionner une Team
+    </option>`;
 
 
-  creatorSelect.innerHTML=
-    `<option value="">Sélectionner un créateur</option>`;
+  creatorSelect.innerHTML =
+    `<option value="">
+      Sélectionner un créateur
+    </option>`;
 
 
-  if(!agency) return;
+  if(!agency)
+    return;
 
 
-  agency.teams.forEach(team=>{
+  agency.teams.forEach(
+    team=>{
 
-    const option=document.createElement("option");
-
-    option.value=team.id;
-
-    option.textContent=team.name;
-
-    teamSelect.appendChild(option);
-
-  });
+      const option =
+        document.createElement("option");
 
 
-  updateOpponentCreatorsByTeam();
+      option.value=team.id;
+      option.textContent=team.name;
+
+
+      teamSelect.appendChild(
+        option
+      );
+
+    }
+  );
 
 }
 
 
 function updateOpponentCreatorsByTeam(){
 
-  const agencyId=
-    document.getElementById("matchAgency").value;
+  const agencyId =
+    document.getElementById(
+      "matchAgency"
+    ).value;
 
 
-  const teamId=
-    document.getElementById("matchOpponentTeam").value;
+  const teamId =
+    document.getElementById(
+      "matchOpponentTeam"
+    ).value;
 
 
-  const agency=
-    db.agencies.find(a=>a.id===agencyId);
-
-
-  const select=
-    document.getElementById("matchOpponentCreator");
-
-
-  select.innerHTML=
-    `<option value="">Sélectionner un créateur</option>`;
-
-
-  if(!agency) return;
-
-
-  const creators=
-    agency.creators.filter(c=>
-      !teamId || c.teamId===teamId
+  const agency =
+    db.agencies.find(
+      a=>a.id===agencyId
     );
 
 
-  creators.forEach(c=>{
+  const select =
+    document.getElementById(
+      "matchOpponentCreator"
+    );
 
-    const option=document.createElement("option");
 
-    option.value=c.id;
+  select.innerHTML =
+    `<option value="">
+      Sélectionner un créateur
+    </option>`;
 
-    option.textContent=
-      c.name +
-      (c.handle ? " · "+c.handle : "");
 
-    select.appendChild(option);
+  if(!agency)
+    return;
 
-  });
+
+  const creators =
+    agency.creators.filter(
+      creator=>
+        !teamId ||
+        creator.teamId===teamId
+    );
+
+
+  creators.forEach(
+    creator=>{
+
+      const option =
+        document.createElement("option");
+
+
+      option.value=
+        creator.id;
+
+
+      option.textContent =
+        creator.name +
+        (
+          creator.handle
+            ? " · "+creator.handle
+            : ""
+        );
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   MATCH — ADD OPPONENT CREATOR
+   OPPONENT CREATOR
 ========================================================= */
 
 function openOpponentCreator(){
@@ -2887,97 +3406,139 @@ function openOpponentCreator(){
   populateAgencySelect();
 
 
-  const selectedAgency=
-    document.getElementById("matchAgency").value;
+  const agencyId =
+    document.getElementById(
+      "matchAgency"
+    ).value;
 
 
   document.getElementById(
     "oppCreatorAgency"
-  ).value=selectedAgency;
+  ).value=agencyId;
 
 
   updateOpponentCreatorTeams();
 
 
-  document.getElementById("oppCreatorName").value="";
-  document.getElementById("oppCreatorHandle").value="";
-  document.getElementById("oppCreatorSave").checked=true;
+  document.getElementById(
+    "oppCreatorName"
+  ).value="";
 
 
-  openOverlay("oppCreatorOverlay");
+  document.getElementById(
+    "oppCreatorHandle"
+  ).value="";
+
+
+  document.getElementById(
+    "oppCreatorSave"
+  ).checked=true;
+
+
+  openOverlay(
+    "oppCreatorOverlay"
+  );
 
 }
 
 
 function updateOpponentCreatorTeams(){
 
-  const agencyId=
-    document.getElementById("oppCreatorAgency").value;
+  const agencyId =
+    document.getElementById(
+      "oppCreatorAgency"
+    ).value;
 
 
-  const agency=
-    db.agencies.find(a=>a.id===agencyId);
+  const agency =
+    db.agencies.find(
+      a=>a.id===agencyId
+    );
 
 
-  const select=
-    document.getElementById("oppCreatorTeam");
+  const select =
+    document.getElementById(
+      "oppCreatorTeam"
+    );
 
 
-  select.innerHTML=
-    `<option value="">Sélectionner une Team</option>`;
+  select.innerHTML =
+    `<option value="">
+      Sélectionner une Team
+    </option>`;
 
 
-  if(!agency) return;
+  if(!agency)
+    return;
 
 
-  agency.teams.forEach(team=>{
+  agency.teams.forEach(
+    team=>{
 
-    const option=document.createElement("option");
+      const option =
+        document.createElement("option");
 
-    option.value=team.id;
 
-    option.textContent=team.name;
+      option.value=team.id;
+      option.textContent=team.name;
 
-    select.appendChild(option);
 
-  });
+      select.appendChild(
+        option
+      );
+
+    }
+  );
 
 }
 
 
-document.getElementById("oppCreatorAgency")
-  .addEventListener("change",updateOpponentCreatorTeams);
+document.getElementById(
+  "oppCreatorAgency"
+)
+.addEventListener(
+  "change",
+  updateOpponentCreatorTeams
+);
 
-
-/* =========================================================
-   SAVE OPPONENT CREATOR
-========================================================= */
 
 function saveOpponentCreator(){
 
-  const agencyId=
-    document.getElementById("oppCreatorAgency").value;
+  const agencyId =
+    document.getElementById(
+      "oppCreatorAgency"
+    ).value;
 
 
-  const teamId=
-    document.getElementById("oppCreatorTeam").value;
+  const teamId =
+    document.getElementById(
+      "oppCreatorTeam"
+    ).value;
 
 
-  const name=
-    document.getElementById("oppCreatorName").value.trim();
+  const name =
+    document.getElementById(
+      "oppCreatorName"
+    ).value.trim();
 
 
-  const handle=
-    document.getElementById("oppCreatorHandle").value.trim();
+  const handle =
+    document.getElementById(
+      "oppCreatorHandle"
+    ).value.trim();
 
 
-  const shouldSave=
-    document.getElementById("oppCreatorSave").checked;
+  const shouldSave =
+    document.getElementById(
+      "oppCreatorSave"
+    ).checked;
 
 
   if(!agencyId){
 
-    alert("Sélectionne une agence.");
+    alert(
+      "Sélectionne une agence."
+    );
 
     return;
 
@@ -2986,18 +3547,23 @@ function saveOpponentCreator(){
 
   if(!name){
 
-    alert("Indique le nom du créateur.");
+    alert(
+      "Indique le nom du créateur."
+    );
 
     return;
 
   }
 
 
-  const agency=
-    db.agencies.find(a=>a.id===agencyId);
+  const agency =
+    db.agencies.find(
+      a=>a.id===agencyId
+    );
 
 
-  if(!agency) return;
+  if(!agency)
+    return;
 
 
   let teamName="";
@@ -3005,20 +3571,30 @@ function saveOpponentCreator(){
 
   if(teamId){
 
-    const team=
-      agency.teams.find(t=>t.id===teamId);
+    const team =
+      agency.teams.find(
+        t=>t.id===teamId
+      );
 
-    teamName=team ? team.name : "";
+
+    teamName =
+      team
+        ? team.name
+        : "";
 
   }
 
 
-  const creator={
+  const creator = {
 
     id:uid(),
+
     name,
+
     handle,
+
     teamId,
+
     team:teamName
 
   };
@@ -3026,31 +3602,45 @@ function saveOpponentCreator(){
 
   if(shouldSave){
 
-    agency.creators.push(creator);
+    agency.creators.push(
+      creator
+    );
 
     save();
 
   }
 
 
-  const matchCreator=
+  const select =
     document.getElementById(
       "matchOpponentCreator"
     );
 
 
-  const option=document.createElement("option");
+  const option =
+    document.createElement("option");
 
-  option.value=creator.id;
 
-  option.textContent=
+  option.value=
+    creator.id;
+
+
+  option.textContent =
     creator.name +
-    (creator.handle ? " · "+creator.handle : "");
+    (
+      creator.handle
+        ? " · "+creator.handle
+        : ""
+    );
 
 
-  matchCreator.appendChild(option);
+  select.appendChild(
+    option
+  );
 
-  matchCreator.value=creator.id;
+
+  select.value=
+    creator.id;
 
 
   if(teamId){
@@ -3062,7 +3652,9 @@ function saveOpponentCreator(){
   }
 
 
-  closeOverlay("oppCreatorOverlay");
+  closeOverlay(
+    "oppCreatorOverlay"
+  );
 
 }
 
@@ -3073,41 +3665,63 @@ function saveOpponentCreator(){
 
 function saveMatch(){
 
-  const date=
-    document.getElementById("matchDate").value;
+  const date =
+    document.getElementById(
+      "matchDate"
+    ).value;
 
 
-  const time=
-    document.getElementById("matchTime").value;
+  const time =
+    document.getElementById(
+      "matchTime"
+    ).value;
 
 
-  const theme=
-    document.getElementById("matchTheme").value.trim();
+  const theme =
+    document.getElementById(
+      "matchTheme"
+    ).value.trim();
 
 
-  const teamId=
-    document.getElementById("matchTeam").value;
+  const teamId =
+    document.getElementById(
+      "matchTeam"
+    ).value;
 
 
-  const creatorId=
-    document.getElementById("matchCreator").value;
+  const creatorId =
+    document.getElementById(
+      "matchCreator"
+    ).value;
 
 
-  const result=
-    document.getElementById("matchResult").value;
+  const result =
+    document.getElementById(
+      "matchResult"
+    ).value;
 
 
-  const scoreLVF=
-    Number(document.getElementById("matchScoreLVF").value)||0;
+  const scoreLVF =
+    Number(
+      document.getElementById(
+        "matchScoreLVF"
+      ).value
+    ) || 0;
 
 
-  const scoreOpp=
-    Number(document.getElementById("matchScoreOpp").value)||0;
+  const scoreOpp =
+    Number(
+      document.getElementById(
+        "matchScoreOpp"
+      ).value
+    ) || 0;
 
 
   if(!date){
 
-    alert("Indique la date du Match.");
+    alert(
+      "Indique la date du Match."
+    );
 
     return;
 
@@ -3116,7 +3730,9 @@ function saveMatch(){
 
   if(!teamId){
 
-    alert("Sélectionne la Team LVF.");
+    alert(
+      "Sélectionne la Team LVF."
+    );
 
     return;
 
@@ -3125,28 +3741,32 @@ function saveMatch(){
 
   if(!creatorId){
 
-    alert("Sélectionne le créateur LVF.");
+    alert(
+      "Sélectionne le créateur LVF."
+    );
 
     return;
 
   }
 
 
+  const newAgencyMode =
+    document.getElementById(
+      "agencyChoiceNew"
+    )
+    .classList
+    .contains("active");
+
+
+  let agencyId="";
   let agencyName="";
   let opponentTeam="";
   let opponentCreator="";
-  let agencyId="";
 
 
-  const agencyMode=
-    document.getElementById(
-      "agencyChoiceNew"
-    ).classList.contains("active");
+  if(!newAgencyMode){
 
-
-  if(!agencyMode){
-
-    agencyId=
+    agencyId =
       document.getElementById(
         "matchAgency"
       ).value;
@@ -3154,83 +3774,95 @@ function saveMatch(){
 
     if(!agencyId){
 
-      alert("Sélectionne l'agence adverse.");
+      alert(
+        "Sélectionne l'agence adverse."
+      );
 
       return;
 
     }
 
 
-    const agency=
-      db.agencies.find(a=>a.id===agencyId);
+    const agency =
+      db.agencies.find(
+        a=>a.id===agencyId
+      );
 
 
-    agencyName=agency ? agency.name : "";
+    if(!agency){
+
+      alert(
+        "Agence introuvable."
+      );
+
+      return;
+
+    }
 
 
-    const teamSelect=
+    agencyName=
+      agency.name;
+
+
+    const teamSelect =
       document.getElementById(
         "matchOpponentTeam"
       );
 
 
-    opponentTeam=
-      teamSelect.options[
-        teamSelect.selectedIndex
-      ]?.textContent || "";
+    if(
+      teamSelect.value
+    ){
+
+      opponentTeam =
+        teamSelect.options[
+          teamSelect.selectedIndex
+        ].textContent;
+
+    }
 
 
-    const creatorSelect=
+    const creatorSelect =
       document.getElementById(
         "matchOpponentCreator"
       );
 
 
-    opponentCreator=
-      creatorSelect.options[
-        creatorSelect.selectedIndex
-      ]?.textContent || "";
+    if(
+      creatorSelect.value
+    ){
+
+      const creator =
+        agency.creators.find(
+          c=>
+            c.id===
+            creatorSelect.value
+        );
 
 
-    if(opponentCreator.includes(" · ")){
+      if(creator){
 
-      opponentCreator=
-        opponentCreator.split(" · ")[0];
+        opponentCreator=
+          creator.name;
 
-    }
+      }else{
 
-  }else{
+        opponentCreator=
+          creatorSelect.options[
+            creatorSelect.selectedIndex
+          ].textContent
+            .split(" · ")[0];
 
-    agencyName=
-      document.getElementById(
-        "matchNewAgencyName"
-      ).value.trim();
-
-
-    opponentTeam=
-      document.getElementById(
-        "matchNewOpponentTeam"
-      ).value.trim();
-
-
-    opponentCreator=
-      document.getElementById(
-        "matchNewOpponentCreator"
-      ).value.trim();
-
-
-    if(!agencyName){
-
-      alert("Indique le nom de l'agence adverse.");
-
-      return;
+      }
 
     }
 
 
     if(!opponentTeam){
 
-      alert("Indique la Team adverse.");
+      alert(
+        "Sélectionne la Team adverse."
+      );
 
       return;
 
@@ -3239,7 +3871,61 @@ function saveMatch(){
 
     if(!opponentCreator){
 
-      alert("Indique le créateur adverse.");
+      alert(
+        "Sélectionne le créateur adverse."
+      );
+
+      return;
+
+    }
+
+  }else{
+
+    agencyName =
+      document.getElementById(
+        "matchNewAgencyName"
+      ).value.trim();
+
+
+    opponentTeam =
+      document.getElementById(
+        "matchNewOpponentTeam"
+      ).value.trim();
+
+
+    opponentCreator =
+      document.getElementById(
+        "matchNewOpponentCreator"
+      ).value.trim();
+
+
+    if(!agencyName){
+
+      alert(
+        "Indique le nom de l'agence adverse."
+      );
+
+      return;
+
+    }
+
+
+    if(!opponentTeam){
+
+      alert(
+        "Indique la Team adverse."
+      );
+
+      return;
+
+    }
+
+
+    if(!opponentCreator){
+
+      alert(
+        "Indique le créateur adverse."
+      );
 
       return;
 
@@ -3248,12 +3934,16 @@ function saveMatch(){
   }
 
 
-  const team=
-    db.teams.find(t=>t.id===teamId);
+  const team =
+    db.teams.find(
+      t=>t.id===teamId
+    );
 
 
-  const creator=
-    db.creators.find(c=>c.id===creatorId);
+  const creator =
+    db.creators.find(
+      c=>c.id===creatorId
+    );
 
 
   const match={
@@ -3268,11 +3958,17 @@ function saveMatch(){
 
     teamId,
 
-    team:team ? team.name : "",
+    team:
+      team
+        ? team.name
+        : "",
 
     creatorId,
 
-    creator:creator ? creator.name : "",
+    creator:
+      creator
+        ? creator.name
+        : "",
 
     agencyId,
 
@@ -3291,14 +3987,23 @@ function saveMatch(){
   };
 
 
-  db.matches.push(match);
+  db.matches.push(
+    match
+  );
+
 
   save();
 
 
-  closeOverlay("matchOverlay");
+  closeOverlay(
+    "matchOverlay"
+  );
+
 
   refresh();
+
+
+  go("matches");
 
 }
 
@@ -3310,18 +4015,26 @@ function saveMatch(){
 let currentMatchFilter="all";
 
 
-function filterMatches(filter,button){
+function filterMatches(
+  filter,
+  button
+){
 
-  currentMatchFilter=filter;
-
-
-  document.querySelectorAll(".filter")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
+  currentMatchFilter=
+    filter;
 
 
-  button.classList.add("active");
+  document.querySelectorAll(
+    ".filter"
+  )
+  .forEach(
+    btn=>
+      btn.classList.remove("active")
+  );
+
+
+  if(button)
+    button.classList.add("active");
 
 
   renderMatches();
@@ -3330,49 +4043,66 @@ function filterMatches(filter,button){
 
 
 /* =========================================================
-   MATCH LIST
+   MATCHES
 ========================================================= */
 
 function renderMatches(){
 
-  const container=
-    document.getElementById("matchesList");
-
-
-  let matches=[...db.matches];
-
-
-  if(currentMatchFilter==="upcoming"){
-
-    matches=matches.filter(
-      m=>m.result==="upcoming"
+  const container =
+    document.getElementById(
+      "matchesList"
     );
+
+
+  let matches =
+    [...db.matches];
+
+
+  if(
+    currentMatchFilter===
+    "upcoming"
+  ){
+
+    matches =
+      matches.filter(
+        m=>m.result==="upcoming"
+      );
 
   }
 
 
-  if(currentMatchFilter==="done"){
+  if(
+    currentMatchFilter===
+    "done"
+  ){
 
-    matches=matches.filter(
-      m=>m.result!=="upcoming"
-    );
+    matches =
+      matches.filter(
+        m=>m.result!=="upcoming"
+      );
 
   }
 
 
-  matches.sort((a,b)=>{
+  matches.sort(
+    (a,b)=>{
 
-    const da=new Date(
-      `${a.date || ""}T${a.time || "00:00"}`
-    );
+      const da =
+        new Date(
+          `${a.date || ""}T${a.time || "00:00"}`
+        );
 
-    const dbb=new Date(
-      `${b.date || ""}T${b.time || "00:00"}`
-    );
 
-    return dbb-da;
+      const dbb =
+        new Date(
+          `${b.date || ""}T${b.time || "00:00"}`
+        );
 
-  });
+
+      return dbb-da;
+
+    }
+  );
 
 
   if(!matches.length){
@@ -3381,14 +4111,19 @@ function renderMatches(){
 
       <div class="empty">
 
-        <div class="empty-icon">⚔️</div>
+        <div class="empty-icon">
+          ⚔️
+        </div>
 
-        <strong>Aucun Match</strong>
+        <strong>
+          Aucun Match
+        </strong>
 
         <p>
-          ${currentMatchFilter==="all"
-            ?"Crée ton premier Match OFF pour commencer."
-            :"Aucun Match dans cette catégorie."
+          ${
+            currentMatchFilter==="all"
+              ? "Crée ton premier Match OFF pour commencer."
+              : "Aucun Match dans cette catégorie."
           }
         </p>
 
@@ -3401,14 +4136,16 @@ function renderMatches(){
   }
 
 
-  container.innerHTML=
-    matches.map(matchCard).join("");
+  container.innerHTML =
+    matches
+      .map(matchCard)
+      .join("");
 
 }
 
 
 /* =========================================================
-   MATCH CARD — NOUVEL AFFICHAGE
+   MATCH CARD
 ========================================================= */
 
 function matchCard(m){
@@ -3454,13 +4191,19 @@ function matchCard(m){
           </div>
 
           <div class="match-card-date">
+
             📅 ${dateFR(m.date)}
-            ${m.time
-              ? " · "+esc(m.time)
-              : ""}
+
+            ${
+              m.time
+                ? " · "+esc(m.time)
+                : ""
+            }
+
           </div>
 
         </div>
+
 
         <span class="badge ${status}">
           ${statusText}
@@ -3480,17 +4223,21 @@ function matchCard(m){
           </div>
 
           <div class="match-side-team">
-            👥 ${esc(
-              m.team ||
-              "Team non renseignée"
-            )}
+            👥 ${
+              esc(
+                m.team ||
+                "Team non renseignée"
+              )
+            }
           </div>
 
           <div class="match-side-creator">
-            👤 ${esc(
-              m.creator ||
-              "Créateur non renseigné"
-            )}
+            👤 ${
+              esc(
+                m.creator ||
+                "Créateur non renseigné"
+              )
+            }
           </div>
 
         </div>
@@ -3508,24 +4255,30 @@ function matchCard(m){
         <div class="match-side-box right">
 
           <div class="match-side-title">
-            🏢 ${esc(
-              m.agency ||
-              "Adversaire"
-            )}
+            🏢 ${
+              esc(
+                m.agency ||
+                "Adversaire"
+              )
+            }
           </div>
 
           <div class="match-side-team">
-            👥 ${esc(
-              m.opponentTeam ||
-              "Team non renseignée"
-            )}
+            👥 ${
+              esc(
+                m.opponentTeam ||
+                "Team non renseignée"
+              )
+            }
           </div>
 
           <div class="match-side-creator">
-            👤 ${esc(
-              m.opponentCreator ||
-              "Créateur non renseigné"
-            )}
+            👤 ${
+              esc(
+                m.opponentCreator ||
+                "Créateur non renseigné"
+              )
+            }
           </div>
 
         </div>
@@ -3547,7 +4300,9 @@ function matchCard(m){
             color:var(--muted);
             font-size:18px;
             margin:0 3px;
-          ">—</span>
+          ">
+            —
+          </span>
 
           ${Number(m.scoreOpp)||0}
 
@@ -3574,6 +4329,7 @@ function matchCard(m){
 
       <button
         class="danger-btn"
+        type="button"
         style="margin-top:12px;min-height:42px"
         onclick="deleteMatch('${m.id}')">
 
@@ -3588,20 +4344,18 @@ function matchCard(m){
 }
 
 
-/* =========================================================
-   DELETE MATCH
-========================================================= */
-
 function deleteMatch(id){
 
-  const ok=confirm(
-    "Supprimer ce Match ?"
-  );
+  if(
+    !confirm(
+      "Supprimer ce Match ?"
+    )
+  ){
+    return;
+  }
 
-  if(!ok) return;
 
-
-  db.matches=
+  db.matches =
     db.matches.filter(
       m=>m.id!==id
     );
@@ -3615,13 +4369,19 @@ function deleteMatch(id){
 
 
 /* =========================================================
-   CREATOR
+   CREATORS
 ========================================================= */
 
 function openCreator(){
 
-  document.getElementById("creatorName").value="";
-  document.getElementById("creatorHandle").value="";
+  document.getElementById(
+    "creatorName"
+  ).value="";
+
+
+  document.getElementById(
+    "creatorHandle"
+  ).value="";
 
 
   populateSelect(
@@ -3631,26 +4391,28 @@ function openCreator(){
   );
 
 
-  openOverlay("creatorOverlay");
+  openOverlay(
+    "creatorOverlay"
+  );
 
 }
 
 
 function saveCreator(){
 
-  const name=
+  const name =
     document.getElementById(
       "creatorName"
     ).value.trim();
 
 
-  const handle=
+  const handle =
     document.getElementById(
       "creatorHandle"
     ).value.trim();
 
 
-  const teamId=
+  const teamId =
     document.getElementById(
       "creatorTeam"
     ).value;
@@ -3658,7 +4420,9 @@ function saveCreator(){
 
   if(!name){
 
-    alert("Indique le nom du créateur.");
+    alert(
+      "Indique le nom du créateur."
+    );
 
     return;
 
@@ -3667,14 +4431,16 @@ function saveCreator(){
 
   if(!teamId){
 
-    alert("Sélectionne une Team.");
+    alert(
+      "Sélectionne une Team."
+    );
 
     return;
 
   }
 
 
-  const team=
+  const team =
     db.teams.find(
       t=>t.id===teamId
     );
@@ -3683,17 +4449,26 @@ function saveCreator(){
   db.creators.push({
 
     id:uid(),
+
     name,
+
     handle,
+
     teamId,
-    team:team ? team.name : ""
+
+    team:
+      team
+        ? team.name
+        : ""
 
   });
 
 
   save();
 
-  closeOverlay("creatorOverlay");
+  closeOverlay(
+    "creatorOverlay"
+  );
 
   refresh();
 
@@ -3702,7 +4477,7 @@ function saveCreator(){
 
 function renderCreators(){
 
-  const container=
+  const container =
     document.getElementById(
       "creatorsList"
     );
@@ -3714,9 +4489,13 @@ function renderCreators(){
 
       <div class="empty">
 
-        <div class="empty-icon">👤</div>
+        <div class="empty-icon">
+          👤
+        </div>
 
-        <strong>Aucun créateur</strong>
+        <strong>
+          Aucun créateur
+        </strong>
 
         <p>
           Ajoute les créateurs de LVF et associe-les à une Team.
@@ -3731,67 +4510,83 @@ function renderCreators(){
   }
 
 
-  container.innerHTML=
-    db.creators.map(c=>{
+  container.innerHTML =
+    db.creators
+      .map(
+        creator=>{
 
-      const team=
-        db.teams.find(
-          t=>t.id===c.teamId
-        );
+          const team =
+            db.teams.find(
+              t=>t.id===creator.teamId
+            );
 
 
-      return `
+          return `
 
-        <div class="list-item">
+            <div class="list-item">
 
-          <div class="avatar">
-            👤
-          </div>
+              <div class="avatar">
+                👤
+              </div>
 
-          <div class="list-main">
+              <div class="list-main">
 
-            <strong>
-              ${esc(c.name)}
-            </strong>
+                <strong>
+                  ${esc(creator.name)}
+                </strong>
 
-            <small>
-              ${esc(c.handle || "")}
-              ${team
-                ? " · "+esc(team.name)
-                : ""}
-            </small>
+                <small>
 
-          </div>
+                  ${esc(
+                    creator.handle || ""
+                  )}
 
-          <div class="list-actions">
+                  ${
+                    team
+                      ? " · "+esc(team.name)
+                      : ""
+                  }
 
-            <button
-              class="small-btn"
-              onclick="deleteCreator('${c.id}')">
-              🗑️
-            </button>
+                </small>
 
-          </div>
+              </div>
 
-        </div>
+              <div class="list-actions">
 
-      `;
+                <button
+                  class="small-btn"
+                  type="button"
+                  onclick="deleteCreator('${creator.id}')">
 
-    }).join("");
+                  🗑️
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
 
 }
 
 
 function deleteCreator(id){
 
-  const ok=confirm(
-    "Supprimer ce créateur ?"
-  );
+  if(
+    !confirm(
+      "Supprimer ce créateur ?"
+    )
+  ){
+    return;
+  }
 
-  if(!ok) return;
 
-
-  db.creators=
+  db.creators =
     db.creators.filter(
       c=>c.id!==id
     );
@@ -3805,7 +4600,7 @@ function deleteCreator(id){
 
 
 /* =========================================================
-   TEAM
+   TEAMS
 ========================================================= */
 
 function openTeam(){
@@ -3815,14 +4610,16 @@ function openTeam(){
   ).value="";
 
 
-  openOverlay("teamOverlay");
+  openOverlay(
+    "teamOverlay"
+  );
 
 }
 
 
 function saveTeam(){
 
-  const name=
+  const name =
     document.getElementById(
       "teamName"
     ).value.trim();
@@ -3830,7 +4627,9 @@ function saveTeam(){
 
   if(!name){
 
-    alert("Indique le nom de la Team.");
+    alert(
+      "Indique le nom de la Team."
+    );
 
     return;
 
@@ -3840,6 +4639,7 @@ function saveTeam(){
   db.teams.push({
 
     id:uid(),
+
     name
 
   });
@@ -3847,7 +4647,9 @@ function saveTeam(){
 
   save();
 
-  closeOverlay("teamOverlay");
+  closeOverlay(
+    "teamOverlay"
+  );
 
   refresh();
 
@@ -3856,7 +4658,7 @@ function saveTeam(){
 
 function renderTeams(){
 
-  const container=
+  const container =
     document.getElementById(
       "teamsList"
     );
@@ -3868,9 +4670,13 @@ function renderTeams(){
 
       <div class="empty">
 
-        <div class="empty-icon">👥</div>
+        <div class="empty-icon">
+          👥
+        </div>
 
-        <strong>Aucune Team</strong>
+        <strong>
+          Aucune Team
+        </strong>
 
         <p>
           Crée les Teams de LVF pour pouvoir y rattacher les créateurs.
@@ -3885,67 +4691,74 @@ function renderTeams(){
   }
 
 
-  container.innerHTML=
-    db.teams.map(team=>{
+  container.innerHTML =
+    db.teams
+      .map(
+        team=>{
 
-      const count=
-        db.creators.filter(
-          c=>c.teamId===team.id
-        ).length;
+          const count =
+            db.creators.filter(
+              c=>c.teamId===team.id
+            ).length;
 
 
-      return `
+          return `
 
-        <div class="list-item">
+            <div class="list-item">
 
-          <div class="avatar">
-            👥
-          </div>
+              <div class="avatar">
+                👥
+              </div>
 
-          <div class="list-main">
+              <div class="list-main">
 
-            <strong>
-              ${esc(team.name)}
-            </strong>
+                <strong>
+                  ${esc(team.name)}
+                </strong>
 
-            <small>
-              ${count}
-              créateur${count>1?"s":""}
-            </small>
+                <small>
+                  ${count}
+                  créateur${count>1?"s":""}
+                </small>
 
-          </div>
+              </div>
 
-          <div class="list-actions">
+              <div class="list-actions">
 
-            <button
-              class="small-btn"
-              onclick="deleteTeam('${team.id}')">
-              🗑️
-            </button>
+                <button
+                  class="small-btn"
+                  type="button"
+                  onclick="deleteTeam('${team.id}')">
 
-          </div>
+                  🗑️
 
-        </div>
+                </button>
 
-      `;
+              </div>
 
-    }).join("");
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
 
 }
 
 
 function deleteTeam(id){
 
-  const users=
+  const count =
     db.creators.filter(
       c=>c.teamId===id
-    );
+    ).length;
 
 
-  if(users.length){
+  if(count){
 
     alert(
-      "Cette Team contient encore des créateurs. Déplace-les ou supprime-les avant de supprimer la Team."
+      "Cette Team contient encore des créateurs. Supprime-les ou rattache-les à une autre Team avant de supprimer la Team."
     );
 
     return;
@@ -3953,14 +4766,16 @@ function deleteTeam(id){
   }
 
 
-  const ok=confirm(
-    "Supprimer cette Team ?"
-  );
+  if(
+    !confirm(
+      "Supprimer cette Team ?"
+    )
+  ){
+    return;
+  }
 
-  if(!ok) return;
 
-
-  db.teams=
+  db.teams =
     db.teams.filter(
       t=>t.id!==id
     );
@@ -3974,7 +4789,7 @@ function deleteTeam(id){
 
 
 /* =========================================================
-   AGENCY
+   AGENCIES
 ========================================================= */
 
 let agencyTeamDraft=[];
@@ -3982,46 +4797,76 @@ let agencyTeamDraft=[];
 
 function openAgency(){
 
-  document.getElementById("agencyName").value="";
-  document.getElementById("agencyHandle").value="";
-  document.getElementById("agencyLink").value="";
-  document.getElementById("agencyContact").value="";
-  document.getElementById("agencyNotes").value="";
-  document.getElementById("agencyTeamInput").value="";
+  document.getElementById(
+    "agencyName"
+  ).value="";
+
+
+  document.getElementById(
+    "agencyHandle"
+  ).value="";
+
+
+  document.getElementById(
+    "agencyLink"
+  ).value="";
+
+
+  document.getElementById(
+    "agencyContact"
+  ).value="";
+
+
+  document.getElementById(
+    "agencyNotes"
+  ).value="";
+
+
+  document.getElementById(
+    "agencyTeamInput"
+  ).value="";
 
 
   agencyTeamDraft=[];
 
+
   renderAgencyTeamDraft();
 
-  openOverlay("agencyOverlay");
+
+  openOverlay(
+    "agencyOverlay"
+  );
 
 }
 
 
 function addAgencyTeamField(){
 
-  const input=
+  const input =
     document.getElementById(
       "agencyTeamInput"
     );
 
 
-  const name=input.value.trim();
+  const name =
+    input.value.trim();
 
 
-  if(!name) return;
+  if(!name)
+    return;
 
 
   agencyTeamDraft.push({
 
     id:uid(),
+
     name
 
   });
 
 
   input.value="";
+
 
   renderAgencyTeamDraft();
 
@@ -4030,34 +4875,41 @@ function addAgencyTeamField(){
 
 function renderAgencyTeamDraft(){
 
-  const container=
+  const container =
     document.getElementById(
       "agencyTeamDraft"
     );
 
 
-  container.innerHTML=
-    agencyTeamDraft.map(team=>`
+  container.innerHTML =
+    agencyTeamDraft
+      .map(
+        team=>`
 
-      <div class="mini-tag">
+          <div class="mini-tag">
 
-        ${esc(team.name)}
+            ${esc(team.name)}
 
-        <button
-          onclick="removeAgencyTeamDraft('${team.id}')">
-          ×
-        </button>
+            <button
+              type="button"
+              onclick="removeAgencyTeamDraft('${team.id}')">
 
-      </div>
+              ×
 
-    `).join("");
+            </button>
+
+          </div>
+
+        `
+      )
+      .join("");
 
 }
 
 
 function removeAgencyTeamDraft(id){
 
-  agencyTeamDraft=
+  agencyTeamDraft =
     agencyTeamDraft.filter(
       t=>t.id!==id
     );
@@ -4070,31 +4922,31 @@ function removeAgencyTeamDraft(id){
 
 function saveAgency(){
 
-  const name=
+  const name =
     document.getElementById(
       "agencyName"
     ).value.trim();
 
 
-  const handle=
+  const handle =
     document.getElementById(
       "agencyHandle"
     ).value.trim();
 
 
-  const link=
+  const link =
     document.getElementById(
       "agencyLink"
     ).value.trim();
 
 
-  const contact=
+  const contact =
     document.getElementById(
       "agencyContact"
     ).value.trim();
 
 
-  const notes=
+  const notes =
     document.getElementById(
       "agencyNotes"
     ).value.trim();
@@ -4102,7 +4954,9 @@ function saveAgency(){
 
   if(!name){
 
-    alert("Indique le nom de l'agence.");
+    alert(
+      "Indique le nom de l'agence."
+    );
 
     return;
 
@@ -4123,12 +4977,16 @@ function saveAgency(){
 
     notes,
 
-    teams:agencyTeamDraft.map(
-      t=>({
-        id:t.id,
-        name:t.name
-      })
-    ),
+    teams:
+      agencyTeamDraft.map(
+        team=>({
+
+          id:team.id,
+
+          name:team.name
+
+        })
+      ),
 
     creators:[]
 
@@ -4137,7 +4995,9 @@ function saveAgency(){
 
   save();
 
-  closeOverlay("agencyOverlay");
+  closeOverlay(
+    "agencyOverlay"
+  );
 
   refresh();
 
@@ -4146,7 +5006,7 @@ function saveAgency(){
 
 function renderAgencies(){
 
-  const container=
+  const container =
     document.getElementById(
       "agenciesList"
     );
@@ -4158,9 +5018,13 @@ function renderAgencies(){
 
       <div class="empty">
 
-        <div class="empty-icon">🏢</div>
+        <div class="empty-icon">
+          🏢
+        </div>
 
-        <strong>Aucune agence adverse</strong>
+        <strong>
+          Aucune agence adverse
+        </strong>
 
         <p>
           Les agences seront enregistrées ici pour tes prochains Matchs.
@@ -4175,58 +5039,71 @@ function renderAgencies(){
   }
 
 
-  container.innerHTML=
-    db.agencies.map(agency=>`
+  container.innerHTML =
+    db.agencies
+      .map(
+        agency=>`
 
-      <div class="list-item">
+          <div class="list-item">
 
-        <div class="avatar">
-          🏢
-        </div>
+            <div class="avatar">
+              🏢
+            </div>
 
-        <div class="list-main">
+            <div class="list-main">
 
-          <strong>
-            ${esc(agency.name)}
-          </strong>
+              <strong>
+                ${esc(agency.name)}
+              </strong>
 
-          <small>
-            ${agency.teams?.length || 0}
-            Team${(agency.teams?.length || 0)>1?"s":""}
-            ·
-            ${agency.creators?.length || 0}
-            créateur${(agency.creators?.length || 0)>1?"s":""}
-          </small>
+              <small>
 
-        </div>
+                ${agency.teams.length}
+                Team${agency.teams.length>1?"s":""}
 
-        <div class="list-actions">
+                ·
 
-          <button
-            class="small-btn"
-            onclick="deleteAgency('${agency.id}')">
-            🗑️
-          </button>
+                ${agency.creators.length}
+                créateur${agency.creators.length>1?"s":""}
 
-        </div>
+              </small>
 
-      </div>
+            </div>
 
-    `).join("");
+            <div class="list-actions">
+
+              <button
+                class="small-btn"
+                type="button"
+                onclick="deleteAgency('${agency.id}')">
+
+                🗑️
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
 
 }
 
 
 function deleteAgency(id){
 
-  const ok=confirm(
-    "Supprimer cette agence et toutes ses informations ?"
-  );
+  if(
+    !confirm(
+      "Supprimer cette agence et ses informations ?"
+    )
+  ){
+    return;
+  }
 
-  if(!ok) return;
 
-
-  db.agencies=
+  db.agencies =
     db.agencies.filter(
       a=>a.id!==id
     );
@@ -4245,11 +5122,11 @@ function deleteAgency(id){
 
 function openDiamonds(){
 
-  const now=
+  const now =
     new Date();
 
 
-  const month=
+  const month =
     now.getFullYear() +
     "-" +
     String(
@@ -4265,27 +5142,31 @@ function openDiamonds(){
   renderDiamondFields();
 
 
-  openOverlay("diamondOverlay");
+  openOverlay(
+    "diamondOverlay"
+  );
 
 }
 
 
-document.getElementById("diamondMonth")
-  .addEventListener(
-    "change",
-    renderDiamondFields
-  );
+document.getElementById(
+  "diamondMonth"
+)
+.addEventListener(
+  "change",
+  renderDiamondFields
+);
 
 
 function renderDiamondFields(){
 
-  const month=
+  const month =
     document.getElementById(
       "diamondMonth"
     ).value;
 
 
-  const container=
+  const container =
     document.getElementById(
       "diamondFields"
     );
@@ -4300,15 +5181,44 @@ function renderDiamondFields(){
   }
 
 
-  const existing=
+  const existing =
     db.diamonds.find(
       d=>d.month===month
     );
 
 
+  if(!db.teams.length){
+
+    container.innerHTML=`
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          💎
+        </div>
+
+        <strong>
+          Aucune Team
+        </strong>
+
+        <p>
+          Crée d'abord tes Teams dans l'onglet LVF.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
   container.innerHTML=`
 
-    <div class="card" style="margin-top:14px">
+    <div
+      class="card"
+      style="margin-top:14px">
 
       <div class="card-title">
         Diamants par Team
@@ -4322,48 +5232,40 @@ function renderDiamondFields(){
       <div style="margin-top:15px">
 
         ${
-          db.teams.length
-          ? db.teams.map(team=>{
+          db.teams
+            .map(
+              team=>{
 
-              const value=
-                existing?.values?.[team.id] || 0;
+                const value =
+                  existing
+                    ?.values
+                    ?.[team.id]
+                    || 0;
 
 
-              return `
+                return `
 
-                <div class="field">
+                  <div class="field">
 
-                  <label>
-                    ${esc(team.name)}
-                  </label>
+                    <label>
+                      ${esc(team.name)}
+                    </label>
 
-                  <input
-                    class="input diamond-input"
-                    data-team="${team.id}"
-                    type="number"
-                    min="0"
-                    value="${Number(value)||0}"
-                    placeholder="0">
+                    <input
+                      class="input diamond-input"
+                      data-team="${team.id}"
+                      type="number"
+                      min="0"
+                      value="${Number(value)||0}"
+                      placeholder="0">
 
-                </div>
+                  </div>
 
-              `;
+                `;
 
-            }).join("")
-
-          : `
-
-            <div class="empty">
-
-              <strong>Aucune Team</strong>
-
-              <p>
-                Crée d'abord tes Teams dans l'onglet LVF.
-              </p>
-
-            </div>
-
-          `
+              }
+            )
+            .join("")
         }
 
       </div>
@@ -4377,7 +5279,7 @@ function renderDiamondFields(){
 
 function saveDiamonds(){
 
-  const month=
+  const month =
     document.getElementById(
       "diamondMonth"
     ).value;
@@ -4385,7 +5287,9 @@ function saveDiamonds(){
 
   if(!month){
 
-    alert("Sélectionne un mois.");
+    alert(
+      "Sélectionne un mois."
+    );
 
     return;
 
@@ -4397,15 +5301,20 @@ function saveDiamonds(){
 
   document.querySelectorAll(
     ".diamond-input"
-  ).forEach(input=>{
+  )
+  .forEach(
+    input=>{
 
-    values[input.dataset.team]=
-      Number(input.value)||0;
+      values[
+        input.dataset.team
+      ] =
+        Number(input.value)||0;
 
-  });
+    }
+  );
 
 
-  const existingIndex=
+  const index =
     db.diamonds.findIndex(
       d=>d.month===month
     );
@@ -4414,8 +5323,8 @@ function saveDiamonds(){
   const entry={
 
     id:
-      existingIndex>=0
-        ? db.diamonds[existingIndex].id
+      index>=0
+        ? db.diamonds[index].id
         : uid(),
 
     month,
@@ -4425,20 +5334,25 @@ function saveDiamonds(){
   };
 
 
-  if(existingIndex>=0){
+  if(index>=0){
 
-    db.diamonds[existingIndex]=entry;
+    db.diamonds[index]=
+      entry;
 
   }else{
 
-    db.diamonds.push(entry);
+    db.diamonds.push(
+      entry
+    );
 
   }
 
 
   save();
 
-  closeOverlay("diamondOverlay");
+  closeOverlay(
+    "diamondOverlay"
+  );
 
   refresh();
 
@@ -4446,20 +5360,25 @@ function saveDiamonds(){
 
 
 /* =========================================================
-   STATS — MONTHLY
+   STATS
 ========================================================= */
 
 function getMonthlyTotal(entry){
 
-  if(!entry || !entry.values)
+  if(
+    !entry ||
+    !entry.values
+  ){
     return 0;
+  }
 
 
   return Object.values(
     entry.values
-  ).reduce(
+  )
+  .reduce(
     (sum,value)=>
-      sum + (Number(value)||0),
+      sum+(Number(value)||0),
     0
   );
 
@@ -4475,7 +5394,9 @@ function getLatestDiamond(){
   return [...db.diamonds]
     .sort(
       (a,b)=>
-        b.month.localeCompare(a.month)
+        b.month.localeCompare(
+          a.month
+        )
     )[0];
 
 }
@@ -4490,17 +5411,23 @@ function getPreviousDiamond(){
   return [...db.diamonds]
     .sort(
       (a,b)=>
-        b.month.localeCompare(a.month)
+        b.month.localeCompare(
+          a.month
+        )
     )[1];
 
 }
 
 
-function percentageChange(current,previous){
+function percentageChange(
+  current,
+  previous
+){
 
   if(previous===0){
 
-    if(current===0) return 0;
+    if(current===0)
+      return 0;
 
     return null;
 
@@ -4521,44 +5448,46 @@ function percentageChange(current,previous){
 
 function renderHome(){
 
-  const latest=
+  const latest =
     getLatestDiamond();
 
 
-  const previous=
+  const previous =
     getPreviousDiamond();
 
 
-  const total=
-    getMonthlyTotal(latest);
+  const total =
+    getMonthlyTotal(
+      latest
+    );
 
 
   document.getElementById(
     "homeDiamonds"
-  ).innerHTML=
+  ).innerHTML =
     `${fmt(total)}
      <span>diamants</span>`;
 
 
   document.getElementById(
     "homeTeams"
-  ).textContent=
+  ).textContent =
     db.teams.length;
 
 
   document.getElementById(
     "homeCreators"
-  ).textContent=
+  ).textContent =
     db.creators.length;
 
 
   document.getElementById(
     "homeMatches"
-  ).textContent=
+  ).textContent =
     db.matches.length;
 
 
-  const evolution=
+  const evolution =
     document.getElementById(
       "homeEvolution"
     );
@@ -4572,7 +5501,8 @@ function renderHome(){
     evolution.textContent=
       "— Aucun mois enregistré";
 
-  }else if(!previous){
+  }
+  else if(!previous){
 
     evolution.className=
       "evolution neutral";
@@ -4580,45 +5510,47 @@ function renderHome(){
     evolution.textContent=
       "Premier mois enregistré";
 
-  }else{
+  }
+  else{
 
-    const change=
+    const change =
       percentageChange(
         total,
-        getMonthlyTotal(previous)
+        getMonthlyTotal(
+          previous
+        )
+      );
+
+
+    evolution.className =
+      "evolution " +
+      (
+        change>0
+          ? "positive"
+          : change<0
+            ? "negative"
+            : "neutral"
       );
 
 
     if(change===null){
 
-      evolution.className=
-        "evolution positive";
-
       evolution.textContent=
         "↑ Nouvelle progression";
 
-    }else{
+    }
+    else{
 
-      evolution.className=
-        "evolution " +
+      evolution.textContent =
         (
           change>0
-            ?"positive"
-            :change<0
-              ?"negative"
-              :"neutral"
-        );
-
-
-      evolution.textContent=
-        (
-          change>0
-            ?"↑ "
-            :change<0
-              ?"↓ "
-              :""
+            ? "↑ "
+            : change<0
+              ? "↓ "
+              : ""
         ) +
-        Math.abs(change).toFixed(1) +
+        Math.abs(change)
+          .toFixed(1) +
         "% vs mois précédent";
 
     }
@@ -4639,30 +5571,36 @@ function renderHome(){
 
 function renderNextMatch(){
 
-  const container=
+  const container =
     document.getElementById(
       "nextMatchContainer"
     );
 
 
-  const upcoming=
+  const upcoming =
     db.matches
       .filter(
         m=>m.result==="upcoming"
       )
-      .sort((a,b)=>{
+      .sort(
+        (a,b)=>{
 
-        const da=new Date(
-          `${a.date}T${a.time||"00:00"}`
-        );
+          const da =
+            new Date(
+              `${a.date}T${a.time||"00:00"}`
+            );
 
-        const dbb=new Date(
-          `${b.date}T${b.time||"00:00"}`
-        );
 
-        return da-dbb;
+          const dbb =
+            new Date(
+              `${b.date}T${b.time||"00:00"}`
+            );
 
-      })[0];
+
+          return da-dbb;
+
+        }
+      )[0];
 
 
   if(!upcoming){
@@ -4679,11 +5617,15 @@ function renderNextMatch(){
     <div class="section-head">
 
       <div>
+
         <h2
           class="section-title"
           style="font-size:18px">
+
           Prochain Match
+
         </h2>
+
       </div>
 
     </div>
@@ -4696,30 +5638,32 @@ function renderNextMatch(){
 
 
 /* =========================================================
-   STATS
+   STATS RENDER
 ========================================================= */
 
 function renderStats(){
 
-  const latest=
+  const latest =
     getLatestDiamond();
 
 
-  const previous=
+  const previous =
     getPreviousDiamond();
 
 
-  const total=
-    getMonthlyTotal(latest);
+  const total =
+    getMonthlyTotal(
+      latest
+    );
 
 
   document.getElementById(
     "statsTotal"
-  ).textContent=
+  ).textContent =
     fmt(total);
 
 
-  const evolution=
+  const evolution =
     document.getElementById(
       "statsEvolution"
     );
@@ -4733,7 +5677,8 @@ function renderStats(){
     evolution.textContent=
       "— Aucun historique";
 
-  }else if(!previous){
+  }
+  else if(!previous){
 
     evolution.className=
       "evolution neutral";
@@ -4741,45 +5686,47 @@ function renderStats(){
     evolution.textContent=
       "Premier mois enregistré";
 
-  }else{
+  }
+  else{
 
-    const change=
+    const change =
       percentageChange(
         total,
-        getMonthlyTotal(previous)
+        getMonthlyTotal(
+          previous
+        )
+      );
+
+
+    evolution.className =
+      "evolution " +
+      (
+        change>0
+          ? "positive"
+          : change<0
+            ? "negative"
+            : "neutral"
       );
 
 
     if(change===null){
 
-      evolution.className=
-        "evolution positive";
-
       evolution.textContent=
         "↑ Progression";
 
-    }else{
+    }
+    else{
 
-      evolution.className=
-        "evolution " +
+      evolution.textContent =
         (
           change>0
-            ?"positive"
-            :change<0
-              ?"negative"
-              :"neutral"
-        );
-
-
-      evolution.textContent=
-        (
-          change>0
-            ?"↑ "
-            :change<0
-              ?"↓ "
-              :""
+            ? "↑ "
+            : change<0
+              ? "↓ "
+              : ""
         ) +
-        Math.abs(change).toFixed(1) +
+        Math.abs(change)
+          .toFixed(1) +
         "% vs mois précédent";
 
     }
@@ -4802,29 +5749,34 @@ function renderStats(){
 
 function renderTeamRanking(){
 
-  const container=
+  const container =
     document.getElementById(
       "teamRanking"
     );
 
 
-  const latest=
-    getLatestDiamond();
-
-
-  const best=
+  const best =
     document.getElementById(
       "bestTeam"
     );
 
 
-  if(!latest || !db.teams.length){
+  const latest =
+    getLatestDiamond();
+
+
+  if(
+    !latest ||
+    !db.teams.length
+  ){
 
     best.innerHTML=`
 
       <div class="empty">
 
-        <strong>Pas encore de classement</strong>
+        <strong>
+          Pas encore de classement
+        </strong>
 
         <p>
           Enregistre les diamants du mois pour obtenir le classement.
@@ -4834,6 +5786,7 @@ function renderTeamRanking(){
 
     `;
 
+
     container.innerHTML="";
 
     return;
@@ -4841,23 +5794,29 @@ function renderTeamRanking(){
   }
 
 
-  const ranking=
-    db.teams.map(team=>({
+  const ranking =
+    db.teams
+      .map(
+        team=>({
 
-      team,
+          team,
 
-      value:
-        Number(
-          latest.values?.[team.id]
-        ) || 0
+          value:
+            Number(
+              latest.values?.[
+                team.id
+              ]
+            ) || 0
 
-    }))
-    .sort(
-      (a,b)=>b.value-a.value
-    );
+        })
+      )
+      .sort(
+        (a,b)=>
+          b.value-a.value
+      );
 
 
-  const winner=
+  const winner =
     ranking[0];
 
 
@@ -4865,44 +5824,59 @@ function renderTeamRanking(){
 
     best.innerHTML=`
 
-      <div style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        padding:14px;
-        border-radius:18px;
-        background:rgba(245,196,81,.07);
-        border:1px solid rgba(245,196,81,.13)
-      ">
-
-        <div style="
-          width:42px;
-          height:42px;
-          border-radius:14px;
-          display:grid;
-          place-items:center;
-          background:rgba(245,196,81,.1);
-          font-size:20px
+      <div
+        style="
+          display:flex;
+          align-items:center;
+          gap:12px;
+          padding:14px;
+          border-radius:18px;
+          background:rgba(245,196,81,.07);
+          border:1px solid rgba(245,196,81,.13);
         ">
+
+        <div
+          style="
+            width:42px;
+            height:42px;
+            border-radius:14px;
+            display:grid;
+            place-items:center;
+            background:rgba(245,196,81,.1);
+            font-size:20px;
+          ">
+
           🏆
+
         </div>
 
         <div style="min-width:0">
 
-          <strong style="
-            display:block;
-            font-size:13px
-          ">
-            ${esc(winner.team.name)}
+          <strong
+            style="
+              display:block;
+              font-size:13px;
+            ">
+
+            ${esc(
+              winner.team.name
+            )}
+
           </strong>
 
-          <span style="
-            display:block;
-            margin-top:3px;
-            color:var(--muted);
-            font-size:10px
-          ">
-            ${fmt(winner.value)} diamants
+          <span
+            style="
+              display:block;
+              margin-top:3px;
+              color:var(--muted);
+              font-size:10px;
+            ">
+
+            ${fmt(
+              winner.value
+            )}
+            diamants
+
           </span>
 
         </div>
@@ -4914,36 +5888,47 @@ function renderTeamRanking(){
   }
 
 
-  container.innerHTML=
-    ranking.map((item,index)=>`
+  container.innerHTML =
+    ranking
+      .map(
+        (item,index)=>`
 
-      <div class="rank">
+          <div class="rank">
 
-        <div class="rank-number">
-          ${index+1}
-        </div>
+            <div class="rank-number">
+              ${index+1}
+            </div>
 
-        <div class="rank-main">
+            <div class="rank-main">
 
-          <strong>
-            ${esc(item.team.name)}
-          </strong>
+              <strong>
+                ${esc(
+                  item.team.name
+                )}
+              </strong>
 
-          <small>
-            ${item.value
-              ?fmt(item.value)+" diamants"
-              :"Aucun diamant enregistré"}
-          </small>
+              <small>
 
-        </div>
+                ${
+                  item.value
+                    ? fmt(item.value)
+                      +" diamants"
+                    : "Aucun diamant enregistré"
+                }
 
-        <div class="rank-value">
-          ${fmt(item.value)}
-        </div>
+              </small>
 
-      </div>
+            </div>
 
-    `).join("");
+            <div class="rank-value">
+              ${fmt(item.value)}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
 
 }
 
@@ -4954,35 +5939,35 @@ function renderTeamRanking(){
 
 function renderMatchStats(){
 
-  const container=
+  const container =
     document.getElementById(
       "matchStats"
     );
 
 
-  const total=
+  const total =
     db.matches.length;
 
 
-  const wins=
+  const wins =
     db.matches.filter(
       m=>m.result==="win"
     ).length;
 
 
-  const losses=
+  const losses =
     db.matches.filter(
       m=>m.result==="loss"
     ).length;
 
 
-  const draws=
+  const draws =
     db.matches.filter(
       m=>m.result==="draw"
     ).length;
 
 
-  const upcoming=
+  const upcoming =
     db.matches.filter(
       m=>m.result==="upcoming"
     ).length;
@@ -4990,7 +5975,9 @@ function renderMatchStats(){
 
   container.innerHTML=`
 
-    <div class="kpis" style="margin-top:13px">
+    <div
+      class="kpis"
+      style="margin-top:13px">
 
       <div class="kpi">
 
@@ -5011,9 +5998,12 @@ function renderMatchStats(){
           Victoires
         </div>
 
-        <div class="kpi-value"
-             style="color:var(--green)">
+        <div
+          class="kpi-value"
+          style="color:var(--green)">
+
           ${wins}
+
         </div>
 
       </div>
@@ -5025,9 +6015,12 @@ function renderMatchStats(){
           Défaites
         </div>
 
-        <div class="kpi-value"
-             style="color:var(--red)">
+        <div
+          class="kpi-value"
+          style="color:var(--red)">
+
           ${losses}
+
         </div>
 
       </div>
@@ -5035,15 +6028,19 @@ function renderMatchStats(){
     </div>
 
 
-    <div style="
-      color:var(--muted);
-      font-size:11px;
-      margin-top:2px
-    ">
+    <div
+      style="
+        color:var(--muted);
+        font-size:11px;
+      ">
 
-      ${draws} égalité${draws>1?"s":""}
+      ${draws}
+      égalité${draws>1?"s":""}
+
       ·
-      ${upcoming} à venir
+
+      ${upcoming}
+      à venir
 
     </div>
 
@@ -5053,7 +6050,7 @@ function renderMatchStats(){
 
 
 /* =========================================================
-   CHART DATA
+   CHART
 ========================================================= */
 
 function chartData(){
@@ -5061,55 +6058,72 @@ function chartData(){
   return [...db.diamonds]
     .sort(
       (a,b)=>
-        a.month.localeCompare(b.month)
+        a.month.localeCompare(
+          b.month
+        )
     )
     .slice(-8);
 
 }
 
 
-/* =========================================================
-   DRAW CHART
-========================================================= */
+function drawChart(
+  canvasId,
+  data
+){
 
-function drawChart(canvasId,data){
-
-  const canvas=
-    document.getElementById(canvasId);
-
-
-  if(!canvas) return;
+  const canvas =
+    document.getElementById(
+      canvasId
+    );
 
 
-  const rect=
+  if(!canvas)
+    return;
+
+
+  const rect =
     canvas.getBoundingClientRect();
 
 
-  const dpr=
+  const dpr =
     window.devicePixelRatio || 1;
 
 
-  const width=
-    Math.max(1,rect.width);
+  const width =
+    Math.max(
+      1,
+      rect.width
+    );
 
 
-  const height=
-    Math.max(1,rect.height);
+  const height =
+    Math.max(
+      1,
+      rect.height
+    );
 
 
-  canvas.width=
+  canvas.width =
     width*dpr;
 
 
-  canvas.height=
+  canvas.height =
     height*dpr;
 
 
-  const ctx=
+  const ctx =
     canvas.getContext("2d");
 
 
-  ctx.scale(dpr,dpr);
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
 
 
   ctx.clearRect(
@@ -5122,17 +6136,23 @@ function drawChart(canvasId,data){
 
   if(!data.length){
 
-    ctx.fillStyle="#9095a5";
+    ctx.fillStyle=
+      "#9993aa";
 
-    ctx.font="12px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif";
+
+    ctx.font=
+      "12px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif";
+
 
     ctx.textAlign="center";
+
 
     ctx.fillText(
       "Aucune donnée enregistrée",
       width/2,
       height/2
     );
+
 
     return;
 
@@ -5147,60 +6167,82 @@ function drawChart(canvasId,data){
   };
 
 
-  const chartW=
-    width-padding.left-padding.right;
+  const chartW =
+    width -
+    padding.left -
+    padding.right;
 
 
-  const chartH=
-    height-padding.top-padding.bottom;
+  const chartH =
+    height -
+    padding.top -
+    padding.bottom;
 
 
-  const values=
+  const values =
     data.map(
-      item=>getMonthlyTotal(item)
+      item=>
+        getMonthlyTotal(item)
     );
 
 
-  const max=
-    Math.max(...values,1);
-
-
-  const min=0;
+  const max =
+    Math.max(
+      ...values,
+      1
+    );
 
 
   function x(i){
 
     if(data.length===1)
-      return padding.left+chartW/2;
+      return padding.left+
+        chartW/2;
 
-    return padding.left +
-      (i/(data.length-1))*chartW;
+
+    return padding.left+
+      (
+        i/
+        (data.length-1)
+      )*
+      chartW;
 
   }
 
 
   function y(value){
 
-    return padding.top +
-      chartH -
-      ((value-min)/(max-min))*chartH;
+    return padding.top+
+      chartH-
+      (
+        value/max
+      )*
+      chartH;
 
   }
 
 
-  /* lignes */
+  /* GRID */
 
   ctx.strokeStyle=
     "rgba(255,255,255,.055)";
 
+
   ctx.lineWidth=1;
 
 
-  for(let i=0;i<4;i++){
+  for(
+    let i=0;
+    i<4;
+    i++
+  ){
 
-    const yy=
-      padding.top +
-      (i/3)*chartH;
+    const yy =
+      padding.top+
+      (
+        i/3
+      )*
+      chartH;
 
 
     ctx.beginPath();
@@ -5220,32 +6262,49 @@ function drawChart(canvasId,data){
   }
 
 
-  /* courbe */
+  /* LINE */
 
   ctx.beginPath();
 
 
-  data.forEach((item,i)=>{
+  data.forEach(
+    (item,i)=>{
 
-    const xx=x(i);
-    const yy=y(getMonthlyTotal(item));
+      const xx =
+        x(i);
 
 
-    if(i===0){
+      const yy =
+        y(
+          getMonthlyTotal(
+            item
+          )
+        );
 
-      ctx.moveTo(xx,yy);
 
-    }else{
+      if(i===0){
 
-      ctx.lineTo(xx,yy);
+        ctx.moveTo(
+          xx,
+          yy
+        );
+
+      }else{
+
+        ctx.lineTo(
+          xx,
+          yy
+        );
+
+      }
 
     }
-
-  });
+  );
 
 
   ctx.strokeStyle=
-    "#ff6b35";
+    "#9b6cff";
+
 
   ctx.lineWidth=3;
 
@@ -5256,93 +6315,90 @@ function drawChart(canvasId,data){
   ctx.stroke();
 
 
-  /* points */
+  /* POINTS */
 
-  data.forEach((item,i)=>{
+  data.forEach(
+    (item,i)=>{
 
-    const xx=x(i);
-    const yy=y(getMonthlyTotal(item));
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-      xx,
-      yy,
-      4,
-      0,
-      Math.PI*2
-    );
+      const xx =
+        x(i);
 
 
-    ctx.fillStyle=
-      "#ff6b35";
-
-    ctx.fill();
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-      xx,
-      yy,
-      7,
-      0,
-      Math.PI*2
-    );
+      const yy =
+        y(
+          getMonthlyTotal(
+            item
+          )
+        );
 
 
-    ctx.strokeStyle=
-      "rgba(255,107,53,.18)";
+      ctx.beginPath();
 
-    ctx.lineWidth=2;
+      ctx.arc(
+        xx,
+        yy,
+        4,
+        0,
+        Math.PI*2
+      );
 
-    ctx.stroke();
 
-  });
+      ctx.fillStyle=
+        "#9b6cff";
 
 
-  /* labels */
+      ctx.fill();
+
+
+    }
+  );
+
+
+  /* LABELS */
 
   ctx.fillStyle=
-    "#777c8b";
+    "#777183";
+
 
   ctx.font=
     "9px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif";
 
+
   ctx.textAlign="center";
 
 
-  data.forEach((item,i)=>{
+  data.forEach(
+    (item,i)=>{
 
-    const xx=x(i);
+      const d =
+        new Date(
+          item.month+
+          "-01T00:00:00"
+        );
 
 
-    const d=
-      new Date(
-        item.month+"-01T00:00:00"
+      const label =
+        d.toLocaleDateString(
+          "fr-FR",
+          {
+            month:"short"
+          }
+        )
+        .replace(".","");
+
+
+      ctx.fillText(
+        label,
+        x(i),
+        height-9
       );
 
+    }
+  );
 
-    const label=
-      d.toLocaleDateString(
-        "fr-FR",
-        {month:"short"}
-      ).replace(".","");
-
-
-    ctx.fillText(
-      label,
-      xx,
-      height-9
-    );
-
-  });
-
-
-  /* valeur max */
 
   ctx.textAlign="left";
+
 
   ctx.fillText(
     fmt(max),
@@ -5352,10 +6408,6 @@ function drawChart(canvasId,data){
 
 }
 
-
-/* =========================================================
-   CHART WRAPPERS
-========================================================= */
 
 function renderHomeChart(){
 
@@ -5404,7 +6456,7 @@ refresh();
 
 
 /* =========================================================
-   RESIZE CHARTS
+   RESIZE
 ========================================================= */
 
 window.addEventListener(
@@ -5417,35 +6469,44 @@ window.addEventListener(
 
 
 /* =========================================================
-   CLOSE SHEETS BY BACKDROP
+   CLOSE SHEETS ON BACKDROP
 ========================================================= */
 
-document.querySelectorAll(".sheet")
-  .forEach(sheet=>{
+document.querySelectorAll(
+  ".sheet"
+)
+.forEach(
+  sheet=>{
 
     sheet.addEventListener(
       "click",
       event=>{
 
-        if(event.target===sheet){
+        if(
+          event.target===sheet
+        ){
 
-          sheet.classList.remove("open");
+          sheet.classList.remove(
+            "open"
+          );
 
         }
 
       }
     );
 
-  });
+  }
+);
 
 
 /* =========================================================
-   ENTER = ADD AGENCY TEAM
+   ENTER — AGENCY TEAM
 ========================================================= */
 
 document.getElementById(
   "agencyTeamInput"
-).addEventListener(
+)
+.addEventListener(
   "keydown",
   event=>{
 
@@ -5457,8 +6518,8 @@ document.getElementById(
 
     }
 
-  };
-
+  }
+);
 
 </script>
 
